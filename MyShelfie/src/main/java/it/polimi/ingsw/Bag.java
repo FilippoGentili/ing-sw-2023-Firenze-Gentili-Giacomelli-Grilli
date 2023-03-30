@@ -18,7 +18,7 @@ public class Bag {
 
         Collections.shuffle(remainingTiles);
 
-        for(int i=0; i<numStartTile; i++){
+        for(int i=0; i<numStartTile-LivingRoom.getNumberOfTiles(); i++){
             chosen.set(i, remainingTiles.get(i));
         }
 
