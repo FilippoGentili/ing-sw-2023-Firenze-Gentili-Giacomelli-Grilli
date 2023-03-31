@@ -13,19 +13,19 @@ public class Tile {
     }
 
     public int getCol(){
-        return this.col;
+        return col;
     }
 
     public int getRow(){
-        return this.row;
+        return row;
     }
 
     public Location getLocation(){
-        return this.location;
+        return location;
     }
 
     public TileType getTileType(){
-        return this.type;
+        return type;
     }
 
 }
