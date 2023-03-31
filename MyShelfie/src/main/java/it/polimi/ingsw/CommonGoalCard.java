@@ -28,25 +28,25 @@ abstract class CommonGoalCard {
         checkTile[tile.getRow()][tile.getCol()]=true;
 
         if(tile.getRow()==0){
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()), player);
             }
         }else if(tile.getRow()==6){
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player);
             }
         }else{
-            if(tile.getTypeTile().equals(
+            if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTypeTile())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player);
             }
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()), player);
             }
@@ -54,25 +54,25 @@ abstract class CommonGoalCard {
         }
 
         if(tile.getCol()==0){
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player);
             }
         } else if(tile.getCol()==5){
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player);
             }
         }else{
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player);
             }
-            if(tile.getTypeTile().equals(
-               player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTypeTile())){
+            if(tile.getTileType().equals(
+               player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTileType()))){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player);
             }
@@ -83,7 +83,6 @@ abstract class CommonGoalCard {
     }
 }
 
-//in player serve il metodo getBookshelf() e in Tile il metodo getTypeTile()
 
 public class CommonGoalCard1 extends CommonGoalCard{
     @Override
@@ -97,7 +96,7 @@ public class CommonGoalCard1 extends CommonGoalCard{
 
         for(row=0, countGroup=0; row<6; row++){
             for(col=0; col<5; col++){
-                if(checkTile[row][col]==false){
+                if(!checkTile[row][col]){
                     count= FindSubmatrix(player.getBookshelf().getTile(row, col), player, checkTile);
                 }
                 if(count>1)
@@ -121,15 +120,15 @@ public class CommonGoalCard2 extends CommonGoalCard {
 
         //cerco una diagonale che rispetti la specifica fra le 4 possibili
         for(row=0, column=0; row<5 && column<5 && trovato; row++, column++){
-            if(!player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                player.getBookshelf().getTile(row+1,column+1).getTypeTile()))
+            if(!player.getBookshelf().getTile(row,column).getTileType().equals(
+                player.getBookshelf().getTile(row+1,column+1).getTileType()))
                 trovato=false;
         }
         if(!trovato){
             trovato=true;
             for(row=1, column=0; row<6 && column<5 && trovato; row++, column++){
-                if(!player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                        player.getBookshelf().getTile(row+1,column+1).getTypeTile()))
+                if(!player.getBookshelf().getTile(row,column).getTileType().equals(
+                        player.getBookshelf().getTile(row+1,column+1).getTileType()))
                     trovato=false;
             }
 
@@ -137,8 +136,8 @@ public class CommonGoalCard2 extends CommonGoalCard {
         if(!trovato){
             trovato=true;
             for(row=0, column=4; row<5 && column>=0 && trovato; row++, column--){
-                if(!player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                        player.getBookshelf().getTile(row+1,column-1).getTypeTile()))
+                if(!player.getBookshelf().getTile(row,column).getTileType().equals(
+                        player.getBookshelf().getTile(row+1,column-1).getTileType()))
                     trovato=false;
             }
 
@@ -146,8 +145,8 @@ public class CommonGoalCard2 extends CommonGoalCard {
         if(!trovato){
             trovato=true;
             for(row=1, column=4; row<6 && column>=0 && trovato; row++, column--){
-                if(!player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                        player.getBookshelf().getTile(row+1,column-1).getTypeTile()))
+                if(!player.getBookshelf().getTile(row,column).getTileType().equals(
+                        player.getBookshelf().getTile(row+1,column-1).getTileType()))
                     trovato=false;
             }
 
@@ -166,12 +165,12 @@ public class CommonGoalCard3 extends CommonGoalCard{
         boolean verifica;
 
         //confronto direttamente tutti e 4 gli angoli della bookshelf
-        if(player.getBookshelf().getTile(0,0).getTypeTile().equals(
-           player.getBookshelf().getTile(0,4).getTypeTile()) &&
-           player.getBookshelf().getTile(0,0).getTypeTile().equals(
-           player.getBookshelf().getTile(5,4).getTypeTile()) &&
-           player.getBookshelf().getTile(0,0).getTypeTile().equals(
-           player.getBookshelf().getTile(5,0).getTypeTile())){
+        if(player.getBookshelf().getTile(0,0).getTileType().equals(
+           player.getBookshelf().getTile(0,4).getTileType()) &&
+           player.getBookshelf().getTile(0,0).getTileType().equals(
+           player.getBookshelf().getTile(5,4).getTileType()) &&
+           player.getBookshelf().getTile(0,0).getTileType().equals(
+           player.getBookshelf().getTile(5,0).getTileType())){
             verifica = true;
         }else{
             verifica = false;
@@ -191,8 +190,8 @@ public class CommonGoalCard4 extends CommonGoalCard{
         for(row=0; row<6; row++){
             for(column=1, countTile=1; column<5; column++){
                 for(k=0, uguale=false; k<column && !uguale; k++){
-                    if(player.getBookshelf().getTile(row,k).getTypeTile().equals(
-                       player.getBookshelf().getTile(row,column).getTypeTile()))
+                    if(player.getBookshelf().getTile(row,k).getTileType().equals(
+                       player.getBookshelf().getTile(row,column).getTileType()))
                         uguale=true;
                 }
                 if(!uguale)
@@ -218,8 +217,8 @@ public class CommonGoalCard6 extends CommonGoalCard{
         for(column=0; column<5 && count<2; column++){
             for(row=0, uguali=false; row<5 && !uguali; row++){
                 for(k=row+1; k<6 && !uguali; k++){
-                    if(player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                       player.getBookshelf().getTile(k,column).getTypeTile()))
+                    if(player.getBookshelf().getTile(row,column).getTileType().equals(
+                       player.getBookshelf().getTile(k,column).getTileType()))
                         uguali=true;
                 }
             }
@@ -243,8 +242,8 @@ public class CommonGoalCard8 extends CommonGoalCard{
         for(row=0; row<6 && count<2; row++){
             for(column=0, uguali=false; column<4 && !uguali; column++){
                 for(k=column+1; k<5 && !uguali; k++){
-                    if(player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                       player.getBookshelf().getTile(row,k).getTypeTile()))
+                    if(player.getBookshelf().getTile(row,column).getTileType().equals(
+                       player.getBookshelf().getTile(row,k).getTileType()))
                         uguali=true;
                 }
             }
@@ -268,8 +267,8 @@ public class CommonGoalCard9 extends CommonGoalCard{
         for(column=0; column<5; column++){
             for(row=1, countTile=1; row<6; row++){
                 for(k=0, uguale=false; k<row && !uguale; k++){
-                    if(player.getBookshelf().getTile(k,column).getTypeTile().equals(
-                       player.getBookshelf().getTile(row,column).getTypeTile()))
+                    if(player.getBookshelf().getTile(k,column).getTileType().equals(
+                       player.getBookshelf().getTile(row,column).getTileType()))
                         uguale=true;
                 }
                 if(!uguale)
@@ -294,14 +293,14 @@ public class CommonGoalCard10 extends CommonGoalCard{
 
         for(row=0; row<4 && !verifica; row++){
             for(column=0; column<3 && !verifica; column++){
-                if(player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                   player.getBookshelf().getTile(row,column+2).getTypeTile()) &&
-                   player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                   player.getBookshelf().getTile(row+2,column).getTypeTile()) &&
-                   player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                   player.getBookshelf().getTile(row+1,column+1).getTypeTile()) &&
-                   player.getBookshelf().getTile(row,column).getTypeTile().equals(
-                   player.getBookshelf().getTile(row+2,column+2).getTypeTile()))
+                if(player.getBookshelf().getTile(row,column).getTileType().equals(
+                   player.getBookshelf().getTile(row,column+2).getTileType()) &&
+                   player.getBookshelf().getTile(row,column).getTileType().equals(
+                   player.getBookshelf().getTile(row+2,column).getTileType()) &&
+                   player.getBookshelf().getTile(row,column).getTileType().equals(
+                   player.getBookshelf().getTile(row+1,column+1).getTileType()) &&
+                   player.getBookshelf().getTile(row,column).getTileType().equals(
+                   player.getBookshelf().getTile(row+2,column+2).getTileType()))
                     verifica=true;
             }
         }
@@ -320,8 +319,8 @@ public class CommonGoalCard11 extends CommonGoalCard{
             for(j=0; j<5 && !trovato; j++){
                 for(k=0; k<6; k++){
                     for(h=0; h<5; h++){
-                        if(player.getBookshelf().getTile(i,j).getTypeTile().equals(
-                           player.getBookshelf().getTile(k,h).getTypeTile()))
+                        if(player.getBookshelf().getTile(i,j).getTileType().equals(
+                           player.getBookshelf().getTile(k,h).getTileType()))
                             count++;
                     }
                 }
@@ -349,7 +348,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
         for(row=0, count=0, prova=true; row<5 && prova; row++){
             count++;
             for(column=0; column<count && prova; column++){
-                if(player.getBookshelf().getTile(row,column).getTypeTile().equals(null))
+                if(player.getBookshelf().getTile(row,column).getTileType().equals(null))
                     prova=false;
             }
         }
@@ -357,7 +356,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
             for(row=1, count=0, prova=true; row<6 && prova; row++){
                 count++;
                 for(column=0; column<count && prova; column++){
-                    if(player.getBookshelf().getTile(row,column).getTypeTile().equals(null))
+                    if(player.getBookshelf().getTile(row,column).getTileType().equals(null))
                         prova=false;
                 }
             }
@@ -365,7 +364,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
         if(!prova){
             for(row=5, count=0, prova=true; row>0 && prova; row--){
                 for(column=4; column>=count && prova; column--){
-                    if(player.getBookshelf().getTile(row,column).getTypeTile().equals(null))
+                    if(player.getBookshelf().getTile(row,column).getTileType().equals(null))
                         prova=false;
                 }
                 count++;
@@ -374,7 +373,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
         if(!prova){
             for(row=4, count=0, prova=true; row>=0 && prova; row--){
                 for(column=4; column>=count && prova; column--){
-                    if(player.getBookshelf().getTile(row,column).getTypeTile().equals(null))
+                    if(player.getBookshelf().getTile(row,column).getTileType().equals(null))
                         prova=false;
                 }
                 count++;
