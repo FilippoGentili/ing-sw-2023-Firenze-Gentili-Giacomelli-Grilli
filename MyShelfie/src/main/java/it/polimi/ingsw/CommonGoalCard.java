@@ -41,7 +41,7 @@ abstract class CommonGoalCard {
             }
         }else{
             if(tile.getTileType().equals(
-               player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTypeTile())){
+               player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player, checkTile);
             }
@@ -72,7 +72,7 @@ abstract class CommonGoalCard {
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player, checkTile);
             }
             if(tile.getTileType().equals(
-               player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTileType()))){
+               player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTileType())){
                 count++;
                 count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player, checkTile);
             }
