@@ -31,24 +31,24 @@ abstract class CommonGoalCard {
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()).getTileType())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()), player, checkTile);
             }
         }else if(tile.getRow()==6){
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTileType())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player, checkTile);
             }
         }else{
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()).getTypeTile())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()-1,tile.getCol()), player, checkTile);
             }
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()).getTileType())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow()+1,tile.getCol()), player, checkTile);
             }
 
         }
@@ -57,24 +57,24 @@ abstract class CommonGoalCard {
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1).getTileType())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player, checkTile);
             }
         } else if(tile.getCol()==5){
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTileType())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player, checkTile);
             }
         }else{
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1).getTileType())){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()+1), player, checkTile);
             }
             if(tile.getTileType().equals(
                player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1).getTileType()))){
                 count++;
-                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player);
+                count = count + FindSubmatrix(player.getBookshelf().getTile(tile.getRow(),tile.getCol()-1), player, checkTile);
             }
         }
 
