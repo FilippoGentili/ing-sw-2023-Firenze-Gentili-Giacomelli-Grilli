@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba9ab80d-ec4a-471e-b8c9-4c39346d1d67" name="Changes" comment="update">
+    <list default="true" id="ba9ab80d-ec4a-471e-b8c9-4c39346d1d67" name="Changes" comment="fixed getter methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" afterDir="false" />
     </list>
@@ -58,7 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1680018947645</updated>
       <workItem from="1680018949727" duration="2566000" />
-      <workItem from="1680176123524" duration="13139000" />
+      <workItem from="1680176123524" duration="15526000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1680019217458</created>
@@ -95,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680277494243</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed getter methods">
+      <created>1680279409131</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680279409131</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +124,7 @@
     <MESSAGE value="Prova1" />
     <MESSAGE value="Bag complete" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="fixed getter methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed getter methods" />
   </component>
 </project>
