@@ -6,7 +6,6 @@ public class CommonGoalCard1 extends CommonGoalCard{
         int count=0, countGroup, row, col, i;
         boolean[][] checkTile = new boolean[6][5];
 
-        //checkTile mi serve per non dover ispezionare delle celle che ho già ispezionato
         for(row=0; row<6; row++)
             for(col=0; col<5; col++)
                 checkTile[row][col]=false;
