@@ -47,9 +47,9 @@ public class Game {
 
     public void assignPoints([NotNull] ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
         for (Player player : players) {
-            int personalGoalPoints = personalGoalCard.getPoints(player);
-            int commonGoalPoints = commonGoalCard.getPoints(player);
-            int totalPoints = player.getPoints() + personalGoalPoints + commonGoalPoints;
+            int personalGoalPoints = personalGoalCard.assaignPoints(player);
+            int commonGoalPoints = commonGoalCard.assignPoints(player);
+            int totalPoints = player.assignPoints() + personalGoalPoints + commonGoalPoints;
             player.setPoints(totalPoints);
         }
     }
