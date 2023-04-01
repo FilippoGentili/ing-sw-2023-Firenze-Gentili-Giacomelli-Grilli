@@ -1,27 +1,46 @@
 package it.polimi.ingsw;
+import static java.util.Objects.isNull;
 
 public class CommonGoalCard4 extends CommonGoalCard{
     @Override
     public boolean check(Player player) {
-        boolean verifica=false, uguale;
-        int row, column, k, countTile, countRow=0;
+        boolean uguale, cellaVuota;
+        int row, col, k, countTile, countRow;
 
-        for(row=0; row<6; row++){
-            for(column=1, countTile=1; column<5; column++){
-                for(k=0, uguale=false; k<column && !uguale; k++){
-                    if(player.getBookshelf().getTile(row,k).getTileType().equals(
-                            player.getBookshelf().getTile(row,column).getTileType()))
-                        uguale=true;
+        for(row=0, countRow=0; row<6; row++){
+
+            if(!isNull(player.getBookshelf().getTile(row,0))) {
+                for (col = 1, countTile = 1, cellaVuota=false; col < 5 && !cellaVuota; col++) {
+
+                    if(!isNull(player.getBookshelf().getTile(row,col))) {
+                        for (k = 0, uguale = false; k < col && !uguale; k++) {
+
+                            if (player.getBookshelf().getTile(row, k).getTileType().equals(
+                                    player.getBookshelf().getTile(row, col).getTileType()))
+                                uguale = true;
+                        }
+
+                        if (!uguale)
+                            countTile++;
+
+                    }else{
+                        cellaVuota=true;
+                    }
+
                 }
-                if(!uguale)
-                    countTile++;
-            }
-            if(countTile<=3)
-                countRow++;
-        }
-        if(countRow>3)
-            verifica=true;
 
-        return verifica;
+                if(!cellaVuota) {
+                    if (countTile <= 3)
+                        countRow++;
+
+                }
+
+            }
+        }
+
+        if(countRow>3)
+            return true;
+        else
+            return false;
     }
 }

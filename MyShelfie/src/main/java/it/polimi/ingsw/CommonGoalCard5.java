@@ -1,12 +1,12 @@
 package it.polimi.ingsw;
 
-public class CommonGoalCard1 extends CommonGoalCard{
+public class CommonGoalCard5 extends CommonGoalCard{
+
     @Override
     public boolean check(Player player) {
         int count=0, countGroup, row, col, i;
         boolean[][] checkTile = new boolean[6][5];
 
-        //checkTile mi serve per non dover ispezionare delle celle che ho già ispezionato
         for(row=0; row<6; row++)
             for(col=0; col<5; col++)
                 checkTile[row][col]=false;
@@ -16,15 +16,16 @@ public class CommonGoalCard1 extends CommonGoalCard{
                 if(!checkTile[row][col]){
                     count= HorizontalCheck(player.getBookshelf().getTile(row,col),player,checkTile);
                 }
-                if(count>1) {
+                if(count > 3) {
                     countGroup++;
                 }
-                if(count>2){
+                if(count > 4){
                     for(i=0; i<count; i++)
-                        checkTile[row][col+2+i] = false;
+                        checkTile[row][col+4+i] = false;
                 }
-                if(count<2)
-                    checkTile[row][col] = false;
+                if(count < 4)
+                    for(i=col; i<col+count; i++)
+                        checkTile[row][i] = false;
             }
         }
 
@@ -34,14 +35,14 @@ public class CommonGoalCard1 extends CommonGoalCard{
                     if (!checkTile[row][col]) {
                         count = HorizontalCheck(player.getBookshelf().getTile(row, col), player, checkTile);
                     }
-                    if (count > 1) {
+                    if (count > 3) {
                         countGroup++;
                     }
                 }
             }
         }
 
-        if(countGroup>5)
+        if(countGroup>3)
             return true;
         else
             return false;
