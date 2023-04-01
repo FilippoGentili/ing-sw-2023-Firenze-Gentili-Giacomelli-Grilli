@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Bookshelf {
     private Tile[][] shelf;
+
     private final int rows=6;
     private final int columns=5;
 
@@ -12,15 +13,6 @@ public class Bookshelf {
             return false;
         else
             return true;
-    }
-
-    public Tile[] selectOrder(ArrayList<Tile> chosen){
-        int app;
-
-        for(Tile tile:chosen){
-            System.out.println(tile.getTileType());
-        }
-
     }
 
     public Tile getTile(int i, int j){
