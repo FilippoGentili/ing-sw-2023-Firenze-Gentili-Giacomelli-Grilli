@@ -5,7 +5,7 @@ public class Tile {
     private int col;
     private int row;
     private Location location;
-    private TileType type;
+    private final TileType type;
 
     public Tile(TileType tile, Location loc){
         this.type = tile;
@@ -26,6 +26,18 @@ public class Tile {
 
     public TileType getTileType(){
         return type;
+    }
+
+    public void setCol(int c){
+        this.col = c;
+    }
+
+    public void setRow(int r){
+        this.row = r;
+    }
+
+    public void setLocation(Location loc){
+        this.location = loc;
     }
 
 }
