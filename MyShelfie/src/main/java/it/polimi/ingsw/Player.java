@@ -15,7 +15,7 @@ public class Player {
     //This method asks the user to choose a Nickname
     public void chooseNickname(){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Choose your nickname: ");
+            System.out.println("Choose your nickname");
             String nickname = scanner.nextLine();
     }
 
@@ -61,5 +61,9 @@ public class Player {
     }
     public void stateAction(){
         currentState.stateAction();
+    }
+
+    public int getGoalCard() {
+        return goalCard.getID();
     }
 }

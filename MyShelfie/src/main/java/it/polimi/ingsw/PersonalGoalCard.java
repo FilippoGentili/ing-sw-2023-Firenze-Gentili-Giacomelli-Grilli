@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import org.jetbrains.annotations.NotNull;
-
 public class PersonalGoalCard {
     private Player player;
     private int points = 0;
@@ -11,6 +9,10 @@ public class PersonalGoalCard {
     PersonalGoalCard(int ID){
         this.ID=ID;
         this.player=player;
+    }
+
+    public int getID(){
+        return ID;
     }
 
     //Each personal Goal Card has an ID
@@ -248,7 +250,7 @@ public class PersonalGoalCard {
     }
 
     //The method gives how many points the player has to get, based on his PersonalGoalCard
-    public int assignPoints (@NotNull Player player){
+    public int assignPoints (int ID){
         switch(ID) {
             case 1 :
                 matches=pGoal1.check1();
