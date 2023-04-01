@@ -45,7 +45,13 @@ public class Game {
         // Implementazione del metodo
     }
 
-    public void assignPoints(Player player, int score){
-        // Implementazione del metodo
+    public void assignPoints([NotNull] ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
+        for (Player player : players) {
+            int personalGoalPoints = personalGoalCard.getPoints(player);
+            int commonGoalPoints = commonGoalCard.getPoints(player);
+            int totalPoints = player.getPoints() + personalGoalPoints + commonGoalPoints;
+            player.setPoints(totalPoints);
+        }
     }
+
 }
