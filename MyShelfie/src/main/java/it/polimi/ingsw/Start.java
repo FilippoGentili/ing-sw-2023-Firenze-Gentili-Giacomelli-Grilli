@@ -11,10 +11,11 @@ public class Start implements State{
         TimerTask turn = new TimerTask() {
             public void run() {
                 System.out.println("Time is up!");
-                for(Player.game.Player player: players){
+                for(Game.getPlayers() : players){
                     Scanner scanner = new Scanner(System.in);
                     System.out.println("Do you want to keep playing?");
                     scanner.nextLine();
+
                 }
             }
         };
