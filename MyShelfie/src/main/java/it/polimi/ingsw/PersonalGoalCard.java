@@ -11,6 +11,10 @@ public class PersonalGoalCard {
         this.player=player;
     }
 
+    public int getID(){
+        return ID;
+    }
+
     //Each personal Goal Card has an ID
     PersonalGoalCard pGoal1 = new PersonalGoalCard(1);
     PersonalGoalCard pGoal2 = new PersonalGoalCard(2);

@@ -1,4 +1,5 @@
 package it.polimi.ingsw;
+import static java.util.Objects.isNull;
 
 public class CommonGoalCard11 extends CommonGoalCard{
     @Override
@@ -8,20 +9,24 @@ public class CommonGoalCard11 extends CommonGoalCard{
 
         for(i=0; i<6 && !trovato; i++){
             for(j=0; j<5 && !trovato; j++){
-                for(k=0; k<6; k++){
-                    for(h=0; h<5; h++){
-                        if(player.getBookshelf().getTile(i,j).getTileType().equals(
-                                player.getBookshelf().getTile(k,h).getTileType()))
-                            count++;
+                if(!isNull(player.getBookshelf().getTile(i,j))) {
+                    for (k = 0; k < 6; k++) {
+                        for (h = 0; h < 5; h++) {
+                            if(!isNull(player.getBookshelf().getTile(k, h))) {
+                                if (player.getBookshelf().getTile(i, j).getTileType().equals(
+                                        player.getBookshelf().getTile(k, h).getTileType()))
+                                    count++;
+                            }
+                        }
                     }
-                }
-                count--;
+                    count--;
 
-                if(count>=8){
-                    trovato=true;
-                    verifica=true;
-                }else{
-                    count=0;
+                    if (count >= 8) {
+                        trovato = true;
+                        verifica = true;
+                    } else {
+                        count = 0;
+                    }
                 }
             }
         }
