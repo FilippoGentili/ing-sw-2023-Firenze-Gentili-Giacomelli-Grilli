@@ -40,8 +40,13 @@ public class Player {
     }
 
     public int getScore(){
-        return this.score;
+        return score;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 
     //If the player wants to quit the game he is in, it calls this method. The method remove Player in game eliminates the player from the player list of the specific game
     public void quitGame(Game game){

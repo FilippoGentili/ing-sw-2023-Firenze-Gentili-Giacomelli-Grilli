@@ -5,14 +5,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class Game {
-    private ArrayList<Player> listOfPlayers;
+    private static ArrayList<Player> listOfPlayers;
 
     public Game() {
         this.listOfPlayers = new ArrayList<>();
     }
 
-    public ArrayList<Player> getPlayers() {
-        return this.listOfPlayers;
+    public static ArrayList<Player> getPlayers() {
+        return listOfPlayers;
     }
 
     public void addPlayer(Player player) {
@@ -43,16 +43,22 @@ public class Game {
         return numberOfTiles;
     }
 
-    public void endGameTrigger() {
-        // Implementazione del metodo
+    public void endGameTrigger(@NotNull Bookshelf bookshelf, Player player) {
+        if (bookshelf.fullBookshelf()) {
+            int score = player.getScore();
+            player.setScore(score + 1);
+        }
+
+        // si può fare solo un giro poi il gioco finisce
     }
 
-    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
+
+    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard){
         for (Player player : players) {
             int personalGoalPoints = personalGoalCard.assignPoints(player);
             int commonGoalPoints = commonGoalCard.assignPoints(player);
             int totalPoints = player.getScore() + personalGoalPoints + commonGoalPoints;
-            player.getScore(totalPoints);
+            player.setScore(totalPoints);
         }
     }
 
