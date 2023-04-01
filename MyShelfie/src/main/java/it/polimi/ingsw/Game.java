@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -45,12 +47,12 @@ public class Game {
         // Implementazione del metodo
     }
 
-    public void assignPoints([NotNull] ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
+    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
         for (Player player : players) {
-            int personalGoalPoints = personalGoalCard.assaignPoints(player);
+            int personalGoalPoints = personalGoalCard.assignPoints(player);
             int commonGoalPoints = commonGoalCard.assignPoints(player);
-            int totalPoints = player.assignPoints() + personalGoalPoints + commonGoalPoints;
-            player.setPoints(totalPoints);
+            int totalPoints = player.getScore() + personalGoalPoints + commonGoalPoints;
+            player.getScore(totalPoints);
         }
     }
 
