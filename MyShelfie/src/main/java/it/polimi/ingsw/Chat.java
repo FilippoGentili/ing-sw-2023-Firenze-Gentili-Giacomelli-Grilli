@@ -18,7 +18,7 @@ public class Chat {
         participants.add(participant);
 
     }
-    public int getNumberOfParticipants(@NotNull Player participants){
+    public int getNumberOfParticipants(@NotNull ArrayList<Player> participants){
         return participants.size();
     }
 
