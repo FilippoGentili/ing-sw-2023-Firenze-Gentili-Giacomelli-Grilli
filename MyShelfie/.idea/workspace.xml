@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba9ab80d-ec4a-471e-b8c9-4c39346d1d67" name="Changes" comment="Tile done, livingroom almost done">
+    <list default="true" id="ba9ab80d-ec4a-471e-b8c9-4c39346d1d67" name="Changes" comment="livingroom done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/LivingRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/LivingRoom.java" afterDir="false" />
@@ -62,7 +62,8 @@
       <option name="presentableId" value="Default" />
       <updated>1680018947645</updated>
       <workItem from="1680018949727" duration="2566000" />
-      <workItem from="1680176123524" duration="29000000" />
+      <workItem from="1680176123524" duration="29147000" />
+      <workItem from="1680442586105" duration="6381000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1680019217458</created>
@@ -120,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680356778055</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="livingroom done">
+      <created>1680386470282</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1680386470282</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +153,7 @@
     <MESSAGE value="fixed getter methods" />
     <MESSAGE value="bookshelf (not finished)" />
     <MESSAGE value="Tile done, livingroom almost done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tile done, livingroom almost done" />
+    <MESSAGE value="livingroom done" />
+    <option name="LAST_COMMIT_MESSAGE" value="livingroom done" />
   </component>
 </project>
