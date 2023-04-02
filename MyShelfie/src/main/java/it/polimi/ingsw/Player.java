@@ -11,8 +11,6 @@ public class Player {
     private PersonalGoalCard goalCard;
     private boolean FirstPlayer;
 
-
-
     //This method asks the user to choose a Nickname
     public void chooseNickname(){
             Scanner scanner = new Scanner(System.in);

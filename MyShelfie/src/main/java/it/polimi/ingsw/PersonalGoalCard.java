@@ -4,11 +4,10 @@ public class PersonalGoalCard {
     private Player player;
     private int points = 0;
     private int matches = 0;
-    private int ID;
+    private final int ID;
 
     PersonalGoalCard(int ID){
         this.ID=ID;
-        this.player=player;
     }
 
     public int getID(){
@@ -31,204 +30,204 @@ public class PersonalGoalCard {
 
     //There are 12 methods that check the number of matches and return it
     public int check1(){
-        if(player.getBookshelf().getTile(0,0).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(0,0).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(0,2).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(1,4).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(1,4).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(2,3).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(2,3).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(3,1).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(3,1).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(5,2).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(5,2).getTileType().equals(TileType.TROPHIE))
             matches++;
 
         return matches;
     }
 
     public int check2(){
-        if(player.getBookshelf().getTile(1,1).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(2,0).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(2,0).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(2,2).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(3,4).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(3,4).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(4,3).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(4,3).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(5,4).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(5,4).getTileType().equals(TileType.FRAME))
             matches++;
 
         return matches;
     }
 
     public int check3(){
-        if(player.getBookshelf().getTile(1,0).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(1,0).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(1,3).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(1,3).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(2,2).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(3,1).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(3,1).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(3,4).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(3,4).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(5,0).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(5,0).getTileType().equals(TileType.BOOK))
             matches++;
 
         return matches;
     }
 
     public int check4(){
-        if(player.getBookshelf().getTile(0,4).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(2,0).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(2,0).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(2,2).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(3,3).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(3,3).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(4,1).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(4,1).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(4,2).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(4,2).getTileType().equals(TileType.CAT))
             matches++;
 
         return matches;
     }
 
     public int check5(){
-        if(player.getBookshelf().getTile(1,1).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(3,1).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(3,1).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(3,2).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(3,2).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(4,4).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(4,4).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(5,0).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(5,0).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(5,3).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.PLANT))
             matches++;
 
         return matches;
     }
 
     public int check6(){
-        if(player.getBookshelf().getTile(0,2).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(0,4).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(2,3).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(2,3).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(4,1).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(4,1).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(4,3).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(4,3).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(5,0).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(5,0).getTileType().equals(TileType.PLANT))
             matches++;
 
         return matches;
     }
 
     public int check7(){
-        if(player.getBookshelf().getTile(0,0).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(0,0).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(1,3).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(1,3).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(2,1).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(2,1).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(3,0).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(3,0).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(4,4).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(4,4).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(5,2).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(5,2).getTileType().equals(TileType.BOOK))
             matches++;
 
         return matches;
     }
 
     public int check8(){
-        if(player.getBookshelf().getTile(0,4).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(1,1).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(2,2).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(3,0).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(3,0).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(4,3).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(4,3).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(5,3).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.GAME))
             matches++;
 
         return matches;
     }
 
     public int check9(){
-        if(player.getBookshelf().getTile(0,2).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(2,2).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(3,4).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(3,4).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(4,1).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(4,1).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(4,4).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(4,4).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(5,0).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(5,0).getTileType().equals(TileType.FRAME))
             matches++;
 
         return matches;
     }
 
     public int check10(){
-        if(player.getBookshelf().getTile(0,4).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(1,1).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(2,0).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(2,0).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(3,3).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(3,3).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(4,2).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(4,2).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(5,3).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.PLANT))
             matches++;
 
         return matches;
     }
 
     public int check11(){
-        if(player.getBookshelf().getTile(0,2).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(1,1).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(2,0).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(2,0).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(3,2).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(3,2).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(4,4).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(4,4).getTileType().equals(TileType.CAT))
             matches++;
-        if(player.getBookshelf().getTile(5,3).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.TROPHIE))
             matches++;
 
         return matches;
     }
 
     public int check12(){
-        if(player.getBookshelf().getTile(0,2).equals(TileType.BOOK))
+        if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.BOOK))
             matches++;
-        if(player.getBookshelf().getTile(1,1).equals(TileType.PLANT))
+        if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.PLANT))
             matches++;
-        if(player.getBookshelf().getTile(2,2).equals(TileType.FRAME))
+        if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.FRAME))
             matches++;
-        if(player.getBookshelf().getTile(3,3).equals(TileType.TROPHIE))
+        if(player.getBookshelf().getTile(3,3).getTileType().equals(TileType.TROPHIE))
             matches++;
-        if(player.getBookshelf().getTile(4,4).equals(TileType.GAME))
+        if(player.getBookshelf().getTile(4,4).getTileType().equals(TileType.GAME))
             matches++;
-        if(player.getBookshelf().getTile(5,0).equals(TileType.CAT))
+        if(player.getBookshelf().getTile(5,0).getTileType().equals(TileType.CAT))
             matches++;
 
         return matches;
@@ -251,55 +250,55 @@ public class PersonalGoalCard {
 
     //The method gives how many points the player has to get, based on his PersonalGoalCard
     public int assignPoints (int ID){
-        switch(ID) {
-            case 1 :
-                matches=pGoal1.check1();
-                points=pGoal1.countPoints(matches);
-                break;
-            case 2 :
-                matches=pGoal2.check2();
-                points=pGoal2.countPoints(matches);
-                break;
-            case 3 :
-                matches=pGoal3.check3();
-                points=pGoal3.countPoints(matches);
-                break;
-            case 4 :
-                matches=pGoal4.check4();
-                points=pGoal4.countPoints(matches);
-                break;
-            case 5 :
-                matches=pGoal5.check5();
-                points=pGoal5.countPoints(matches);
-                break;
-            case 6 :
-                matches=pGoal6.check6();
-                points=pGoal6.countPoints(matches);
-                break;
-            case 7 :
-                matches=pGoal7.check7();
-                points=pGoal7.countPoints(matches);
-                break;
-            case 8 :
-                matches=pGoal8.check8();
-                points=pGoal8.countPoints(matches);
-                break;
-            case 9 :
-                matches=pGoal9.check9();
-                points=pGoal9.countPoints(matches);
-                break;
-            case 10 :
-                matches=pGoal10.check10();
-                points=pGoal10.countPoints(matches);
-                break;
-            case 11 :
-                matches=pGoal11.check11();
-                points=pGoal11.countPoints(matches);
-                break;
-            case 12 :
-                matches=pGoal12.check12();
-                points=pGoal1.countPoints(matches);
-                break;
+        switch (ID) {
+            case 1 -> {
+                matches = pGoal1.check1();
+                points = pGoal1.countPoints(matches);
+            }
+            case 2 -> {
+                matches = pGoal2.check2();
+                points = pGoal2.countPoints(matches);
+            }
+            case 3 -> {
+                matches = pGoal3.check3();
+                points = pGoal3.countPoints(matches);
+            }
+            case 4 -> {
+                matches = pGoal4.check4();
+                points = pGoal4.countPoints(matches);
+            }
+            case 5 -> {
+                matches = pGoal5.check5();
+                points = pGoal5.countPoints(matches);
+            }
+            case 6 -> {
+                matches = pGoal6.check6();
+                points = pGoal6.countPoints(matches);
+            }
+            case 7 -> {
+                matches = pGoal7.check7();
+                points = pGoal7.countPoints(matches);
+            }
+            case 8 -> {
+                matches = pGoal8.check8();
+                points = pGoal8.countPoints(matches);
+            }
+            case 9 -> {
+                matches = pGoal9.check9();
+                points = pGoal9.countPoints(matches);
+            }
+            case 10 -> {
+                matches = pGoal10.check10();
+                points = pGoal10.countPoints(matches);
+            }
+            case 11 -> {
+                matches = pGoal11.check11();
+                points = pGoal11.countPoints(matches);
+            }
+            case 12 -> {
+                matches = pGoal12.check12();
+                points = pGoal1.countPoints(matches);
+            }
         }
 
         return points;
