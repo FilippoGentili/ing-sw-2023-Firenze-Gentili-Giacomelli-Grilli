@@ -23,7 +23,6 @@ public class Bookshelf {
         int curr=0;
         int numAd;
 
-
     }
 
     public boolean fullBookshelf(){
