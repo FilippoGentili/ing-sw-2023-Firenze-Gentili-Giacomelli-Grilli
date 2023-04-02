@@ -39,19 +39,6 @@ public class Bookshelf {
         return adjacents;
     }
 
-    /*public boolean hasSameAdjacentTiles(Tile curr){
-        if(curr.getRow()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))
-            return true;
-        if(curr.getCol()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()-1].getTileType()))
-            return true;
-        if(curr.getCol()+1 <= columns-1 && curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()+1].getTileType()))
-            return true;
-        if(curr.getRow()+1 <= rows-1 && curr.getTileType().equals(shelf[curr.getRow()+1][curr.getCol()].getTileType()))
-            return true;
-
-        return false;
-    }*/
-
     public int MatrixWalk(ArrayList<Tile> tiles, int numAd){
 
         if(tiles.size()>0){
