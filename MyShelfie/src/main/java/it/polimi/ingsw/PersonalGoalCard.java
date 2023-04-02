@@ -286,6 +286,7 @@ public class PersonalGoalCard {
                 matches = check12();
                 points = countPoints(matches);
             }
+            default -> throw new IllegalStateException("Unexpected value: " + ID);
         }
 
         return points;
