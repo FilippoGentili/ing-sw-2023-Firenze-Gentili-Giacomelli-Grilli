@@ -15,7 +15,11 @@ public class InsertTile implements State{
 
         ArrayList<Tile> order = new ArrayList<Tile>();
         System.out.println("Choose the first tile");
+        order.add(scanner.nextLine());
 
+        if(Bookshelf.fullBookshelf().equals(false)){
+            Bookshelf.
+        }
 
     }
 }
