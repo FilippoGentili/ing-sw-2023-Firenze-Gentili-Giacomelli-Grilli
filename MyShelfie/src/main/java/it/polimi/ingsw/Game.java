@@ -20,19 +20,27 @@ public class Game {
         availablePersonaGoalCards = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
             availablePersonaGoalCards.add(i);
-
-
-            // inizializza livingroom
         }
+        // inizializza livingroom
+
     }
 
-    //process of one round
+    //gets the current player and puts the state to start
     public static void gameLoop() {
+        Player currentPlayer = getCurrentPlayer();
+        currentPlayer.setState(new Start());
+        currentPlayer.getState().stateAction();
+    }
 
+    //returns the first player of the match (random)
+    public Player pickFirstPlayer(){
+        Random random = new Random();
+        int i = random.nextInt(listOfPlayers.size());
+        return listOfPlayers.get(i);
     }
 
     //returns the current player that is playing
-    public Player getCurrentPlayer() {
+    public static Player getCurrentPlayer() {
         return listOfPlayers.get(currentPlayer);
     }
 

@@ -8,7 +8,7 @@ public class Player {
     private int score;
     private Game game;
     private Bookshelf bookshelf;
-    private PersonalGoalCard goalCard;
+    private int goalCard;
     private boolean FirstPlayer;
 
     //This method asks the user to choose a Nickname
@@ -26,6 +26,7 @@ public class Player {
     public Player(String nickname){
         this.nickname = nickname;
         this.score = 0;
+        this.goalCard=game.pickPersonalGoalCard();
     }
 
     //The player gets a bookshelf to play with
@@ -58,16 +59,17 @@ public class Player {
     public void setState(State state){
         currentState = state;
     }
+
+    public State getState(){
+        return currentState;
+    }
     public void stateAction(){
         currentState.stateAction();
-    }
-
-    public int getGoalCard() {
-        return goalCard.getID();
     }
 
     public void exitChat(){
 
     }
+
 }
 
