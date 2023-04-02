@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Game {
     private static ArrayList<Player> listOfPlayers;
     private int currentPlayer;
+    private CommonGoalCard CommonGoal1, CommonGoal2;
 
     public Game() {
         listOfPlayers = new ArrayList<>();
@@ -68,6 +69,13 @@ public class Game {
             int totalPoints = player.getScore() + personalGoalPoints + commonGoalPoints;
             player.setScore(totalPoints);
         }
+    }
+
+    public CommonGoalCard getCommonGoal1(){
+        return this.CommonGoal1;
+    }
+    public CommonGoalCard getCommonGoal2(){
+        return this.CommonGoal2;
     }
 
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 public class CommonGoalCard1 extends CommonGoalCard{
+
     @Override
     public boolean check(Player player) {
         int count=0, countGroup, row, col, i;
