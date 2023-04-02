@@ -8,6 +8,8 @@ public class Bookshelf {
     private final int rows=6;
     private final int columns=5;
 
+    boolean[][] alreadyChecked = new boolean[rows][columns];
+
     public boolean isEmpty(int i, int j){
         if(shelf[i][j] != null)
             return false;
@@ -23,7 +25,7 @@ public class Bookshelf {
         return shelf;
     }
 
-    /*public ArrayList<Tile> getSameAdjacentTiles(Tile curr){
+    public ArrayList<Tile> getSameAdjacentTiles(Tile curr){
         ArrayList<Tile> adjacents = new ArrayList<Tile>();
         if(curr.getRow()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))
             adjacents.add(shelf[curr.getRow()-1][curr.getCol()]);
@@ -35,9 +37,9 @@ public class Bookshelf {
             adjacents.add(shelf[curr.getRow()+1][curr.getCol()]);
 
         return adjacents;
-    }*/
+    }
 
-    public boolean hasSameAdjacentTiles(Tile curr){
+    /*public boolean hasSameAdjacentTiles(Tile curr){
         if(curr.getRow()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))
             return true;
         if(curr.getCol()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()-1].getTileType()))
@@ -48,22 +50,29 @@ public class Bookshelf {
             return true;
 
         return false;
-    }
+    }*/
 
-    public int MatrixWalk(ArrayList<Tile> tiles){
+    public int MatrixWalk(ArrayList<Tile> tiles, int numAd){
+
         if(tiles.size()>0){
             for(Tile curr:tiles){
-                return 0;
+                if(!alreadyChecked[curr.getRow()][curr.getCol()]){
+                    numAd++;
+                    alreadyChecked[curr.getRow()][curr.getCol()]=true;
+                    MatrixWalk(getSameAdjacentTiles(curr), numAd);
+                }
             }
         }
+
+        return numAd;
     }
 
     public int countPoints(){
 
-        boolean[][] alreadyChecked = new boolean[rows][columns];
-        int numAd;
+        int numAd = 0;
         boolean more=true;
         ArrayList<Tile> adj;
+        int points=0;
 
 
         for(int i=0; i<rows; i++){
@@ -74,21 +83,26 @@ public class Bookshelf {
 
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
-                numAd=1;
-                alreadyChecked[i][j] = true;
-                adj = getSameAdjacentTiles(shelf[i][j]);
-                if(adj.size() > 0){
-                    for(Tile curr:adj){
-                        if(!alreadyChecked[curr.getRow()][curr.getCol()]){
-                            numAd++;
-                            getSameAdjacentTiles(shelf[curr.getRow()][curr.getCol()])
-                        }
-                    }
+                if(!alreadyChecked[i][j]){
+                    numAd=1;
+                    alreadyChecked[i][j] = true;
                     adj = getSameAdjacentTiles(shelf[i][j]);
+                    numAd = MatrixWalk(adj, numAd);
                 }
+
+                if(numAd==3)
+                    points+=2;
+                else if(numAd==4)
+                    points+=3;
+                else if(numAd==5)
+                    points+=5;
+                else if(numAd>=6)
+                    points+=8;
+
             }
         }
 
+        return points;
     }
 
     public boolean fullBookshelf(){
