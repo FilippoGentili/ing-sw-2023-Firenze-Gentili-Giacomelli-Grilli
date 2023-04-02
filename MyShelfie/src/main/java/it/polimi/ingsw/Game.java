@@ -118,12 +118,11 @@ public class Game {
         // continua il giro finchè non arrivi al primo giocatore
     }
 
-    //assigns all points to player
-    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
+    //assigns personalGoalCard points to player
+    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard) {
         for (Player player : players) {
-            int personalGoalPoints = personalGoalCard.assignPoints(player);
-            int commonGoalPoints = commonGoalCard.assignPoints(player);
-            int totalPoints = player.getScore() + personalGoalPoints + commonGoalPoints;
+            int personalGoalCardPoints = personalGoalCard.assignPoints(pickPersonalGoalCard());
+            int totalPoints = player.getScore() + personalGoalCardPoints;
             player.setScore(totalPoints);
         }
     }
