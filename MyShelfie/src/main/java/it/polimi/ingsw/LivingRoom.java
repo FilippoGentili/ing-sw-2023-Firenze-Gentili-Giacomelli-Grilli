@@ -11,7 +11,7 @@ public class LivingRoom{
     private final int rows = 9;
     private final int columns = 9;
 
-    private LivingRoom(Game game){                               // da sistemare (ora solo per 4 giocatori)
+    private LivingRoom(Game game){
 
         switch(game.numberOfTiles()){
             case 29:
