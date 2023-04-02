@@ -4,18 +4,24 @@ import java.util.Scanner;
 
 public class InsertTile implements State{
     private Player player;
-    private int column;
-    private ArrayList<TileType> order;
+
     @Override
     public void stateAction (){
-        int j=0;
+        ArrayList<TileType> order;
+        ArrayList<TileType> chosenTiles;
+
+        //The player has to choose the column he wants to put the tiles in
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose the column");
-        column = Integer.parseInt(scanner.nextLine());
+        int column = Integer.parseInt(scanner.nextLine());
 
-        ArrayList<Tile> order = new ArrayList<Tile>();
-        System.out.println("Choose the first tile");
-        order.add(scanner.nextLine());
+        order = new ArrayList<TileType>();
+        chosenTiles = new ArrayList<TileType>();
+        //An arraylist order is used to
+        for (TileType tileType : chosenTiles=DrawingTile.stateAction()) {
+            System.out.println("Choose the tile order");
+            order.add(TileType.valueOf(scanner.nextLine()));
+        }
 
         if(!player.getBookshelf().fullBookshelf()){
 

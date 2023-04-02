@@ -5,15 +5,16 @@ import java.util.Scanner;
 
 public class DrawingTile implements State{
     private Player player;
-    private ArrayList<Tile> chosenTiles;
+    private ArrayList<TileType> chosenTiles;
 
-    @Override
-    public void stateAction (){
+    @Overload
+    public ArrayList<TileType> stateAction (){
         int i, j;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many tiles do you want to pick?");
         int nrTiles = Integer.parseInt(scanner.nextLine());
 
+        return chosenTiles;
     }
 }
