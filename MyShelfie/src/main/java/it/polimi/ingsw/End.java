@@ -12,7 +12,8 @@ public class End implements State{
             player.setScore(player.getScore())+=Game.getCommonGoal2().getValue();
             getCommonGoalCard2().updateValue();
         }
-        if(player.getBookshelf().fullBookshelf())
+        if(player.getBookshelf().fullBookshelf()) {
             Game.endGameTrigger(player.getBookshelf(), player);
+        }
     }
 }

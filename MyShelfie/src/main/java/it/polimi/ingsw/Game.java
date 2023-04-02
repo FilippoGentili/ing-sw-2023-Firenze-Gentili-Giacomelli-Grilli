@@ -6,9 +6,17 @@ import java.util.ArrayList;
 
 public class Game {
     private static ArrayList<Player> listOfPlayers;
+    private int currentPlayer;
 
     public Game() {
-        this.listOfPlayers = new ArrayList<>();
+        listOfPlayers = new ArrayList<>();
+
+        //scegliere carte comuni e personali
+        // livingroom
+    }
+
+    public Player getCurrentPlayer() {
+        return listofplayers.get(currentPlayer);
     }
 
     public static ArrayList<Player> getPlayers() {
@@ -43,13 +51,13 @@ public class Game {
         return numberOfTiles;
     }
 
-    public void endGameTrigger(@NotNull Bookshelf bookshelf, Player player) {
-        if (bookshelf.fullBookshelf()) {
-            int score = player.getScore();
-            player.setScore(score + 1);
-        }
+    public static void endGameTrigger(Bookshelf bookshelf, @NotNull Player player) {
+        int score = player.getScore();
+        player.setScore(score + 1);
 
-        // si può fare solo un giro poi il gioco finisce
+
+
+        // continua il giro finchè non arrivi al primo giocatore
     }
 
 
