@@ -3,6 +3,8 @@ package it.polimi.ingsw;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Game {
     private static ArrayList<Player> listOfPlayers;
@@ -11,8 +13,8 @@ public class Game {
     public Game() {
         listOfPlayers = new ArrayList<>();
 
-        //scegliere carte comuni e personali
-        // livingroom
+
+        // inizializza livingroom
     }
 
     //process of one round
@@ -68,15 +70,31 @@ public class Game {
     }
 
     //picks 2 random common goal cards
-    public pickCommonGoalCards(){
+    public List<CommonGoalCard> pickCommonGoalCards(){
+        List<CommonGoalCard> listOfCards = new ArrayList<>();
 
+        listOfCards.add(new CommonGoalCard1());
+        listOfCards.add(new CommonGoalCard2());
+        listOfCards.add(new CommonGoalCard3());
+        listOfCards.add(new CommonGoalCard4());
+        listOfCards.add(new CommonGoalCard5());
+        listOfCards.add(new CommonGoalCard6());
+        listOfCards.add(new CommonGoalCard7());
+        listOfCards.add(new CommonGoalCard8());
+        listOfCards.add(new CommonGoalCard9());
+        listOfCards.add(new CommonGoalCard10());
+        listOfCards.add(new CommonGoalCard11());
+        listOfCards.add(new CommonGoalCard12());
+
+        Collections.shuffle(listOfCards);
+
+        return listOfCards.subList(0, 2);
     }
 
     //picks 1 random personal goal card for each player
     public pickPersonalGoalCard(){
 
     }
-
 
     //notify that it is the last round and gives the first player one extra point
     public static void endGameTrigger(Bookshelf bookshelf, @NotNull Player player) {
