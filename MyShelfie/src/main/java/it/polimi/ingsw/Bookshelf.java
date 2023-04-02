@@ -53,7 +53,7 @@ public class Bookshelf {
     public int MatrixWalk(ArrayList<Tile> tiles){
         if(tiles.size()>0){
             for(Tile curr:tiles){
-                MatrixWalk(curr.)
+                return 0;
             }
         }
     }
