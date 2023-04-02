@@ -14,19 +14,6 @@ public class PersonalGoalCard {
         return ID;
     }
 
-    //Each personal Goal Card has an ID
-    PersonalGoalCard pGoal1 = new PersonalGoalCard(1);
-    PersonalGoalCard pGoal2 = new PersonalGoalCard(2);
-    PersonalGoalCard pGoal3 = new PersonalGoalCard(3);
-    PersonalGoalCard pGoal4 = new PersonalGoalCard(4);
-    PersonalGoalCard pGoal5 = new PersonalGoalCard(5);
-    PersonalGoalCard pGoal6 = new PersonalGoalCard(6);
-    PersonalGoalCard pGoal7 = new PersonalGoalCard(7);
-    PersonalGoalCard pGoal8 = new PersonalGoalCard(8);
-    PersonalGoalCard pGoal9 = new PersonalGoalCard(9);
-    PersonalGoalCard pGoal10 = new PersonalGoalCard(10);
-    PersonalGoalCard pGoal11 = new PersonalGoalCard(11);
-    PersonalGoalCard pGoal12 = new PersonalGoalCard(12);
 
     //There are 12 methods that check the number of matches and return it
     public int check1(){
@@ -252,52 +239,52 @@ public class PersonalGoalCard {
     public int assignPoints (int ID){
         switch (ID) {
             case 1 -> {
-                matches = pGoal1.check1();
-                points = pGoal1.countPoints(matches);
+                matches = check1();
+                points = countPoints(matches);
             }
             case 2 -> {
-                matches = pGoal2.check2();
-                points = pGoal2.countPoints(matches);
+                matches = check2();
+                points = countPoints(matches);
             }
             case 3 -> {
-                matches = pGoal3.check3();
-                points = pGoal3.countPoints(matches);
+                matches = check3();
+                points = countPoints(matches);
             }
             case 4 -> {
-                matches = pGoal4.check4();
-                points = pGoal4.countPoints(matches);
+                matches = check4();
+                points = countPoints(matches);
             }
             case 5 -> {
-                matches = pGoal5.check5();
-                points = pGoal5.countPoints(matches);
+                matches = check5();
+                points = countPoints(matches);
             }
             case 6 -> {
-                matches = pGoal6.check6();
-                points = pGoal6.countPoints(matches);
+                matches = check6();
+                points = countPoints(matches);
             }
             case 7 -> {
-                matches = pGoal7.check7();
-                points = pGoal7.countPoints(matches);
+                matches = check7();
+                points = countPoints(matches);
             }
             case 8 -> {
-                matches = pGoal8.check8();
-                points = pGoal8.countPoints(matches);
+                matches = check8();
+                points = countPoints(matches);
             }
             case 9 -> {
-                matches = pGoal9.check9();
-                points = pGoal9.countPoints(matches);
+                matches = check9();
+                points = countPoints(matches);
             }
             case 10 -> {
-                matches = pGoal10.check10();
-                points = pGoal10.countPoints(matches);
+                matches = check10();
+                points = countPoints(matches);
             }
             case 11 -> {
-                matches = pGoal11.check11();
-                points = pGoal11.countPoints(matches);
+                matches = check11();
+                points = countPoints(matches);
             }
             case 12 -> {
-                matches = pGoal12.check12();
-                points = pGoal1.countPoints(matches);
+                matches = check12();
+                points = countPoints(matches);
             }
         }
 
