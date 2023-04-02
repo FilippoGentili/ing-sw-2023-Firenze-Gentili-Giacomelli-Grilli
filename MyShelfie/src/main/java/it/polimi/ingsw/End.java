@@ -5,11 +5,11 @@ public class End implements State{
     @Override
     public void stateAction (){
         if(Game.getCommonGoal1().check(player)){
-            Player.setScore(player.getScore())+=Game.getCommonGoal1().getValue();
+            player.setScore(player.getScore())+=Game.getCommonGoal1().getValue();
             getCommonGoalCard1().updateValue();
         }
         if(Game.getCommonGoal2().check(player)){
-            Player.setScore(player.getScore())+=Game.getCommonGoal2().getValue();
+            player.setScore(player.getScore())+=Game.getCommonGoal2().getValue();
             getCommonGoalCard2().updateValue();
         }
         if(player.getBookshelf().fullBookshelf())

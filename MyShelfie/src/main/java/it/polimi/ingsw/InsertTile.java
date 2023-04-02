@@ -17,8 +17,8 @@ public class InsertTile implements State{
         System.out.println("Choose the first tile");
         order.add(scanner.nextLine());
 
-        if(Bookshelf.fullBookshelf().equals(false)){
-            Bookshelf.
+        if(!player.getBookshelf().fullBookshelf()){
+
         }
 
     }
