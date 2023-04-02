@@ -15,6 +15,7 @@ public class Game {
 
     public Game() {
         listOfPlayers = new ArrayList<>();
+
         //initialize personalGoalCard
         availablePersonaGoalCards = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
@@ -48,33 +49,23 @@ public class Game {
 
     //adds player to ArrayList
     public void addPlayer(Player player) {
-        this.listOfPlayers.add(player);
+        listOfPlayers.add(player);
     }
 
     //removes player from ArrayList
     public void removePlayer(Player player) {
-        this.listOfPlayers.remove(player);
+        listOfPlayers.remove(player);
     }
 
     //return number of tiles on living room board for different amount of players
     public int numberOfTiles() {
-        int numberOfTiles;
 
-        switch (listOfPlayers.size()) {
-            case 2:
-                numberOfTiles = 29;
-                break;
-            case 3:
-                numberOfTiles = 37;
-                break;
-            case 4:
-                numberOfTiles = 45;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid number of players");
-        }
-
-        return numberOfTiles;
+        return switch (listOfPlayers.size()) {
+            case 2 -> 29;
+            case 3 -> 37;
+            case 4 -> 45;
+            default -> throw new IllegalArgumentException("Invalid number of players");
+        };
     }
 
     //picks 2 random common goal cards
@@ -108,7 +99,6 @@ public class Game {
         availablePersonaGoalCards.remove(i);
         return pickedCard;
     }
-
 
     //notify that it is the last round and gives the first player one extra point
     public static void endGameTrigger(Bookshelf bookshelf, @NotNull Player player) {

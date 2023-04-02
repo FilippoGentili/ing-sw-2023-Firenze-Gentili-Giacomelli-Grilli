@@ -5,7 +5,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
     @Override
     public boolean check(Player player) {
         int row, col;
-        boolean verifica = false, trovato = true;
+        boolean trovato = true;
 
         //nella libreria è possibile creare quattro diagonali: le ispeziono singolarmente finché non ne trovo una che
         //rispetti la specifica
@@ -59,8 +59,8 @@ public class CommonGoalCard2 extends CommonGoalCard {
 
         }
         if(trovato)
-            verifica=true;
-
-        return verifica;
+            return true;
+        else
+            return false;
     }
 }
