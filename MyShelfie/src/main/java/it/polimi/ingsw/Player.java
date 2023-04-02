@@ -59,6 +59,10 @@ public class Player {
     public void setState(State state){
         currentState = state;
     }
+
+    public State getState(){
+        return currentState;
+    }
     public void stateAction(){
         currentState.stateAction();
     }
