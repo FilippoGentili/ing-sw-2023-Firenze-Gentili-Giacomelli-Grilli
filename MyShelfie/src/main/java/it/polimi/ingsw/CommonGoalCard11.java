@@ -4,17 +4,16 @@ import static java.util.Objects.isNull;
 public class CommonGoalCard11 extends CommonGoalCard{
     @Override
     public boolean check(Player player) {
-        boolean trovato=false, verifica = false;
-        int i, j, k, h, count = 0;
+        int row, col, i, j, count = 0;
 
-        for(i=0; i<6 && !trovato; i++){
-            for(j=0; j<5 && !trovato; j++){
-                if(!isNull(player.getBookshelf().getTile(i,j))) {
-                    for (k = 0; k < 6; k++) {
-                        for (h = 0; h < 5; h++) {
-                            if(!isNull(player.getBookshelf().getTile(k, h))) {
-                                if (player.getBookshelf().getTile(i, j).getTileType().equals(
-                                        player.getBookshelf().getTile(k, h).getTileType()))
+        for(row=0; row<6; row++){
+            for(col=0; col<5; col++){
+                if(!isNull(player.getBookshelf().getTile(row,col))) {
+                    for (i = 0; i < 6; i++) {
+                        for (j = 0; j < 5; j++) {
+                            if(!isNull(player.getBookshelf().getTile(i,j))) {
+                                if (player.getBookshelf().getTile(row,col).getTileType().equals(
+                                player.getBookshelf().getTile(i,j).getTileType()))
                                     count++;
                             }
                         }
@@ -22,15 +21,15 @@ public class CommonGoalCard11 extends CommonGoalCard{
                     count--;
 
                     if (count >= 8) {
-                        trovato = true;
-                        verifica = true;
+                        return true;
                     } else {
                         count = 0;
                     }
+
                 }
             }
         }
 
-        return verifica;
+        return false;
     }
 }
