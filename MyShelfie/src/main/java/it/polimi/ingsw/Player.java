@@ -9,6 +9,7 @@ public class Player {
     private Game game;
     private Bookshelf bookshelf;
     private PersonalGoalCard goalCard;
+    private boolean FirstPlayer;
 
 
 
@@ -66,4 +67,9 @@ public class Player {
     public int getGoalCard() {
         return goalCard.getID();
     }
+
+    public void exitChat(){
+
+    }
 }
+
