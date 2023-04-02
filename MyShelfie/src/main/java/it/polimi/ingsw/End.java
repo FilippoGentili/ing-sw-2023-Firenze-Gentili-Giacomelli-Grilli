@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import java.net.CookieHandler;
-
 public class End implements State{
     private Player player;
     @Override
@@ -15,6 +13,6 @@ public class End implements State{
             getCommonGoalCard2().updateValue();
         }
         if(player.getBookshelf().fullBookshelf())
-            Game.
+            Game.endGameTrigger(player.getBookshelf(), player);
     }
 }
