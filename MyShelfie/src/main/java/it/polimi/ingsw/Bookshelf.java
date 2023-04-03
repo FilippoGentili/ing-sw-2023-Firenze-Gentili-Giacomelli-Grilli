@@ -25,6 +25,24 @@ public class Bookshelf {
         return shelf;
     }
 
+    public boolean spaceAvailable(ArrayList<Tile> tiles, int col){
+        for(int i=0; i<tiles.size(); i++){
+            if(!isEmpty(i, col))
+                return false;
+        }
+        return true;
+    }
+
+    public void insertTiles(ArrayList<Tile> tiles, int col){
+        for(Tile app:tiles){
+            int i=rows-1;
+            while(!isEmpty(i, col) && i>=0){
+                i--;
+            }
+            shelf[i][col]=app;
+        }
+    }
+
     public ArrayList<Tile> getSameAdjacentTiles(Tile curr){
         ArrayList<Tile> adjacents = new ArrayList<Tile>();
         if(curr.getRow()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))

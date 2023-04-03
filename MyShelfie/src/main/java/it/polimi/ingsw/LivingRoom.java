@@ -84,9 +84,11 @@ public class LivingRoom{
         for(Tile tile:chosen){
             for(int i=0; i<rows; i++){
                 for(int j=0; j<columns; j++){
-                    if(valid[i][j]){
+                    if(valid[i][j] && board[i][j]==null){
                         board[i][j]=tile;
                         tile.setLocation(Location.LIVING_ROOM);
+                        tile.setRow(i);
+                        tile.setCol(j);
                         numberOfTiles++;
                     }
                 }
