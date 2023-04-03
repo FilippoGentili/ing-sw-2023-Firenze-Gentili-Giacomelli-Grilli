@@ -33,7 +33,7 @@ public class Game {
     }
 
     //returns the first player of the match (random)
-    public Player pickFirstPlayer(){
+    public static Player pickFirstPlayer(){
         Random random = new Random();
         int i = random.nextInt(listOfPlayers.size());
         return listOfPlayers.get(i);
@@ -112,18 +112,16 @@ public class Game {
     public static void endGameTrigger(Bookshelf bookshelf, @NotNull Player player) {
         int score = player.getScore();
         player.setScore(score + 1);
-        while (Game.getNextPlayer() != player)
+        // the game goes on until it's the first player's turn
+        while (Game.getCurrentPlayer() != Game.pickFirstPlayer())
             Game.gameLoop();
-
-        // continua il giro finchè non arrivi al primo giocatore
     }
 
-    //assigns all points to player
-    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard, CommonGoalCard commonGoalCard) {
+    //assigns personalGoalCard points to player
+    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard) {
         for (Player player : players) {
-            int personalGoalPoints = personalGoalCard.assignPoints(player);
-            int commonGoalPoints = commonGoalCard.assignPoints(player);
-            int totalPoints = player.getScore() + personalGoalPoints + commonGoalPoints;
+            int personalGoalCardPoints = personalGoalCard.assignPoints(pickPersonalGoalCard());
+            int totalPoints = player.getScore() + personalGoalCardPoints;
             player.setScore(totalPoints);
         }
     }

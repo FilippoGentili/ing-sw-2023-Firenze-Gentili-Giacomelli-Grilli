@@ -11,7 +11,7 @@ public class Start implements State{
         TimerTask turn = new TimerTask() {
             public void run() {
                 System.out.println("Time is up!");
-                for(Game.getPlayers() : players){
+                for(Player player : Game.getPlayers()){
                     Scanner scanner = new Scanner(System.in);
                     System.out.println("Do you want to keep playing?");
                     scanner.nextLine();
