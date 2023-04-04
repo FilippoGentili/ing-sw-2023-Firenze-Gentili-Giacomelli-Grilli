@@ -10,6 +10,14 @@ public class Bookshelf {
 
     boolean[][] alreadyChecked = new boolean[rows][columns];
 
+    public Bookshelf(){
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                shelf[i][j]=null;
+            }
+        }
+    }
+
     public boolean isEmpty(int i, int j){
         if(shelf[i][j] != null)
             return false;
