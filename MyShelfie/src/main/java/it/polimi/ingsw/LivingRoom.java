@@ -85,24 +85,8 @@ public class LivingRoom{
         return board[i][j];
     }
 
-    public void insertTiles(ArrayList<Tile> chosen){
-        for(Tile tile:chosen){
-            for(int i=0; i<rows; i++){
-                for(int j=0; j<columns; j++){
-                    if(valid[i][j] && board[i][j]==null){
-                        board[i][j]=tile;
-                        tile.setLocation(Location.LIVING_ROOM);
-                        tile.setRow(i);
-                        tile.setCol(j);
-                        numberOfTiles++;
-                    }
-                }
-            }
-        }
-    }
-
-    public ArrayList<Tile> pickTiles(){
-        int count = 0;
+    public Tile pickTile(int i, int j){
+        /*int count = 0;
         boolean stop = false;
         String input;
         int i, j;
@@ -135,8 +119,34 @@ public class LivingRoom{
             }
 
         }
-        return chosen;
+        return chosen;*/    //interazione utente
+
+        Tile app;
+
+        app = getTile(i, j);
+        board[i][j]=null;
+        numberOfTiles--;
+
+        return app;
     }
+
+    public void insertTiles(ArrayList<Tile> chosen){
+        for(Tile tile:chosen){
+            for(int i=0; i<rows; i++){
+                for(int j=0; j<columns; j++){
+                    if(valid[i][j] && board[i][j]==null){
+                        board[i][j]=tile;
+                        tile.setLocation(Location.LIVING_ROOM);
+                        tile.setRow(i);
+                        tile.setCol(j);
+                        numberOfTiles++;
+                    }
+                }
+            }
+        }
+    }
+
+
 
     public boolean isAdjacent(Tile t1, Tile t2){
         if((t1.getCol()==t2.getCol() && (t1.getRow()==t2.getRow()+1 || t1.getRow()==t2.getRow()-1)) ||
