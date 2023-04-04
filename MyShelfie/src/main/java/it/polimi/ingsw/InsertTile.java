@@ -26,7 +26,7 @@ public class InsertTile implements State{
         if(!player.getBookshelf().fullBookshelf()){
             for(int i=0; i<5 ; i++){
                 for(int j=0; j<order.size(); j++){
-                    if(player.getBookshelf().shelf[i][column]==null)
+                    if(player.getBookshelf().getTile(i, column)==null)
                         i++;
                     player.getBookshelf().shelf[i][column]=order.get(j);
                 }

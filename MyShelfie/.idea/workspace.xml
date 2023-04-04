@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba9ab80d-ec4a-471e-b8c9-4c39346d1d67" name="Changes" comment="some missing methods">
+    <list default="true" id="ba9ab80d-ec4a-471e-b8c9-4c39346d1d67" name="Changes" comment="End issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/InsertTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/InsertTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/LivingRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/LivingRoom.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
       <workItem from="1680176123524" duration="29147000" />
       <workItem from="1680442586105" duration="8924000" />
       <workItem from="1680557960777" duration="964000" />
-      <workItem from="1680610651665" duration="855000" />
+      <workItem from="1680610651665" duration="4588000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1680019217458</created>
@@ -164,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680558890574</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="End issue">
+      <created>1680611871906</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1680611871906</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +201,7 @@
     <MESSAGE value="getshelf; doing count points" />
     <MESSAGE value="bookshelf done" />
     <MESSAGE value="some missing methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="some missing methods" />
+    <MESSAGE value="End issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="End issue" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LivingRoom{
 
@@ -80,6 +81,10 @@ public class LivingRoom{
         return numberOfTiles;
     }
 
+    public Tile getTile(int i, int j){
+        return board[i][j];
+    }
+
     public void insertTiles(ArrayList<Tile> chosen){
         for(Tile tile:chosen){
             for(int i=0; i<rows; i++){
@@ -96,8 +101,41 @@ public class LivingRoom{
         }
     }
 
-    public Tile getTile(int i, int j){
-        return board[i][j];
+    public ArrayList<Tile> pickTiles(){
+        int count = 0;
+        boolean stop = false;
+        String input;
+        int i, j;
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Tile> chosen = new ArrayList<Tile>();
+
+        System.out.println("Scegli gli indici delle tessere che vuoi prendere (scrivi 'stop' se hai concluso la scelta):");
+
+        //try catch per gestire l'immissione sbagliata degli indici
+
+        System.out.println(count+1 + " tessera:");
+        i = Integer.parseInt(scanner.nextLine());
+        j = Integer.parseInt(scanner.nextLine());
+        chosen.add(getTile(i ,j));
+        count++;
+
+        while(count<3 && !stop){
+
+            System.out.println(count+1 + " tessera:");
+
+            input = scanner.nextLine();
+
+            if(input.equals("stop"))
+                stop=true;
+            else{
+                i = Integer.parseInt(input);
+                j = Integer.parseInt(scanner.nextLine());
+                chosen.add(getTile(i ,j));
+                count++;
+            }
+
+        }
+        return chosen;
     }
 
     public boolean isAdjacent(Tile t1, Tile t2){
