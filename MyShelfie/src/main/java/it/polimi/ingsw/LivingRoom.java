@@ -123,11 +123,14 @@ public class LivingRoom{
 
         Tile app;
 
-        app = getTile(i, j);
-        board[i][j]=null;
-        numberOfTiles--;
+        if(valid[i][j] && board[i][j]!=null){
+            app = getTile(i, j);
+            board[i][j]=null;
+            numberOfTiles--;
 
-        return app;
+            return app;
+        }else throw new IllegalArgumentException("Coordinate errate");
+
     }
 
     public void insertTiles(ArrayList<Tile> chosen){
