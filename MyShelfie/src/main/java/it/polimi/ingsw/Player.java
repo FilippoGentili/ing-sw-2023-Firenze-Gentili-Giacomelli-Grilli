@@ -71,5 +71,9 @@ public class Player {
 
     }
 
+    public Game getGame(){
+        return game;
+    }
+
 }
 

@@ -12,6 +12,7 @@ public class Game {
     private static int currentPlayer;
     private ArrayList<Integer> availablePersonaGoalCards;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
+    private static LivingRoom livingRoom;
 
 
     public Game() {
@@ -132,6 +133,9 @@ public class Game {
     }
     public static CommonGoalCard getCommonGoal2(){
         return CommonGoal2;
+    }
+    public static LivingRoom getLivingRoom(){
+        return livingRoom;
     }
 
 }
