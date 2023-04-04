@@ -11,6 +11,7 @@ public class Game {
     private static ArrayList<Player> listOfPlayers;
     private static int currentPlayer;
     private ArrayList<Integer> availablePersonaGoalCards;
+    private static CommonGoalCard CommonGoal1, CommonGoal2;
 
 
     public Game() {
@@ -124,6 +125,13 @@ public class Game {
             int totalPoints = player.getScore() + personalGoalCardPoints;
             player.setScore(totalPoints);
         }
+    }
+
+    public static CommonGoalCard getCommonGoal1(){
+        return CommonGoal1;
+    }
+    public static CommonGoalCard getCommonGoal2(){
+        return CommonGoal2;
     }
 
 }
