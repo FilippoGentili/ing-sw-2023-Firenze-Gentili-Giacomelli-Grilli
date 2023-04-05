@@ -8,14 +8,11 @@ public class Bookshelf {
     private final int rows=6;
     private final int columns=5;
 
-    boolean[][] alreadyChecked = new boolean[rows][columns];
+    boolean[][] alreadyChecked;
 
     public Bookshelf(){
-        for(int i=0; i<rows; i++){
-            for(int j=0; j<columns; j++){
-                shelf[i][j]=null;
-            }
-        }
+        shelf = new Tile[rows][columns];
+        alreadyChecked = new boolean[rows][columns];
     }
 
     public boolean isEmpty(int i, int j){
@@ -42,8 +39,9 @@ public class Bookshelf {
     }
 
     public void insertTiles(ArrayList<Tile> tiles, int col){
+        int i=rows-1;
+
         for(Tile app:tiles){
-            int i=rows-1;
             while(!isEmpty(i, col) && i>=0){
                 i--;
             }
