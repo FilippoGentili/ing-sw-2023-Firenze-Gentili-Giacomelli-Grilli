@@ -25,9 +25,9 @@ public class Game {
 
     }
 
-    //gets the current player and puts the state to start
+    //next player becomes the current player and puts the state to start
     public static void gameLoop() {
-        Player currentPlayer = getCurrentPlayer();
+        Player currentPlayer = getNextPlayer();
         currentPlayer.setState(new Start());
         currentPlayer.getState().stateAction();
     }
@@ -47,6 +47,12 @@ public class Game {
     //returns the next player that must play
     public static Player getNextPlayer() {
         return listOfPlayers.get(currentPlayer + 1);
+
+    }
+
+    //winner of the game
+    public  Player getWinner(){
+
 
     }
 
