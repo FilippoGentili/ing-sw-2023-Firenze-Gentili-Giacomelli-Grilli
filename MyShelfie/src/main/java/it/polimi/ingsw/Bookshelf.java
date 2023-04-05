@@ -45,6 +45,9 @@ public class Bookshelf {
             while(!isEmpty(i, col) && i>=0){
                 i--;
             }
+            app.setRow(i);
+            app.setCol(col);
+            app.setLocation(Location.BOOKSHELF);
             shelf[i][col]=app;
         }
     }
