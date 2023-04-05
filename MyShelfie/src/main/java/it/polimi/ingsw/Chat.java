@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class Chat {
         participants.add(participant);
 
     }
-    public int getNumberOfParticipants(@NotNull Player participants){
+    public int getNumberOfParticipants(){
         return participants.size();
     }
 

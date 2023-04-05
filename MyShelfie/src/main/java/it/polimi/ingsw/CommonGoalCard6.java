@@ -3,16 +3,15 @@ import static java.util.Objects.isNull;
 
 public class CommonGoalCard6 extends CommonGoalCard{
     @Override
-    public boolean check(Player player) {
+    public boolean check(Bookshelf bookshelf) {
         int row, col, k, count=0;
         boolean verifica=false, uguali, CellaVuota;
 
         for(col=0; col<5 && count<2; col++){
             for(row=0, uguali=false, CellaVuota=false; row<5 && !uguali && !CellaVuota; row++){
-                if(!isNull(player.getBookshelf().getTile(row,col))) {
+                if(!isNull(bookshelf.getTile(row,col))) {
                     for (k = row + 1; k < 6 && !uguali; k++) {
-                        if (player.getBookshelf().getTile(row, col).getTileType().equals(
-                                player.getBookshelf().getTile(k, col).getTileType()))
+                        if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(k, col).getTileType())
                             uguali = true;
                     }
                 }else{

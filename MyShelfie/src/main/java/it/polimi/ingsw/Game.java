@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -111,7 +109,7 @@ public class Game {
     }
 
     //notify that it is the last round and gives the first player one extra point
-    public static void endGameTrigger(Bookshelf bookshelf, @NotNull Player player) {
+    public static void endGameTrigger(Bookshelf bookshelf,Player player) {
         int score = player.getScore();
         player.setScore(score + 1);
         // the game goes on until it's the first player's turn
@@ -120,7 +118,7 @@ public class Game {
     }
 
     //assigns personalGoalCard points to player
-    public void assignPoints(@NotNull ArrayList<Player> players, PersonalGoalCard personalGoalCard) {
+    public void assignPoints(ArrayList<Player> players, PersonalGoalCard personalGoalCard) {
         for (Player player : players) {
             int personalGoalCardPoints = personalGoalCard.assignPoints(pickPersonalGoalCard());
             int totalPoints = player.getScore() + personalGoalCardPoints;

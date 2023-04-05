@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 public class CommonGoalCard5 extends CommonGoalCard{
 
     @Override
-    public boolean check(Player player) {
+    public boolean check(Bookshelf bookshelf) {
         int count=0, countGroup, row, col, i;
         boolean[][] checkTile = new boolean[6][5];
 
@@ -14,7 +14,7 @@ public class CommonGoalCard5 extends CommonGoalCard{
         for(row=0, countGroup=0; row<6; row++){
             for(col=0; col<5; col++){
                 if(!checkTile[row][col]){
-                    count= HorizontalCheck(player.getBookshelf().getTile(row,col),player,checkTile);
+                    count= HorizontalCheck(bookshelf.getTile(row,col),bookshelf,checkTile);
                 }
                 if(count > 3) {
                     countGroup++;
@@ -33,7 +33,7 @@ public class CommonGoalCard5 extends CommonGoalCard{
             for(row=0, countGroup=0; row<6; row++) {
                 for (col = 0; col < 5; col++) {
                     if (!checkTile[row][col]) {
-                        count = HorizontalCheck(player.getBookshelf().getTile(row, col), player, checkTile);
+                        count = HorizontalCheck(bookshelf.getTile(row, col), bookshelf, checkTile);
                     }
                     if (count > 3) {
                         countGroup++;

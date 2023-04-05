@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DrawingTile implements State{
     private Player player;
-    private ArrayList<Tile> chosenTiles;
+    private static ArrayList<Tile> chosenTiles;
 
     int i, j;
 

@@ -23,8 +23,7 @@ public class Player {
     }
 
     //The player is created with the chosen nickname and an initial score of 0 points
-    public Player(String nickname){
-        this.nickname = nickname;
+    public Player(){
         this.score = 0;
         this.goalCard=game.pickPersonalGoalCard();
     }
