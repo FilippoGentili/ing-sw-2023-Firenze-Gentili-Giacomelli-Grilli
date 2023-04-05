@@ -66,8 +66,8 @@ public class Player {
         currentState.stateAction();
     }
 
-    public void exitChat(){
-
+    public void exitChat(Chat chat){
+        chat.removeParticipant(this);
     }
 
     public Game getGame(){

@@ -29,4 +29,8 @@ public class Chat {
     public List<Message> getMessages(){
         return messages;
     }
+
+    public void removeParticipant(Player participant) {
+        participants.remove(participant);
+    }
 }
