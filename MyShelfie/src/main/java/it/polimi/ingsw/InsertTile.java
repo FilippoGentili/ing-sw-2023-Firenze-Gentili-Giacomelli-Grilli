@@ -7,31 +7,25 @@ public class InsertTile implements State{
 
     @Override
     public void stateAction (){
-        ArrayList<TileType> order;
-        ArrayList<TileType> chosenTiles;
+        ArrayList<Tile> order;
+        ArrayList<Tile> chosenTiles;
 
         //The player has to choose the column he wants to put the tiles in
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose the column");
         int column = Integer.parseInt(scanner.nextLine());
 
-        order = new ArrayList<TileType>();
-        chosenTiles = new ArrayList<TileType>();
+        //An arraylist of tiles is created to set the order
+        order = new ArrayList<Tile>();
         //An arraylist order is used to
-        for (TileType tileType : chosenTiles=DrawingTile.stateAction()) {
-            System.out.println("Choose the tile order");
-            order.add(TileType.valueOf(scanner.nextLine()));
+        for (Tile Tile : chosenTiles=DrawingTile.getChosenTiles()) {
+            System.out.println("Select the order of ");
+            int j = Integer.parseInt(scanner.nextLine());
+            order.add(chosenTiles.get(j));
         }
 
         if(!player.getBookshelf().fullBookshelf()){
-            for(int i=0; i<5 ; i++){
-                for(int j=0; j<order.size(); j++){
-                    if(player.getBookshelf().getTile(i, column)==null)
-                        i++;
-                    player.getBookshelf().shelf[i][column]=order.get(j);
-                }
-            }
-
+            player.getBookshelf().insertTiles(order, column);
         }
 
     }

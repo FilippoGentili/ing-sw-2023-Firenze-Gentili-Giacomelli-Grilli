@@ -9,13 +9,7 @@ public class DrawingTile implements State{
 
 
     public void stateAction (){
-        int i, j;
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How many tiles do you want to pick?");
-        int nrTiles = Integer.parseInt(scanner.nextLine());
-
-        chosenTiles = player.getGame().getLivingRoom().pickTiles();
+        chosenTiles = player.getGame().getLivingRoom().pickTiles(i, j);
         player.getGame().getLivingRoom().checkValid(chosenTiles);
 
     }

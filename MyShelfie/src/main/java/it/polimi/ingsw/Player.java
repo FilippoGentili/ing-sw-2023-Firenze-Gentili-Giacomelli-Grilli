@@ -52,7 +52,6 @@ public class Player {
     public void quitGame(Game game){
         if(game!=null){
             game.removePlayer(this);
-            game=null;
         }
     }
 
