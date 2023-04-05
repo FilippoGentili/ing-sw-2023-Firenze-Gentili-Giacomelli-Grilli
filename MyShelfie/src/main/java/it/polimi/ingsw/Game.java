@@ -21,7 +21,7 @@ public class Game {
         for (int i = 1; i <= 12; i++) {
             availablePersonaGoalCards.add(i);
         }
-        // inizializza livingroom
+
 
     }
 
@@ -77,25 +77,54 @@ public class Game {
     }
 
     //picks 2 random common goal cards
-    public List<CommonGoalCard> pickCommonGoalCards() {
-        List<CommonGoalCard> listOfCards = new ArrayList<>();
+    public void pickCommonGoalCards() {
+        List<Integer> availableCommonGoalCards = new ArrayList<>();
+        for(int i=1; i<=12; i++){
+            availableCommonGoalCards.add(i);
+        }
 
-        listOfCards.add(new CommonGoalCard1());
-        listOfCards.add(new CommonGoalCard2());
-        listOfCards.add(new CommonGoalCard3());
-        listOfCards.add(new CommonGoalCard4());
-        listOfCards.add(new CommonGoalCard5());
-        listOfCards.add(new CommonGoalCard6());
-        listOfCards.add(new CommonGoalCard7());
-        listOfCards.add(new CommonGoalCard8());
-        listOfCards.add(new CommonGoalCard9());
-        listOfCards.add(new CommonGoalCard10());
-        listOfCards.add(new CommonGoalCard11());
-        listOfCards.add(new CommonGoalCard12());
+        Collections.shuffle(availableCommonGoalCards);
+        int commonGoalCard1 = availableCommonGoalCards.get(0);
+        int commonGoalCard2 = availableCommonGoalCards.get(1);
 
-        Collections.shuffle(listOfCards);
+        while(commonGoalCard1 == commonGoalCard2){
+            Collections.shuffle(availableCommonGoalCards);
+            commonGoalCard1 = availableCommonGoalCards.get(0);
+            commonGoalCard2 = availableCommonGoalCards.get(1);
+        }
 
-        return listOfCards.subList(0, 2);
+        CommonGoal1 = switch(commonGoalCard1){
+            case 1 -> new CommonGoalCard1();
+            case 2 -> new CommonGoalCard2();
+            case 3 -> new CommonGoalCard3();
+            case 4 -> new CommonGoalCard4();
+            case 5 -> new CommonGoalCard5();
+            case 6 -> new CommonGoalCard6();
+            case 7 -> new CommonGoalCard7();
+            case 8 -> new CommonGoalCard8();
+            case 9 -> new CommonGoalCard9();
+            case 10 -> new CommonGoalCard10();
+            case 11 -> new CommonGoalCard11();
+            case 12 -> new CommonGoalCard12();
+            default ->  throw new IllegalArgumentException("Invalid commonGoalCardNumber");
+        };
+
+        CommonGoal2 = switch(commonGoalCard2){
+            case 1 -> new CommonGoalCard1();
+            case 2 -> new CommonGoalCard2();
+            case 3 -> new CommonGoalCard3();
+            case 4 -> new CommonGoalCard4();
+            case 5 -> new CommonGoalCard5();
+            case 6 -> new CommonGoalCard6();
+            case 7 -> new CommonGoalCard7();
+            case 8 -> new CommonGoalCard8();
+            case 9 -> new CommonGoalCard9();
+            case 10 -> new CommonGoalCard10();
+            case 11 -> new CommonGoalCard11();
+            case 12 -> new CommonGoalCard12();
+            default ->  throw new IllegalArgumentException("Invalid commonGoalCardNumber");
+        };
+
     }
 
     //picks 1 random personal goal card (int) removes that so that another player can't pick the same
