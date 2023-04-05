@@ -14,7 +14,7 @@ public class DrawingTile implements State{
 
     }
 
-    public ArrayList<Tile> getChosenTiles(){
+    public static ArrayList<Tile> getChosenTiles(){
         return chosenTiles;
     }
 }

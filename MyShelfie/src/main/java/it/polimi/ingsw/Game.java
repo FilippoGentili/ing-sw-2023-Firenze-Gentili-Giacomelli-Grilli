@@ -51,10 +51,7 @@ public class Game {
     }
 
     //winner of the game
-    public  Player getWinner(){
 
-
-    }
 
     //return ArrayList of all participants
     public static ArrayList<Player> getPlayers() {
