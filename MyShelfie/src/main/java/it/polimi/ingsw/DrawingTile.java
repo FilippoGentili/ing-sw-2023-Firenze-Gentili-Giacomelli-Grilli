@@ -6,15 +6,15 @@ public class DrawingTile implements State{
     private Player player;
     private ArrayList<Tile> chosenTiles;
 
-
+    int i, j;
 
     public void stateAction (){
-        chosenTiles = player.getGame().getLivingRoom().pickTiles(i, j);
+        chosenTiles.add(player.getGame().getLivingRoom().pickTile(i, j));
         player.getGame().getLivingRoom().checkValid(chosenTiles);
 
     }
 
-    public ArrayList<Tile> getChosenTiles(){
+    public static ArrayList<Tile> getChosenTiles(){
         return chosenTiles;
     }
 }
