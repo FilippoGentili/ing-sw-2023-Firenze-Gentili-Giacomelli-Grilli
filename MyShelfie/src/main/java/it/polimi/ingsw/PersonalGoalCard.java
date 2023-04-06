@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 public class PersonalGoalCard {
     private Player player;
     private int points = 0;
-    private int matches = 0;
+    private int matches;
     private final int ID;
 
     PersonalGoalCard(int ID){
@@ -17,6 +17,7 @@ public class PersonalGoalCard {
 
     //There are 12 methods that check the number of matches and return it
     public int check1(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,0).getTileType().equals(TileType.PLANT))
             matches++;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.FRAME))
@@ -34,6 +35,7 @@ public class PersonalGoalCard {
     }
 
     public int check2(){
+        matches = 0;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.PLANT))
             matches++;
         if(player.getBookshelf().getTile(2,0).getTileType().equals(TileType.CAT))
@@ -51,6 +53,7 @@ public class PersonalGoalCard {
     }
 
     public int check3(){
+        matches = 0;
         if(player.getBookshelf().getTile(1,0).getTileType().equals(TileType.FRAME))
             matches++;
         if(player.getBookshelf().getTile(1,3).getTileType().equals(TileType.GAME))
@@ -68,6 +71,7 @@ public class PersonalGoalCard {
     }
 
     public int check4(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.GAME))
             matches++;
         if(player.getBookshelf().getTile(2,0).getTileType().equals(TileType.TROPHIE))
@@ -85,6 +89,7 @@ public class PersonalGoalCard {
     }
 
     public int check5(){
+        matches = 0;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.TROPHIE))
             matches++;
         if(player.getBookshelf().getTile(3,1).getTileType().equals(TileType.FRAME))
@@ -102,6 +107,7 @@ public class PersonalGoalCard {
     }
 
     public int check6(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.TROPHIE))
             matches++;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.CAT))
@@ -119,6 +125,7 @@ public class PersonalGoalCard {
     }
 
     public int check7(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,0).getTileType().equals(TileType.CAT))
             matches++;
         if(player.getBookshelf().getTile(1,3).getTileType().equals(TileType.FRAME))
@@ -136,6 +143,7 @@ public class PersonalGoalCard {
     }
 
     public int check8(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.FRAME))
             matches++;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.CAT))
@@ -153,6 +161,7 @@ public class PersonalGoalCard {
     }
 
     public int check9(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.GAME))
             matches++;
         if(player.getBookshelf().getTile(2,2).getTileType().equals(TileType.CAT))
@@ -170,6 +179,7 @@ public class PersonalGoalCard {
     }
 
     public int check10(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.TROPHIE))
             matches++;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.GAME))
@@ -187,6 +197,7 @@ public class PersonalGoalCard {
     }
 
     public int check11(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.PLANT))
             matches++;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.BOOK))
@@ -204,6 +215,7 @@ public class PersonalGoalCard {
     }
 
     public int check12(){
+        matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.BOOK))
             matches++;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.PLANT))
