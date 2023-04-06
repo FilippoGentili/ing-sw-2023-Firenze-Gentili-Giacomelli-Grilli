@@ -101,19 +101,18 @@ public class Game {
     //picks 2 random common goal cards
     public void pickCommonGoalCards() {
         List<Integer> availableCommonGoalCards = new ArrayList<>();
+        int commonGoalCard1, commonGoalCard2;
+
         for(int i=1; i<=12; i++){
             availableCommonGoalCards.add(i);
         }
 
-        Collections.shuffle(availableCommonGoalCards);
-        int commonGoalCard1 = availableCommonGoalCards.get(0);
-        int commonGoalCard2 = availableCommonGoalCards.get(1);
-
-        while(commonGoalCard1 == commonGoalCard2){
+        do{
             Collections.shuffle(availableCommonGoalCards);
             commonGoalCard1 = availableCommonGoalCards.get(0);
             commonGoalCard2 = availableCommonGoalCards.get(1);
-        }
+        }while(commonGoalCard1 == commonGoalCard2);
+
 
         CommonGoal1 = switch(commonGoalCard1){
             case 1 -> new CommonGoalCard1();

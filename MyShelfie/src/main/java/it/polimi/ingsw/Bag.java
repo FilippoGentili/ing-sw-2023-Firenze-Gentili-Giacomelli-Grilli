@@ -7,23 +7,30 @@ import java.util.*;
 
 public class Bag {
 
-    private static int numOfTiles;
-    private ArrayList<Tile> remainingTiles;
+    private static final int numOfTiles=132;
+    private static ArrayList<Tile> remainingTiles;
 
     public Bag(){
-        numOfTiles=132;
-        for(int i=0; i<numOfTiles;i++){
+
+        remainingTiles = new ArrayList<Tile>();
+
+        for(int i=0; i<numOfTiles; i++){
             if(i<22){
                 remainingTiles.add(new Tile(TileType.CAT, Location.BAG));
-            }else if(i>=22 && i<44){
+            }
+            if(i>=22 && i<44){
                 remainingTiles.add(new Tile(TileType.BOOK, Location.BAG));
-            }else if(i>=44 && i<66){
+            }
+            if(i>=44 && i<66){
                 remainingTiles.add(new Tile(TileType.GAME, Location.BAG));
-            }else if(i>=66 && i<88){
+            }
+            if(i>=66 && i<88){
                 remainingTiles.add(new Tile(TileType.FRAME, Location.BAG));
-            }else if(i>=88 && i<110){
+            }
+            if(i>=88 && i<110){
                 remainingTiles.add(new Tile(TileType.TROPHIE, Location.BAG));
-            }else if(i>=110 && i<132){
+            }
+            if(i>=110){
                 remainingTiles.add(new Tile(TileType.BOOK, Location.BAG));
             }
         }
@@ -37,6 +44,12 @@ public class Bag {
 
         for(int i=0; i<numStartTile-LivingRoom.getNumberOfTiles(); i++){
             chosen.add(remainingTiles.get(i));
+        }
+
+        int i=0;
+        for(Tile tile:chosen){
+            System.out.println(chosen.get(i).getTileType());
+            i++;
         }
 
         return chosen;

@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 import static java.util.Objects.isNull;
 
 abstract class CommonGoalCard {
-    private int id;
+
     private int value = 8;
     private int delta;
 

@@ -1,7 +1,24 @@
 package it.polimi.ingsw;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class BagTest extends TestCase {
+import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+class BagTest {
+
+    @Test
+    void printChosen(){
+
+        Bag bag = new Bag();
+        ArrayList<Tile> chosen = new ArrayList<Tile>();
+
+        chosen = bag.extract(132);
+
+        for(Tile tile:chosen)
+            System.out.println(tile.getTileType());
+
+        assertEquals(chosen.size(), 132);
+    }
 }
