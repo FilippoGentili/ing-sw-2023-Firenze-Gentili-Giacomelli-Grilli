@@ -8,7 +8,7 @@ import java.util.Random;
 public class Game {
     private static ArrayList<Player> listOfPlayers;
     private static int currentPlayer;
-    private ArrayList<Integer> availablePersonaGoalCards;
+    private final ArrayList<Integer> availablePersonaGoalCards;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
     private static LivingRoom livingRoom;
 
@@ -50,10 +50,21 @@ public class Game {
 
     }
 
-    //winner of the game
+    //returns winner of the game
+    public Player getWinner(){
+        Player winner = null;
+        int maxScore = 0;
+        for(Player player : listOfPlayers){
+            int score = player.getScore();
+            if(score>maxScore){
+                maxScore = score;
+                winner = player;
+            }
+        }
+        return winner;
+    }
 
-
-    //return ArrayList of all participants
+    //returns ArrayList of all participants
     public static ArrayList<Player> getPlayers() {
         return listOfPlayers;
     }
@@ -142,6 +153,9 @@ public class Game {
 
     //notify that it is the last round and gives the first player one extra point
     public static void endGameTrigger(Bookshelf bookshelf,Player player) {
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         int score = player.getScore();
         player.setScore(score + 1);
         // the game goes on until it's the first player's turn
@@ -151,6 +165,9 @@ public class Game {
 
     //assigns personalGoalCard points to player
     public void assignPoints(ArrayList<Player> players, PersonalGoalCard personalGoalCard) {
+        if(players==null || players.isEmpty())
+            throw new IllegalArgumentException("The list of players can't be null or empty");
+
         for (Player player : players) {
             int personalGoalCardPoints = personalGoalCard.assignPoints(pickPersonalGoalCard());
             int totalPoints = player.getScore() + personalGoalCardPoints;

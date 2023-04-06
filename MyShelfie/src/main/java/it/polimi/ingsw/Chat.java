@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chat {
-    private ArrayList<Player> participants;
-    private List<Message> messages;
+    private final ArrayList<Player> participants;
+    private final List<Message> messages;
 
     public Chat(){
         participants = new ArrayList<>();
