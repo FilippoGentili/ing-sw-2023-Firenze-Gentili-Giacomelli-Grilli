@@ -50,7 +50,7 @@ public class Game {
 
     }
 
-    //returns winner of the game
+    //returns winner of the game, if there is a tie the most distant player from the first player wins the game
     public Player getWinner(){
         Player winner = null;
         int maxScore = 0;
@@ -59,6 +59,14 @@ public class Game {
             if(score>maxScore){
                 maxScore = score;
                 winner = player;
+            }else if(score == maxScore){
+                int firstPlayer = listOfPlayers.indexOf(Game.pickFirstPlayer());
+                int var = (listOfPlayers.indexOf(player) - firstPlayer + listOfPlayers.size()) % listOfPlayers.size();
+                int win = (listOfPlayers.indexOf(winner) - firstPlayer + listOfPlayers.size()) % listOfPlayers.size();
+                if(var > win){
+                    winner = player;
+                }
+
             }
         }
         return winner;
@@ -175,12 +183,17 @@ public class Game {
         }
     }
 
+    //gets Common Goal Card 1
     public static CommonGoalCard getCommonGoal1(){
         return CommonGoal1;
     }
+
+    //gets Common Goal Card 2
     public static CommonGoalCard getCommonGoal2(){
         return CommonGoal2;
     }
+
+    //gets the Living room
     public static LivingRoom getLivingRoom(){
         return livingRoom;
     }
