@@ -1,5 +1,5 @@
 package it.polimi.ingsw;
 
-class PlayerTest{
+class DrawingTileTest {
 
 }
