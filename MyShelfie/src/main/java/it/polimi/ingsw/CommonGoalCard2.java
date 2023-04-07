@@ -10,7 +10,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         //nella libreria è possibile creare quattro diagonali: le ispeziono singolarmente finché non ne trovo una che
         //rispetti la specifica
 
-        for(row=0, col=0; row<5 && col<5 && trovato; row++, col++){
+        for(row=0, col=0; row<4 && col<4 && trovato; row++, col++){
             if(isNull(bookshelf.getTile(row,col))){
                 trovato = false;
             }else {
@@ -20,7 +20,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         }
         if(!trovato){
             trovato=true;
-            for(row=1, col=0; row<6 && col<5 && trovato; row++, col++){
+            for(row=1, col=0; row<5 && col<4 && trovato; row++, col++){
                 if(isNull(bookshelf.getTile(row,col))){
                     trovato = false;
                 }else {
@@ -32,7 +32,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         }
         if(!trovato){
             trovato=true;
-            for(row=0, col=4; row<5 && col>=0 && trovato; row++, col--){
+            for(row=0, col=4; row<4 && col>0 && trovato; row++, col--){
                 if(isNull(bookshelf.getTile(row,col))){
                     trovato = false;
                 }else {
@@ -44,7 +44,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         }
         if(!trovato){
             trovato=true;
-            for(row=1, col=4; row<6 && col>=0 && trovato; row++, col--){
+            for(row=1, col=4; row<5 && col>0 && trovato; row++, col--){
                 if(isNull(bookshelf.getTile(row,col))){
                     trovato = false;
                 }else {
