@@ -39,10 +39,11 @@ public class Bag {
     public ArrayList<Tile> extract(int numStartTile){
 
         ArrayList<Tile> chosen = new ArrayList<Tile>();
+        LivingRoom living = LivingRoom.getInstance();
 
         Collections.shuffle(remainingTiles);
 
-        for(int i=0; i<numStartTile-LivingRoom.getNumberOfTiles(); i++){
+        for(int i=0; i<numStartTile- living.getNumberOfTiles(); i++){
             chosen.add(remainingTiles.get(i));
         }
 

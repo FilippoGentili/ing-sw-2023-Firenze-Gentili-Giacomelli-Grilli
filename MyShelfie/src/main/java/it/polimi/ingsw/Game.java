@@ -98,6 +98,65 @@ public class Game {
         };
     }
 
+    public void initializeLivingRoom(){
+
+        LivingRoom living = LivingRoom.getInstance();
+
+        switch(numberOfTiles()){
+            case 29:
+                for(int i=0; i<9; i++){
+                    for(int j=0; j<9; j++){
+                        if((i==1 && (j==3 || j==4)) ||
+                                (i==2 && (j==3 || j==4 || j==5)) ||
+                                (i==3 && j!=0 && j!=1 && j!=8) ||
+                                (i==4 && j!=0 && j!=8) ||
+                                (i==5 && j!=0 && j!=7 && j!=8) ||
+                                (i==6 && (j==3 || j==4 || j==5)) ||
+                                (i==7 && (j==4 || j==5)))
+                            living.setValid(i, j, true);
+                        else living.setValid(i, j, false);
+                    }
+                }
+                break;
+            case 37:
+                for(int i=0; i<9; i++){
+                    for(int j=0; j<9; j++){
+                        if((i==0 && j==3) ||
+                                (i==1 && (j==3 || j==4)) ||
+                                (i==2 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
+                                (i==3 && j!=0 && j!=1) ||
+                                (i==4 && j!=0 && j!=8) ||
+                                (i==5 && j!=7 && j!=8) ||
+                                (i==6 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
+                                (i==7 && (j==4 || j==5)) ||
+                                (i==8 && j==5))
+                            living.setValid(i, j, true);
+                        else living.setValid(i, j, false);
+                    }
+                }
+                break;
+            case 45:
+                for(int i=0; i<9; i++){
+                    for(int j=0; j<9; j++){
+                        if((i==0 && (j==3 || j==4)) ||
+                                (i==1 && (j==3 || j==4 || j==5)) ||
+                                (i==2 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
+                                (i==3 && j!=0) ||
+                                (i==4) ||
+                                (i==5 && j!=8) ||
+                                (i==6 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
+                                (i==7 && (j==3 || j==4 || j==5)) ||
+                                (i==8 && (j==4 || j==5)))
+                            living.setValid(i, j, true);
+                        else living.setValid(i, j, false);
+                    }
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal number of tiles");
+        }
+    }
+
     //picks 2 random common goal cards
     public void pickCommonGoalCards() {
         List<Integer> availableCommonGoalCards = new ArrayList<>();

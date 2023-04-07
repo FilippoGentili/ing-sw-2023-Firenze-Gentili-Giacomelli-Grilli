@@ -39,6 +39,7 @@ public class Bookshelf {
     }
 
     public void insertTiles(ArrayList<Tile> tiles, int col){
+
         int i=rows-1;
 
         for(Tile app:tiles){

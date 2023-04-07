@@ -6,78 +6,29 @@ import java.util.Scanner;
 public class LivingRoom{
 
     private static LivingRoom single_instance = null;
-    private static int numberOfTiles=0;
+    private int numberOfTiles=0;
     private Tile[][] board;
     private boolean[][] valid;
     private final int rows = 9;
     private final int columns = 9;
 
-    private LivingRoom(Game game){
-
-        switch(game.numberOfTiles()){
-            case 29:
-                for(int i=0; i<rows; i++){
-                    for(int j=0; j<columns; j++){
-                        if((i==1 && (j==3 || j==4)) ||
-                                (i==2 && (j==3 || j==4 || j==5)) ||
-                                (i==3 && j!=0 && j!=1 && j!=8) ||
-                                (i==4 && j!=0 && j!=8) ||
-                                (i==5 && j!=0 && j!=7 && j!=8) ||
-                                (i==6 && (j==3 || j==4 || j==5)) ||
-                                (i==7 && (j==4 || j==5)))
-                            valid[i][j]=true;
-                        else valid[i][j]=false;
-                    }
-                }
-                break;
-            case 37:
-                for(int i=0; i<rows; i++){
-                    for(int j=0; j<columns; j++){
-                        if((i==0 && j==3) ||
-                                (i==1 && (j==3 || j==4)) ||
-                                (i==2 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
-                                (i==3 && j!=0 && j!=1) ||
-                                (i==4 && j!=0 && j!=8) ||
-                                (i==5 && j!=7 && j!=8) ||
-                                (i==6 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
-                                (i==7 && (j==4 || j==5)) ||
-                                (i==8 && j==5))
-                            valid[i][j]=true;
-                        else valid[i][j]=false;
-                    }
-                }
-                break;
-            case 45:
-                for(int i=0; i<rows; i++){
-                    for(int j=0; j<columns; j++){
-                        if((i==0 && (j==3 || j==4)) ||
-                                (i==1 && (j==3 || j==4 || j==5)) ||
-                                (i==2 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
-                                (i==3 && j!=0) ||
-                                (i==4) ||
-                                (i==5 && j!=8) ||
-                                (i==6 && (j==2 || j==3 || j==4 || j==5 || j==6)) ||
-                                (i==7 && (j==3 || j==4 || j==5)) ||
-                                (i==8 && (j==4 || j==5)))
-                            valid[i][j]=true;
-                        else valid[i][j]=false;
-                    }
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Illegal number of tiles");
-        }
-
+    private LivingRoom(){
+        board = new Tile[rows][columns];
+        valid = new boolean[rows][columns];
     }
 
-    public static synchronized LivingRoom getInstance(Game game){
+    public static synchronized LivingRoom getInstance(){
         if(single_instance == null)
-            single_instance = new LivingRoom(game);
+            single_instance = new LivingRoom();
 
         return  single_instance;
     }
 
-    public static int getNumberOfTiles(){
+    public void setValid(int i, int j, boolean x){
+        this.valid[i][j]=x;
+    }
+
+    public int getNumberOfTiles(){
         return numberOfTiles;
     }
 
