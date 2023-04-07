@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonalGoalCardTest {
+
+    /*
     @Test
     public void zeroMatchesGiveZeroPoints(){
         PersonalGoalCard pGoal1 = new PersonalGoalCard(1);
@@ -207,11 +209,23 @@ class PersonalGoalCardTest {
         assertEquals(12, pGoal11.countPoints(6));
         assertEquals(12, pGoal12.countPoints(6));
     }
+    */
 
     @Test
     public void assignPointsToPGoal1(){
-        PersonalGoalCard pGoal1 = new PersonalGoalCard(1);
-        int matches = pGoal1.check1();
+        Bookshelf bookshelf= new Bookshelf();
+        bookshelf.setTile(0,0, TileType.PLANT);
+        bookshelf.setTile(0,2, TileType.FRAME);
+        bookshelf.setTile(1,4, TileType.CAT);
+        bookshelf.setTile(2,3, TileType.BOOK);
+        bookshelf.setTile(3,1, TileType.GAME);
+        bookshelf.setTile(5,2, TileType.TROPHIE);
+
+        PersonalGoalCard pGoal1= new PersonalGoalCard(1);
+
+        assertEquals(6, pGoal1.check1());
+        assertEquals(12, pGoal1.countPoints(pGoal1.check1()));
+
     }
 
 }

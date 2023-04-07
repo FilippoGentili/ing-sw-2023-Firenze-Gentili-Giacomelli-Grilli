@@ -128,4 +128,8 @@ public class Bookshelf {
         return true;
     }
 
+    public void setTile(int i, int j, TileType type) {
+        Tile tile = new Tile(type, Location.BOOKSHELF);
+        shelf[i][j]=tile;
+    }
 }
