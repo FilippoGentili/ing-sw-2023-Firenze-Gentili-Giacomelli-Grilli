@@ -4,7 +4,7 @@ import static java.util.Objects.isNull;
 public class CommonGoalCard12 extends CommonGoalCard{
     @Override
     public boolean check(Bookshelf bookshelf) {
-        boolean verifica=false, prove;
+        boolean prove;
         int row, col, count;
 
         for(row=0, count=0, prove=true; row<5 && prove; row++){
@@ -14,7 +14,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
                     prove=false;
 
             if(prove){
-                for(col=count; col<5 && false; col++)
+                for(col=count; col<5 && prove; col++)
                     if(!isNull(bookshelf.getTile(row,col)))
                         prove=false;
             }
@@ -27,7 +27,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
                         prove=false;
 
                 if(prove){
-                    for(col=count; col<5 && false; col++)
+                    for(col=count; col<5 && prove; col++)
                         if(!isNull(bookshelf.getTile(row,col)))
                             prove=false;
                 }
@@ -62,9 +62,7 @@ public class CommonGoalCard12 extends CommonGoalCard{
             }
         }
 
-        if(prove)
-            verifica=true;
-
-        return verifica;
+        if(prove) return true;
+        else return false;
     }
 }
