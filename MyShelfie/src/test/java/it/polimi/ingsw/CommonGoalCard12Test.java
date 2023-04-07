@@ -25,6 +25,7 @@ class CommonGoalCard12Test {
         ArrayList<Tile> TileGame = new ArrayList<>();
         ArrayList<Tile> TilePlant = new ArrayList<>();
 
+
         TileCat.add(cat);
         TileBook.add(book);
         TileTrophie.add(trophie);
