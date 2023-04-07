@@ -12,10 +12,13 @@ public class Player {
     private boolean FirstPlayer;
 
     //This method asks the user to choose a Nickname
-    public void chooseNickname(){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Choose your nickname");
-            String nickname = scanner.nextLine();
+    public String chooseNickname(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose your nickname");
+        String nickname = scanner.nextLine();
+
+        return nickname;
+
     }
 
     public String getNickname() {
@@ -26,6 +29,11 @@ public class Player {
     public Player(){
         this.score = 0;
         this.goalCard=game.pickPersonalGoalCard();
+        this.nickname=chooseNickname();
+    }
+
+    public int getGoalCard(){
+        return goalCard;
     }
 
     //The player gets a bookshelf to play with

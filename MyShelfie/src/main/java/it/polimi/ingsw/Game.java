@@ -176,7 +176,7 @@ public class Game {
             throw new IllegalArgumentException("The list of players can't be null or empty");
 
         for (Player player : players) {
-            int personalGoalCardPoints = personalGoalCard.assignPoints(pickPersonalGoalCard());
+            int personalGoalCardPoints = personalGoalCard.assignPoints(player.getGoalCard());
             int totalPoints = player.getScore() + personalGoalCardPoints;
             player.setScore(totalPoints);
         }
