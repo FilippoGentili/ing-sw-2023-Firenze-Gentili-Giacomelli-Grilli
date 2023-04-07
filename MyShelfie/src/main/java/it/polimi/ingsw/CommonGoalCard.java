@@ -35,9 +35,8 @@ abstract class CommonGoalCard {
             if(!isNull(tile)) {
 
                 if (tile.getCol() == 0) {
-                    if (tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())) {
-                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile);
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(),tile.getCol()+1).getTileType()) {
+                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(), tile.getCol()+1),bookshelf,checkTile);
                     } else {
                         count = 1;
                     }
