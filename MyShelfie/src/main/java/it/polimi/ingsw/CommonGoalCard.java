@@ -32,36 +32,17 @@ abstract class CommonGoalCard {
 
             checkTile[tile.getRow()][tile.getCol()] = true;
 
-            if(!isNull(tile)) {
-
-                if (tile.getCol() == 0) {
-                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(),tile.getCol()+1).getTileType()) {
-                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(), tile.getCol()+1),bookshelf,checkTile);
-                    } else {
+            if(tile.getCol()<4) {
+                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1))) {
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())
+                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(),tile.getCol()+1), bookshelf, checkTile);
+                    else
                         count = 1;
-                    }
-                } else if (tile.getCol() == 4) {
-                    if (tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())) {
-                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile);
-                    } else {
-                        count = 1;
-                    }
-
                 } else {
-                    if (tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())) {
-                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile);
-                    } else {
-                        count = 1;
-                    }
-                    if (tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())) {
-                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile);
-                    } else {
-                        count = 1;
-                    }
+                    count = 1;
                 }
+            }else{
+                count=1;
             }
 
         }
@@ -76,37 +57,20 @@ abstract class CommonGoalCard {
 
             checkTile[tile.getRow()][tile.getCol()] = true;
 
-            if(!isNull(tile)){
-                if(tile.getRow()==0){
-                    if(tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())){
-                        count = 1 + VerticalCheck(bookshelf.getTile(tile.getRow()+1,tile.getCol()), bookshelf, checkTile);
-                    }else{
+            if(tile.getRow()>0){
+                if(!isNull(bookshelf.getTile(tile.getRow()-1,tile.getCol()))){
+                    if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())
+                        count = 1 + VerticalCheck(bookshelf.getTile(tile.getRow()-1,tile.getCol()),bookshelf,checkTile);
+                    else
                         count = 1;
-                    }
-                } else if(tile.getRow()==5){
-                    if(tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())){
-                        count = 1 + VerticalCheck(bookshelf.getTile(tile.getRow()-1,tile.getCol()), bookshelf, checkTile);
-                    }else{
-                        count = 1;
-                    }
                 }else{
-                    if(tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())){
-                        count = 1 + VerticalCheck(bookshelf.getTile(tile.getRow()+1,tile.getCol()), bookshelf, checkTile);
-                    }else{
-                        count = 1;
-                    }
-                    if(tile.getTileType().equals(
-                            bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())){
-                        count = 1 + VerticalCheck(bookshelf.getTile(tile.getRow()-1,tile.getCol()), bookshelf, checkTile);
-                    }else{
-                        count = 1;
-                    }
+                    count = 1;
                 }
+            }else{
+                count = 1;
             }
         }
+
         return count;
     }
 }
