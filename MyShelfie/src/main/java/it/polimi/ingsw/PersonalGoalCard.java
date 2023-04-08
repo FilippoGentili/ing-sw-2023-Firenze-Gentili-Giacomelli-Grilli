@@ -14,6 +14,9 @@ public class PersonalGoalCard {
 
     //There are 12 methods that check the number of matches and return it
     public int check1(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,0).getTileType().equals(TileType.PLANT))
             matches++;
@@ -32,6 +35,9 @@ public class PersonalGoalCard {
     }
 
     public int check2(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.PLANT))
             matches++;
@@ -50,6 +56,9 @@ public class PersonalGoalCard {
     }
 
     public int check3(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(1,0).getTileType().equals(TileType.FRAME))
             matches++;
@@ -68,6 +77,9 @@ public class PersonalGoalCard {
     }
 
     public int check4(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.GAME))
             matches++;
@@ -86,6 +98,9 @@ public class PersonalGoalCard {
     }
 
     public int check5(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(1,1).getTileType().equals(TileType.TROPHIE))
             matches++;
@@ -104,6 +119,9 @@ public class PersonalGoalCard {
     }
 
     public int check6(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.TROPHIE))
             matches++;
@@ -122,6 +140,9 @@ public class PersonalGoalCard {
     }
 
     public int check7(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,0).getTileType().equals(TileType.CAT))
             matches++;
@@ -140,6 +161,9 @@ public class PersonalGoalCard {
     }
 
     public int check8(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.FRAME))
             matches++;
@@ -158,6 +182,9 @@ public class PersonalGoalCard {
     }
 
     public int check9(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.GAME))
             matches++;
@@ -176,6 +203,9 @@ public class PersonalGoalCard {
     }
 
     public int check10(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,4).getTileType().equals(TileType.TROPHIE))
             matches++;
@@ -194,6 +224,9 @@ public class PersonalGoalCard {
     }
 
     public int check11(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.PLANT))
             matches++;
@@ -212,6 +245,9 @@ public class PersonalGoalCard {
     }
 
     public int check12(Player player){
+        if(player==null)
+            throw new IllegalArgumentException("Player can't be null");
+
         matches = 0;
         if(player.getBookshelf().getTile(0,2).getTileType().equals(TileType.BOOK))
             matches++;
