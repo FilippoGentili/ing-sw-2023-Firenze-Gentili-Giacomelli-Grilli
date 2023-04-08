@@ -31,6 +31,7 @@ public class Player {
         this.score = 0;
         this.goalCard=game.pickPersonalGoalCard();
         this.nickname=chooseNickname();
+        this.bookshelf=new Bookshelf();
     }
 
     public int getGoalCard(){
