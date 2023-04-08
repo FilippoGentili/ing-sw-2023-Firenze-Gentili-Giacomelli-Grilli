@@ -1,9 +1,7 @@
 package it.polimi.ingsw;
 
-import java.util.Scanner;
-
 public class Player {
-    private final String nickname;
+    //private final String nickname;
     private State currentState;
     private int score;
     private Game game;
@@ -11,7 +9,7 @@ public class Player {
     private boolean FirstPlayer;
     private PersonalGoalCard personalGoalCard;
 
-    //This method asks the user to choose a Nickname
+    /*This method asks the user to choose a Nickname
     public String chooseNickname(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose your nickname");
@@ -21,14 +19,18 @@ public class Player {
         return scanner.nextLine();
     }
 
-    public String getNickname() {
+     */
+
+   /* public String getNickname() {
         return this.nickname;
     }
+
+    */
 
     //The player is created with the chosen nickname and an initial score of 0 points
     public Player(){
         this.score = 0;
-        this.nickname = chooseNickname();
+        //this.nickname = chooseNickname();
         this.bookshelf = new Bookshelf();
         this.personalGoalCard = new PersonalGoalCard();
     }

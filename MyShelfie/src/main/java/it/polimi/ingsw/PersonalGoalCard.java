@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
-
 public class PersonalGoalCard {
 
     private Player player;
@@ -114,7 +112,7 @@ public class PersonalGoalCard {
                     matches++;
                 if(player.getBookshelf().getTile(5,0).getTileType().equals(TileType.GAME))
                     matches++;
-                if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.PLANT))
+                if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.CAT))
                     matches++;
 
                 return matches;
