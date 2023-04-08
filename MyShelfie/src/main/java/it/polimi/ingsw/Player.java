@@ -3,12 +3,12 @@ package it.polimi.ingsw;
 import java.util.Scanner;
 
 public class Player {
-    private String nickname;
+    private final String nickname;
     private State currentState;
     private int score;
     private Game game;
     private Bookshelf bookshelf;
-    private int goalCard;
+    private final int goalCard;
     private boolean FirstPlayer;
 
     //This method asks the user to choose a Nickname
@@ -17,8 +17,9 @@ public class Player {
         System.out.println("Choose your nickname");
         String nickname = scanner.nextLine();
 
-        return nickname;
+        //Da verificare che non sia uguale a quello di un altro
 
+        return nickname;
     }
 
     public String getNickname() {

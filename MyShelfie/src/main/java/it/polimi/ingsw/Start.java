@@ -3,8 +3,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Scanner;
 public class Start implements State{
-    private Player player;
-    private Timer timer;
     @Override
     public void stateAction (){
         Timer timer = new Timer();

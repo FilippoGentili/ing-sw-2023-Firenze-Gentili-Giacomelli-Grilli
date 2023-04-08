@@ -213,7 +213,9 @@ class PersonalGoalCardTest {
 
     @Test
     public void assignPointsToPGoal1(){
-        Bookshelf bookshelf= new Bookshelf();
+        Bookshelf bookshelf = new Bookshelf();
+        Player player = new Player();
+
         bookshelf.setTile(0,0, TileType.PLANT);
         bookshelf.setTile(0,2, TileType.FRAME);
         bookshelf.setTile(1,4, TileType.CAT);
@@ -223,8 +225,7 @@ class PersonalGoalCardTest {
 
         PersonalGoalCard pGoal1= new PersonalGoalCard(1);
 
-        assertEquals(6, pGoal1.check1());
-        assertEquals(12, pGoal1.countPoints(pGoal1.check1()));
+        assertEquals(6, pGoal1.check1(player));
 
     }
 
