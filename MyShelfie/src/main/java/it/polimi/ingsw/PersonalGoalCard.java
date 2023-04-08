@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
+
 public class PersonalGoalCard {
 
     //private Player player = new Player();
@@ -281,7 +283,7 @@ public class PersonalGoalCard {
     }
 
     //The method gives how many points the player has to get, based on his PersonalGoalCard
-    public int assignPoints (int ID){
+    public int assignPoints (ArrayList<Integer> ID){
         switch (ID) {
             case 1 -> {
                 matches = check1();
