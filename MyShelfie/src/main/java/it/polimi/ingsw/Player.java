@@ -35,7 +35,7 @@ public class Player {
         this.bookshelf=new Bookshelf();
     }
 
-    public  getGoalCard(){
+    public ArrayList<Integer> getGoalCard(){
         return goalCard;
     }
 
