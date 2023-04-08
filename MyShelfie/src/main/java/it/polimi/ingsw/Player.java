@@ -8,7 +8,7 @@ public class Player {
     private int score;
     private Game game;
     private Bookshelf bookshelf;
-    private final int goalCard;
+    private PersonalGoalCard goalCard;
     private boolean FirstPlayer;
 
     //This method asks the user to choose a Nickname
@@ -29,12 +29,12 @@ public class Player {
     //The player is created with the chosen nickname and an initial score of 0 points
     public Player(){
         this.score = 0;
-        this.goalCard=game.pickPersonalGoalCard();
+        this.goalCard = new PersonalGoalCard(game.pickPersonalGoalCard());
         this.nickname=chooseNickname();
         this.bookshelf=new Bookshelf();
     }
 
-    public int getGoalCard(){
+    public PersonalGoalCard getGoalCard(){
         return goalCard;
     }
 

@@ -225,7 +225,7 @@ class PersonalGoalCardTest {
 
         PersonalGoalCard pGoal1= new PersonalGoalCard(1);
 
-        assertEquals(6, pGoal1.check1(player));
+        assertEquals(6, pGoal1.check1());
 
     }
 
