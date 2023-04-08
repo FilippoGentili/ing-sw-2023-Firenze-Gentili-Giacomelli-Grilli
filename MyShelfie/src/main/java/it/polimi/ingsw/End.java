@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import static it.polimi.ingsw.Game.endGameTrigger;
+
 public class End implements State{
     private Player player;
     @Override
@@ -13,7 +15,7 @@ public class End implements State{
             Game.getCommonGoal2().updateValue();
         }
         if(player.getBookshelf().fullBookshelf()) {
-            Game.endGameTrigger(player.getBookshelf(), player);
+            endGameTrigger(player.getBookshelf(), player);
         }
     }
 }
