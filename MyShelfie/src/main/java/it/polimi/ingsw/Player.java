@@ -7,7 +7,7 @@ public class Player {
     private State currentState;
     private int score;
     private Game game;
-    private Bookshelf bookshelf;
+    private final Bookshelf bookshelf;
     private final int goalCard;
     private boolean FirstPlayer;
 
@@ -15,11 +15,10 @@ public class Player {
     public String chooseNickname(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose your nickname");
-        String nickname = scanner.nextLine();
 
         //Da verificare che non sia uguale a quello di un altro
 
-        return nickname;
+        return scanner.nextLine();
     }
 
     public String getNickname() {

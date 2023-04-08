@@ -207,14 +207,29 @@ public class Game {
 
     }
 
-    //picks 1 random personal goal card (int) removes that so that another player can't pick the same
-    public int pickPersonalGoalCard() {
+    //picks 4 random personal goal card (int), removes that so that another player can't pick the same
+    public ArrayList<Integer> pickPersonalGoalCard() {
         Random random = new Random();
-        int i = random.nextInt(availablePersonaGoalCards.size());
-        int pickedCard = availablePersonaGoalCards.get(i);
+        ArrayList<Integer> pickedCards = new ArrayList<Integer>();
 
-        availablePersonaGoalCards.remove(i);
-        return pickedCard;
+        while (pickedCards.size() < listOfPlayers.size()) {
+            int i = random.nextInt(availablePersonaGoalCards.size());
+            int pickedCard = availablePersonaGoalCards.get(i);
+            if (!pickedCards.contains(pickedCard)) {
+                pickedCards.add(pickedCard);
+                availablePersonaGoalCards.remove(i);
+            }
+        }
+    }
+
+    //set personalGoalCard to every player
+    public void setPersonalGoalCard(){
+        ArrayList<Integer> pickedPersonalGoalCards = pickPersonalGoalCard();
+        for (int i = 0; i < listOfPlayers.size(); i++) {
+            Player player = listOfPlayers.get(i);
+            PersonalGoalCard personalGoalCard = new PersonalGoalCard(pickedPersonalGoalCards.get(i));
+            player.setPersonalGoalCard(personalGoalCard);
+        }
     }
 
     //notify that it is the last round and gives the first player one extra point
