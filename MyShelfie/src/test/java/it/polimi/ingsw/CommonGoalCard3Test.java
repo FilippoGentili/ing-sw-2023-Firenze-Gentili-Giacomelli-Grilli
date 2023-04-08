@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CommonGoalCard3Test {
     @Test
-    void FourCornersAsCats(){
+    void FullBookshelf(){
         CommonGoalCard Card = new CommonGoalCard3();
         Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
         ArrayList<Tile> TileCat= new ArrayList<>();
@@ -85,8 +85,28 @@ class CommonGoalCard3Test {
 
         assertFalse(Card.check(bookshelf));
     }
+
     @Test
-    void AllCornersAreStillNull(){
+    void TwoEqualsColumns(){
+        CommonGoalCard Card = new CommonGoalCard3();
+        Bookshelf bookshelf = new Bookshelf();
+
+        Tile book = new Tile(TileType.BOOK, Location.BOOKSHELF);
+
+        ArrayList<Tile> TileBook = new ArrayList<>();
+
+        TileBook.add(book);
+
+        for(int i=0; i<6; i++)
+            bookshelf.insertTiles(TileBook,0);
+        for(int i=0; i<6; i++)
+            bookshelf.insertTiles(TileBook,4);
+
+        assertTrue(Card.check(bookshelf));
+    }
+
+    @Test
+    void EmptyBookshelf(){
         CommonGoalCard Card = new CommonGoalCard3();
         Bookshelf bookshelf = new Bookshelf();
 
