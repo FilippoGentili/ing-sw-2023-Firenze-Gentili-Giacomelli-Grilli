@@ -30,6 +30,7 @@ public class Player {
         this.score = 0;
         this.nickname = chooseNickname();
         this.bookshelf = new Bookshelf();
+        this.personalGoalCard = new PersonalGoalCard();
     }
 
     //The player gets a bookshelf to play with
@@ -82,8 +83,9 @@ public class Player {
         return game;
     }
 
-    public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
-        this.personalGoalCard = personalGoalCard;
+    public void setPersonalGoalCard(int personalGoalCard) {
+        this.personalGoalCard.setID(personalGoalCard);
+        this.personalGoalCard.setPlayer(this);
     }
 
     public PersonalGoalCard getPersonalGoalCard(){

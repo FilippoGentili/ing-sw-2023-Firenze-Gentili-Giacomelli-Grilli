@@ -8,21 +8,12 @@ import java.util.Random;
 public class Game {
     private static ArrayList<Player> listOfPlayers;
     private static int currentPlayer;
-    private final ArrayList<Integer> availablePersonaGoalCards;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
     private static LivingRoom livingRoom;
 
 
     public Game() {
         listOfPlayers = new ArrayList<>();
-
-        //initialize personalGoalCard
-        availablePersonaGoalCards = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            availablePersonaGoalCards.add(i);
-        }
-
-
     }
 
     //next player becomes the current player and puts the state to start
@@ -208,7 +199,7 @@ public class Game {
     }
 
     //picks 4 random personal goal card (int), removes that so that another player can't pick the same
-    public ArrayList<Integer> pickPersonalGoalCard() {
+    /*public ArrayList<Integer> pickPersonalGoalCard() {
         Random random = new Random();
         ArrayList<Integer> pickedCards = new ArrayList<Integer>();
 
@@ -230,6 +221,22 @@ public class Game {
             PersonalGoalCard personalGoalCard = new PersonalGoalCard(pickedPersonalGoalCards.get(i));
             player.setPersonalGoalCard(personalGoalCard);
         }
+    }*/
+
+    void setPersonalGoalCard(){
+
+        ArrayList<Integer> availablePersonaGoalCards = new ArrayList<>();
+        for(int i=0; i<12; i++)
+            availablePersonaGoalCards.add(i);
+
+        Collections.shuffle(availablePersonaGoalCards);
+
+        int app=0;
+        for(Player player: listOfPlayers){
+            player.setPersonalGoalCard(availablePersonaGoalCards.get(app));
+            app++;
+        }
+
     }
 
     //notify that it is the last round and gives the first player one extra point
@@ -245,12 +252,12 @@ public class Game {
     }
 
     //assigns personalGoalCard points to player
-    public void assignPoints(ArrayList<Player> players, PersonalGoalCard personalGoalCard) {
+    public void assignPoints(ArrayList<Player> players) {
         if(players==null || players.isEmpty())
             throw new IllegalArgumentException("The list of players can't be null or empty");
 
         for (Player player : players) {
-            int personalGoalCardPoints = personalGoalCard.assignPoints(player.getGoalCard());
+            int personalGoalCardPoints = player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID());
             int totalPoints = player.getScore() + personalGoalCardPoints;
             player.setScore(totalPoints);
         }
