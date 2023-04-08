@@ -45,6 +45,9 @@ public class Player {
 
     //When a player wants to join a game, it calls this method. the method addPlayer in game adds the player in the list of player dor the specific game
     public void joinGame(Game game){
+        if(game==null)
+            throw new IllegalArgumentException("Game can't be null");
+
         game.addPlayer(this);
     }
 
@@ -76,6 +79,8 @@ public class Player {
     }
 
     public void exitChat(Chat chat){
+        if(chat==null)
+            throw new IllegalArgumentException("Chat can't be null");
         chat.removeParticipant(this);
     }
 
