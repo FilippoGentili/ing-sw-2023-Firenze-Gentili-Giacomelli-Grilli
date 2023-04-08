@@ -28,8 +28,8 @@ public class Player {
     //The player is created with the chosen nickname and an initial score of 0 points
     public Player(){
         this.score = 0;
-        this.nickname=chooseNickname();
-        this.bookshelf=new Bookshelf();
+        this.nickname = chooseNickname();
+        this.bookshelf = new Bookshelf();
     }
 
     //The player gets a bookshelf to play with
@@ -89,8 +89,6 @@ public class Player {
     public PersonalGoalCard getPersonalGoalCard(){
         return personalGoalCard;
     }
-
-
 
 }
 
