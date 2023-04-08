@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
@@ -8,8 +9,9 @@ public class Player {
     private int score;
     private Game game;
     private final Bookshelf bookshelf;
-    private final int goalCard;
+    private final ArrayList<Integer> goalCard;
     private boolean FirstPlayer;
+    private PersonalGoalCard personalGoalCard;
 
     //This method asks the user to choose a Nickname
     public String chooseNickname(){
@@ -33,7 +35,7 @@ public class Player {
         this.bookshelf=new Bookshelf();
     }
 
-    public int getGoalCard(){
+    public  getGoalCard(){
         return goalCard;
     }
 
@@ -86,6 +88,12 @@ public class Player {
     public Game getGame(){
         return game;
     }
+
+    public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
+        this.personalGoalCard = personalGoalCard;
+    }
+
+
 
 }
 
