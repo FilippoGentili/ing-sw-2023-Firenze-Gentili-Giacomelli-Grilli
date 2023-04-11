@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 import java.util.ArrayList;
 
 public class Bookshelf {
-    private Tile[][] shelf;
+    private static Tile[][] shelf;
 
     private final int rows=6;
     private final int columns=5;
@@ -55,37 +55,40 @@ public class Bookshelf {
 
     public ArrayList<Tile> getSameAdjacentTiles(Tile curr){
         ArrayList<Tile> adjacents = new ArrayList<Tile>();
-        if(curr.getRow()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))
-            adjacents.add(shelf[curr.getRow()-1][curr.getCol()]);
-        if(curr.getCol()-1 >= 0 && curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()-1].getTileType()))
-            adjacents.add(shelf[curr.getRow()][curr.getCol()-1]);
-        if(curr.getCol()+1 <= columns-1 && curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()+1].getTileType()))
-            adjacents.add(shelf[curr.getRow()][curr.getCol()+1]);
-        if(curr.getRow()+1 <= rows-1 && curr.getTileType().equals(shelf[curr.getRow()+1][curr.getCol()].getTileType()))
-            adjacents.add(shelf[curr.getRow()+1][curr.getCol()]);
+        if(curr.getRow()-1 >= 0 && shelf[curr.getRow()-1][curr.getCol()]!=null)
+            if(curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))
+                adjacents.add(shelf[curr.getRow()-1][curr.getCol()]);
+        if(curr.getCol()-1 >= 0 && shelf[curr.getRow()][curr.getCol()-1]!=null)
+            if(curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()-1].getTileType()))
+                adjacents.add(shelf[curr.getRow()][curr.getCol()-1]);
+        if(curr.getCol()+1 <= columns-1 && shelf[curr.getRow()][curr.getCol()+1]!=null)
+            if(curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()+1].getTileType()))
+                adjacents.add(shelf[curr.getRow()][curr.getCol()+1]);
+        if(curr.getRow()+1 <= rows-1 && shelf[curr.getRow()+1][curr.getCol()]!=null)
+            if(curr.getTileType().equals(shelf[curr.getRow()+1][curr.getCol()].getTileType()))
+                adjacents.add(shelf[curr.getRow()+1][curr.getCol()]);
 
         return adjacents;
     }
 
-    public int MatrixWalk(ArrayList<Tile> tiles, int numAd){
+    public int MatrixWalk(ArrayList<Tile> tiles, int x){
 
         if(tiles.size()>0){
             for(Tile curr:tiles){
                 if(!alreadyChecked[curr.getRow()][curr.getCol()]){
-                    numAd++;
+                    x++;
                     alreadyChecked[curr.getRow()][curr.getCol()]=true;
-                    MatrixWalk(getSameAdjacentTiles(curr), numAd);
+                    MatrixWalk(getSameAdjacentTiles(curr), x);
                 }
             }
         }
 
-        return numAd;
+        return x;
     }
 
     public int countPoints(){
 
         int numAd = 0;
-        boolean more=true;
         ArrayList<Tile> adj;
         int points=0;
 
@@ -98,10 +101,10 @@ public class Bookshelf {
 
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
-                if(!alreadyChecked[i][j]){
+                if(!alreadyChecked[i][j] && getTile(i, j)!=null){
                     numAd=1;
                     alreadyChecked[i][j] = true;
-                    adj = getSameAdjacentTiles(shelf[i][j]);
+                    adj = getSameAdjacentTiles(this.getTile(i,j));
                     numAd = MatrixWalk(adj, numAd);
                 }
 

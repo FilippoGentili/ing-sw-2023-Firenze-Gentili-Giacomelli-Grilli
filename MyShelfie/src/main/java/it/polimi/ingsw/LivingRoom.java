@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class LivingRoom{
 
     private static LivingRoom single_instance = null;
-    private int numberOfTiles=0;
-    private Tile[][] board;
-    private boolean[][] valid;
+    private static int numberOfTiles=0;
+    private static Tile[][] board;
+    private static boolean[][] valid;
     private final int rows = 9;
     private final int columns = 9;
 
@@ -25,7 +25,7 @@ public class LivingRoom{
     }
 
     public void setValid(int i, int j, boolean x){
-        this.valid[i][j]=x;
+        valid[i][j]=x;
     }
 
     public int getNumberOfTiles(){
@@ -85,20 +85,18 @@ public class LivingRoom{
     }
 
     public void insertTiles(ArrayList<Tile> chosen){
-        for(Tile tile:chosen){
+        for(int x=0; x<chosen.size(); x++){
             for(int i=0; i<rows; i++){
                 for(int j=0; j<columns; j++){
                     if(valid[i][j] && board[i][j]==null){
-                        board[i][j]=tile;
-                        tile.setLocation(Location.LIVING_ROOM);
-                        tile.setRow(i);
-                        tile.setCol(j);
+                        setTile(chosen.get(x), i, j);
                         numberOfTiles++;
                     }
                 }
             }
         }
     }
+
 
 
 
@@ -111,15 +109,34 @@ public class LivingRoom{
 
     public boolean checkValid(ArrayList<Tile> chosen){
 
-        for(Tile curr:chosen){
-            if(curr.getLocation() != Location.LIVING_ROOM)
+        for(Tile curr : chosen){
+            int num=0;
+
+            if(!curr.getLocation().equals(Location.LIVING_ROOM))
                 return false;
-            if(board[curr.getRow()-1][curr.getCol()] != null && board[curr.getRow()+1][curr.getCol()] != null
-            && board[curr.getRow()][curr.getCol()-1] != null && board[curr.getRow()][curr.getCol()+1] != null)
+
+            //se non ha almeno uno spazio adiacente libero return false
+            if(curr.getRow()-1 >= 0)
+                if(board[curr.getRow()-1][curr.getCol()] != null)
+                    num++;
+            if(curr.getRow()+1 <= 8)
+                if(board[curr.getRow()+1][curr.getCol()] != null)
+                    num++;
+            if(curr.getCol()-1 >= 0)
+                if(board[curr.getRow()][curr.getCol()-1] != null)
+                    num++;
+            if(curr.getCol()+1 <= 8)
+                if(board[curr.getRow()][curr.getCol()+1] != null)
+                    num++;
+
+            if(num==4)
                 return false;
         }
 
+
         switch (chosen.size()){
+            case 1:
+                return true;
             case 2:
                 if(isAdjacent(chosen.get(0), chosen.get(1)))
                     return true;
@@ -135,5 +152,12 @@ public class LivingRoom{
         }
 
         return false;
+    }
+
+    void setTile(Tile t, int i, int j){
+        board[i][j] = t;
+        t.setRow(i);
+        t.setCol(j);
+        t.setLocation(Location.LIVING_ROOM);
     }
 }

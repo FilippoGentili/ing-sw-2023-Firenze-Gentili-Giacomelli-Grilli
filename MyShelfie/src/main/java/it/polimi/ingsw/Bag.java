@@ -43,15 +43,15 @@ public class Bag {
 
         Collections.shuffle(remainingTiles);
 
-        for(int i=0; i<numStartTile- living.getNumberOfTiles(); i++){
+        for(int i=0; i< numStartTile- living.getNumberOfTiles(); i++){
             chosen.add(remainingTiles.get(i));
         }
 
-        int i=0;
+        /*int i=0;
         for(Tile tile:chosen){
             System.out.println(chosen.get(i).getTileType());
             i++;
-        }
+        }*/
 
         return chosen;
     }

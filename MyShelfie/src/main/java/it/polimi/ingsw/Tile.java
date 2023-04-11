@@ -28,9 +28,7 @@ public class Tile {
         return type;
     }
 
-    public void setCol(int c){
-        this.col = c;
-    }
+    public void setCol(int c){ this.col = c; }
 
     public void setRow(int r){
         this.row = r;

@@ -259,6 +259,65 @@ class BookshelfTest {
         assertFalse(bookshelf.fullBookshelf());
     }
 
+    @Test
+    void countPointsTest(){
+        Bookshelf bookshelf = new Bookshelf();
+        ArrayList<Tile> tiles0 = new ArrayList<>();
+        ArrayList<Tile> tiles1 = new ArrayList<>();
+        ArrayList<Tile> tiles2 = new ArrayList<>();
+        ArrayList<Tile> tiles3 = new ArrayList<>();
+        ArrayList<Tile> tiles4 = new ArrayList<>();
+
+        tiles0.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles0.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles0.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles0.add(new Tile(TileType.FRAME, Location.BOOKSHELF));
+        tiles0.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles0.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        bookshelf.insertTiles(tiles0, 0);
+
+        tiles1.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles1.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles1.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles1.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles1.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        tiles1.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        bookshelf.insertTiles(tiles1, 1);
+
+        tiles2.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles2.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles2.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
+        tiles2.add(new Tile(TileType.FRAME, Location.BOOKSHELF));
+        tiles2.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        tiles2.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        bookshelf.insertTiles(tiles2, 2);
+
+        tiles3.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles3.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles3.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles3.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles3.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        bookshelf.insertTiles(tiles3, 3);
+
+
+        tiles4.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles4.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        bookshelf.insertTiles(tiles4, 4);
+
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5;j++){
+                if(bookshelf.getTile(i, j)!=null)
+                    System.out.print(bookshelf.getTile(i, j).getTileType() + " ");
+                else System.out.print("  ");
+            }
+            System.out.println();
+        }
+
+
+
+        assertEquals(18, bookshelf.countPoints());
+    }
+
 
 
 
