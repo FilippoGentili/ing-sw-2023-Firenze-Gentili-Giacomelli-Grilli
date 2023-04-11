@@ -21,8 +21,12 @@ public class Player {
 
      */
 
-   /* public String getNickname() {
+   /*
+   public String getNickname() {
         return this.nickname;
+    }
+    public void setNickname(String nickName){
+    this.nickname=nickName;
     }
 
     */
