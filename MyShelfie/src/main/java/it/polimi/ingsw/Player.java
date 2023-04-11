@@ -8,6 +8,9 @@ public class Player {
     private final Bookshelf bookshelf;
     private boolean FirstPlayer;
     private PersonalGoalCard personalGoalCard;
+    private boolean Pointscg1 = false;
+
+    private boolean Pointscg2 = false;
 
     /*This method asks the user to choose a Nickname
     public String chooseNickname(){
@@ -96,6 +99,22 @@ public class Player {
 
     public PersonalGoalCard getPersonalGoalCard(){
         return personalGoalCard;
+    }
+
+    public boolean getPointscg1(){
+        return Pointscg1;
+    }
+
+    public boolean getPointscg2(){
+        return Pointscg2;
+    }
+
+    public void setPointscg1(){
+        this.Pointscg1=true;
+    }
+
+    public void setPointscg2(){
+        this.Pointscg2=true;
     }
 
 }
