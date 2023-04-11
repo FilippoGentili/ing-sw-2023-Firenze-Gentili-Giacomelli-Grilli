@@ -14,6 +14,10 @@ public class Game {
 
     public Game() {
         listOfPlayers = new ArrayList<>();
+        currentPlayer = 0;
+        CommonGoal1 = null;
+        CommonGoal2 = null;
+        livingRoom = null;
     }
 
     //next player becomes the current player and puts the state to start
@@ -25,6 +29,9 @@ public class Game {
 
     //returns the first player of the match (random)
     public static Player pickFirstPlayer(){
+        if(listOfPlayers.isEmpty())
+            throw new IllegalStateException("There are no players");
+
         Random random = new Random();
         int i = random.nextInt(listOfPlayers.size());
         return listOfPlayers.get(i);
@@ -32,17 +39,23 @@ public class Game {
 
     //returns the current player that is playing
     public static Player getCurrentPlayer() {
-        return listOfPlayers.get(currentPlayer);
+        if(currentPlayer < listOfPlayers.size()) {
+            return listOfPlayers.get(currentPlayer);
+        }else{
+            return null;
+        }
     }
 
     //returns the next player that must play
     public static Player getNextPlayer() {
-        return listOfPlayers.get(currentPlayer + 1);
+        int nextPlayer = (currentPlayer+1) % listOfPlayers.size();
+        currentPlayer = nextPlayer;
+        return listOfPlayers.get(nextPlayer);
 
     }
 
     //returns winner of the game, if there is a tie the most distant player from the first player wins the game
-    public Player getWinner(){
+    public static Player getWinner(){
         Player winner = null;
         int maxScore = 0;
         for(Player player : listOfPlayers){
@@ -70,12 +83,29 @@ public class Game {
 
     //adds player to ArrayList
     public void addPlayer(Player player) {
+        if(listOfPlayers.contains(player)){
+            System.out.println("The player is already in the game");
+            return;
+        }
+        if(listOfPlayers.size() == 4){
+            System.out.println("The game is full");
+            return;
+        }
         listOfPlayers.add(player);
+        System.out.println("The player has been added to the game");
     }
 
     //removes player from ArrayList
     public void removePlayer(Player player) {
+        if(!listOfPlayers.contains(player)){
+            System.out.println("The player is not part of the game");
+            return;
+        }
+        int i = listOfPlayers.indexOf(player);
         listOfPlayers.remove(player);
+        if(currentPlayer == i){
+            currentPlayer = (currentPlayer + 1) % listOfPlayers.size();
+        }
     }
 
     //return number of tiles on living room board for different amount of players
@@ -153,6 +183,7 @@ public class Game {
         List<Integer> availableCommonGoalCards = new ArrayList<>();
         int commonGoalCard1, commonGoalCard2;
 
+
         for(int i=1; i<=12; i++){
             availableCommonGoalCards.add(i);
         }
@@ -226,15 +257,15 @@ public class Game {
     void setPersonalGoalCard(){
 
         ArrayList<Integer> availablePersonaGoalCards = new ArrayList<>();
-        for(int i=0; i<12; i++)
+        for(int i=0; i<12; i++) {
             availablePersonaGoalCards.add(i);
-
+        }
         Collections.shuffle(availablePersonaGoalCards);
 
-        int app=0;
+        int i = 0;
         for(Player player: listOfPlayers){
-            player.setPersonalGoalCard(availablePersonaGoalCards.get(app));
-            app++;
+            player.setPersonalGoalCard(availablePersonaGoalCards.get(i));
+            i++;
         }
 
     }
