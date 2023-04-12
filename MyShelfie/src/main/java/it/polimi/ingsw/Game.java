@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +41,9 @@ public class Game {
 
     //returns the current player that is playing
     public static Player getCurrentPlayer() {
+        if(listOfPlayers.isEmpty())
+            throw new IllegalStateException("There are no players");
+
         if(currentPlayer < listOfPlayers.size()) {
             return listOfPlayers.get(currentPlayer);
         }else{
@@ -254,7 +259,7 @@ public class Game {
         }
     }*/
 
-    void setPersonalGoalCard(){
+    public void setPersonalGoalCard(){
 
         ArrayList<Integer> availablePersonaGoalCards = new ArrayList<>();
         for(int i=0; i<12; i++) {
