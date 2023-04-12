@@ -1,11 +1,13 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
+
 public class Player {
     //private final String nickname;
     private State currentState;
     private int score;
     private Game game;
-    private final Bookshelf bookshelf;
+    private Bookshelf bookshelf;
     private boolean FirstPlayer;
     private PersonalGoalCard personalGoalCard;
     private boolean Pointscg1 = false;
@@ -40,6 +42,10 @@ public class Player {
         //this.nickname = chooseNickname();
         this.bookshelf = new Bookshelf();
         this.personalGoalCard = new PersonalGoalCard();
+    }
+
+    public void InsertTiles(ArrayList<Tile> chosenTiles, int column){
+
     }
 
     //The player gets a bookshelf to play with

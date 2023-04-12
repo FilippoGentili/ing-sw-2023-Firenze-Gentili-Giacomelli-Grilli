@@ -8,6 +8,8 @@ public class Tile {
     private final TileType type;
 
     public Tile(TileType tile, Location loc){
+        this.row = 0;
+        this.col = 0;
         this.type = tile;
         this.location = loc;
     }

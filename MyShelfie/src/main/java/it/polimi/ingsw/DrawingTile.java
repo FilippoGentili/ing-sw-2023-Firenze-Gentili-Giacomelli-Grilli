@@ -7,9 +7,10 @@ public class DrawingTile implements State{
     private Player player;
     private static ArrayList<Tile> chosenTiles;
 
-    int i, j;
+    int i, j, column;
 
     public void stateAction (){
+
         chosenTiles.add(player.getGame().getLivingRoom().pickTile(i, j));
         player.getGame().getLivingRoom().checkValid(chosenTiles);
 

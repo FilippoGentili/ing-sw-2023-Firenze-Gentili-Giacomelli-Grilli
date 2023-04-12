@@ -11,8 +11,8 @@ public class Bookshelf {
     boolean[][] alreadyChecked;
 
     public Bookshelf(){
-        shelf = new Tile[rows][columns];
-        alreadyChecked = new boolean[rows][columns];
+        this.shelf = new Tile[rows][columns];
+        this.alreadyChecked = new boolean[rows][columns];
     }
 
     public boolean isEmpty(int i, int j){
@@ -42,14 +42,14 @@ public class Bookshelf {
 
         int i=rows-1;
 
-        for(Tile app:tiles){
+        for(Tile app : tiles){
             while(!isEmpty(i, col) && i>=0){
                 i--;
             }
-            app.setRow(i);
-            app.setCol(col);
-            app.setLocation(Location.BOOKSHELF);
             shelf[i][col]=app;
+            shelf[i][col].setRow(i);
+            shelf[i][col].setCol(col);
+            shelf[i][col].setLocation(Location.BOOKSHELF);
         }
     }
 
@@ -134,6 +134,8 @@ public class Bookshelf {
 
     public void setTile(int i, int j, TileType type) {
         Tile tile = new Tile(type, Location.BOOKSHELF);
+        tile.setRow(i);
+        tile.setCol(j);
         shelf[i][j]=tile;
     }
 }

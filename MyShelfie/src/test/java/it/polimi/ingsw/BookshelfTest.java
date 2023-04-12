@@ -86,6 +86,7 @@ class BookshelfTest {
         assertEquals(bookshelf.getTile(2, col), tiles.get(3));
         assertEquals(bookshelf.getTile(1, col), tiles.get(4));
         assertEquals(bookshelf.getTile(0, col), tiles.get(5));
+
     }
 
     @Test
