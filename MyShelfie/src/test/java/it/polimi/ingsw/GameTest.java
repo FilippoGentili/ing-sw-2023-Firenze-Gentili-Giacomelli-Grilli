@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class GameTest {
     private List<Player> listOfPlayers;
 
-    /*@Test
+    @Test
     public void gameLoopTest2Players(){
         Game game = new Game();
         listOfPlayers = new ArrayList<>();
@@ -764,6 +764,6 @@ public class GameTest {
         Game game = new Game();
         LivingRoom livingRoom = game.getLivingRoom();
         assertNotNull(livingRoom);
-    }*/
+    }
 
 }
