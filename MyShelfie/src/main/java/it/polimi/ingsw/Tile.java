@@ -7,11 +7,8 @@ public class Tile {
     private Location location;
     private final TileType type;
 
-    public Tile(TileType tile, Location loc){
-        this.row = 0;
-        this.col = 0;
+    public Tile(TileType tile){
         this.type = tile;
-        this.location = loc;
     }
 
     public int getCol(){
@@ -22,9 +19,9 @@ public class Tile {
         return row;
     }
 
-    public Location getLocation(){
+    /*public Location getLocation(){
         return location;
-    }
+    }*/
 
     public TileType getTileType(){
         return type;

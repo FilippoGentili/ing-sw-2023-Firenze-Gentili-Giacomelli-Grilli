@@ -15,27 +15,27 @@ class CommonGoalCard12Test {
         for(int i=0; i<6; i++){
             for(int j=0; j<5; j++){
                 if(j==0) {
-                    Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+                    Tile cat = new Tile(TileType.CAT);
                     ArrayList<Tile> TileCat = new ArrayList<>();
                     TileCat.add(cat);
                     bookshelf.insertTiles(TileCat, j);
                 }else if(j==1) {
-                    Tile book = new Tile(TileType.BOOK, Location.BOOKSHELF);
+                    Tile book = new Tile(TileType.BOOK);
                     ArrayList<Tile> TileBook = new ArrayList<>();
                     TileBook.add(book);
                     bookshelf.insertTiles(TileBook, j);
                 }else if(j==2) {
-                    Tile frame = new Tile(TileType.FRAME, Location.BOOKSHELF);
+                    Tile frame = new Tile(TileType.FRAME);
                     ArrayList<Tile> TileFrame = new ArrayList<>();
                     TileFrame.add(frame);
                     bookshelf.insertTiles(TileFrame, j);
                 }else if(j==3) {
-                    Tile game = new Tile(TileType.GAME, Location.BOOKSHELF);
+                    Tile game = new Tile(TileType.GAME);
                     ArrayList<Tile> TileGame = new ArrayList<>();
                     TileGame.add(game);
                     bookshelf.insertTiles(TileGame, j);
                 } else {
-                    Tile plant = new Tile(TileType.PLANT, Location.BOOKSHELF);
+                    Tile plant = new Tile(TileType.PLANT);
                     ArrayList<Tile> TilePlant = new ArrayList<>();
                     TilePlant.add(plant);
                     bookshelf.insertTiles(TilePlant, j);
@@ -59,30 +59,30 @@ class CommonGoalCard12Test {
         CommonGoalCard Card = new CommonGoalCard12();
         Bookshelf bookshelf = new Bookshelf();
 
-        Tile cat1 = new Tile(TileType.CAT, Location.BOOKSHELF);
+        Tile cat1 = new Tile(TileType.CAT);
         ArrayList<Tile> TileCat1 = new ArrayList<>();
         TileCat1.add(cat1);
 
         for(int i=0; i<5; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 0);
         }
         for(int i=0; i<4; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 1);
         }
         for(int i=0; i<3; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 2);
         }
         for(int i=0; i<2; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 3);
@@ -93,7 +93,7 @@ class CommonGoalCard12Test {
         assertTrue(Card.check(bookshelf));
 
         for(int j=0; j<5; j++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, j);
@@ -107,30 +107,30 @@ class CommonGoalCard12Test {
         CommonGoalCard Card = new CommonGoalCard12();
         Bookshelf bookshelf = new Bookshelf();
 
-        Tile cat1 = new Tile(TileType.CAT, Location.BOOKSHELF);
+        Tile cat1 = new Tile(TileType.CAT);
         ArrayList<Tile> TileCat1 = new ArrayList<>();
         TileCat1.add(cat1);
 
         for(int i=0; i<5; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 4);
         }
         for(int i=0; i<4; i++) {
-            Tile book = new Tile(TileType.BOOK, Location.BOOKSHELF);
+            Tile book = new Tile(TileType.BOOK);
             ArrayList<Tile> TileBook = new ArrayList<>();
             TileBook.add(book);
             bookshelf.insertTiles(TileBook, 3);
         }
         for(int i=0; i<3; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 2);
         }
         for(int i=0; i<2; i++) {
-            Tile book = new Tile(TileType.BOOK, Location.BOOKSHELF);
+            Tile book = new Tile(TileType.BOOK);
             ArrayList<Tile> TileBook = new ArrayList<>();
             TileBook.add(book);
             bookshelf.insertTiles(TileBook, 1);
@@ -141,7 +141,7 @@ class CommonGoalCard12Test {
         assertTrue(Card.check(bookshelf));
 
         for(int j=0; j<5; j++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, j);
@@ -156,34 +156,34 @@ class CommonGoalCard12Test {
         CommonGoalCard Card = new CommonGoalCard12();
         Bookshelf bookshelf = new Bookshelf();
 
-        Tile cat1 = new Tile(TileType.CAT, Location.BOOKSHELF);
+        Tile cat1 = new Tile(TileType.CAT);
         ArrayList<Tile> TileCat1 = new ArrayList<>();
         TileCat1.add(cat1);
 
-        Tile book1 = new Tile(TileType.BOOK, Location.BOOKSHELF);
+        Tile book1 = new Tile(TileType.BOOK);
         ArrayList<Tile> TileBook1 = new ArrayList<>();
         TileBook1.add(book1);
 
         for(int i=0; i<5; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 4);
         }
         for(int i=0; i<4; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 3);
         }
         for(int i=0; i<3; i++) {
-            Tile cat = new Tile(TileType.CAT, Location.BOOKSHELF);
+            Tile cat = new Tile(TileType.CAT);
             ArrayList<Tile> TileCat = new ArrayList<>();
             TileCat.add(cat);
             bookshelf.insertTiles(TileCat, 2);
         }
         for(int i=0; i<2; i++) {
-            Tile book = new Tile(TileType.BOOK, Location.BOOKSHELF);
+            Tile book = new Tile(TileType.BOOK);
             ArrayList<Tile> TileBook = new ArrayList<>();
             TileBook.add(book);
             bookshelf.insertTiles(TileBook, 1);

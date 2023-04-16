@@ -37,9 +37,9 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.BOOK));
 
         bookshelf.insertTiles(tiles, col);
 
@@ -53,12 +53,12 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.BOOK));
 
         bookshelf.insertTiles(tiles, col);
 
@@ -71,12 +71,12 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.TROPHIE));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.CAT));
 
         bookshelf.insertTiles(tiles, col);
 
@@ -94,21 +94,21 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
 
-        tiles.set(0, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.BOOK));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.BOOK));
 
         bookshelf.insertTiles(tiles, 1);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 2);
 
@@ -120,21 +120,21 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
 
-        tiles.set(0, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.BOOK));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.BOOK));
 
         bookshelf.insertTiles(tiles, 1);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 2);
 
@@ -146,21 +146,21 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.BOOK, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.BOOK));
 
         bookshelf.insertTiles(tiles, 1);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 2);
 
@@ -172,21 +172,21 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 1);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.GAME));
+        tiles.set(2, new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 2);
 
@@ -198,21 +198,21 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
 
-        tiles.set(0, new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.CAT));
+        tiles.set(1, new Tile(TileType.BOOK));
+        tiles.set(2, new Tile(TileType.CAT));
 
         bookshelf.insertTiles(tiles, 1);
 
-        tiles.set(0, new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.set(1, new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles.set(2, new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.set(0, new Tile(TileType.GAME));
+        tiles.set(1, new Tile(TileType.TROPHIE));
+        tiles.set(2, new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 2);
 
@@ -224,12 +224,12 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
         bookshelf.insertTiles(tiles, 1);
@@ -245,12 +245,12 @@ class BookshelfTest {
         Bookshelf bookshelf = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles.add(new Tile(TileType.GAME, Location.BOOKSHELF));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.GAME));
 
         bookshelf.insertTiles(tiles, 0);
         bookshelf.insertTiles(tiles, 1);
@@ -269,52 +269,50 @@ class BookshelfTest {
         ArrayList<Tile> tiles3 = new ArrayList<>();
         ArrayList<Tile> tiles4 = new ArrayList<>();
 
-        tiles0.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles0.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles0.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles0.add(new Tile(TileType.FRAME, Location.BOOKSHELF));
-        tiles0.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles0.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        tiles0.add(new Tile(TileType.TROPHIE));
+        tiles0.add(new Tile(TileType.TROPHIE));
+        tiles0.add(new Tile(TileType.TROPHIE));
+        tiles0.add(new Tile(TileType.FRAME));
+        tiles0.add(new Tile(TileType.BOOK));
+        tiles0.add(new Tile(TileType.PLANT));
         bookshelf.insertTiles(tiles0, 0);
 
-        tiles1.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles1.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles1.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles1.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles1.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
-        tiles1.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        tiles1.add(new Tile(TileType.TROPHIE));
+        tiles1.add(new Tile(TileType.TROPHIE));
+        tiles1.add(new Tile(TileType.GAME));
+        tiles1.add(new Tile(TileType.BOOK));
+        tiles1.add(new Tile(TileType.PLANT));
+        tiles1.add(new Tile(TileType.PLANT));
         bookshelf.insertTiles(tiles1, 1);
 
-        tiles2.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles2.add(new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles2.add(new Tile(TileType.TROPHIE, Location.BOOKSHELF));
-        tiles2.add(new Tile(TileType.FRAME, Location.BOOKSHELF));
-        tiles2.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
-        tiles2.add(new Tile(TileType.PLANT, Location.BOOKSHELF));
+        tiles2.add(new Tile(TileType.TROPHIE));
+        tiles2.add(new Tile(TileType.CAT));
+        tiles2.add(new Tile(TileType.TROPHIE));
+        tiles2.add(new Tile(TileType.FRAME));
+        tiles2.add(new Tile(TileType.PLANT));
+        tiles2.add(new Tile(TileType.PLANT));
         bookshelf.insertTiles(tiles2, 2);
 
-        tiles3.add(new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles3.add(new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles3.add(new Tile(TileType.GAME, Location.BOOKSHELF));
-        tiles3.add(new Tile(TileType.BOOK, Location.BOOKSHELF));
-        tiles3.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles3.add(new Tile(TileType.CAT));
+        tiles3.add(new Tile(TileType.CAT));
+        tiles3.add(new Tile(TileType.GAME));
+        tiles3.add(new Tile(TileType.BOOK));
+        tiles3.add(new Tile(TileType.CAT));
         bookshelf.insertTiles(tiles3, 3);
 
 
-        tiles4.add(new Tile(TileType.CAT, Location.BOOKSHELF));
-        tiles4.add(new Tile(TileType.CAT, Location.BOOKSHELF));
+        tiles4.add(new Tile(TileType.CAT));
+        tiles4.add(new Tile(TileType.CAT));
         bookshelf.insertTiles(tiles4, 4);
 
         for(int i=0; i<6; i++){
             for(int j=0; j<5;j++){
                 if(bookshelf.getTile(i, j)!=null)
                     System.out.print(bookshelf.getTile(i, j).getTileType() + " ");
-                else System.out.print("  ");
+                else System.out.print(" - ");
             }
             System.out.println();
         }
-
-
 
         assertEquals(18, bookshelf.countPoints());
     }

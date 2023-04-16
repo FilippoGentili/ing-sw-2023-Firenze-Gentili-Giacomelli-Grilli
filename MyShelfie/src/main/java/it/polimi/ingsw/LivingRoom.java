@@ -17,7 +17,7 @@ public class LivingRoom{
         valid = new boolean[rows][columns];
     }
 
-    public static synchronized LivingRoom getInstance(){
+    public static LivingRoom getInstance(){
         if(single_instance == null)
             single_instance = new LivingRoom();
 
@@ -26,6 +26,21 @@ public class LivingRoom{
 
     public void setValid(int i, int j, boolean x){
         valid[i][j]=x;
+    }
+
+    public boolean validCell(int i, int j){
+        return valid[i][j];
+    }
+
+    void setTile(Tile t, int i, int j){
+        Tile tile = new Tile(t.getTileType());
+        tile.setRow(i);
+        tile.setCol(j);
+        board[i][j] = tile;
+    }
+
+    void setNull(int i, int j){
+        board[i][j]=null;
     }
 
     public int getNumberOfTiles(){
@@ -72,9 +87,9 @@ public class LivingRoom{
         }
         return chosen;*/    //interazione utente
 
-        Tile app;
+        Tile app;  //nuova istanza da creare?
 
-        if(valid[i][j] && board[i][j]!=null){
+        if(valid[i][j] && getTile(i,j)!=null){
             app = getTile(i, j);
             board[i][j]=null;
             numberOfTiles--;
@@ -85,19 +100,21 @@ public class LivingRoom{
     }
 
     public void insertTiles(ArrayList<Tile> chosen){
-        for(int x=0; x<chosen.size(); x++){
-            for(int i=0; i<rows; i++){
-                for(int j=0; j<columns; j++){
-                    if(valid[i][j] && board[i][j]==null){
-                        setTile(chosen.get(x), i, j);
+
+        int x=0;
+
+        while (x< chosen.size()) {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    if (valid[i][j] && getTile(i, j) == null) {
+                        setTile(chosen.get(0), i, j);
+                        chosen.remove(0);
                         numberOfTiles++;
                     }
                 }
             }
         }
     }
-
-
 
 
     public boolean isAdjacent(Tile t1, Tile t2){
@@ -109,24 +126,30 @@ public class LivingRoom{
 
     public boolean checkValid(ArrayList<Tile> chosen){
 
-        for(Tile curr : chosen){
-            int num=0;
+        int num;
+        int x, y;
 
-            if(!curr.getLocation().equals(Location.LIVING_ROOM))
+        for(Tile curr : chosen){
+            num=0;
+            x= curr.getRow();
+            y= curr.getCol();
+
+            /*if(!curr.getLocation().equals(Location.LIVING_ROOM))
                 return false;
+            */
 
             //se non ha almeno uno spazio adiacente libero return false
-            if(curr.getRow()-1 >= 0)
-                if(board[curr.getRow()-1][curr.getCol()] != null)
+            if(x >= 1)
+                if(getTile(x-1, y) != null)
                     num++;
-            if(curr.getRow()+1 <= 8)
-                if(board[curr.getRow()+1][curr.getCol()] != null)
+            if(x <= 7)
+                if(getTile(x+1, y) != null)
                     num++;
-            if(curr.getCol()-1 >= 0)
-                if(board[curr.getRow()][curr.getCol()-1] != null)
+            if(y >= 1)
+                if(getTile(x, y-1) != null)
                     num++;
-            if(curr.getCol()+1 <= 8)
-                if(board[curr.getRow()][curr.getCol()+1] != null)
+            if(y <= 7)
+                if(getTile(x, y+1) != null)
                     num++;
 
             if(num==4)
@@ -154,10 +177,5 @@ public class LivingRoom{
         return false;
     }
 
-    void setTile(Tile t, int i, int j){
-        board[i][j] = t;
-        t.setRow(i);
-        t.setCol(j);
-        t.setLocation(Location.LIVING_ROOM);
-    }
+
 }

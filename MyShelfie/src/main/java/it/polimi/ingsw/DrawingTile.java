@@ -19,9 +19,9 @@ public class DrawingTile implements State{
         System.out.println("Choose the column");
         int column = Integer.parseInt(scanner.nextLine());
         */
-        if(!player.getBookshelf().fullBookshelf()){
+        /*if(!player.getBookshelf().fullBookshelf()){
             player.getBookshelf().insertTiles(chosenTiles, column);
-        }
+        }*/
 
 
     }
