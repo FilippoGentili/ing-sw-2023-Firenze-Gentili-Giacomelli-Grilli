@@ -125,8 +125,9 @@ public class GameTest {
         Player player2 = new Player();
         getPlayers().add(player1);
         getPlayers().add(player2);
+        setCurrentPlayer(player1);
         getCurrentPlayer();
-        assertTrue(getCurrentPlayer() == player1);
+        assertTrue(getCurrentPlayer() == player1 );
     }
 
     @Test
@@ -138,6 +139,7 @@ public class GameTest {
         getPlayers().add(player1);
         getPlayers().add(player2);
         getPlayers().add(player3);
+        setCurrentPlayer(player1);
         Player currentPlayer = getCurrentPlayer();
         assertTrue(currentPlayer == player1 || currentPlayer == player2 || currentPlayer == player3);
     }
@@ -153,6 +155,7 @@ public class GameTest {
         getPlayers().add(player2);
         getPlayers().add(player3);
         getPlayers().add(player4);
+        setCurrentPlayer(player1);
         Player currentPlayer = getCurrentPlayer();
         assertTrue(currentPlayer == player1 || currentPlayer == player2 || currentPlayer == player3 || currentPlayer == player4);
     }
@@ -164,9 +167,8 @@ public class GameTest {
         Player player2 = new Player();
         getPlayers().add(player1);
         getPlayers().add(player2);
-        setNextPlayer(player2);
+        setCurrentPlayer(player1);
         assertEquals(getNextPlayer(), player2);
-        setNextPlayer(player1);
         assertEquals(getNextPlayer(), player1);
 
     }
@@ -180,11 +182,9 @@ public class GameTest {
         getPlayers().add(player1);
         getPlayers().add(player2);
         getPlayers().add(player3);
-        setNextPlayer(player2);
+        setCurrentPlayer(player1);
         assertEquals(getNextPlayer(), player2);
-        setNextPlayer(player3);
         assertEquals(getNextPlayer(), player3);
-        setNextPlayer(player1);
         assertEquals(getNextPlayer(), player1);
     }
 
@@ -199,13 +199,10 @@ public class GameTest {
         getPlayers().add(player2);
         getPlayers().add(player3);
         getPlayers().add(player4);
-        setNextPlayer(player2);
+        setCurrentPlayer(player1);
         assertEquals(getNextPlayer(), player2);
-        setNextPlayer(player3);
         assertEquals(getNextPlayer(), player3);
-        setNextPlayer(player4);
         assertEquals(getNextPlayer(), player4);
-        setNextPlayer(player1);
         assertEquals(getNextPlayer(), player1);
     }
 
