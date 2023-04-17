@@ -42,9 +42,10 @@ public class Bookshelf {
             while(!isEmpty(i, col) && i>=0){
                 i--;
             }
-            shelf[i][col]=app;
-            shelf[i][col].setRow(i);
-            shelf[i][col].setCol(col);
+            Tile def = new Tile(app.getTileType());
+            def.setRow(i);
+            def.setCol(col);
+            shelf[i][col]=def;
             //shelf[i][col].setLocation(Location.BOOKSHELF);
         }
     }
@@ -69,17 +70,19 @@ public class Bookshelf {
 
     public int MatrixWalk(ArrayList<Tile> tiles, int x){
 
+        int y=x;
+
         if(tiles.size()>0){
             for(Tile curr:tiles){
                 if(!alreadyChecked[curr.getRow()][curr.getCol()]){
                     x++;
                     alreadyChecked[curr.getRow()][curr.getCol()]=true;
-                    MatrixWalk(getSameAdjacentTiles(curr), x);
+                    y = MatrixWalk(getSameAdjacentTiles(curr), x);
                 }
             }
         }
 
-        return x;
+        return y;
     }
 
     public int countPoints(){
@@ -102,17 +105,16 @@ public class Bookshelf {
                     alreadyChecked[i][j] = true;
                     adj = getSameAdjacentTiles(this.getTile(i,j));
                     numAd = MatrixWalk(adj, numAd);
+
+                    if(numAd==3)
+                        points+=2;
+                    else if(numAd==4)
+                        points+=3;
+                    else if(numAd==5)
+                        points+=5;
+                    else if(numAd>=6)
+                        points+=8;
                 }
-
-                if(numAd==3)
-                    points+=2;
-                else if(numAd==4)
-                    points+=3;
-                else if(numAd==5)
-                    points+=5;
-                else if(numAd>=6)
-                    points+=8;
-
             }
         }
 
@@ -132,6 +134,6 @@ public class Bookshelf {
         Tile tile = new Tile(type);
         tile.setRow(i);
         tile.setCol(j);
-        shelf[i][j]=new Tile(type);
+        shelf[i][j]=tile;
     }
 }

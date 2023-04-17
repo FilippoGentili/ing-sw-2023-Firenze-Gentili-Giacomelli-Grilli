@@ -12,7 +12,7 @@ public class LivingRoom{
     private final int rows = 9;
     private final int columns = 9;
 
-    public LivingRoom(){
+    private LivingRoom(){
         board = new Tile[rows][columns];
         valid = new boolean[rows][columns];
     }
@@ -85,7 +85,7 @@ public class LivingRoom{
             }
 
         }
-        return chosen;*/    //interazione utente
+        return chosen;*/    //ignora (interazione utente)
 
         Tile app;  //nuova istanza da creare?
 
@@ -96,7 +96,6 @@ public class LivingRoom{
 
             return app;
         }else throw new IllegalArgumentException("Coordinate errate");
-
     }
 
     public void insertTiles(ArrayList<Tile> chosen){

@@ -685,7 +685,7 @@ public class GameTest {
     @Test
     public void getLivingRoomTest(){
         Game game = new Game();
-        LivingRoom livingRoom = new LivingRoom();
+        LivingRoom livingRoom = LivingRoom.getInstance();
         getLivingRoom();
         assertEquals(livingRoom, getLivingRoom());
     }
