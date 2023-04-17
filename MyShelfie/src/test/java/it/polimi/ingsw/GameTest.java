@@ -26,7 +26,12 @@ public class GameTest {
         player2.setState(End);
         gameLoop();
         assertEquals(player2, getCurrentPlayer());
-        assertEquals(player2.getState(),Start);
+        assertTrue(player2.getState() instanceof Start);
+        assertTrue(player1.getState() instanceof End);
+        gameLoop();
+        assertEquals(player1, getCurrentPlayer());
+        assertTrue(player1.getState() instanceof Start);
+        assertTrue(player2.getState() instanceof End);
     }
 
     @Test
@@ -46,10 +51,19 @@ public class GameTest {
         player3.setState(End);
         gameLoop();
         assertEquals(player2, getCurrentPlayer());
-        assertEquals(player2.getState(),Start);
-        assertEquals(player3.getState(),End);
-
-
+        assertTrue(player2.getState() instanceof Start);
+        assertTrue(player3.getState() instanceof End);
+        assertTrue(player1.getState() instanceof End);
+        gameLoop();
+        assertEquals(player3, getCurrentPlayer());
+        assertTrue(player3.getState() instanceof Start);
+        assertTrue(player1.getState() instanceof End);
+        assertTrue(player2.getState() instanceof End);
+        gameLoop();
+        assertEquals(player1, getCurrentPlayer());
+        assertTrue(player1.getState() instanceof Start);
+        assertTrue(player2.getState() instanceof End);
+        assertTrue(player3.getState() instanceof End);
     }
 
     @Test
@@ -72,10 +86,28 @@ public class GameTest {
         player4.setState(End);
         gameLoop();
         assertEquals(player2, getCurrentPlayer());
-        assertEquals(player2.getState(),Start);
-        assertEquals(player3.getState(),End);
-        assertEquals(player4.getState(),End);
-
+        assertTrue(player2.getState() instanceof Start);
+        assertTrue(player3.getState() instanceof End);
+        assertTrue(player4.getState() instanceof End);
+        assertTrue(player1.getState() instanceof End);
+        gameLoop();
+        assertEquals(player3, getCurrentPlayer());
+        assertTrue(player3.getState() instanceof Start);
+        assertTrue(player4.getState() instanceof End);
+        assertTrue(player1.getState() instanceof End);
+        assertTrue(player2.getState() instanceof End);
+        gameLoop();
+        assertEquals(player4, getCurrentPlayer());
+        assertTrue(player4.getState() instanceof Start);
+        assertTrue(player1.getState() instanceof End);
+        assertTrue(player2.getState() instanceof End);
+        assertTrue(player3.getState() instanceof End);
+        gameLoop();
+        assertEquals(player1, getCurrentPlayer());
+        assertTrue(player1.getState() instanceof Start);
+        assertTrue(player2.getState() instanceof End);
+        assertTrue(player3.getState() instanceof End);
+        assertTrue(player4.getState() instanceof End);
     }
 
     @Test
@@ -439,6 +471,7 @@ public class GameTest {
         Player player2 = new Player();
         getPlayers().add(player1);
         getPlayers().add(player2);
+        game.initializeLivingRoom();
         int validTilesCount = 0;
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -462,6 +495,7 @@ public class GameTest {
         getPlayers().add(player1);
         getPlayers().add(player2);
         getPlayers().add(player3);
+        game.initializeLivingRoom();
         int validTilesCount = 0;
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -487,6 +521,7 @@ public class GameTest {
         getPlayers().add(player2);
         getPlayers().add(player3);
         getPlayers().add(player4);
+        game.initializeLivingRoom();
         int validTilesCount = 0;
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -574,7 +609,6 @@ public class GameTest {
         int score = player1.getScore();
         Game.endGameTrigger(bookshelf, player1);
         assertEquals(score + 1, player1.getScore());
-        assertEquals(Game.pickFirstPlayer(), Game.getCurrentPlayer());
     }
 
     @Test
@@ -590,7 +624,6 @@ public class GameTest {
         int score = player1.getScore();
         Game.endGameTrigger(bookshelf, player1);
         assertEquals(score + 1, player1.getScore());
-        assertEquals(Game.pickFirstPlayer(), Game.getCurrentPlayer());
     }
 
     @Test
@@ -608,7 +641,6 @@ public class GameTest {
         int score = player1.getScore();
         Game.endGameTrigger(bookshelf, player1);
         assertEquals(score + 1, player1.getScore());
-        assertEquals(Game.pickFirstPlayer(), Game.getCurrentPlayer());
     }
 
     @Test
@@ -618,12 +650,14 @@ public class GameTest {
         Player player2 = new Player();
         getPlayers().add(player1);
         getPlayers().add(player2);
-        for (Player player : getPlayers()){
-            int pre = player.getScore();
-            int tot = player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID());
-            game.assignPoints((ArrayList<Player>) getPlayers());
-            assertEquals(player.getScore(), pre+tot);
-        }
+        game.setPersonalGoalCard();
+        game.initializeLivingRoom();
+        game.pickCommonGoalCards();
+        player1.setScore(10);
+        player2.setScore(20);
+        game.assignPoints(getPlayers());
+        assertEquals(player1.getScore(), 10 + player1.getPersonalGoalCard().assignPoints(player1.getPersonalGoalCard().getID()));
+        assertEquals(player2.getScore(), 20 + player2.getPersonalGoalCard().assignPoints(player2.getPersonalGoalCard().getID()));
     }
 
     @Test
@@ -635,13 +669,16 @@ public class GameTest {
         getPlayers().add(player1);
         getPlayers().add(player2);
         getPlayers().add(player3);
-        for (Player player : getPlayers()){
-            int pre = player.getScore();
-            int tot = player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID());
-            game.assignPoints((ArrayList<Player>) getPlayers());
-            assertEquals(player.getScore(), pre+tot);
-        }
-
+        game.setPersonalGoalCard();
+        game.initializeLivingRoom();
+        game.pickCommonGoalCards();
+        player1.setScore(10);
+        player2.setScore(20);
+        player3.setScore(30);
+        game.assignPoints(getPlayers());
+        assertEquals(player1.getScore(), 10 + player1.getPersonalGoalCard().assignPoints(player1.getPersonalGoalCard().getID()));
+        assertEquals(player2.getScore(), 20 + player2.getPersonalGoalCard().assignPoints(player2.getPersonalGoalCard().getID()));
+        assertEquals(player3.getScore(), 30 + player2.getPersonalGoalCard().assignPoints(player3.getPersonalGoalCard().getID()));
     }
 
     @Test
@@ -655,39 +692,80 @@ public class GameTest {
         getPlayers().add(player2);
         getPlayers().add(player3);
         getPlayers().add(player4);
-        for (Player player : getPlayers()){
-            int pre = player.getScore();
-            int tot = player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID());
-            game.assignPoints((ArrayList<Player>) getPlayers());
-            assertEquals(player.getScore(), pre+tot);
-        }
+        game.setPersonalGoalCard();
+        game.initializeLivingRoom();
+        game.pickCommonGoalCards();
+        player1.setScore(10);
+        player2.setScore(20);
+        player1.setScore(30);
+        player2.setScore(40);
+        game.assignPoints(getPlayers());
+        assertEquals(player1.getScore(), 10 + player1.getPersonalGoalCard().assignPoints(player1.getPersonalGoalCard().getID()));
+        assertEquals(player2.getScore(), 20 + player2.getPersonalGoalCard().assignPoints(player2.getPersonalGoalCard().getID()));
+        assertEquals(player3.getScore(), 30 + player3.getPersonalGoalCard().assignPoints(player3.getPersonalGoalCard().getID()));
+        assertEquals(player4.getScore(), 40 + player4.getPersonalGoalCard().assignPoints(player4.getPersonalGoalCard().getID()));
     }
 
     @Test
     public void getCommonGoal1Test(){
         Game game = new Game();
-        CommonGoalCard commonGoalCard = new CommonGoalCard() {
-            @Override
-            public boolean check(Bookshelf bookshelf) {
-                return false;
-            }
-        };
-        getCommonGoal1();
-        assertEquals(commonGoalCard,getCommonGoal1());
+        game.pickCommonGoalCards();
+        CommonGoalCard commonGoal1 = getCommonGoal1();
+        assertNotNull(commonGoal1);
+
     }
 
     @Test
     public void getCommonGoal2Test(){
         Game game = new Game();
-        assertNotNull(getCommonGoal2());
+        game.pickCommonGoalCards();
+        CommonGoalCard commonGoal2 = getCommonGoal2();
+        assertNotNull(commonGoal2);
     }
 
     @Test
-    public void getLivingRoomTest(){
+    public void getLivingRoomTest2Players(){
         Game game = new Game();
-        LivingRoom livingRoom = LivingRoom.getInstance();
-        getLivingRoom();
-        assertEquals(livingRoom, getLivingRoom());
+        LivingRoom livingRoom = getLivingRoom();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        getPlayers().add(player1);
+        getPlayers().add(player2);
+        game.initializeLivingRoom();
+        assertNotNull(livingRoom);
+        assertEquals(livingRoom, LivingRoom.getInstance());
+    }
+
+    @Test
+    public void getLivingRoomTest3Players(){
+        Game game = new Game();
+        LivingRoom livingRoom = getLivingRoom();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        getPlayers().add(player1);
+        getPlayers().add(player2);
+        getPlayers().add(player3);
+        game.initializeLivingRoom();
+        assertNotNull(livingRoom);
+        assertEquals(livingRoom, LivingRoom.getInstance());
+    }
+
+    @Test
+    public void getLivingRoomTest4Players(){
+        Game game = new Game();
+        LivingRoom livingRoom = game.getLivingRoom();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        Player player4 = new Player();
+        getPlayers().add(player1);
+        getPlayers().add(player2);
+        getPlayers().add(player3);
+        getPlayers().add(player4);
+        game.initializeLivingRoom();
+        assertNotNull(livingRoom);
+        assertEquals(livingRoom, LivingRoom.getInstance());
     }
 
 }

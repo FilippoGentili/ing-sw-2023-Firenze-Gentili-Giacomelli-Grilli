@@ -14,18 +14,14 @@ public class Game {
     private static Player winner;
     private static Player firstPlayer;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
-    private static LivingRoom livingRoom;
-
 
     public Game() {
         listOfPlayers = new ArrayList<>();
-        CommonGoal1 = null;
-        CommonGoal2 = null;
-        livingRoom = null;
     }
 
     //next player becomes the current player and puts the state to start
     public static void gameLoop() {
+        currentPlayer.setState(new End());
         Game.setCurrentPlayer(getNextPlayer());
         currentPlayer.setState(new Start());
         currentPlayer.getState().stateAction();
@@ -301,6 +297,7 @@ public class Game {
 
     //gets the Living room
     public static LivingRoom getLivingRoom(){
+        LivingRoom livingRoom = LivingRoom.getInstance();
         return livingRoom;
     }
 
