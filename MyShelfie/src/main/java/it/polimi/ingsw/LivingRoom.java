@@ -12,7 +12,7 @@ public class LivingRoom{
     private final int rows = 9;
     private final int columns = 9;
 
-    private LivingRoom(){
+    public LivingRoom(){
         board = new Tile[rows][columns];
         valid = new boolean[rows][columns];
     }

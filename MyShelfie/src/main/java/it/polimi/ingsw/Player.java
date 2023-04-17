@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 import java.util.ArrayList;
 
 public class Player {
-    //private final String nickname;
+    private String nickname;
     private State currentState;
     private int score;
     private Game game;
@@ -26,15 +26,15 @@ public class Player {
 
      */
 
-   /*
+
    public String getNickname() {
         return this.nickname;
     }
     public void setNickname(String nickName){
-    this.nickname=nickName;
+    nickname=nickName;
     }
 
-    */
+
 
     //The player is created with the chosen nickname and an initial score of 0 points
     public Player(){

@@ -9,14 +9,16 @@ import java.util.Random;
 
 public class Game {
     private static ArrayList<Player> listOfPlayers;
-    private static int currentPlayer;
+    private static Player currentPlayer;
+    private static Player nextPlayer;
+    private static Player winner;
+    private static Player firstPlayer;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
     private static LivingRoom livingRoom;
 
 
     public Game() {
         listOfPlayers = new ArrayList<>();
-        currentPlayer = 0;
         CommonGoal1 = null;
         CommonGoal2 = null;
         livingRoom = null;
@@ -24,7 +26,7 @@ public class Game {
 
     //next player becomes the current player and puts the state to start
     public static void gameLoop() {
-        Player currentPlayer = getNextPlayer();
+        Game.setCurrentPlayer(getNextPlayer());
         currentPlayer.setState(new Start());
         currentPlayer.getState().stateAction();
     }
@@ -33,35 +35,41 @@ public class Game {
     public static Player pickFirstPlayer(){
         if(listOfPlayers.isEmpty())
             throw new IllegalStateException("There are no players");
-
         Random random = new Random();
         int i = random.nextInt(listOfPlayers.size());
-        return listOfPlayers.get(i);
+        firstPlayer = listOfPlayers.get(i);
+
+        return firstPlayer;
     }
 
     //returns the current player that is playing
     public static Player getCurrentPlayer() {
         if(listOfPlayers.isEmpty())
             throw new IllegalStateException("There are no players");
+        return currentPlayer;
+    }
 
-        if(currentPlayer < listOfPlayers.size()) {
-            return listOfPlayers.get(currentPlayer);
-        }else{
-            return null;
-        }
+    //sets current player
+    public static void setCurrentPlayer(Player player) {
+         currentPlayer = player;
+
     }
 
     //returns the next player that must play
     public static Player getNextPlayer() {
-        int nextPlayer = (currentPlayer+1) % listOfPlayers.size();
+        nextPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer)+1) % listOfPlayers.size());
         currentPlayer = nextPlayer;
-        return listOfPlayers.get(nextPlayer);
+        return nextPlayer;
 
+    }
+
+    //sets next player
+    public static void setNextPlayer(Player player){
+        nextPlayer = player;
     }
 
     //returns winner of the game, if there is a tie the most distant player from the first player wins the game
     public static Player getWinner(){
-        Player winner = null;
         int maxScore = 0;
         for(Player player : listOfPlayers){
             int score = player.getScore();
@@ -79,6 +87,11 @@ public class Game {
             }
         }
         return winner;
+    }
+
+    //sets the winner
+    public void setWinner(Player player){
+        winner = player;
     }
 
     //returns ArrayList of all participants
@@ -108,9 +121,10 @@ public class Game {
         }
         int i = listOfPlayers.indexOf(player);
         listOfPlayers.remove(player);
-        if(currentPlayer == i){
-            currentPlayer = (currentPlayer + 1) % listOfPlayers.size();
+        if(listOfPlayers.indexOf(currentPlayer) == i){
+            currentPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer) + 1) % listOfPlayers.size());
         }
+        System.out.println("The player has been removed from the game");
     }
 
     //return number of tiles on living room board for different amount of players
@@ -234,31 +248,7 @@ public class Game {
 
     }
 
-    //picks 4 random personal goal card (int), removes that so that another player can't pick the same
-    /*public ArrayList<Integer> pickPersonalGoalCard() {
-        Random random = new Random();
-        ArrayList<Integer> pickedCards = new ArrayList<Integer>();
-
-        while (pickedCards.size() < listOfPlayers.size()) {
-            int i = random.nextInt(availablePersonaGoalCards.size());
-            int pickedCard = availablePersonaGoalCards.get(i);
-            if (!pickedCards.contains(pickedCard)) {
-                pickedCards.add(pickedCard);
-                availablePersonaGoalCards.remove(i);
-            }
-        }
-    }
-
-    //set personalGoalCard to every player
-    public void setPersonalGoalCard(){
-        ArrayList<Integer> pickedPersonalGoalCards = pickPersonalGoalCard();
-        for (int i = 0; i < listOfPlayers.size(); i++) {
-            Player player = listOfPlayers.get(i);
-            PersonalGoalCard personalGoalCard = new PersonalGoalCard(pickedPersonalGoalCards.get(i));
-            player.setPersonalGoalCard(personalGoalCard);
-        }
-    }*/
-
+    //sets the personalGoalCard for each player
     public void setPersonalGoalCard(){
 
         ArrayList<Integer> availablePersonaGoalCards = new ArrayList<>();
