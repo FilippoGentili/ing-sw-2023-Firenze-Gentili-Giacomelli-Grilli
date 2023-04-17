@@ -1,10 +1,11 @@
 package it.polimi.ingsw;
+import static java.util.Objects.isNull;
 
 public class CommonGoalCard5 extends CommonGoalCard{
 
     @Override
     public boolean check(Bookshelf bookshelf) {
-        int count=0, countGroup, row, col, i;
+        int count, countGroup, row, col;
         boolean[][] checkTile = new boolean[6][5];
 
         for(row=0; row<6; row++)
@@ -13,31 +14,16 @@ public class CommonGoalCard5 extends CommonGoalCard{
 
         for(row=0, countGroup=0; row<6; row++){
             for(col=0; col<5; col++){
-                if(!checkTile[row][col]){
-                    count= HorizontalCheck(bookshelf.getTile(row,col),bookshelf,checkTile);
-                }
-                if(count > 3) {
-                    countGroup++;
-                }
-                if(count > 4){
-                    for(i=0; i<count; i++)
-                        checkTile[row][col+4+i] = false;
-                }
-                if(count < 4)
-                    for(i=col; i<col+count; i++)
-                        checkTile[row][i] = false;
-            }
-        }
+                count=0;
+                if(!isNull(bookshelf.getTile(row,col))) {
+                    if (!checkTile[row][col])
+                        count = FindAdjacentTiles(bookshelf.getTile(row,col),bookshelf,checkTile,4,0);
 
-        if(countGroup<6){
-            for(row=0, countGroup=0; row<6; row++) {
-                for (col = 0; col < 5; col++) {
-                    if (!checkTile[row][col]) {
-                        count = HorizontalCheck(bookshelf.getTile(row, col), bookshelf, checkTile);
-                    }
-                    if (count > 3) {
+                    if(count==4)
                         countGroup++;
-                    }
+
+                    if(count < 4)
+                        ResetCheckTile(bookshelf.getTile(row,col),bookshelf,checkTile);
                 }
             }
         }

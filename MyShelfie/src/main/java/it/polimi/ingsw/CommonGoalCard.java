@@ -24,53 +24,121 @@ abstract class CommonGoalCard {
         }
     }
 
-
-    public int HorizontalCheck(Tile tile,Bookshelf bookshelf,boolean[][] checkTile){
+    public int FindAdjacentTiles(Tile tile,Bookshelf bookshelf,boolean[][] checkTile,int limit,int counter){
         int count=0;
 
-        if(!checkTile[tile.getRow()][tile.getCol()]){
+        if(counter<limit){
 
-            checkTile[tile.getRow()][tile.getCol()] = true;
+            if(!checkTile[tile.getRow()][tile.getCol()]){
 
-            if(tile.getCol()<4) {
-                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1))) {
-                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())
-                        count = 1 + HorizontalCheck(bookshelf.getTile(tile.getRow(),tile.getCol()+1), bookshelf, checkTile);
-                    else
-                        count = 1;
-                } else {
-                    count = 1;
-                }
-            }else{
-                count=1;
-            }
+                checkTile[tile.getRow()][tile.getCol()] = true;
+                count++;
 
-        }
-        return count;
-    }
+                if(tile.getCol()==0){
+                    if (!isNull(bookshelf.getTile(tile.getRow(),tile.getCol() + 1)))
+                        if (tile.getTileType() == bookshelf.getTile(tile.getRow(),tile.getCol() + 1).getTileType())
+                            count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(),tile.getCol() + 1),bookshelf,checkTile,limit, counter+1);
 
+                }else if(tile.getCol()==4){
+                    if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                        if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
+                            count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile, limit, counter+1);
 
-    public int VerticalCheck(Tile tile, Bookshelf bookshelf, boolean[][] checkTile){
-        int count=0;
-
-        if(!checkTile[tile.getRow()][tile.getCol()]){
-
-            checkTile[tile.getRow()][tile.getCol()] = true;
-
-            if(tile.getRow()>0){
-                if(!isNull(bookshelf.getTile(tile.getRow()-1,tile.getCol()))){
-                    if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())
-                        count = 1 + VerticalCheck(bookshelf.getTile(tile.getRow()-1,tile.getCol()),bookshelf,checkTile);
-                    else
-                        count = 1;
                 }else{
-                    count = 1;
+                    if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1)))
+                        if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType()) {
+                            count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile, limit, counter + 1);
+                            counter+=count;
+                        }
+
+                    if(counter<limit){
+                        if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                            if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile, limit, counter);
+
+                    }
                 }
-            }else{
-                count = 1;
+
+
+                if(counter<limit){
+                    if(tile.getRow()==0){
+                        if(!isNull(bookshelf.getTile(tile.getRow()+1,tile.getCol())))
+                            if(tile.getTileType() == bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter+1);
+
+                    }else if(tile.getRow()==5){
+                        if(!isNull(bookshelf.getTile(tile.getRow()-1,tile.getCol())))
+                            if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter+1);
+
+                    }else{
+                        if(!isNull(bookshelf.getTile(tile.getRow()-1,tile.getCol())))
+                            if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType()) {
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter + 1);
+                                counter += count;
+                            }
+
+                        if(counter<limit){
+                            if(!isNull(bookshelf.getTile(tile.getRow()+1,tile.getCol())))
+                                if(tile.getTileType() == bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())
+                                    count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter);
+
+                        }
+                    }
+                }
             }
         }
 
         return count;
     }
+
+    public void ResetCheckTile(Tile tile,Bookshelf bookshelf,boolean[][] checkTile) {
+
+        if (checkTile[tile.getRow()][tile.getCol()]) {
+            checkTile[tile.getRow()][tile.getCol()] = false;
+
+            if (tile.getCol() == 0) {
+                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1)))
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())
+                        ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile);
+
+            } else if (tile.getCol() == 4) {
+                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
+                        ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile);
+            } else {
+                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1)))
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())
+                        ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile);
+
+                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
+                        ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile);
+            }
+
+
+            if (tile.getRow() == 0) {
+                if (!isNull(bookshelf.getTile(tile.getRow() + 1, tile.getCol()))) {
+                    if (tile.getTileType() == bookshelf.getTile(tile.getRow() + 1, tile.getCol()).getTileType())
+                        ResetCheckTile(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile);
+
+                } else if (tile.getRow() == 5) {
+                    if (!isNull(bookshelf.getTile(tile.getRow() - 1, tile.getCol())))
+                        if (tile.getTileType() == bookshelf.getTile(tile.getRow() - 1, tile.getCol()).getTileType())
+                            ResetCheckTile(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile);
+
+                } else {
+                    if (!isNull(bookshelf.getTile(tile.getRow() - 1, tile.getCol())))
+                        if (tile.getTileType() == bookshelf.getTile(tile.getRow() - 1, tile.getCol()).getTileType())
+                            ResetCheckTile(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile);
+
+                    if (!isNull(bookshelf.getTile(tile.getRow() + 1, tile.getCol())))
+                        if (tile.getTileType() == bookshelf.getTile(tile.getRow() + 1, tile.getCol()).getTileType())
+                            ResetCheckTile(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile);
+
+                }
+            }
+        }
+    }
+
 }
