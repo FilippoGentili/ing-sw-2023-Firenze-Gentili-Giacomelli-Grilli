@@ -1,15 +1,22 @@
 package it.polimi.ingsw;
-
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.*;
 
+
+/**
+ * Bag class that contains the 132 tiles
+ * @author pheelaw
+ */
 public class Bag {
 
     private static int numOfTiles=132;
     private static ArrayList<Tile> remainingTiles;
 
+    /**
+     * Bag constructor
+     * creates 132 tiles, 22 for each type
+     */
     public Bag(){
 
         remainingTiles = new ArrayList<Tile>();
@@ -19,6 +26,13 @@ public class Bag {
                 remainingTiles.add(new Tile(type));
         }
     }
+
+
+    /**
+     *
+     * @param numStartTile number of tiles to fulfill the board, based on the number of players
+     * @return an array list of the tiles chosen from the bag
+     */
 
     public ArrayList<Tile> extract(int numStartTile){
 

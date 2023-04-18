@@ -8,6 +8,7 @@ public class Player {
     private int score;
     private Game game;
     private Bookshelf bookshelf;
+
     private boolean FirstPlayer;
     private PersonalGoalCard personalGoalCard;
     private boolean Pointscg1 = false;
@@ -23,7 +24,6 @@ public class Player {
 
         return scanner.nextLine();
     }
-
      */
 
 

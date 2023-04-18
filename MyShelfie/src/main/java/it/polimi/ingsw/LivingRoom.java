@@ -12,11 +12,18 @@ public class LivingRoom{
     private final int rows = 9;
     private final int columns = 9;
 
+    /**
+     * private constructor because of the singleton pattern
+     */
     private LivingRoom(){
         board = new Tile[rows][columns];
         valid = new boolean[rows][columns];
     }
 
+    /**
+     * Method to get the instance of the singleton
+     * @return the instance of the livingroom
+     */
     public static LivingRoom getInstance(){
         if(single_instance == null)
             single_instance = new LivingRoom();
@@ -24,10 +31,22 @@ public class LivingRoom{
         return  single_instance;
     }
 
+    /**
+     * Set a cell either true or false, to keep track of the cell to consider on the board
+     * @param i row
+     * @param j column
+     * @param x value to be set
+     */
     public void setValid(int i, int j, boolean x){
         valid[i][j]=x;
     }
 
+    /**
+     * check if a cell is either valid or not
+     * @param i row
+     * @param j column
+     * @return true if it is valid, false if it is not valid
+     */
     public boolean validCell(int i, int j){
         return valid[i][j];
     }
@@ -51,6 +70,12 @@ public class LivingRoom{
         return board[i][j];
     }
 
+    /**
+     * Remove the tile of the specified position from the board, and return it
+     * @param i row
+     * @param j column
+     * @return tile picked
+     */
     public Tile pickTile(int i, int j){
         /*int count = 0;
         boolean stop = false;
@@ -98,6 +123,10 @@ public class LivingRoom{
         }else throw new IllegalArgumentException("Coordinate errate");
     }
 
+    /**
+     * inserts the tiles to fulfill the board
+     * @param chosen arraylist of the tikes to insert
+     */
     public void insertTiles(ArrayList<Tile> chosen){
 
         int x=0;
@@ -116,6 +145,11 @@ public class LivingRoom{
     }
 
 
+    /**
+     * @param t1 first tile
+     * @param t2 second tile
+     * @return true if t1 and t2 are adjacents
+     */
     public boolean isAdjacent(Tile t1, Tile t2){
         if((t1.getCol()==t2.getCol() && (t1.getRow()==t2.getRow()+1 || t1.getRow()==t2.getRow()-1)) ||
                 (t1.getRow() == t2.getRow() && (t1.getCol()==t2.getCol()+1 || t1.getCol()==t2.getCol()-1)))
@@ -123,6 +157,10 @@ public class LivingRoom{
         else return false;
     }
 
+    /**
+     * @param chosen tiles that I want to pick from the board
+     * @return true if the selected tiles can be picked up, false if not
+     */
     public boolean checkValid(ArrayList<Tile> chosen){
 
         int num;

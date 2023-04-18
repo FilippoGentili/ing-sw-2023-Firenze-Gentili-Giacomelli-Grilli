@@ -317,8 +317,62 @@ class BookshelfTest {
         assertEquals(18, bookshelf.countPoints());
     }
 
+    @Test
+    void countPointsTest2(){
+        Bookshelf bookshelf = new Bookshelf();
+        ArrayList<Tile> tiles0 = new ArrayList<>();
+        ArrayList<Tile> tiles1 = new ArrayList<>();
+        ArrayList<Tile> tiles2 = new ArrayList<>();
+        ArrayList<Tile> tiles3 = new ArrayList<>();
+        ArrayList<Tile> tiles4 = new ArrayList<>();
+
+        tiles0.add(new Tile(TileType.TROPHIE));
+        tiles0.add(new Tile(TileType.BOOK));
+        tiles0.add(new Tile(TileType.BOOK));
+        tiles0.add(new Tile(TileType.BOOK));
+        tiles0.add(new Tile(TileType.PLANT));
+        tiles0.add(new Tile(TileType.PLANT));
+        bookshelf.insertTiles(tiles0, 0);
+
+        tiles1.add(new Tile(TileType.TROPHIE));
+        tiles1.add(new Tile(TileType.TROPHIE));
+        tiles1.add(new Tile(TileType.GAME));
+        tiles1.add(new Tile(TileType.BOOK));
+        tiles1.add(new Tile(TileType.PLANT));
+        tiles1.add(new Tile(TileType.PLANT));
+        bookshelf.insertTiles(tiles1, 1);
+
+        tiles2.add(new Tile(TileType.TROPHIE));
+        tiles2.add(new Tile(TileType.CAT));
+        tiles2.add(new Tile(TileType.GAME));
+        tiles2.add(new Tile(TileType.PLANT));
+        tiles2.add(new Tile(TileType.PLANT));
+        bookshelf.insertTiles(tiles2, 2);
+
+        tiles3.add(new Tile(TileType.CAT));
+        tiles3.add(new Tile(TileType.CAT));
+        tiles3.add(new Tile(TileType.GAME));
+        tiles3.add(new Tile(TileType.PLANT));
+        tiles3.add(new Tile(TileType.PLANT));
+        bookshelf.insertTiles(tiles3, 3);
 
 
+        tiles4.add(new Tile(TileType.CAT));
+        tiles4.add(new Tile(TileType.CAT));
+        tiles4.add(new Tile(TileType.FRAME));
+        tiles4.add(new Tile(TileType.FRAME));
+        bookshelf.insertTiles(tiles4, 4);
 
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5;j++){
+                if(bookshelf.getTile(i, j)!=null)
+                    System.out.print(bookshelf.getTile(i, j).getTileType() + " ");
+                else System.out.print(" - ");
+            }
+            System.out.println();
+        }
+
+        assertEquals(21, bookshelf.countPoints());
+    }
 
 }

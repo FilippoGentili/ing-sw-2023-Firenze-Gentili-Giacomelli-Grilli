@@ -273,8 +273,9 @@ public class PersonalGoalCard {
 
     //The method gives how many points the player has to get, based on his PersonalGoalCard
     public int assignPoints (int ID){
-        matches = check(ID);
-        points = countPoints(matches);
+        int x;
+        x = check(ID);
+        points = countPoints(x);
 
         return points;
     }

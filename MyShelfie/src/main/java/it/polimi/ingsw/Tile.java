@@ -33,8 +33,8 @@ public class Tile {
         this.row = r;
     }
 
-    public void setLocation(Location loc){
+    /*public void setLocation(Location loc){
         this.location = loc;
-    }
+    }*/
 
 }
