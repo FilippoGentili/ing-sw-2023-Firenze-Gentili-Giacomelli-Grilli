@@ -280,9 +280,10 @@ public class Game {
 
         for (Player player : players) {
             int personalGoalCardPoints = player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID());
-            int totalPoints = player.getScore() + personalGoalCardPoints;
+            int totalPoints = player.getScore() + personalGoalCardPoints ;
             player.setScore(totalPoints);
         }
+
     }
 
     //gets Common Goal Card 1

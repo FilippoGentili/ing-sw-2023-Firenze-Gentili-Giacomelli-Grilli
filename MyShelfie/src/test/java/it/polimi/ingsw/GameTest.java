@@ -650,14 +650,30 @@ public class GameTest {
         Player player2 = new Player();
         getPlayers().add(player1);
         getPlayers().add(player2);
-        game.setPersonalGoalCard();
-        game.initializeLivingRoom();
-        game.pickCommonGoalCards();
+        PersonalGoalCard personalGoal1 = new PersonalGoalCard();
+        PersonalGoalCard personalGoal2 = new PersonalGoalCard();
+        personalGoal1.setID(1);
+        personalGoal1.setPlayer(player1);
+        personalGoal2.setID(2);
+        personalGoal2.setPlayer(player2);
+        player1.getBookshelf().setTile(0,0, TileType.PLANT);
+        player1.getBookshelf().setTile(0,2, TileType.FRAME);
+        player1.getBookshelf().setTile(1,4, TileType.CAT);
+        player1.getBookshelf().setTile(2,3, TileType.BOOK);
+        player1.getBookshelf().setTile(3,1, TileType.GAME);
+        player1.getBookshelf().setTile(5,2, TileType.TROPHIE);
+
+        player2.getBookshelf().setTile(1,1, TileType.PLANT);
+        player2.getBookshelf().setTile(2,0, TileType.CAT);
+        player2.getBookshelf().setTile(2,2, TileType.GAME);
+        player2.getBookshelf().setTile(3,4, TileType.BOOK);
+        player2.getBookshelf().setTile(4,3, TileType.TROPHIE);
+        player2.getBookshelf().setTile(5,4, TileType.FRAME);
         player1.setScore(10);
         player2.setScore(20);
         game.assignPoints(getPlayers());
-        assertEquals(player1.getScore(), 10 + player1.getPersonalGoalCard().assignPoints(player1.getPersonalGoalCard().getID()));
-        assertEquals(player2.getScore(), 20 + player2.getPersonalGoalCard().assignPoints(player2.getPersonalGoalCard().getID()));
+        assertEquals(player1.getScore(),  10 + player1.getPersonalGoalCard().assignPoints(player1.getPersonalGoalCard().getID()));
+        assertEquals(player2.getScore(),  20 + player2.getPersonalGoalCard().assignPoints(player2.getPersonalGoalCard().getID()));
     }
 
     @Test
