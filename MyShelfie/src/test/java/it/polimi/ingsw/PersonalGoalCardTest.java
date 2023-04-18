@@ -174,14 +174,12 @@ class PersonalGoalCardTest {
         PersonalGoalCard pGoal2 = new PersonalGoalCard();
         pGoal2.setID(2);
         pGoal2.setPlayer(player);
-
         player.getBookshelf().setTile(1,1, TileType.PLANT);
         player.getBookshelf().setTile(2,0, TileType.CAT);
         player.getBookshelf().setTile(2,2, TileType.GAME);
         player.getBookshelf().setTile(3,4, TileType.BOOK);
         player.getBookshelf().setTile(4,3, TileType.TROPHIE);
         player.getBookshelf().setTile(5,4, TileType.FRAME);
-
         assertEquals(6, pGoal2.check(pGoal2.getID()));
     }
 

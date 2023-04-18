@@ -19,7 +19,11 @@ public class Game {
         listOfPlayers = new ArrayList<>();
     }
 
-    //next player becomes the current player and puts the state to start
+    /**
+     * next player becomes the current player and puts the state to start
+     *
+     */
+
     public static void gameLoop() {
         currentPlayer.setState(new End());
         Game.setCurrentPlayer(getNextPlayer());
@@ -27,7 +31,10 @@ public class Game {
         currentPlayer.getState().stateAction();
     }
 
-    //returns the first player of the match (random)
+    /**
+     *  random selection of the first player
+     * @return the first player of the match
+     */
     public static Player pickFirstPlayer(){
         if(listOfPlayers.isEmpty())
             throw new IllegalStateException("There are no players");
@@ -38,20 +45,29 @@ public class Game {
         return firstPlayer;
     }
 
-    //returns the current player that is playing
+    /**
+     *
+     * @return the current player that is playing
+     */
     public static Player getCurrentPlayer() {
         if(listOfPlayers.isEmpty())
             throw new IllegalStateException("There are no players");
         return currentPlayer;
     }
 
-    //sets current player
+    /**
+     * sets current player
+     * @param player
+     */
     public static void setCurrentPlayer(Player player) {
          currentPlayer = player;
 
     }
 
-    //returns the next player that must play
+    /**
+     * @return the next player that must play
+     */
+
     public static Player getNextPlayer() {
         nextPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer)+1) % listOfPlayers.size());
         currentPlayer = nextPlayer;
@@ -59,12 +75,17 @@ public class Game {
 
     }
 
-    //sets next player
+    /**
+     * sets next player
+     */
+
     public static void setNextPlayer(Player player){
         nextPlayer = player;
     }
 
-    //returns winner of the game, if there is a tie the most distant player from the first player wins the game
+    /** If there is a tie, the most distant player from the first player wins the game
+     * @return winner of the game
+     */
     public static Player getWinner(){
         int maxScore = 0;
         for(Player player : listOfPlayers){
@@ -85,17 +106,25 @@ public class Game {
         return winner;
     }
 
-    //sets the winner
+    /**
+     * sets the winner
+     */
     public void setWinner(Player player){
         winner = player;
     }
 
-    //returns ArrayList of all participants
+    /**
+     *
+     * @return list of all participants
+     */
     public static ArrayList<Player> getPlayers() {
         return listOfPlayers;
     }
 
-    //adds player to ArrayList
+    /**
+     * adds player to the list of players
+     */
+
     public void addPlayer(Player player) {
         if(listOfPlayers.contains(player)){
             System.out.println("The player is already in the game");
@@ -109,7 +138,10 @@ public class Game {
         System.out.println("The player has been added to the game");
     }
 
-    //removes player from ArrayList
+    /**
+     * removes player from the list of players
+     * @param player
+     */
     public void removePlayer(Player player) {
         if(!listOfPlayers.contains(player)){
             System.out.println("The player is not part of the game");
@@ -123,7 +155,10 @@ public class Game {
         System.out.println("The player has been removed from the game");
     }
 
-    //return number of tiles on living room board for different amount of players
+    /**
+     *
+     * @return number of tiles on living room board for different amount of players
+     */
     public int numberOfTiles() {
 
         return switch (listOfPlayers.size()) {
@@ -134,6 +169,9 @@ public class Game {
         };
     }
 
+    /**
+     * sets the valid cells of the living room
+     */
     public void initializeLivingRoom(){
 
         LivingRoom living = LivingRoom.getInstance();
@@ -193,7 +231,9 @@ public class Game {
         }
     }
 
-    //picks 2 random common goal cards
+    /**
+     * picks two random common goal cards
+     */
     public void pickCommonGoalCards() {
         List<Integer> availableCommonGoalCards = new ArrayList<>();
         int commonGoalCard1, commonGoalCard2;
@@ -244,7 +284,9 @@ public class Game {
 
     }
 
-    //sets the personalGoalCard for each player
+    /**
+     * sets the personal goal card for each player
+     */
     public void setPersonalGoalCard(){
 
         ArrayList<Integer> availablePersonaGoalCards = new ArrayList<>();
@@ -261,7 +303,11 @@ public class Game {
 
     }
 
-    //notify that it is the last round and gives the first player one extra point
+    /**
+     * notifies that it is the last round and gives the first player that calls the method one extra point
+     * @param bookshelf
+     * @param player
+     */
     public static void endGameTrigger(Bookshelf bookshelf,Player player) {
         if(player==null)
             throw new IllegalArgumentException("Player can't be null");
@@ -273,7 +319,10 @@ public class Game {
             Game.gameLoop();
     }
 
-    //assigns personalGoalCard points to player
+    /**
+     * assigns personal goal card points for each player
+     * @param players
+     */
     public void assignPoints(ArrayList<Player> players) {
         if(players==null || players.isEmpty())
             throw new IllegalArgumentException("The list of players can't be null or empty");
@@ -286,17 +335,26 @@ public class Game {
 
     }
 
-    //gets Common Goal Card 1
+    /**
+     *
+     * @return common goal card 1
+     */
     public static CommonGoalCard getCommonGoal1(){
         return CommonGoal1;
     }
 
-    //gets Common Goal Card 2
+    /**
+     *
+     * @return common goal card 2
+     */
     public static CommonGoalCard getCommonGoal2(){
         return CommonGoal2;
     }
 
-    //gets the Living room
+    /**
+     *
+     * @return living room
+     */
     public static LivingRoom getLivingRoom(){
         LivingRoom livingRoom = LivingRoom.getInstance();
         return livingRoom;

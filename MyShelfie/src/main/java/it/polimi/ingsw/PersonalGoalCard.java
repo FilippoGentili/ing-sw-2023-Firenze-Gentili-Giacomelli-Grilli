@@ -250,7 +250,7 @@ public class PersonalGoalCard {
 
                 return matches;
             default:
-                throw new IllegalArgumentException("id not valid");
+                throw new IllegalArgumentException("ID not valid");
 
         }
     }
