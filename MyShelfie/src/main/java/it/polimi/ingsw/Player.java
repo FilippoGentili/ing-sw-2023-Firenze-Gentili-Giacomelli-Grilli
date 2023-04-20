@@ -12,7 +12,6 @@ public class Player {
     private boolean FirstPlayer;
     private PersonalGoalCard personalGoalCard;
     private boolean Pointscg1 = false;
-
     private boolean Pointscg2 = false;
 
     /*This method asks the user to choose a Nickname
@@ -26,17 +25,25 @@ public class Player {
     }
      */
 
-
+    /**
+     * @return the nickname
+     */
    public String getNickname() {
         return this.nickname;
     }
+
+    /**
+     * sets the nickname of the player
+     * @param nickName
+     */
     public void setNickname(String nickName){
-    nickname=nickName;
+        this.nickname=nickName;
     }
 
 
-
-    //The player is created with the chosen nickname and an initial score of 0 points
+    /**
+     * creates a player identified by a nickname and with a personal goal card and a score, initially of zero points
+     */
     public Player(){
         this.score = 0;
         //this.nickname = chooseNickname();
@@ -48,7 +55,9 @@ public class Player {
 
     }
 
-    //The player gets a bookshelf to play with
+    /**
+     * @return the bookshelf of the player
+     */
     public Bookshelf getBookshelf(){
         return this.bookshelf;
     }
@@ -65,10 +74,17 @@ public class Player {
         game.addPlayer(this);
     }
 
+    /**
+     * @return the score of the player
+     */
     public int getScore(){
         return score;
     }
 
+    /**
+     * sets the score of the player
+     * @param score
+     */
     public void setScore(int score) {
         this.score = score;
     }
@@ -79,20 +95,30 @@ public class Player {
      * eliminates the player from the player list of the specific game
      * @param game
      */
-
     public void quitGame(Game game){
         if(game!=null){
             game.removePlayer(this);
         }
     }
 
+    /**
+     * sets the current state of the player
+     * @param state
+     */
     public void setState(State state){
         currentState = state;
     }
 
+    /**
+     * @return the current state of the player
+     */
     public State getState(){
         return currentState;
     }
+
+    /**
+     * calls stateAction from the current state
+     */
     public void stateAction(){
         currentState.stateAction();
     }
@@ -107,6 +133,9 @@ public class Player {
         chat.removeParticipant(this);
     }
 
+    /**
+     * @return the instance of the game
+     */
     public Game getGame(){
         return game;
     }
@@ -120,22 +149,37 @@ public class Player {
         this.personalGoalCard.setPlayer(this);
     }
 
+    /**
+     * @return the specific personal goal card of the player
+     */
     public PersonalGoalCard getPersonalGoalCard(){
         return personalGoalCard;
     }
 
+    /**
+     * @return the value of the common goal card one attribute
+     */
     public boolean getPointscg1(){
         return Pointscg1;
     }
 
+    /**
+     * @return the value of the common goal card two attribute
+     */
     public boolean getPointscg2(){
         return Pointscg2;
     }
 
+    /**
+     * sets to true the common goal card attribute number one after the player completes the goal
+     */
     public void setPointscg1(){
         this.Pointscg1=true;
     }
 
+    /**
+     * sets to true the common goal card attribute number two after the player completes the goal
+     */
     public void setPointscg2(){
         this.Pointscg2=true;
     }
