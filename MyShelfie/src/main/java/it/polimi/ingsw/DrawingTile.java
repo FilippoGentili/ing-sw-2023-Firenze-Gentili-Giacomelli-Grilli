@@ -1,14 +1,16 @@
 package it.polimi.ingsw;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DrawingTile implements State{
     private Player player;
     private static ArrayList<Tile> chosenTiles;
-
     int i, j, column;
 
+    /**
+     * This method gets an arraylist of chosen tiles from the player and asks for a column. Then sets them
+     * in the bookshelf
+     */
     public void stateAction (){
 
         chosenTiles.add(player.getGame().getLivingRoom().pickTile(i, j));
@@ -19,9 +21,9 @@ public class DrawingTile implements State{
         System.out.println("Choose the column");
         int column = Integer.parseInt(scanner.nextLine());
         */
-        /*if(!player.getBookshelf().fullBookshelf()){
+        if(!player.getBookshelf().spaceAvailable(chosenTiles, column)){
             player.getBookshelf().insertTiles(chosenTiles, column);
-        }*/
+        }
 
 
     }

@@ -19,6 +19,12 @@ public class PersonalGoalCard {
         return ID;
     }
 
+    /**
+     * The switch case calls the correct check method, depending on the ID of the Personal Goal Card assigned to
+     * the player
+     * @param id
+     * @return the number of matches for the particular card
+     */
     public int check(int id){
         switch(id){
             case 1:
@@ -256,7 +262,11 @@ public class PersonalGoalCard {
     }
 
 
-    //With the method count points, the number of matches is used to decide how many points the player gets
+    /**
+     * With the method count points, the number of matches is used to decide how many points the player gets
+     * @param matches
+     * @return the points that are going ot be assigned
+     */
     public int countPoints(int matches){
         switch (matches) {
             case 0 -> points = 0;
@@ -271,7 +281,11 @@ public class PersonalGoalCard {
         return points;
     }
 
-    //The method gives how many points the player has to get, based on his PersonalGoalCard
+    /**
+     * The method gives how many points the player has to get, based on his PersonalGoalCard
+     * @param ID
+     * @return points given to the player depending on the number of matches
+     */
     public int assignPoints (int ID){
         int x;
         x = check(ID);

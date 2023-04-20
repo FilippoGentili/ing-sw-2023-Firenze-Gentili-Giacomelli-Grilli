@@ -158,12 +158,14 @@ class PersonalGoalCardTest {
     public void checkPGoal2SixMatches(){
         Player player = new Player();
         player.setPersonalGoalCard(2);
+
         player.getBookshelf().setTile(1,1, TileType.PLANT);
         player.getBookshelf().setTile(2,0, TileType.CAT);
         player.getBookshelf().setTile(2,2, TileType.GAME);
         player.getBookshelf().setTile(3,4, TileType.BOOK);
         player.getBookshelf().setTile(4,3, TileType.TROPHIE);
         player.getBookshelf().setTile(5,4, TileType.FRAME);
+
         assertEquals(6, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
     }
 
@@ -1303,4 +1305,175 @@ class PersonalGoalCardTest {
         assertEquals(0, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
     }
 
+    @Test
+    public void assignPointsPGoal1(){
+        Player player = new Player();
+        player.setPersonalGoalCard(1);
+
+        player.getBookshelf().setTile(0,0, TileType.PLANT);
+        player.getBookshelf().setTile(0,2, TileType.FRAME);
+        player.getBookshelf().setTile(1,4, TileType.CAT);
+        player.getBookshelf().setTile(2,3, TileType.BOOK);
+        player.getBookshelf().setTile(3,1, TileType.GAME);
+        player.getBookshelf().setTile(5,2, TileType.TROPHIE);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+
+    @Test
+    public void assignPointsPGoal2(){
+        Player player = new Player();
+        player.setPersonalGoalCard(2);
+
+        player.getBookshelf().setTile(1,1, TileType.PLANT);
+        player.getBookshelf().setTile(2,0, TileType.CAT);
+        player.getBookshelf().setTile(2,2, TileType.GAME);
+        player.getBookshelf().setTile(3,4, TileType.BOOK);
+        player.getBookshelf().setTile(4,3, TileType.TROPHIE);
+        player.getBookshelf().setTile(5,4, TileType.FRAME);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+
+    @Test
+    public void assignPointsPGoal3(){
+        Player player = new Player();
+        player.setPersonalGoalCard(3);
+
+        player.getBookshelf().setTile(1,0, TileType.FRAME);
+        player.getBookshelf().setTile(1,3, TileType.GAME);
+        player.getBookshelf().setTile(2,2, TileType.PLANT);
+        player.getBookshelf().setTile(3,1, TileType.CAT);
+        player.getBookshelf().setTile(3,4, TileType.TROPHIE);
+        player.getBookshelf().setTile(5,0, TileType.BOOK);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+
+    @Test
+    public void assignPointsPGoal4(){
+        Player player = new Player();
+        player.setPersonalGoalCard(4);
+
+        player.getBookshelf().setTile(0,4, TileType.GAME);
+        player.getBookshelf().setTile(2,0, TileType.TROPHIE);
+        player.getBookshelf().setTile(2,2, TileType.FRAME);
+        player.getBookshelf().setTile(3,3, TileType.PLANT);
+        player.getBookshelf().setTile(4,1, TileType.BOOK);
+        player.getBookshelf().setTile(4,2, TileType.CAT);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal5(){
+        Player player = new Player();
+        player.setPersonalGoalCard(5);
+
+        player.getBookshelf().setTile(1,1, TileType.TROPHIE);
+        player.getBookshelf().setTile(3,1, TileType.FRAME);
+        player.getBookshelf().setTile(3,2, TileType.BOOK);
+        player.getBookshelf().setTile(4,4, TileType.PLANT);
+        player.getBookshelf().setTile(5,0, TileType.GAME);
+        player.getBookshelf().setTile(5,3, TileType.CAT);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal6(){
+        Player player = new Player();
+        player.setPersonalGoalCard(6);
+
+        player.getBookshelf().setTile(0,2, TileType.TROPHIE);
+        player.getBookshelf().setTile(0,4, TileType.CAT);
+        player.getBookshelf().setTile(2,3, TileType.BOOK);
+        player.getBookshelf().setTile(4,1, TileType.GAME);
+        player.getBookshelf().setTile(4,3, TileType.FRAME);
+        player.getBookshelf().setTile(5,0, TileType.PLANT);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal7(){
+        Player player = new Player();
+        player.setPersonalGoalCard(7);
+
+        player.getBookshelf().setTile(0,0, TileType.CAT);
+        player.getBookshelf().setTile(1,3, TileType.FRAME);
+        player.getBookshelf().setTile(2,1, TileType.PLANT);
+        player.getBookshelf().setTile(3,0, TileType.TROPHIE);
+        player.getBookshelf().setTile(4,4, TileType.GAME);
+        player.getBookshelf().setTile(5,2, TileType.BOOK);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal8(){
+        Player player = new Player();
+        player.setPersonalGoalCard(8);
+
+        player.getBookshelf().setTile(0,4, TileType.FRAME);
+        player.getBookshelf().setTile(1,1, TileType.CAT);
+        player.getBookshelf().setTile(2,2, TileType.TROPHIE);
+        player.getBookshelf().setTile(3,0, TileType.PLANT);
+        player.getBookshelf().setTile(4,3, TileType.BOOK);
+        player.getBookshelf().setTile(5,3, TileType.GAME);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal9(){
+        Player player = new Player();
+        player.setPersonalGoalCard(9);
+
+        player.getBookshelf().setTile(0,2, TileType.GAME);
+        player.getBookshelf().setTile(2,2, TileType.CAT);
+        player.getBookshelf().setTile(3,4, TileType.BOOK);
+        player.getBookshelf().setTile(4,1, TileType.TROPHIE);
+        player.getBookshelf().setTile(4,4, TileType.PLANT);
+        player.getBookshelf().setTile(5,0, TileType.FRAME);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal10(){
+        Player player = new Player();
+        player.setPersonalGoalCard(10);
+
+        player.getBookshelf().setTile(0,4, TileType.TROPHIE);
+        player.getBookshelf().setTile(1,1, TileType.GAME);
+        player.getBookshelf().setTile(2,0, TileType.BOOK);
+        player.getBookshelf().setTile(3,3, TileType.CAT);
+        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(5,3, TileType.PLANT);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal11(){
+        Player player = new Player();
+        player.setPersonalGoalCard(11);
+
+        player.getBookshelf().setTile(0,2, TileType.PLANT);
+        player.getBookshelf().setTile(1,1, TileType.BOOK);
+        player.getBookshelf().setTile(2,0, TileType.GAME);
+        player.getBookshelf().setTile(3,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,4, TileType.CAT);
+        player.getBookshelf().setTile(5,3, TileType.TROPHIE);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
+    @Test
+    public void assignPointsPGoal12(){
+        Player player = new Player();
+        player.setPersonalGoalCard(12);
+
+        player.getBookshelf().setTile(0,2, TileType.BOOK);
+        player.getBookshelf().setTile(1,1, TileType.PLANT);
+        player.getBookshelf().setTile(2,2, TileType.FRAME);
+        player.getBookshelf().setTile(3,3, TileType.TROPHIE);
+        player.getBookshelf().setTile(4,4, TileType.GAME);
+        player.getBookshelf().setTile(5,0, TileType.CAT);
+
+        assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
+    }
 }

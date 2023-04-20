@@ -53,7 +53,11 @@ public class Player {
         return this.bookshelf;
     }
 
-    //When a player wants to join a game, it calls this method. the method addPlayer in game adds the player in the list of player dor the specific game
+    /**
+     * When a player wants to join a game, it calls this method. the method addPlayer in game adds the player
+     * in the list of player dor the specific game
+     * @param game
+     */
     public void joinGame(Game game){
         if(game==null)
             throw new IllegalArgumentException("Game can't be null");
@@ -70,7 +74,12 @@ public class Player {
     }
 
 
-    //If the player wants to quit the game he is in, it calls this method. The method remove Player in game eliminates the player from the player list of the specific game
+    /**
+     * If the player wants to quit the game he is in, it calls this method. The method remove Player in game
+     * eliminates the player from the player list of the specific game
+     * @param game
+     */
+
     public void quitGame(Game game){
         if(game!=null){
             game.removePlayer(this);
@@ -88,6 +97,10 @@ public class Player {
         currentState.stateAction();
     }
 
+    /**
+     * Method called when the player wants to exit the chat
+     * @param chat
+     */
     public void exitChat(Chat chat){
         if(chat==null)
             throw new IllegalArgumentException("Chat can't be null");
@@ -98,6 +111,10 @@ public class Player {
         return game;
     }
 
+    /**
+     * Method to assign the personalGoalCard to the player
+     * @param personalGoalCard drawn in game
+     */
     public void setPersonalGoalCard(int personalGoalCard) {
         this.personalGoalCard.setID(personalGoalCard);
         this.personalGoalCard.setPlayer(this);
