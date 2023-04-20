@@ -20,7 +20,7 @@ public class Game {
     }
 
     /**
-     * next player becomes the current player and puts the state to start
+     * the next player of the list becomes the current player and the state is set to start
      *
      */
 
@@ -32,8 +32,9 @@ public class Game {
     }
 
     /**
-     *  random selection of the first player
+     * random selection of the first player
      * @return the first player of the match
+     * @throws IllegalStateException if the list of players is empty
      */
     public static Player pickFirstPlayer(){
         if(listOfPlayers.isEmpty())
@@ -48,6 +49,7 @@ public class Game {
     /**
      *
      * @return the current player that is playing
+     * @throws IllegalStateException if the list of players is empty
      */
     public static Player getCurrentPlayer() {
         if(listOfPlayers.isEmpty())
@@ -60,12 +62,12 @@ public class Game {
      * @param player
      */
     public static void setCurrentPlayer(Player player) {
-         currentPlayer = player;
+        currentPlayer = player;
 
     }
 
     /**
-     * @return the next player that must play
+     * @return the next player int the list of players
      */
 
     public static Player getNextPlayer() {
@@ -115,7 +117,7 @@ public class Game {
 
     /**
      *
-     * @return list of all participants
+     * @return list of all players
      */
     public static ArrayList<Player> getPlayers() {
         return listOfPlayers;
