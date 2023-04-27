@@ -12,8 +12,11 @@ public class Game {
     private static Player firstPlayer;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
 
+    private static LivingRoom living;
+
     public Game() {
         listOfPlayers = new ArrayList<>();
+        this.initializeLivingRoom();
     }
 
     /**
@@ -125,16 +128,8 @@ public class Game {
      */
 
     public void addPlayer(Player player) {
-        if(listOfPlayers.contains(player)){
-            System.out.println("The player is already in the game");
-            return;
-        }
-        if(listOfPlayers.size() == 4){
-            System.out.println("The game is full");
-            return;
-        }
+
         listOfPlayers.add(player);
-        System.out.println("The player has been added to the game");
     }
 
     /**
@@ -173,7 +168,7 @@ public class Game {
      */
     public void initializeLivingRoom(){
 
-        LivingRoom living = LivingRoom.getInstance();
+        living = LivingRoom.getInstance();
 
         switch(numberOfTiles()){
             case 29:
