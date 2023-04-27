@@ -7,5 +7,5 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServer{
-
+     int prova;
 }
