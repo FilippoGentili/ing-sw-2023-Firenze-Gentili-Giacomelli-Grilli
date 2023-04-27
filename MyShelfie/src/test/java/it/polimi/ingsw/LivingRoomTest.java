@@ -1,5 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.Bag;
+import it.polimi.ingsw.model.LivingRoom;
+import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.model.TileType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

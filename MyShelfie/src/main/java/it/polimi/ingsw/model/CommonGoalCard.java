@@ -1,20 +1,43 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
+import it.polimi.ingsw.model.Bookshelf;
+import it.polimi.ingsw.model.Tile;
+
 import static java.util.Objects.isNull;
 
-abstract class CommonGoalCard {
+/**
+ * Abstract class for CommonGoalCard
+ * @author silvia
+ */
+
+public abstract class CommonGoalCard {
 
     private int value = 8;
     private int delta;
 
+    /**
+     * The method checks if the bookshelf respects the object required from the CommonGoalCard.
+     * There is an override for each CommonGoalCard.
+     * @param bookshelf
+     * @return boolean
+     */
     public abstract boolean check(Bookshelf bookshelf);
 
     public int getValue() {
         return this.value;
     }
 
+    /**
+     * the method update the "points value" of the card. The decrease (Delta) depends on the number of players, that
+     * determines the Delta. When a player reaches the Common Goal this method must be called.
+     */
     public void updateValue(){
         this.value = this.value - this.delta;
     }
+
+    /**
+     * the method set the value of the decrease of the card value. It depends on the number of players.
+     * @param NumPlayers
+     */
 
     public void setDelta(int NumPlayers){
         if(NumPlayers == 2){
@@ -24,7 +47,20 @@ abstract class CommonGoalCard {
         }
     }
 
-    public int FindAdjacentTiles(Tile tile,Bookshelf bookshelf,boolean[][] checkTile,int limit,int counter){
+    /**
+     * Considering a particular bookshelf, the method finds how many tiles of the bookshelf are adjacent to
+     * a particular "tile" with the same TileType. If this count reaches the value "limit", the count stops and a group
+     * of a "limit" number of tiles is found. If this method is called more times, those tiles that were part of another
+     * group are not considered thanks to the boolean matrix "checkTiles".
+     * @param tile
+     * @param bookshelf
+     * @param checkTile
+     * @param limit
+     * @param counter
+     * @return int
+     */
+
+    public int FindAdjacentTiles(Tile tile, Bookshelf bookshelf, boolean[][] checkTile, int limit, int counter){
         int count=0;
 
         if(counter<limit){
@@ -92,6 +128,14 @@ abstract class CommonGoalCard {
         return count;
     }
 
+
+    /**
+     * the method takes the tiles adjacent to "tile" with the same TileType and reset the cells of the boolean
+     * matrix "checkTiles" whose positions matches with the found tiles.
+     * @param tile
+     * @param bookshelf
+     * @param checkTile
+     */
     public void ResetCheckTile(Tile tile,Bookshelf bookshelf,boolean[][] checkTile) {
 
         if (checkTile[tile.getRow()][tile.getCol()]) {

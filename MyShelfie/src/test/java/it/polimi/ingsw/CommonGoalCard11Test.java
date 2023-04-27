@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import static java.util.Objects.isNull;
 
 import static org.junit.jupiter.api.Assertions.*;
 

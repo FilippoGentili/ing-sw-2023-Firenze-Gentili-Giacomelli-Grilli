@@ -1,4 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.model.Location;
+import it.polimi.ingsw.model.TileType;
 
 public class Tile {
 

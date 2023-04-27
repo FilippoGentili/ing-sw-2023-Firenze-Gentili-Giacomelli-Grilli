@@ -1,8 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import static it.polimi.ingsw.Game.endGameTrigger;
+import static it.polimi.ingsw.model.Game.endGameTrigger;
 
-public class End implements State{
+public class End implements State {
     private Player player;
 
     /**
