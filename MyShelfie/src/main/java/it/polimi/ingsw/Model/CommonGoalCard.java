@@ -1,6 +1,4 @@
-package it.polimi.ingsw.model;
-import it.polimi.ingsw.model.Bookshelf;
-import it.polimi.ingsw.model.Tile;
+package it.polimi.ingsw.Model;
 
 import static java.util.Objects.isNull;
 

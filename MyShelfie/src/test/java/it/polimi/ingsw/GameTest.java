@@ -1,11 +1,11 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.Model.*;
 import org.junit.Test;
 
 import java.util.List;
 
-import static it.polimi.ingsw.model.Game.*;
+import static it.polimi.ingsw.Model.Game.*;
 import static org.junit.Assert.*;
 
 public class GameTest {

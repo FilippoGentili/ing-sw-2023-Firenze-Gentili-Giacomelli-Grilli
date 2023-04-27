@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.Model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
