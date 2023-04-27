@@ -1,4 +1,5 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
+
 import static java.util.Objects.isNull;
 
 public class CommonGoalCard2 extends CommonGoalCard {

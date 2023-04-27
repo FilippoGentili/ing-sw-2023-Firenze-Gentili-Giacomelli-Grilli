@@ -1,8 +1,10 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.Model.Bookshelf;
+import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Model.TileType;
 import org.junit.jupiter.api.Test;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;

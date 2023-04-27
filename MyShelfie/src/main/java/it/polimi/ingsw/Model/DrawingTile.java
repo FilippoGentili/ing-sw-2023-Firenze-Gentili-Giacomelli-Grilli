@@ -1,8 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
 
 import java.util.ArrayList;
 
-public class DrawingTile implements State{
+public class DrawingTile implements State {
     private Player player;
     private static ArrayList<Tile> chosenTiles;
     int i, j, column;

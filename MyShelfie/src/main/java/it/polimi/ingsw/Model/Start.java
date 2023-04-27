@@ -1,8 +1,9 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Scanner;
-public class Start implements State{
+public class Start implements State {
     /**
      * The method in the class start sets a timer for an 8 minute turn, when the timer ends it asks the other players
      * if they want to keep playing or if they'd rather quit

@@ -1,5 +1,5 @@
-package it.polimi.ingsw;
-import java.io.*;
+package it.polimi.ingsw.Model;
+
 import java.util.ArrayList;
 import java.util.*;
 

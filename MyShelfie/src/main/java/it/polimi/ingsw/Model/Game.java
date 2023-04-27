@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
 
 //import org.jetbrains.annotations.Nullable;
 
@@ -307,7 +307,7 @@ public class Game {
      * @param bookshelf
      * @param player
      */
-    public static void endGameTrigger(Bookshelf bookshelf,Player player) {
+    public static void endGameTrigger(Bookshelf bookshelf, Player player) {
         if(player==null)
             throw new IllegalArgumentException("Player can't be null");
 

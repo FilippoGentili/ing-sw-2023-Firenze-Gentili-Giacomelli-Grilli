@@ -1,7 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
+
 import static java.util.Objects.isNull;
 
-public class CommonGoalCard5 extends CommonGoalCard{
+public class CommonGoalCard5 extends CommonGoalCard {
 
     @Override
     public boolean check(Bookshelf bookshelf) {

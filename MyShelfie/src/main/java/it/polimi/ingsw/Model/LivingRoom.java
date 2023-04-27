@@ -1,7 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.Model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class LivingRoom{
 
@@ -51,14 +50,14 @@ public class LivingRoom{
         return valid[i][j];
     }
 
-    void setTile(Tile t, int i, int j){
+    public void setTile(Tile t, int i, int j){
         Tile tile = new Tile(t.getTileType());
         tile.setRow(i);
         tile.setCol(j);
         board[i][j] = tile;
     }
 
-    void setNull(int i, int j){
+    public void setNull(int i, int j){
         board[i][j]=null;
     }
 
