@@ -779,12 +779,66 @@ public class GameTest {
     }
 
     @Test
+    public void getScoreBoardTest2Players(){
+        Game game = new Game();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        getPlayers().add(player1);
+        getPlayers().add(player2);
+        player1.setScore(30);
+        player2.setScore(40);
+        game.getScoreBoard(getPlayers());
+        assertEquals(game.getScoreBoard(getPlayers()).get(0), player2);
+        assertEquals(game.getScoreBoard(getPlayers()).get(1), player1);
+
+    }
+
+    @Test
+    public void getScoreBoardTest3Players(){
+        Game game = new Game();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        getPlayers().add(player1);
+        getPlayers().add(player2);
+        getPlayers().add(player3);
+        player1.setScore(30);
+        player2.setScore(40);
+        player3.setScore(50);
+        game.getScoreBoard(getPlayers());
+        assertEquals(game.getScoreBoard(getPlayers()).get(0), player3);
+        assertEquals(game.getScoreBoard(getPlayers()).get(1), player2);
+        assertEquals(game.getScoreBoard(getPlayers()).get(2), player1);
+    }
+
+    @Test
+    public void getScoreBoardTest4Players(){
+        Game game = new Game();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        Player player3 = new Player();
+        Player player4 = new Player();
+        getPlayers().add(player1);
+        getPlayers().add(player2);
+        getPlayers().add(player3);
+        getPlayers().add(player4);
+        player1.setScore(30);
+        player2.setScore(40);
+        player3.setScore(50);
+        player4.setScore(60);
+        game.getScoreBoard(getPlayers());
+        assertEquals(game.getScoreBoard(getPlayers()).get(0), player4);
+        assertEquals(game.getScoreBoard(getPlayers()).get(1), player3);
+        assertEquals(game.getScoreBoard(getPlayers()).get(2), player2);
+        assertEquals(game.getScoreBoard(getPlayers()).get(3), player1);
+    }
+
+    @Test
     public void getCommonGoal1Test(){
         Game game = new Game();
         game.pickCommonGoalCards();
         CommonGoalCard commonGoal1 = getCommonGoal1();
         assertNotNull(commonGoal1);
-
     }
 
     @Test

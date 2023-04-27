@@ -2,10 +2,7 @@ package it.polimi.ingsw;
 
 //import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
     private static ArrayList<Player> listOfPlayers;
@@ -335,6 +332,18 @@ public class Game {
             player.setScore(totalPoints);
         }
 
+    }
+
+    /**
+     * gets the scoreboard
+     * @param players
+     * @return arraylist of players in decreasing order of their score
+     */
+    public ArrayList<Player> getScoreBoard(ArrayList<Player> players){
+        ArrayList<Player> scoreBoard = new ArrayList<>(players);
+        scoreBoard.sort(Comparator.comparingInt(Player::getScore).reversed());
+
+        return scoreBoard;
     }
 
     /**
