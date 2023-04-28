@@ -11,12 +11,21 @@ public class LivingRoom{
     private final int rows = 9;
     private final int columns = 9;
 
+    private final String SERVER_NAME = "server";
+
     /**
      * private constructor because of the singleton pattern
      */
     private LivingRoom(){
         board = new Tile[rows][columns];
         valid = new boolean[rows][columns];
+    }
+
+    /**
+     * @return the name server, is used in the reply messages
+     */
+    public String getServerName(){
+        return SERVER_NAME;
     }
 
     /**
