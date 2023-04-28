@@ -38,6 +38,11 @@ public class GameController {
         return game;
     }
 
+    public void startGame(){
+        firstPlayer = game.pickFirstPlayer();
+        currentPlayer = firstPlayer;
+    }
+
     /*gestione list of player
     dobbiamo far partire il game quando il numero dei giocatori è uguale al numero stabilito per la partita
 
