@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 import it.polimi.ingsw.Model.LivingRoom;
 
@@ -8,7 +8,7 @@ public class LoginReply extends Message{
     private final boolean successfulAccess;
 
     /**
-     * Message used to respond to a login request from the server to the client
+     * Message used to respond to a login request from the Server to the Client
      * @param nicknameAccepted
      * @param successfulAccess
      */

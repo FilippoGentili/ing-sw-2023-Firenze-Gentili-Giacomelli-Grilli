@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public enum MessageType {
     LOGIN_REQUEST,

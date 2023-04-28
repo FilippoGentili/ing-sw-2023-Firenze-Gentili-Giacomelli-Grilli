@@ -1,8 +1,8 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public class LoginRequest extends Message{
     /**
-     * Message from the client to the server to try to connect
+     * Message from the Client to the Server to try to connect
      * @param username
      */
     public LoginRequest(String username) {
