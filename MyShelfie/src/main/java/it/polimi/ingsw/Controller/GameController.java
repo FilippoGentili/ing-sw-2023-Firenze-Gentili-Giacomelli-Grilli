@@ -2,12 +2,12 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
-public class GameController {
+public class gameController {
 
     private Game game;
     private final int numOfPlayers;
 
-    public GameController(int num){
+    public gameController(int num){
         this.game = new Game();
         this.numOfPlayers = num;
     }
@@ -27,8 +27,6 @@ public class GameController {
         player.setNickname(nickname);
         game.addPlayer(player);
     }
-
-
 
 
 

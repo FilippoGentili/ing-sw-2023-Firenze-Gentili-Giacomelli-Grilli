@@ -1,4 +1,8 @@
 package it.polimi.ingsw.View;
 
-public class View {
+public interface View {
+
+    void EnterNickname();
+
+    void showCurrentPlayer();
 }

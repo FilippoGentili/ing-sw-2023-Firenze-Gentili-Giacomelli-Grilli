@@ -1,30 +1,31 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
 
-    private HashMap<Game, gameController> allGames;
+    private Map<GameController, Game> allGames;
 
     public Controller(){
-        allGames = new HashMap<Game, gameController>();
+        allGames = new HashMap<GameController, Game>();
     }
 
     public void login(String nickname, int num /*cambia parametri in messaggi?*/){
         //scorri la mappa
-        for(Map.Entry<Game, gameController> map : allGames.entrySet()){
-            if(map.getValue().getNumOfPlayers() == num) {
-                if (!map.getValue().isFull()) {
-                    map.getValue().addPlayer(nickname);
+        for(Map.Entry<GameController, Game> map : allGames.entrySet()){
+            if(map.getKey().getNumOfPlayers() == num) {
+                if (!map.getKey().isFull()) {
+                    map.getKey().addPlayer(nickname);
                     return;
                 }
             }
         }
-        allGames.put(new Game(), new gameController(num));
+
+        GameController newGame = new GameController(num);
+        newGame.addPlayer(nickname);
+        allGames.put(newGame, newGame.getGame());
     }
 }

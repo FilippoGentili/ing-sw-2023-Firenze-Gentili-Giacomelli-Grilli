@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Controller;
 
-public class InputController {
+public class inputController {
 
     //chiama gameController
 
