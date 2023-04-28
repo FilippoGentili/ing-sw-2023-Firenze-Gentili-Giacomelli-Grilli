@@ -5,11 +5,11 @@ import it.polimi.ingsw.Model.Game;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Controller {
+public class Controller1 {
 
     private Map<GameController, Game> allGames;
 
-    public Controller(){
+    public Controller1(){
         allGames = new HashMap<GameController, Game>();
     }
 

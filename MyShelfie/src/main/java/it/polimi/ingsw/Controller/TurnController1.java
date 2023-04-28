@@ -5,7 +5,7 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.util.Map;
 
-public class TurnController {
+public class TurnController1 {
 
     private GameController gameController;
     private Map<Player, VirtualView> virtualViewMap;

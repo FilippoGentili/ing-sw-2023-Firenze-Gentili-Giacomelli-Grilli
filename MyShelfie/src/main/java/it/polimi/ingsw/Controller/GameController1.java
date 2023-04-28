@@ -2,12 +2,14 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
-public class gameController {
+public class GameController1 {
 
     private Game game;
     private final int numOfPlayers;
+    private Player currentPlayer;
+    private Player firstPlayer;
 
-    public gameController(int num){
+    public GameController(int num){
         this.game = new Game();
         this.numOfPlayers = num;
     }
@@ -28,9 +30,13 @@ public class gameController {
         game.addPlayer(player);
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 
-
-
+    public Game getGame() {
+        return game;
+    }
 
     /*gestione list of player
     dobbiamo far partire il game quando il numero dei giocatori è uguale al numero stabilito per la partita
@@ -50,3 +56,4 @@ public class gameController {
     */
 
 }
+
