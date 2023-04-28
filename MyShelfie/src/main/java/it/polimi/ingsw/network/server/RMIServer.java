@@ -1,41 +1,39 @@
-package it.polimi.ingsw.network.server;
+public class SocketClient {
+    private String hostname;
+    private int port;
+    private Socket socket;
+    private ObjectOutputStream oos;
+    private ObjectInputStream ois;
 
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.network.Match;
-
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
-
-/*public class RMIServer extends UnicastRemoteObject implements Match {
-    protected RMIServer() throws RemoteException {
-
-        super();
-
-    }
-    @Override
-    public void addPlayer(String nickname) throws RemoteException{
-
+    public SocketClient(String hostname, int port) {
+        this.hostname = hostname;
+        this.port = port;
     }
 
-    @Override
-    public void removePlayer(String nickname) throws RemoteException{
+    public void connect() throws UnknownHostException, IOException {
+        String localHostAddress = InetAddress.getLocalHost().getHostAddress();
+        System.out.println("Connecting to server on " + localHostAddress + ":" + port);
 
-    }
-    @Override
-    public void selectTile(int row, int col) throws RemoteException{
+        socket = new Socket(hostname, port);
+        System.out.println("Connected to server on " + localHostAddress + ":" + port);
 
-    }
-
-    @Override
-    public boolean gameOver() throws RemoteException{
-
+        oos = new ObjectOutputStream(socket.getOutputStream());
+        ois = new ObjectInputStream(socket.getInputStream());
     }
 
-    @Override
-    public String getWinner() throws  RemoteException{
-        Game game = new Game();
-        return game.getScoreBoard();
+    public void disconnect() throws IOException {
+        ois.close();
+        oos.close();
+        socket.close();
     }
-}*/
+
+    public void sendMessage(Object message) throws IOException {
+        oos.writeObject(message);
+        oos.flush();
+    }
+
+    public Object receiveMessage() throws ClassNotFoundException, IOException {
+        Object message = ois.readObject();
+        return message;
+    }
+}

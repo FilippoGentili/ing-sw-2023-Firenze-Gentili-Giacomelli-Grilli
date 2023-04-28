@@ -1,21 +1,55 @@
 package it.polimi.ingsw.network.server;
 
-import it.polimi.ingsw.network.Match;
-
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class SocketServer {
-    public static void main(String[] args) {
+    private int port;
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
+
+    public SocketServer(int port) {
+        this.port = port;
+    }
+
+    public void start() {
         try {
-            MatchImpl match = new MatchImpl();
-            Match stub = (Match) UnicastRemoteObject.exportObject(match, 0);
-            Registry registry = LocateRegistry.createRegistry(1099);
-            registry.bind("Game", stub);
-            System.out.println("Server ready");
-        } catch (Exception e) {
-            System.err.println("Server exception: " + e.toString());
+            serverSocket = new ServerSocket(port);
+            clientSocket = serverSocket.accept();
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessage(Object message) {
+        try {
+            out.writeObject(message);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Object receiveMessage() {
+        try {
+            return in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void close() {
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
