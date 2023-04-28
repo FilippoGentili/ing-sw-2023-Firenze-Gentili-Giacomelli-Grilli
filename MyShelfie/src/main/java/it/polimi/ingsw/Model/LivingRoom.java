@@ -11,7 +11,7 @@ public class LivingRoom{
     private final int rows = 9;
     private final int columns = 9;
 
-    private final String SERVER_NAME = "server";
+    private final String SERVER_NAME = "Server";
 
     /**
      * private constructor because of the singleton pattern
@@ -22,7 +22,7 @@ public class LivingRoom{
     }
 
     /**
-     * @return the name server, is used in the reply messages
+     * @return the name Server, is used in the reply messages
      */
     public String getServerName(){
         return SERVER_NAME;
