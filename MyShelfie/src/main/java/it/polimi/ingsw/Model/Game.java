@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-//import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 
 public class Game {

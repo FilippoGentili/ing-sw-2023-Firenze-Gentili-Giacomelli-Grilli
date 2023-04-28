@@ -1,9 +1,7 @@
 package it.polimi.ingsw.network.client;
 
-import java.rmi.Naming;
-import java.rmi.registry.Registry;
-import java.util.Scanner;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 public class RMIClient {
     Registry registry = LocateRegistry.getRegistry(ip);
