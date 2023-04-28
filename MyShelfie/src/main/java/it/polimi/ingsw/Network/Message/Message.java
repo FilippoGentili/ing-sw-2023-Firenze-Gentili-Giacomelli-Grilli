@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public abstract class Message {
     private final String nickname;
