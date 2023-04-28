@@ -5,4 +5,6 @@ public interface View {
     void EnterNickname();
 
     void showCurrentPlayer();
+
+    void showMessage(String message);
 }

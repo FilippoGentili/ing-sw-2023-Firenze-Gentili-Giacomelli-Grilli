@@ -11,4 +11,9 @@ public class VirtualView implements View {
     public void showCurrentPlayer() {
 
     }
+
+    @Override
+    public void showMessage(String message) {
+        //send message tramite client handler all'interno di Server
+    }
 }
