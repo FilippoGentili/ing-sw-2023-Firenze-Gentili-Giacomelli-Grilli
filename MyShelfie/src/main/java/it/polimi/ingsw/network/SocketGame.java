@@ -20,4 +20,6 @@ public class SocketGame {
         server.sendMessage(message);
     }
 
+}
+
 
