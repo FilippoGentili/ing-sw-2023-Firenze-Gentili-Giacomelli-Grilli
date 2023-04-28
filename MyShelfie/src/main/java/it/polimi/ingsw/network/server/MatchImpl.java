@@ -34,4 +34,9 @@ public class MatchImpl extends UnicastRemoteObject implements Match {
     public String getWinner() throws RemoteException {
         return null;
     }
+
+    @Override
+    public void startGame() throws RemoteException {
+
+    }
 }

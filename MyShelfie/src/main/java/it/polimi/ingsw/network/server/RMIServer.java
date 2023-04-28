@@ -8,13 +8,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIServer extends UnicastRemoteObject implements Match {
+/*public class RMIServer extends UnicastRemoteObject implements Match {
     protected RMIServer() throws RemoteException {
 
         super();
 
     }
-
     @Override
     public void addPlayer(String nickname) throws RemoteException{
 
@@ -39,4 +38,4 @@ public class RMIServer extends UnicastRemoteObject implements Match {
         Game game = new Game();
         return game.getScoreBoard();
     }
-}
+}*/

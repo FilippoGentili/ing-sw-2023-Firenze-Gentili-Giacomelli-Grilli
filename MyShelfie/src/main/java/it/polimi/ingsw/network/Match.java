@@ -9,5 +9,5 @@ public interface Match extends Remote {
     public void selectTile(int row, int col) throws RemoteException;
     public boolean gameOver() throws RemoteException;
     public String getWinner() throws  RemoteException;
-
+    public void startGame() throws RemoteException;
 }
