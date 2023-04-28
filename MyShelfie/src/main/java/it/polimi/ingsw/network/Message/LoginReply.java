@@ -25,4 +25,6 @@ public class LoginReply extends Message{
     public boolean isNicknameAccepted(){
         return nicknameAccepted;
     }
+
+
 }

@@ -20,4 +20,5 @@ public class GenericMessage extends Message{
     public String toString(){
         return " " + getNickname() + " : " + getMessage();
     }
+
 }
