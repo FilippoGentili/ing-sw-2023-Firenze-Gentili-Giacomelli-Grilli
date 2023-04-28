@@ -169,6 +169,8 @@ public class Bookshelf {
     }
 
 
+
+
     /**
      * Set a tile in a given position
      * Use only for testing!
@@ -181,5 +183,22 @@ public class Bookshelf {
         tile.setRow(i);
         tile.setCol(j);
         shelf[i][j]=tile;
+    }
+
+    public int getMaxPossibleTiles(){
+        int max=0;
+        int curr=0;
+        for(int i=0; i<columns; i++){
+            for(int j=0; j<rows; j++){
+                curr=0;
+                if(isEmpty(i, j))
+                    curr++;
+            }
+            if(curr>max)
+                max=curr;
+        }
+        if(max>=3)
+            return 3;
+        else return max;
     }
 }
