@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class TurnController1 {
 
-    private GameController gameController;
+    private GameController gameController; //prova
     private Map<Player, VirtualView> virtualViewMap;
 
     public TurnController(GameController gameController, Map<Player, VirtualView> virtualViewMap){
