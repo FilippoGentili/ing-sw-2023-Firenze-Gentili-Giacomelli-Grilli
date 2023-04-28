@@ -4,7 +4,7 @@ import it.polimi.ingsw.Model.Player;
 
 public class GameController1 {
 
-    private Game game;
+    private Game game; //prova
     private final int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
