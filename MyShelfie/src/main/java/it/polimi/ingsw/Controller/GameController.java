@@ -2,9 +2,9 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
-public class GameController1 {
+public class GameController {
 
-    private Game game; //prova
+    private Game game;
     private final int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
