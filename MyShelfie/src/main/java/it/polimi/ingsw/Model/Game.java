@@ -11,12 +11,19 @@ public class Game {
     private static CommonGoalCard CommonGoal1, CommonGoal2;
 
     private static LivingRoom living;
+    private final String SERVER_NAME = "Server";
 
     public Game() {
         listOfPlayers = new ArrayList<>();
         this.initializeLivingRoom();
     }
 
+    /**
+     * @return the name Server, is used in the reply messages
+     */
+    public static String getServerName(){
+        return SERVER_NAME;
+    }
     /**
      * the next player of the list becomes the current player and the state is set to start
      *

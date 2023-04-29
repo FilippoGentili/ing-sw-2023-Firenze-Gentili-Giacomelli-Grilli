@@ -1,6 +1,6 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
-import it.polimi.ingsw.Model.LivingRoom;
+import it.polimi.ingsw.Model.Game;
 
 public class LoginReply extends Message{
 
@@ -13,7 +13,7 @@ public class LoginReply extends Message{
      * @param successfulAccess
      */
     public LoginReply(boolean nicknameAccepted, boolean successfulAccess) {
-        super(LivingRoom.getInstance().getServerName(), MessageType.LOGIN_REPLY);
+        super(Game.getServerName(), MessageType.LOGIN_REPLY);
         this.nicknameAccepted=nicknameAccepted;
         this.successfulAccess=successfulAccess;
     }

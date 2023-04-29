@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public enum MessageType {
     LOGIN_REQUEST,
@@ -10,14 +10,12 @@ public enum MessageType {
     DISCONNECTION_REPLY,
     PING,
     ACK,
-    TILES_REQUEST,
+    CHOSEN_TILES_REQUEST,
     INSERT_TILES,
     COLUMN_REQUEST,
     COLUMN,
     UPDATE_POINTS,
     GENERIC_MESSAGE,
     WINNER
-
-
 
 }
