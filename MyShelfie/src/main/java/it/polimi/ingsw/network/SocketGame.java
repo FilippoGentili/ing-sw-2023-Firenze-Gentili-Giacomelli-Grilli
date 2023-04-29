@@ -1,7 +1,7 @@
-package it.polimi.ingsw.network;
+package it.polimi.ingsw.Network;
 
-import it.polimi.ingsw.network.client.SocketClient;
-import it.polimi.ingsw.network.server.SocketServer;
+import it.polimi.ingsw.Network.Client.SocketClient;
+import it.polimi.ingsw.Network.Server.SocketServer;
 
 public class SocketGame {
     private SocketServer server;
