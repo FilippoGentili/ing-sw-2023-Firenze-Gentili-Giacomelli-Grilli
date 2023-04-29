@@ -1,11 +1,11 @@
-package it.polimi.ingsw.Network.Message;
+package it.polimi.ingsw.network.Message;
 
 public abstract class Message {
     private final String nickname;
     private final MessageType type;
 
-    public Message(String username, MessageType messageType){
-        this.nickname = username;
+    public Message(String nickname, MessageType messageType){
+        this.nickname = nickname;
         this.type=messageType;
     }
 

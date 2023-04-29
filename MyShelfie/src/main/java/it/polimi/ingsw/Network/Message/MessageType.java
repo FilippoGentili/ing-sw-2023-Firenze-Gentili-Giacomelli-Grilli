@@ -1,11 +1,11 @@
-package it.polimi.ingsw.Network.Message;
+package it.polimi.ingsw.network.Message;
 
 public enum MessageType {
     LOGIN_REQUEST,
     LOGIN_REPLY,
-    NUM_OF_PLAYERS_REQUEST,
-    NUM_OF_PLAYERS_REPLY,
-    PICK_FIRST_PLAYER,
+    NUM_OF_PLAYERS_REQUEST, //serve?
+    NUM_OF_PLAYERS_REPLY, //serve?
+    PICK_FIRST_PLAYER, //serve?
     DISCONNECTION_REQUEST,
     DISCONNECTION_REPLY,
     PING,

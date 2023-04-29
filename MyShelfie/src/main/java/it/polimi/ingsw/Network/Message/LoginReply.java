@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Message;
+package it.polimi.ingsw.network.Message;
 
 import it.polimi.ingsw.Model.LivingRoom;
 

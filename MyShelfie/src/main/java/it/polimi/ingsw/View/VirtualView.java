@@ -16,4 +16,13 @@ public class VirtualView implements View {
     public void showMessage(String message) {
         //send message tramite client handler all'interno di Server
     }
+
+    public void loginResult(){
+        //da gestire sempre con clientHandler
+    }
+
+    @Override
+    public void TilesRequest() {
+
+    }
 }
