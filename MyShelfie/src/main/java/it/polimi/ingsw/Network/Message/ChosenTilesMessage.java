@@ -17,4 +17,9 @@ public class ChosenTilesMessage extends Message {
         return chosenTiles;
     }
 
+    @Override
+    public String toString(){
+        return "" + getNickname() + " has chosen the following tiles " + getChosenTiles();
+    }
+
 }

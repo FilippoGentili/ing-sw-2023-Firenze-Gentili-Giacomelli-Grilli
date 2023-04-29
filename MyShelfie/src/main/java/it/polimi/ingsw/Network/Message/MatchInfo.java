@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Player;
 import java.util.ArrayList;
 
 public class MatchInfo extends Message{
+    private static final long serialVersionUID = 6955347987257164619L;
     private final String ActivePlayer;
     private final ArrayList<Player> players;
     public MatchInfo(String nickname, ArrayList<Player> players) {
