@@ -191,7 +191,7 @@ public class Bookshelf {
         for(int i=0; i<columns; i++){
             for(int j=0; j<rows; j++){
                 curr=0;
-                if(isEmpty(i, j))
+                if(isEmpty(j, i))
                     curr++;
             }
             if(curr>max)
@@ -200,5 +200,22 @@ public class Bookshelf {
         if(max>=3)
             return 3;
         else return max;
+    }
+
+    public ArrayList<Integer> getFreeColumns(int size){
+        ArrayList<Integer> col = new ArrayList<>();
+        int curr;
+
+        for(int i=0; i<columns; i++){
+            curr=0;
+            for(int j=0; j<rows; j++){
+                if(isEmpty(j, i))
+                    curr++;
+            }
+            if(curr>=size)
+                col.add(i);
+        }
+
+        return col;
     }
 }

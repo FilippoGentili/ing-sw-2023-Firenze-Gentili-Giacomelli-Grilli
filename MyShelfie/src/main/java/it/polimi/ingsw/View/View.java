@@ -10,6 +10,8 @@ public interface View {
     void NicknameRequest();
     void loginResult(boolean result);
     void askNumberOfPlayers();
+
+    void columnRequest();
     void TilesRequest(ArrayList<Tile> chosenTiles);
 
     void showCurrentPlayer();
