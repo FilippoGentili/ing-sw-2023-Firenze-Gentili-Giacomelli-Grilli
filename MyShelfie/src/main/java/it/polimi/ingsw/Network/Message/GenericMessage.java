@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Network.Message;
 
 public class GenericMessage extends Message{
+
+    private static final long serialVersionUID = -4683872130244249855L;
     private final String message;
 
     /**

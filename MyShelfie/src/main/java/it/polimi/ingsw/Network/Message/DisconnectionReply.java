@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Message;
 import it.polimi.ingsw.Model.Game;
 
 public class DisconnectionReply extends Message{
+    private static final long serialVersionUID = -1754601960629355380L;
     /**
      * The server lets the other player know a player has left the game
      */

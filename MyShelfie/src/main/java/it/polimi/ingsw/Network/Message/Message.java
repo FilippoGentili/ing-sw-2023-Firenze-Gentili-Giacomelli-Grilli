@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Network.Message;
 
-public abstract class Message {
+import java.io.Serializable;
+
+public abstract class Message implements Serializable {
+    private static final long serialVersionUID = -4873567285652677918L;
     private final String nickname;
     private final MessageType type;
 
@@ -23,3 +26,11 @@ public abstract class Message {
     }
 
 }
+
+/* In socket client e socket server aggiungere:
+    private final ObjectOutputStream outputStream;
+    private final ObjectInputStream inputStream;
+
+    this.outputStm = new ObjectOutputStream(socket.getOutputStream());
+    this.inputStm = new ObjectInputStream(socket.getInputStream());
+ */

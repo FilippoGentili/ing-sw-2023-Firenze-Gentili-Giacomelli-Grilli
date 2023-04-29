@@ -4,7 +4,6 @@ public enum MessageType {
     LOGIN_REQUEST,
     LOGIN_REPLY,
     NUM_OF_PLAYERS_REQUEST, //serve?
-    NUM_OF_PLAYERS_REPLY, //serve?
     PICK_FIRST_PLAYER, //serve?
     DISCONNECTION_REQUEST,
     DISCONNECTION_REPLY,
@@ -13,7 +12,7 @@ public enum MessageType {
     CHOSEN_TILES_REQUEST,
     INSERT_TILES,
     COLUMN_REQUEST,
-    COLUMN,
+    COLUMN_REPLY,
     UPDATE_POINTS,
     GENERIC_MESSAGE,
     WINNER

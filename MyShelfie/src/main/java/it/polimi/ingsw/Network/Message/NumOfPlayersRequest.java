@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Message;
 
 public class NumOfPlayersRequest extends Message{
+    private static final long serialVersionUID = -6565070052540678653L;
     private final int numOfPlayers;
 
     /**
