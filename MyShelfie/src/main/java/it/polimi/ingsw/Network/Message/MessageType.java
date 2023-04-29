@@ -15,5 +15,6 @@ public enum MessageType {
     COLUMN_REPLY,
     UPDATE_POINTS,
     GENERIC_MESSAGE,
-    WINNER
+    WINNER,
+    MATCH_INFO
 }
