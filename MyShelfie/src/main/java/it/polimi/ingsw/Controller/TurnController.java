@@ -61,7 +61,9 @@ public class TurnController {
     }
 
     public void chooseTiles(){
-        Player player = gameController.getCurrentPlayer();
+        ArrayList<Tile> chosenTiles = new ArrayList<>();
+
+        virtualViewMap.get(currentPlayer).TilesRequest(chosenTiles);
     }
 
     public void turnMessage(String message){

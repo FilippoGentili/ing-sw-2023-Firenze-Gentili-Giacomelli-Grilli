@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Map;
 public class GameController {
 
     private Game game;
+    private GameState gameState;
     private final int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
@@ -32,13 +35,30 @@ public class GameController {
         else return false;
     }
 
-    public void addPlayer(String nickname){
+    public void handleLogin(String nickname, VirtualView vv){
+        Player player = new Player();
+        vv.NicknameRequest();
+
+        if(virtualViewMap.isEmpty()){
+            player.setNickname(nickname);
+            game.addPlayer(player);
+            virtualViewMap.put(player,vv);
+
+            vv.loginResult(true);
+            vv.askNumberOfPlayers();
+
+        }else{
+
+        }
+    }
+
+    /*public void addPlayer(String nickname){
         Player player = new Player();
         player.setNickname(nickname);
         VirtualView vv = new VirtualView();
         virtualViewMap.put(player,vv);
         game.addPlayer(player);
-    }
+    }*/
 
     public Player getCurrentPlayer() {
         return currentPlayer;
@@ -46,6 +66,12 @@ public class GameController {
 
     public Game getGame() {
         return game;
+    }
+
+    public void HandleMessage(Message message){
+        if(gameState==GameState.LOGIN){
+
+        }
     }
 
     public void startGame(){
@@ -59,6 +85,11 @@ public class GameController {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public boolean waitingForPlayers(){
+        if(gameState == GameState.LOGIN) return true;
+        else return false;
     }
     /*gestione list of player
     dobbiamo far partire il game quando il numero dei giocatori è uguale al numero stabilito per la partita

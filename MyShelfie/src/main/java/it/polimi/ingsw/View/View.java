@@ -1,11 +1,16 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Model.Tile;
+
+import java.util.ArrayList;
+
 public interface View {
 
     void showMessage(String message);
-    void EnterNickname();
-    void loginResult();
-    void TilesRequest();
+    void NicknameRequest();
+    void loginResult(boolean result);
+    void askNumberOfPlayers();
+    void TilesRequest(ArrayList<Tile> chosenTiles);
 
     void showCurrentPlayer();
 }

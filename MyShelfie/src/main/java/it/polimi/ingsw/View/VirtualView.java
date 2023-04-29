@@ -1,9 +1,13 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Model.Tile;
+
+import java.util.ArrayList;
+
 public class VirtualView implements View {
 
     @Override
-    public void EnterNickname() {
+    public void NicknameRequest() {
 
     }
 
@@ -17,12 +21,17 @@ public class VirtualView implements View {
         //send message tramite client handler all'interno di Server
     }
 
-    public void loginResult(){
+    public void loginResult(boolean result){
         //da gestire sempre con clientHandler
     }
 
     @Override
-    public void TilesRequest() {
+    public void askNumberOfPlayers() {
+
+    }
+
+    @Override
+    public void TilesRequest(ArrayList<Tile> chosenTiles) {
 
     }
 }

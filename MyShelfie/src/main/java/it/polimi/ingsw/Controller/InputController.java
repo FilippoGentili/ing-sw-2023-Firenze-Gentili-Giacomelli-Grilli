@@ -3,7 +3,7 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.View.VirtualView;
-import it.polimi.ingsw.network.Message.*;
+import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Model.Tile;
 
 import java.util.ArrayList;
@@ -30,17 +30,19 @@ public class InputController {
     public boolean checkNickname(String nickname, View view){
         if(nickname.isEmpty()){
             view.showMessage("nickname missing");
-            view.loginResult();
+            view.loginResult(false);
             return false;
         }
 
         for(Map.Entry<Player, VirtualView> map : gameController.getVirtualViewMap().entrySet()){
             if(nickname.equals(map.getKey().getNickname())){
                 view.showMessage("this nickname is already used");
-                view.loginResult();
+                view.loginResult(false);
                 return false;
             }
         }
+
+        view.loginResult(true);
         return true;
     }
 
@@ -58,7 +60,8 @@ public class InputController {
 
         if(chosenTiles.size() > max){
             virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("You can't choose so many tiles");
-            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest();
+            ArrayList<Tile> otherTiles = new ArrayList<>();
+            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(otherTiles);
             return false;
         }
 
