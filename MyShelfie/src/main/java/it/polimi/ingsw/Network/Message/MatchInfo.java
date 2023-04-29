@@ -6,16 +6,16 @@ import java.util.ArrayList;
 
 public class MatchInfo extends Message{
     private static final long serialVersionUID = 6955347987257164619L;
-    private final String ActivePlayer;
+    private final String activePlayer;
     private final ArrayList<Player> players;
-    public MatchInfo(String nickname, ArrayList<Player> players) {
+    public MatchInfo(String nickname, ArrayList<Player> players, String activePlayer) {
         super(nickname, MessageType.MATCH_INFO);
-        this.ActivePlayer = nickname;
+        this.activePlayer = activePlayer;
         this.players = players;
     }
 
     public String getActivePlayer() {
-        return ActivePlayer;
+        return activePlayer;
     }
 
     public ArrayList<Player> getPlayers(){
@@ -24,6 +24,6 @@ public class MatchInfo extends Message{
 
     @Override
     public String toString(){
-        return "" + getActivePlayer() + "is the active player, the other players are " + getPlayers();
+        return "" + "is asking for info: " + getActivePlayer() + "is the active player, the other players are " + getPlayers();
     }
 }
