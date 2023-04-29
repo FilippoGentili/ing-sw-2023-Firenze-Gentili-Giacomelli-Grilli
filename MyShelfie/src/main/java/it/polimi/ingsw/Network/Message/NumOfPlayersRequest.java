@@ -1,10 +1,10 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public class NumOfPlayersRequest extends Message{
     private final int numOfPlayers;
 
     /**
-     * Message from the client to the server to communicate the number of players of the match the user wants to play in,
+     * Message from the Client to the Server to communicate the number of players of the match the user wants to play in,
      * or the match the player wants to create
      * @param username
      * @param num

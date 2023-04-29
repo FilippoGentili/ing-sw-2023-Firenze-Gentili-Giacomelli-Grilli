@@ -14,6 +14,8 @@ public class Player {
     private boolean Pointscg1 = false;
     private boolean Pointscg2 = false;
 
+    private static ArrayList<Tile> chosenTiles = new ArrayList<>();
+
     /*This method asks the user to choose a Nickname
     public String chooseNickname(){
         Scanner scanner = new Scanner(System.in);
@@ -182,6 +184,19 @@ public class Player {
      */
     public void setPointscg2(){
         this.Pointscg2=true;
+    }
+
+    public void drawTile(int i, int j){
+        chosenTiles.add(getGame().getLivingRoom().pickTile(i, j));
+    }
+
+    public ArrayList<Tile> getChosenTiles(){
+        return chosenTiles;
+    }
+
+
+    public void insertTiles(ArrayList<Tile> chosen, int column){
+        getBookshelf().insertTiles(chosenTiles, column);
     }
 
 }

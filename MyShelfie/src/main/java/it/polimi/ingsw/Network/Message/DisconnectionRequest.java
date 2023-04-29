@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public class DisconnectionRequest extends Message{
     private final String disconnectedUser;
@@ -10,6 +10,10 @@ public class DisconnectionRequest extends Message{
 
     public String getDisconnectedUser(){
         return disconnectedUser;
+    }
+
+    public String toString(){
+        return " " + getDisconnectedUser() + " wants to quit the game";
     }
 
 }

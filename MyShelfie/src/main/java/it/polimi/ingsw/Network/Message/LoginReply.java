@@ -8,7 +8,7 @@ public class LoginReply extends Message{
     private final boolean successfulAccess;
 
     /**
-     * Message used to respond to a login request from the server to the client
+     * Message used to respond to a login request from the Server to the Client
      * @param nicknameAccepted
      * @param successfulAccess
      */

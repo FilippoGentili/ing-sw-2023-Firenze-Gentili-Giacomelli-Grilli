@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.View.VirtualView;
+
+import java.util.Map;
 
 public class GameController {
 
@@ -8,10 +11,15 @@ public class GameController {
     private final int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
+    private TurnController turnController;
+    private InputController inputController;
+    private Map<Player, VirtualView> virtualViewMap;
 
     public GameController(int num){
         this.game = new Game();
         this.numOfPlayers = num;
+        this.turnController = new TurnController(this,virtualViewMap);
+        this.inputController = new InputController(this,virtualViewMap);
     }
 
     public int getNumOfPlayers(){
@@ -27,6 +35,8 @@ public class GameController {
     public void addPlayer(String nickname){
         Player player = new Player();
         player.setNickname(nickname);
+        VirtualView vv = new VirtualView();
+        virtualViewMap.put(player,vv);
         game.addPlayer(player);
     }
 
@@ -38,6 +48,18 @@ public class GameController {
         return game;
     }
 
+    public void startGame(){
+        firstPlayer = game.pickFirstPlayer();
+        currentPlayer = firstPlayer;
+    }
+
+    public Map<Player,VirtualView> getVirtualViewMap(){
+        return virtualViewMap;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
     /*gestione list of player
     dobbiamo far partire il game quando il numero dei giocatori è uguale al numero stabilito per la partita
 
