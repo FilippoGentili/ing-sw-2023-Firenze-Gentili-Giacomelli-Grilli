@@ -24,6 +24,6 @@ public class MatchInfo extends Message{
 
     @Override
     public String toString(){
-        return "" + "is asking for info: " + getActivePlayer() + "is the active player, the other players are " + getPlayers();
+        return "" + getNickname() + "is asking for info: " + getActivePlayer() + "is the active player, the other players are " + getPlayers();
     }
 }
