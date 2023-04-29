@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServer extends MatchImpl {
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         try{
             MatchImpl obj = new MatchImpl();
             Registry registry = LocateRegistry.createRegistry(1099);
@@ -19,9 +19,7 @@ public class RMIServer extends MatchImpl {
 
 
 
-        }catch (RemoteException e) {
-            throw new RuntimeException(e);
-        } catch (MalformedURLException e) {
+        }catch (RemoteException | MalformedURLException e) {
             throw new RuntimeException(e);
         }
 
