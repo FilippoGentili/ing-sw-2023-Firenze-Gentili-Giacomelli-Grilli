@@ -11,7 +11,7 @@ public class Game {
     private static CommonGoalCard CommonGoal1, CommonGoal2;
 
     private static LivingRoom living;
-    private final String SERVER_NAME = "Server";
+    private static final String SERVER_NAME = "Server";
 
     public Game() {
         listOfPlayers = new ArrayList<>();

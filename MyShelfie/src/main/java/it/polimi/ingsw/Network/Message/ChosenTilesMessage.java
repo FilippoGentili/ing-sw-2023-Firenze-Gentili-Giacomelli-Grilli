@@ -15,4 +15,5 @@ public class ChosenTilesMessage extends Message {
     public ArrayList<Tile> getChosenTiles() {
         return chosenTiles;
     }
+
 }

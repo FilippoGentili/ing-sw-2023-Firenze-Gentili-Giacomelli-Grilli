@@ -23,5 +23,4 @@ public class NumOfPlayersRequest extends Message{
         return " "+ getNickname() +" wants to play with " + getNumOfPlayers() + " players";
     }
 
-
 }

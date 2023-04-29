@@ -26,5 +26,4 @@ public class LoginReply extends Message{
         return nicknameAccepted;
     }
 
-
 }

@@ -17,5 +17,4 @@ public enum MessageType {
     UPDATE_POINTS,
     GENERIC_MESSAGE,
     WINNER
-
 }

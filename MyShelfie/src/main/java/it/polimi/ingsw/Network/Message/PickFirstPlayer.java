@@ -17,5 +17,4 @@ public class PickFirstPlayer extends Message{
         return " " + getFirstPlayer() + " is the first player";
     }
 
-
 }

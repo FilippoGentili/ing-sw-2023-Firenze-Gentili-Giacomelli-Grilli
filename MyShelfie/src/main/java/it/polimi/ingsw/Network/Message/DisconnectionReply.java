@@ -20,5 +20,4 @@ public class DisconnectionReply extends Message{
         return " " + getDisconnectedUser() + " is leaving the game";
     }
 
-
 }

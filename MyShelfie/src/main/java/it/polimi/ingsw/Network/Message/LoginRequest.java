@@ -13,5 +13,4 @@ public class LoginRequest extends Message{
         return "LoginRequest from: " + getNickname();
     }
 
-
 }

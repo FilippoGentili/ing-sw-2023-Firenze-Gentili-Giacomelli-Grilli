@@ -22,6 +22,4 @@ public abstract class Message {
         return "Message from: "+ nickname + ", of type: " + type + "}";
     }
 
-
-
 }

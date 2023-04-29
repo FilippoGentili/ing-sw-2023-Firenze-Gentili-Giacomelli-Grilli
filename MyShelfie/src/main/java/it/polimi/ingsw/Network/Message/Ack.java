@@ -9,4 +9,5 @@ public class Ack extends Message{
     public Ack() {
         super(Game.getServerName(), MessageType.ACK);
     }
+
 }
