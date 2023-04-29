@@ -51,7 +51,7 @@ public class InputController {
      * @param message message from the client
      * @return {code @true} if the tiles are valid {code @false} if the tiles are invalid.
      */
-    public boolean LivingRoomChosenTiles(Message message){
+    public boolean livingRoomChosenTiles(Message message){
 
         ChosenTilesMessage chosen = (ChosenTilesMessage) message;
         ArrayList<Tile> chosenTiles = chosen.getChosenTiles();
@@ -62,7 +62,7 @@ public class InputController {
             virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("You can't choose so many tiles");
             ArrayList<Tile> otherTiles = new ArrayList<>();
             virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(otherTiles);
-            return false;
+            return false;       //ma qui è giusto ritornare false dopo aver fatto una seconda TilesRequest??
         }
 
         boolean valid = gameController.getGame().getLivingRoom().checkValid(chosenTiles);
@@ -73,6 +73,12 @@ public class InputController {
 
         return true;
     }
+
+    public boolean selectedColumn(Message message){
+
+    }
+
+
     //chiama gameController
 
 }

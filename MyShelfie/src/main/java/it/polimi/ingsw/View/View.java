@@ -12,6 +12,7 @@ public interface View {
     void askNumberOfPlayers();
 
     void columnRequest();
+
     void TilesRequest(ArrayList<Tile> chosenTiles);
 
     void showCurrentPlayer();

@@ -7,6 +7,8 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.util.Map;
 
+import static it.polimi.ingsw.Model.GameState.*;
+
 public class GameController {
 
     private Game game;
@@ -74,7 +76,15 @@ public class GameController {
         }
     }
 
+    public void setGameState(GameState gameState){
+        this.gameState = gameState;
+    }
+
     public void startGame(){
+        setGameState(PLAY);
+    }
+
+    public void setupGame(){
         firstPlayer = game.pickFirstPlayer();
         currentPlayer = firstPlayer;
     }

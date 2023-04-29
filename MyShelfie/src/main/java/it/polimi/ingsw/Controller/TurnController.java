@@ -3,6 +3,8 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Start;
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Message.ChosenTilesMessage;
+import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.util.ArrayList;
@@ -64,6 +66,13 @@ public class TurnController {
         ArrayList<Tile> chosenTiles = new ArrayList<>();
 
         virtualViewMap.get(currentPlayer).TilesRequest(chosenTiles);
+    }
+
+    public void chosenTiles(Message message){
+        ChosenTilesMessage chosenTilesMessage = (ChosenTilesMessage) message;
+        ArrayList<Tile> chosen = chosenTilesMessage.getChosenTiles();
+
+
     }
 
     public void turnMessage(String message){

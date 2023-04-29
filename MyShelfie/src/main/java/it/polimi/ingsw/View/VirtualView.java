@@ -31,6 +31,11 @@ public class VirtualView implements View {
     }
 
     @Override
+    public void columnRequest() {
+
+    }
+
+    @Override
     public void TilesRequest(ArrayList<Tile> chosenTiles) {
 
     }
