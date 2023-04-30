@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import it.polimi.ingsw.Model.State;
 import it.polimi.ingsw.Network.Message.Message;
 
 public class RMIClient implements MatchClient {
@@ -18,13 +19,22 @@ public class RMIClient implements MatchClient {
         registry.rebind("client", client);
     }
 
-    @Override
+
     public void receiveMessage(Message message) throws RemoteException {
         // implementazione del metodo per ricevere i messaggi dal server
     }
 
-    @Override
+
     public void sendMessage(Message message) throws RemoteException {
         // implementazione del metodo per inviare i messaggi al server
+    }
+
+    public void update(Message message) throws RemoteException{
+    }
+
+    public void updateState(State state) throws RemoteException{
+    }
+
+    public void notifyDisconnection() throws RemoteException{
     }
 }
