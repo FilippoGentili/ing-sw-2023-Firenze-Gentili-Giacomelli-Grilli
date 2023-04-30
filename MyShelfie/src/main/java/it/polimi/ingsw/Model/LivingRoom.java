@@ -21,6 +21,10 @@ public class LivingRoom extends Observable {
         valid = new boolean[rows][columns];
     }
 
+    public Tile[][] getBoard(){
+        return board;
+    }
+
     /**
      * Method to get the instance of the singleton
      * @return the instance of the livingroom

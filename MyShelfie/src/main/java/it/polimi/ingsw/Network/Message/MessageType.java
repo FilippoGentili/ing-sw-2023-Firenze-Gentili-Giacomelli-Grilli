@@ -16,5 +16,6 @@ public enum MessageType {
     UPDATE_POINTS,
     GENERIC_MESSAGE,
     WINNER,
-    MATCH_INFO
+    MATCH_INFO,
+    LIVING_ROOM
 }
