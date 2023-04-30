@@ -30,19 +30,19 @@ public class InputController {
     public boolean checkNickname(String nickname, View view){
         if(nickname.isEmpty()){
             view.showMessage("nickname missing");
-            view.loginResult(false);
+            view.loginResult(false, false, nickname);
             return false;
         }
 
         for(Map.Entry<Player, VirtualView> map : gameController.getVirtualViewMap().entrySet()){
             if(nickname.equals(map.getKey().getNickname())){
                 view.showMessage("this nickname is already used");
-                view.loginResult(false);
+                view.loginResult(false, false, nickname;
                 return false;
             }
         }
 
-        view.loginResult(true);
+        view.loginResult(true, true, nickname);
         return true;
     }
 

@@ -6,7 +6,7 @@ import it.polimi.ingsw.Model.Tile;
 
 import java.util.ArrayList;
 
-public interface ViewObserver {
+public interface ViewObserver{
 
     void updateServerInfo(/*Map<String, String> serverInfo*/);
 

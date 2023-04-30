@@ -8,7 +8,7 @@ public interface View {
 
     void showMessage(String message);
     void NicknameRequest();
-    void loginResult(boolean result);
+    void loginResult(boolean validNickname, boolean connection, String nickname);
     void askNumberOfPlayers();
 
     void columnRequest();

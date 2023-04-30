@@ -1,10 +1,17 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Observer.Observer;
 
 import java.util.ArrayList;
 
-public class VirtualView implements View {
+public class VirtualView implements View, Observer {
+
+    @Override
+    public void update(Message message) {
+
+    }
 
     @Override
     public void NicknameRequest() {
@@ -21,9 +28,7 @@ public class VirtualView implements View {
         //send message tramite client handler all'interno di Server
     }
 
-    public void loginResult(boolean result){
-        //da gestire sempre con clientHandler
-    }
+
 
     @Override
     public void askNumberOfPlayers() {
@@ -37,6 +42,11 @@ public class VirtualView implements View {
 
     @Override
     public void TilesRequest(ArrayList<Tile> chosenTiles) {
+
+    }
+
+    @Override
+    public void loginResult(boolean validNickname, boolean connection, String nickname) {
 
     }
 }

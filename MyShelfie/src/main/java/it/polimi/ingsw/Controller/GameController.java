@@ -37,9 +37,23 @@ public class GameController {
         else return false;
     }
 
+    public void addVirtualView(Player player, VirtualView vv){
+        virtualViewMap.put(player, vv);
+        game.addObserver(vv);
+        game.getLivingRoom().addObserver(vv);
+        player.getBookshelf().addObserver(vv);
+    }
+
+    public void removeVirtualView(Player player, VirtualView vv){
+        virtualViewMap.remove(player, vv);
+        game.removeObserver(vv);
+        game.getLivingRoom().removeObserver(vv);
+        player.getBookshelf().removeObserver(vv);
+    }
+
     public void handleLogin(String nickname, VirtualView vv){
         Player player = new Player();
-        vv.NicknameRequest();
+        player.setNickname(nickname);
 
         if(virtualViewMap.isEmpty()){
             player.setNickname(nickname);
