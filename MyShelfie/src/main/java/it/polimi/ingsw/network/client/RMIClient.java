@@ -6,26 +6,25 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Server.Match;
-import it.polimi.ingsw.Network.Server.MatchImpl;
 
-import java.util.Scanner;
-
-public class RMIClient extends MatchImpl {
+public class RMIClient implements MatchClient {
 
     public RMIClient() throws RemoteException {
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1");
-        MatchImpl client = (MatchImpl) registry.lookup("server");
-
+        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+        MatchClient client = new RMIClient();
+        registry.rebind("client", client);
     }
 
-    public void sendMessage(Message message){
-        //manda un messaggio al server
+    @Override
+    public void receiveMessage(Message message) throws RemoteException {
+        // implementazione del metodo per ricevere i messaggi dal server
     }
 
-
+    @Override
+    public void sendMessage(Message message) throws RemoteException {
+        // implementazione del metodo per inviare i messaggi al server
+    }
 }
-

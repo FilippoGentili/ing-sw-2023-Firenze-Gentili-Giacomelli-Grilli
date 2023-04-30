@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * by server. Methods which are invoked by the client
  */
 
-public interface Match extends Remote {
+public interface MatchServer extends Remote {
     void login() throws RemoteException;
     void nicknameRequest(String name) throws RemoteException;
     void connectClient(RMIClient client) throws RemoteException;

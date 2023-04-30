@@ -8,13 +8,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIServer extends MatchImpl {
+public class RMIServer{
 
     public static void main(String[] args){
         try{
-            MatchImpl obj = new MatchImpl();
+            MatchServerImpl obj = new MatchServerImpl();
+            MatchServer server/*stub*/ = (MatchServer) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
-            MatchImpl server = (MatchImpl) UnicastRemoteObject.exportObject(obj, 0);
             Naming.rebind("//Localhost/Server", server);
 
 
