@@ -17,5 +17,6 @@ public enum MessageType {
     GENERIC_MESSAGE,
     WINNER,
     MATCH_INFO,
-    LIVING_ROOM
+    LIVING_ROOM,
+    SERVER_INFO
 }
