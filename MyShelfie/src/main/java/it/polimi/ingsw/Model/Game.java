@@ -1,8 +1,11 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Observer.Observable;
+
 import java.util.*;
 
-public class Game {
+//le classi che estendono observable sono quelle che notificheranno l'evento all'esterno
+public class Game extends Observable {
     private static ArrayList<Player> listOfPlayers;
     private static Player currentPlayer;
     private static Player nextPlayer;

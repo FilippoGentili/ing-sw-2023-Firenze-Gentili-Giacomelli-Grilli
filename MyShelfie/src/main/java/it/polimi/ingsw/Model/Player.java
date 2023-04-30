@@ -1,8 +1,10 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Observer.Observable;
+
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends Observable {
     private String nickname;
     private State currentState;
     private int score;

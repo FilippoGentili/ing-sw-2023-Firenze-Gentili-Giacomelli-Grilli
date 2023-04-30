@@ -4,6 +4,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+
+import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Match;
 import it.polimi.ingsw.Network.Server.MatchImpl;
 

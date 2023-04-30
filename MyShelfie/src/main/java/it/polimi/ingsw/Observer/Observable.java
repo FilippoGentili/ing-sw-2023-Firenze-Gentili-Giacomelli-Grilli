@@ -4,6 +4,8 @@ import it.polimi.ingsw.Network.Message.Message;
 
 import java.util.ArrayList;
 
+//manda eventi
+
 public class Observable {
 
     public ArrayList<Observer> observers = new ArrayList<>();

@@ -1,12 +1,14 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Observer.Observable;
+
 import java.util.ArrayList;
 
 /**
  * Class Bookshelf
  * @author pheelaw
  */
-public class Bookshelf {
+public class Bookshelf extends Observable {
     private static Tile[][] shelf;
 
     private final int rows=6;

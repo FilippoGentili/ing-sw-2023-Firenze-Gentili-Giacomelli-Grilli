@@ -1,8 +1,10 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Observer.Observable;
+
 import java.util.ArrayList;
 
-public class LivingRoom{
+public class LivingRoom extends Observable {
 
     private static LivingRoom single_instance = null;
     private static int numberOfTiles=0;
