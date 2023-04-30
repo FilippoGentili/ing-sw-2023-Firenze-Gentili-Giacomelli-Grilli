@@ -1,0 +1,24 @@
+package it.polimi.ingsw.network.Message;
+
+public enum MessageType {
+    LOGIN_REQUEST,
+    LOGIN_REPLY,
+    NUM_OF_PLAYERS_REQUEST, //serve?
+    PICK_FIRST_PLAYER, //serve?
+    DISCONNECTION_REQUEST,
+    DISCONNECTION_REPLY,
+    PING,
+    ACK,
+    CHOSEN_TILES_REQUEST,
+    INSERT_TILES,
+    COLUMN_REQUEST,
+    COLUMN_REPLY,
+    UPDATE_POINTS,
+    GENERIC_MESSAGE,
+    WINNER,
+    MATCH_INFO,
+    LIVING_ROOM,
+    SERVER_INFO,
+    ORDERED_TILES
+}
+
