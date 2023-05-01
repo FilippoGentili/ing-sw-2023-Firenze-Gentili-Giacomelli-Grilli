@@ -14,21 +14,19 @@ import java.rmi.RemoteException;
 public interface MatchServer extends Remote {
 
 /**
- * Returns the connection status.
+ * connects the client to the server
  *
- * @return true if the client is still connected
  */
     void connectClient(RMIClient client) throws RemoteException;
 
     /**
-     * Disconnects from the client
+     * Disconnects the client from the server
      */
     void disconnectClient(RMIClient client) throws RemoteException;
 
     /**
      * Sends a message to the client
-     *
-     * @param message
+     * @param message that the server sends to the client
      */
     void sendMessage(Message message) throws RemoteException;
 }
