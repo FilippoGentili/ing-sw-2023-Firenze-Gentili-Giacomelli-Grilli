@@ -222,7 +222,7 @@ public class Cli extends ViewObservable implements View{
             }
         }while(!chosenTiles.toString().contains(input));
 
-        notif
+        notifyObserver(obs -> obs.updateOrderedTiles(orderedTiles));
     }
 
     @Override
@@ -258,4 +258,6 @@ public class Cli extends ViewObservable implements View{
         for(int i=1; i<=nicknames.size(); i++)
             System.out.println(i+") "+nicknames.get(i-1));
     }
+
+
 }

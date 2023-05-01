@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Tile;
 
@@ -24,4 +25,8 @@ public interface View {
     void showListOfPlayers(ArrayList<String> nicknames);
 
     void someoneDisconnected(String nickname);
+
+    void showLivingRoom(LivingRoom livingRoom);
+
+    void showBookshelf(Bookshelf bookshelf);
 }
