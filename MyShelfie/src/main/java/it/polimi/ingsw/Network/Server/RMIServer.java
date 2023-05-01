@@ -21,21 +21,18 @@ public class RMIServer{
             MatchServerImpl obj = new MatchServerImpl();
             MatchServer server/*stub*/ = (MatchServer) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
-            Naming.rebind("//Localhost/Server", server);
-
-
-
+            Naming.rebind("//localhost/MatchServer", server);
         }catch (RemoteException | MalformedURLException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public void addClient(MatchClientImpl matchClient) {
+    public void connectClient(MatchClientImpl matchClient) {
         clients.add(matchClient);
     }
 
-    public void removeClient(MatchClientImpl matchClient) {
+    public void disconnectClient(MatchClientImpl matchClient) {
         clients.remove(matchClient);
         System.out.println("A player has left the game");
     }
