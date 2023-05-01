@@ -12,7 +12,6 @@ public class Game extends Observable {
     private static Player winner;
     private static Player firstPlayer;
     private static CommonGoalCard CommonGoal1, CommonGoal2;
-
     private static LivingRoom living;
     private static final String SERVER_NAME = "Server";
 

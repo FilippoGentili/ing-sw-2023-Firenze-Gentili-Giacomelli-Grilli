@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static it.polimi.ingsw.Model.Game.endGameTrigger;
+import static it.polimi.ingsw.Model.Game.pickFirstPlayer;
 import static it.polimi.ingsw.Model.GameState.*;
 
 public class GameController {
@@ -24,20 +25,19 @@ public class GameController {
     private InputController inputController;
     private ArrayList<Player> players;
     private Map<Player, VirtualView> virtualViewMap;
-    private boolean lastTurn;
-    private boolean firstTurn;
+    private boolean lastRound = false;
+    private boolean firstTurn = true;
 
     public GameController(int num){
         this.game = new Game();
         this.numOfPlayers = num;
-        this.lastTurn = false;
-        this.firstTurn = true;
         this.turnController = new TurnController(this,virtualViewMap);
         this.inputController = new InputController(this,virtualViewMap);
     }
 
     public void startGame(){
         setGameState(PLAY);
+        currentPlayer = game.pickFirstPlayer();
         broadcastShowMessage("Game started!");
         newTurn();
     }
@@ -163,33 +163,50 @@ public class GameController {
         }
     }
 
+    /**
+     * this method handles the last actions of the turn: it checks if che current player has finished his bookshelf.
+     * If he has, "endGameTrigger" is called and the last round starts. If he hasn't, a new turn start with another player.
+     * If it already was the round, the method check if it was the last turn
+     */
     public void EndTurn(){
-        if(currentPlayer.getBookshelf().fullBookshelf()) {
-            for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()) {
-                map.getValue().showMessage("" + currentPlayer.getNickname() + " finished his bookshelf! Last Round!");
-            }
-            virtualViewMap.get(currentPlayer).showMessage("You earn one points for finishing your " +
-                                                          "bookshelf before the other players.");
-            endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
-            lastRound(); //da rivedere
-        }else{
-            virtualViewMap.get(currentPlayer).showMessage("Your turn ended.");
-            nextPlayer();
-            newTurn(); //da rivedere
-        }
 
-        if(lastTurn){
+        if(lastRound){
             int currPlayer = players.indexOf(currentPlayer);
-            if(players.get(currPlayer+1).getLatPlayer())
+            if(players.get(currPlayer+1).getLastPlayer()) {
                 findWinner();
+            }else{
+                virtualViewMap.get(currentPlayer).showMessage("Your turn ended.");
+                nextPlayer();
+                newTurn();
+            }
+        }else{
+            if (currentPlayer.getBookshelf().fullBookshelf()) {
+                for (Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()) {
+                    map.getValue().showMessage("" + currentPlayer.getNickname() + " finished his bookshelf! Last Round!");
+                }
+                virtualViewMap.get(currentPlayer).showMessage("You earn one points for finishing your " +
+                        "bookshelf before the other players.");
+                endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+                lastRound(); //da rivedere
+            } else {
+                virtualViewMap.get(currentPlayer).showMessage("Your turn ended.");
+                nextPlayer();
+                newTurn(); //da rivedere
+            }
         }
     }
 
+    /**
+     * beginning of the last round
+     */
     public void lastRound(){
-        lastTurn = true;
-        nextPlayer();
+        lastRound = true;
+        newTurn();
     }
 
+    /**
+     * this method tells all the player who has won the game.
+     */
     public void findWinner(){
         List<Integer> scorePlayers = new ArrayList<>();
         List<Player> winnerPlayers = new ArrayList<>();
@@ -213,7 +230,7 @@ public class GameController {
                     for(int i=0; i<players.size(); i++)
                         map.getValue().showMessage(players.get(i).getNickname());
                 }else{
-                    map.getValue().showMessage("You lost the game :( ... the winners is: " + players.get(0).getNickname());
+                    map.getValue().showMessage("You lost the game :( ... the winner is: " + players.get(0).getNickname());
                 }
             }
         }
@@ -276,12 +293,6 @@ public class GameController {
         return game;
     }
 
-    public void HandleMessage(Message message){
-        if(gameState==GameState.LOGIN){
-
-        }
-    }
-
     public void setGameState(GameState gameState){
         this.gameState = gameState;
     }
@@ -304,6 +315,10 @@ public class GameController {
         else return false;
     }
 
+    /**
+     * sends message to all the virtualView of the clients
+     * @param message message to send
+     */
     public void broadcastShowMessage(String message){
         for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
             map.getValue().showMessage(message);

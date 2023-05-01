@@ -224,7 +224,7 @@ public class Player extends Observable {
         this.lastPlayer = lastPlayer;
     }
 
-    public boolean getLatPlayer(){
+    public boolean getLastPlayer(){
         return lastPlayer;
     }
 }
