@@ -12,6 +12,7 @@ public class Player extends Observable {
     private Bookshelf bookshelf;
 
     private boolean FirstPlayer;
+    private boolean lastPlayer;
     private PersonalGoalCard personalGoalCard;
     private boolean Pointscg1 = false;
     private boolean Pointscg2 = false;
@@ -54,6 +55,7 @@ public class Player extends Observable {
         //this.nickname = chooseNickname();
         this.bookshelf = new Bookshelf();
         this.personalGoalCard = new PersonalGoalCard();
+        this.lastPlayer = false;
     }
 
     public void InsertTiles(ArrayList<Tile> chosenTiles, int column){
@@ -219,5 +221,8 @@ public class Player extends Observable {
         getBookshelf().insertTiles(chosenTiles, column);
     }
 
+    public void setLastPlayer(boolean lastPlayer) {
+        this.lastPlayer = lastPlayer;
+    }
 }
 
