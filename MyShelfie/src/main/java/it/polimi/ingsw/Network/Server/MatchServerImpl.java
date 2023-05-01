@@ -17,65 +17,27 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     public MatchServerImpl() throws RemoteException {
 
         clients = new ArrayList<>();
-        players = new ArrayList<>();
     }
 
     @Override
-    public boolean checkConnection() {
-        return false;
-    }
-
-    @Override
-    public void disconnect() {
-
-    }
-
-    @Override
-    public void sendMessage(Message message) {
-
-    }
-
-    public void connectClient(RMIClient client) throws RemoteException {
+    public void connectClient(RMIClient client) throws RemoteException{
         clients.add(client);
     }
 
-    public void addPlayer(Player player) throws RemoteException {
-        players.add(player);
+    @Override
+    public void disconnectClient(RMIClient client) throws RemoteException{
+        clients.remove(client);
     }
 
-    public void removePlayer(Player player) throws RemoteException {
-        players.remove(player);
+    @Override
+    public void sendMessage(Message message) throws RemoteException{
+
     }
 
-    public ArrayList<Player> getListPlayers() throws RemoteException {
-        return players;
-    }
 
-    public void connectChat(String nickname) throws RemoteException {
-        //implementazione della chat
-    }
 
-    public void startGame(int numOfPlayers) throws RemoteException {
-        //implementazione dell'avvio del gioco
-    }
 
-    public void selectTile(int row, int col) throws RemoteException {
-        //implementazione della selezione della tessera
-    }
 
-    public void updateState(State state) throws RemoteException {
-        //implementazione dell'aggiornamento dello stato
-    }
 
-    public boolean GameOver() throws RemoteException {
-        //implementazione della verifica del game over
-        boolean x=true;
 
-        return x;
-    }
-
-    public String getWinner() throws RemoteException {
-        //implementazione del recupero del vincitore
-        return null;
-    }
 }

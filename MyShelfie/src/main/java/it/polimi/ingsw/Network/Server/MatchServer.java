@@ -1,13 +1,10 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Model.Message;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.State;
 import it.polimi.ingsw.Network.Client.RMIClient;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 /**
  * Remote interface of the client which will be used
@@ -21,17 +18,17 @@ public interface MatchServer extends Remote {
  *
  * @return true if the client is still connected
  */
-    boolean checkConnection();
+    void connectClient(RMIClient client) throws RemoteException;
 
     /**
      * Disconnects from the client
      */
-    void disconnect();
+    void disconnectClient(RMIClient client) throws RemoteException;
 
     /**
      * Sends a message to the client
      *
      * @param message
      */
-    void sendMessage(Message message);
+    void sendMessage(Message message) throws RemoteException;
 }
