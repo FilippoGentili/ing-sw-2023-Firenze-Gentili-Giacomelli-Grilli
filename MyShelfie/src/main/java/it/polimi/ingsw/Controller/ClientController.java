@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Client.RMIClient;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -8,8 +9,9 @@ import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.Map;
 public class ClientController implements Observer, ViewObserver {
 
 
@@ -20,6 +22,8 @@ public class ClientController implements Observer, ViewObserver {
     public ClientController(View view) {
         this.view = view;
     }
+
+    public String getNickname(){return this.nickname;}
 
     @Override
     public void update(Message message) {
@@ -32,7 +36,7 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     @Override
-    public void updateServerInfo() {
+    public void updateServerInfo(Map<String, String> serverInfo) {
 
     }
 

@@ -5,10 +5,11 @@ package it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Model.Tile;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface ViewObserver{
 
-    void updateServerInfo(/*Map<String, String> serverInfo*/);
+    void updateServerInfo(Map<String, String> serverInfo);
 
     void updateNickname(String nickname);
 

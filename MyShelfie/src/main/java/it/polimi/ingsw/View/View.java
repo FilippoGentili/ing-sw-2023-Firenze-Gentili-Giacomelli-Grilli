@@ -7,8 +7,11 @@ import java.util.ArrayList;
 public interface View {
 
     void showMessage(String message);
-    void NicknameRequest();
+
     void loginResult(boolean validNickname, boolean connection, String nickname);
+
+    void nicknameRequest();
+
     void askNumberOfPlayers();
 
     void columnRequest(String nickname, ArrayList<Integer> AvailableColumns);
