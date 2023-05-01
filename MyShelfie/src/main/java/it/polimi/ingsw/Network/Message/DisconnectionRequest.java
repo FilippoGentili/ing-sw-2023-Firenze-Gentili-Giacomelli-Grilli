@@ -4,6 +4,10 @@ public class DisconnectionRequest extends Message{
     private static final long serialVersionUID = 1407047261009093715L;
     private final String disconnectedUser;
 
+    /**
+     * Message used to notify that the player wants to quit
+     * @param username
+     */
     public DisconnectionRequest(String username) {
         super(username, MessageType.DISCONNECTION_REQUEST);
         this.disconnectedUser=username;

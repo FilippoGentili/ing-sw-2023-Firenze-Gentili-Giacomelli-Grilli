@@ -7,6 +7,12 @@ public class GivePoints extends Message{
     private static final long serialVersionUID = 6172630014346767975L;
     private final int points;
     private final String player;
+
+    /**
+     * This message is sent from the server to the client to let it know how many points it's been given
+     * @param nickname
+     * @param points
+     */
     public GivePoints(String nickname, int points) {
         super(Game.getServerName(), MessageType.GIVE_POINTS);
         this.points=points;

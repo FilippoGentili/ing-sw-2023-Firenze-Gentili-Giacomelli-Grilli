@@ -8,6 +8,11 @@ public class ChosenTilesMessage extends Message {
     private static final long serialVersionUID = 611518002718302338L;
     private final ArrayList<Tile> chosenTiles;
 
+    /**
+     * Message that is used to communicate the chosen tiles from the client to the server
+     * @param nickname
+     * @param chosenTiles
+     */
     public ChosenTilesMessage(String nickname, ArrayList<Tile> chosenTiles){
         super(nickname, MessageType.CHOSEN_TILES_REQUEST);
         this.chosenTiles = chosenTiles;

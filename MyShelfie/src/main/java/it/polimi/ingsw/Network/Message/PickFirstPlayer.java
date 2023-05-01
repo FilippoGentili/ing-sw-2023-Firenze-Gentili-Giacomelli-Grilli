@@ -5,6 +5,11 @@ import it.polimi.ingsw.Model.Game;
 public class PickFirstPlayer extends Message{
     private static final long serialVersionUID = 1204922671829035642L;
     public String firstPlayer;
+
+    /**
+     * The server sends a message to update on the chosen first player
+     * @param firstPlayerUsername
+     */
     public PickFirstPlayer(String firstPlayerUsername) {
         super(Game.getServerName(), MessageType.PICK_FIRST_PLAYER);
         this.firstPlayer=firstPlayerUsername;

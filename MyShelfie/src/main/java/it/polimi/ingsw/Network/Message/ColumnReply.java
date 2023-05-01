@@ -2,13 +2,14 @@ package it.polimi.ingsw.Network.Message;
 
 import java.util.ArrayList;
 
+
 public class ColumnReply extends Message{
     private static final long serialVersionUID = -399221901652619718L;
     private final int column;
     private final ArrayList<Integer> AvailableColumns;
 
     /**
-     * Method used to let the server know which column the player has chosen to set the tiles into
+     * Message used to let the server know which column the player has chosen to set the tiles into
      * @param nickname
      * @param column
      */

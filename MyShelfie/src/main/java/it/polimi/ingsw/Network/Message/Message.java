@@ -7,8 +7,12 @@ public abstract class Message implements Serializable {
         private final String nickname;
         private final MessageType type;
 
-
-        public Message(String nickname, MessageType messageType){
+    /**
+     * Constructor for the message
+     * @param nickname
+     * @param messageType
+     */
+    public Message(String nickname, MessageType messageType){
             this.nickname = nickname;
             this.type = messageType;
         }

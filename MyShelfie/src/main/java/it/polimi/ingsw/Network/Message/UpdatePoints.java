@@ -10,13 +10,17 @@ public class UpdatePoints extends Message{
     private static final long serialVersionUID = 1477878597230914222L;
     private final int updatedValue;
     private final CommonGoalCard commonGoalCard;
+
+    /**
+     * Message used to let the client know the updated value of the common goal card's points
+     * @param updatedValue
+     * @param commonGoalCard
+     */
     public UpdatePoints(int updatedValue, CommonGoalCard commonGoalCard) {
         super(Game.getServerName(), MessageType.UPDATE_POINTS);
         this.updatedValue=updatedValue;
         this.commonGoalCard=commonGoalCard;
     }
-
-
     public int getUpdatedValue(){
         return updatedValue;
     }

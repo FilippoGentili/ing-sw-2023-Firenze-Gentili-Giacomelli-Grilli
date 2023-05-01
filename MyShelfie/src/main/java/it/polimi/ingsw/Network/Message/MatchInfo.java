@@ -8,6 +8,13 @@ public class MatchInfo extends Message{
     private static final long serialVersionUID = 6955347987257164619L;
     private final String activePlayer;
     private final ArrayList<Player> players;
+
+    /**
+     * Message used to update the clients on the ongoing match
+     * @param nickname
+     * @param players
+     * @param activePlayer
+     */
     public MatchInfo(String nickname, ArrayList<Player> players, String activePlayer) {
         super(nickname, MessageType.MATCH_INFO);
         this.activePlayer = activePlayer;
