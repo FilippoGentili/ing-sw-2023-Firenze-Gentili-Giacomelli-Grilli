@@ -50,6 +50,11 @@ public class Cli extends ViewObservable implements View{
         serverInfo();
     }
 
+    @Override
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+
     public void serverInfo(){
         Map<String, String> serverInfo = new HashMap<>();
         String defaultAddress = "localhost";
@@ -101,7 +106,6 @@ public class Cli extends ViewObservable implements View{
         String nickname;
         System.out.println("Insert your nickname: ");
         nickname=readLine();
-        //controllo
         notifyObserver(obs -> obs.updateNickname(nickname));
     }
 
@@ -110,7 +114,6 @@ public class Cli extends ViewObservable implements View{
         int num;
         System.out.println("Insert the number of players you want to play with: ");
         num = checkValidNumOfPlayers();
-
         notifyObserver(obs -> obs.updateNumOfPlayers(num));
     }
 
@@ -127,9 +130,24 @@ public class Cli extends ViewObservable implements View{
     }
 
     @Override
-    public void columnRequest() {
+    public void TilesRequest() {
+        Map<Integer, Integer> chosenTilesIndex = new HashMap<>();
+        int row;
         int col;
-        boolean valid = true;
+
+        System.out.println("Choose up to 3 tiles from the board. Insert the coordinates of the tiles you want to choose: ");
+        for(int i=1; i<4; i++){
+            System.out.println(i+":");
+            System.out.println("row: ");
+            row = parseInt(readLine());
+
+
+        }
+    }
+
+    @Override
+    public void columnRequest(ArrayList<Integer> AvailableColumns) {
+        int col;
 
         System.out.println("Insert the number of the column where you want to insert the tiles");
         System.out.println("Starting from the left: first column = 0, last column = 4");
@@ -137,15 +155,15 @@ public class Cli extends ViewObservable implements View{
         do{
             col = parseInt(readLine());
 
-            if(col<0 || col>4){
-                valid = false;
-                System.out.println("Column index out of bound. Please insert a number between 0 and 4");
-            }else if(!clientController.validColumn()){
-                System.out.println("Column not valid. Please select a free column:");
-            }
+            if(!AvailableColumns.contains(col))
+                System.out.println("Column index Not valid. Please select a column with enough space");
 
-        }while(!valid);
+        }while(!AvailableColumns.contains(col));
 
+        final int choice = col;
 
+        notifyObserver(obs -> obs.updateChosenColumn(choice));
     }
+
+
 }

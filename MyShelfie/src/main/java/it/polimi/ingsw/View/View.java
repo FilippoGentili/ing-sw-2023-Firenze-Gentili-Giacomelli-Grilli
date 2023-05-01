@@ -14,9 +14,9 @@ public interface View {
 
     void askNumberOfPlayers();
 
-    void columnRequest(String nickname, ArrayList<Integer> AvailableColumns);
+    void columnRequest(ArrayList<Integer> AvailableColumns);
 
-    void TilesRequest(ArrayList<Tile> chosenTiles);
+    void TilesRequest();
 
     void OrderTiles(ArrayList<Tile> chosenTiles);
 

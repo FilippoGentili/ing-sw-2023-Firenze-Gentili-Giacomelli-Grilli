@@ -2,11 +2,19 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Server.MatchServer;
+import it.polimi.ingsw.Network.Server.MatchServerImpl;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.util.ArrayList;
 
 public class VirtualView implements View, Observer {
+
+    private final MatchServer matchServer;
+
+    public VirtualView(MatchServer matchServer){
+        this.matchServer = matchServer;
+    }
 
     @Override
     public void update(Message message) {
@@ -25,7 +33,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showMessage(String message) {
-        //send message tramite client handler all'interno di Server
+        matchServer.
     }
 
 
@@ -36,12 +44,12 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void columnRequest(String nickname, ArrayList<Integer> AvailableColumns) {
+    public void columnRequest(ArrayList<Integer> AvailableColumns) {
 
     }
 
     @Override
-    public void TilesRequest(ArrayList<Tile> chosenTiles) {
+    public void TilesRequest() {
 
     }
 
