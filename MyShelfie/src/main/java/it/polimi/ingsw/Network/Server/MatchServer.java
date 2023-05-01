@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Model.Message;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.State;
 import it.polimi.ingsw.Network.Client.RMIClient;
@@ -14,17 +15,23 @@ import java.util.ArrayList;
  */
 
 public interface MatchServer extends Remote {
-    void login() throws RemoteException;
-    void nicknameRequest(String name) throws RemoteException;
-    void connectClient(RMIClient client) throws RemoteException;
-    void addPlayer(Player player) throws RemoteException;
-    void removePlayer(Player player) throws RemoteException;
-    ArrayList<Player> getListPlayers() throws RemoteException;
-    void connectChat(String nickname) throws RemoteException;
-    void startGame(int numOfPlayers) throws RemoteException;
-    void selectTile(int row, int col) throws RemoteException;
-    void updateState(State state) throws RemoteException;
-    boolean isGameOver() throws RemoteException;
-    String getWinner() throws RemoteException;
-}
 
+/**
+ * Returns the connection status.
+ *
+ * @return true if the client is still connected
+ */
+    boolean checkConnection();
+
+    /**
+     * Disconnects from the client
+     */
+    void disconnect();
+
+    /**
+     * Sends a message to the client
+     *
+     * @param message
+     */
+    void sendMessage(Message message);
+}

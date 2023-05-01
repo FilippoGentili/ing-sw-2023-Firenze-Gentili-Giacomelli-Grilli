@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Model.Message;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.State;
 import it.polimi.ingsw.Network.Client.RMIClient;
@@ -20,12 +21,17 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     }
 
     @Override
-    public void login() throws RemoteException {
+    public boolean checkConnection() {
+        return false;
+    }
+
+    @Override
+    public void disconnect() {
 
     }
 
     @Override
-    public void nicknameRequest(String name) throws RemoteException {
+    public void sendMessage(Message message) {
 
     }
 
@@ -61,7 +67,7 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
         //implementazione dell'aggiornamento dello stato
     }
 
-    public boolean isGameOver() throws RemoteException {
+    public boolean GameOver() throws RemoteException {
         //implementazione della verifica del game over
         boolean x=true;
 
