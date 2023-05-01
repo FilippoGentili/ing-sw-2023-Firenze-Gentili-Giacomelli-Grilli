@@ -5,6 +5,7 @@ package it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Model.Tile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface ViewObserver{
@@ -15,7 +16,7 @@ public interface ViewObserver{
 
     void updateNumOfPlayers(int num);
 
-    void updateChosenTiles(ArrayList<Tile> chosen);
+    void updateChosenTiles(HashMap<Integer, Integer> chosen);
 
     void updateChosenColumn(int col);
 

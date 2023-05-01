@@ -131,18 +131,45 @@ public class Cli extends ViewObservable implements View{
 
     @Override
     public void TilesRequest() {
-        Map<Integer, Integer> chosenTilesIndex = new HashMap<>();
+        HashMap<Integer, Integer> chosenTilesIndex = new HashMap<>();
         int row;
         int col;
+        String input;
 
         System.out.println("Choose up to 3 tiles from the board. Insert the coordinates of the tiles you want to choose: ");
-        for(int i=1; i<4; i++){
+        int i=1;
+        boolean valid = true;
+
+        while(i<4 && valid){
             System.out.println(i+":");
-            System.out.println("row: ");
-            row = parseInt(readLine());
+            do{
+                System.out.println("row: ");
+                row = parseInt(readLine());
+                if(row<0 || row>8)
+                    System.out.println("Index out of bound. Please insert a number between 0 and 8");
+            }while(row<0 || row>8);
+            do{
+                System.out.println("column: ");
+                col = parseInt(readLine());
+                if(col<0 || col>8)
+                    System.out.println("Index out of bound. Please insert a number between 0 and 8");
+            }while(col<0 || col>8);
+            chosenTilesIndex.put(row, col);
+            i++;
 
-
+            if(i<4){
+                do{
+                    System.out.println("Do you want to select another tile? (y/n)");
+                    input = readLine();
+                    if(input.equals("n"))
+                        valid=false;
+                    else if(!input.equals("y"))
+                        System.out.println("Command not valid");
+                }while(!input.equals("y") && !input.equals("n"))
+            }
         }
+
+        notifyObserver(obs -> obs.updateChosenTiles(chosenTilesIndex));
     }
 
     @Override
