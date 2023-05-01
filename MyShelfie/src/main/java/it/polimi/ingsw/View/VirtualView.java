@@ -36,12 +36,17 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void columnRequest() {
+    public void columnRequest(String nickname, ArrayList<Integer> AvailableColumns) {
 
     }
 
     @Override
     public void TilesRequest(ArrayList<Tile> chosenTiles) {
+
+    }
+
+    @Override
+    public void OrderTiles(ArrayList<Tile> chosenTiles){
 
     }
 

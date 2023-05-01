@@ -60,7 +60,7 @@ public class GameController {
             game.addPlayer(player);
             virtualViewMap.put(player,vv);
 
-            vv.loginResult(true);
+            vv.loginResult(true,true,nickname);
             vv.askNumberOfPlayers();
 
         }else{

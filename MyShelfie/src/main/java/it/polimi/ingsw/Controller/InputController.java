@@ -37,7 +37,7 @@ public class InputController {
         for(Map.Entry<Player, VirtualView> map : gameController.getVirtualViewMap().entrySet()){
             if(nickname.equals(map.getKey().getNickname())){
                 view.showMessage("this nickname is already used");
-                view.loginResult(false, false, nickname;
+                view.loginResult(false, false, nickname);
                 return false;
             }
         }
@@ -75,6 +75,16 @@ public class InputController {
     }
 
     public boolean selectedColumn(Message message){
+        ColumnReply chosenColumn = (ColumnReply) message;
+        int column = chosenColumn.getColumn();
+        ArrayList<Integer> availableColumns = chosenColumn.getAvailableColumns();
+
+        for(int i=0; i> availableColumns.size(); i++){
+            if(column == availableColumns.get(i))
+                return true;
+        }
+
+        return false;
 
     }
 

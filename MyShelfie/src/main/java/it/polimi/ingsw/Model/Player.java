@@ -16,7 +16,8 @@ public class Player extends Observable {
     private boolean Pointscg1 = false;
     private boolean Pointscg2 = false;
 
-    private static ArrayList<Tile> chosenTiles = new ArrayList<>();
+    private ArrayList<Tile> chosenTiles;
+    private Integer ChosenColumn;
 
     /*This method asks the user to choose a Nickname
     public String chooseNickname(){
@@ -32,7 +33,7 @@ public class Player extends Observable {
     /**
      * @return the nickname
      */
-   public String getNickname() {
+    public String getNickname() {
         return this.nickname;
     }
 
@@ -196,6 +197,23 @@ public class Player extends Observable {
         return chosenTiles;
     }
 
+    public void setChosenTiles(ArrayList<Tile> chosen){
+        for(int i=0; i<chosen.size(); i++)
+            chosenTiles.add(chosen.get(i));
+    }
+
+    public void ClearChosenTiles(){
+        for(int i=0; i<chosenTiles.size(); i++)
+            chosenTiles.remove(i);
+    }
+
+    public Integer getChosenColumn() {
+        return ChosenColumn;
+    }
+
+    public void setChosenColumn(Integer chosenColumn) {
+        ChosenColumn = chosenColumn;
+    }
 
     public void insertTiles(ArrayList<Tile> chosen, int column){
         getBookshelf().insertTiles(chosenTiles, column);

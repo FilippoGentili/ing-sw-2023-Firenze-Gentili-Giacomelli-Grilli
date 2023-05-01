@@ -11,9 +11,11 @@ public interface View {
     void loginResult(boolean validNickname, boolean connection, String nickname);
     void askNumberOfPlayers();
 
-    void columnRequest();
+    void columnRequest(String nickname, ArrayList<Integer> AvailableColumns);
 
     void TilesRequest(ArrayList<Tile> chosenTiles);
+
+    void OrderTiles(ArrayList<Tile> chosenTiles);
 
     void showCurrentPlayer();
 }
