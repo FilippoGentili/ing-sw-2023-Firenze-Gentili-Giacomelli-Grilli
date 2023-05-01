@@ -2,7 +2,6 @@ package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Model.Tile;
-import it.polimi.ingsw.Network.Message.ConnectionRequest;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Observer.ViewObservable;
@@ -101,6 +100,7 @@ public class Cli extends ViewObservable implements View{
 
         notifyObserver(obs -> obs.updateServerInfo(serverInfo));
     }
+
     @Override
     public void nicknameRequest(){
         String nickname;
@@ -127,6 +127,21 @@ public class Cli extends ViewObservable implements View{
         }while(num<2 || num>4);
 
         return num;
+    }
+
+    @Override
+    public void loginResult(boolean validNickname, boolean connection, String nickname) {
+        out.flush();
+        if(validNickname && connection)
+            System.out.println("Hello " + nickname + ", you are connected to the server!");
+        else if(connection){
+            System.out.println("The nickname is not valid.");
+            nicknameRequest();
+        }else{
+            System.out.println("Connection refused");
+            System.exit(1);
+        }
+
     }
 
     @Override
@@ -192,5 +207,14 @@ public class Cli extends ViewObservable implements View{
         notifyObserver(obs -> obs.updateChosenColumn(choice));
     }
 
+    @Override
+    public void showCurrentPlayer() {
 
+    }
+
+    @Override
+    public void someoneDisconnected(String nickname) {
+        System.out.println(nickname + " disconnected");
+        System.exit(1);
+    }
 }

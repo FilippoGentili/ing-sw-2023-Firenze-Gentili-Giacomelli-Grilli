@@ -21,4 +21,6 @@ public interface View {
     void OrderTiles(ArrayList<Tile> chosenTiles);
 
     void showCurrentPlayer();
+
+    void someoneDisconnected(String nickname);
 }
