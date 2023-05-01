@@ -10,8 +10,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient implements MatchClient {
-
+    RMIServer server;
     public RMIClient() throws RemoteException {
+
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException {
@@ -21,19 +22,35 @@ public class RMIClient implements MatchClient {
         client.notifyConnection();
     }
 
+    public void setServer(RMIServer server) {
+        this.server = server;
+    }
+
+    public RMIServer getServer() {
+        return server;
+    }
+
     @Override
     public void notifyConnection() throws RemoteException {
-
+        try {
+            server.connectClient(new MatchClientImpl(this, server));
+        } catch (RemoteException e) {
+            System.err.println("Error connecting to server: " + e.getMessage());
+        }
     }
 
     @Override
     public void notifyDisconnection() throws RemoteException {
-
+        try {
+            server.disconnectClient(new MatchClientImpl(this, server));
+        } catch (RemoteException e) {
+            System.err.println("Error disconnecting from server: " + e.getMessage());
+        }
     }
 
     @Override
     public void notifyMessageSent(Message message) throws RemoteException {
-
+        server.sendMessage(message);
     }
 }
 

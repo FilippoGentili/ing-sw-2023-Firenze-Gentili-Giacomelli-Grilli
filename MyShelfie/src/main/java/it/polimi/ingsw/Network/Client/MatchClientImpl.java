@@ -36,6 +36,11 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
         server.disconnectClient(this);
     }
 
+    /**
+     * notifies the server that the client has sent a message
+     * @param message that the client sends
+     * @throws RemoteException
+     */
     @Override
     public void notifyMessageSent(Message message) throws RemoteException {
         server.sendMessage(message);

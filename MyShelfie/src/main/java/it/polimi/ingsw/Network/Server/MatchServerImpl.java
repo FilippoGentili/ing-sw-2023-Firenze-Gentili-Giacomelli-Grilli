@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Network.Client.MatchClientImpl;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Client.RMIClient;
