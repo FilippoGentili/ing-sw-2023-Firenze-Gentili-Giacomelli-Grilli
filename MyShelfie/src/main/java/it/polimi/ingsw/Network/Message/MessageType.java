@@ -10,7 +10,7 @@ public enum MessageType {
     PING,
     ACK,
     CHOSEN_TILES_REQUEST,
-    INSERT_TILES,
+    GIVE_POINTS,
     COLUMN_REQUEST,
     COLUMN_REPLY,
     UPDATE_POINTS,
@@ -20,5 +20,6 @@ public enum MessageType {
     LIVING_ROOM,
     SERVER_INFO,
     ORDERED_TILES
+
 }
 

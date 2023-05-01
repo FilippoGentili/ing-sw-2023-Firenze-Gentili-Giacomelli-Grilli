@@ -1,15 +1,21 @@
 package it.polimi.ingsw.Network.Server;
 
 
+import it.polimi.ingsw.Network.Client.MatchClient;
+import it.polimi.ingsw.Network.Client.MatchClientImpl;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RMIServer{
 
+    private List<MatchClient> clients = new ArrayList<>();
     public static void main(String[] args){
         try{
             MatchServerImpl obj = new MatchServerImpl();
@@ -25,4 +31,12 @@ public class RMIServer{
 
     }
 
+    public void addClient(MatchClientImpl matchClient) {
+        clients.add(matchClient);
+    }
+
+    public void removeClient(MatchClientImpl matchClient) {
+        clients.remove(matchClient);
+        System.out.println("A player has left the game");
+    }
 }
