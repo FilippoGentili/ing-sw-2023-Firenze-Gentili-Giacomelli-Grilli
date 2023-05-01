@@ -10,6 +10,7 @@ import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
 
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Map;
 public class ClientController implements Observer, ViewObserver {
@@ -41,7 +42,7 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     @Override
-    public void updateNickname(String nickname) {
+    public void updateNickname(String nickname) throws RemoteException {
         this.nickname = nickname;
         client.notifyMessageSent(new LoginRequest(nickname));      //questo è il pattern: viewObserver è l'interfaccia da cui prendere i metodi da overridare. Poi il client creerà nuovi messaggi in base al metodo in cui mi trovo tramite sendMessage
     }                                                       // da noi MatchImpl dovrebbe diventare Observable, perchè sono la stessa cosa; infatti il client dovrà estendere proprio observable
