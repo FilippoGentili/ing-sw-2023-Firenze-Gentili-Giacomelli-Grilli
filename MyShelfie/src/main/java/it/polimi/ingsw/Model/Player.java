@@ -16,7 +16,6 @@ public class Player extends Observable {
     private PersonalGoalCard personalGoalCard;
     private boolean Pointscg1 = false;
     private boolean Pointscg2 = false;
-
     private ArrayList<Tile> chosenTiles;
     private Integer ChosenColumn;
 
@@ -223,6 +222,10 @@ public class Player extends Observable {
 
     public void setLastPlayer(boolean lastPlayer) {
         this.lastPlayer = lastPlayer;
+    }
+
+    public boolean getLatPlayer(){
+        return lastPlayer;
     }
 }
 

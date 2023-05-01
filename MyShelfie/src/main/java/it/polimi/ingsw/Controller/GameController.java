@@ -2,15 +2,19 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.View.VirtualView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
+import static it.polimi.ingsw.Model.Game.endGameTrigger;
 import static it.polimi.ingsw.Model.GameState.*;
 
 public class GameController {
-
     private Game game;
     private GameState gameState;
     private final int numOfPlayers;
@@ -18,13 +22,201 @@ public class GameController {
     private Player firstPlayer;
     private TurnController turnController;
     private InputController inputController;
+    private ArrayList<Player> players;
     private Map<Player, VirtualView> virtualViewMap;
+    private boolean lastTurn;
+    private boolean firstTurn;
 
     public GameController(int num){
         this.game = new Game();
         this.numOfPlayers = num;
+        this.lastTurn = false;
+        this.firstTurn = true;
         this.turnController = new TurnController(this,virtualViewMap);
         this.inputController = new InputController(this,virtualViewMap);
+    }
+
+    public void startGame(){
+        setGameState(PLAY);
+        broadcastShowMessage("Game started!");
+        newTurn();
+    }
+
+    /**
+     * This method set the currentPlayer who is going play the turn
+     */
+    public void nextPlayer(){
+        int indexPlayer = players.indexOf(currentPlayer);
+
+        if(indexPlayer+1 < players.size())
+            currentPlayer = players.get(indexPlayer + 1);
+        else
+            currentPlayer = players.get(0);
+
+        setCurrentPlayer(currentPlayer);
+    }
+
+    /**
+     * this method initializes a new turn.
+     */
+    public void newTurn(){
+        //yourTurn(gameController.getCurrentPlayer());
+        if(firstTurn){
+            firstTurn = false;
+        }else{
+            firstTurn = false;
+            nextPlayer();
+        }
+        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
+            if(!map.getKey().equals(currentPlayer))
+                map.getValue().showMessage("It's the turn of " + currentPlayer.getNickname());
+            else
+                map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
+        }
+
+        virtualViewMap.get(currentPlayer).TilesRequest();
+
+    }
+
+    /**
+     * This method receives the tiles chosen from the current Player on the livingRoom. If the selection is valid,
+     * it asks the client to select the column, otherwise it asks to select the tiles again.
+     * @param message tiles the client chose
+     */
+    public void chooseTiles(Message message){
+        ChosenTilesMessage chosenTilesMessage = (ChosenTilesMessage) message;
+        ArrayList<Tile> chosen = chosenTilesMessage.getChosenTiles();
+
+        if(inputController.livingRoomChosenTiles(chosenTilesMessage)){
+            ArrayList<Tile> TemporaryChosenTiles = new ArrayList<>();
+
+            for(int i=0; i<chosen.size(); i++)
+                TemporaryChosenTiles.add(chosen.get(i));
+
+            currentPlayer.setChosenTiles(TemporaryChosenTiles);
+            ArrayList<Integer> availableColumns = new ArrayList<>();
+            availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
+            virtualViewMap.get(currentPlayer).columnRequest(availableColumns);
+        }else{
+            virtualViewMap.get(currentPlayer).TilesRequest();
+        }
+    }
+
+    /**
+     * this method check if the column chosen by the client is valid. If it's not, it asks the user to select another
+     * column, otherwise it asks him to order the tiles he has already chosen.
+     * @param message
+     */
+    public void SelectedColumn(Message message){
+        ColumnReply chosenColumn = (ColumnReply) message;
+        int chosen = chosenColumn.getColumn();
+
+        if(inputController.selectedColumn(chosenColumn)){
+            currentPlayer.setChosenColumn(chosen);
+            virtualViewMap.get(currentPlayer).OrderTiles(currentPlayer.getChosenTiles());
+        }else{
+            ArrayList<Integer> availableColumns = new ArrayList<>();
+            availableColumns = currentPlayer.getBookshelf().getFreeColumns(currentPlayer.getChosenTiles().size());
+            virtualViewMap.get(currentPlayer).columnRequest(availableColumns);
+        }
+    }
+
+    /**
+     * this method receives the ordered tiles and inserts them in the bookshelf of the currentPlayer.
+     * @param message
+     */
+    public void InsertTiles(Message message){
+        OrderedTiles orderedTiles = (OrderedTiles) message;
+        ArrayList<Tile> chosenTiles = orderedTiles.getOrderedTiles();
+
+        currentPlayer.InsertTiles(chosenTiles, currentPlayer.getChosenColumn());
+
+        CheckCommonGoal(currentPlayer);
+        /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
+    }
+
+    /**
+     * this method check if the player has reached the common goals. if he did, he receives his points, otherwise nothing
+     * happens.
+     * @param player the player whose library must be checked.
+     */
+    public void CheckCommonGoal(Player player){
+
+        if(game.getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()){
+            virtualViewMap.get(player).showMessage("Congratulations! You reached the first common Goal! You earn " +
+                                                    game.getCommonGoal1().getValue() + " points!");
+            player.setScore(player.getScore()+ Game.getCommonGoal1().getValue());
+            String newScore = String.valueOf(player.getScore());
+            broadcastShowMessage(newScore);
+            Game.getCommonGoal1().updateValue();
+            player.setPointscg1();
+        }
+
+        if(game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
+            virtualViewMap.get(player).showMessage("Congratulations! You reached the second common Goal! You earn " +
+                                                    game.getCommonGoal2().getValue() + " points!");
+            player.setScore(player.getScore()+Game.getCommonGoal2().getValue());
+            String newScore = String.valueOf(player.getScore());
+            broadcastShowMessage(newScore);
+            Game.getCommonGoal2().updateValue();
+            player.setPointscg2();
+        }
+    }
+
+    public void EndTurn(){
+        if(currentPlayer.getBookshelf().fullBookshelf()) {
+            for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()) {
+                map.getValue().showMessage("" + currentPlayer.getNickname() + " finished his bookshelf! Last Round!");
+            }
+            virtualViewMap.get(currentPlayer).showMessage("You earn one points for finishing your " +
+                                                          "bookshelf before the other players.");
+            endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+            lastRound(); //da rivedere
+        }else{
+            virtualViewMap.get(currentPlayer).showMessage("Your turn ended.");
+            nextPlayer();
+            newTurn(); //da rivedere
+        }
+
+        if(lastTurn){
+            int currPlayer = players.indexOf(currentPlayer);
+            if(players.get(currPlayer+1).getLatPlayer())
+                findWinner();
+        }
+    }
+
+    public void lastRound(){
+        lastTurn = true;
+        nextPlayer();
+    }
+
+    public void findWinner(){
+        List<Integer> scorePlayers = new ArrayList<>();
+        List<Player> winnerPlayers = new ArrayList<>();
+
+        for(int i=0; i< players.size(); i++)
+            scorePlayers.add(players.get(i).getScore());
+
+        Collections.sort(scorePlayers);
+
+        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
+            if(map.getKey().getScore()==scorePlayers.get(0))
+                winnerPlayers.add(map.getKey());
+        }
+
+        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
+            if(map.getKey().getScore()==scorePlayers.get(0)) {
+                map.getValue().showMessage("Congratulations! You won the game!");
+            }else{
+                if(winnerPlayers.size()>1){
+                    map.getValue().showMessage("You lost the game :( ... the winners are: ");
+                    for(int i=0; i<players.size(); i++)
+                        map.getValue().showMessage(players.get(i).getNickname());
+                }else{
+                    map.getValue().showMessage("You lost the game :( ... the winners is: " + players.get(0).getNickname());
+                }
+            }
+        }
     }
 
     public int getNumOfPlayers(){
@@ -94,10 +286,6 @@ public class GameController {
         this.gameState = gameState;
     }
 
-    public void startGame(){
-        setGameState(PLAY);
-    }
-
     public void setupGame(){
         firstPlayer = game.pickFirstPlayer();
         currentPlayer = firstPlayer;
@@ -115,22 +303,12 @@ public class GameController {
         if(gameState == GameState.LOGIN) return true;
         else return false;
     }
-    /*gestione list of player
-    dobbiamo far partire il game quando il numero dei giocatori è uguale al numero stabilito per la partita
 
-    if(listOfPlayers.contains(player)){
-        System.out.println("The player is already in the game");
-        return;
+    public void broadcastShowMessage(String message){
+        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
+            map.getValue().showMessage(message);
+        }
     }
-        if(listOfPlayers.size() == 4)
-
-    {
-        System.out.println("The game is full");
-        return;
-    }
-    System.out.println("The player has been added to the game");
-
-    */
 
 }
 

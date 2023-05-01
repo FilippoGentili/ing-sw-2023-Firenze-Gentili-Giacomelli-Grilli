@@ -74,6 +74,10 @@ public class InputController {
         return true;
     }
 
+    public boolean validColumn(int ){
+
+    }
+
     public boolean selectedColumn(Message message){
         ColumnReply chosenColumn = (ColumnReply) message;
         int column = chosenColumn.getColumn();
