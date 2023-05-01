@@ -19,7 +19,7 @@ public interface ViewObserver{
 
     void updateChosenTiles(ArrayList<Tile> chosen);
 
-    void updateOrderedTiles(ArrayList<Tile> chosen)
+    void updateOrderedTiles(ArrayList<Tile> chosen);
 
     void updateChosenColumn(int col);
 

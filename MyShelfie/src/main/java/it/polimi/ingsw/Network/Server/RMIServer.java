@@ -31,6 +31,7 @@ public class RMIServer{
 
     public void connectClient(MatchClientImpl matchClient) {
         clients.add(matchClient);
+        System.out.println("A player has been added to the game");
     }
 
     public void disconnectClient(MatchClientImpl matchClient) {
@@ -39,5 +40,13 @@ public class RMIServer{
     }
 
     public void sendMessage(Message message) {
+        for (MatchClient client : clients) {
+            try {
+                client.notifyMessageSent(message);
+            } catch (RemoteException e) {
+                System.err.println("Error sending message to client: " + e.getMessage());
+            }
+        }
     }
+
 }
