@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public class ColumnReply extends Message{
     private static final long serialVersionUID = -399221901652619718L;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public class ServerInfo extends Message{
     private static final long serialVersionUID = -5932772855094497108L;

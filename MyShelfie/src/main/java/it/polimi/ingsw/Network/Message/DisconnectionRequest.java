@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.Message;
+package it.polimi.ingsw.Network.Message;
 
 public class DisconnectionRequest extends Message{
     private static final long serialVersionUID = 1407047261009093715L;
