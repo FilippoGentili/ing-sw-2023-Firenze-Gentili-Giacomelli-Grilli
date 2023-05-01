@@ -140,8 +140,8 @@ public class Cli extends ViewObservable implements View{
             if(col<0 || col>4){
                 valid = false;
                 System.out.println("Column index out of bound. Please insert a number between 0 and 4");
-            }else if(clientController.validColumn()){
-
+            }else if(!clientController.validColumn()){
+                System.out.println("Column not valid. Please select a free column:");
             }
 
         }while(!valid);
