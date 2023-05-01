@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Tile;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ public interface View {
 
     void columnRequest(ArrayList<Integer> AvailableColumns);
 
-    void TilesRequest();
+    void TilesRequest(LivingRoom livingRoom);
 
     void OrderTiles(ArrayList<Tile> chosenTiles);
 
-    void showCurrentPlayer();
+    void showListOfPlayers(ArrayList<String> nicknames);
 
     void someoneDisconnected(String nickname);
 }

@@ -16,7 +16,9 @@ public interface ViewObserver{
 
     void updateNumOfPlayers(int num);
 
-    void updateChosenTiles(HashMap<Integer, Integer> chosen);
+    void updateChosenTiles(ArrayList<Tile> chosen);
+
+    void updateOrderedTiles()
 
     void updateChosenColumn(int col);
 

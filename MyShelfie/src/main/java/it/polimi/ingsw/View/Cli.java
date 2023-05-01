@@ -1,6 +1,9 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.MessageType;
@@ -55,6 +58,9 @@ public class Cli extends ViewObservable implements View{
     }
 
     public void serverInfo(){
+
+        //DA IMPLEMENTARE LA SCELTA TRA RMI E SOCKET
+
         Map<String, String> serverInfo = new HashMap<>();
         String defaultAddress = "localhost";
         String defaultPort = "1099"; //da cambiare forse
@@ -145,8 +151,8 @@ public class Cli extends ViewObservable implements View{
     }
 
     @Override
-    public void TilesRequest() {
-        HashMap<Integer, Integer> chosenTilesIndex = new HashMap<>();
+    public void TilesRequest(LivingRoom livingRoom) {
+        ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
         int col;
         String input;
@@ -169,7 +175,7 @@ public class Cli extends ViewObservable implements View{
                 if(col<0 || col>8)
                     System.out.println("Index out of bound. Please insert a number between 0 and 8");
             }while(col<0 || col>8);
-            chosenTilesIndex.put(row, col);
+            chosenTiles.add(livingRoom.getTile(row, col))
             i++;
 
             if(i<4){
@@ -184,7 +190,39 @@ public class Cli extends ViewObservable implements View{
             }
         }
 
-        notifyObserver(obs -> obs.updateChosenTiles(chosenTilesIndex));
+        notifyObserver(obs -> obs.updateChosenTiles(chosenTiles));
+    }
+
+    @Override
+    public void OrderTiles(ArrayList<Tile> chosenTiles) {
+        String input;
+        ArrayList<Tile> orderedTiles = new ArrayList<>();
+
+        System.out.println("Choose the order of the tiles, from the bottom to the top");
+        int i=1;
+        boolean done = false;
+        do{
+            System.out.println("Here are the tiles you chose: ");
+            for (Tile chosenTile : chosenTiles)
+                System.out.println(chosenTile.toString());
+            System.out.println("Select the " + i + " tile type:");
+            input = readLine();
+
+            if(!chosenTiles.toString().contains(input)) {
+                System.out.println("You didn't choose this type of tile");
+            }else{
+                for (int x=0; x<chosenTiles.size() && !done; x++) {
+                    if (input.equals(chosenTiles.get(x).getTileType().toString())) {
+                        orderedTiles.add(chosenTiles.get(x));
+                        chosenTiles.remove(x);
+                        done = true;
+                    }
+                }
+                i++;
+            }
+        }while(!chosenTiles.toString().contains(input));
+
+        notif
     }
 
     @Override
@@ -207,14 +245,17 @@ public class Cli extends ViewObservable implements View{
         notifyObserver(obs -> obs.updateChosenColumn(choice));
     }
 
-    @Override
-    public void showCurrentPlayer() {
-
-    }
 
     @Override
     public void someoneDisconnected(String nickname) {
         System.out.println(nickname + " disconnected");
         System.exit(1);
+    }
+
+    @Override
+    public void showListOfPlayers(ArrayList<String> nicknames) {
+        System.out.println("Lobby: ");
+        for(int i=1; i<=nicknames.size(); i++)
+            System.out.println(i+") "+nicknames.get(i-1));
     }
 }
