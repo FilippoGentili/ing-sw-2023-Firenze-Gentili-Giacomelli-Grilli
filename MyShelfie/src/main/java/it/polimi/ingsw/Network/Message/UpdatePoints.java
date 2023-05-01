@@ -16,6 +16,7 @@ public class UpdatePoints extends Message{
         this.commonGoalCard=commonGoalCard;
     }
 
+
     public int getUpdatedValue(){
         return updatedValue;
     }

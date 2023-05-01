@@ -7,7 +7,7 @@ public class GivePoints extends Message{
 
     private static final long serialVersionUID = 6172630014346767975L;
     private final int points;
-    private String player;
+    private final String player;
     public GivePoints(String nickname, int points) {
         super(Game.getServerName(), MessageType.GIVE_POINTS);
         this.points=points;
