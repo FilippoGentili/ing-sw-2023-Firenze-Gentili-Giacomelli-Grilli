@@ -1,4 +1,5 @@
 package it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Model.Message;
 import it.polimi.ingsw.Network.Server.RMIServer;
 
 import java.rmi.RemoteException;
@@ -36,7 +37,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     }
 
     @Override
-    public void notifyMessageSent() throws RemoteException {
+    public void notifyMessageSent(Message message) throws RemoteException {
         server.sendMessage(message);
     }
 }

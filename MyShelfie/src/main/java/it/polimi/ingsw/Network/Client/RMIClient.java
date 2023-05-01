@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Model.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.Network.Server.RMIServer;
 
@@ -18,6 +19,21 @@ public class RMIClient implements MatchClient {
         MatchServer server = (MatchServer) registry.lookup("//localhost/MatchServer");
         MatchClient client = new MatchClientImpl(new RMIClient(), (RMIServer) server);
         client.notifyConnection();
+    }
+
+    @Override
+    public void notifyConnection() throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyDisconnection() throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyMessageSent(Message message) throws RemoteException {
+
     }
 }
 

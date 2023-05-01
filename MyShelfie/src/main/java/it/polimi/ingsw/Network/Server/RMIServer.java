@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 
+import it.polimi.ingsw.Model.Message;
 import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Client.MatchClientImpl;
 
@@ -35,5 +36,8 @@ public class RMIServer{
     public void disconnectClient(MatchClientImpl matchClient) {
         clients.remove(matchClient);
         System.out.println("A player has left the game");
+    }
+
+    public void sendMessage(Message message) {
     }
 }
