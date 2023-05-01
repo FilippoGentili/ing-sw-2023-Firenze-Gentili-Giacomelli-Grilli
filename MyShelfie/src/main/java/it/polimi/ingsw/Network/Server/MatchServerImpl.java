@@ -9,12 +9,24 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
+
     private ArrayList<RMIClient> clients;
     private ArrayList<Player> players;
 
     public MatchServerImpl() throws RemoteException {
+
         clients = new ArrayList<>();
         players = new ArrayList<>();
+    }
+
+    @Override
+    public void login() throws RemoteException {
+
+    }
+
+    @Override
+    public void nicknameRequest(String name) throws RemoteException {
+
     }
 
     public void connectClient(RMIClient client) throws RemoteException {
@@ -51,9 +63,13 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
 
     public boolean isGameOver() throws RemoteException {
         //implementazione della verifica del game over
+        boolean x=true;
+
+        return x;
     }
 
     public String getWinner() throws RemoteException {
         //implementazione del recupero del vincitore
+        return null;
     }
 }

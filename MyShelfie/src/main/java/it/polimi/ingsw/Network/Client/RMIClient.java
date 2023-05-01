@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.State;
 import it.polimi.ingsw.Network.Message.Message;
 
@@ -36,5 +37,35 @@ public class RMIClient implements MatchClient {
     }
 
     public void notifyDisconnection() throws RemoteException{
+    }
+
+    @Override
+    public void notifyPlayerAdded(Player player) throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyPlayerRemoved(Player player) throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyGameStarted() throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyTileSelected(int row, int col) throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyStateUpdate(State state) throws RemoteException {
+
+    }
+
+    @Override
+    public void notifyGameOver(String winner) throws RemoteException {
+
     }
 }
