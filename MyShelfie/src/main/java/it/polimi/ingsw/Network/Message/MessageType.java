@@ -20,6 +20,5 @@ public enum MessageType {
     LIVING_ROOM,
     SERVER_INFO,
     ORDERED_TILES,
-    NICKNAME_REQUEST
 }
 
