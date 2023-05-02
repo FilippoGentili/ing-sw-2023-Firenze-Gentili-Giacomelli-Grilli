@@ -6,6 +6,7 @@ public abstract class Message implements Serializable {
         private static final long serialVersionUID = -4873567285652677918L;
         private final String nickname;
         private final MessageType type;
+         private byte[] data;
 
     /**
      * Constructor for the message
@@ -29,7 +30,11 @@ public abstract class Message implements Serializable {
             return "Message from: "+ nickname + ", of type: " + type + "}";
         }
 
+        public byte[] getData() {
+             return data;
     }
+}
+
 
 /* In socket client e socket server aggiungere:
     private final ObjectOutputStream outputStream;

@@ -4,29 +4,17 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Client.RMIClient;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
 
-    private ArrayList<RMIClient> clients;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private ArrayList<RMIClient> listOfClients = new ArrayList<>();
 
     public MatchServerImpl() throws RemoteException {
         super();
-        clients = new ArrayList<>();
-        try {
-            this.output = new ObjectOutputStream(clients.getOutputStream());
-            this.input = new ObjectInputStream(clients.getInputStream());
-        }catch (IOException e){
-            //qualcosa
-        }
-
     }
 
     /**
@@ -35,8 +23,9 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
      * @throws RemoteException
      */
     @Override
-    public void connectClient(RMIClient client) throws RemoteException{
-        clients.add(client);
+    public synchronized void connectClient(RMIClient client) throws RemoteException{
+        listOfClients.add(client);
+        System.out.println("Client connected");
     }
 
     /**
@@ -45,8 +34,10 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
      * @throws RemoteException
      */
     @Override
-    public void disconnectClient(RMIClient client) throws RemoteException{
-        clients.remove(client);
+    public synchronized void disconnectClient(RMIClient client) throws RemoteException{
+        listOfClients.remove(client);
+        System.out.println("Client disconnected");
+
     }
 
     /**
@@ -55,9 +46,21 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
      * @throws RemoteException
      */
     @Override
-    public void sendMessage(Message message) throws RemoteException{
-        for(MatchClient client: clients)
-            client.getMessage(message);
+    public synchronized void sendMessage(Message message) throws RemoteException{
+        for (MatchClient client : listOfClients) {
+            try {
+                //serialize message
+                ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+                ObjectOutputStream objStream = new ObjectOutputStream(byteStream);
+                objStream.writeObject(message);
+                objStream.flush();
+                byte[] data = byteStream.toByteArray();
+                //send message to client
+                client.getMessage(message);
+            } catch (IOException e) {
+                System.err.println("Error sending message to client: " + e.getMessage());
+            }
+        }
     }
 
     /**
@@ -67,7 +70,16 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
      */
     @Override
     public void getMessage(Message message) throws  RemoteException{
-
+        try {
+            //deserialize message
+            byte[] data = message.getData();
+            ByteArrayInputStream bis = new ByteArrayInputStream(data);
+            ObjectInput in = new ObjectInputStream(bis);
+            Message receivedMessage = (Message) in.readObject();
+            System.out.println("Received message: " + receivedMessage.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error receiving message: " + e.getMessage());
+        }
     }
 
 }

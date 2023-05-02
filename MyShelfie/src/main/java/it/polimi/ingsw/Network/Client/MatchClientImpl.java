@@ -2,17 +2,14 @@ package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.RMIServer;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class MatchClientImpl extends UnicastRemoteObject implements MatchClient {
 
-    private final RMIClient client;
+    private final MatchClient client;
     private final RMIServer server;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
 
     public MatchClientImpl(RMIClient client, RMIServer server) throws RemoteException {
         super();
@@ -22,7 +19,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
 
 
     /**
-     * notifies the serer that a new client is connected
+     * method called by the server to connect the client
      * @throws RemoteException
      */
     @Override
@@ -31,7 +28,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     }
 
     /**
-     * notifies the server that the client has left the game
+     * method called by the server to disconnect the client
      * @throws RemoteException
      */
     @Override
@@ -46,6 +43,18 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
      */
     @Override
     public void sendMessage(Message message) throws RemoteException {
+        try {
+            //serialize message
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+            objectStream.writeObject(message);
+            objectStream.flush();
+            byte[] data = byteStream.toByteArray();
+            //send message to server
+            server.getMessage(message);
+        } catch (IOException e) {
+            System.err.println("Error sending message to server: " + e.getMessage());
+        }
     }
 
     /**
@@ -55,7 +64,16 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
      */
     @Override
     public void getMessage(Message message) throws RemoteException {
-        server.sendMessage(message);
+        try {
+            //deserialize message
+            byte[] data = message.getData();
+            ByteArrayInputStream bis = new ByteArrayInputStream(data);
+            ObjectInput in = new ObjectInputStream(bis);
+            Message receivedMessage = (Message) in.readObject();
+            System.out.println("Received message: " + receivedMessage.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error receiving message: " + e.getMessage());
+        }
 
     }
 }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.Network.Server.RMIServer;
 
+import java.io.*;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -50,12 +51,32 @@ public class RMIClient implements MatchClient {
 
     @Override
     public void sendMessage(Message message) throws RemoteException {
-        server.getMessage(message);
+        try {
+            //serialize message
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectStream = new ObjectOutputStream(byteStream);
+            objectStream.writeObject(message);
+            objectStream.flush();
+            byte[] data = byteStream.toByteArray();
+            //send message to server
+            server.getMessage(message);
+        } catch (IOException e) {
+            System.err.println("Error sending message to server: " + e.getMessage());
+        }
     }
 
     @Override
     public void getMessage(Message message) throws RemoteException {
-
+        try {
+            //deserialize message
+            byte[] data = message.getData();
+            ByteArrayInputStream bis = new ByteArrayInputStream(data);
+            ObjectInput in = new ObjectInputStream(bis);
+            Message receivedMessage = (Message) in.readObject();
+            System.out.println("Received message: " + receivedMessage.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error receiving message: " + e.getMessage());
+        }
     }
 
 }
