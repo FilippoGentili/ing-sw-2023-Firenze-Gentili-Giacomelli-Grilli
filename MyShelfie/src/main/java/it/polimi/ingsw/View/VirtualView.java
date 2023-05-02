@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
@@ -27,11 +28,6 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showCurrentPlayer() {
-
-    }
-
-    @Override
     public void showMessage(String message) {
         matchServer.
     }
@@ -49,7 +45,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void TilesRequest() {
+    public void TilesRequest(LivingRoom livingRoom) {
 
     }
 
