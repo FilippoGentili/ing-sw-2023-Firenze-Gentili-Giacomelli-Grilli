@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Message;
 
+import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
 import java.util.ArrayList;
@@ -11,12 +12,11 @@ public class MatchInfo extends Message{
 
     /**
      * Message used to update the clients on the ongoing match
-     * @param nickname
      * @param players
      * @param activePlayer
      */
-    public MatchInfo(String nickname, ArrayList<Player> players, String activePlayer) {
-        super(nickname, MessageType.MATCH_INFO);
+    public MatchInfo(ArrayList<Player> players, String activePlayer) {
+        super(Game.getServerName(), MessageType.MATCH_INFO);
         this.activePlayer = activePlayer;
         this.players = players;
     }
@@ -31,7 +31,7 @@ public class MatchInfo extends Message{
 
     @Override
     public String toString(){
-        return "" + getNickname() + "is asking for info: " + getActivePlayer() + "is the active player, the other players are " + getPlayers();
+        return "" + getActivePlayer() + "is the active player, the other players are " + getPlayers();
     }
 }
 
