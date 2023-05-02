@@ -21,7 +21,6 @@ public class GameController {
     private final int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
-    private TurnController turnController;
     private InputController inputController;
     private ArrayList<Player> players;
     private Map<Player, VirtualView> virtualViewMap;
@@ -31,7 +30,6 @@ public class GameController {
     public GameController(int num){
         this.game = new Game();
         this.numOfPlayers = num;
-        this.turnController = new TurnController(this,virtualViewMap);
         this.inputController = new InputController(this,virtualViewMap);
     }
 
