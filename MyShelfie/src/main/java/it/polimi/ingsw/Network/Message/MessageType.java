@@ -19,6 +19,7 @@ public enum MessageType {
     MATCH_INFO,
     LIVING_ROOM,
     SERVER_INFO,
-    ORDERED_TILES
+    ORDERED_TILES,
+    NICKNAME_REQUEST
 }
 
