@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Client.MatchClientImpl;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class RMIServer{
 
-    private List<MatchClient> clients = new ArrayList<>();
+    private List<MatchClient> listOfClients = new ArrayList<>();
     public static void main(String[] args){
         try{
             MatchServerImpl obj = new MatchServerImpl();
@@ -29,24 +30,46 @@ public class RMIServer{
 
     }
 
+    /**
+     * connects client to server
+     * @param matchClient client that will be connected
+     */
     public void connectClient(MatchClientImpl matchClient) {
-        clients.add(matchClient);
+        listOfClients.add(matchClient);
         System.out.println("A player has been added to the game");
     }
 
+    /**
+     * disconnects client from the server
+     * @param matchClient client that is being disconnected
+     */
     public void disconnectClient(MatchClientImpl matchClient) {
-        clients.remove(matchClient);
+        listOfClients.remove(matchClient);
         System.out.println("A player has left the game");
     }
 
+    /**
+     * sends message from server to client
+     * @param message sent
+     */
     public void sendMessage(Message message) {
-        for (MatchClient client : clients) {
+        for (MatchClient client : listOfClients) {
             try {
-                client.notifyMessageSent(message);
-            } catch (RemoteException e) {
+                output.writeObject(message);
+                output.reset();
+                client.getMessage(message);
+            } catch (IOException e) {
                 System.err.println("Error sending message to client: " + e.getMessage());
             }
         }
+    }
+
+    /**
+     * server gets message from client
+     * @param message received
+     */
+    public void getMessage(Message message){
+
     }
 
 }

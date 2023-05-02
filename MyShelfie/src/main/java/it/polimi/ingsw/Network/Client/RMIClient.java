@@ -19,7 +19,7 @@ public class RMIClient implements MatchClient {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
         MatchServer server = (MatchServer) registry.lookup("//localhost/MatchServer");
         MatchClient client = new MatchClientImpl(new RMIClient(), (RMIServer) server);
-        client.notifyConnection();
+        client.connectToServer();
     }
 
     public void setServer(RMIServer server) {
@@ -31,7 +31,7 @@ public class RMIClient implements MatchClient {
     }
 
     @Override
-    public void notifyConnection() throws RemoteException {
+    public void connectToServer() throws RemoteException {
         try {
             server.connectClient(new MatchClientImpl(this, server));
         } catch (RemoteException e) {
@@ -40,7 +40,7 @@ public class RMIClient implements MatchClient {
     }
 
     @Override
-    public void notifyDisconnection() throws RemoteException {
+    public void disconnectFromServer() throws RemoteException {
         try {
             server.disconnectClient(new MatchClientImpl(this, server));
         } catch (RemoteException e) {
@@ -49,8 +49,14 @@ public class RMIClient implements MatchClient {
     }
 
     @Override
-    public void notifyMessageSent(Message message) throws RemoteException {
-        server.sendMessage(message);
+    public void sendMessage(Message message) throws RemoteException {
+        server.getMessage(message);
     }
+
+    @Override
+    public void getMessage(Message message) throws RemoteException {
+
+    }
+
 }
 

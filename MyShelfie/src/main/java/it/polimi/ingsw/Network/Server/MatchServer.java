@@ -29,4 +29,9 @@ public interface MatchServer extends Remote {
      * @param message that the server sends to the client
      */
     void sendMessage(Message message) throws RemoteException;
+
+    /**
+     * @param message sent from client
+     */
+    void getMessage(Message message) throws RemoteException;
 }
