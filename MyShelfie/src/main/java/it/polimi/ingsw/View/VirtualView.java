@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.LivingRoom;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
@@ -32,7 +33,25 @@ public class VirtualView implements View, Observer {
         matchServer.
     }
 
+    @Override
+    public void showListOfPlayers(ArrayList<String> nicknames) {
 
+    }
+
+    @Override
+    public void showLivingRoom(LivingRoom livingRoom) {
+
+    }
+
+    @Override
+    public void showBookshelf(Player player) {
+
+    }
+
+    @Override
+    public void someoneDisconnected(String nickname) {
+
+    }
 
     @Override
     public void askNumberOfPlayers() {

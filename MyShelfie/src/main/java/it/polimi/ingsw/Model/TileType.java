@@ -4,42 +4,26 @@ public enum TileType {
     CAT, BOOK, GAME, FRAME, TROPHIE, PLANT
 
     public String toString(){
-        switch(this.ordinal()){
-            case 0:
-                return "cat";
-            case 1:
-                return "book";
-            case 2:
-                return "game";
-            case 3:
-                return "frame";
-            case 4:
-                return "trophie";
-            case 5:
-                return "plant";
-            default:
-                return null;
-
-        }
+        return switch (this.ordinal()) {
+            case 0 -> "cat";
+            case 1 -> "book";
+            case 2 -> "game";
+            case 3 -> "frame";
+            case 4 -> "trophie";
+            case 5 -> "plant";
+            default -> null;
+        };
     }
 
     public String toCliString(){
-        switch(this.ordinal()){
-            case 0:
-                return "  cat  ";
-            case 1:
-                return "  book ";
-            case 2:
-                return "  game ";
-            case 3:
-                return " frame ";
-            case 4:
-                return "trophie";
-            case 5:
-                return " plant ";
-            default:
-                return "       ";
-
-        }
+        return switch (this.ordinal()) {
+            case 0 -> "  cat  ";
+            case 1 -> "  book ";
+            case 2 -> "  game ";
+            case 3 -> " frame ";
+            case 4 -> "trophie";
+            case 5 -> " plant ";
+            default -> "       ";
+        };
     }
 }
