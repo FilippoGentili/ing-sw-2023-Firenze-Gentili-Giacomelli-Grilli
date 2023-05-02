@@ -19,13 +19,8 @@ public class LivingRoomMessage extends Message{
         this.livingroom=livingroom;
     }
 
-    public Tile[][] getLivingRoomBoard(){
-        return livingroom.getBoard();
-    }
-
-    @Override
-    public String toString(){
-        return "LivingRoom : " + Arrays.deepToString(getLivingRoomBoard());
+    public LivingRoom getLivingRoom(){
+        return livingroom;
     }
 
 }
