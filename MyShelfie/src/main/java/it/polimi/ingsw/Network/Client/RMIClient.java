@@ -2,7 +2,7 @@ package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.MatchServer;
-import it.polimi.ingsw.Network.Server.RMIServer;
+import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.*;
 import java.rmi.NotBoundException;
@@ -11,7 +11,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient implements MatchClient {
-    RMIServer server;
+    Server server;
     public RMIClient() throws RemoteException {
 
     }
@@ -19,15 +19,15 @@ public class RMIClient implements MatchClient {
     public static void main(String[] args) throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
         MatchServer server = (MatchServer) registry.lookup("//localhost/MatchServer");
-        MatchClient client = new MatchClientImpl(new RMIClient(), (RMIServer) server);
+        MatchClient client = new MatchClientImpl(new RMIClient(), (Server) server);
         client.connectToServer();
     }
 
-    public void setServer(RMIServer server) {
+    public void setServer(Server server) {
         this.server = server;
     }
 
-    public RMIServer getServer() {
+    public Server getServer() {
         return server;
     }
 
@@ -80,4 +80,3 @@ public class RMIClient implements MatchClient {
     }
 
 }
-

@@ -1,12 +1,15 @@
 package it.polimi.ingsw.Network.Server;
 
 
+import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Client.MatchClientImpl;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -15,22 +18,60 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RMIServer{
-    private List<MatchClient> listOfClients = new ArrayList<>();
+public class Server {
+    private static List<MatchClient> listOfClients = new ArrayList<>();
     public static void main(String[] args){
+        startRMIServer();
+        startSocketServer();
+    }
+
+    /**
+     * method to start the RMI Server on port 1099
+     */
+    public static void startRMIServer(){
         try{
             MatchServerImpl obj = new MatchServerImpl();
             MatchServer server/*stub*/ = (MatchServer) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
             Naming.rebind("//localhost/MatchServer", server);
+            System.out.println("RMI Server started");
         }catch (RemoteException | MalformedURLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     /**
-     * connects client to server
+     * method to start the Socket Server on port 1099
+     */
+    public static void startSocketServer(){
+        try {
+            ServerSocket serverSocket = new ServerSocket(1099);
+            System.out.println("Server Socket started");
+            new Thread(() -> {
+                while (true) {
+                    try {
+                        Socket socket = serverSocket.accept();
+                        SocketClient socketClient = new SocketClient(socket, serverSocket);
+                        MatchClientImpl matchClient = new MatchClientImpl(socketClient);
+                        listOfClients.add(matchClient);
+                        System.out.println("Socket client connected");
+                    } catch (IOException e) {
+                        System.err.println("Error accepting socket connection: " + e.getMessage());
+                    }
+                }
+            }).start();
+
+        } catch (RemoteException | MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            System.err.println("Error starting server socket: " + e.getMessage());
+        }catch (IOException e){
+            System.err.println("Error starting server socket: " + e.getMessage());
+        }
+    }
+
+    /**
+     * connects RMIClient to server
      * @param matchClient client that will be connected
      */
     public void connectClient(MatchClientImpl matchClient) {
@@ -39,7 +80,7 @@ public class RMIServer{
     }
 
     /**
-     * disconnects client from the server
+     * disconnects RMIClient from the server
      * @param matchClient client that is being disconnected
      */
     public void disconnectClient(MatchClientImpl matchClient) {
@@ -48,7 +89,7 @@ public class RMIServer{
     }
 
     /**
-     * sends message from server to client
+     * sends RMIMessage from server to client
      * @param message sent
      */
     public void sendMessage(Message message) {
@@ -62,15 +103,15 @@ public class RMIServer{
                 byte[] data = byteStream.toByteArray();
                 //send message to client
                 client.getMessage(message);
-                } catch (IOException e) {
-                    System.err.println("Error sending message to client: " + e.getMessage());
-                }
+            } catch (IOException e) {
+                System.err.println("Error sending message to client: " + e.getMessage());
             }
+        }
 
     }
 
     /**
-     * server gets message from client
+     * server gets RMIMessage from client
      * @param message received
      */
     public void getMessage(Message message){

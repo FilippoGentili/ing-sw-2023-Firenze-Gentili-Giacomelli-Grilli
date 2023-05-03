@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.Message.*;
-import it.polimi.ingsw.Network.Server.RMIServer;
+import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.*;
 import java.rmi.RemoteException;
@@ -9,9 +9,9 @@ import java.rmi.server.UnicastRemoteObject;
 public class MatchClientImpl extends UnicastRemoteObject implements MatchClient {
 
     private final MatchClient client;
-    private final RMIServer server;
+    private final Server server;
 
-    public MatchClientImpl(RMIClient client, RMIServer server) throws RemoteException {
+    public MatchClientImpl(MatchClient client, Server server) throws RemoteException {
         super();
         this.client = client;
         this.server = server;

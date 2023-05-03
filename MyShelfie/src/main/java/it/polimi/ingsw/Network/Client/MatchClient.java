@@ -33,4 +33,3 @@ public interface MatchClient extends Remote {
      */
     void getMessage(Message message) throws RemoteException;
 }
-
