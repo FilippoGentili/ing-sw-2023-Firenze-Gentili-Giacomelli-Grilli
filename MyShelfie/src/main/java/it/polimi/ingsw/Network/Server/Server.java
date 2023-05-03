@@ -50,9 +50,10 @@ public class Server {
             new Thread(() -> {
                 while (true) {
                     try {
+                        Server server = new Server();
                         Socket socket = serverSocket.accept();
-                        SocketClient socketClient = new SocketClient(socket, serverSocket);
-                        MatchClientImpl matchClient = new MatchClientImpl(socketClient);
+                        SocketClient socketClient = new SocketClient();
+                        MatchClientImpl matchClient = new MatchClientImpl(socketClient, server);
                         listOfClients.add(matchClient);
                         System.out.println("Socket client connected");
                     } catch (IOException e) {
@@ -60,15 +61,11 @@ public class Server {
                     }
                 }
             }).start();
-
-        } catch (RemoteException | MalformedURLException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            System.err.println("Error starting server socket: " + e.getMessage());
-        }catch (IOException e){
-            System.err.println("Error starting server socket: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
+
 
     /**
      * connects RMIClient to server
