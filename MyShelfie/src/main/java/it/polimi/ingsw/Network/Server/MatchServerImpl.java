@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
 
+    @Serial
+    private static final long serialVersionUID = 2646967431577448909L;
     private ArrayList<RMIClient> listOfClients = new ArrayList<>();
 
     public MatchServerImpl() throws RemoteException {
@@ -20,7 +22,7 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     /**
      * Implementation of the connection of the client
      * @param client that will be connected
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public synchronized void connectClient(RMIClient client) throws RemoteException{
@@ -31,7 +33,7 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     /**
      * Implementation of the disconnection of the client
      * @param client that will be disconnected
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public synchronized void disconnectClient(RMIClient client) throws RemoteException{
@@ -43,7 +45,7 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     /**
      * Implementation of the method that sends the message to the client
      * @param message that the server sends to the client
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public synchronized void sendMessage(Message message) throws RemoteException{
@@ -66,7 +68,7 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     /**
      * Implementation of the method that gets the message from the client
      * @param message sent from client
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public void getMessage(Message message) throws  RemoteException{

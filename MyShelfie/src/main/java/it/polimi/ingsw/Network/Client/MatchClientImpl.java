@@ -8,6 +8,8 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class MatchClientImpl extends UnicastRemoteObject implements MatchClient {
 
+    @Serial
+    private static final long serialVersionUID = -1560260263161329165L;
     private final MatchClient client;
     private final Server server;
 
@@ -20,7 +22,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
 
     /**
      * method called by the server to connect the client
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public void connectToServer() throws RemoteException{
@@ -29,7 +31,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
 
     /**
      * method called by the server to disconnect the client
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public void disconnectFromServer() throws RemoteException {
@@ -39,7 +41,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     /**
      * Implementation of the method that sends the message to the server
      * @param message that the client sends
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public void sendMessage(Message message) throws RemoteException {
@@ -60,7 +62,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     /**
      * Implementation of the method that gets the message from the server
      * @param message that the client sends
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     @Override
     public void getMessage(Message message) throws RemoteException {

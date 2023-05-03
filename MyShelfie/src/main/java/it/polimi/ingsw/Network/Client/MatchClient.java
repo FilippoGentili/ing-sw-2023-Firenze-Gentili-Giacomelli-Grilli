@@ -9,27 +9,27 @@ public interface MatchClient extends Remote {
 
     /**
      * connects client to the server
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     void connectToServer() throws RemoteException;
 
     /**
      * disconnects client from the server
-     * @throws RemoteException
+     * @throws RemoteException if a communication error occurs
      */
     void disconnectFromServer() throws RemoteException;
 
     /**
      * sends message from client to the server
-     * @param message
-     * @throws RemoteException
+     * @param message that will be sent
+     * @throws RemoteException if a communication error occurs
      */
     void sendMessage(Message message) throws RemoteException;
 
     /**
      * receive message from the server
-     * @param message
-     * @throws RemoteException
+     * @param message that is received
+     * @throws RemoteException if a communication error occurs
      */
     void getMessage(Message message) throws RemoteException;
 }
