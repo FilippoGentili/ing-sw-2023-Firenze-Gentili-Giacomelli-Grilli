@@ -12,7 +12,7 @@ public interface View {
 
     void showMessage(String message) throws RemoteException;
 
-    void loginResult(boolean validNickname, boolean connection, String nickname);
+    void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException;
 
     void nicknameRequest() throws RemoteException;
 
@@ -22,7 +22,7 @@ public interface View {
 
     void TilesRequest(LivingRoom livingRoom) throws RemoteException;
 
-    void OrderTiles(ArrayList<Tile> chosenTiles);
+    void OrderTiles(ArrayList<Tile> chosenTiles) throws RemoteException;
 
     void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException;
 

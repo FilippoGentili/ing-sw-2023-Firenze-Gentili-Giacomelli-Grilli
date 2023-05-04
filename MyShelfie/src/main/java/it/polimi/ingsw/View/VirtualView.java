@@ -74,12 +74,12 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void OrderTiles(ArrayList<Tile> chosenTiles){
-        matchServer.sendMessage(new OrderedTiles(chosenTiles));
+    public void OrderTiles(ArrayList<Tile> chosenTiles) throws RemoteException {
+        matchServer.sendMessage(new OrderedTilesRequest(chosenTiles));
     }
 
     @Override
-    public void loginResult(boolean validNickname, boolean connection, String nickname) {
-        matchServer.sendMessage(new LoginReply());
+    public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
+        matchServer.sendMessage(new LoginResult(nickname, validNickname, connection));
     }
 }
