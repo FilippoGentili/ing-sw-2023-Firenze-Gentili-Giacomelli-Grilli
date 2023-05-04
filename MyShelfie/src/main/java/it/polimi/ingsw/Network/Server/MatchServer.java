@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Message.*;
-import it.polimi.ingsw.Network.Client.RMIClient;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -18,14 +18,14 @@ public interface MatchServer extends Remote {
      * @param client that will be connected
      * @throws RemoteException if a communication error occurs
      */
-    void connectClient(RMIClient client) throws RemoteException;
+    void connectClient(MatchClient client) throws RemoteException;
 
     /**
      * Disconnects the client from the server
      * @param client that will be disconnected
      * @throws RemoteException if a communication error occurs
      */
-    void disconnectClient(RMIClient client) throws RemoteException;
+    void disconnectClient(MatchClient client) throws RemoteException;
 
     /**
      * Sends a message to the client
@@ -40,4 +40,5 @@ public interface MatchServer extends Remote {
      * @throws RemoteException if a communication error occurs
      */
     void getMessage(Message message) throws RemoteException;
+
 }

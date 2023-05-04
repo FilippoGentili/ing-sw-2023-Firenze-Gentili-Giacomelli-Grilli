@@ -11,7 +11,6 @@ public enum MessageType {
     PING,
     ACK,
     CHOSEN_TILES_REQUEST,
-    CHOSEN_TILES_REPLY,
     GIVE_POINTS,
     COLUMN_REQUEST,
     COLUMN_REPLY,
@@ -22,6 +21,6 @@ public enum MessageType {
     LIVING_ROOM,
     SERVER_INFO,
     ORDERED_TILES,
-    BOOKSHELF
+    HEARTBEAT,
 }
 

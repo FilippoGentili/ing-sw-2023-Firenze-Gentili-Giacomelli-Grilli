@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Network.Client.MatchClientImpl;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Client.MatchClient;
 import it.polimi.ingsw.Network.Client.RMIClient;
@@ -8,13 +9,15 @@ import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
 
     @Serial
     private static final long serialVersionUID = 2646967431577448909L;
-    private ArrayList<RMIClient> listOfClients = new ArrayList<>();
-
+    private ArrayList<MatchClient> listOfClients = new ArrayList<>();
+    private RMIClient client;
     public MatchServerImpl() throws RemoteException {
         super();
     }
@@ -25,7 +28,7 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
      * @throws RemoteException if a communication error occurs
      */
     @Override
-    public synchronized void connectClient(RMIClient client) throws RemoteException{
+    public synchronized void connectClient(MatchClient client) throws RemoteException{
         listOfClients.add(client);
         System.out.println("Client connected");
     }
@@ -36,10 +39,9 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
      * @throws RemoteException if a communication error occurs
      */
     @Override
-    public synchronized void disconnectClient(RMIClient client) throws RemoteException{
+    public synchronized void disconnectClient(MatchClient client) throws RemoteException{
         listOfClients.remove(client);
         System.out.println("Client disconnected");
-
     }
 
     /**

@@ -5,20 +5,51 @@ import it.polimi.ingsw.Network.Server.Server;
 import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MatchClientImpl extends UnicastRemoteObject implements MatchClient {
 
     @Serial
     private static final long serialVersionUID = -1560260263161329165L;
     private final MatchClient client;
+    private boolean isConnected;
     private final Server server;
 
     public MatchClientImpl(MatchClient client, Server server) throws RemoteException {
         super();
         this.client = client;
         this.server = server;
+        isConnected = true;
     }
 
+    /**
+     * checks connection between client and server
+     */
+    public void heartbeat() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (isConnected) {
+                    try {
+                        Message Heartbeat= new Heartbeat();
+                        sendMessage(Heartbeat);
+                    } catch (RemoteException e) {
+                        System.err.println("Error sending heartbeat message: " + e.getMessage());
+                        isConnected = false;
+                        try {
+                            disconnectFromServer();
+                        } catch (RemoteException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 0, 10000);
+    }
 
     /**
      * method called by the server to connect the client
@@ -27,6 +58,8 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     @Override
     public void connectToServer() throws RemoteException{
         server.connectClient(this);
+        isConnected = true;
+        heartbeat();
     }
 
     /**
@@ -36,6 +69,7 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     @Override
     public void disconnectFromServer() throws RemoteException {
         server.disconnectClient(this);
+        isConnected = false;
     }
 
     /**

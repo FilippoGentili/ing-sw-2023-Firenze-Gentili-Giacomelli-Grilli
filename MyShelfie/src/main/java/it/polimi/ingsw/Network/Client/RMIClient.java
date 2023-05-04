@@ -23,6 +23,7 @@ public class RMIClient implements MatchClient {
         client.connectToServer();
     }
 
+
     public void setServer(Server server) {
         this.server = server;
     }
