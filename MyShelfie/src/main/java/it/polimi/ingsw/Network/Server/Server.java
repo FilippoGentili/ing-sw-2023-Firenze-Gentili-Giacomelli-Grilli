@@ -20,10 +20,6 @@ import java.util.List;
 
 public class Server {
     private static List<MatchClient> listOfClients = new ArrayList<>();
-    public static void main(String[] args){
-        startRMIServer();
-        startSocketServer();
-    }
 
     /**
      * method to start the RMI Server on port 1099

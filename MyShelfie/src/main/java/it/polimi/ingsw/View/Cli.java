@@ -101,7 +101,13 @@ public class Cli extends ViewObservable implements View{
             }
         }while(!valid);
 
-        notifyObserver(obs -> obs.updateServerInfo(serverInfo));
+        notifyObserver(obs -> {
+            try {
+                obs.updateServerInfo(serverInfo);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
