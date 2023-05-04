@@ -24,34 +24,6 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
     }
 
     /**
-     * checks connection between client and server
-     */
-    public void heartbeat() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (isConnected) {
-                    try {
-                        Message Heartbeat= new Heartbeat();
-                        sendMessage(Heartbeat);
-                    } catch (RemoteException e) {
-                        System.err.println("Error sending heartbeat message: " + e.getMessage());
-                        isConnected = false;
-                        try {
-                            disconnectFromServer();
-                        } catch (RemoteException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                } else {
-                    timer.cancel();
-                }
-            }
-        }, 0, 10000);
-    }
-
-    /**
      * method called by the server to connect the client
      * @throws RemoteException if a communication error occurs
      */
@@ -110,6 +82,34 @@ public class MatchClientImpl extends UnicastRemoteObject implements MatchClient 
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error receiving message: " + e.getMessage());
         }
+    }
 
+    /**
+     * checks connection between client and server every 10 seconds
+     */
+    @Override
+    public void heartbeat() throws RemoteException{
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (isConnected) {
+                    try {
+                        Message Heartbeat= new Heartbeat();
+                        sendMessage(Heartbeat);
+                    } catch (RemoteException e) {
+                        System.err.println("Error sending heartbeat message: " + e.getMessage());
+                        isConnected = false;
+                        try {
+                            disconnectFromServer();
+                        } catch (RemoteException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 0, 10000);
     }
 }

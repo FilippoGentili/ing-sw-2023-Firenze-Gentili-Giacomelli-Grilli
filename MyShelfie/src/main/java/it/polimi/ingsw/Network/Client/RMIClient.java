@@ -9,13 +9,24 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RMIClient implements MatchClient {
     Server server;
+    private boolean isConnected;
+
     public RMIClient() throws RemoteException {
+        isConnected = true;
 
     }
 
+    /**
+     * establish connection with the server
+     * @param args
+     * @throws RemoteException if a communication error occurs
+     * @throws NotBoundException
+     */
     public static void main(String[] args) throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
         MatchServer server = (MatchServer) registry.lookup("//localhost/MatchServer");
@@ -23,15 +34,26 @@ public class RMIClient implements MatchClient {
         client.connectToServer();
     }
 
-
+    /**
+     * gets the server
+     * @param server that is set
+     */
     public void setServer(Server server) {
         this.server = server;
     }
 
+    /**
+     * sets the server
+     * @return the server
+     */
     public Server getServer() {
         return server;
     }
 
+    /**
+     * connects client to the server
+     * @throws RemoteException if a communication error occurs
+     */
     @Override
     public void connectToServer() throws RemoteException {
         try {
@@ -41,6 +63,10 @@ public class RMIClient implements MatchClient {
         }
     }
 
+    /**
+     * disconnects client from the server
+     * @throws RemoteException if a communication error occurs
+     */
     @Override
     public void disconnectFromServer() throws RemoteException {
         try {
@@ -50,6 +76,11 @@ public class RMIClient implements MatchClient {
         }
     }
 
+    /**
+     * sends message to the server
+     * @param message that the client sends
+     * @throws RemoteException if a communication error occurs
+     */
     @Override
     public void sendMessage(Message message) throws RemoteException {
         try {
@@ -66,6 +97,11 @@ public class RMIClient implements MatchClient {
         }
     }
 
+    /**
+     * receive message from the server
+     * @param message that is received
+     * @throws RemoteException if a communication error occurs
+     */
     @Override
     public void getMessage(Message message) throws RemoteException {
         try {
@@ -78,6 +114,35 @@ public class RMIClient implements MatchClient {
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error receiving message: " + e.getMessage());
         }
+    }
+
+    /**
+     * checks connection between client and server every 10 seconds
+     */
+    @Override
+    public void heartbeat() throws RemoteException{
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (isConnected) {
+                    try {
+                        Message Heartbeat= new Heartbeat();
+                        sendMessage(Heartbeat);
+                    } catch (RemoteException e) {
+                        System.err.println("Error sending heartbeat message: " + e.getMessage());
+                        isConnected = false;
+                        try {
+                            disconnectFromServer();
+                        } catch (RemoteException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 0, 10000);
     }
 
 }

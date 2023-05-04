@@ -32,4 +32,10 @@ public interface MatchClient extends Remote {
      * @throws RemoteException if a communication error occurs
      */
     void getMessage(Message message) throws RemoteException;
+
+    /**
+     * checks if the connection is up
+     * @throws RemoteException if a communication error occurs
+     */
+     void heartbeat() throws RemoteException;
 }
