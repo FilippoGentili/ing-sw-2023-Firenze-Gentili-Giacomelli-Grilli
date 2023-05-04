@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Message;
 public enum MessageType {
     LOGIN_REQUEST,
     LOGIN_REPLY,
+    LOGIN_RESULT,
     NUM_OF_PLAYERS_REQUEST,
     NUM_OF_PLAYERS_REPLY,
     PICK_FIRST_PLAYER, //serve?
@@ -20,7 +21,8 @@ public enum MessageType {
     MATCH_INFO,
     LIVING_ROOM,
     SERVER_INFO,
-    ORDERED_TILES,
+    ORDERED_TILES_REPLY,
+    ORDERED_TILES_REQUEST,
     HEARTBEAT,
 }
 

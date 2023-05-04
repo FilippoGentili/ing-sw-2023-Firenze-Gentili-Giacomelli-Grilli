@@ -124,8 +124,8 @@ public class GameController {
      * @param message
      */
     public void InsertTiles(Message message) throws RemoteException {
-        OrderedTiles orderedTiles = (OrderedTiles) message;
-        ArrayList<Tile> chosenTiles = orderedTiles.getOrderedTiles();
+        OrderedTilesReply orderedTilesReply = (OrderedTilesReply) message;
+        ArrayList<Tile> chosenTiles = orderedTilesReply.getOrderedTiles();
 
         currentPlayer.InsertTiles(chosenTiles, currentPlayer.getChosenColumn());
 
