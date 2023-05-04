@@ -31,12 +31,6 @@ public class Game extends Observable {
      *
      */
 
-    public static void gameLoop() {
-        currentPlayer.setState(new End());
-        Game.setCurrentPlayer(getNextPlayer());
-        currentPlayer.setState(new Start());
-        currentPlayer.getState().stateAction();
-    }
 
     /**
      * random selection of the first player
@@ -316,9 +310,6 @@ public class Game extends Observable {
         int score = player.getScore();
         player.setScore(score + 1);
         player.setLastPlayer(true);
-        // the game goes on until it's the first player's turn
-        while (Game.getCurrentPlayer() != Game.pickFirstPlayer())
-            Game.gameLoop();
     }
 
     /**

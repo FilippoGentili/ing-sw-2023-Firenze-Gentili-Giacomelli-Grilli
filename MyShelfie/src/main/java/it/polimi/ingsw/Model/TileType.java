@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model;
 
 public enum TileType {
-    CAT, BOOK, GAME, FRAME, TROPHIE, PLANT
+    CAT, BOOK, GAME, FRAME, TROPHIE, PLANT;
 
     public String toString(){
         return switch (this.ordinal()) {

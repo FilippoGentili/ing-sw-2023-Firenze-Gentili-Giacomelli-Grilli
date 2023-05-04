@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Player extends Observable {
     private String nickname;
-    private State currentState;
     private int score;
     private Game game;
     private Bookshelf bookshelf;
@@ -18,17 +17,6 @@ public class Player extends Observable {
     private boolean Pointscg2 = false;
     private ArrayList<Tile> chosenTiles;
     private Integer ChosenColumn;
-
-    /*This method asks the user to choose a Nickname
-    public String chooseNickname(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your nickname");
-
-        //Da verificare che non sia uguale a quello di un altro
-
-        return scanner.nextLine();
-    }
-     */
 
     /**
      * @return the nickname
@@ -51,7 +39,6 @@ public class Player extends Observable {
      */
     public Player(){
         this.score = 0;
-        //this.nickname = chooseNickname();
         this.bookshelf = new Bookshelf();
         this.personalGoalCard = new PersonalGoalCard();
         this.lastPlayer = false;
@@ -105,28 +92,6 @@ public class Player extends Observable {
         if(game!=null){
             game.removePlayer(this);
         }
-    }
-
-    /**
-     * sets the current state of the player
-     * @param state
-     */
-    public void setState(State state){
-        currentState = state;
-    }
-
-    /**
-     * @return the current state of the player
-     */
-    public State getState(){
-        return currentState;
-    }
-
-    /**
-     * calls stateAction from the current state
-     */
-    public void stateAction(){
-        currentState.stateAction();
     }
 
     /**
