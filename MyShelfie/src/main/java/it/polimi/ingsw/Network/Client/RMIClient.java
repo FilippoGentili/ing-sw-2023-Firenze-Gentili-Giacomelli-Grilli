@@ -25,13 +25,16 @@ public class RMIClient implements MatchClient {
      * establish connection with the server
      * @param args
      * @throws RemoteException if a communication error occurs
-     * @throws NotBoundException
      */
-    public static void main(String[] args) throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-        MatchServer server = (MatchServer) registry.lookup("//localhost/MatchServer");
-        MatchClient client = new MatchClientImpl(new RMIClient(), (Server) server);
-        client.connectToServer();
+    public static void main(String[] args) throws RemoteException {
+        try {
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+            MatchServer server = (MatchServer) registry.lookup("//localhost/MatchServer");
+            MatchClient client = new MatchClientImpl(new RMIClient(), (Server) server);
+            client.connectToServer();
+        }catch (NotBoundException e){
+            System.err.println("MatchServer is not bound to the registry: " + e.getMessage());
+        }
     }
 
     /**
