@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import static it.polimi.ingsw.Model.Game.endGameTrigger;
-import static it.polimi.ingsw.Model.Game.pickFirstPlayer;
 import static it.polimi.ingsw.Model.GameState.*;
 
 public class GameController {
@@ -83,7 +82,7 @@ public class GameController {
      * @param message tiles the client chose
      */
     public void chooseTiles(Message message) throws RemoteException {
-        ChosenTilesMessage chosenTilesMessage = (ChosenTilesMessage) message;
+        ChosenTilesReply chosenTilesMessage = (ChosenTilesReply) message;
         ArrayList<Tile> chosen = chosenTilesMessage.getChosenTiles();
 
         if(inputController.livingRoomChosenTiles(chosenTilesMessage)){

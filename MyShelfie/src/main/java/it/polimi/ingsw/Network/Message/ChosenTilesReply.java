@@ -4,7 +4,7 @@ import it.polimi.ingsw.Model.Tile;
 
 import java.util.ArrayList;
 
-public class ChosenTilesMessage extends Message {
+public class ChosenTilesReply extends Message {
     private static final long serialVersionUID = 611518002718302338L;
     private final ArrayList<Tile> chosenTiles;
 
@@ -13,8 +13,8 @@ public class ChosenTilesMessage extends Message {
      * @param nickname
      * @param chosenTiles
      */
-    public ChosenTilesMessage(String nickname, ArrayList<Tile> chosenTiles){
-        super(nickname, MessageType.CHOSEN_TILES_REQUEST);
+    public ChosenTilesReply(String nickname, ArrayList<Tile> chosenTiles){
+        super(nickname, MessageType.CHOSEN_TILES_REPLY);
         this.chosenTiles = chosenTiles;
     }
 

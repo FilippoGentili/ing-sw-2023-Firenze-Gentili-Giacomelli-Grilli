@@ -53,7 +53,7 @@ public class InputController {
      */
     public boolean livingRoomChosenTiles(Message message){
 
-        ChosenTilesMessage chosen = (ChosenTilesMessage) message;
+        ChosenTilesReply chosen = (ChosenTilesReply) message;
         ArrayList<Tile> chosenTiles = chosen.getChosenTiles();
 
         int max = gameController.getCurrentPlayer().getBookshelf().getMaxPossibleTiles();
