@@ -2,6 +2,7 @@ package it.polimi.ingsw.Observer;
 
 import it.polimi.ingsw.Network.Message.Message;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 //manda eventi
@@ -18,7 +19,7 @@ public class Observable {
         observers.remove(obs);
     }
 
-    public void notifyObserver(Message message){
+    public void notifyObserver(Message message) throws RemoteException {
         for(Observer obs : observers){
             obs.update(message);
         }

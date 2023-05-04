@@ -28,7 +28,7 @@ public class InputController {
      * @param view view of the client
      * @return {code @true} if nickname is valid {code @false} if nickname is not valid
      */
-    public boolean checkNickname(String nickname, View view){
+    public boolean checkNickname(String nickname, View view) throws RemoteException {
         if(nickname.isEmpty()){
             view.showMessage("nickname missing");
             view.loginResult(false, false, nickname);

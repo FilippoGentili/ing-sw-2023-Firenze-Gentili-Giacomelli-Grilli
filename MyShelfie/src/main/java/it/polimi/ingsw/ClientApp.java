@@ -4,17 +4,28 @@ import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.View.Cli;
 
+import java.rmi.RemoteException;
+import java.util.Scanner;
+
 public class ClientApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
 
         boolean cliCheck = false;
 
-        for(String arg : args) {
+        /*for(String arg : args) {
             if (arg.equals("-cli")) {
                 cliCheck = true;
                 break;
             }
+        }*/
+
+        System.out.println("If you want to start a cli write '-cli' ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        if (input.equals("-cli")) {
+            cliCheck = true;
         }
 
         if(cliCheck){
@@ -22,9 +33,9 @@ public class ClientApp {
             ClientController clientController = new ClientController(view);
             view.addObserver(clientController);
             view.start();
-        }else{
+        }/*else{
             //gui
-        }
+        }*/
 
     }
 }

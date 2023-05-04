@@ -3,6 +3,8 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Server.Server;
 
+import java.util.Scanner;
+
 import static it.polimi.ingsw.Network.Server.Server.startRMIServer;
 import static it.polimi.ingsw.Network.Server.Server.startSocketServer;
 
@@ -11,16 +13,16 @@ public class ServerApp {
     public static void main(String[] args) {
 
         Server server = new Server();
-        GameController gameController = new GameController();
+        //GameController gameController = new GameController();
+
+        System.out.println("If you want to start an rmi server write '-rmi' ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
 
         boolean rmi = false;
 
-        for(String arg : args){
-            if(arg.equals("-rmi")){
-                rmi = true;
-                break;
-            }
-        }
+        if(input.equals("-rmi"))
+            rmi = true;
 
         if(rmi){
             startRMIServer();

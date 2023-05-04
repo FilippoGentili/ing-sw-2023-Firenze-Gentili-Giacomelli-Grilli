@@ -22,7 +22,8 @@ public class ClientController implements Observer, ViewObserver {
     private RMIClient client;
     private String nickname;
 
-    public ClientController(View view) {
+    public ClientController(View view) throws RemoteException {
+        this.client = new RMIClient();
         this.view = view;
     }
 
@@ -79,16 +80,6 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void handleDisconnection() throws RemoteException {
         client.sendMessage(new DisconnectionRequest(nickname));
-    }
-
-    public boolean validIP(String address){
-        String regex = "";
-        return address.matches(regex);
-    }
-
-    public boolean validPort(String  port){
-        int p = Integer.parseInt(port);
-        return p >= 1 && p <= 65535;
     }
 
 

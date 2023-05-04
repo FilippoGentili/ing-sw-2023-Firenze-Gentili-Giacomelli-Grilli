@@ -18,16 +18,17 @@ import static java.lang.Integer.parseInt;
 
 public class Cli extends ViewObservable implements View{
 
-    private ClientController clientController;
+    //private ClientController clientController;
 
     private final PrintStream out;
+    Scanner scanner = new Scanner(System.in);
 
     public Cli(){
         out = System.out;
     }
 
     public String readLine(){
-        //da sistemare con i thread
+        return scanner.nextLine().trim();
     }
 
 
@@ -65,7 +66,7 @@ public class Cli extends ViewObservable implements View{
         String address;
         String port;
 
-        do{
+        /*do{
             out.println("Specify the address");
             System.out.println("Default address value -> " + defaultAddress);
 
@@ -73,7 +74,7 @@ public class Cli extends ViewObservable implements View{
             if (address.equals("")) {
                 serverInfo.put("address", defaultAddress);
                 valid = true;
-            } else if (clientController.validIP(address)) {
+            } else if (validIP(address)) {
                 serverInfo.put("address", address);
                 valid = true;
             } else {
@@ -81,17 +82,20 @@ public class Cli extends ViewObservable implements View{
                 out.flush();
                 valid = false;
             }
-        }while(!valid);
+        }while(!valid);*/
+
+        serverInfo.put("address", defaultAddress);
 
         do{
             out.println("Specify the port");
-            System.out.println("Default port value -> " + defaultAddress);
+            System.out.println("Default port value -> " + defaultPort);
 
             port = readLine();
+
             if (port.equals("")) {
                 serverInfo.put("port", defaultPort);
                 valid = true;
-            } else if (clientController.validPort(port)) {
+            }else if (validPort(port)) {
                 serverInfo.put("port", port);
                 valid = true;
             } else {
@@ -108,6 +112,12 @@ public class Cli extends ViewObservable implements View{
                 throw new RuntimeException(e);
             }
         });
+    }
+
+
+    public boolean validPort(String port){
+        int p = Integer.parseInt(port);
+        return p >= 1 && p <= 65535;
     }
 
     @Override

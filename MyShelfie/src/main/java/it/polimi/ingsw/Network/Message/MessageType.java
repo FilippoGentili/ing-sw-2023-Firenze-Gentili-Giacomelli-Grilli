@@ -24,5 +24,7 @@ public enum MessageType {
     ORDERED_TILES_REPLY,
     ORDERED_TILES_REQUEST,
     HEARTBEAT,
+    BOOKSHELF,
+    CHOSEN_TILES_REPLY
 }
 

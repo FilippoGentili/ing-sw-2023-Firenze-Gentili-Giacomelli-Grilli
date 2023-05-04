@@ -27,9 +27,9 @@ public class Server {
     public static void startRMIServer(){
         try{
             MatchServerImpl obj = new MatchServerImpl();
-            MatchServer server/*stub*/ = (MatchServer) UnicastRemoteObject.exportObject(obj, 0);
+            //MatchServer server/*stub*/ = (MatchServer) UnicastRemoteObject.exportObject(obj, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
-            Naming.rebind("//localhost/MatchServer", server);
+            Naming.rebind("//localhost/MatchServer", obj);
             System.out.println("RMI Server started");
         }catch (RemoteException | MalformedURLException e) {
             throw new RuntimeException(e);
