@@ -3,7 +3,8 @@ package it.polimi.ingsw.Network.Message;
 public enum MessageType {
     LOGIN_REQUEST,
     LOGIN_REPLY,
-    NUM_OF_PLAYERS_REQUEST, //serve?
+    NUM_OF_PLAYERS_REQUEST,
+    NUM_OF_PLAYERS_REPLY,
     PICK_FIRST_PLAYER, //serve?
     DISCONNECTION_REQUEST,
     DISCONNECTION_REPLY,

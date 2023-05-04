@@ -11,26 +11,20 @@ public class ColumnRequest extends Message{
 
     /**
      * Message used to request a column from the server to the client
-     * @param nickname
      * @param availableColumns
      */
-    public ColumnRequest(String nickname, ArrayList<Integer> availableColumns){
+    public ColumnRequest(ArrayList<Integer> availableColumns){
         super(Game.getServerName(),  MessageType.COLUMN_REQUEST);
         this.availableColumns=availableColumns;
-        this.activePlayer = nickname;
     }
-
 
     public ArrayList<Integer> getAvailableColumns(){
         return availableColumns;
     }
-    public String getActivePlayer(){
-        return activePlayer;
-    }
 
     @Override
     public String toString(){
-        return " " + getActivePlayer() +" select the column from the list: " + getAvailableColumns();
+        return "Select the column from the list: " + getAvailableColumns();
     }
 
 }
