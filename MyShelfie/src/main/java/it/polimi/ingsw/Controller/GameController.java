@@ -258,7 +258,7 @@ public class GameController {
         player.getBookshelf().removeObserver(vv);
     }
 
-    public void handleLogin(String nickname, VirtualView vv){
+    public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
         Player player = new Player();
         player.setNickname(nickname);
         int num;

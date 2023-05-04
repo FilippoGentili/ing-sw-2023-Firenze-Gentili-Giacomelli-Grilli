@@ -10,6 +10,7 @@ import it.polimi.ingsw.Observer.ViewObservable;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.rmi.RemoteException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -108,7 +109,13 @@ public class Cli extends ViewObservable implements View{
         String nickname;
         System.out.println("Insert your nickname: ");
         nickname=readLine();
-        notifyObserver(obs -> obs.updateNickname(nickname));
+        notifyObserver(obs -> {
+            try {
+                obs.updateNickname(nickname);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
@@ -116,7 +123,13 @@ public class Cli extends ViewObservable implements View{
         int num;
         System.out.println("Insert the number of players you want to play with: ");
         num = checkValidNumOfPlayers();
-        notifyObserver(obs -> obs.updateNumOfPlayers(num));
+        notifyObserver(obs -> {
+            try {
+                obs.updateNumOfPlayers(num);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public int checkValidNumOfPlayers(){
@@ -213,7 +226,13 @@ public class Cli extends ViewObservable implements View{
             }
         }
 
-        notifyObserver(obs -> obs.updateChosenTiles(chosenTiles));
+        notifyObserver(obs -> {
+            try {
+                obs.updateChosenTiles(chosenTiles);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
@@ -245,7 +264,13 @@ public class Cli extends ViewObservable implements View{
             }
         }while(!chosenTiles.toString().contains(input));
 
-        notifyObserver(obs -> obs.updateOrderedTiles(orderedTiles));
+        notifyObserver(obs -> {
+            try {
+                obs.updateOrderedTiles(orderedTiles);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
@@ -264,7 +289,13 @@ public class Cli extends ViewObservable implements View{
 
         final int choice = col-1;
 
-        notifyObserver(obs -> obs.updateChosenColumn(choice));
+        notifyObserver(obs -> {
+            try {
+                obs.updateChosenColumn(choice, AvailableColumns);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 
@@ -275,10 +306,10 @@ public class Cli extends ViewObservable implements View{
     }
 
     @Override
-    public void showListOfPlayers(ArrayList<String> nicknames) {
+    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException {
         System.out.println("Lobby: ");
-        for(int i=1; i<=nicknames.size(); i++)
-            System.out.println(i+") "+nicknames.get(i-1));
+        for(int i=1; i<=listOfPlayers.size(); i++)
+            System.out.println(i+") "+listOfPlayers.get(i-1));
     }
 
     @Override

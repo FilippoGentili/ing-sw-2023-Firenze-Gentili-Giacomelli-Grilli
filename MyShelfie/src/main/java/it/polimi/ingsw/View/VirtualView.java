@@ -49,7 +49,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showBookshelf(Player player) {
+    public void showBookshelf(Player player) throws RemoteException {
         matchServer.sendMessage(new BookshelfMessage(player));  //BookshelfMessage da creare
     }
 
@@ -59,8 +59,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askNumberOfPlayers() {
-        matchServer.sendMessage(new NumOfPlayersReply());   //da creare
+    public void askNumberOfPlayers() throws RemoteException {
+        matchServer.sendMessage(new NumOfPlayersRequest());   //da creare
     }
 
     @Override
@@ -69,17 +69,17 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void TilesRequest(LivingRoom livingRoom) {
-
+    public void TilesRequest(LivingRoom livingRoom) throws RemoteException {
+        matchServer.sendMessage(new ChosenTilesRequest(livingRoom));
     }
 
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles){
-
+        matchServer.sendMessage(new OrderedTiles(chosenTiles));
     }
 
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) {
-
+        matchServer.sendMessage(new LoginReply());
     }
 }

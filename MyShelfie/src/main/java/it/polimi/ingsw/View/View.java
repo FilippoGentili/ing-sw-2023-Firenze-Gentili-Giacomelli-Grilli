@@ -16,11 +16,11 @@ public interface View {
 
     void nicknameRequest() throws RemoteException;
 
-    void askNumberOfPlayers();
+    void askNumberOfPlayers() throws RemoteException;
 
     void columnRequest(ArrayList<Integer> AvailableColumns) throws RemoteException;
 
-    void TilesRequest(LivingRoom livingRoom);
+    void TilesRequest(LivingRoom livingRoom) throws RemoteException;
 
     void OrderTiles(ArrayList<Tile> chosenTiles);
 
@@ -30,5 +30,5 @@ public interface View {
 
     void showLivingRoom(LivingRoom livingRoom) throws RemoteException;
 
-    void showBookshelf(Player player);
+    void showBookshelf(Player player) throws RemoteException;
 }

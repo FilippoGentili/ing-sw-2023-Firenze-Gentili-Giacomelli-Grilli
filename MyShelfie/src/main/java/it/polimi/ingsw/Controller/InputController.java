@@ -6,6 +6,7 @@ import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Model.Tile;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class InputController {
      * @param message message from the client
      * @return {code @true} if the tiles are valid {code @false} if the tiles are invalid.
      */
-    public boolean livingRoomChosenTiles(Message message){
+    public boolean livingRoomChosenTiles(Message message) throws RemoteException {
 
         ChosenTilesReply chosen = (ChosenTilesReply) message;
         ArrayList<Tile> chosenTiles = chosen.getChosenTiles();
