@@ -11,17 +11,17 @@ import java.util.Map;
 
 public interface ViewObserver{
 
-    void updateServerInfo(Map<String, String> serverInfo);
+    void updateServerInfo(Map<String, String> serverInfo) throws RemoteException;
 
     void updateNickname(String nickname) throws RemoteException;
 
     void updateNumOfPlayers(int num) throws RemoteException;
 
-    void updateChosenTiles(ArrayList<Tile> chosen);
+    void updateChosenTiles(ArrayList<Tile> chosen) throws RemoteException;
 
-    void updateOrderedTiles(ArrayList<Tile> chosen);
+    void updateOrderedTiles(ArrayList<Tile> chosen) throws RemoteException;
 
-    void updateChosenColumn(int col);
+    void updateChosenColumn(int col,ArrayList<Integer> availableColumns) throws RemoteException;
 
-    void handleDisconnection();
+    void handleDisconnection() throws RemoteException;
 }

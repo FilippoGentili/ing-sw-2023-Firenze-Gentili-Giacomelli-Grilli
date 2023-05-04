@@ -113,7 +113,7 @@ public class GameController {
             currentPlayer.setChosenColumn(chosen);
             virtualViewMap.get(currentPlayer).OrderTiles(currentPlayer.getChosenTiles());
         }else{
-            ArrayList<Integer> availableColumns = new ArrayList<>();
+            ArrayList<Integer> availableColumns;
             availableColumns = currentPlayer.getBookshelf().getFreeColumns(currentPlayer.getChosenTiles().size());
             virtualViewMap.get(currentPlayer).columnRequest(availableColumns);
         }
