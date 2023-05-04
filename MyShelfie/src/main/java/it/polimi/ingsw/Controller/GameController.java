@@ -72,7 +72,7 @@ public class GameController {
                 map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
         }
 
-        virtualViewMap.get(currentPlayer).TilesRequest();
+        virtualViewMap.get(currentPlayer).TilesRequest(game.getLivingRoom());
 
     }
 
@@ -96,7 +96,7 @@ public class GameController {
             availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
             virtualViewMap.get(currentPlayer).columnRequest(availableColumns);
         }else{
-            virtualViewMap.get(currentPlayer).TilesRequest();
+            virtualViewMap.get(currentPlayer).TilesRequest(game.getLivingRoom());
         }
     }
 

@@ -15,7 +15,7 @@ public interface ViewObserver{
 
     void updateNickname(String nickname) throws RemoteException;
 
-    void updateNumOfPlayers(int num);
+    void updateNumOfPlayers(int num) throws RemoteException;
 
     void updateChosenTiles(ArrayList<Tile> chosen);
 

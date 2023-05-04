@@ -61,7 +61,7 @@ public class InputController {
         if(chosenTiles.size() > max){
             virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("You can't choose so many tiles");
             ArrayList<Tile> otherTiles = new ArrayList<>();
-            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(otherTiles);
+            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(gameController.getGame().getLivingRoom());
             return false;       //ma qui è giusto ritornare false dopo aver fatto una seconda TilesRequest??
         }
 

@@ -48,7 +48,8 @@ public class ClientController implements Observer, ViewObserver {
     }                                                       // da noi MatchImpl dovrebbe diventare Observable, perchè sono la stessa cosa; infatti il client dovrà estendere proprio observable
 
     @Override
-    public void updateNumOfPlayers(int num) {
+    public void updateNumOfPlayers(int num) throws RemoteException {
+        client.sendMessage(new NumOfPlayersReply(nickname,num));
 
     }
 
