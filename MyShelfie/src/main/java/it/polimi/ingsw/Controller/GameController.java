@@ -6,6 +6,7 @@ import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.View.VirtualView;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +34,7 @@ public class GameController {
         this.inputController = new InputController(this,virtualViewMap);
     }
 
-    public void startGame(){
+    public void startGame() throws RemoteException {
         setGameState(PLAY);
         currentPlayer = game.pickFirstPlayer();
         broadcastShowMessage("Game started!");
@@ -57,7 +58,7 @@ public class GameController {
     /**
      * this method initializes a new turn.
      */
-    public void newTurn(){
+    public void newTurn() throws RemoteException {
         //yourTurn(gameController.getCurrentPlayer());
         if(firstTurn){
             firstTurn = false;
@@ -81,7 +82,7 @@ public class GameController {
      * it asks the client to select the column, otherwise it asks to select the tiles again.
      * @param message tiles the client chose
      */
-    public void chooseTiles(Message message){
+    public void chooseTiles(Message message) throws RemoteException {
         ChosenTilesMessage chosenTilesMessage = (ChosenTilesMessage) message;
         ArrayList<Tile> chosen = chosenTilesMessage.getChosenTiles();
 
@@ -105,7 +106,7 @@ public class GameController {
      * column, otherwise it asks him to order the tiles he has already chosen.
      * @param message
      */
-    public void SelectedColumn(Message message){
+    public void SelectedColumn(Message message) throws RemoteException {
         ColumnReply chosenColumn = (ColumnReply) message;
         int chosen = chosenColumn.getColumn();
 
@@ -123,7 +124,7 @@ public class GameController {
      * this method receives the ordered tiles and inserts them in the bookshelf of the currentPlayer.
      * @param message
      */
-    public void InsertTiles(Message message){
+    public void InsertTiles(Message message) throws RemoteException {
         OrderedTiles orderedTiles = (OrderedTiles) message;
         ArrayList<Tile> chosenTiles = orderedTiles.getOrderedTiles();
 
@@ -138,7 +139,7 @@ public class GameController {
      * happens.
      * @param player the player whose library must be checked.
      */
-    public void CheckCommonGoal(Player player){
+    public void CheckCommonGoal(Player player) throws RemoteException {
 
         if(game.getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()){
             virtualViewMap.get(player).showMessage("Congratulations! You reached the first common Goal! You earn " +
@@ -166,7 +167,7 @@ public class GameController {
      * If he has, "endGameTrigger" is called and the last round starts. If he hasn't, a new turn start with another player.
      * If it already was the round, the method check if it was the last turn
      */
-    public void EndTurn(){
+    public void EndTurn() throws RemoteException {
 
         if(lastRound){
             int currPlayer = players.indexOf(currentPlayer);
@@ -197,7 +198,7 @@ public class GameController {
     /**
      * beginning of the last round
      */
-    public void lastRound(){
+    public void lastRound() throws RemoteException {
         lastRound = true;
         newTurn();
     }
@@ -205,7 +206,7 @@ public class GameController {
     /**
      * this method tells all the player who has won the game.
      */
-    public void findWinner(){
+    public void findWinner() throws RemoteException {
         List<Integer> scorePlayers = new ArrayList<>();
         List<Player> winnerPlayers = new ArrayList<>();
 
@@ -261,6 +262,7 @@ public class GameController {
     public void handleLogin(String nickname, VirtualView vv){
         Player player = new Player();
         player.setNickname(nickname);
+        int num;
 
         if(virtualViewMap.isEmpty()){
             player.setNickname(nickname);
@@ -269,7 +271,6 @@ public class GameController {
 
             vv.loginResult(true,true,nickname);
             vv.askNumberOfPlayers();
-
         }else{
 
         }
@@ -317,7 +318,7 @@ public class GameController {
      * sends message to all the virtualView of the clients
      * @param message message to send
      */
-    public void broadcastShowMessage(String message){
+    public void broadcastShowMessage(String message) throws RemoteException {
         for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
             map.getValue().showMessage(message);
         }

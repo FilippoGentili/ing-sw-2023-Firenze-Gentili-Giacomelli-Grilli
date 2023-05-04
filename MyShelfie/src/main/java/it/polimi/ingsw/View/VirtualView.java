@@ -3,11 +3,12 @@ package it.polimi.ingsw.View;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
-import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.Network.Server.MatchServerImpl;
 import it.polimi.ingsw.Observer.Observer;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VirtualView implements View, Observer {
@@ -18,49 +19,53 @@ public class VirtualView implements View, Observer {
         this.matchServer = matchServer;
     }
 
-    @Override
-    public void update(Message message) {
-
+    public MatchServer getMatchServer() {
+        return matchServer;
     }
 
     @Override
-    public void nicknameRequest() {
-
+    public void update(Message message) throws RemoteException {
+        matchServer.sendMessage(message);
     }
 
     @Override
-    public void showMessage(String message) {
-        matchServer.
+    public void nicknameRequest() throws RemoteException {
+        matchServer.sendMessage(new LoginReply(false, true));
     }
 
     @Override
-    public void showListOfPlayers(ArrayList<String> nicknames) {
-
+    public void showMessage(String message) throws RemoteException {
+        matchServer.sendMessage(new GenericMessage(message));
     }
 
     @Override
-    public void showLivingRoom(LivingRoom livingRoom) {
+    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException {
+        matchServer.sendMessage(new MatchInfo(listOfPlayers, player.getNickname()));
+    }
 
+    @Override
+    public void showLivingRoom(LivingRoom livingRoom) throws RemoteException {
+        matchServer.sendMessage(new LivingRoomMessage(livingRoom));
     }
 
     @Override
     public void showBookshelf(Player player) {
-
+        matchServer.sendMessage(new BookshelfMessage(player));  //BookshelfMessage da creare
     }
 
     @Override
-    public void someoneDisconnected(String nickname) {
-
+    public void someoneDisconnected(String nickname) throws RemoteException {
+        matchServer.sendMessage(new DisconnectionReply(nickname));
     }
 
     @Override
     public void askNumberOfPlayers() {
-
+        matchServer.sendMessage(new NumOfPlayersReply());   //da creare
     }
 
     @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns) {
-
+    public void columnRequest(ArrayList<Integer> AvailableColumns) throws RemoteException {
+        matchServer.sendMessage(new ColumnRequest(AvailableColumns)); //da sistemare gestione request e reply perche non coincidono
     }
 
     @Override

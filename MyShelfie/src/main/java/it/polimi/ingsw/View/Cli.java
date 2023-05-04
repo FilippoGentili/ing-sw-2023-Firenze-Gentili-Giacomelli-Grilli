@@ -209,7 +209,7 @@ public class Cli extends ViewObservable implements View{
                         valid=false;
                     else if(!input.equals("y"))
                         System.out.println("Command not valid");
-                }while(!input.equals("y") && !input.equals("n"))
+                }while(!input.equals("y") && !input.equals("n"));
             }
         }
 
