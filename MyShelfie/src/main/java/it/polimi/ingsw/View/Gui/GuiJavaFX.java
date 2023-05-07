@@ -1,10 +1,42 @@
 package it.polimi.ingsw.View.Gui;
+import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.View.Gui.Scene.MenuSceneController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GuiJavaFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
+        Gui guiView = new Gui();
+        ClientController clientController = new ClientController(guiView);
+
+        guiView.addObserver(clientController);
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+
+        fxmlLoader.setLocation(getClass().getResource("/fxml/menuScene.fxml"));
+        Parent layout = null;
+
+        try{
+            layout = fxmlLoader.load();
+        }catch (IOException e){
+
+        }
+
+        MenuSceneController controller = fxmlLoader.getController();
+        controller.addObserver(clientController);
+
+        Scene scene = new Scene(layout);
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setTitle("MyShelfie");
+        stage.show();
 
     }
 
