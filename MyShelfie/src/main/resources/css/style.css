@@ -5,7 +5,8 @@
 }
 
 .generalButton{
-    -fx-background-image: url("../images/misc/playbutton2.png");
+    /*-fx-background-image: url("../images/misc/playbutton2.png");*/
+    -fx-shape:
     -fx-alignment: center;
     -fx-text-fill: #ffffff;
 }
