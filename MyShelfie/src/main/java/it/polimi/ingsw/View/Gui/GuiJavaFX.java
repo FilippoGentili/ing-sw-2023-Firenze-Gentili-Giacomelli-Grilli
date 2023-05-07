@@ -1,11 +1,10 @@
 package it.polimi.ingsw.View.Gui;
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.View.Gui.Scene.MenuSceneController;
+import it.polimi.ingsw.View.Gui.Scene.MenuScene;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,7 +28,7 @@ public class GuiJavaFX extends Application {
 
         }
 
-        MenuSceneController controller = fxmlLoader.getController();
+        MenuScene controller = fxmlLoader.getController();
         controller.addObserver(clientController);
 
         Scene scene = new Scene(layout);

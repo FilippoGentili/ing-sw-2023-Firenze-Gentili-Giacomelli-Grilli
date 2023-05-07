@@ -7,17 +7,15 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.polimi.ingsw.View.Gui.Scene.MenuSceneController" fx:id="menuPane" styleClass="mainPanel">
+      fx:controller="it.polimi.ingsw.View.Gui.Scene.MenuScene" styleClass="basePane">
     <stylesheets>
         <URL value="@../css/style.css"/>
         <URL value="@../css/menuScene.css"/>
     </stylesheets>
 
     <ImageView>
-        <image>
-            <Image url="@../images/Publisher material/bigTitle.png"/>
-        </image>
+        <Image url="@../images/Publisher material/bigTitle.png"/>
     </ImageView>
-    <Button fx:id="playButton" id="exitButton" styleClass="generalButton" text="let's play!"/>
-    <Button fx:id="exitButton" id="exitButton" styleClass="generalButton" text="exit"/>
+    <Button fx:id="playButton" id="exitButton" styleClass="generalButton"/>
+    <Button fx:id="exitButton" id="exitButton" styleClass="generalButton"/>
 </VBox>
