@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.polimi.ingsw.View.Gui.Scene.MenuSceneController" fx:id="mainPane" styleClass="mainPanel">
+    <stylesheets>
+        <URL value="@../css/style.css"/>
+        <URL value="@../css/menuScene.css"/>
+    </stylesheets>
+
+    <ImageView id="logoImage"/>
+
+    <Button fx:id="playButton" id="exitButton" styleClass="generalButton" text="let's play!"/>
+
+    <Button fx:id="exitButton" id="exitButton" styleClass="generalButton" text="exit"/>
+</VBox>
