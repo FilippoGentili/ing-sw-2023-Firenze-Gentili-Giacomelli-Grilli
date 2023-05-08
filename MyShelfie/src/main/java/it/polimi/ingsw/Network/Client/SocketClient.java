@@ -3,9 +3,7 @@ package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +31,16 @@ public class SocketClient extends Client{
         this.pinger = Executors.newSingleThreadScheduledExecutor();
     }
 
-
+    public void startSocketClient(){
+        try (Socket socket = new Socket(getAddress(), getPort());){
+            InputStream input = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            String line = reader.readLine();
+            System.out.println(line);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public void disconnect() {
 
