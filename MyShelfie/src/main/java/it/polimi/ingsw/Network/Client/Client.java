@@ -30,7 +30,7 @@ public abstract class Client extends UnicastRemoteObject {
         return port;
     }
 
-    abstract void startConnection() throws Exception;
+    abstract void startRMIClient() throws Exception;
 
     abstract void closeConnection() throws Exception;
 

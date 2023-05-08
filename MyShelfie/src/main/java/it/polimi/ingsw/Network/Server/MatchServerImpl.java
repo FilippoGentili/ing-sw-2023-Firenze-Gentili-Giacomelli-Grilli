@@ -7,12 +7,13 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
+public class MatchServerImpl() extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
     private final transient Server server;
+
     private ArrayList<Client>
 
-    MatchServerImpl(Server server) throws RemoteException{
+    public MatchServerImpl(Server server) throws RemoteException{
         this.server = server;
     }
     @Override

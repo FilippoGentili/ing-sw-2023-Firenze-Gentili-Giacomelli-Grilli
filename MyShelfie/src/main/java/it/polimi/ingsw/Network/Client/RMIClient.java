@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
+import it.polimi.ingsw.Observer.Observable;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -12,6 +13,10 @@ public class RMIClient extends Client implements MatchClient{
 
         private transient MatchServer server;
 
+        RMIClient(String nickname, String address, int port) throws RemoteException {
+                super(nickname, address, port);
+        }
+
         @Override
         public void startRMIClient(){
                 try {
@@ -21,6 +26,11 @@ public class RMIClient extends Client implements MatchClient{
                 } catch (RemoteException | NotBoundException e){
                         throw new RuntimeException(e);
                 }
+        }
+
+        @Override
+        void closeConnection() throws Exception {
+
         }
 
         @Override
