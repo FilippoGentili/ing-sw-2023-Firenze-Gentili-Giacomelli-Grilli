@@ -7,9 +7,10 @@ import java.rmi.RemoteException;
 
 public interface MatchServer extends Remote {
 
-    void connect(String username, RMIClient client) throws RemoteException;
+    void connectClient(Client client) throws RemoteException;
 
     void sendMessage(Message message) throws RemoteException;
 
-    void disconnect() throws RemoteException;
+    void disconnectClient(Client client) throws RemoteException;
+    void getMessage(Message message) throws RemoteException;
 }
