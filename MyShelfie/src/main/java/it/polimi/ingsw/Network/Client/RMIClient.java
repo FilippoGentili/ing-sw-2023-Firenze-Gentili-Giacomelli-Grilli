@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
 
+import java.io.Serial;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -10,7 +11,13 @@ import java.rmi.registry.Registry;
 
 public class RMIClient extends Client implements MatchClient{
 
+        @Serial
+        private static final long serialVersionUID = 4702549132783715919L;
         private transient MatchServer server;
+
+        RMIClient(String nickname, String address, int port) throws RemoteException {
+                super(nickname, address, port);
+        }
 
         @Override
         public void startRMIClient(){
@@ -21,6 +28,11 @@ public class RMIClient extends Client implements MatchClient{
                 } catch (RemoteException | NotBoundException e){
                         throw new RuntimeException(e);
                 }
+        }
+
+        @Override
+        void closeConnection() throws Exception {
+
         }
 
         @Override
