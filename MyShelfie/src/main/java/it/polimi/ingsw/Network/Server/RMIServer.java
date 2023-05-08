@@ -1,20 +1,28 @@
 package it.polimi.ingsw.Network.Server;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIServer {
-        public static void main(String[] args){
-                 try{
-                        MatchServer obj = new MatchServerImpl();
-                        LocateRegistry.createRegistry(1099);
-                        Naming.rebind("//localhost/MatchServer", obj);
-                        System.out.println("RMI Server started");
-                }catch (RemoteException | MalformedURLException e) {
-                        throw new RuntimeException(e);
-                }
+    private final Server server;
+    private final int port;
+
+    public RMIServer(Server server, int port) {
+        this.server = server;
+        this.port = port;
+    }
+
+    void startRMIServer(){
+        try{
+            MatchServerImpl obj = new MatchServerImpl(server);
+            Registry registry = LocateRegistry.createRegistry(port);
+            Naming.rebind("MyShelfieServer", obj);
+            System.out.println("RMI Server started");
+        }catch (IOException | AlreadyBoundException e) {
+            Server.LOGGER.severe(e.getMessage());
         }
+    }
 }
