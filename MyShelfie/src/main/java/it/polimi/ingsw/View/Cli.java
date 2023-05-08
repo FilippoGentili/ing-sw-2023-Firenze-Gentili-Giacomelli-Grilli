@@ -107,7 +107,7 @@ public class Cli extends ViewObservable implements View{
 */
         notifyObserver(obs -> {
             try {
-                obs.updateServerInfo(serverInfo);
+                obs.updateServerInfoSocket(serverInfo);
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }

@@ -3,18 +3,24 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMIClient;
+import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Server;
+import it.polimi.ingsw.Network.Server.SocketServer;
 import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
 
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Map;
+
+import static java.lang.Integer.parseInt;
+
 public class ClientController implements Observer, ViewObserver {
 
 
@@ -44,15 +50,27 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     @Override
-    public void updateServerInfo(Map<String, String> serverInfo) throws RemoteException {
-        String IPaddress = "";
-        String port = "";
+    public void updateServerInfoSocket(Map<String, String> serverInfo) throws IOException {
+        String Ipaddress = null;
+        String portString;
+        int port = 0;
+
         for(Map.Entry<String, String> map : serverInfo.entrySet()){
-            IPaddress = map.getKey();
-            port = map.getValue();
+            Ipaddress = map.getKey();
+            portString = map.getValue();
+            port = parseInt(portString);
             break;
         }
-        client.sendMessage(new ServerInfo(nickname,IPaddress,port));
+
+        try{
+            //creo una connessione con il server che ha ipaddress e port come serverInfo.
+            SocketClient clientSocket = new SocketClient(Ipaddress,port);
+            clientSocket.addObserver(this);
+            //attendo il messaggio dal server
+            clientSocket.readMessage();
+        }catch (IOException e){
+            view.loginResult(false,false,this.nickname);
+        }
     }
 
     @Override
