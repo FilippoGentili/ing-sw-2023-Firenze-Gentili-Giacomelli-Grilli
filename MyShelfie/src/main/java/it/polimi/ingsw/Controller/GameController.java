@@ -40,6 +40,45 @@ public class GameController {
         newTurn();
     }
 
+    public void forwardMessage(Message message) throws RemoteException {
+        VirtualView vv=null;
+        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
+            if(map.getKey().getNickname().equals(message.getNickname())){
+                vv = map.getValue();
+            }
+        }
+
+        switch (gameState){
+            case LOGIN:
+                handleLogin(message.getNickname(),vv);
+                break;
+            case PLAY:
+                handleGame(message);
+                break;
+
+        }
+    }
+
+    public void handleGame(Message message) throws RemoteException {
+        VirtualView vv =null;
+        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
+            if(map.getKey().getNickname().equals(message.getNickname())){
+                vv = map.getValue();
+            }
+        }
+
+        switch (message.getMessageType()){
+            case CHOSEN_TILES_REPLY:
+                chooseTiles(message);
+                break;
+            case COLUMN_REPLY:
+                SelectedColumn(message);
+                break;
+            case ORDERED_TILES_REPLY:
+                InsertTiles(message);
+        }
+    }
+
     /**
      * This method set the currentPlayer who is going play the turn
      */
@@ -159,6 +198,8 @@ public class GameController {
             Game.getCommonGoal2().updateValue();
             player.setPointscg2();
         }
+
+        EndTurn();
     }
 
     /**
