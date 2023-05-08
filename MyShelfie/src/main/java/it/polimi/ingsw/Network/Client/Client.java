@@ -7,34 +7,14 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public abstract class Client extends UnicastRemoteObject, Observable {
+public abstract class Client extends Observable{
 
-    private final String nickname;
-    private final String address;
-    private final int port;
+    public abstract void disconnect();
 
-    Client(String nickname, String address, int port) throws RemoteException{
-        this.nickname = nickname;
-        this.address = address;
-        this.port = port;
-    }
+    public abstract void sendMessage(Message message);
 
-    String getNickname(){
-        return nickname;
-    }
+    public abstract void readMessage();
 
-    String getAddress(){
-        return address;
-    }
-
-    int getPort(){
-        return port;
-    }
-
-    abstract void startRMIClient() throws Exception;
-
-    abstract void closeConnection() throws Exception;
-
-    abstract void sendMessage(Message message) throws IOException;
+    public abstract void pinger(boolean on);
 
 }

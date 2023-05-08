@@ -30,13 +30,24 @@ public class RMIClient extends Client implements MatchClient{
                 }
         }
 
+
         @Override
-        void closeConnection() throws Exception {
+        public void disconnect() {
 
         }
 
         @Override
-        public void sendMessage(Message message) throws RemoteException {
+        public void sendMessage(Message message){
+
+        }
+
+        @Override
+        public void readMessage() {
+
+        }
+
+        @Override
+        public void pinger(boolean on) {
 
         }
 
