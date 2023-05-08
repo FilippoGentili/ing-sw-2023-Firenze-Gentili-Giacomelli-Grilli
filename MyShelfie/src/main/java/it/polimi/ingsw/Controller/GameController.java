@@ -251,27 +251,28 @@ public class GameController {
         player.getBookshelf().addObserver(vv);
     }
 
-    public void removeVirtualView(Player player, VirtualView vv){
-        virtualViewMap.remove(player, vv);
+    public void removeVirtualView(String nickname){
+        VirtualView vv = virtualViewMap.remove(nickname);
         game.removeObserver(vv);
         game.getLivingRoom().removeObserver(vv);
-        player.getBookshelf().removeObserver(vv);
+        for(Player player : players)
+            if(player.getNickname().equals(nickname))
+                player.getBookshelf().removeObserver(vv);
     }
 
     public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
         Player player = new Player();
-        player.setNickname(nickname);
-        int num;
 
-        if(virtualViewMap.isEmpty()){
-            player.setNickname(nickname);
-            game.addPlayer(player);
-            virtualViewMap.put(player,vv);
-
-            vv.loginResult(true,true,nickname);
-            vv.askNumberOfPlayers();
-        }else{
-
+        if(virtualViewMap.size() < numOfPlayers){
+            if(inputController.checkNickname(nickname, vv)){
+                addVirtualView(player, vv);
+                player.setNickname(nickname);
+                game.addPlayer(player);
+                vv.loginResult(true,true, nickname);
+            }else
+                vv.loginResult(false,true, nickname);
+        }else {
+            vv.loginResult(true, false, nickname);
         }
     }
 
@@ -294,6 +295,8 @@ public class GameController {
     public void setGameState(GameState gameState){
         this.gameState = gameState;
     }
+
+
 
     public void setupGame(){
         firstPlayer = game.pickFirstPlayer();
