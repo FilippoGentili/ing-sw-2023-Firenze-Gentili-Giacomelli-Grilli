@@ -7,7 +7,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIServer {
-    public void startRMIServer(){
+    public static void main(String[] args){
         try{
             MatchServer obj = new MatchServerImpl();
             LocateRegistry.createRegistry(1099);
