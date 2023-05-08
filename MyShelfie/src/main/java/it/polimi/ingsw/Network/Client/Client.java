@@ -12,9 +12,9 @@ public abstract class Client extends Observable{
 
     protected static final Logger LOGGER = Logger.getLogger(Client.class.getName());
 
-    public abstract void disconnect();
+    public abstract void disconnect() throws RemoteException;
 
-    public abstract void sendMessage(Message message);
+    public abstract void sendMessage(Message message) throws RemoteException;
 
     public abstract void readMessage();
 
