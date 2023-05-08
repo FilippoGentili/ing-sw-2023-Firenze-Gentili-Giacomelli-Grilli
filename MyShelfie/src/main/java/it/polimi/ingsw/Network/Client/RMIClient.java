@@ -10,9 +10,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient{
-        public static void main(String[] args) throws RemoteException, NotBoundException {
-                Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-                MatchServer matchServer = (MatchServer) registry.lookup("//localhost/MatchServer");
+        public static void main(String[] args){
+                try {
+                        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+                        MatchServer matchServer = (MatchServer) registry.lookup("//localhost/MatchServer");
+                        System.out.println("RMI Client started");
+                } catch (RemoteException | NotBoundException e){
+                        throw new RuntimeException(e);
+                }
         }
 }
 

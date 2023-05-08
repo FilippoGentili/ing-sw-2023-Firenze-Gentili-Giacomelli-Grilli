@@ -7,14 +7,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIServer {
-    public static void main(String[] args){
-        try{
-            MatchServer obj = new MatchServerImpl();
-            LocateRegistry.createRegistry(1099);
-            Naming.rebind("//localhost/MatchServer", obj);
-            System.out.println("RMI Server started");
-        }catch (RemoteException | MalformedURLException e) {
-            throw new RuntimeException(e);
+        public static void main(String[] args){
+                 try{
+                        MatchServer obj = new MatchServerImpl();
+                        LocateRegistry.createRegistry(1099);
+                        Naming.rebind("//localhost/MatchServer", obj);
+                        System.out.println("RMI Server started");
+                }catch (RemoteException | MalformedURLException e) {
+                        throw new RuntimeException(e);
+                }
         }
-    }
 }
