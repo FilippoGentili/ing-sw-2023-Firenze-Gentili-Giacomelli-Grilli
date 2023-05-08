@@ -6,8 +6,11 @@ import it.polimi.ingsw.Observer.Observable;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Logger;
 
 public abstract class Client extends Observable{
+
+    protected static final Logger LOGGER = Logger.getLogger(Client.class.getName());
 
     public abstract void disconnect();
 
