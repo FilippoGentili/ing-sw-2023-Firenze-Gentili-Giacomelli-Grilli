@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.Cli;
 
 import java.rmi.RemoteException;
@@ -29,8 +31,7 @@ public class ClientApp {
 
         if(cliCheck){
             Cli view = new Cli();
-            Server server = new Server();
-            ClientController clientController = new ClientController(view, server);
+            ClientController clientController = new ClientController(view);
             view.addObserver(clientController);
             view.start();
         }/*else{

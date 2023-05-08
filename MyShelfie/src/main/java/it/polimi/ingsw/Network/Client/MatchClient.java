@@ -40,7 +40,6 @@ public interface MatchClient extends Remote {
      * @throws RemoteException if a communication error occurs
      */
     void heartbeat() throws RemoteException;
-}
 
 
 }

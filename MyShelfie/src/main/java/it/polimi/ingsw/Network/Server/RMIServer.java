@@ -6,18 +6,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIServer {
-    private final Server server;
-    private final int port;
+    private static Server server ;
 
-    public RMIServer(Server server, int port) {
+    public RMIServer(Server server) {
         this.server = server;
-        this.port = port;
     }
 
-    void startRMIServer(){
+    public void startRMIServer(){
         try{
             MatchServerImpl obj = new MatchServerImpl(server);
-            Registry registry = LocateRegistry.createRegistry(port);
+            Registry registry = LocateRegistry.createRegistry(1099);
             Naming.rebind("MyShelfieServer", obj);
             System.out.println("RMI Server started");
         }catch (IOException e) {

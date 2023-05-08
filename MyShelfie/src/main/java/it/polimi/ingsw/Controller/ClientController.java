@@ -1,10 +1,12 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMIClient;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
+import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
@@ -17,12 +19,16 @@ public class ClientController implements Observer, ViewObserver {
 
 
     private final View view;
-    private RMIClient client;
+    private Client client;
     private String nickname;
 
-    public ClientController(View view, Server server) throws RemoteException {
-        this.client = new RMIClient(server);
+    public ClientController(View view) throws RemoteException {
         this.view = view;
+
+    }
+
+    public void setClient(Client client){
+        this.client = client;
     }
 
     public String getNickname(){return this.nickname;}

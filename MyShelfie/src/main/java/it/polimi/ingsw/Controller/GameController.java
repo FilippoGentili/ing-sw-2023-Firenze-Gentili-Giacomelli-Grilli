@@ -18,7 +18,7 @@ import static it.polimi.ingsw.Model.GameState.*;
 public class GameController {
     private Game game;
     private GameState gameState;
-    private final int numOfPlayers;
+    private  int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
     private InputController inputController;
@@ -27,12 +27,15 @@ public class GameController {
     private boolean lastRound = false;
     private boolean firstTurn = true;
 
-    public GameController(int num){
+    public GameController(){
         this.game = new Game();
-        this.numOfPlayers = num;
+        //this.numOfPlayers = num;
         this.inputController = new InputController(this,virtualViewMap);
     }
 
+    public void setNumOfPlayers(int num){
+        this.numOfPlayers = num;
+    }
     public void startGame() throws RemoteException {
         setGameState(PLAY);
         currentPlayer = game.pickFirstPlayer();

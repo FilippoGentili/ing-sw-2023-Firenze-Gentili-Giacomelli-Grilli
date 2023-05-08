@@ -10,18 +10,41 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class SocketServer {
+public class SocketServer implements Runnable {
 
     private final Server server;
-    private final int port;
     ServerSocket serverSocket;
 
-    public SocketServer(Server server, int port){
+    public SocketServer(Server server){
         this.server = server;
-        this.port = port;
     }
 
-    public void startSocketServer(){
+    @Override
+    public  void run() {
+        try {
+            serverSocket = new ServerSocket(1099);
+            Server.LOGGER.info(() -> "Socket server started on port " + 1099 + ".");
+        } catch (IOException e) {
+            Server.LOGGER.severe("Error while starting server");
+            return;
+        }
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                Socket client = serverSocket.accept();
+
+                client.setSoTimeout(5000);
+
+                MatchServerSocket matchServerSocket = new MatchServerSocket(this, client);
+                Thread thread = new Thread((Runnable) matchServerSocket, "matchServerSocket" + client.getInetAddress());
+                thread.start();
+            } catch (IOException e) {
+                Server.LOGGER.severe("Connection lost");
+            }
+        }
+    }
+
+
+   /* public void startSocketServer(){
         try (ServerSocket listener = new ServerSocket(getPort())){
             while (true){
                 try (Socket socket = listener.accept()){
@@ -34,13 +57,13 @@ public class SocketServer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public void addClient(String nickname, MatchServer matchServer) throws RemoteException {
         server.addClient(nickname, matchServer);
     }
 
-    public void forwardMessage(Message message){
+    public void forwardMessage(Message message) throws RemoteException {
         server.forwardMessage(message);
     }
 

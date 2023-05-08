@@ -34,8 +34,8 @@ public class SocketClient extends Client{
         this.pinger = Executors.newSingleThreadScheduledExecutor();
     }
 
-    public void startSocketClient(){
-        try (Socket socket = new Socket(getAddress(), getPort());){
+    /*public void startSocketClient(){
+        try (Socket socket = new Socket(address, port){
             InputStream input = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String line = reader.readLine();
@@ -43,7 +43,7 @@ public class SocketClient extends Client{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
     @Override
     public void disconnect() throws RemoteException {
         try {

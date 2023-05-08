@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class Server {
 
+    public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
     private final Map<String, MatchServer> matchServerMap;
     private static final Logger logger = Logger.getLogger(Server.class.getName());
@@ -34,7 +35,7 @@ public class Server {
     }
 
 
-    public void forwardMessage(Message message){
+    public void forwardMessage(Message message) throws RemoteException {
         gameController.forwardMessage(message);
     }
 

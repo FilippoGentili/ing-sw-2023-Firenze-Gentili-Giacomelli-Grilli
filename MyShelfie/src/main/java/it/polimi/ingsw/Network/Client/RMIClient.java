@@ -15,14 +15,9 @@ public class RMIClient extends Client implements MatchClient{
         private static final long serialVersionUID = 4702549132783715919L;
         private transient MatchServer server;
 
-        RMIClient(String nickname, String address, int port) throws RemoteException {
-                super(nickname, address, port);
-        }
-
-        @Override
         public void startRMIClient(){
                 try {
-                        Registry registry = LocateRegistry.getRegistry(getAddress(), getPort());
+                        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
                         MatchServer matchServer = (MatchServer) registry.lookup("MyShelfieServer");
                         System.out.println("RMI Client started");
                 } catch (RemoteException | NotBoundException e){

@@ -23,4 +23,3 @@ public class MenuScene extends ViewObservable {
 
     }
 }*/
-*/

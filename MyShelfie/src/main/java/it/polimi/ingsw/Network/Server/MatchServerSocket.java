@@ -39,5 +39,10 @@ public class MatchServerSocket implements MatchServer{
 
     }
 
+    @Override
+    public void getMessage() {
+
+    }
+
 
 }

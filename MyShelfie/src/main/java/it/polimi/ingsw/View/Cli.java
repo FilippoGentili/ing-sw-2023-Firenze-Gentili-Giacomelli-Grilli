@@ -84,7 +84,7 @@ public class Cli extends ViewObservable implements View{
             }
         }while(!valid);*/
 
-        serverInfo.put("address", defaultAddress);
+       /* serverInfo.put("address", defaultAddress);
 
         do{
             out.println("Specify the port");
@@ -104,7 +104,7 @@ public class Cli extends ViewObservable implements View{
                 valid = false;
             }
         }while(!valid);
-
+*/
         notifyObserver(obs -> {
             try {
                 obs.updateServerInfo(serverInfo);

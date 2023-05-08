@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MatchServerImpl() extends UnicastRemoteObject implements MatchServer {
+public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
     private final transient Server server;
 
@@ -25,12 +25,12 @@ public class MatchServerImpl() extends UnicastRemoteObject implements MatchServe
     public MatchServerImpl(Server server) throws RemoteException{
         this.server = server;
 
-        try {
+       /* try {
             this.output = new ObjectOutputStream(client.getOutputStream());
             this.input = new ObjectInputStream(client.getInputStream());
         } catch (IOException e) {
             Server.LOGGER.severe(e.getMessage());
-        }
+        }*/
     }
     @Override
     public void connectClient(Client client) throws RemoteException {
