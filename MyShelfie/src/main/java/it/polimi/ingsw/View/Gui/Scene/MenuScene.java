@@ -1,5 +1,5 @@
 package it.polimi.ingsw.View.Gui.Scene;
-
+/*
 import it.polimi.ingsw.Observer.ViewObservable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,3 +23,4 @@ public class MenuScene extends ViewObservable {
 
     }
 }
+*/

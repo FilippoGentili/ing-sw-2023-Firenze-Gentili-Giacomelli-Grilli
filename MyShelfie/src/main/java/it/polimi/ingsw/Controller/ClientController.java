@@ -1,15 +1,12 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
-import it.polimi.ingsw.Network.Client.RMIClient;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.View.VirtualView;
 
 
 import java.rmi.RemoteException;
@@ -22,8 +19,8 @@ public class ClientController implements Observer, ViewObserver {
     private RMIClient client;
     private String nickname;
 
-    public ClientController(View view) throws RemoteException {
-        this.client = new RMIClient();
+    public ClientController(View view, Server server) throws RemoteException {
+        this.client = new RMIClient(server);
         this.view = view;
     }
 

@@ -4,8 +4,6 @@ import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.*;
-import it.polimi.ingsw.Network.Server.MatchServer;
-import it.polimi.ingsw.Network.Server.MatchServerImpl;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.rmi.RemoteException;

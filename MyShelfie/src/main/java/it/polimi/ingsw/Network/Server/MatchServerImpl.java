@@ -1,86 +1,30 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Network.Message.*;
-import it.polimi.ingsw.Network.Client.MatchClient;
-import it.polimi.ingsw.Network.Client.RMIClient;
+import it.polimi.ingsw.Network.Message.Message;
 
-import java.io.*;
+import javax.management.remote.rmi.RMIConnection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
 public class MatchServerImpl extends UnicastRemoteObject implements MatchServer {
+    private final transient Server server;
+    private transient RMIConnection rmiSession;
 
-    @Serial
-    private static final long serialVersionUID = 2646967431577448909L;
-    private ArrayList<MatchClient> listOfClients = new ArrayList<>();
-    private RMIClient client;
-    public MatchServerImpl() throws RemoteException {
-        super();
+    MatchServerImpl(Server server) throws RemoteException{
+        this.server = server;
     }
-
-    /**
-     * Implementation of the connection of the client
-     * @param client that will be connected
-     * @throws RemoteException if a communication error occurs
-     */
     @Override
-    public synchronized void connectClient(MatchClient client) throws RemoteException{
-        listOfClients.add(client);
-        System.out.println("Client connected");
+    public void connect(String username, RMIClient client) throws RemoteException {
+        rmiSession
     }
 
-    /**
-     * Implementation of the disconnection of the client
-     * @param client that will be disconnected
-     * @throws RemoteException if a communication error occurs
-     */
     @Override
-    public synchronized void disconnectClient(MatchClient client) throws RemoteException{
-        listOfClients.remove(client);
-        System.out.println("Client disconnected");
+    public void sendMessage(Message message) throws RemoteException {
+        server.onMessage(message);
     }
 
-    /**
-     * Implementation of the method that sends the message to the client
-     * @param message that the server sends to the client
-     * @throws RemoteException if a communication error occurs
-     */
     @Override
-    public synchronized void sendMessage(Message message) throws RemoteException{
-        for (MatchClient client : listOfClients) {
-            try {
-                //serialize message
-                ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-                ObjectOutputStream objStream = new ObjectOutputStream(byteStream);
-                objStream.writeObject(message);
-                objStream.flush();
-                byte[] data = byteStream.toByteArray();
-                //send message to client
-                client.getMessage(message);
-            } catch (IOException e) {
-                System.err.println("Error sending message to client: " + e.getMessage());
-            }
-        }
-    }
+    public void disconnect() throws RemoteException {
 
-    /**
-     * Implementation of the method that gets the message from the client
-     * @param message sent from client
-     * @throws RemoteException if a communication error occurs
-     */
-    @Override
-    public void getMessage(Message message) throws  RemoteException{
-        try {
-            //deserialize message
-            byte[] data = message.getData();
-            ByteArrayInputStream bis = new ByteArrayInputStream(data);
-            ObjectInput in = new ObjectInputStream(bis);
-            Message receivedMessage = (Message) in.readObject();
-            System.out.println("Received message: " + receivedMessage.toString());
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error receiving message: " + e.getMessage());
-        }
     }
-
 }

@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.View.Cli;
 
 import java.rmi.RemoteException;
@@ -30,7 +29,8 @@ public class ClientApp {
 
         if(cliCheck){
             Cli view = new Cli();
-            ClientController clientController = new ClientController(view);
+            Server server = new Server();
+            ClientController clientController = new ClientController(view, server);
             view.addObserver(clientController);
             view.start();
         }/*else{
