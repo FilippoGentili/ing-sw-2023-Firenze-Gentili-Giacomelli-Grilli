@@ -1,32 +1,54 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
 import javax.management.remote.rmi.RMIConnection;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MatchServerImpl() extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
     private final transient Server server;
 
-    private ArrayList<Client>
+    private ArrayList<Client> listOfClients = new ArrayList<>();
+    private ObjectOutputStream output;
+    private ObjectInputStream input;
+
 
     public MatchServerImpl(Server server) throws RemoteException{
         this.server = server;
+
+        try {
+            this.output = new ObjectOutputStream(client.getOutputStream());
+            this.input = new ObjectInputStream(client.getInputStream());
+        } catch (IOException e) {
+            Server.LOGGER.severe(e.getMessage());
+        }
     }
     @Override
     public void connectClient(Client client) throws RemoteException {
-
+        listOfClients.add(client);
     }
 
     @Override
     public void sendMessage(Message message) throws RemoteException {
-        server.sendMessage(message);
+
     }
 
     @Override
-    public void disconnectClient() throws RemoteException {
+    public void disconnectClient(Client client) throws RemoteException {
+        listOfClients.remove(client);
+    }
+
+    @Override
+    public void getMessage(){
+
     }
 }
