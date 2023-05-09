@@ -24,13 +24,6 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
 
     public MatchServerImpl(Server server) throws RemoteException{
         this.server = server;
-
-       /* try {
-            this.output = new ObjectOutputStream(client.getOutputStream());
-            this.input = new ObjectInputStream(client.getInputStream());
-        } catch (IOException e) {
-            Server.LOGGER.severe(e.getMessage());
-        }*/
     }
     @Override
     public void connectClient(Client client) throws RemoteException {
