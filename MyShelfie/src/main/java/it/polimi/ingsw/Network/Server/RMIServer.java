@@ -9,8 +9,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+
 public class RMIServer implements Runnable{
-    private static Server server ;
+    private static Server server;
 
     public RMIServer(Server server) {
         this.server = server;

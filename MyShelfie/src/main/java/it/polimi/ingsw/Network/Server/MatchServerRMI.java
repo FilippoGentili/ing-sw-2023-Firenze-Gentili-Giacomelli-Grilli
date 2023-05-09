@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.rmi.server.RemoteCall;
+import java.rmi.server.RemoteStub;
 
 public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
@@ -21,14 +23,13 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private boolean connected;
     private final Object inputLock;
     private final Object outputLock;
-
-
     public MatchServerRMI(Server server) throws RemoteException{
         this.server = server;
         this.connected = true;
         this.inputLock = new Object();
         this.outputLock = new Object();
     }
+
 
     public void connectClient(Client client) throws RemoteException {
         listOfClients.add(client);
