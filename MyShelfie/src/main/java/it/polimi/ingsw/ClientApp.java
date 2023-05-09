@@ -25,6 +25,11 @@ public class ClientApp {
         System.out.println("If you want to start a cli write '-cli' ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
+        while(!input.equals("-cli")){
+            System.out.println("Invalid statement!");
+            System.out.println("If you want to start a cli write '-cli' ");
+            input = scanner.nextLine().trim();
+        }
 
         if (input.equals("-cli")) {
             cliCheck = true;
