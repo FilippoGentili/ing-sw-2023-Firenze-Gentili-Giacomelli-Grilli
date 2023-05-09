@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.RMIClient;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.io.IOException;
@@ -18,11 +19,15 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private boolean connected;
+    private final Object inputLock;
+    private final Object outputLock;
 
 
     public MatchServerRMI(Server server) throws RemoteException{
         this.server = server;
         this.connected = true;
+        this.inputLock = new Object();
+        this.outputLock = new Object();
     }
 
     public void connectClient(Client client) throws RemoteException {
@@ -41,7 +46,15 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
 
     @Override
     public void sendMessage(Message message) throws RemoteException {
-
+        try{
+            synchronized(outputLock){
+                output.writeObject(message);
+                output.reset();
+                Server.LOGGER.info(() -> "Sent: " + message);
+            }
+        } catch(IOException e) {
+            Server.LOGGER.severe(e.getMessage());
+        }
     }
 
 }

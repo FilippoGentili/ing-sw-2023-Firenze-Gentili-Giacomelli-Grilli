@@ -32,13 +32,17 @@ public abstract class Message implements Serializable {
             return "Message from: "+ nickname + ", of type: " + type + "}";
         }
 
-        public byte[] getData() {
+        /*public byte[] getData() {
              return data;
         }
 
-        public void setData(byte[] data) {
+         */
+
+        /*public void setData(byte[] data) {
              this.data = data;
          }
+
+         */
 }
 
 

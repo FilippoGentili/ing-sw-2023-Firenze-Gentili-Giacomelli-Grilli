@@ -18,10 +18,15 @@ public class MatchServerSocket implements MatchServer{
     private ObjectOutputStream out;
     private ObjectInputStream in;
 
+    private final Object inputLock;
+    private final Object outputLock;
+
     public MatchServerSocket(SocketServer socketServer, Socket client){
         this.client = client;
         this.socketServer = socketServer;
         this.connected = true;
+        this.inputLock = new Object();
+        this.outputLock = new Object();
 
         try{
             this.in = new ObjectInputStream(client.getInputStream());
@@ -69,7 +74,15 @@ public class MatchServerSocket implements MatchServer{
 
     @Override
     public void sendMessage(Message message) throws RemoteException {
-
+        try{
+            synchronized(outputLock){
+                out.writeObject(message);
+                out.reset();
+                Server.LOGGER.info(() -> "Sent: " + message);
+            }
+        } catch(IOException e) {
+            Server.LOGGER.severe(e.getMessage());
+        }
     }
 
 }

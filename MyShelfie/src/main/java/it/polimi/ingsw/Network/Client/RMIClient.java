@@ -4,6 +4,8 @@ import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.Network.Server.Server;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serial;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -15,6 +17,8 @@ public class RMIClient extends Client{
         @Serial
         private static final long serialVersionUID = 4702549132783715919L;
         private transient MatchServer server;
+        private ObjectOutputStream output;
+        private ObjectInputStream input;
 
         public void startRMIClient(){
                 try {
