@@ -52,8 +52,8 @@ public class MatchServerSocket implements MatchServer{
     }
 
     @Override
-    public void checkConnection() throws RemoteException {
-
+    public boolean checkConnection() throws RemoteException {
+        return connected;
     }
 
     @Override

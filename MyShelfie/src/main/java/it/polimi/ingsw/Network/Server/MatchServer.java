@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 
 public interface MatchServer extends Remote {
 
-    void checkConnection() throws RemoteException;
+    boolean checkConnection() throws RemoteException;
 
     void disconnectClient(Client client) throws RemoteException;
 

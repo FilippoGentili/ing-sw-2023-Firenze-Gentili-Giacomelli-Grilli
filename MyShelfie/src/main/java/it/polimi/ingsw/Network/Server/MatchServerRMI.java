@@ -17,19 +17,21 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private ArrayList<Client> listOfClients = new ArrayList<>();
     private ObjectOutputStream output;
     private ObjectInputStream input;
+    private boolean connected;
 
 
     public MatchServerRMI(Server server) throws RemoteException{
         this.server = server;
+        this.connected = true;
     }
 
     public void connectClient(Client client) throws RemoteException {
-
+        listOfClients.add(client);
     }
 
     @Override
-    public void checkConnection() throws RemoteException {
-
+    public boolean checkConnection() throws RemoteException {
+        return connected;
     }
 
     @Override
