@@ -1,11 +1,8 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -58,8 +55,16 @@ public class MatchServerSocket implements MatchServer{
     }
 
     @Override
-    public void disconnectClient(Client client) throws RemoteException {
+    public void disconnectClient() throws IOException {
+        if(connected){
+            if(!client.isClosed()){
+                client.close();
+            }
+            connected = false;
+            Thread.currentThread().interrupt();
 
+            socketServer.clientDisconnection(this);
+        }
     }
 
     @Override

@@ -18,9 +18,12 @@ public class Server {
     private final Map<String, MatchServer> matchServerMap;
     private static final Logger logger = Logger.getLogger(Server.class.getName());
 
+    private final Object lock;
+
     public Server(GameController gameController){
         this.gameController = gameController;
         this.matchServerMap = new HashMap<>();
+        this.lock = new Object();
     }
 
     public void addClient(String nickname, MatchServer matchServer) throws RemoteException {
@@ -44,24 +47,26 @@ public class Server {
             if(map.getValue().equals(matchServer))
                 return map.getKey();
         }
-
         return null;
     }
 
     public void removeClient(String nickname){
         matchServerMap.remove(nickname);
         gameController.removeVirtualView(nickname);
+        LOGGER.info(() -> nickname + " was removed from the client list");
     }
 
     public void clientDisconnection(MatchServer matchServer) throws RemoteException {
-        String nickname = getNickname(matchServer);
+        synchronized (lock){
+            String nickname = getNickname(matchServer);
 
-        if(nickname != null){
-            removeClient(nickname);
+            if(nickname != null){
+                removeClient(nickname);
 
-            if(!gameController.waitingForPlayers()){
-                gameController.broadcastShowMessage(nickname + " disconnected from the server. Game finished!");
-                //fine partita, cancella tutto
+                if(!gameController.waitingForPlayers()){
+                    gameController.broadcastShowMessage(nickname + " disconnected from the server. Game finished :(");
+                    //fine partita, cancella tutto
+                }
             }
         }
     }
