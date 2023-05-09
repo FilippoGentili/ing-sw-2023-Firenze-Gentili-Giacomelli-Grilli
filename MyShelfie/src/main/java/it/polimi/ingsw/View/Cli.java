@@ -373,4 +373,204 @@ public class Cli extends ViewObservable implements View{
         System.out.println("+-------+-------+-------+-------+-------+");
         System.out.println();
     }
+
+    @Override
+    public void showCommonGoalCards(Game game) {
+
+        int gc[] = new int[2];
+        gc[0] = game.getCommonGoal1().getId();
+        gc[1] = game.getCommonGoal2().getId();
+
+        for(int i=0; i<2; i++){
+            if(i==0){
+                System.out.println("FIRST COMMON GOAL CARD:");
+                System.out.println("Points: " + game.getCommonGoal1().getValue());
+            }else{
+                System.out.println("SECOND COMMON GOAL CARD:");
+                System.out.println("Points: " + game.getCommonGoal2().getValue());
+            }
+
+            switch(gc[i]){
+                case 1:
+                    System.out.println("Six groups each containing at least 2 tiles of the same type (not necessarily in the depicted shape).\n" +
+                            "The tiles of one group can be different from those of another group.");
+                    System.out.println("+-------+");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+   x6");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+");
+                    break;
+                case 2:
+                    System.out.println("Five tiles of the same type forming a diagonal.");
+                    System.out.println("+-------+");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+-------+");
+                    System.out.println("        |   =   |");
+                    System.out.println("        +-------+-------+");
+                    System.out.println("                |   =   |");
+                    System.out.println("                +-------+-------+");
+                    System.out.println("                        |   =   |");
+                    System.out.println("                        +-------+-------+");
+                    System.out.println("                                |   =   |");
+                    System.out.println("                                +-------+");
+                    break;
+                case 3:
+                    System.out.println("Four tiles of the same type in the four corners of the bookshelf.");
+                    System.out.println("+-------+-----------------------+-------+");
+                    System.out.println("|   =   |                       |   =   |");
+                    System.out.println("+-------+                       +-------+");
+                    System.out.println("|                                       |");
+                    System.out.println("|                                       |");
+                    System.out.println("|                                       |");
+                    System.out.println("|                                       |");
+                    System.out.println("|                                       |");
+                    System.out.println("|                                       |");
+                    System.out.println("+-------+                       +-------+");
+                    System.out.println("|   =   |                       |   =   |");
+                    System.out.println("+-------+-----------------------+-------+");
+                    break;
+                case 4:
+                    System.out.println("Four lines each formed by 5 tiles of maximum three different types.\n" +
+                            "One line can show the same or a different combination of another line.");
+                    System.out.println("+-------+-------+-------+-------+-------+");
+                    System.out.println("|       |       |       |       |       |       x4");
+                    System.out.println("+-------+-------+-------+-------+-------+");
+                    System.out.println();
+                    System.out.println("        +-------+");
+                    System.out.println("MAX 3   |   !=  |");
+                    System.out.println("        +-------+");
+                    break;
+                case 5:
+                    System.out.println("Four groups each containing at least 4 tiles of the same type (not necessarily in the depicted shape).\n" +
+                            "The tiles of one group can be different from those of another group");
+                    System.out.println("+-------+");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+   x4");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+");
+                    System.out.println("|   =   |");
+                    System.out.println("+-------+");
+                    break;
+                case 6:
+                    System.out.println("Two columns each formed by 6 different types of tiles. ");
+                    System.out.println("+-------+");
+                    System.out.println("|  !=   |");
+                    System.out.println("+-------+");
+                    System.out.println("|  !=   |");
+                    System.out.println("+-------+");
+                    System.out.println("|  !=   |");
+                    System.out.println("+-------+   x2");
+                    System.out.println("|  !=   |");
+                    System.out.println("+-------+");
+                    System.out.println("|  !=   |");
+                    System.out.println("+-------+");
+                    System.out.println("|  !=   |");
+                    System.out.println("+-------+");
+                    break;
+                case 7:
+                    System.out.println("Two groups each containing 4 tiles of the same type in a 2x2 square.\n" +
+                            "The tiles of one square can be different from those of the other square.");
+                    System.out.println("+-------+-------+");
+                    System.out.println("|   =   |   =   |");
+                    System.out.println("+-------+-------+   x2");
+                    System.out.println("|   =   |   =   |");
+                    System.out.println("+-------+-------+");
+                    break;
+                case 8:
+                    System.out.println("Two lines each formed by 5 different types of tiles.\n" +
+                            "One line can show the same or a different combination of the other line.");
+                    System.out.println("+-------+-------+-------+-------+-------+");
+                    System.out.println("|  !=   |  !=   |  !=   |  !=   |  !=   |   x2");
+                    System.out.println("+-------+-------+-------+-------+-------+");
+                    break;
+                case 9:
+                    System.out.println("Three columns each formed by 6 tiles of maximum three different types.\n" +
+                            "One column can show the same or a different combination of another column.");
+                    System.out.println("+-------+");
+                    System.out.println("|       |");
+                    System.out.println("+-------+");
+                    System.out.println("|       |");
+                    System.out.println("+-------+");
+                    System.out.println("|       |           +-------+");
+                    System.out.println("+-------+   MAX 3   |   !=  |");
+                    System.out.println("|       |           +-------+");
+                    System.out.println("+-------+");
+                    System.out.println("|       |");
+                    System.out.println("+-------+");
+                    System.out.println("|       |");
+                    System.out.println("+-------+");
+                    break;
+                case 10:
+                    System.out.println("Five tiles of the same type forming an X.");
+                    System.out.println("+-------+       +-------+");
+                    System.out.println("|   =   |       |   =   |");
+                    System.out.println("+-------+-------+-------+");
+                    System.out.println("        |   =   |       ");
+                    System.out.println("+-------+-------+-------+");
+                    System.out.println("|   =   |       |   =   |");
+                    System.out.println("+-------+       +-------+");
+                    break;
+                case 11:
+                    System.out.println("Eight tiles of the same type. There’s no restriction about the position of these tiles.");
+                    System.out.println("    +-------+   +-------+");
+                    System.out.println("    |   =   |   |   =   |");
+                    System.out.println("    +-------+   +-------+");
+                    System.out.println();
+                    System.out.println("+-------+   +-------+   +-------+");
+                    System.out.println("|   =   |   |   =   |   |   =   |");
+                    System.out.println("+-------+   +-------+   +-------+");
+                    System.out.println();
+                    System.out.println("+-------+   +-------+   +-------+");
+                    System.out.println("|   =   |   |   =   |   |   =   |");
+                    System.out.println("+-------+   +-------+   +-------+");
+                    break;
+                case 12:
+                    System.out.println("Five columns of increasing or decreasing height. Starting from the first column on the left or on the right,\n" +
+                            " each next column must be made of exactly one more tile. Tiles can be of any type.");
+                    System.out.println("+-------+");
+                    System.out.println("|       |");
+                    System.out.println("+-------+-------+");
+                    System.out.println("|       |       |");
+                    System.out.println("+-------+-------+-------+");
+                    System.out.println("|       |       |       |");
+                    System.out.println("+-------+-------+-------+-------+");
+                    System.out.println("|       |       |       |       |");
+                    System.out.println("+-------+-------+-------+-------+-------+");
+                    System.out.println("|       |       |       |       |       |");
+                    System.out.println("+-------+-------+-------+-------+-------+");
+                    break;
+
+            }
+
+
+        }
+
+
+
+
+    }
+
+    @Override
+    public void showPersonalGoalCard(Player player) throws Exception {
+        Tile[][] personalGoalCard = player.getPersonalGoalCard().buildPersonalGoalCard();
+        System.out.println("PERSONAL GOAL CARD:");
+        System.out.println("|   1   |   2   |   3   |   4   |   5   |");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println("|"+personalGoalCard[0][0].getTileType().toCliString()+"|"+personalGoalCard[0][1].getTileType().toCliString()+"|"+personalGoalCard[0][2].getTileType().toCliString()+"|"+personalGoalCard[0][3].getTileType().toCliString()+"|"+personalGoalCard[0][4].getTileType().toCliString()+"|");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println("|"+personalGoalCard[1][0].getTileType().toCliString()+"|"+personalGoalCard[1][1].getTileType().toCliString()+"|"+personalGoalCard[1][2].getTileType().toCliString()+"|"+personalGoalCard[1][3].getTileType().toCliString()+"|"+personalGoalCard[1][4].getTileType().toCliString()+"|");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println("|"+personalGoalCard[2][0].getTileType().toCliString()+"|"+personalGoalCard[2][1].getTileType().toCliString()+"|"+personalGoalCard[2][2].getTileType().toCliString()+"|"+personalGoalCard[2][3].getTileType().toCliString()+"|"+personalGoalCard[2][4].getTileType().toCliString()+"|");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println("|"+personalGoalCard[3][0].getTileType().toCliString()+"|"+personalGoalCard[3][1].getTileType().toCliString()+"|"+personalGoalCard[3][2].getTileType().toCliString()+"|"+personalGoalCard[3][3].getTileType().toCliString()+"|"+personalGoalCard[3][4].getTileType().toCliString()+"|");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println("|"+personalGoalCard[4][0].getTileType().toCliString()+"|"+personalGoalCard[4][1].getTileType().toCliString()+"|"+personalGoalCard[4][2].getTileType().toCliString()+"|"+personalGoalCard[4][3].getTileType().toCliString()+"|"+personalGoalCard[4][4].getTileType().toCliString()+"|");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println("|"+personalGoalCard[5][0].getTileType().toCliString()+"|"+personalGoalCard[5][1].getTileType().toCliString()+"|"+personalGoalCard[5][2].getTileType().toCliString()+"|"+personalGoalCard[5][3].getTileType().toCliString()+"|"+personalGoalCard[5][4].getTileType().toCliString()+"|");
+        System.out.println("+-------+-------+-------+-------+-------+");
+        System.out.println();
+
+    }
 }

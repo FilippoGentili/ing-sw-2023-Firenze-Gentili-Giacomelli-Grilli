@@ -281,6 +281,111 @@ public class PersonalGoalCard {
         return points;
     }
 
+    public Tile[][] buildPersonalGoalCard() throws Exception {
+        Tile[][] goal = new Tile[5][6];
+
+        switch(getID()){
+            case 1:
+                goal[0][0] = new Tile(TileType.PLANT);
+                goal[0][2] = new Tile(TileType.FRAME);
+                goal[1][4] = new Tile(TileType.CAT);
+                goal[2][3] = new Tile(TileType.BOOK);
+                goal[3][1] = new Tile(TileType.GAME);
+                goal[5][2] = new Tile(TileType.TROPHIE);
+                return goal;
+            case 2:
+                goal[1][1] = new Tile(TileType.PLANT);
+                goal[2][0] = new Tile(TileType.CAT);
+                goal[2][2] = new Tile(TileType.GAME);
+                goal[3][4] = new Tile(TileType.BOOK);
+                goal[4][3] = new Tile(TileType.TROPHIE);
+                goal[5][4] = new Tile(TileType.FRAME);
+                return goal;
+            case 3:
+                goal[1][0] = new Tile(TileType.FRAME);
+                goal[1][3] = new Tile(TileType.GAME);
+                goal[2][2] = new Tile(TileType.PLANT);
+                goal[3][1] = new Tile(TileType.CAT);
+                goal[3][4] = new Tile(TileType.TROPHIE);
+                goal[5][0] = new Tile(TileType.BOOK);
+                return goal;
+            case 4:
+                goal[0][4] = new Tile(TileType.GAME);
+                goal[2][0] = new Tile(TileType.TROPHIE);
+                goal[2][2] = new Tile(TileType.FRAME);
+                goal[3][3] = new Tile(TileType.PLANT);
+                goal[4][1] = new Tile(TileType.BOOK);
+                goal[4][2] = new Tile(TileType.CAT);
+                return goal;
+            case 5:
+                goal[1][1] = new Tile(TileType.TROPHIE);
+                goal[3][1] = new Tile(TileType.FRAME);
+                goal[3][2] = new Tile(TileType.BOOK);
+                goal[4][4] = new Tile(TileType.PLANT);
+                goal[5][0] = new Tile(TileType.GAME);
+                goal[5][3] = new Tile(TileType.CAT);
+                return goal;
+            case 6:
+                goal[0][2] = new Tile(TileType.TROPHIE);
+                goal[0][4] = new Tile(TileType.CAT);
+                goal[2][3] = new Tile(TileType.BOOK);
+                goal[4][1] = new Tile(TileType.GAME);
+                goal[4][3] = new Tile(TileType.FRAME);
+                goal[5][0] = new Tile(TileType.PLANT);
+                return goal;
+            case 7:
+                goal[0][0] = new Tile(TileType.CAT);
+                goal[1][3] = new Tile(TileType.FRAME);
+                goal[2][1] = new Tile(TileType.PLANT);
+                goal[3][0] = new Tile(TileType.TROPHIE);
+                goal[4][4] = new Tile(TileType.GAME);
+                goal[5][2] = new Tile(TileType.BOOK);
+                return goal;
+            case 8:
+                goal[0][4] = new Tile(TileType.FRAME);
+                goal[1][1] = new Tile(TileType.CAT);
+                goal[2][2] = new Tile(TileType.TROPHIE);
+                goal[3][0] = new Tile(TileType.PLANT);
+                goal[4][3] = new Tile(TileType.BOOK);
+                goal[5][3] = new Tile(TileType.GAME);
+                return goal;
+            case 9:
+                goal[0][2] = new Tile(TileType.GAME);
+                goal[2][2] = new Tile(TileType.CAT);
+                goal[3][4] = new Tile(TileType.BOOK);
+                goal[4][1] = new Tile(TileType.TROPHIE);
+                goal[4][4] = new Tile(TileType.PLANT);
+                goal[5][0] = new Tile(TileType.FRAME);
+                return goal;
+            case 10:
+                goal[0][4] = new Tile(TileType.TROPHIE);
+                goal[1][1] = new Tile(TileType.GAME);
+                goal[2][0] = new Tile(TileType.BOOK);
+                goal[3][3] = new Tile(TileType.CAT);
+                goal[4][2] = new Tile(TileType.FRAME);
+                goal[5][3] = new Tile(TileType.PLANT);
+                return goal;
+            case 11:
+                goal[0][2] = new Tile(TileType.PLANT);
+                goal[1][1] = new Tile(TileType.BOOK);
+                goal[2][0] = new Tile(TileType.GAME);
+                goal[3][2] = new Tile(TileType.FRAME);
+                goal[4][4] = new Tile(TileType.CAT);
+                goal[5][3] = new Tile(TileType.TROPHIE);
+                return goal;
+            case 12:
+                goal[0][2] = new Tile(TileType.BOOK);
+                goal[1][1] = new Tile(TileType.PLANT);
+                goal[2][2] = new Tile(TileType.FRAME);
+                goal[3][3] = new Tile(TileType.TROPHIE);
+                goal[4][4] = new Tile(TileType.GAME);
+                goal[5][0] = new Tile(TileType.CAT);
+                return goal;
+            default:
+                throw new Exception("An error occured");
+        }
+    }
+
     /**
      * The method gives how many points the player has to get, based on his PersonalGoalCard
      * @param ID

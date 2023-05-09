@@ -4,6 +4,10 @@ import static java.util.Objects.isNull;
 
 public class CommonGoalCard1 extends CommonGoalCard {
 
+    private final int id=1;
+
+    public int getId(){return this.id;}
+
     @Override
     public boolean check(Bookshelf bookshelf) {
         int count, countGroup=0, row, col, i;

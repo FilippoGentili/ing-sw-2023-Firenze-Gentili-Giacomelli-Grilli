@@ -12,6 +12,9 @@ public abstract class CommonGoalCard {
     private int value = 8;
     private int delta;
 
+    public abstract int getId();
+
+
     /**
      * The method checks if the bookshelf respects the object required from the CommonGoalCard.
      * There is an override for each CommonGoalCard.

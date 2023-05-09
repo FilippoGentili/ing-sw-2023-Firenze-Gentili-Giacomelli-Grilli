@@ -3,6 +3,10 @@ package it.polimi.ingsw.Model;
 import static java.util.Objects.isNull;
 
 public class CommonGoalCard4 extends CommonGoalCard {
+
+    private final int id=4;
+
+    public int getId(){return this.id;}
     @Override
     public boolean check(Bookshelf bookshelf) {
         boolean uguale, cellaVuota;
