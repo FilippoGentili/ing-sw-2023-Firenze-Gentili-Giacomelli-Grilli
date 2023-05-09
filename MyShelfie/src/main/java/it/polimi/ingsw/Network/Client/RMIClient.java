@@ -20,7 +20,7 @@ public class RMIClient extends Client implements MatchClient{
                 try {
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
                         MatchServer matchServer = (MatchServer) registry.lookup("MyShelfieServer");
-                        Client.LOGGER.info(() ->"RMI client started on port " + 1099 + ".");
+                        Client.LOGGER.info(() ->"RMI client started on port 1099");
                 } catch (RemoteException | NotBoundException e){
                         Server.LOGGER.severe(e.getMessage());
                 }

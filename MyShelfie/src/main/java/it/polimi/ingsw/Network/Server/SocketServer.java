@@ -23,7 +23,7 @@ public class SocketServer implements Runnable {
     public  void run() {
         try {
             serverSocket = new ServerSocket(1099);
-            Server.LOGGER.info(() -> "Socket server started on port " + 1099 + ".");
+            Server.LOGGER.info(() -> "Socket server started on port 1099");
         } catch (IOException e) {
             Server.LOGGER.severe("Error while starting server");
             return;
@@ -42,22 +42,6 @@ public class SocketServer implements Runnable {
             }
         }
     }
-
-
-   /* public void startSocketServer(){
-        try (ServerSocket listener = new ServerSocket(getPort())){
-            while (true){
-                try (Socket socket = listener.accept()){
-                    TimeUnit.SECONDS.sleep(20);
-                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                    out.println(new Date().toString());
-                    System.out.println("Data sent");
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     public void addClient(String nickname, MatchServer matchServer) throws RemoteException {
         server.addClient(nickname, matchServer);

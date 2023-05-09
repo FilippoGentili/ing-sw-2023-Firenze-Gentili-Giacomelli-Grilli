@@ -60,7 +60,7 @@ public class Server {
             removeClient(nickname);
 
             if(!gameController.waitingForPlayers()){
-                gameController.broadcastShowMessage(nickname + " disconnected from the server. Game finished :(");
+                gameController.broadcastShowMessage(nickname + " disconnected from the server. Game finished!");
                 //fine partita, cancella tutto
             }
         }

@@ -18,12 +18,11 @@ public class RMIServer {
                 MatchServerImpl obj = new MatchServerImpl(server);
                 Registry registry = LocateRegistry.createRegistry(1099);
                 Naming.rebind("MyShelfieServer", obj);
-                Server.LOGGER.info(() ->"RMI server started on port " + 1099 + ".");
+                Server.LOGGER.info(() ->"RMI server started on port 1099");
             } catch (IOException e) {
                 Server.LOGGER.severe(e.getMessage());
             }
         });
         thread.start();
     }
-
 }

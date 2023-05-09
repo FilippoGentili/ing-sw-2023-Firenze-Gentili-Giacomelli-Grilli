@@ -32,7 +32,7 @@ public class SocketClient extends Client{
         this.in = new ObjectInputStream(socket.getInputStream());
         this.executorService = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
-        Client.LOGGER.info(() ->"Socket client started on port " + 1099 + ".");
+        Client.LOGGER.info(() ->"Socket client started on port 1099");
 
     }
     @Override
