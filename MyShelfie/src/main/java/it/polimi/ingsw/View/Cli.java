@@ -101,28 +101,6 @@ public class Cli extends ViewObservable implements View{
             SocketClient sc = new SocketClient();
             sc.startSocketClient();
         }
-
-       /* serverInfo.put("address", defaultAddress);
-
-        do{
-            out.println("Specify the port");
-            System.out.println("Default port value -> " + defaultPort);
-
-            port = readLine();
-
-            if (port.equals("")) {
-                serverInfo.put("port", defaultPort);
-                valid = true;
-            }else if (validPort(port)) {
-                serverInfo.put("port", port);
-                valid = true;
-            } else {
-                out.println("Invalid port!");
-                out.flush();
-                valid = false;
-            }
-        }while(!valid);
-*/
         notifyObserver(obs -> {
             try {
                 obs.updateServerInfoSocket(serverInfo);
@@ -130,12 +108,6 @@ public class Cli extends ViewObservable implements View{
                 throw new RuntimeException(e);
             }
         });
-    }
-
-
-    public boolean validPort(String port){
-        int p = Integer.parseInt(port);
-        return p >= 1 && p <= 65535;
     }
 
     @Override
