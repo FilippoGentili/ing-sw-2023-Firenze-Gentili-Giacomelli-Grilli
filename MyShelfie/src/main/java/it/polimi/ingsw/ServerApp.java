@@ -38,7 +38,7 @@ public class ServerApp {
 
         if(rmi){
             RMIServer rs = new RMIServer(server);
-            rs.startRMIServer();
+            rs.run();
         }else if(socket) {
             SocketServer ss = new SocketServer(server);
             ss.run();

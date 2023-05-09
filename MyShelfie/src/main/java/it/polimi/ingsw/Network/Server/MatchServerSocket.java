@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 
@@ -11,7 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class MatchServerSocket implements MatchServer,Runnable{
+public class MatchServerSocket implements MatchServer{
 
     private final Socket client;
     private final SocketServer socketServer;
@@ -33,7 +34,7 @@ public class MatchServerSocket implements MatchServer,Runnable{
         }
     }
 
-    public void clientConnection() throws IOException{
+    public void connectClient() {
         Server.LOGGER.info("" + client.getInetAddress() + " connected");
 
         try{
@@ -46,19 +47,12 @@ public class MatchServerSocket implements MatchServer,Runnable{
                     socketServer.forwardMessage(message);
                 }
             }
-        }catch (ClassNotFoundException e){
-
+        }catch (ClassNotFoundException | IOException e){
         }
     }
 
-
     @Override
-    public void connectClient(Client client) throws RemoteException {
-
-    }
-
-    @Override
-    public void sendMessage(Message message) throws RemoteException {
+    public void checkConnection() throws RemoteException {
 
     }
 
@@ -68,20 +62,8 @@ public class MatchServerSocket implements MatchServer,Runnable{
     }
 
     @Override
-    public void getMessage() {
+    public void sendMessage(Message message) throws RemoteException {
 
-    }
-
-
-    @Override
-    public void run() {
-        while(!Thread.currentThread().isInterrupted()){
-            try {
-                clientConnection();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
 }

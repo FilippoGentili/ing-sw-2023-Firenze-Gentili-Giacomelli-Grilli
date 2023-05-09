@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIClient extends Client implements MatchClient{
+public class RMIClient extends Client{
 
         @Serial
         private static final long serialVersionUID = 4702549132783715919L;
@@ -28,7 +28,12 @@ public class RMIClient extends Client implements MatchClient{
 
 
         @Override
-        public void disconnect() {
+        public void connect() throws RemoteException {
+
+        }
+
+        @Override
+        public void disconnect() throws RemoteException {
 
         }
 
@@ -44,26 +49,6 @@ public class RMIClient extends Client implements MatchClient{
 
         @Override
         public void pinger(boolean on) {
-
-        }
-
-        @Override
-        public void ping() throws RemoteException {
-
-        }
-
-        @Override
-        public void connectToServer() throws RemoteException {
-
-        }
-
-        @Override
-        public void disconnectFromServer() throws RemoteException {
-
-        }
-
-        @Override
-        public void heartbeat() throws RemoteException {
 
         }
 }

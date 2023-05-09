@@ -35,6 +35,12 @@ public class SocketClient extends Client{
         Client.LOGGER.info(() ->"Socket client started on port 1099");
 
     }
+
+    @Override
+    public void connect() throws RemoteException{
+
+    }
+
     @Override
     public void disconnect() throws RemoteException {
         try {
