@@ -3,8 +3,13 @@ package it.polimi.ingsw.View;
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.RMIClient;
+import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Server.RMIServer;
+import it.polimi.ingsw.Network.Server.SocketServer;
 import it.polimi.ingsw.Observer.ViewObservable;
 
 import java.io.IOException;
@@ -21,6 +26,8 @@ public class Cli extends ViewObservable implements View{
 
     //private ClientController clientController;
 
+    private Client client;
+
     private final PrintStream out;
     Scanner scanner = new Scanner(System.in);
 
@@ -33,7 +40,7 @@ public class Cli extends ViewObservable implements View{
     }
 
 
-    public void start(){
+    public void start() throws IOException {
         out.println("Welcome to MyShelfie!");
         out.println("\n" +
                 " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" +
@@ -56,35 +63,44 @@ public class Cli extends ViewObservable implements View{
         System.out.println(message);
     }
 
-    public void serverInfo(){
+    public void serverInfo() throws IOException {
 
-        //DA IMPLEMENTARE LA SCELTA TRA RMI E SOCKET
+        boolean rmi = false;
+        boolean socket = false;
 
         Map<String, String> serverInfo = new HashMap<>();
         String defaultAddress = "localhost";
-        String defaultPort = "1099"; //da cambiare forse
+        String defaultPort = "1099";
         boolean valid;
         String address;
         String port;
         serverInfo.put(defaultAddress,defaultPort);
 
-        /*do{
-            out.println("Specify the address");
-            System.out.println("Default address value -> " + defaultAddress);
 
-            address = readLine();
-            if (address.equals("")) {
-                serverInfo.put("address", defaultAddress);
-                valid = true;
-            } else if (validIP(address)) {
-                serverInfo.put("address", address);
-                valid = true;
-            } else {
-                out.println("Invalid address!");
-                out.flush();
-                valid = false;
-            }
-        }while(!valid);*/
+        //choose type of connection
+        System.out.println("Which type of connection do you want to use?");
+        System.out.println("Type -rmi or -socket");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+        //check if input is right
+        while(!input.equals("-rmi") && !input.equals("-socket")){
+            System.out.println("Invalid statement!");
+            System.out.println("Type -rmi or -socket");
+            input = scanner.nextLine().trim();
+        }
+        if(input.equals("-rmi"))
+            rmi = true;
+
+        if(input.equals("-socket"))
+            socket = true;
+
+        if(rmi){
+            RMIClient rc = new RMIClient();
+            rc.startRMIClient();
+        }else if(socket) {
+            SocketClient sc = new SocketClient();
+            sc.startSocketClient();
+        }
 
        /* serverInfo.put("address", defaultAddress);
 

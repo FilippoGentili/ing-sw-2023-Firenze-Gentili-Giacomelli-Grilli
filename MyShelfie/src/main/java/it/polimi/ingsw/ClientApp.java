@@ -5,12 +5,13 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.Cli;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ClientApp {
 
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws IOException {
 
         boolean cliCheck = false;
 

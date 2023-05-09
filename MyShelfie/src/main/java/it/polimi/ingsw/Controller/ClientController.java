@@ -68,7 +68,7 @@ public class ClientController implements Observer, ViewObserver {
 
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            client = new SocketClient(Ipaddress,port);
+            client = new SocketClient();
             client.addObserver(this);
             //attendo il messaggio dal server
             client.readMessage();

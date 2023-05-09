@@ -15,35 +15,26 @@ import java.util.concurrent.TimeUnit;
 
 public class SocketClient extends Client{
 
-    private final Socket socket;
+    private Socket socket;
 
-    private final ObjectOutputStream out;
-    private final ObjectInputStream in;
-    private final ExecutorService executorService;
-    private final ScheduledExecutorService pinger;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
+    private ExecutorService executorService;
+    private ScheduledExecutorService pinger;
 
 
     private static final int HEARTBEAT = 10000;
 
-    public SocketClient(String address, int port) throws IOException {
+
+
+    public void startSocketClient() throws IOException {
         this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress(address, port), HEARTBEAT);
+        this.socket.connect(new InetSocketAddress("127.0.0.1", 1099), HEARTBEAT);
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.in = new ObjectInputStream(socket.getInputStream());
         this.executorService = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
     }
-
-    /*public void startSocketClient(){
-        try (Socket socket = new Socket(address, port){
-            InputStream input = socket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            String line = reader.readLine();
-            System.out.println(line);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     @Override
     public void disconnect() throws RemoteException {
         try {

@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.Server.RMIServer;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Network.Server.SocketServer;
+import it.polimi.ingsw.Network.Server.RMIServer;
 
 import java.util.Scanner;
 
