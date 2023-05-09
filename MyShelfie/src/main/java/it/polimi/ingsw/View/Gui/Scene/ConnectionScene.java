@@ -36,7 +36,13 @@ public class ConnectionScene extends ViewObservable {
         Map<String,String> serverInfo = new HashMap<>();
         serverInfo.put(address,port);
 
-        ClientController.updateServerInfoSocket(serverInfo); //metto tutti i metodi e attributi relativi come statici?
+        notifyObserver(obs -> {
+            try {
+                obs.updateServerInfoSocket(serverInfo);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void goBackButtonClicked(){
