@@ -3,6 +3,8 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -21,6 +23,13 @@ public class MatchServerSocket implements MatchServer{
         this.client = client;
         this.socketServer = socketServer;
         this.connected = true;
+
+        try{
+            this.in = new ObjectInputStream(client.getInputStream());
+            this.out = new ObjectOutputStream(client.getOutputStream());
+        }catch (IOException e){
+
+        }
     }
 
 

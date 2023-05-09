@@ -17,7 +17,7 @@ public class Game extends Observable {
 
     public Game() {
         listOfPlayers = new ArrayList<>();
-        this.initializeLivingRoom();
+        //this.initializeLivingRoom();
     }
 
     /**

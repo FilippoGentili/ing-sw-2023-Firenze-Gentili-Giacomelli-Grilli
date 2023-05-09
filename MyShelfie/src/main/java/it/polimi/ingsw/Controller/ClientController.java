@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.lang.Integer.parseInt;
 
@@ -25,11 +27,13 @@ public class ClientController implements Observer, ViewObserver {
 
 
     private final View view;
+    private final ExecutorService taskQueue;
     private Client client;
     private String nickname;
 
     public ClientController(View view) throws RemoteException {
         this.view = view;
+        taskQueue = Executors.newSingleThreadExecutor();
 
     }
 
@@ -58,7 +62,7 @@ public class ClientController implements Observer, ViewObserver {
         for(Map.Entry<String, String> map : serverInfo.entrySet()){
             Ipaddress = map.getKey();
             portString = map.getValue();
-            port = parseInt(portString);
+            port = Integer.parseInt(portString);
             break;
         }
 
@@ -68,6 +72,7 @@ public class ClientController implements Observer, ViewObserver {
             clientSocket.addObserver(this);
             //attendo il messaggio dal server
             clientSocket.readMessage();
+            view.nicknameRequest();
         }catch (IOException e){
             view.loginResult(false,false,this.nickname);
         }

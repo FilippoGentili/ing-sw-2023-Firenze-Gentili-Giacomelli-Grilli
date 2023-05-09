@@ -276,6 +276,8 @@ public class GameController {
                 }
             }
         }
+
+        setGameState(END);
     }
 
     public int getNumOfPlayers(){
