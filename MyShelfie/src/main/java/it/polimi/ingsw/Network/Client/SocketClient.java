@@ -37,11 +37,6 @@ public class SocketClient extends Client{
     }
 
     @Override
-    public void connect() throws RemoteException{
-
-    }
-
-    @Override
     public void disconnect() throws RemoteException {
         try {
             if (!socket.isClosed()) {

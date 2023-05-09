@@ -14,12 +14,6 @@ import java.rmi.registry.Registry;
 
 public class RMIClient extends Client{
 
-        @Serial
-        private static final long serialVersionUID = 4702549132783715919L;
-        private transient MatchServer server;
-        private ObjectOutputStream output;
-        private ObjectInputStream input;
-
         public void startRMIClient(){
                 try {
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
@@ -30,11 +24,6 @@ public class RMIClient extends Client{
                 }
         }
 
-
-        @Override
-        public void connect() throws RemoteException {
-
-        }
 
         @Override
         public void disconnect() throws RemoteException {

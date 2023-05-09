@@ -40,8 +40,8 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     }
 
     @Override
-    public void disconnectClient(Client client) throws RemoteException {
-        listOfClients.remove(client);
+    public void disconnectClient() throws RemoteException {
+
     }
 
     @Override
