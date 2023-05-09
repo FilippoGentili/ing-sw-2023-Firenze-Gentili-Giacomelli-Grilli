@@ -9,4 +9,6 @@
     -fx-shape:
     -fx-alignment: center;
     -fx-text-fill: #ffffff;
+    -fx-border-color: #EEEE00;
+    -fx-background-color: #228B22;
 }

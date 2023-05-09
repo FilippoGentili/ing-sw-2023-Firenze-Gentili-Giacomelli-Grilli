@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public abstract class Client extends Observable{
 
-    protected static final Logger LOGGER = Logger.getLogger(Client.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     protected Timer pingTimer;
 
     public abstract void disconnect() throws IOException;

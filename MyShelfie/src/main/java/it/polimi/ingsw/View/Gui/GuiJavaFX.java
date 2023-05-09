@@ -1,5 +1,5 @@
 package it.polimi.ingsw.View.Gui;
-/*
+
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.View.Gui.Scene.MenuScene;
 
@@ -46,4 +46,3 @@ public class GuiJavaFX extends Application {
         super.stop();
     }
 }
-*/

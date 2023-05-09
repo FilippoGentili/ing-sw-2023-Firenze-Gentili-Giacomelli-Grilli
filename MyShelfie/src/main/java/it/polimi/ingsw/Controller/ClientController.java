@@ -54,7 +54,7 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     @Override
-    public void updateServerInfoSocket(Map<String, String> serverInfo) throws IOException {
+    public static void updateServerInfoSocket(Map<String, String> serverInfo) throws IOException {
         String Ipaddress = null;
         String portString;
         int port = 0;
