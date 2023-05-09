@@ -6,13 +6,15 @@ import it.polimi.ingsw.Observer.Observable;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Timer;
 import java.util.logging.Logger;
 
 public abstract class Client extends Observable{
 
     protected static final Logger LOGGER = Logger.getLogger(Client.class.getName());
+    protected Timer pingTimer;
 
-    public abstract void disconnect() throws RemoteException;
+    public abstract void disconnect() throws IOException;
 
     public abstract void sendMessage(Message message) throws RemoteException;
 

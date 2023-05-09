@@ -4,15 +4,15 @@ import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.Network.Server.Server;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serial;
+import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Timer;
 
 public class RMIClient extends Client{
+        private transient MatchServer server;
 
         public void startRMIClient(){
                 try {
@@ -26,18 +26,24 @@ public class RMIClient extends Client{
 
 
         @Override
-        public void disconnect() throws RemoteException {
-
+        public void disconnect() throws IOException {
+                server.disconnectClient();
+                server = null;
         }
 
         @Override
-        public void sendMessage(Message message){
-
+        public void sendMessage(Message message) throws RemoteException {
+                if(server == null){
+                        throw new RemoteException();
+                }
+                server.sendMessage(message);
         }
 
         @Override
         public void readMessage() {
-
+                synchronized (messageQueue) {
+                        messageQueue.add(message);
+                }
         }
 
         @Override
