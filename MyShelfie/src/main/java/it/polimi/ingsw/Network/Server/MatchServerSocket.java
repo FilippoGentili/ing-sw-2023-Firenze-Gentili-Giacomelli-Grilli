@@ -30,7 +30,7 @@ public class MatchServerSocket implements MatchServer{
             this.in = new ObjectInputStream(client.getInputStream());
             this.out = new ObjectOutputStream(client.getOutputStream());
         }catch (IOException e){
-
+            Server.LOGGER.severe("Server down");
         }
     }
 
@@ -48,6 +48,7 @@ public class MatchServerSocket implements MatchServer{
                 }
             }
         }catch (ClassNotFoundException | IOException e){
+            Server.LOGGER.severe("Connection could not be established");
         }
     }
 
