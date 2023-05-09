@@ -66,6 +66,7 @@ public class Cli extends ViewObservable implements View{
         boolean valid;
         String address;
         String port;
+        serverInfo.put(defaultAddress,defaultPort);
 
         /*do{
             out.println("Specify the address");
