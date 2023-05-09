@@ -7,6 +7,7 @@ import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Observer.ViewObservable;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -108,7 +109,7 @@ public class Cli extends ViewObservable implements View{
         notifyObserver(obs -> {
             try {
                 obs.updateServerInfoSocket(serverInfo);
-            } catch (RemoteException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
