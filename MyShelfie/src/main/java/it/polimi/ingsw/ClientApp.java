@@ -1,12 +1,9 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.Cli;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ClientApp {
@@ -14,13 +11,6 @@ public class ClientApp {
     public static void main(String[] args) throws IOException {
 
         boolean cliCheck = false;
-
-        /*for(String arg : args) {
-            if (arg.equals("-cli")) {
-                cliCheck = true;
-                break;
-            }
-        }*/
 
         System.out.println("If you want to start a cli write '-cli' ");
         Scanner scanner = new Scanner(System.in);
@@ -43,6 +33,5 @@ public class ClientApp {
         }/*else{
             //gui
         }*/
-
     }
 }

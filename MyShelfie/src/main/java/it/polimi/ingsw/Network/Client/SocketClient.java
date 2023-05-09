@@ -25,15 +25,13 @@ public class SocketClient extends Client{
 
     private static final int HEARTBEAT = 10000;
 
-
-
     public void startSocketClient() throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress("127.0.0.1", 1099), HEARTBEAT);
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.in = new ObjectInputStream(socket.getInputStream());
-        //this.executorService = Executors.newSingleThreadExecutor();
-        //this.pinger = Executors.newSingleThreadScheduledExecutor();
+        this.executorService = Executors.newSingleThreadExecutor();
+        this.pinger = Executors.newSingleThreadScheduledExecutor();
         Client.LOGGER.info(() ->"Socket client started on port " + 1099 + ".");
 
     }
@@ -97,7 +95,7 @@ public class SocketClient extends Client{
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
-            }, 0, 1000, TimeUnit.MILLISECONDS);
+            }, 0, HEARTBEAT, TimeUnit.MILLISECONDS);
         } else {
             pinger.shutdownNow();
         }

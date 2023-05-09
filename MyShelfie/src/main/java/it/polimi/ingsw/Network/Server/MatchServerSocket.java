@@ -34,7 +34,7 @@ public class MatchServerSocket implements MatchServer,Runnable{
     }
 
     public void clientConnection() throws IOException{
-        Server.LOGGER.info("" + client.getInetAddress() + "connected");
+        Server.LOGGER.info("" + client.getInetAddress() + " connected");
 
         try{
             Message message = (Message) in.readObject();
