@@ -559,15 +559,10 @@ public class Cli extends ViewObservable implements View{
                     System.out.println("|       |       |       |       |       |");
                     System.out.println("+-------+-------+-------+-------+-------+");
                     break;
-
+                default:
+                    System.out.println("Common goal id not valid");
             }
-
-
         }
-
-
-
-
     }
 
     @Override

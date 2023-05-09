@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Observer;
 
 //qui ci saranno tutti i metodi da chiamare in seguito a cambiamenti nella view
+//i metodi manderanno messaggi al server
 
 import it.polimi.ingsw.Model.Tile;
 
