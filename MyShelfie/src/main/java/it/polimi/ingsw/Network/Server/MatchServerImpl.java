@@ -38,6 +38,11 @@ public class MatchServerImpl extends UnicastRemoteObject implements MatchServer 
     }
 
     @Override
+    public void clientConnection() throws IOException {
+
+    }
+
+    @Override
     public void sendMessage(Message message) throws RemoteException {
 
     }

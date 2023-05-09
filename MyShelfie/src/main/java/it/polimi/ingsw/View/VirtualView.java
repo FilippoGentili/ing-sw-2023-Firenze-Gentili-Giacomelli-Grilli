@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
@@ -50,6 +51,16 @@ public class VirtualView implements View, Observer {
     @Override
     public void showBookshelf(Player player) throws RemoteException {
         matchServer.sendMessage(new BookshelfMessage(player));  //BookshelfMessage da creare
+    }
+
+    @Override
+    public void showCommonGoalCards(Game game) {
+
+    }
+
+    @Override
+    public void showPersonalGoalCard(Player player) throws Exception {
+
     }
 
     @Override

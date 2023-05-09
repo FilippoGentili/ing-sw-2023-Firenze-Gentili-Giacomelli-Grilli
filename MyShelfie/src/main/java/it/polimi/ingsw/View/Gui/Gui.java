@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View.Gui;
 
+import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
@@ -62,6 +63,16 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showBookshelf(Player player) throws RemoteException {
+
+    }
+
+    @Override
+    public void showCommonGoalCards(Game game) {
+
+    }
+
+    @Override
+    public void showPersonalGoalCard(Player player) throws Exception {
 
     }
 }
