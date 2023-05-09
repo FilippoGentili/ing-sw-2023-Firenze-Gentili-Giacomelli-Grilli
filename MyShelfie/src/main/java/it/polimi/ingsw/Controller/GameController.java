@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.*;
+import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.rmi.RemoteException;
@@ -45,20 +46,48 @@ public class GameController {
 
     public void forwardMessage(Message message) throws RemoteException {
         VirtualView vv=null;
-        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
-            if(map.getKey().getNickname().equals(message.getNickname())){
+
+        for (Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()) {
+            if (map.getKey().getNickname().equals(message.getNickname())) {
                 vv = map.getValue();
             }
         }
 
-        switch (gameState){
+        switch (gameState) {
             case LOGIN:
-                handleLogin(message.getNickname(),vv);
+                if(message.getMessageType()==MessageType.NUM_OF_PLAYERS_REPLY) {
+                    NumOfPlayersReply num = (NumOfPlayersReply) message;
+                    int numOfPlayers = num.getNumOfPlayers();
+                    setNumOfPlayers(numOfPlayers);
+                }else {
+                    Server.LOGGER.severe("Message from the client is not the number of players");
+                }
                 break;
             case PLAY:
                 handleGame(message);
                 break;
+        }
+    }
 
+    public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
+        Player player = new Player();
+
+        if(virtualViewMap.size() < numOfPlayers) {
+            if (inputController.checkNickname(nickname, vv)) {
+                addVirtualView(player, vv);
+                player.setNickname(nickname);
+                game.addPlayer(player);
+                vv.loginResult(true, true, nickname);
+            } else
+                vv.loginResult(false, true, nickname);
+        }else if(virtualViewMap.isEmpty()){
+            addVirtualView(player, vv);
+            player.setNickname(nickname);
+            game.addPlayer(player);
+            vv.loginResult(true, true, nickname);
+            vv.askNumberOfPlayers();
+        }else {
+            vv.loginResult(true, false, nickname);
         }
     }
 
@@ -304,22 +333,6 @@ public class GameController {
         for(Player player : players)
             if(player.getNickname().equals(nickname))
                 player.getBookshelf().removeObserver(vv);
-    }
-
-    public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
-        Player player = new Player();
-
-        if(virtualViewMap.size() < numOfPlayers){
-            if(inputController.checkNickname(nickname, vv)){
-                addVirtualView(player, vv);
-                player.setNickname(nickname);
-                game.addPlayer(player);
-                vv.loginResult(true,true, nickname);
-            }else
-                vv.loginResult(false,true, nickname);
-        }else {
-            vv.loginResult(true, false, nickname);
-        }
     }
 
     /*public void addPlayer(String nickname){

@@ -40,10 +40,11 @@ public class MatchServerSocket implements MatchServer,Runnable{
             Message message = (Message) in.readObject();
 
             if(message != null){
-                if(message.getMessageType() == MessageType.LOGIN_RESULT){
+                if(message.getMessageType() == MessageType.LOGIN_REQUEST){
                     socketServer.addClient(message.getNickname(),this);
+                }else {
+                    socketServer.forwardMessage(message);
                 }
-                socketServer.forwardMessage(message);
             }
         }catch (ClassNotFoundException e){
 
