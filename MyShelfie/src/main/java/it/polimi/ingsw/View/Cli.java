@@ -25,9 +25,6 @@ import static java.lang.Integer.parseInt;
 public class Cli extends ViewObservable implements View{
 
     //private ClientController clientController;
-
-    private Client client;
-
     private final PrintStream out;
     Scanner scanner = new Scanner(System.in);
 
@@ -71,11 +68,7 @@ public class Cli extends ViewObservable implements View{
         Map<String, String> serverInfo = new HashMap<>();
         String defaultAddress = "localhost";
         String defaultPort = "1099";
-        boolean valid;
-        String address;
-        String port;
         serverInfo.put(defaultAddress,defaultPort);
-
 
         //choose type of connection
         System.out.println("Which type of connection do you want to use?");
@@ -303,7 +296,6 @@ public class Cli extends ViewObservable implements View{
             }
         });
     }
-
 
     @Override
     public void someoneDisconnected(String nickname) {

@@ -32,8 +32,10 @@ public class SocketClient extends Client{
         this.socket.connect(new InetSocketAddress("127.0.0.1", 1099), HEARTBEAT);
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.in = new ObjectInputStream(socket.getInputStream());
-        this.executorService = Executors.newSingleThreadExecutor();
-        this.pinger = Executors.newSingleThreadScheduledExecutor();
+        //this.executorService = Executors.newSingleThreadExecutor();
+        //this.pinger = Executors.newSingleThreadScheduledExecutor();
+        Client.LOGGER.info(() ->"Socket client started on port " + 1099 + ".");
+
     }
     @Override
     public void disconnect() throws RemoteException {
