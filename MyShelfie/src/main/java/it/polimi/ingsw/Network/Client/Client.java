@@ -15,7 +15,7 @@ public abstract class Client extends Observable{
 
     public abstract void disconnect() throws IOException;
 
-    public abstract void sendMessage(Message message) throws RemoteException;
+    public abstract void sendMessage(Message message) throws IOException;
 
     public abstract void readMessage();
 

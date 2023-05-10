@@ -8,6 +8,7 @@ import it.polimi.ingsw.Network.Message.MessageType;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
 
     private final transient Server server;
+
     private boolean connected;
 
     //private ArrayList<Client> listOfClients = new ArrayList<>();
@@ -42,7 +44,7 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     }
 
 
-    public void connectClient() throws RemoteException {
+    public void connectClient(Client client) throws RemoteException {
         Server.LOGGER.info("" + client.getInetAddress() + " connected");
 
         try{

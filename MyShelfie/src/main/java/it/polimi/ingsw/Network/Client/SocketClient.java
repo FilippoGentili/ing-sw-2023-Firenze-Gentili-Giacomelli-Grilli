@@ -17,8 +17,8 @@ public class SocketClient extends Client{
 
     private Socket socket;
 
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
+    private ObjectOutputStream output;
+    private ObjectInputStream input;
     private ExecutorService executorService;
     private ScheduledExecutorService pinger;
 
@@ -28,8 +28,8 @@ public class SocketClient extends Client{
     public void startSocketClient() throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress("127.0.0.1", 1099), HEARTBEAT);
-        this.out = new ObjectOutputStream(socket.getOutputStream());
-        this.in = new ObjectInputStream(socket.getInputStream());
+        this.output = new ObjectOutputStream(socket.getOutputStream());
+        this.input = new ObjectInputStream(socket.getInputStream());
         this.executorService = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
         Client.LOGGER.info(() ->"Socket client started on port 1099");
@@ -53,8 +53,8 @@ public class SocketClient extends Client{
     @Override
     public void sendMessage(Message message) throws RemoteException {
         try {
-            out.writeObject(message);
-            out.reset();
+            output.writeObject(message);
+            output.reset();
         } catch (IOException e) {
             disconnect();
             notifyObserver(new GenericMessage("Could not send message."));
@@ -67,7 +67,7 @@ public class SocketClient extends Client{
             while(!executorService.isShutdown()){
                 Message message;
                 try {
-                    message = (Message) in.readObject();
+                    message = (Message) input.readObject();
                     Client.LOGGER.info("Received: " + message);
                 } catch (IOException | ClassNotFoundException e) {
                     message = new GenericMessage("Connection lost");
