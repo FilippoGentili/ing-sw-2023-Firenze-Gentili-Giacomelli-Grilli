@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
+import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 
@@ -11,12 +12,12 @@ import java.rmi.RemoteException;
 
 public class MatchServerSocket implements MatchServer{
 
-    private final Socket client;
     private final SocketServer socketServer;
+    private final Socket client;
     private boolean connected;
 
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
+    private ObjectOutputStream output;
+    private ObjectInputStream input;
 
     private final Object inputLock;
     private final Object outputLock;
@@ -29,8 +30,8 @@ public class MatchServerSocket implements MatchServer{
         this.outputLock = new Object();
 
         try{
-            this.in = new ObjectInputStream(client.getInputStream());
-            this.out = new ObjectOutputStream(client.getOutputStream());
+            this.input = new ObjectInputStream(client.getInputStream());
+            this.output = new ObjectOutputStream(client.getOutputStream());
         }catch (IOException e){
             Server.LOGGER.severe("Server down");
         }
@@ -40,7 +41,7 @@ public class MatchServerSocket implements MatchServer{
         Server.LOGGER.info("" + client.getInetAddress() + " connected");
 
         try{
-            Message message = (Message) in.readObject();
+            Message message = (Message) input.readObject();
 
             if(message != null){
                 if(message.getMessageType() == MessageType.LOGIN_REQUEST){
@@ -76,8 +77,8 @@ public class MatchServerSocket implements MatchServer{
     public void sendMessage(Message message) throws RemoteException {
         try{
             synchronized(outputLock){
-                out.writeObject(message);
-                out.reset();
+                output.writeObject(message);
+                output.reset();
                 Server.LOGGER.info(() -> "Sent: " + message);
             }
         } catch(IOException e) {

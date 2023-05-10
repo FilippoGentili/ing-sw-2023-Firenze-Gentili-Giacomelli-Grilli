@@ -93,5 +93,6 @@
     <orderEntry type="library" name="javafx.media" level="application" />
     <orderEntry type="library" name="javafx.swing" level="application" />
     <orderEntry type="library" name="javafx.web" level="application" />
+    <orderEntry type="library" name="javafx-swt" level="application" />
   </component>
 </module>

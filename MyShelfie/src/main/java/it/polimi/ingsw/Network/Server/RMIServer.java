@@ -31,4 +31,16 @@ public class RMIServer implements Runnable{
         });
         thread.start();
     }
+
+    public static void addClient(String nickname, MatchServer matchServer) throws RemoteException{
+        server.addClient(nickname, matchServer);
+    }
+
+    public static void forwardMessage(Message message) throws RemoteException {
+        server.forwardMessage(message);
+    }
+
+    public void clientDisconnection(MatchServer matchServer) throws RemoteException {
+        server.clientDisconnection(matchServer);
+    }
 }
