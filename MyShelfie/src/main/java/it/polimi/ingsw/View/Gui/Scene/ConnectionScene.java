@@ -15,34 +15,42 @@ public class ConnectionScene extends ViewObservable {
 
     private TextField serverAddress;
     private TextField serverPort;
-    private Button connectButton;
+    private Button connectRMIButton;
+    private Button connectSocketButton;
     private Button goBackButton;
 
     public void setUp(){
-        connectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        connectRMIButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                connectButtonClicked();
+                connectRMIButtonClicked();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+
+        connectSocketButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                connectSocketButtonClicked();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         goBackButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> goBackButtonClicked());
     }
 
-    private void connectButtonClicked() throws IOException {
-        String address = serverAddress.getText();
-        String port = serverPort.getText();
-
-        Map<String,String> serverInfo = new HashMap<>();
-        serverInfo.put(address,port);
-
+    private void connectRMIButtonClicked() throws IOException {
         notifyObserver(obs -> {
             try {
-                obs.updateServerInfoSocket(serverInfo);
+                obs.updateServerInfoSocket();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    private void connectSocketButtonClicked() throws IOException{
+
     }
 
     private void goBackButtonClicked(){

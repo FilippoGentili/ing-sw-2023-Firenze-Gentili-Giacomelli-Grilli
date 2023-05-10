@@ -6,10 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 <?import java.net.URL?>
+
 <AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="760.0" prefWidth="1300.0" styleClass="basePane"
-            stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19">
+            stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19"
+            fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionScene" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@../css/style.css" />
     </stylesheets>
