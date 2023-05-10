@@ -1,7 +1,7 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.View.Gui.SceneController;
+import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,7 +14,7 @@ public class MenuScene extends ViewObservable {
     private Button exitButton;
 
     private void playButtonClicked(Event event){
-        SceneController.changePane("connectScene.fxml",event,observers);
+        GuiController.changeScene("connectScene.fxml",event,observers);
     }
     @FXML
     public void setUp(){

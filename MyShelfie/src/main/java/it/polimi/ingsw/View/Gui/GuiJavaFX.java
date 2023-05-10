@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View.Gui;
 
 import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.View.Gui.Scene.MenuScene;
 
 import javafx.application.Application;
@@ -27,11 +28,12 @@ public class GuiJavaFX extends Application {
         try{
             layout = fxmlLoader.load();
         }catch (IOException e){
-
+            Client.LOGGER.severe(e.getMessage());
+            System.exit(0);
         }
 
-        MenuScene controller = fxmlLoader.getController();
-        controller.addObserver(clientController);
+        MenuScene menuScene = fxmlLoader.getController();
+        menuScene.addObserver(clientController);
 
         Scene scene = new Scene(layout);
         stage.setScene(scene);
