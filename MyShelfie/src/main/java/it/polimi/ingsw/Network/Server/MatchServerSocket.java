@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class MatchServerSocket implements MatchServer{
+public class MatchServerSocket implements MatchServer, Runnable{
 
     private final SocketServer socketServer;
     private final Socket client;
@@ -86,4 +86,8 @@ public class MatchServerSocket implements MatchServer{
         }
     }
 
+    @Override
+    public void run() {
+
+    }
 }

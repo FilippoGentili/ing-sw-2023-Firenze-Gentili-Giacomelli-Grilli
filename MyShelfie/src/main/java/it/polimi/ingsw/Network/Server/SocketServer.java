@@ -35,7 +35,7 @@ public class SocketServer implements Runnable {
                 client.setSoTimeout(5000);
 
                 MatchServerSocket matchServerSocket = new MatchServerSocket(this, client);
-                Thread thread = new Thread((Runnable) matchServerSocket, "matchServerSocket" + client.getInetAddress());
+                Thread thread = new Thread(matchServerSocket, "matchServerSocket" + client.getInetAddress());
                 thread.start();
             } catch (IOException e) {
                 Server.LOGGER.severe("Connection lost");
