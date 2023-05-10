@@ -36,7 +36,7 @@ public class SocketClient extends Client{
     }
 
     @Override
-    public void disconnect() throws RemoteException {
+    public void disconnect(){
         try {
             if (!socket.isClosed()) {
                 executorService.shutdownNow();
@@ -44,19 +44,27 @@ public class SocketClient extends Client{
                 socket.close();
             }
         } catch (IOException e) {
-            notifyObserver(new GenericMessage("Could not disconnect."));
+            try {
+                notifyObserver(new GenericMessage("Could not disconnect."));
+            } catch (RemoteException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
     }
 
     @Override
-    public void sendMessage(Message message) throws RemoteException {
+    public void sendMessage(Message message){
         try {
             output.writeObject(message);
             output.reset();
         } catch (IOException e) {
             disconnect();
-            notifyObserver(new GenericMessage("Could not send message."));
+            try {
+                notifyObserver(new GenericMessage("Could not send message."));
+            } catch (RemoteException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -70,11 +78,7 @@ public class SocketClient extends Client{
                     Client.LOGGER.info("Received: " + message);
                 } catch (IOException | ClassNotFoundException e) {
                     message = new GenericMessage("Connection lost");
-                    try {
-                        disconnect();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    disconnect();
                     executorService.shutdownNow();
                 }
                 try {
@@ -90,11 +94,7 @@ public class SocketClient extends Client{
     public void pinger(boolean on) {
         if (on) {
             pinger.scheduleAtFixedRate(() -> {
-                try {
-                    sendMessage(new Ping());
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
+                sendMessage(new Ping());
             }, 0, HEARTBEAT, TimeUnit.MILLISECONDS);
         } else {
             pinger.shutdownNow();

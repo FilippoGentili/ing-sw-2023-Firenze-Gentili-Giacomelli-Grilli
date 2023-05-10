@@ -43,26 +43,38 @@ public class RMIClient extends Client{
 
 
         @Override
-        public void disconnect() throws IOException {
+        public void disconnect(){
                 try{
                         server.disconnectClient();
                         server = null;
                         executorService.shutdownNow();
                         pinger(false);
                 }catch (IOException e){
-                        notifyObserver(new GenericMessage("Could not disconnect."));
+                        try {
+                                notifyObserver(new GenericMessage("Could not disconnect."));
+                        } catch (RemoteException ex) {
+                                throw new RuntimeException(ex);
+                        }
 
                 }
         }
 
         @Override
-        public void sendMessage(Message message) throws IOException {
+        public void sendMessage(Message message){
                 try {
                         output.writeObject(message);
                         output.reset();
                 } catch (IOException e) {
-                        server.disconnectClient();
-                        notifyObserver(new GenericMessage("Could not send message."));
+                        try {
+                                server.disconnectClient();
+                        } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                        }
+                        try {
+                                notifyObserver(new GenericMessage("Could not send message."));
+                        } catch (RemoteException ex) {
+                                throw new RuntimeException(ex);
+                        }
                 }
         }
 
@@ -97,11 +109,7 @@ public class RMIClient extends Client{
         public void pinger(boolean on) {
                 if (on) {
                         pinger.scheduleAtFixedRate(() -> {
-                                try {
-                                        sendMessage(new Ping());
-                                } catch (IOException e) {
-                                        throw new RuntimeException(e);
-                                }
+                                sendMessage(new Ping());
                         }, 0, HEARTBEAT, TimeUnit.MILLISECONDS);
                 } else {
                         pinger.shutdownNow();

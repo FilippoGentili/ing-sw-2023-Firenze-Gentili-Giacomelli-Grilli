@@ -13,9 +13,9 @@ public abstract class Client extends Observable{
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
 
-    public abstract void disconnect() throws IOException;
+    public abstract void disconnect();
 
-    public abstract void sendMessage(Message message) throws IOException;
+    public abstract void sendMessage(Message message);
 
     public abstract void readMessage();
 

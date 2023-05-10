@@ -19,7 +19,6 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
 
     private final transient Server server;
-
     private boolean connected;
 
     //private ArrayList<Client> listOfClients = new ArrayList<>();
@@ -34,18 +33,11 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
         this.connected = true;
         this.inputLock = new Object();
         this.outputLock = new Object();
-
-        try{
-            this.input = new ObjectInputStream(client.getInputStream());
-            this.output = new ObjectOutputStream(client.getOutputStream());
-        }catch (IOException e){
-            Server.LOGGER.severe("Server down");
-        }
     }
 
 
     public void connectClient(Client client) throws RemoteException {
-        Server.LOGGER.info("" + client.getInetAddress() + " connected");
+        Server.LOGGER.info("Client connected");
 
         try{
             Message message = (Message) input.readObject();
