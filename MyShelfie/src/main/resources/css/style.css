@@ -1,14 +1,19 @@
 
 .basePane{
-    -fx-background-image: url("../images/misc/sfondoParquet.jpg");
-    -fx-background-size: stretch;
+    -fx-background-image : url("../images/misc/sfondoParquet.jpg");
+    -fx-background-size : stretch;
 }
 
 .generalButton{
     /*-fx-background-image: url("../images/misc/playbutton2.png");*/
     -fx-shape:
-    -fx-alignment: center;
-    -fx-text-fill: #ffffff;
-    -fx-border-color: #EEEE00;
-    -fx-background-color: #228B22;
+    -fx-alignment : center;
+    -fx-text-fill : #ffffff;
+    -fx-border-color : #EEEE00;
+    -fx-background-color : #228B22;
+}
+
+.generalLabel{
+    -fx-text-fill : #dbe07b;
+    -fx-border-color : #030303;
 }

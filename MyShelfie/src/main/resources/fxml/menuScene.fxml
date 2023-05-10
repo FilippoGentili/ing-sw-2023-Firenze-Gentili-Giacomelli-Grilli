@@ -10,21 +10,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="760.0" prefWidth="1300.0"
-            styleClass="basePane" xmlns="http://javafx.com/javafx/19">
+<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="760.0" prefWidth="1300.0" styleClass="basePane"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.MenuScene">
     <stylesheets>
         <URL value="@../css/style.css" />
         <URL value="@../css/menuScene.css" />
     </stylesheets>
    <children>
-       <ImageView fitHeight="388.0" fitWidth="1000.0" layoutX="150.0" layoutY="24.0"
-                  AnchorPane.bottomAnchor="353.0" AnchorPane.topAnchor="19.0">
+       <ImageView fitHeight="388.0" fitWidth="1000.0" layoutX="150.0" layoutY="24.0" AnchorPane.bottomAnchor="353.0" AnchorPane.topAnchor="19.0">
            <Image url="@../images/Publisher material/smallTitle.png" />
        </ImageView>
-      <VBox layoutX="452.0" layoutY="523.0" prefHeight="1128.0" prefWidth="683.0"
-            AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="452.0" AnchorPane.rightAnchor="452.0" AnchorPane.topAnchor="523.0" />
-      <Button layoutX="315.0" layoutY="477.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="298.0"
-              styleClass="generalButton" text="Play">
+      <Button layoutX="315.0" layoutY="477.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="298.0" styleClass="generalButton" text="Play">
          <font>
             <Font name="Blackadder ITC" size="65.0" />
          </font>
@@ -32,8 +28,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button layoutX="686.0" layoutY="478.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="298.0"
-               styleClass="generalButton" text="Exit">
+      <Button layoutX="686.0" layoutY="478.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="298.0" styleClass="generalButton" text="Exit">
          <font>
             <Font name="Blackadder ITC" size="65.0" />
          </font>
