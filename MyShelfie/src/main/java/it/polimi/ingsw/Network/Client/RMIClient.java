@@ -41,9 +41,7 @@ public class RMIClient extends Client{
 
         @Override
         public void readMessage() {
-                synchronized (messageQueue) {
-                        messageQueue.add(message);
-                }
+
         }
 
         @Override
