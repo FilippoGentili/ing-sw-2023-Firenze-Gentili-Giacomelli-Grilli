@@ -63,12 +63,6 @@ public class Cli extends ViewObservable implements View{
     public void serverInfo() throws IOException {
 
         boolean rmi = false;
-        boolean socket = false;
-
-        Map<String, String> serverInfo = new HashMap<>();
-        String defaultAddress = "localhost";
-        String defaultPort = "1099";
-        serverInfo.put(defaultAddress,defaultPort);
 
         //choose type of connection
         System.out.println("Which type of connection do you want to use?");
@@ -84,23 +78,19 @@ public class Cli extends ViewObservable implements View{
         if(input.equals("-rmi"))
             rmi = true;
 
-        if(input.equals("-socket"))
-            socket = true;
-
         if(rmi){
             RMIClient rc = new RMIClient();
             rc.startRMIClient();
-        }else if(socket) {
-            SocketClient sc = new SocketClient();
-            sc.startSocketClient();
+        }else{
+            notifyObserver(obs -> {
+                try {
+                    obs.updateServerInfoSocket();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
-        notifyObserver(obs -> {
-            try {
-                obs.updateServerInfoSocket(serverInfo);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+
     }
 
     @Override

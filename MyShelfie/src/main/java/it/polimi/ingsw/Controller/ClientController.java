@@ -27,9 +27,10 @@ public class ClientController implements Observer, ViewObserver {
 
 
     private final View view;
-    private final ExecutorService taskQueue;
     private Client client;
     private String nickname;
+    private final ExecutorService taskQueue;
+
 
     public ClientController(View view) throws RemoteException {
         this.view = view;
@@ -46,29 +47,91 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void update(Message message) {
         switch(message.getMessageType()){
+            case GENERIC_MESSAGE:
+
+                break;
+            case LOGIN_REQUEST:
+
+                break;
             case LOGIN_REPLY:
-                LoginReply loginReply = (LoginReply) message;
 
+                break;
+            case LOGIN_RESULT:
 
+                break;
+            case NUM_OF_PLAYERS_REQUEST:
+
+                break;
+            case NUM_OF_PLAYERS_REPLY:
+
+                break;
+            case PICK_FIRST_PLAYER:
+
+                break;
+            case DISCONNECTION_REQUEST:
+
+                break;
+            case DISCONNECTION_REPLY:
+
+                break;
+            case PING:
+
+                break;
+            case ACK:
+
+                break;
+            case CHOSEN_TILES_REQUEST:
+
+                break;
+            case CHOSEN_TILES_REPLY:
+
+                break;
+            case ORDERED_TILES_REQUEST:
+
+                break;
+            case ORDERED_TILES_REPLY:
+
+                break;
+            case COLUMN_REQUEST:
+
+                break;
+            case COLUMN_REPLY:
+
+                break;
+            case GIVE_POINTS:
+
+                break;
+            case UPDATE_POINTS:
+
+                break;
+            case WINNER:
+
+                break;
+            case MATCH_INFO:
+
+                break;
+            case SERVER_INFO:
+
+                break;
+            case LIVING_ROOM:
+
+                break;
+            case BOOKSHELF:
+
+                break;
+            case HEARTBEAT:
+
+                break;
+            default:
+                break;
         }
     }
 
     @Override
-    public void updateServerInfoSocket(Map<String, String> serverInfo) throws IOException {
-        String Ipaddress = null;
-        String portString;
-        int port = 0;
-
-        for(Map.Entry<String, String> map : serverInfo.entrySet()){
-            Ipaddress = map.getKey();
-            portString = map.getValue();
-            port = Integer.parseInt(portString);
-            break;
-        }
-
+    public void updateServerInfoSocket() throws IOException {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            client = new SocketClient();
+            client =  new SocketClient();
             client.addObserver(this);
             //attendo il messaggio dal server
             client.readMessage();
@@ -76,6 +139,12 @@ public class ClientController implements Observer, ViewObserver {
         }catch (IOException e){
             view.loginResult(false,false,this.nickname);
         }
+    }
+
+    @Override
+    public void updateServerInfoRmi() {
+        client = new RMIClient();
+        client.addObserver(this);
     }
 
     @Override

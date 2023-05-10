@@ -13,7 +13,9 @@ import java.util.Map;
 
 public interface ViewObserver{
 
-    void updateServerInfoSocket(Map<String, String> serverInfo) throws IOException;
+    void updateServerInfoSocket() throws IOException;
+
+    void updateServerInfoRmi();
 
     void updateNickname(String nickname) throws RemoteException;
 
