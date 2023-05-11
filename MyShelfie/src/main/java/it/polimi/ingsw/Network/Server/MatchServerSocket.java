@@ -93,10 +93,14 @@ public class MatchServerSocket implements MatchServer, Runnable{
 
     }
 
+    /*
     @Override
     public void ping(){
 
     }
+
+     */
+
 
     @Override
     public void receiveMessage(Message message) throws RemoteException {

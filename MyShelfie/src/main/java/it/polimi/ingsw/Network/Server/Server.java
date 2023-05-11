@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Server implements Runnable{
+public class Server{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
@@ -109,7 +109,7 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Sending to {0}, message '{1}", new Object[]{nickname, message});
     }
 
-    @Override
+    /*@Override
     public void run(){
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
@@ -131,5 +131,7 @@ public class Server implements Runnable{
             }
         }
     }
+
+     */
 
 }

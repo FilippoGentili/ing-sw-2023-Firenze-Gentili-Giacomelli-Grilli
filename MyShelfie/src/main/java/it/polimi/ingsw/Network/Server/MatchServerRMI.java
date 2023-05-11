@@ -71,11 +71,13 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     public void receiveMessage(Message message) throws RemoteException {
         server.receiveMessage(message);
     }
-
+    /*
     @Override
     public void ping(){
 
     }
+
+     */
     @Override
     public void sendMessage(Message message) throws RemoteException {
         server.sendMessage(message, server.getNickname(this));
