@@ -1,15 +1,13 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Observer.ViewObservable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ConnectionScene extends ViewObservable {
 
@@ -17,7 +15,7 @@ public class ConnectionScene extends ViewObservable {
     private TextField serverPort;
     private Button connectRMIButton;
     private Button connectSocketButton;
-    private Button goBackButton;
+    private Hyperlink goBackLink;
 
     public void setUp(){
         connectRMIButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -36,7 +34,7 @@ public class ConnectionScene extends ViewObservable {
             }
         });
 
-        goBackButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> goBackButtonClicked());
+        goBackLink.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> goBackLinkClicked());
     }
 
     private void connectRMIButtonClicked() throws IOException {
@@ -53,7 +51,7 @@ public class ConnectionScene extends ViewObservable {
 
     }
 
-    private void goBackButtonClicked(){
+    private void goBackLinkClicked(){
 
     }
 

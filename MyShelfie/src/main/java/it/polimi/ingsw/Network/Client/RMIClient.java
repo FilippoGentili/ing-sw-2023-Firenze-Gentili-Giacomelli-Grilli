@@ -4,6 +4,7 @@ import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.Ping;
 import it.polimi.ingsw.Network.Server.MatchServer;
+import it.polimi.ingsw.Network.Server.MatchServerRMI;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import java.net.URL?>
 
 <AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="760.0" prefWidth="1300.0" styleClass="basePane"
-            stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19"
-            fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionScene" xmlns:fx="http://javafx.com/fxml/1">
+            stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionScene">
     <stylesheets>
         <URL value="@../css/style.css" />
     </stylesheets>
     <children>
-        <ImageView fitHeight="388.0" fitWidth="1000.0" layoutX="150.0" layoutY="24.0" AnchorPane.bottomAnchor="353.0348" AnchorPane.topAnchor="19.0">
+        <ImageView fitHeight="388.0" fitWidth="1000.0" layoutX="150.0" layoutY="24.0"
+                   AnchorPane.bottomAnchor="353.0348" AnchorPane.topAnchor="19.0">
             <Image url="@../images/Publisher material/smallTitle.png" />
         </ImageView>
       <Label layoutX="270.0" layoutY="407.0" prefHeight="101.0" prefWidth="759.0"
@@ -35,5 +36,10 @@
             <Font name="Blackadder ITC" size="40.0" />
          </font>
       </Button>
+      <Hyperlink layoutX="574.0" layoutY="662.0" text="Go Back" textFill="#dbe07b">
+         <font>
+            <Font name="Blackadder ITC" size="40.0" />
+         </font>
+      </Hyperlink>
     </children>
 </AnchorPane>
