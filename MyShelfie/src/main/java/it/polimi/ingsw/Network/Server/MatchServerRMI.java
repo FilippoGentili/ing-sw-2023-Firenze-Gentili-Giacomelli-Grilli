@@ -38,19 +38,25 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     public void connectClient(Client client) throws RemoteException {
         Server.LOGGER.info("Client connected");
 
-        try{
-            Message message = (Message) input.readObject();
+        while(!Thread.currentThread().isInterrupted()){
+            synchronized (inputLock){
+                try{
+                    Message message = (Message) input.readObject();
 
-            if(message != null){
-                if(message.getMessageType() == MessageType.LOGIN_REQUEST){
-                    RMIServer.addClient(message.getNickname(),this);
-                }else {
-                    RMIServer.forwardMessage(message);
+                    if(message != null){
+                        if(message.getMessageType() == MessageType.LOGIN_REQUEST){
+                            RMIServer.addClient(message.getNickname(),this);
+                        }else {
+                            RMIServer.forwardMessage(message);
+                        }
+                    }
+                }catch (ClassNotFoundException | IOException e){
+                    Server.LOGGER.severe("Connection could not be established");
                 }
             }
-        }catch (ClassNotFoundException | IOException e){
-            Server.LOGGER.severe("Connection could not be established");
         }
+
+
     }
 
     @Override

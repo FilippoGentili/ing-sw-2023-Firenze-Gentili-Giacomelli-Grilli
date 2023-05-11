@@ -52,6 +52,7 @@ public class Cli extends ViewObservable implements View{
                 "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");
 
+        nicknameRequest();
         serverInfo();
     }
 
@@ -78,9 +79,9 @@ public class Cli extends ViewObservable implements View{
         if(input.equals("-rmi"))
             rmi = true;
 
+
         if(rmi){
             RMIClient rc = new RMIClient();
-            rc.startRMIClient();
         }else{
             notifyObserver(obs -> {
                 try {

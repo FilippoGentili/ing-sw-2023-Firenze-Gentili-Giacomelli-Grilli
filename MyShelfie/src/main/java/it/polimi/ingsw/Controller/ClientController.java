@@ -48,19 +48,44 @@ public class ClientController implements Observer, ViewObserver {
     public void update(Message message) {
         switch(message.getMessageType()){
             case GENERIC_MESSAGE:
-
+                taskQueue.execute(() -> {
+                    try {
+                        view.showMessage(message.toString());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case LOGIN_REQUEST:
-
+                taskQueue.execute(() -> {
+                    try {
+                        view.nicknameRequest();
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case LOGIN_REPLY:
-
+                //???
                 break;
             case LOGIN_RESULT:
-
+                LoginResult loginResult = (LoginResult) message;
+                taskQueue.execute(() -> {
+                    try {
+                        view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getNickname());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case NUM_OF_PLAYERS_REQUEST:
-
+                taskQueue.execute(() -> {
+                    try {
+                        view.askNumberOfPlayers();
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case NUM_OF_PLAYERS_REPLY:
 
@@ -81,19 +106,40 @@ public class ClientController implements Observer, ViewObserver {
 
                 break;
             case CHOSEN_TILES_REQUEST:
-
+                ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
+                taskQueue.execute(() -> {
+                    try {
+                        view.TilesRequest(chosenTilesRequest.getLivingroom());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case CHOSEN_TILES_REPLY:
 
                 break;
             case ORDERED_TILES_REQUEST:
-
+                OrderedTilesRequest orderedTilesRequest = (OrderedTilesRequest) message;
+                taskQueue.execute(() -> {
+                    try {
+                        view.OrderTiles(orderedTilesRequest.getChosenTiles());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case ORDERED_TILES_REPLY:
 
                 break;
             case COLUMN_REQUEST:
-
+                ColumnRequest columnRequest = (ColumnRequest) message;
+                taskQueue.execute(() -> {
+                    try {
+                        view.columnRequest(columnRequest.getAvailableColumns());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case COLUMN_REPLY:
 

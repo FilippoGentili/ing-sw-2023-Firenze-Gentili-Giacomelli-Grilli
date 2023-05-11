@@ -33,7 +33,8 @@ public class RMIClient extends Client{
         private static final int HEARTBEAT = 10000;
 
 
-        public void startRMIClient(){
+        public RMIClient(String username){
+                super(username);
                 try {
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
                         server = (MatchServer) registry.lookup("MyShelfieServer");
