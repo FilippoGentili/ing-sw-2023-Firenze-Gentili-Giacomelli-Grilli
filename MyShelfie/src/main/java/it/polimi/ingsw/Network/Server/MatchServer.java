@@ -14,4 +14,8 @@ public interface MatchServer extends Remote {
     void disconnectClient() throws IOException;
 
     void sendMessage(Message message) throws RemoteException;
+
+    void ping(); //da capire come gestire
+
+    void receiveMessage(Message message) throws RemoteException;
 }

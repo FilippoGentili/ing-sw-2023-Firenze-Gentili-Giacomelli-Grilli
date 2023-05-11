@@ -5,19 +5,19 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.View.VirtualView;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Server {
+public class Server implements Runnable{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
     private final Map<String, MatchServer> matchServerMap;
-    private static final Logger logger = Logger.getLogger(Server.class.getName());
-
     private final Object lock;
 
     public Server(GameController gameController){
@@ -71,5 +71,65 @@ public class Server {
         }
     }
 
+    public void receiveMessage(Message message){
+        if(message!=null && message.getNickname()!=null){
+            String messageContent = message.toString();
+            LOGGER.log(Level.INFO, messageContent);
+        } else {
+            LOGGER.log(Level.INFO, "Received invalid message: {0}", message);
+        }
+    }
+
+    public void SendMessageBroadcast(Message message) throws RemoteException {
+        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
+            if(map.getValue()!=null && map.getValue().checkConnection()){
+                try{
+                    map.getValue().sendMessage(message);
+                } catch (IOException e) {
+                    LOGGER.severe(e.getMessage());
+                }
+            }
+        }
+        LOGGER.log(Level.INFO, "Send to all: {0}", message);
+    }
+
+    public void sendMessage(Message message, String nickname) throws RemoteException {
+        synchronized(lock){
+            for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
+                if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
+                    try{
+                        map.getValue().sendMessage(message);
+                    } catch(IOException e){
+                        LOGGER.severe(e.getMessage());
+                    }
+                    break;
+                }
+            }
+        }
+        LOGGER.log(Level.INFO, "Sending to {0}, message '{1}", new Object[]{nickname, message});
+    }
+
+    @Override
+    public void run(){
+        while(!Thread.currentThread().isInterrupted()){
+            synchronized(lock) {
+                for (Map.Entry<String, MatchServer> map : matchServerMap.entrySet()) {
+                    try {
+                        if (map.getValue() != null && map.getValue().checkConnection()) {
+                            map.getValue().ping();//da capire come gestire
+                        }
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            try{
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                LOGGER.severe(e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
 
 }

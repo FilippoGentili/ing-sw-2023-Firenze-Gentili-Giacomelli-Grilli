@@ -9,6 +9,7 @@ import it.polimi.ingsw.Network.Server.Server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -20,6 +21,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class RMIClient extends Client{
+        private static final long serialVersionUID = -4866092295114430600L;
         private transient MatchServer server;
         private ExecutorService executorService;
         private ScheduledExecutorService pinger;
@@ -32,7 +34,7 @@ public class RMIClient extends Client{
         public void startRMIClient(){
                 try {
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-                        MatchServer matchServer = (MatchServer) registry.lookup("MyShelfieServer");
+                        server = (MatchServer) registry.lookup("MyShelfieServer");
                         this.executorService = Executors.newSingleThreadExecutor();
                         this.pinger = Executors.newSingleThreadScheduledExecutor();
                         Client.LOGGER.info(() ->"RMI client started on port 1099");
@@ -59,11 +61,15 @@ public class RMIClient extends Client{
                 }
         }
 
+        /**
+         * Method used to send from client RMI to server a message
+         * @param message
+         * @throws RemoteException
+         */
         @Override
-        public void sendMessage(Message message){
+        public void sendMessage(Message message) throws RemoteException {
                 try {
-                        output.writeObject(message);
-                        output.reset();
+                        server.sendMessage(message);
                 } catch (IOException e) {
                         try {
                                 server.disconnectClient();
@@ -78,7 +84,7 @@ public class RMIClient extends Client{
                 }
         }
 
-        @Override
+        /*@Override
         public void readMessage() {
                 executorService.execute(() -> {
                         while(!executorService.isShutdown()){
@@ -105,15 +111,26 @@ public class RMIClient extends Client{
 
         }
 
+         */
+
         @Override
         public void pinger(boolean on) {
                 if (on) {
                         pinger.scheduleAtFixedRate(() -> {
-                                sendMessage(new Ping());
+                                try {
+                                        sendMessage(new Ping());
+                                } catch (RemoteException e) {
+                                        throw new RuntimeException(e);
+                                }
                         }, 0, HEARTBEAT, TimeUnit.MILLISECONDS);
                 } else {
                         pinger.shutdownNow();
                 }
+        }
+
+        @Override
+        public void readMessage() {
+
         }
 }
 

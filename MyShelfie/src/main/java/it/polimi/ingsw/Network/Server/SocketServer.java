@@ -3,12 +3,9 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class SocketServer implements Runnable {
 
@@ -47,12 +44,16 @@ public class SocketServer implements Runnable {
         server.addClient(nickname, matchServer);
     }
 
-    public void forwardMessage(Message message) throws RemoteException {
-        server.forwardMessage(message);
+    public void receiveMessage(Message message) throws RemoteException {
+        server.receiveMessage(message);
     }
 
     public void clientDisconnection(MatchServer matchServer) throws RemoteException {
         server.clientDisconnection(matchServer);
+    }
+
+    public void forwardMessage(Message message) throws RemoteException {
+        server.forwardMessage(message);
     }
 
 }

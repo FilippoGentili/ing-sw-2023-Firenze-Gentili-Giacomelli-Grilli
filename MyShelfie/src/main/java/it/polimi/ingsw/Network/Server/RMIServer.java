@@ -17,6 +17,7 @@ public class RMIServer implements Runnable{
         this.server = server;
     }
 
+
     @Override
     public void run() {
         Thread thread = new Thread(() -> {
@@ -36,11 +37,15 @@ public class RMIServer implements Runnable{
         server.addClient(nickname, matchServer);
     }
 
-    public static void forwardMessage(Message message) throws RemoteException {
-        server.forwardMessage(message);
+    public static void receiveMessage(Message message) throws RemoteException {
+        server.receiveMessage(message);
     }
 
     public void clientDisconnection(MatchServer matchServer) throws RemoteException {
         server.clientDisconnection(matchServer);
+    }
+
+    public static void forwardMessage(Message message) throws RemoteException {
+        server.forwardMessage(message);
     }
 }

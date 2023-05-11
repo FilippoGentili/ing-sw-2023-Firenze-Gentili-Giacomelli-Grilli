@@ -3,12 +3,14 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Message.Ping;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.concurrent.TimeUnit;
 
 public class MatchServerSocket implements MatchServer, Runnable{
 
@@ -90,4 +92,15 @@ public class MatchServerSocket implements MatchServer, Runnable{
     public void run() {
 
     }
+
+    @Override
+    public void ping(){
+
+    }
+
+    @Override
+    public void receiveMessage(Message message) throws RemoteException {
+        socketServer.receiveMessage(message);
+    }
+
 }

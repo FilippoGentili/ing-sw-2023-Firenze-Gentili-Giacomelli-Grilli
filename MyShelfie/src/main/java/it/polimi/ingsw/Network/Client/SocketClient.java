@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 public class SocketClient extends Client{
 
@@ -68,6 +69,9 @@ public class SocketClient extends Client{
         }
     }
 
+    /**
+     * Method used when the client is Socket and receives a message from server
+     */
     @Override
     public void readMessage() {
         executorService.execute(() -> {
@@ -75,7 +79,7 @@ public class SocketClient extends Client{
                 Message message;
                 try {
                     message = (Message) input.readObject();
-                    Client.LOGGER.info("Received: " + message);
+                    Client.LOGGER.info("Received:" + message);
                 } catch (IOException | ClassNotFoundException e) {
                     message = new GenericMessage("Connection lost");
                     disconnect();

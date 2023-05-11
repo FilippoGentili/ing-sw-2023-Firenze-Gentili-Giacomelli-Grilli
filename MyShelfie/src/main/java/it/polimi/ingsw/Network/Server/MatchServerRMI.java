@@ -4,16 +4,14 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMIClient;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Message.Ping;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.rmi.server.RemoteCall;
-import java.rmi.server.RemoteStub;
+
 
 public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     private static final long serialVersionUID = -8871984387622564437L;
@@ -27,6 +25,7 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
 
     private final Object inputLock;
     private final Object outputLock;
+
 
     public MatchServerRMI(Server server) throws RemoteException{
         this.server = server;
@@ -69,16 +68,17 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
     }
 
     @Override
+    public void receiveMessage(Message message) throws RemoteException {
+        server.receiveMessage(message);
+    }
+
+    @Override
+    public void ping(){
+
+    }
+    @Override
     public void sendMessage(Message message) throws RemoteException {
-        try{
-            synchronized(outputLock){
-                output.writeObject(message);
-                output.reset();
-                Server.LOGGER.info(() -> "Sent: " + message);
-            }
-        } catch(IOException e) {
-            Server.LOGGER.severe(e.getMessage());
-        }
+        server.sendMessage(message, server.getNickname(this));
     }
 
 }
