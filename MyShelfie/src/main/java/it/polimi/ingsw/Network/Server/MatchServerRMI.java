@@ -89,4 +89,8 @@ public class MatchServerRMI extends UnicastRemoteObject implements MatchServer {
         server.sendMessage(message, server.getNickname(this));
     }
 
+    public void login(String username, RMIClient client){
+        Client
+    }
+
 }

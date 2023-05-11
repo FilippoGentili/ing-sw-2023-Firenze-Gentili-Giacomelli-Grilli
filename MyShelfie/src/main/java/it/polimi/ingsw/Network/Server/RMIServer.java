@@ -24,7 +24,7 @@ public class RMIServer implements Runnable{
             try {
                 MatchServerRMI obj = new MatchServerRMI(server);
                 Registry registry = LocateRegistry.createRegistry(1099);
-                Naming.rebind("MyShelfieServer", obj);
+                registry.rebind("MyShelfieServer", obj);
                 Server.LOGGER.info(() ->"RMI server started on port 1099");
             } catch (IOException e) {
                 Server.LOGGER.severe(e.getMessage());
