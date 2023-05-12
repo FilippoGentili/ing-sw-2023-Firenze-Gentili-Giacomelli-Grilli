@@ -37,7 +37,7 @@ public class ClientApp {
             }
             if (guiCheck) {
                 //gui
-                System.out.println("DIO ***************");
+                System.out.println("ciao");
             }
         }
 }
