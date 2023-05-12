@@ -26,10 +26,11 @@ public class Cli extends ViewObservable implements View{
 
     //private ClientController clientController;
     private final PrintStream out;
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
 
     public Cli(){
         out = System.out;
+        scanner = new Scanner(System.in);
     }
 
     public String readLine(){
@@ -52,7 +53,6 @@ public class Cli extends ViewObservable implements View{
                 "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n");
 
-        nicknameRequest();
         serverInfo();
     }
 
@@ -81,7 +81,7 @@ public class Cli extends ViewObservable implements View{
 
 
         if(rmi){
-            RMIClient rc = new RMIClient();
+            //RMIClient rc = new RMIClient();
         }else{
             notifyObserver(obs -> {
                 try {

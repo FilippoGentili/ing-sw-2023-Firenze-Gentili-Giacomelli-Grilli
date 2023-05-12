@@ -39,7 +39,7 @@ public class MatchServerSocket implements MatchServer, Runnable{
         }
     }
 
-    public void connectClient() {
+    public void clientMessageHandler() {
         Server.LOGGER.info("" + client.getInetAddress() + " connected");
 
         try{
@@ -63,15 +63,23 @@ public class MatchServerSocket implements MatchServer, Runnable{
     }
 
     @Override
-    public void disconnectClient() throws IOException {
+    public void disconnectClient() {
         if(connected){
-            if(!client.isClosed()){
-                client.close();
+            try {
+                if (!client.isClosed()) {
+                    client.close();
+                }
+            }catch (IOException e){
+                Server.LOGGER.severe(e.getMessage());
             }
             connected = false;
             Thread.currentThread().interrupt();
 
-            socketServer.clientDisconnection(this);
+            try {
+                socketServer.clientDisconnection(this);
+            }catch (IOException e){
+                Server.LOGGER.severe("Connection problems");
+            }
         }
     }
 
@@ -90,7 +98,7 @@ public class MatchServerSocket implements MatchServer, Runnable{
 
     @Override
     public void run() {
-
+        clientMessageHandler();
     }
 
     /*

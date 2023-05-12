@@ -177,19 +177,19 @@ public class ClientController implements Observer, ViewObserver {
     public void updateServerInfoSocket() throws IOException {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            client =  new SocketClient();
-            client.addObserver(this);
+            this.client =  new SocketClient();
+            this.client.addObserver(this);
             //attendo il messaggio dal server
-            client.readMessage();
-            view.nicknameRequest();
+            this.client.readMessage();
+            this.view.nicknameRequest();
         }catch (IOException e){
-            view.loginResult(false,false,this.nickname);
+            this.view.loginResult(false,false,this.nickname);
         }
     }
 
-    @Override
+   @Override
     public void updateServerInfoRmi() {
-        client = new RMIClient();
+        //client = new RMIClient();
         client.addObserver(this);
     }
 

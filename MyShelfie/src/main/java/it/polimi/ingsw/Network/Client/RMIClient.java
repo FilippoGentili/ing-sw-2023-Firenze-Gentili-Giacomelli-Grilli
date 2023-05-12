@@ -34,7 +34,7 @@ public class RMIClient extends Client{
 
 
         public RMIClient(String username){
-                super(username);
+                super();
                 try {
                         Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
                         server = (MatchServer) registry.lookup("MyShelfieServer");

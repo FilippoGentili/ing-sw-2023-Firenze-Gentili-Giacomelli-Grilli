@@ -9,7 +9,7 @@ public class LoginResult extends Message{
     private final String chosenNickname;
     public LoginResult(String nickname,boolean nicknameAccepted, boolean successfulAccess) {
         super(Game.getServerName(), MessageType.LOGIN_RESULT);
-        chosenNickname= nickname;
+        this.chosenNickname= nickname;
         this.nicknameAccepted = nicknameAccepted;
         this.successfulAccess = successfulAccess;
     }

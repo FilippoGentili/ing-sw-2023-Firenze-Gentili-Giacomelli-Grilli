@@ -22,9 +22,8 @@ public abstract class Client extends Observable implements Serializable {
     private String username;
     final transient ArrayList<Message> messageQueue;
 
-    public Client(String username){
+    public Client(){
         this.messageQueue = new ArrayList<>();
-        this.username = username;
     }
 
     public abstract void disconnect();

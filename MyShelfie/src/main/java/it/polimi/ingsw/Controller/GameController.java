@@ -8,10 +8,7 @@ import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static it.polimi.ingsw.Model.Game.endGameTrigger;
 import static it.polimi.ingsw.Model.GameState.*;
@@ -32,6 +29,8 @@ public class GameController {
         this.game = new Game();
         //this.numOfPlayers = num;
         this.inputController = new InputController(this,virtualViewMap);
+        setGameState(LOGIN);
+        virtualViewMap = new HashMap<>();
     }
 
     public void setNumOfPlayers(int num){
