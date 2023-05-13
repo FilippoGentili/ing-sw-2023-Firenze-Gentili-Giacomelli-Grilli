@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 public class RMIClient extends Client {
         private static final long serialVersionUID = -4866092295114430600L;
-        //private transient MatchServer server;
         private final View view;
         private transient RMIClientHandler server = null;
         private ExecutorService executorService;
@@ -37,16 +36,12 @@ public class RMIClient extends Client {
         public RMIClient(View view){
                 super();
                 this.view = view;
+                connectRMIClient();
         }
 
         public RMIClientHandler connectRMIClient(){
                 try {
                         server = (RMIClientHandler) Naming.lookup("rmiConnection");
-                        /*Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-                        server = (MatchServer) registry.lookup("MyShelfieServer");
-                        this.executorService = Executors.newSingleThreadExecutor();
-                        this.pinger = Executors.newSingleThreadScheduledExecutor();
-                        Client.LOGGER.info(() ->"RMI client started on port 1099");*/
                 } catch (MalformedURLException | NotBoundException | RemoteException e){
                         Server.LOGGER.severe(e.getMessage());
                 }
@@ -94,35 +89,6 @@ public class RMIClient extends Client {
                         }
                 }
         }
-
-        /*@Override
-        public void readMessage() {
-                executorService.execute(() -> {
-                        while(!executorService.isShutdown()){
-                                Message message;
-                                try {
-                                        message = (Message) input.readObject();
-                                        Client.LOGGER.info("Received: " + message);
-                                } catch (IOException | ClassNotFoundException e) {
-                                        message = new GenericMessage("Connection lost");
-                                        try {
-                                                server.disconnectClient();
-                                        } catch (IOException ex) {
-                                                throw new RuntimeException(ex);
-                                        }
-                                        executorService.shutdownNow();
-                                }
-                                try {
-                                        notifyObserver(message);
-                                } catch (RemoteException e) {
-                                        throw new RuntimeException(e);
-                                }
-                        }
-                });
-
-        }
-
-         */
 
         @Override
         public void pinger(boolean on) {
