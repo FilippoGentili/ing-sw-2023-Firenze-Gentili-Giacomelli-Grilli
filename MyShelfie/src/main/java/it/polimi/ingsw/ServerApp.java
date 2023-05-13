@@ -23,7 +23,7 @@ public class ServerApp {
         GameController gameController = new GameController();
         Server server = new Server(gameController);
 
-        System.out.println("Which type of connection do you want to use -rmi or -socket?");
+        System.out.println("Which type of connection do you want to use? Type -rmi or -socket");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
 

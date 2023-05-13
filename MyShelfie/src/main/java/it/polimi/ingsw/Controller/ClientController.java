@@ -72,7 +72,7 @@ public class ClientController implements Observer, ViewObserver {
                 LoginResult loginResult = (LoginResult) message;
                 taskQueue.execute(() -> {
                     try {
-                        view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getNickname());
+                        view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getChosenNickname());
                     } catch (RemoteException e) {
                         throw new RuntimeException(e);
                     }
