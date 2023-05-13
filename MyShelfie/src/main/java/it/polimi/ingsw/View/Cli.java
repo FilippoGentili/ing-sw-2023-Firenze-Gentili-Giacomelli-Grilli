@@ -27,6 +27,7 @@ public class Cli extends ViewObservable implements View{
     //private ClientController clientController;
     private final PrintStream out;
     Scanner scanner;
+    private String connection;
 
     public Cli(){
         out = System.out;
@@ -81,7 +82,7 @@ public class Cli extends ViewObservable implements View{
 
 
         if(rmi){
-            //RMIClient rc = new RMIClient();
+            RMIClient rc = new RMIClient(this);
         }else{
             notifyObserver(obs -> {
                 try {

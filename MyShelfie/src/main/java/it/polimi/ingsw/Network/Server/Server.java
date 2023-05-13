@@ -1,13 +1,13 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -24,6 +24,16 @@ public class Server{
         this.gameController = gameController;
         this.matchServerMap = new HashMap<>();
         this.lock = new Object();
+    }
+
+    public void startServers(){
+        try {
+            RMIClientHandlerImpl rmiConnection = new RMIClientHandlerImpl();
+            Naming.rebind("rmiConnection", rmiConnection);
+            Server.LOGGER.info("RMIServer started");
+        }catch (RemoteException | MalformedURLException e){
+
+        }
     }
 
     public void addClient(String nickname, MatchServer matchServer) throws RemoteException {

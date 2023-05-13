@@ -4,27 +4,27 @@ import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.Ping;
 import it.polimi.ingsw.Network.Server.MatchServer;
-import it.polimi.ingsw.Network.Server.MatchServerRMI;
+import it.polimi.ingsw.Network.Server.RMIClientHandler;
 import it.polimi.ingsw.Network.Server.Server;
+import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.Observer.ViewObserver;
+import it.polimi.ingsw.View.View;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serial;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.Scanner;
-import java.util.Timer;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class RMIClient extends Client{
+public class RMIClient extends Client {
         private static final long serialVersionUID = -4866092295114430600L;
         private transient MatchServer server;
+        private final View view;
         private ExecutorService executorService;
         private ScheduledExecutorService pinger;
         private ObjectOutputStream output;
@@ -33,17 +33,25 @@ public class RMIClient extends Client{
         private static final int HEARTBEAT = 10000;
 
 
-        public RMIClient(String username){
+        public RMIClient(View view){
                 super();
+                this.view = view;
+        }
+
+        public RMIClientHandler connectRMIClient(){
+                RMIClientHandler rmiConnectionclient = null;
                 try {
-                        Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+                        rmiConnectionclient = (RMIClientHandler) Naming.lookup("rmiConnection");
+                        /*Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
                         server = (MatchServer) registry.lookup("MyShelfieServer");
                         this.executorService = Executors.newSingleThreadExecutor();
                         this.pinger = Executors.newSingleThreadScheduledExecutor();
-                        Client.LOGGER.info(() ->"RMI client started on port 1099");
-                } catch (RemoteException | NotBoundException e){
+                        Client.LOGGER.info(() ->"RMI client started on port 1099");*/
+                } catch (MalformedURLException | NotBoundException | RemoteException e){
                         Server.LOGGER.severe(e.getMessage());
                 }
+
+                return rmiConnectionclient;
         }
 
 
