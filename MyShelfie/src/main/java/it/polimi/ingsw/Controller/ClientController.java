@@ -28,7 +28,6 @@ public class ClientController implements Observer, ViewObserver {
 
     private final View view;
     private Client client;
-    private String nickname;
     private final ExecutorService taskQueue;
 
 
@@ -42,7 +41,7 @@ public class ClientController implements Observer, ViewObserver {
         this.client = client;
     }
 
-    public String getNickname(){return this.nickname;}
+    public String getNickname(){return this.client.getUsername();}
 
     @Override
     public void update(Message message) {
@@ -182,7 +181,7 @@ public class ClientController implements Observer, ViewObserver {
             this.client.readMessage();
             this.view.nicknameRequest();
         }catch (IOException e){
-            this.view.loginResult(false,false,this.nickname);
+            this.view.loginResult(false,false,this.client.getUsername());
         }
     }
 
@@ -194,33 +193,33 @@ public class ClientController implements Observer, ViewObserver {
 
     @Override
     public void updateNickname(String nickname) throws RemoteException {
-        this.nickname = nickname;
+        this.client.setUsername(nickname);
         client.sendMessage(new LoginRequest(nickname));      //questo è il pattern: viewObserver è l'interfaccia da cui prendere i metodi da overridare. Poi il client creerà nuovi messaggi in base al metodo in cui mi trovo tramite sendMessage
     }                                                       // da noi MatchImpl dovrebbe diventare Observable, perchè sono la stessa cosa; infatti il client dovrà estendere proprio observable
 
     @Override
     public void updateNumOfPlayers(int num) throws RemoteException {
-        client.sendMessage(new NumOfPlayersReply(nickname,num));
+        client.sendMessage(new NumOfPlayersReply(client.getUsername(), num));
 
     }
 
     @Override
     public void updateChosenTiles(ArrayList<Tile> chosen) throws RemoteException {
-        client.sendMessage(new ChosenTilesReply(nickname,chosen));
+        client.sendMessage(new ChosenTilesReply(client.getUsername(), chosen));
     }
 
     @Override
     public void updateChosenColumn(int col, ArrayList<Integer> availableColumns) throws RemoteException {
-        client.sendMessage(new ColumnReply(nickname,col,availableColumns));
+        client.sendMessage(new ColumnReply(client.getUsername(), col,availableColumns));
     }
 
     public void updateOrderedTiles(ArrayList<Tile> orderedTiles) throws RemoteException {
-        client.sendMessage(new OrderedTilesReply(nickname,orderedTiles));
+        client.sendMessage(new OrderedTilesReply(client.getUsername(), orderedTiles));
     }
 
     @Override
     public void handleDisconnection() throws RemoteException {
-        client.sendMessage(new DisconnectionRequest(nickname));
+        client.sendMessage(new DisconnectionRequest(client.getUsername()));
     }
 
 

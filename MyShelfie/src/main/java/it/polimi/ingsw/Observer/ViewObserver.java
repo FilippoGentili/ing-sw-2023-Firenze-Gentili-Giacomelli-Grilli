@@ -15,7 +15,7 @@ public interface ViewObserver{
 
     void updateServerInfoSocket() throws IOException;
 
-    void updateServerInfoRmi();
+    void updateServerInfoRmi() throws RemoteException;
 
     void updateNickname(String nickname) throws RemoteException;
 
