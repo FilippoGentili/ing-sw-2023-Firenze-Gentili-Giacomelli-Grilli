@@ -28,12 +28,12 @@ public class SocketClient extends Client{
 
     public SocketClient() throws IOException {
         this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress("127.0.0.1", 1099), HEARTBEAT);
+        this.socket.connect(new InetSocketAddress("127.0.0.1", 49674), HEARTBEAT);
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
         this.executorService = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
-        Client.LOGGER.info(() ->"Socket client started on port 1099");
+        Client.LOGGER.info(() ->"Socket client started on port 49674");
     }
 
     @Override
