@@ -1,14 +1,9 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Message.NumOfPlayersReply;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.Map;
 
 public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClientHandler {
     private final transient RMIServer server;
@@ -18,6 +13,12 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
         this.server = server;
     }
 
+
+    /**
+     * this method receives the message from the client and sends it to the server.
+     * @param message message sent from the client
+     * @throws RemoteException
+     */
     @Override
     public void sendMessage(Message message) throws RemoteException {
         switch (message.getMessageType()) {
@@ -33,6 +34,7 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
                 updateChosenColumn(message);
                 break;
             case ORDERED_TILES_REPLY:
+                updateOrderedTiles(message);
                 break;
         }
     }
