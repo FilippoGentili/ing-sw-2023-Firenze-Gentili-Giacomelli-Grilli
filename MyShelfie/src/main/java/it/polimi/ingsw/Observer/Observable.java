@@ -16,11 +16,21 @@ public class Observable implements Runnable {
 
     private Thread thread;
 
-    Observable(Client client){
+
+
+    public Observable(){
+        this.client = null;     //da fixare, devo avere un client da passare
+        this.thread = new Thread(this);
+        this.thread.start();
+    }
+
+    public Observable(Client client){
         this.client = client;
         this.thread = new Thread(this);
         this.thread.start();
     }
+
+
 
     @Override
     public void run() {
