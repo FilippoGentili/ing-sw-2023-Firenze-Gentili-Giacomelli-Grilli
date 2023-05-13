@@ -140,13 +140,13 @@ public class Cli extends ViewObservable implements View{
         out.flush();
         if(validNickname && connection)
             System.out.println("Hello " + nickname + ", you are connected to the server!");
-        else if(connection){
+        else {
             System.out.println("The nickname is not valid.");
             nicknameRequest();
-        }else{
+        }/*else{
             System.out.println("Connection refused");
             System.exit(1);
-        }
+        }*/
 
     }
 

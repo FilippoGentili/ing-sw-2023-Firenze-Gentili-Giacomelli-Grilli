@@ -88,7 +88,6 @@ public class ClientController implements Observer, ViewObserver {
                 });
                 break;
             case NUM_OF_PLAYERS_REPLY:
-
                 break;
             case PICK_FIRST_PLAYER:
 
