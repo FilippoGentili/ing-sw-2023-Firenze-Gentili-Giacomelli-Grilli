@@ -10,17 +10,19 @@ import java.rmi.RemoteException;
 public class SocketServer implements Runnable {
 
     private final Server server;
+    private final int port;
     ServerSocket serverSocket;
 
-    public SocketServer(Server server){
+    public SocketServer(Server server, int port){
         this.server = server;
+        this.port = port;
     }
 
     @Override
     public  void run() {
         try {
-            serverSocket = new ServerSocket(1099);
-            Server.LOGGER.info(() -> "Socket server started on port 1099");
+            serverSocket = new ServerSocket(port);
+            Server.LOGGER.info(() -> "Socket server started on port 49674");
         } catch (IOException e) {
             Server.LOGGER.severe("Error while starting server");
             return;

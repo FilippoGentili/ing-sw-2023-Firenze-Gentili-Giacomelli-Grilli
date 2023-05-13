@@ -22,6 +22,6 @@ public interface RMIClientHandler extends Remote {
     void someoneDisconnected(String nickname) throws RemoteException;
     void showLivingRoom(LivingRoom livingRoom) throws RemoteException;
     void showBookshelf(Player player) throws RemoteException;
-    void showCommonGoalCards(Game game);
+    void showCommonGoalCards(Game game) throws RemoteException;
     void showPersonalGoalCard(Player player) throws Exception;
 }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.ServerSocket;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -26,14 +27,13 @@ public class Server{
         this.lock = new Object();
     }
 
-    public void startServers(){
-        try {
-            RMIClientHandlerImpl rmiConnection = new RMIClientHandlerImpl();
-            Naming.rebind("rmiConnection", rmiConnection);
-            Server.LOGGER.info("RMIServer started");
-        }catch (RemoteException | MalformedURLException e){
+    public void startServers() {
+        RMIServer rs = new RMIServer(this);
+        rs.run();
 
-        }
+        int port = 49674;
+        SocketServer ss = new SocketServer(this,port);
+        ss.run();
     }
 
     public void addClient(String nickname, MatchServer matchServer) throws RemoteException {

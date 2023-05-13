@@ -13,7 +13,11 @@ public class ServerApp {
 
     public static void main(String[] args) {
 
-        boolean rmi = false;
+        GameController gameController = new GameController();
+        Server server = new Server(gameController);
+
+        server.startServers();
+        /*boolean rmi = false;
         boolean socket = false;
 
         GameController gameController = new GameController();
@@ -41,6 +45,6 @@ public class ServerApp {
         }else if(socket) {
             SocketServer ss = new SocketServer(server);
             ss.run();
-        }
+        }*/
     }
 }

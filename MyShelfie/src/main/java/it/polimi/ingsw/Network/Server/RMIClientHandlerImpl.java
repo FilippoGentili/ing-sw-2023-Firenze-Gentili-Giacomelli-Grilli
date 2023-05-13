@@ -72,7 +72,7 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
     }
 
     @Override
-    public void showCommonGoalCards(Game game) {
+    public void showCommonGoalCards(Game game) throws RemoteException{
 
     }
 

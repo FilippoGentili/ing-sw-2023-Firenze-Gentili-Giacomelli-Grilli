@@ -22,9 +22,9 @@ public class RMIServer implements Runnable{
     public void run() {
         Thread thread = new Thread(() -> {
             try {
-                MatchServerRMI obj = new MatchServerRMI(server);
+                RMIClientHandlerImpl rmiConnection = new RMIClientHandlerImpl();
                 Registry registry = LocateRegistry.createRegistry(1099);
-                registry.rebind("MyShelfieServer", obj);
+                registry.rebind("MyShelfieServer", rmiConnection);
                 Server.LOGGER.info(() ->"RMI server started on port 1099");
             } catch (IOException e) {
                 Server.LOGGER.severe(e.getMessage());
