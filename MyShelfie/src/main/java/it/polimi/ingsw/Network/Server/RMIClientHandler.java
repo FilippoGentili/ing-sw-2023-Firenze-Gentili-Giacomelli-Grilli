@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Message.Message;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public interface RMIClientHandler extends Remote {
 
     void showMessage(String message) throws RemoteException;
+    void sendMessage(Message message) throws RemoteException;
     void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException;
     void nicknameRequest() throws RemoteException;
     void askNumberOfPlayers() throws RemoteException;
@@ -24,4 +26,5 @@ public interface RMIClientHandler extends Remote {
     void showBookshelf(Player player) throws RemoteException;
     void showCommonGoalCards(Game game) throws RemoteException;
     void showPersonalGoalCard(Player player) throws Exception;
+    void disconnectClient() throws RemoteException;
 }

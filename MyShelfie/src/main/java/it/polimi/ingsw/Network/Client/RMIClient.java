@@ -23,8 +23,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RMIClient extends Client {
         private static final long serialVersionUID = -4866092295114430600L;
-        private transient MatchServer server;
+        //private transient MatchServer server;
         private final View view;
+        private transient RMIClientHandler server = null;
         private ExecutorService executorService;
         private ScheduledExecutorService pinger;
         private ObjectOutputStream output;
@@ -39,9 +40,8 @@ public class RMIClient extends Client {
         }
 
         public RMIClientHandler connectRMIClient(){
-                RMIClientHandler rmiConnectionclient = null;
                 try {
-                        rmiConnectionclient = (RMIClientHandler) Naming.lookup("rmiConnection");
+                        server = (RMIClientHandler) Naming.lookup("rmiConnection");
                         /*Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1099);
                         server = (MatchServer) registry.lookup("MyShelfieServer");
                         this.executorService = Executors.newSingleThreadExecutor();
@@ -51,15 +51,15 @@ public class RMIClient extends Client {
                         Server.LOGGER.severe(e.getMessage());
                 }
 
-                return rmiConnectionclient;
+                return server;
         }
 
 
         @Override
         public void disconnect(){
                 try{
-                        server.disconnectClient();
-                        server = null;
+                        rmiConnectionclient.disconnectClient();
+                        rmiConnectionclient = null;
                         executorService.shutdownNow();
                         pinger(false);
                 }catch (IOException e){
@@ -80,10 +80,10 @@ public class RMIClient extends Client {
         @Override
         public void sendMessage(Message message) throws RemoteException {
                 try {
-                        server.sendMessage(message);
+                        rmiConnectionclient.sendMessage(message);
                 } catch (IOException e) {
                         try {
-                                server.disconnectClient();
+                                rmiConnectionclient.disconnectClient();
                         } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                         }

@@ -1,13 +1,12 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Network.Message.Message;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClientHandler {
 
@@ -17,10 +16,30 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
     }
 
     @Override
-    public void showMessage(String message) throws RemoteException {
+    public void sendMessage(Message message) throws RemoteException {
+        switch (message.getMessageType()){
+            case LOGIN_REQUEST:
+                break;
+            case NUM_OF_PLAYERS_REPLY:
+                break;
+            case CHOSEN_TILES_REPLY:
+                break;
+            case COLUMN_REPLY:
+                break;
+            case ORDERED_TILES_REPLY:
+                break;
+        }
+    }
+
+    @Override
+    public void disconnectClient() throws RemoteException {
 
     }
 
+    @Override
+    public void showMessage(String message) throws RemoteException {
+
+    }
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
 
@@ -28,7 +47,6 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
 
     @Override
     public void nicknameRequest() throws RemoteException {
-        System.out.println("Insert your nickname:");
     }
 
     @Override
@@ -37,12 +55,12 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
     }
 
     @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns) throws RemoteException {
+    public void TilesRequest(LivingRoom livingRoom) throws RemoteException {
 
     }
 
     @Override
-    public void TilesRequest(LivingRoom livingRoom) throws RemoteException {
+    public void columnRequest(ArrayList<Integer> AvailableColumns) throws RemoteException {
 
     }
 
