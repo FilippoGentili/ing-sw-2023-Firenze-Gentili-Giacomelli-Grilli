@@ -15,16 +15,9 @@ public interface RMIClientHandler extends Remote {
     void showMessage(String message) throws RemoteException;
     void sendMessage(Message message) throws RemoteException;
     void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException;
-    void nicknameRequest() throws RemoteException;
-    void askNumberOfPlayers() throws RemoteException;
-    void columnRequest(ArrayList<Integer> AvailableColumns) throws RemoteException;
-    void TilesRequest(LivingRoom livingRoom) throws RemoteException;
-    void OrderTiles(ArrayList<Tile> chosenTiles) throws RemoteException;
-    void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException;
-    void someoneDisconnected(String nickname) throws RemoteException;
-    void showLivingRoom(LivingRoom livingRoom) throws RemoteException;
-    void showBookshelf(Player player) throws RemoteException;
-    void showCommonGoalCards(Game game) throws RemoteException;
-    void showPersonalGoalCard(Player player) throws Exception;
+    void updateNumberOfPlayers(Message message) throws RemoteException;
+    void updateChosenTiles(Message message) throws RemoteException;
+    void updateChosenColumn(Message message) throws RemoteException;
+    void updateOrderedTiles(Message message) throws RemoteException;
     void disconnectClient() throws RemoteException;
 }

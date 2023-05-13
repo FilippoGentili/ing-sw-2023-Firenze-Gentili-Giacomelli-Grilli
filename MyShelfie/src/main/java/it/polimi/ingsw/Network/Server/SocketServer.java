@@ -7,7 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class SocketServer implements Runnable {
+public class SocketServer {
 
     private final Server server;
     private final int port;
@@ -18,7 +18,6 @@ public class SocketServer implements Runnable {
         this.port = port;
     }
 
-    @Override
     public  void run() {
         try {
             serverSocket = new ServerSocket(port);
@@ -46,7 +45,7 @@ public class SocketServer implements Runnable {
         server.addClient(nickname, matchServer);
     }
 
-    public void receiveMessage(Message message) throws RemoteException {
+    public void receiveMessage(Message message) {
         server.receiveMessage(message);
     }
 

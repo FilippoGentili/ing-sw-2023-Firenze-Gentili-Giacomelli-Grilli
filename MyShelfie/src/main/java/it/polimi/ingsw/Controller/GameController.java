@@ -32,10 +32,6 @@ public class GameController {
         setGameState(LOGIN);
         virtualViewMap = new HashMap<>();
     }
-
-    public void setNumOfPlayers(int num){
-        this.numOfPlayers = num;
-    }
     public void startGame() throws RemoteException {
         setGameState(PLAY);
         currentPlayer = game.pickFirstPlayer();
@@ -55,9 +51,7 @@ public class GameController {
         switch (gameState) {
             case LOGIN:
                 if(message.getMessageType()==MessageType.NUM_OF_PLAYERS_REPLY) {
-                    NumOfPlayersReply num = (NumOfPlayersReply) message;
-                    int numOfPlayers = num.getNumOfPlayers();
-                    setNumOfPlayers(numOfPlayers);
+                    setNumOfPlayers(message);
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
                 }
@@ -108,6 +102,12 @@ public class GameController {
             case ORDERED_TILES_REPLY:
                 InsertTiles(message);
         }
+    }
+
+    public void setNumOfPlayers(Message message){
+        NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
+        int num = numOfPlayersReply.getNumOfPlayers();
+        this.numOfPlayers = num;
     }
 
     /**

@@ -194,7 +194,7 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void updateNickname(String nickname) throws RemoteException {
         this.client.setUsername(nickname);
-        client.sendMessage(new LoginRequest(nickname));      //questo è il pattern: viewObserver è l'interfaccia da cui prendere i metodi da overridare. Poi il client creerà nuovi messaggi in base al metodo in cui mi trovo tramite sendMessage
+        client.sendMessage(new LoginRequest(nickname));//questo è il pattern: viewObserver è l'interfaccia da cui prendere i metodi da overridare. Poi il client creerà nuovi messaggi in base al metodo in cui mi trovo tramite sendMessage
     }                                                       // da noi MatchImpl dovrebbe diventare Observable, perchè sono la stessa cosa; infatti il client dovrà estendere proprio observable
 
     @Override

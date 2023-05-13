@@ -58,8 +58,8 @@ public class RMIClient extends Client {
         @Override
         public void disconnect(){
                 try{
-                        rmiConnectionclient.disconnectClient();
-                        rmiConnectionclient = null;
+                        server.disconnectClient();
+                        server = null;
                         executorService.shutdownNow();
                         pinger(false);
                 }catch (IOException e){
@@ -80,10 +80,10 @@ public class RMIClient extends Client {
         @Override
         public void sendMessage(Message message) throws RemoteException {
                 try {
-                        rmiConnectionclient.sendMessage(message);
+                        server.sendMessage(message);
                 } catch (IOException e) {
                         try {
-                                rmiConnectionclient.disconnectClient();
+                                server.disconnectClient();
                         } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                         }

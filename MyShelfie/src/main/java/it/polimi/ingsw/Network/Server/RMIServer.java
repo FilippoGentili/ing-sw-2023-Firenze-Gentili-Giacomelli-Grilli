@@ -10,19 +10,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 
-public class RMIServer implements Runnable{
+public class RMIServer{
     private static Server server;
 
     public RMIServer(Server server) {
         this.server = server;
     }
-
-
-    @Override
     public void run() {
         Thread thread = new Thread(() -> {
             try {
-                RMIClientHandlerImpl rmiConnection = new RMIClientHandlerImpl();
+                RMIClientHandlerImpl rmiConnection = new RMIClientHandlerImpl(this);
                 Registry registry = LocateRegistry.createRegistry(1099);
                 registry.rebind("MyShelfieServer", rmiConnection);
                 Server.LOGGER.info(() ->"RMI server started on port 1099");
