@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
 public class ClientController implements Observer, ViewObserver {
+
+    public static final Logger LOGGER = Logger.getLogger("MyShelfie client");
 
 
     private final View view;
@@ -178,14 +181,14 @@ public class ClientController implements Observer, ViewObserver {
             this.client =  new SocketClient();
             this.client.addObserver(this);
             //attendo il messaggio dal server
-            this.client.readMessage();
-            this.view.nicknameRequest();
+            /*this.client.readMessage();
+            this.view.nicknameRequest();*/
         }catch (IOException e){
             this.view.loginResult(false,false,this.client.getUsername());
         }
     }
 
-   @Override
+    @Override
     public void updateServerInfoRmi() {
         //client = new RMIClient();
         client.addObserver(this);
