@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Server.RMI;
 
 import it.polimi.ingsw.Network.Message.Message;
 
@@ -48,11 +48,6 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
     public void showMessage(String message) throws RemoteException {
 
     }
-
-    /*@Override
-    public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
-
-    }*/
 
     public void updateNumberOfPlayers(Message message) throws RemoteException {
         server.forwardMessage(message);

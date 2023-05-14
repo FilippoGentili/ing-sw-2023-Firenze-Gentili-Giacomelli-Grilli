@@ -11,12 +11,17 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * this class is used to handle all the input messages arriving from the client
+ * this class is used to handle and check all the input messages arriving from the client
  */
 public class InputController {
     private GameController gameController;
     private Map<Player, VirtualView> virtualViewMap;
 
+    /**
+     * constructor
+     * @param gameController
+     * @param virtualViewMap
+     */
     public InputController(GameController gameController, Map<Player, VirtualView> virtualViewMap){
         this.gameController = gameController;
         this.virtualViewMap = virtualViewMap;
@@ -73,6 +78,13 @@ public class InputController {
         return true;
     }
 
+
+    /**
+     * this method checks if the column selected from the client has enough free cells for inserting
+     * the selected tiles.
+     * @param message column selected from the client
+     * @return {code @true} if the column is valid {code @false} if the column is invalid.
+     */
     public boolean selectedColumn(Message message){
         ColumnReply chosenColumn = (ColumnReply) message;
         int column = chosenColumn.getColumn();
@@ -86,8 +98,5 @@ public class InputController {
         return false;
 
     }
-
-
-    //chiama gameController
 
 }

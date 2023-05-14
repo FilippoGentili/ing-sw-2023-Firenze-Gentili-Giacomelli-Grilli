@@ -3,11 +3,8 @@ package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.Ping;
-import it.polimi.ingsw.Network.Server.MatchServer;
-import it.polimi.ingsw.Network.Server.RMIClientHandler;
+import it.polimi.ingsw.Network.Server.RMI.RMIClientHandler;
 import it.polimi.ingsw.Network.Server.Server;
-import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
 
 import java.io.IOException;

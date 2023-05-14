@@ -25,6 +25,9 @@ public class GameController {
     private boolean lastRound = false;
     private boolean firstTurn = true;
 
+    /**
+     * constructor
+     */
     public GameController(){
         this.game = new Game();
         //this.numOfPlayers = num;
@@ -32,21 +35,14 @@ public class GameController {
         setGameState(LOGIN);
         virtualViewMap = new HashMap<>();
     }
-    public void startGame() throws RemoteException {
-        setGameState(PLAY);
-        currentPlayer = game.pickFirstPlayer();
-        broadcastShowMessage("Game started!");
-        newTurn();
-    }
 
+    /**
+     * this method receives the message from the client and decides what method must be called based on
+     * the actual state of the game
+     * @param message
+     * @throws RemoteException
+     */
     public void forwardMessage(Message message) throws RemoteException {
-        VirtualView vv=null;
-
-        for (Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()) {
-            if (map.getKey().getNickname().equals(message.getNickname())) {
-                vv = map.getValue();
-            }
-        }
 
         switch (gameState) {
             case LOGIN:
@@ -62,6 +58,13 @@ public class GameController {
         }
     }
 
+    /**
+     * this method decides if a client who wants to play the game can be admitted or not. If he is the first player,
+     * this method asks what is the number of players.
+     * @param nickname nickname of the player
+     * @param vv virtual view of the player
+     * @throws RemoteException
+     */
     public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
         Player player = new Player();
 
@@ -84,13 +87,13 @@ public class GameController {
         }
     }
 
+    /**
+     * this method is called when the game is already started and a message from the client arrives. It decides what
+     * method must be called based on the type of the message.
+     * @param message
+     * @throws RemoteException
+     */
     public void handleGame(Message message) throws RemoteException {
-        VirtualView vv =null;
-        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
-            if(map.getKey().getNickname().equals(message.getNickname())){
-                vv = map.getValue();
-            }
-        }
 
         switch (message.getMessageType()){
             case CHOSEN_TILES_REPLY:
@@ -102,6 +105,13 @@ public class GameController {
             case ORDERED_TILES_REPLY:
                 InsertTiles(message);
         }
+    }
+
+    public void startGame() throws RemoteException {
+        setGameState(PLAY);
+        currentPlayer = game.pickFirstPlayer();
+        broadcastShowMessage("Game started!");
+        newTurn();
     }
 
     public void setNumOfPlayers(Message message){
@@ -132,7 +142,6 @@ public class GameController {
         if(firstTurn){
             firstTurn = false;
         }else{
-            firstTurn = false;
             nextPlayer();
         }
         for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){

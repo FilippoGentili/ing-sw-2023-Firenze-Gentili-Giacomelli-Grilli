@@ -1,24 +1,13 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMIClient;
-import it.polimi.ingsw.Network.Client.SocketClient;
-import it.polimi.ingsw.Network.Message.LoginRequest;
-import it.polimi.ingsw.Network.Message.MessageType;
-import it.polimi.ingsw.Network.Server.RMIServer;
-import it.polimi.ingsw.Network.Server.SocketServer;
 import it.polimi.ingsw.Observer.ViewObservable;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.rmi.RemoteException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 import static java.lang.Integer.parseInt;
 

@@ -1,10 +1,10 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Server.RMI;
 
-import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Server.MatchServer;
+import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

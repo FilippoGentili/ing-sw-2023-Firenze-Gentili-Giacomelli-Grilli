@@ -1,50 +1,18 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.Server.Server;
+import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.SocketServer;
-import it.polimi.ingsw.Network.Server.RMIServer;
-
-import java.util.Scanner;
-
 
 
 public class ServerApp {
 
     public static void main(String[] args) {
 
-        GameController gameController = new GameController();
-        Server server = new Server(gameController);
+        RMIServer rs = new RMIServer();
+        rs.run();
 
-        server.startServers();
-        /*boolean rmi = false;
-        boolean socket = false;
-
-        GameController gameController = new GameController();
-        Server server = new Server(gameController);
-
-        System.out.println("Which type of connection do you want to use? Type -rmi or -socket");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-
-        while(!input.equals("-rmi") && !input.equals("-socket")){
-            System.out.println("Invalid statement!");
-            System.out.println("Type -rmi or -socket");
-            input = scanner.nextLine().trim();
-        }
-
-        if(input.equals("-rmi"))
-            rmi = true;
-
-        if(input.equals("-socket"))
-            socket = true;
-
-        if(rmi){
-            RMIServer rs = new RMIServer(server);
-            rs.run();
-        }else if(socket) {
-            SocketServer ss = new SocketServer(server);
-            ss.run();
-        }*/
+        int port = 49674;
+        SocketServer ss = new SocketServer(port);
+        ss.run();
     }
 }
