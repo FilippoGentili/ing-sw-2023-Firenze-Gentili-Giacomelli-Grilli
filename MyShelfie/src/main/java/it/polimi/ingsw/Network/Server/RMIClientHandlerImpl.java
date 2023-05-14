@@ -49,10 +49,10 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
 
     }
 
-    @Override
+    /*@Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
 
-    }
+    }*/
 
     public void updateNumberOfPlayers(Message message) throws RemoteException {
         server.forwardMessage(message);
