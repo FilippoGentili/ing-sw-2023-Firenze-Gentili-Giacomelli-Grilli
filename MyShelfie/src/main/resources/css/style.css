@@ -48,15 +48,138 @@
     -fx-background-size : stretch;
 }
 
+.generalCommonGoalCard1{
+    -fx-background-image : url("../images/commonGoalCards/1.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard2{
+    -fx-background-image : url("../images/commonGoalCards/2.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard3{
+    -fx-background-image : url("../images/commonGoalCards/3.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard4{
+    -fx-background-image : url("../images/commonGoalCards/4.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard5{
+    -fx-background-image : url("../images/commonGoalCards/5.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard6{
+    -fx-background-image : url("../images/commonGoalCards/6.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard7{
+    -fx-background-image : url("../images/commonGoalCards/7.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard8{
+    -fx-background-image : url("../images/commonGoalCards/8.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard9{
+    -fx-background-image : url("../images/commonGoalCards/9.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard10{
+    -fx-background-image : url("../images/commonGoalCards/10.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard11{
+    -fx-background-image : url("../images/commonGoalCards/11.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard12{
+    -fx-background-image : url("../images/commonGoalCards/12.jpg");
+    -fx-background-size : stretch;
+}
+
 /*PersonalGoalCards*/
 .generalPersonalGoalCardBack{
     -fx-background-image : url("../images/personalGoalCards/back.jpg");
     -fx-background-size : stretch;
 }
 
+.generalFrontEmpty{
+    -fx-background-image : url("../images/personalGoalCards/front_EMPTY.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard1{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals1.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard2{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals2.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard3{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals3.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard4{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals4.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard5{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals5.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard6{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals6.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard7{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals7.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard8{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals8.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard9{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals9.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard10{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals10.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard11{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals11.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard12{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals12.png");
+    -fx-background-size : stretch;
+}
 
 /*Item tiles*/
-
 .generalFrames1{
     -fx-background-image : url("../images/itemTiles/Cornici1.png");
     -fx-background-size : stretch;
