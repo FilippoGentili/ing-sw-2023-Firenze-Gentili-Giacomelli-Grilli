@@ -2,8 +2,6 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.Network.Client.RMI.RMIClient;
-import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -14,12 +12,9 @@ import it.polimi.ingsw.View.View;
 
 
 import java.io.IOException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
@@ -204,9 +199,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     @Override
-    public void updateServerInfoRmi(){
+    public void updateServerInfoRmi() throws RemoteException {
         this.client = new RMIClient();
         this.client.addObserver(this);
+        view.nicknameRequest();
         this.clientUpdater = new ClientUpdater(this.client, this);
     }
 

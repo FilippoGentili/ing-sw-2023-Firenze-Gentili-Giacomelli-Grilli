@@ -1,7 +1,6 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Observer.ViewObservable;
 
 import java.io.IOException;
