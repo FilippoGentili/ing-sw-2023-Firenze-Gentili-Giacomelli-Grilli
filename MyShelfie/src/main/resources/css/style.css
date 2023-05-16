@@ -16,3 +16,48 @@
     -fx-text-fill : #dbe07b;
     -fx-font : Blackadder ITC;
 }
+
+.generalBookshelf{
+    -fx-background-image : url("../images/boards/bookshelf.png");
+    -fx-background-size : stretch;
+}
+
+.generalOtherPlayersBookshelf{
+    -fx-background-image : url("../images/boards/bookshelf_orth.png");
+    -fx-background-size : stretch;
+}
+
+.generalLivingRoom{
+    -fx-background-image : url("../images/boards/livingroom.png");
+    -fx-background-size : stretch;
+}
+
+.generalClosedBag{
+    -fx-background-image : url("../images/misc/SacchettoChiuso.png");
+    -fx-background-size : stretch;
+}
+
+.generalLogo{
+    -fx-background-image : url("../images/publisherMaterial/bigTitle.png");
+    -fx-background-size : stretch;
+}
+
+.generalFirstPlayerChair{
+    -fx-background-image : url("../images/misc/firstplayertoken.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCardBack{
+    -fx-background-image : url("../images/personalGoalCards/back.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCardBack{
+    -fx-background-image : url("../images/commonGoalCards/back.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalEndGameToken{
+    -fx-background-image : url("../images/scoringTokens/endGame.jpg");
+    -fx-background-size : stretch;
+}

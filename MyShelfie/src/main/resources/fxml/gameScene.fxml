@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="589.0" prefWidth="932.0" styleClass="basePane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="263.0" layoutY="-58.0" prefHeight="228.0" prefWidth="425.0" styleClass="generalLogo" stylesheets="@../css/style.css" />
+      <GridPane layoutX="370.0" layoutY="202.0" prefHeight="210.0" prefWidth="210.0" styleClass="generalLivingRoom" stylesheets="@../css/style.css">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="43.22369384765625" minWidth="28.0" prefWidth="0.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="44.835205078125" minWidth="21.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="41.689056396484375" minWidth="21.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.638641357421875" minWidth="21.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.0" minWidth="21.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="77.5850830078125" minWidth="21.0" prefWidth="20.9241943359375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.5850830078125" minWidth="21.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="47.18359375" minWidth="21.0" prefWidth="21.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.271484375" minWidth="28.0" prefWidth="28.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="29.493423461914062" minHeight="29.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="21.632965087890625" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="0.0" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="21.632965087890625" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="27.44287109375" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.5186767578125" minHeight="21.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.518707275390625" minHeight="29.0" prefHeight="29.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
