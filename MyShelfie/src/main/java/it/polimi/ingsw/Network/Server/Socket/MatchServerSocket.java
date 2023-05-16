@@ -1,7 +1,9 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Server.Socket;
 
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Server.MatchServer;
+import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class MatchServerSocket implements MatchServer, Runnable{
+public class MatchServerSocket extends MatchServer implements Runnable{
     private final SocketServer socketServer;
     private final Socket client;
     private boolean connected;
@@ -103,11 +105,5 @@ public class MatchServerSocket implements MatchServer, Runnable{
     }
 
      */
-
-
-    @Override
-    public void receiveMessage(Message message) throws RemoteException {
-        socketServer.receiveMessage(message);
-    }
 
 }

@@ -19,6 +19,7 @@ public abstract class Client extends Observable implements Serializable {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
+    transient Timer pingTimer;
 
     //private String username;
     
@@ -28,6 +29,7 @@ public abstract class Client extends Observable implements Serializable {
 
     public Client(){
         this.messageQueue = new ArrayList<>();
+        this.pingTimer = new Timer();
     }
 
     public String getUsername(){
@@ -49,8 +51,6 @@ public abstract class Client extends Observable implements Serializable {
     public abstract void disconnect();
 
     public abstract void sendMessage(Message message) throws RemoteException;
-
-    public abstract void pinger(boolean on);
 
     /**
      * Method used when the client is RMI and receives a message

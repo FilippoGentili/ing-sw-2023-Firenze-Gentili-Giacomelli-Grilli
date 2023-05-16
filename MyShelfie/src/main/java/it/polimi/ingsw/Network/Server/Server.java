@@ -8,6 +8,7 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -17,12 +18,12 @@ public class Server{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
-    private final Map<String, Connection> connectionMap;
+    private final Map<String, MatchServer> matchServerMap;
     private final Object lock;
 
     public Server(){
-        this.gameController = new GameController();
-        this.connectionMap = new HashMap<>();
+        this.gameController = new GameController(this);
+        this.matchServerMap = new HashMap<>();
         this.lock = new Object();
     }
 
@@ -39,7 +40,7 @@ public class Server{
         VirtualView vv = new VirtualView(matchServer);
 
         if(gameController.waitingForPlayers()){
-            connectionMap.put(nickname, matchServer);
+            matchServerMap.put(nickname, matchServer);
             gameController.handleLogin(nickname, vv);
         }else{
             vv.loginResult(true, false, null);
@@ -52,32 +53,39 @@ public class Server{
     }
 
     public String getNickname(MatchServer matchServer){
-        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
             if(map.getValue().equals(matchServer))
                 return map.getKey();
         }
         return null;
     }
 
-    public void removeClient(String nickname){
-        connectionMap.remove(nickname);
-        gameController.removeVirtualView(nickname);
-        LOGGER.info(() -> nickname + " was removed from the client list");
+    public void removeClient(MatchServer matchServer){
+        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
+            if(map.getValue().equals(matchServer)) {
+                matchServerMap.remove(map.getKey());
+                gameController.removeVirtualView(map.getKey());
+                LOGGER.info(() -> map.getKey() + " was removed from the client list");
+                break;
+            }
+        }
     }
 
     public void clientDisconnection(MatchServer matchServer) throws RemoteException {
         synchronized (lock){
-            String nickname = getNickname(matchServer);
 
-            if(nickname != null){
-                removeClient(nickname);
+            removeClient(matchServer);
 
-                if(!gameController.waitingForPlayers()){
-                    gameController.broadcastShowMessage(nickname + " disconnected from the server. Game finished :(");
+            if(!gameController.waitingForPlayers()){
+                for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
+                    if(map.getValue().equals(matchServer))
+                        gameController.broadcastShowMessage(map.getKey() + " disconnected from the server. Game finished :(");
+                    break;
+                }
                     //fine partita, cancella tutto
                 }
             }
-        }
+
     }
 
     public void receiveMessage(Message message){
@@ -90,7 +98,7 @@ public class Server{
     }
 
     public void SendMessageBroadcast(Message message) throws RemoteException {
-        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
             if(map.getValue()!=null && map.getValue().checkConnection()){
                 try{
                     map.getValue().sendMessage(message);
@@ -104,7 +112,7 @@ public class Server{
 
     public void sendMessage(Message message, String nickname) throws RemoteException {
         synchronized(lock){
-            for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+            for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
                     try{
                         map.getValue().sendMessage(message);

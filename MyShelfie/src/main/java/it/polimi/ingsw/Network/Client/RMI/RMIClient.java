@@ -27,9 +27,6 @@ public class RMIClient extends Client {
         //private final View view;
         private transient RMIClientHandler server = null;
         private ExecutorService executorService;
-        private ScheduledExecutorService pinger;
-        private ObjectOutputStream output;
-        private ObjectInputStream input;
 
         private static final int HEARTBEAT = 10000;
 
@@ -66,7 +63,6 @@ public class RMIClient extends Client {
                         server.disconnectClient();
                         server = null;
                         executorService.shutdownNow();
-                        pinger(false);
                 }catch (IOException e){
                         try {
                                 notifyObserver(new GenericMessage("Could not disconnect."));
@@ -97,21 +93,6 @@ public class RMIClient extends Client {
                         } catch (RemoteException ex) {
                                 throw new RuntimeException(ex);
                         }
-                }
-        }
-
-        @Override
-        public void pinger(boolean on) {
-                if (on) {
-                        pinger.scheduleAtFixedRate(() -> {
-                                try {
-                                        sendMessage(new Ping());
-                                } catch (RemoteException e) {
-                                        throw new RuntimeException(e);
-                                }
-                        }, 0, HEARTBEAT, TimeUnit.MILLISECONDS);
-                } else {
-                        pinger.shutdownNow();
                 }
         }
 

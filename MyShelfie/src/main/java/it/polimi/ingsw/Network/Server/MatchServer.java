@@ -11,8 +11,4 @@ public abstract class MatchServer {
     public abstract void disconnectClient() throws IOException;
 
     public abstract void sendMessage(Message message) throws RemoteException;
-
-    //void ping(); da capire come gestire
-
-    public abstract void receiveMessage(Message message) throws RemoteException;
 }

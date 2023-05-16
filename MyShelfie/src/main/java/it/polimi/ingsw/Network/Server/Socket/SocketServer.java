@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Network.Server.Socket;
 
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Server.MatchServerSocket;
+import it.polimi.ingsw.Network.Server.MatchServer;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;

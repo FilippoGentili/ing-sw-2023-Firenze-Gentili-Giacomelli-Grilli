@@ -21,4 +21,9 @@ public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServ
     public void sendMessage(Message message) throws RemoteException {
         client.readMessage(message);
     }
+
+    @Override
+    public void disconnect() throws RemoteException {
+        client.disconnect();
+    }
 }

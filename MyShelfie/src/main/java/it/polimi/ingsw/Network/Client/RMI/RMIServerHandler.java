@@ -7,4 +7,5 @@ import java.rmi.RemoteException;
 
 public interface RMIServerHandler extends Remote {
     void sendMessage(Message message) throws RemoteException;
+    void disconnect() throws RemoteException;
 }
