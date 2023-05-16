@@ -61,3 +61,8 @@
     -fx-background-image : url("../images/scoringTokens/endGame.jpg");
     -fx-background-size : stretch;
 }
+
+.generalUsernameScene{
+    -fx-background-image: url("../images/publisherMaterial/Display_5.jpg");
+    -fx-background-size : stretch;
+}
