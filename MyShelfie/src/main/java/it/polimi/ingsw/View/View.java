@@ -32,4 +32,8 @@ public interface View {
     void showCommonGoalCards(Game game);
 
     void showPersonalGoalCard(Player player) throws Exception;
+
+    void updateGameState(Player player) throws Exception;
+
+    void showWinner(String winner);
 }

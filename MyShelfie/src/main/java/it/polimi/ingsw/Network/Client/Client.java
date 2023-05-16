@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Client;
 
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.View.Cli;
@@ -19,7 +20,10 @@ public abstract class Client extends Observable implements Serializable {
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
 
-    private String username;
+    //private String username;
+    
+    private Player player;
+    
     final transient ArrayList<Message> messageQueue;
 
     public Client(){
@@ -27,11 +31,19 @@ public abstract class Client extends Observable implements Serializable {
     }
 
     public String getUsername(){
-        return username;
+        return player.getNickname();
     }
 
     public void setUsername(String username){
-        this.username = username;
+        this.player.setNickname(username);
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
+    }
+
+    public Player getPlayer(){
+        return this.player;
     }
 
     public abstract void disconnect();

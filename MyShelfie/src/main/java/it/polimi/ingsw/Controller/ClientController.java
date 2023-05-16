@@ -64,6 +64,12 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
     //potrei far partire tanti thread quanti sono gli observable
 
+
+    /**
+     * Handles arriving messages from Server (Requests)
+     *
+     * @param message
+     */
     @Override
     public void update(Message message) {
         switch(message.getMessageType()){
@@ -85,9 +91,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case LOGIN_REPLY:
-                //???
-                break;
             case LOGIN_RESULT:
                 LoginResult loginResult = (LoginResult) message;
                 queue.add(() -> {
@@ -107,10 +110,14 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case NUM_OF_PLAYERS_REPLY:
-                break;
-            case PICK_FIRST_PLAYER:
-
+            case GAME_STATE:
+                queue.add(() -> {
+                    try {
+                        view.updateGameState(client.getPlayer());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case DISCONNECTION_REQUEST:
 
@@ -134,9 +141,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case CHOSEN_TILES_REPLY:
-
-                break;
             case ORDERED_TILES_REQUEST:
                 OrderedTilesRequest orderedTilesRequest = (OrderedTilesRequest) message;
                 queue.add(() -> {
@@ -146,9 +150,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         throw new RuntimeException(e);
                     }
                 });
-                break;
-            case ORDERED_TILES_REPLY:
-
                 break;
             case COLUMN_REQUEST:
                 ColumnRequest columnRequest = (ColumnRequest) message;
@@ -160,17 +161,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case COLUMN_REPLY:
-
-                break;
-            case GIVE_POINTS:
-
-                break;
-            case UPDATE_POINTS:
-
-                break;
             case WINNER:
-
+                WinnerMessage winnerMessage = (WinnerMessage) message;
+                queue.add(() -> {
+                    view.showWinner(winnerMessage.getWinnerNickname());
+                });
                 break;
             case MATCH_INFO:
 

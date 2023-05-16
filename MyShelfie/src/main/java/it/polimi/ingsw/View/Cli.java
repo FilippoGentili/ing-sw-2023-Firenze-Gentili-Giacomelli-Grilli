@@ -537,4 +537,21 @@ public class Cli extends ViewObservable implements View{
         System.out.println();
 
     }
+
+    @Override
+    public void updateGameState(Player player) throws Exception {
+        out.flush();
+        showLivingRoom(player.getGame().getLivingRoom());
+        for(Player p : player.getGame().getPlayers())
+            showBookshelf(p);
+        showCommonGoalCards(player.getGame());
+        showPersonalGoalCard(player);
+    }
+
+    @Override
+    public void showWinner(String winner) {
+        out.flush();
+
+        System.out.println(winner + " won the game!!");
+    }
 }

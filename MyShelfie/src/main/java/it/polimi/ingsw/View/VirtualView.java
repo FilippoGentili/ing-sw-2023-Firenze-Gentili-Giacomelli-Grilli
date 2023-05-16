@@ -64,6 +64,11 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void updateGameState(Player player) {
+
+    }
+
+    @Override
     public void someoneDisconnected(String nickname) throws RemoteException {
         matchServer.sendMessage(new DisconnectionReply(nickname));
     }
@@ -91,5 +96,10 @@ public class VirtualView implements View, Observer {
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
         matchServer.sendMessage(new LoginResult(nickname, validNickname, connection));
+    }
+
+    @Override
+    public void showWinner(String winner) {
+
     }
 }

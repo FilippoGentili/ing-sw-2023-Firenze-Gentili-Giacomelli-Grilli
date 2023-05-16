@@ -25,6 +25,8 @@ public enum MessageType {
     ORDERED_TILES_REQUEST,
     HEARTBEAT,
     BOOKSHELF,
-    CHOSEN_TILES_REPLY
+    CHOSEN_TILES_REPLY,
+
+    GAME_STATE
 }
 
