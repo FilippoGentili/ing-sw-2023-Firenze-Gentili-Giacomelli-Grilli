@@ -10,17 +10,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MatchServerSocket implements MatchServer, Runnable{
-
     private final SocketServer socketServer;
     private final Socket client;
     private boolean connected;
-
     private ObjectOutputStream output;
     private ObjectInputStream input;
-
     private final Object inputLock;
     private final Object outputLock;
 

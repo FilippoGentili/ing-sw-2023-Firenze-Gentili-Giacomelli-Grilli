@@ -1,5 +1,6 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Network.Client.RMI;
 
+import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.Ping;
@@ -14,7 +15,10 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -38,8 +42,17 @@ public class RMIClient extends Client {
 
         public RMIClientHandler connectRMIClient(){
                 try {
-                        server = (RMIClientHandler) Naming.lookup("rmiConnection");
-                } catch (MalformedURLException | NotBoundException | RemoteException e){
+                        //server = (RMIClientHandler) Naming.lookup("rmiConnection");
+                        Registry firstRegistry = LocateRegistry.getRegistry("LocalHost", 1099);
+                        server = (RMIClientHandler) firstRegistry.lookup("rmiConnectionServer");
+                        this.executorService = Executors.newSingleThreadExecutor();
+                        this.pinger = Executors.newSingleThreadScheduledExecutor();
+
+                        RMIServerHandlerImpl rmiConnectionClient = new RMIServerHandlerImpl(this);
+                        Registry secondRegistry = LocateRegistry.createRegistry(1099);
+                        secondRegistry.rebind("MyShelfieServer", rmiConnectionClient);
+                        Client.LOGGER.info(() ->"RMI client started on port 1099");
+                } catch (NotBoundException | RemoteException e){
                         Server.LOGGER.severe(e.getMessage());
                 }
 

@@ -22,8 +22,8 @@ public class Server{
     private final Map<String, MatchServer> matchServerMap;
     private final Object lock;
 
-    public Server(GameController gameController){
-        this.gameController = gameController;
+    public Server(){
+        this.gameController = new GameController();
         this.matchServerMap = new HashMap<>();
         this.lock = new Object();
     }

@@ -57,4 +57,8 @@ public class SocketServer {
         server.forwardMessage(message);
     }
 
+    public void sendMessage(Message message, String nickname) throws RemoteException {
+        server.sendMessage(message,nickname);
+    }
+
 }
