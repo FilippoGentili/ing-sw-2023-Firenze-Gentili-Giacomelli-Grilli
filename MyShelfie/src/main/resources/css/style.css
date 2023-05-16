@@ -17,10 +17,10 @@
     -fx-font : Blackadder ITC;
 }
 
-.generalBookshelf{
+/*.generalBookshelf{
     -fx-background-image : url("../images/boards/bookshelf.png");
     -fx-background-size : stretch;
-}
+}*/
 
 .generalOtherPlayersBookshelf{
     -fx-background-image : url("../images/boards/bookshelf_orth.png");
