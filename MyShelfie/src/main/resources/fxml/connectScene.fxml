@@ -20,7 +20,7 @@
             <Image url="@../images/Publisher material/smallTitle.png" />
         </ImageView>
       <Label layoutX="270.0" layoutY="407.0" prefHeight="101.0" prefWidth="759.0"
-             styleClass="generalLabel" text="Which techology do you want to use?" textAlignment="CENTER">
+             styleClass="generalLabel" text="Which technology do you want to use?" textAlignment="CENTER">
          <font>
             <Font name="Blackadder ITC" size="60.0" />
          </font></Label>
