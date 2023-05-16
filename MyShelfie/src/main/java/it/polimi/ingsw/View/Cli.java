@@ -548,10 +548,4 @@ public class Cli extends ViewObservable implements View{
         showPersonalGoalCard(player);
     }
 
-    @Override
-    public void showWinner(String winner) {
-        out.flush();
-
-        System.out.println(winner + " won the game!!");
-    }
 }

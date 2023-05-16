@@ -21,7 +21,7 @@ public class WinnerMessage extends Message{
 
     @Override
     public String toString(){
-        return "" + getWinnerNickname() + " is the Winner";
+        return "" + getWinnerNickname() + " is the Winner!";
     }
 
 }
