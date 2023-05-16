@@ -20,14 +20,16 @@ public class SocketServer {
         this.port = port;
     }
 
-    public  void run() {
+    public void startSocketServer(){
         try {
             serverSocket = new ServerSocket(port);
             Server.LOGGER.info(() -> "Socket server started on port 49674");
         } catch (IOException e) {
             Server.LOGGER.severe("Error while starting server");
-            return;
         }
+    }
+
+    public  void run() {
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Socket client = serverSocket.accept();
@@ -62,5 +64,6 @@ public class SocketServer {
     public void sendMessage(Message message, String nickname) throws RemoteException {
         server.sendMessage(message,nickname);
     }
+
 
 }
