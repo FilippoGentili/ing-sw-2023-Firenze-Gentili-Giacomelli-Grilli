@@ -49,9 +49,6 @@ public class RMIServer{
     public void sendMessage(Message message) throws RemoteException {
             client.sendMessage(message);
     }
-    public static void receiveMessage(Message message) throws RemoteException {
-        server.receiveMessage(message);
-    }
 
     public void clientDisconnection(MatchServer matchServer) throws RemoteException {
         server.clientDisconnection(matchServer);

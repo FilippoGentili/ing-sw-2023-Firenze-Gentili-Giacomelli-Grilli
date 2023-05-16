@@ -116,8 +116,8 @@ public class RMIClient extends Client {
         }
 
         @Override
-        public void readMessage() {
-
+        public void readMessage(Message message) {
+                messageQueue.add(message);
         }
 }
 

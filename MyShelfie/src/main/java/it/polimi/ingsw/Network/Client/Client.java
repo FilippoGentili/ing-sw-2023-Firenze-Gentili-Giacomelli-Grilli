@@ -61,12 +61,6 @@ public abstract class Client extends Observable implements Serializable {
         synchronized (messageQueue){
             messageQueue.add(message);
         }
-
-        try {
-            notifyObserver(message);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
