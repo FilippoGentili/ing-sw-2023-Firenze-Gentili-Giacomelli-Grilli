@@ -197,7 +197,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server
             //this.client.readMessage();
-            /*this.view.nicknameRequest();*/
+            this.view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,this.client.getUsername());
         }

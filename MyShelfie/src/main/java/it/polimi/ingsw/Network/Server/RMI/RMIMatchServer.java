@@ -8,12 +8,12 @@ import it.polimi.ingsw.Network.Server.Server;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-public class MatchServerRMI extends MatchServer {
+public class RMIMatchServer extends MatchServer {
     private final Server server;
     private final RMIServerHandler client;
     private boolean connection = true;
 
-    MatchServerRMI(Server server,RMIServerHandler rmiServerHandler){
+    RMIMatchServer(Server server, RMIServerHandler rmiServerHandler){
         this.server = server;
         this.client = rmiServerHandler;
     }

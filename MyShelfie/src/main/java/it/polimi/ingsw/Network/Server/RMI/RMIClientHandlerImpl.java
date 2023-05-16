@@ -20,7 +20,7 @@ public class RMIClientHandlerImpl extends UnicastRemoteObject implements RMIClie
 
     @Override
     public void login(String nickname, RMIServerHandler rmiServerHandler) throws IOException {
-        connectionServer = new MatchServerRMI(server,rmiServerHandler);
+        connectionServer = new RMIMatchServer(server,rmiServerHandler);
         server.login(nickname,connectionServer);
     }
 

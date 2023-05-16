@@ -22,7 +22,6 @@ public abstract class Client extends Observable implements Serializable {
     transient Timer pingTimer;
 
     //private String username;
-    
     private Player player;
     
     public final transient ArrayList<Message> messageQueue;
