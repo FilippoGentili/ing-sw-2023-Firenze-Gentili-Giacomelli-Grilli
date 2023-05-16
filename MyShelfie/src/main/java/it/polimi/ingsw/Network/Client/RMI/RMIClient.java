@@ -43,11 +43,6 @@ public class RMIClient extends Client {
                         Registry firstRegistry = LocateRegistry.getRegistry("LocalHost", 1099);
                         server = (RMIClientHandler) firstRegistry.lookup("rmiConnectionServer");
                         this.executorService = Executors.newSingleThreadExecutor();
-                        this.pinger = Executors.newSingleThreadScheduledExecutor();
-
-                        RMIServerHandlerImpl rmiConnectionClient = new RMIServerHandlerImpl(this);
-                        Registry secondRegistry = LocateRegistry.createRegistry(1099);
-                        secondRegistry.rebind("MyShelfieServer", rmiConnectionClient);
                         Client.LOGGER.info(() ->"RMI client started on port 1099");
                 } catch (NotBoundException | RemoteException e){
                         Server.LOGGER.severe(e.getMessage());

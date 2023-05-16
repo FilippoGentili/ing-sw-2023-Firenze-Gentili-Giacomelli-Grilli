@@ -36,6 +36,14 @@ public class Server{
         ss.run();
     }
 
+    public void login(String nickname, MatchServer matchServer) throws IOException {
+        try{
+            addClient(nickname,matchServer);
+        }catch (IOException e){
+            matchServer.disconnectClient();
+        }
+    }
+
     public void addClient(String nickname, MatchServer matchServer) throws RemoteException {
         VirtualView vv = new VirtualView(matchServer);
 

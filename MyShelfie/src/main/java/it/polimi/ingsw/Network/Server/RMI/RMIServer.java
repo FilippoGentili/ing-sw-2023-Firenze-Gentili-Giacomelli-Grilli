@@ -23,19 +23,12 @@ public class RMIServer{
     public void run() {
         Thread thread = new Thread(() -> {
             try {
-                RMIClientHandlerImpl rmiConnectionServer = new RMIClientHandlerImpl(this);
+                RMIClientHandlerImpl rmiConnectionServer = new RMIClientHandlerImpl(server);
                 Registry firstRegistry = LocateRegistry.createRegistry(1099);
                 firstRegistry.rebind("MyShelfieServer", rmiConnectionServer);
                 Server.LOGGER.info(() ->"RMI server started on port 1099");
-
-                while(isNull(client)){
-                    Registry thirdRegistry = LocateRegistry.getRegistry("LocalHost", 1099);
-                    client = (RMIServerHandler) thirdRegistry.lookup("rmiConnectionClient");
-                }
             } catch (IOException e) {
                 Server.LOGGER.severe(e.getMessage());
-            } catch (NotBoundException e) {
-                throw new RuntimeException(e);
             }
         });
         thread.start();

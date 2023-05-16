@@ -75,4 +75,14 @@ public class Gui extends ViewObservable implements View {
     public void showPersonalGoalCard(Player player) throws Exception {
 
     }
+
+    @Override
+    public void updateGameState(Player player) throws Exception {
+
+    }
+
+    @Override
+    public void showWinner(String winner) {
+
+    }
 }

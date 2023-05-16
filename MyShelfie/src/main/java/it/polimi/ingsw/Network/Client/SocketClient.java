@@ -40,7 +40,6 @@ public class SocketClient extends Client{
         try {
             if (!socket.isClosed()) {
                 executorService.shutdownNow();
-                pinger(false);
                 socket.close();
             }
         } catch (IOException e) {
@@ -90,17 +89,6 @@ public class SocketClient extends Client{
                 }
             }
         });
-    }
-
-    @Override
-    public void pinger(boolean on) {
-        if (on) {
-            pinger.scheduleAtFixedRate(() -> {
-                sendMessage(new Ping());
-            }, 0, HEARTBEAT, TimeUnit.MILLISECONDS);
-        } else {
-            pinger.shutdownNow();
-        }
     }
 
 }

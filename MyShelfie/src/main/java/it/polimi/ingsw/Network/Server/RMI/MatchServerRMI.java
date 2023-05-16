@@ -37,6 +37,11 @@ public class MatchServerRMI extends MatchServer {
         }
     }
 
+    /**
+     * sends message from server to client
+     * @param message
+     * @throws RemoteException
+     */
     @Override
     public void sendMessage(Message message) throws RemoteException {
         client.sendMessage(message);
