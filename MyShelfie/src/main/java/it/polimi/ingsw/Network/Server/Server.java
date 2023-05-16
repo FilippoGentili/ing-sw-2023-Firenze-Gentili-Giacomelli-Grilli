@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
@@ -8,7 +9,6 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -19,11 +19,13 @@ public class Server{
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
     private final Map<String, MatchServer> matchServerMap;
+    private final Map<String, Connection> connectionMap;
     private final Object lock;
 
     public Server(){
         this.gameController = new GameController(this);
         this.matchServerMap = new HashMap<>();
+        this.connectionMap = new HashMap<>();
         this.lock = new Object();
     }
 
@@ -36,19 +38,19 @@ public class Server{
         ss.run();
     }
 
-    public void login(String nickname, MatchServer matchServer) throws IOException {
+    public void login(String nickname, Connection connection) throws IOException {
         try{
-            addClient(nickname,matchServer);
+            addClient(nickname,connection);
         }catch (IOException e){
-            matchServer.disconnectClient();
+            connection.disconnectClient();
         }
     }
 
-    public void addClient(String nickname, MatchServer matchServer) throws RemoteException {
-        VirtualView vv = new VirtualView(matchServer);
+    public void addClient(String nickname, Connection connection) throws RemoteException {
+        VirtualView vv = new VirtualView(connection);
 
         if(gameController.waitingForPlayers()){
-            matchServerMap.put(nickname, matchServer);
+            connectionMap.put(nickname, connection);
             gameController.handleLogin(nickname, vv);
         }else{
             vv.loginResult(true, false, null);
@@ -56,22 +58,18 @@ public class Server{
     }
 
 
-    public void forwardMessage(Message message) throws RemoteException {
-        gameController.forwardMessage(message);
-    }
-
-    public String getNickname(MatchServer matchServer){
-        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
-            if(map.getValue().equals(matchServer))
+    public String getNickname(Connection connection){
+        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+            if(map.getValue().equals(connection))
                 return map.getKey();
         }
         return null;
     }
 
-    public void removeClient(MatchServer matchServer){
-        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
-            if(map.getValue().equals(matchServer)) {
-                matchServerMap.remove(map.getKey());
+    public void removeClient(Connection connection){
+        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+            if(map.getValue().equals(connection)) {
+                connectionMap.remove(map.getKey());
                 gameController.removeVirtualView(map.getKey());
                 LOGGER.info(() -> map.getKey() + " was removed from the client list");
                 break;
@@ -79,14 +77,14 @@ public class Server{
         }
     }
 
-    public void clientDisconnection(MatchServer matchServer) throws RemoteException {
+    public void clientDisconnection(Connection connection) throws RemoteException {
         synchronized (lock){
 
-            removeClient(matchServer);
+            removeClient(connection);
 
             if(!gameController.waitingForPlayers()){
-                for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
-                    if(map.getValue().equals(matchServer))
+                for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+                    if(map.getValue().equals(connection))
                         gameController.broadcastShowMessage(map.getKey() + " disconnected from the server. Game finished :(");
                     break;
                 }
@@ -132,6 +130,10 @@ public class Server{
             }
         }
         LOGGER.log(Level.INFO, "Sending to {0}, message '{1}", new Object[]{nickname, message});
+    }
+
+    public void handleMessage(Message message) throws RemoteException {
+        gameController.forwardMessage(message);
     }
 
     /*@Override

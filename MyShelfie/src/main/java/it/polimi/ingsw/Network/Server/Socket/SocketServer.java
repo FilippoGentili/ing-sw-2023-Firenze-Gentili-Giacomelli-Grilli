@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Network.Server.Socket;
 
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Server.MatchServer;
+import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
@@ -45,25 +45,23 @@ public class SocketServer {
         }
     }
 
-    public void addClient(String nickname, MatchServer matchServer) throws RemoteException {
-        server.addClient(nickname, matchServer);
+    public void addClient(String nickname, Connection connection) throws RemoteException {
+        server.addClient(nickname, connection);
     }
 
     public void receiveMessage(Message message) {
         server.receiveMessage(message);
     }
 
-    public void clientDisconnection(MatchServer matchServer) throws RemoteException {
-        server.clientDisconnection(matchServer);
-    }
-
-    public void forwardMessage(Message message) throws RemoteException {
-        server.forwardMessage(message);
+    public void clientDisconnection(Connection connection) throws RemoteException {
+        server.clientDisconnection(connection);
     }
 
     public void sendMessage(Message message, String nickname) throws RemoteException {
         server.sendMessage(message,nickname);
     }
 
-
+    public void handleMessage(Message message) throws RemoteException {
+        server.handleMessage(message);
+    }
 }

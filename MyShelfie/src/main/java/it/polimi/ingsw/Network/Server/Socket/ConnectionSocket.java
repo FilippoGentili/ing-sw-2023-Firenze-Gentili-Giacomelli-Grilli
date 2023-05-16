@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.rmi.RemoteException;
 
 public class ConnectionSocket extends Connection implements Runnable{
 
@@ -46,11 +47,47 @@ public class ConnectionSocket extends Connection implements Runnable{
                     Message message = (Message) input.readObject();
 
                     if(message != null){
-                        if(message.getMessageType() == MessageType.LOGIN_REQUEST){
-                            socketServer.
-                        }
+                        socketServer.handleMessage(message);
                     }
                 }
+            } catch (IOException | ClassNotFoundException e) {
+                Server.LOGGER.severe(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void disconnectClient() {
+        if(checkConnection()){
+            try {
+                if (!socket.isClosed()) {
+                    socket.close();
+                }
+            }catch (IOException e){
+                Server.LOGGER.severe(e.getMessage());
+            }
+            isConnected = false;
+            Thread.currentThread().interrupt();
+
+            try {
+                socketServer.clientDisconnection(this);
+            }catch (IOException e){
+                Server.LOGGER.severe("Connection problems");
+            }
+        }
+    }
+
+    @Override
+    public void sendMessage(Message message){
+        if(isConnected){
+            try{
+                synchronized (outputLock){
+                    output.writeObject(message);
+                    output.reset();
+                }
+            } catch (IOException e) {
+                Server.LOGGER.severe(e.getMessage());
+                disconnectClient();
             }
         }
     }

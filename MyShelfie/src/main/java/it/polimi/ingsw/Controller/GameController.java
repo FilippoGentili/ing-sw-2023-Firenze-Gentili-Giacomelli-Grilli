@@ -78,7 +78,6 @@ public class GameController {
                 server.sendMessage(new LoginResult(nickname,true,true),nickname);
                 vv.loginResult(true, true, nickname);
             } else
-
                 vv.loginResult(false, true, nickname);
         }else if(virtualViewMap.isEmpty()){
             addVirtualView(player, vv);
@@ -88,6 +87,7 @@ public class GameController {
             vv.askNumberOfPlayers();
         }else {
             vv.loginResult(true, false, nickname);
+            vv.getConnection().disconnectClient();
         }
     }
 
