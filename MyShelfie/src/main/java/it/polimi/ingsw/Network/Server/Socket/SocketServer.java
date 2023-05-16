@@ -36,8 +36,8 @@ public class SocketServer {
 
                 client.setSoTimeout(5000);
 
-                MatchServerSocket matchServerSocket = new MatchServerSocket(this, client);
-                Thread thread = new Thread(matchServerSocket, "matchServerSocket" + client.getInetAddress());
+                ConnectionSocket connectionSocket = new ConnectionSocket(this, client);
+                Thread thread = new Thread(connectionSocket, "connectionSocket" + client.getInetAddress());
                 thread.start();
             } catch (IOException e) {
                 Server.LOGGER.severe("Connection lost");

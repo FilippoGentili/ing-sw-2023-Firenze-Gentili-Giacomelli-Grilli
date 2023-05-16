@@ -18,13 +18,11 @@ public class Server{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
-    private final Map<String, MatchServer> matchServerMap;
     private final Map<String, Connection> connectionMap;
     private final Object lock;
 
     public Server(){
         this.gameController = new GameController(this);
-        this.matchServerMap = new HashMap<>();
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
     }
@@ -103,14 +101,10 @@ public class Server{
         }
     }
 
-    public void SendMessageBroadcast(Message message) throws RemoteException {
-        for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
+    public void SendMessageBroadcast(Message message) {
+        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue()!=null && map.getValue().checkConnection()){
-                try{
-                    map.getValue().sendMessage(message);
-                } catch (IOException e) {
-                    LOGGER.severe(e.getMessage());
-                }
+                map.getValue().sendMessage(message);
             }
         }
         LOGGER.log(Level.INFO, "Send to all: {0}", message);
@@ -118,13 +112,9 @@ public class Server{
 
     public void sendMessage(Message message, String nickname) throws RemoteException {
         synchronized(lock){
-            for(Map.Entry<String, MatchServer> map : matchServerMap.entrySet()){
+            for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
-                    try{
-                        map.getValue().sendMessage(message);
-                    } catch(IOException e){
-                        LOGGER.severe(e.getMessage());
-                    }
+                    map.getValue().sendMessage(message);
                     break;
                 }
             }
