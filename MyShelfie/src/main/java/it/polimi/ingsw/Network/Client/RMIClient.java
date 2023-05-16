@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RMIClient extends Client {
         private static final long serialVersionUID = -4866092295114430600L;
-        private final View view;
+        //private final View view;
         private transient RMIClientHandler server = null;
         private ExecutorService executorService;
         private ScheduledExecutorService pinger;
@@ -30,9 +30,9 @@ public class RMIClient extends Client {
         private static final int HEARTBEAT = 10000;
 
 
-        public RMIClient(View view){
+        public RMIClient(/*View view*/){
                 super();
-                this.view = view;
+                //this.view = view;
                 connectRMIClient();
         }
 

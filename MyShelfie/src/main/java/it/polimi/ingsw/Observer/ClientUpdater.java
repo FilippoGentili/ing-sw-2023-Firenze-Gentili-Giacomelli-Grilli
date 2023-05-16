@@ -11,12 +11,12 @@ public class ClientUpdater implements Runnable{
 
     private final Client client;
 
-    private Observable observable;
+    private Observer observer;
     private Thread thread;
 
-    ClientUpdater(Client client, Observable observervable) {
+    public ClientUpdater(Client client, Observer observer) {
         this.client = client;
-        this.observable = observervable;
+        this.observer = observer;
         this.thread = new Thread(this);
         this.thread.start();
     }
@@ -39,7 +39,7 @@ public class ClientUpdater implements Runnable{
 
                 for(Message msg : messages) {
                     try {
-                        observable.notifyObserver(msg);
+                        observer.update(msg);
                     } catch (RemoteException e) {
                         throw new RuntimeException(e);
                     }

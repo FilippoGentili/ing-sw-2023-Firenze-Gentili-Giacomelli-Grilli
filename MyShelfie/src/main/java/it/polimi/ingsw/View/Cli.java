@@ -71,7 +71,13 @@ public class Cli extends ViewObservable implements View{
 
 
         if(rmi){
-            RMIClient rc = new RMIClient(this);
+            notifyObserver(obs -> {
+                try {
+                    obs.updateServerInfoRmi();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }else{
             notifyObserver(obs -> {
                 try {

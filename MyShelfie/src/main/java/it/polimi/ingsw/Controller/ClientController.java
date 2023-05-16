@@ -2,37 +2,58 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.RMIClient;
 import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
+import it.polimi.ingsw.Observer.ClientUpdater;
 import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.View;
 
 
 import java.io.IOException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
-public class ClientController implements Observer, ViewObserver {
+public class ClientController implements Observer, ViewObserver, Runnable {
 
     public static final Logger LOGGER = Logger.getLogger("MyShelfie client");
 
 
     private final View view;
     private Client client;
-    private final ExecutorService taskQueue;
+    //private final ExecutorService taskQueue;
+
+    private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+
+    private ClientUpdater clientUpdater;
 
 
     public ClientController(View view) throws RemoteException {
         this.view = view;
-        taskQueue = Executors.newSingleThreadExecutor();
+        //taskQueue = Executors.newSingleThreadExecutor();
+        new Thread(this).start();
+    }
 
+    @Override
+    public void run() {
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                queue.take().run();
+            } catch (InterruptedException e) {
+                LOGGER.severe(e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     public void setClient(Client client){
@@ -41,11 +62,13 @@ public class ClientController implements Observer, ViewObserver {
 
     public String getNickname(){return this.client.getUsername();}
 
+    //potrei far partire tanti thread quanti sono gli observable
+
     @Override
     public void update(Message message) {
         switch(message.getMessageType()){
             case GENERIC_MESSAGE:
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.showMessage(message.toString());
                     } catch (RemoteException e) {
@@ -54,7 +77,7 @@ public class ClientController implements Observer, ViewObserver {
                 });
                 break;
             case LOGIN_REQUEST:
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.nicknameRequest();
                     } catch (RemoteException e) {
@@ -67,7 +90,7 @@ public class ClientController implements Observer, ViewObserver {
                 break;
             case LOGIN_RESULT:
                 LoginResult loginResult = (LoginResult) message;
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getChosenNickname());
                     } catch (RemoteException e) {
@@ -76,7 +99,7 @@ public class ClientController implements Observer, ViewObserver {
                 });
                 break;
             case NUM_OF_PLAYERS_REQUEST:
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.askNumberOfPlayers();
                     } catch (RemoteException e) {
@@ -103,7 +126,7 @@ public class ClientController implements Observer, ViewObserver {
                 break;
             case CHOSEN_TILES_REQUEST:
                 ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.TilesRequest(chosenTilesRequest.getLivingroom());
                     } catch (RemoteException e) {
@@ -116,7 +139,7 @@ public class ClientController implements Observer, ViewObserver {
                 break;
             case ORDERED_TILES_REQUEST:
                 OrderedTilesRequest orderedTilesRequest = (OrderedTilesRequest) message;
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.OrderTiles(orderedTilesRequest.getChosenTiles());
                     } catch (RemoteException e) {
@@ -129,7 +152,7 @@ public class ClientController implements Observer, ViewObserver {
                 break;
             case COLUMN_REQUEST:
                 ColumnRequest columnRequest = (ColumnRequest) message;
-                taskQueue.execute(() -> {
+                queue.add(() -> {
                     try {
                         view.columnRequest(columnRequest.getAvailableColumns());
                     } catch (RemoteException e) {
@@ -175,6 +198,7 @@ public class ClientController implements Observer, ViewObserver {
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient();
             this.client.addObserver(this);
+            this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server
             /*this.client.readMessage();
             this.view.nicknameRequest();*/
@@ -184,9 +208,10 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     @Override
-    public void updateServerInfoRmi() {
-        //client = new RMIClient();
-        client.addObserver(this);
+    public void updateServerInfoRmi(){
+        this.client = new RMIClient();
+        this.client.addObserver(this);
+        this.clientUpdater = new ClientUpdater(this.client, this);
     }
 
     @Override
@@ -198,7 +223,6 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void updateNumOfPlayers(int num) throws RemoteException {
         client.sendMessage(new NumOfPlayersReply(client.getUsername(), num));
-
     }
 
     @Override
