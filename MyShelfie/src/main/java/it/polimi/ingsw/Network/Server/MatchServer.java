@@ -1,21 +1,18 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.io.IOException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface MatchServer extends Remote {
+public abstract class MatchServer {
+    public abstract boolean checkConnection() throws RemoteException;
 
-    boolean checkConnection() throws RemoteException;
+    public abstract void disconnectClient() throws IOException;
 
-    void disconnectClient() throws IOException;
-
-    void sendMessage(Message message) throws RemoteException;
+    public abstract void sendMessage(Message message) throws RemoteException;
 
     //void ping(); da capire come gestire
 
-    void receiveMessage(Message message) throws RemoteException;
+    public abstract void receiveMessage(Message message) throws RemoteException;
 }

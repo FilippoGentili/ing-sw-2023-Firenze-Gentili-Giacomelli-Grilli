@@ -24,7 +24,7 @@ public abstract class Client extends Observable implements Serializable {
     
     private Player player;
     
-    final transient ArrayList<Message> messageQueue;
+    public final transient ArrayList<Message> messageQueue;
 
     public Client(){
         this.messageQueue = new ArrayList<>();
@@ -51,7 +51,6 @@ public abstract class Client extends Observable implements Serializable {
     public abstract void sendMessage(Message message) throws RemoteException;
 
     public abstract void pinger(boolean on);
-    public abstract void readMessage();
 
     /**
      * Method used when the client is RMI and receives a message

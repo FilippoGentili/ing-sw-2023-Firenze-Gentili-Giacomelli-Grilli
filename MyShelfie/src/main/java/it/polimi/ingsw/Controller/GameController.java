@@ -22,14 +22,16 @@ public class GameController {
     private InputController inputController;
     private ArrayList<Player> players;
     private Map<Player, VirtualView> virtualViewMap;
+    private final Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;
 
     /**
      * constructor
      */
-    public GameController(){
+    public GameController(Server server){
         this.game = new Game();
+        this.server = server;
         //this.numOfPlayers = num;
         this.inputController = new InputController(this,virtualViewMap);
         setGameState(LOGIN);
@@ -73,8 +75,10 @@ public class GameController {
                 addVirtualView(player, vv);
                 player.setNickname(nickname);
                 game.addPlayer(player);
+                server.sendMessage(new LoginResult(nickname,true,true),nickname);
                 vv.loginResult(true, true, nickname);
             } else
+
                 vv.loginResult(false, true, nickname);
         }else if(virtualViewMap.isEmpty()){
             addVirtualView(player, vv);

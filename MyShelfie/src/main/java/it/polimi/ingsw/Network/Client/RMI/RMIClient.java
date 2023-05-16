@@ -78,7 +78,7 @@ public class RMIClient extends Client {
         }
 
         /**
-         * Method used to send from client RMI to server a message
+         * Method used to send a message from client RMI to server
          * @param message
          * @throws RemoteException
          */

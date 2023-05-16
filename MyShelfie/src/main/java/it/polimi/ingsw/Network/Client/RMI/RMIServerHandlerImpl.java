@@ -19,6 +19,6 @@ public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServ
      */
     @Override
     public void sendMessage(Message message) throws RemoteException {
-        client.sendMessage(message);
+        client.readMessage(message);
     }
 }
