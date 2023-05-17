@@ -37,6 +37,7 @@ public class GuiJavaFX extends Application {
 
         Scene scene = new Scene(layout);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setFullScreen(true);
         stage.setTitle("MyShelfie");
         stage.show();
