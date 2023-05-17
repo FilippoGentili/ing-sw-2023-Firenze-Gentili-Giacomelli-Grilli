@@ -14,7 +14,7 @@ public class MenuScene extends ViewObservable {
     private Button exitButton;
 
     private void playButtonClicked(Event event){
-        GuiController.changeScene("connectScene.fxml",event,observers);
+        GuiController.changeScene("startScene.fxml",event,observers);
     }
     @FXML
     public void setUp(){

@@ -22,7 +22,7 @@ public class GuiJavaFX extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
 
-        fxmlLoader.setLocation(getClass().getResource("/fxml/menuScene.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/startScene.fxml"));
         Parent layout = null;
 
         try{

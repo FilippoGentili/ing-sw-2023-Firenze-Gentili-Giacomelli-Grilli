@@ -326,3 +326,8 @@
     -fx-background-image : url("../images/scoringTokens/scoring_back_EMPTY.jpg");
     -fx-background-size : stretch;
 }
+
+.generalDisplay5{
+    -fx-background-image : url("../images/publisherMaterial/Display_5.jpg");
+    -fx-background-size : stretch;
+}
