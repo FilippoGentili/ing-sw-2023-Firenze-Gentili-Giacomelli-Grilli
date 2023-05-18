@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Model.Bookshelf;
+import it.polimi.ingsw.Model.LivingRoom;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.DisconnectionHandler;
@@ -169,10 +172,26 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
                 break;
             case LIVING_ROOM:
-
+                LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;
+                LivingRoom livingRoom = livingRoomMessage.getLivingRoom();
+                queue.add(() -> {
+                    try {
+                        view.showLivingRoom(livingRoom);
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
-            case BOOKSHELF:
-
+            case PLAYER_MESSAGE:
+                PlayerMessage playerMessage = (PlayerMessage) message;
+                Player player = playerMessage.getPlayer();
+                queue.add(() -> {
+                    try {
+                        view.showBookshelf(player);
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 break;
             case HEARTBEAT:
 

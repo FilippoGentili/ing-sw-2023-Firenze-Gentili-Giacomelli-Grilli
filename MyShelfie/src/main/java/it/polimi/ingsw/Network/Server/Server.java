@@ -4,7 +4,6 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Client.PingTimer;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -30,8 +29,6 @@ public class Server implements Runnable{
     }
 
     public void startServers() {
-        RMIServer rs = new RMIServer(this);
-        rs.run();
 
         int port = 49674;
         SocketServer ss = new SocketServer(this,port);

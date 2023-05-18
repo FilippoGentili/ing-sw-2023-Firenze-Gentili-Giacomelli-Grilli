@@ -266,6 +266,7 @@ public class GameController {
             }else{
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
+                restoreMatchElements();
                 newTurn();
             }
         }else{
@@ -280,10 +281,12 @@ public class GameController {
                         "bookshelf before the other players."), currentPlayer.getNickname());
 
                 endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+                restoreMatchElements();
                 lastRound(); //da rivedere
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
+                restoreMatchElements();
                 newTurn(); //da rivedere
             }
         }
@@ -315,6 +318,15 @@ public class GameController {
         }
 
         setGameState(END);
+    }
+
+    public void restoreMatchElements() throws RemoteException {
+        for(Player player : players){
+            server.sendMessage(new LivingRoomMessage(game.getLivingRoom()),player.getNickname());
+            for(Player otherPlayer : players){
+                server.sendMessage(new PlayerMessage(otherPlayer),player.getNickname());
+            }
+        }
     }
 
     public int getNumOfPlayers(){
