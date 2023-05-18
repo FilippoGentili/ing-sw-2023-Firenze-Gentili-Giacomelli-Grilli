@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -8,8 +9,9 @@ import java.util.*;
  * Bag class that contains the 132 tiles
  * @author pheelaw
  */
-public class Bag {
+public class Bag implements Serializable {
 
+    private static final long serialVersionUID = 4089040294542656250L;
     private static int numOfTiles=132;
     private static ArrayList<Tile> remainingTiles;
 

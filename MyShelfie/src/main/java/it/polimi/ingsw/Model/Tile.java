@@ -1,7 +1,10 @@
 package it.polimi.ingsw.Model;
 
-public class Tile {
+import java.io.Serializable;
 
+public class Tile implements Serializable {
+
+    private static final long serialVersionUID = -4648973443050270233L;
     private int col;
     private int row;
     private Location location;

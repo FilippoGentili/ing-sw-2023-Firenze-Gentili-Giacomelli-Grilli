@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serializable;
+
 import static java.util.Objects.isNull;
 
 /**
@@ -7,8 +9,9 @@ import static java.util.Objects.isNull;
  * @author silvia
  */
 
-public abstract class CommonGoalCard {
+public abstract class CommonGoalCard implements Serializable {
 
+    private static final long serialVersionUID = -1396395765780504364L;
     private int value = 8;
     private int delta;
 

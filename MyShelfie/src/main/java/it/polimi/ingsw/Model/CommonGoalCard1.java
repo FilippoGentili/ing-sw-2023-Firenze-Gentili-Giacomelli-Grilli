@@ -1,9 +1,11 @@
 package it.polimi.ingsw.Model;
 
+
 import static java.util.Objects.isNull;
 
 public class CommonGoalCard1 extends CommonGoalCard {
 
+    private static final long serialVersionUID = -2155701438769337191L;
     private final int id=1;
 
     public int getId(){return this.id;}

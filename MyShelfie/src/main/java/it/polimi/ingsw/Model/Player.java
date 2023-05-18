@@ -2,9 +2,11 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Observer.Observable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player extends Observable {
+public class Player extends Observable implements Serializable {
+    private static final long serialVersionUID = 859312485853764712L;
     private String nickname;
     private int score;
     private Game game;

@@ -4,6 +4,7 @@ import static java.util.Objects.isNull;
 
 public class CommonGoalCard8 extends CommonGoalCard {
 
+    private static final long serialVersionUID = -960004755710147528L;
     private final int id=8;
 
     public int getId(){return this.id;}

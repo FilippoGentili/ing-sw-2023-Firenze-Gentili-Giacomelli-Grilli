@@ -1,7 +1,10 @@
 package it.polimi.ingsw.Model;
 
-public class PersonalGoalCard {
+import java.io.Serializable;
 
+public class PersonalGoalCard implements Serializable {
+
+    private static final long serialVersionUID = 3824493051654631676L;
     private Player player;
     private int points = 0;
     private int matches;

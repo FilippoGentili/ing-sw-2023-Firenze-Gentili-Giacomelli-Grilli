@@ -2,10 +2,12 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Observer.Observable;
 
+import java.io.Serializable;
 import java.util.*;
 
 //le classi che estendono observable sono quelle che notificheranno l'evento all'esterno
-public class Game extends Observable {
+public class Game extends Observable implements Serializable {
+    private static final long serialVersionUID = -4957685347178142310L;
     private static ArrayList<Player> listOfPlayers;
     private static Player currentPlayer;
     private static Player nextPlayer;
