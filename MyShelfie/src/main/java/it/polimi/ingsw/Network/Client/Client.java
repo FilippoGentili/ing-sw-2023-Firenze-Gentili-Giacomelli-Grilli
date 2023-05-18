@@ -19,47 +19,27 @@ public abstract class Client extends Observable implements Serializable {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
-    transient Timer pingTimer;
+    transient Timer timer;
 
-    //private String username;
-    private Player player;
-    
+    private String username;
+
     public final transient ArrayList<Message> messageQueue;
 
-    public Client(){
+    public Client(String username){
+        this.username = username;
         this.messageQueue = new ArrayList<>();
-        this.pingTimer = new Timer();
+        this.timer = new Timer();
     }
 
-    public String getUsername(){
-        return player.getNickname();
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsername(String username){
-        this.player.setNickname(username);
-    }
-
-    public void setPlayer(Player player){
-        this.player = player;
-    }
-
-    public Player getPlayer(){
-        return this.player;
-    }
+    public abstract void connect() throws IOException;
 
     public abstract void disconnect();
 
     public abstract void sendMessage(Message message) throws RemoteException;
-
-    /**
-     * Method used when the client is RMI and receives a message
-     * @param message
-     */
-    public void readMessage(Message message){
-        synchronized (messageQueue){
-            messageQueue.add(message);
-        }
-    }
 
     /**
      * Method used to get the entire messageQueue and clear it

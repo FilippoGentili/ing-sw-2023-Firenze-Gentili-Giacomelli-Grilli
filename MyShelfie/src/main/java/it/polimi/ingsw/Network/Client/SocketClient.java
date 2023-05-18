@@ -1,47 +1,60 @@
 package it.polimi.ingsw.Network.Client;
 
-import it.polimi.ingsw.Network.Message.GenericMessage;
-import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Message.Ping;
+import it.polimi.ingsw.Network.Message.*;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.Timer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SocketClient extends Client{
+public class SocketClient extends Client implements Runnable{
 
-    private Socket socket;
+    private static final long serialVersionUID = -7451963301034418721L;
+    private transient Socket socket;
 
-    private ObjectOutputStream output;
-    private ObjectInputStream input;
-    private ExecutorService executorService;
-    private ScheduledExecutorService pinger;
+    private transient ObjectOutputStream output;
+    private transient ObjectInputStream input;
+    //private ExecutorService executorService;
+    //private ScheduledExecutorService pinger;
 
+    private transient Thread thread;
 
     private static final int HEARTBEAT = 10000;
 
-    public SocketClient() throws IOException {
+    public SocketClient(String username) throws IOException {
+        super(username);
+        Client.LOGGER.info(() ->"Socket client started on port 49674");
+    }
+
+    @Override
+    public void connect() throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress("127.0.0.1", 49674), HEARTBEAT);
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
-        this.executorService = Executors.newSingleThreadExecutor();
-        this.pinger = Executors.newSingleThreadScheduledExecutor();
-        Client.LOGGER.info(() ->"Socket client started on port 49674");
+
+        sendMessage(new LoginRequest(getUsername()));
+
+        this.thread = new Thread();
+        thread.start();
+
     }
 
     @Override
     public void disconnect(){
         try {
             if (!socket.isClosed()) {
-                executorService.shutdownNow();
                 socket.close();
             }
+            thread.interrupt();
+            input = null;
+            output = null;
+
         } catch (IOException e) {
             try {
                 notifyObserver(new GenericMessage("Could not disconnect."));
@@ -67,28 +80,29 @@ public class SocketClient extends Client{
         }
     }
 
-    /**
-     * Method used when the client is Socket and receives a message from server
-     */
-    public void readMessage() {
-        executorService.execute(() -> {
-            while(!executorService.isShutdown()){
-                Message message;
-                try {
-                    message = (Message) input.readObject();
-                    Client.LOGGER.info("Received:" + message);
-                } catch (IOException | ClassNotFoundException e) {
-                    message = new GenericMessage("Connection lost");
-                    disconnect();
-                    executorService.shutdownNow();
-                }
-                try {
-                    notifyObserver(message);
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-    }
 
+    @Override
+    public void run() {
+        while(!Thread.currentThread().isInterrupted()){
+            Message message;
+            try {
+                message = (Message) input.readObject();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            if(message!=null && !message.getMessageType().equals(MessageType.PING)){
+                synchronized (messageQueue){
+                    messageQueue.add(message);
+                }
+            }else if(message!=null && message.getMessageType().equals(MessageType.PING)){
+                super.timer.cancel();
+                super.timer = new Timer();
+                super.timer.schedule(new Timer);
+            }
+
+        }
+    }
 }
