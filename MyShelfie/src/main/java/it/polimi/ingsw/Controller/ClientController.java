@@ -28,8 +28,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
     private final View view;
     private Client client;
-    //private final ExecutorService taskQueue;
-
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
 
     private ClientUpdater clientUpdater;
@@ -110,7 +108,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             case GAME_STATE:
                 queue.add(() -> {
                     try {
-                        view.updateGameState(client.getPlayer());
+                        view.updateGameState(client.getUsername());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -199,19 +197,19 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-   /* @Override
-    public void updateServerInfoRmi() throws RemoteException {
-        this.client = new RMIClient();
+   @Override
+    public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler) throws RemoteException {
+        this.client = new RMIClient(client.getUsername(), this);
         this.client.addObserver(this);
         view.nicknameRequest();
         this.clientUpdater = new ClientUpdater(this.client, this);
-    }*/
+    }
 
     @Override
     public void updateNickname(String nickname) throws RemoteException {
         this.client.setUsername(nickname);
-        client.sendMessage(new LoginRequest(nickname));//questo è il pattern: viewObserver è l'interfaccia da cui prendere i metodi da overridare. Poi il client creerà nuovi messaggi in base al metodo in cui mi trovo tramite sendMessage
-    }                                                       // da noi MatchImpl dovrebbe diventare Observable, perchè sono la stessa cosa; infatti il client dovrà estendere proprio observable
+        client.sendMessage(new LoginRequest(nickname));
+    }
 
     @Override
     public void updateNumOfPlayers(int num) throws RemoteException {

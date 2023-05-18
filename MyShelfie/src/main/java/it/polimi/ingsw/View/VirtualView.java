@@ -64,7 +64,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void updateGameState(Player player) {
+    public void updateGameState(String username) {
 
     }
 

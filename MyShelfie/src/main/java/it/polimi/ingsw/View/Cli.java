@@ -13,10 +13,8 @@ import static java.lang.Integer.parseInt;
 
 public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
-    //private ClientController clientController;
     private final PrintStream out;
     Scanner scanner;
-    private String connection;
 
     public Cli(){
         out = System.out;
@@ -539,7 +537,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
-    public void updateGameState(Player player) throws Exception {
+    public void updateGameState(String username) throws Exception {
         out.flush();
         showLivingRoom(player.getGame().getLivingRoom());
         for(Player p : player.getGame().getPlayers())
