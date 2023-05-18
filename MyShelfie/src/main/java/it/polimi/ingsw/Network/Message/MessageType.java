@@ -26,7 +26,7 @@ public enum MessageType {
     HEARTBEAT,
     BOOKSHELF,
     CHOSEN_TILES_REPLY,
-
+    PLAYER_MESSAGE,
     GAME_STATE
 }
 
