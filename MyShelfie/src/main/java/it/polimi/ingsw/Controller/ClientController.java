@@ -2,6 +2,7 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.DisconnectionHandler;
 import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -184,10 +185,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     @Override
-    public void updateServerInfoSocket() throws IOException {
+    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler) throws IOException {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            this.client =  new SocketClient();
+            this.client =  new SocketClient(client.getUsername(), disconnectionHandler;
             this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server
@@ -198,13 +199,13 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-    @Override
+   /* @Override
     public void updateServerInfoRmi() throws RemoteException {
         this.client = new RMIClient();
         this.client.addObserver(this);
         view.nicknameRequest();
         this.clientUpdater = new ClientUpdater(this.client, this);
-    }
+    }*/
 
     @Override
     public void updateNickname(String nickname) throws RemoteException {

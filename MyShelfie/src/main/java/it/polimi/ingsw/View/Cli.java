@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Network.Client.DisconnectionHandler;
 import it.polimi.ingsw.Observer.ViewObservable;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
-public class Cli extends ViewObservable implements View{
+public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     //private ClientController clientController;
     private final PrintStream out;
@@ -72,7 +73,7 @@ public class Cli extends ViewObservable implements View{
         if(rmi){
             notifyObserver(obs -> {
                 try {
-                    obs.updateServerInfoRmi();
+                    obs.updateServerInfoRmi(this);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -80,7 +81,7 @@ public class Cli extends ViewObservable implements View{
         }else{
             notifyObserver(obs -> {
                 try {
-                    obs.updateServerInfoSocket();
+                    obs.updateServerInfoSocket(this);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -552,4 +553,8 @@ public class Cli extends ViewObservable implements View{
 
     }
 
+    @Override
+    public void handleDisconnection() {
+
+    }
 }

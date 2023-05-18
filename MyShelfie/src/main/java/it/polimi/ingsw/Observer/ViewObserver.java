@@ -4,6 +4,7 @@ package it.polimi.ingsw.Observer;
 //i metodi manderanno messaggi al server
 
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Client.DisconnectionHandler;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -13,9 +14,9 @@ import java.util.Map;
 
 public interface ViewObserver{
 
-    void updateServerInfoSocket() throws IOException;
+    void updateServerInfoSocket(DisconnectionHandler disconnectionHandler) throws IOException;
 
-    void updateServerInfoRmi() throws RemoteException;
+    void updateServerInfoRmi(DisconnectionHandler disconnectionHandler) throws RemoteException;
 
     void updateNickname(String nickname) throws RemoteException;
 

@@ -94,7 +94,7 @@ public class SocketClient extends Client implements Runnable{
                 }else if(message!=null && message.getMessageType().equals(MessageType.PING)){
                     super.timer.cancel();
                     super.timer = new Timer();
-                    super.timer.schedule(new PingTimer(super.disconnectionHandler, HEARTBEAT));
+                    super.timer.schedule(new PingTimer(super.disconnectionHandler), HEARTBEAT);
                 }
             } catch (IOException e) {
                 disconnect();
