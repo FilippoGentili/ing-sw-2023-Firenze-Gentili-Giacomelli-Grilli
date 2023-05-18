@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Network.Client.PingTimer;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
@@ -14,12 +15,13 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Server{
+public class Server implements Runnable{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final GameController gameController;
     private final Map<String, Connection> connectionMap;
     private final Object lock;
+
 
     public Server(){
         this.gameController = new GameController(this);
@@ -126,11 +128,11 @@ public class Server{
         gameController.forwardMessage(message);
     }
 
-    /*@Override
+    @Override
     public void run(){
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
-                for (Map.Entry<String, MatchServer> map : matchServerMap.entrySet()) {
+                for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
                     try {
                         if (map.getValue() != null && map.getValue().checkConnection()) {
                             map.getValue().ping();//da capire come gestire
@@ -148,7 +150,5 @@ public class Server{
             }
         }
     }
-
-     */
 
 }

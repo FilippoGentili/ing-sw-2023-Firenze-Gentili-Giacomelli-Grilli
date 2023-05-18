@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.Server.Socket;
 
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Message.Ping;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
 
@@ -21,9 +22,12 @@ public class ConnectionSocket extends Connection implements Runnable{
     private Object outputLock = new Object();
     private Thread thread;
 
+    private boolean connected;
+
     public ConnectionSocket(SocketServer socketServer, Socket socket){
         this.socketServer=socketServer;
         this.socket=socket;
+        this.connected = true;
 
         try{
             synchronized(inputLock){
@@ -90,6 +94,11 @@ public class ConnectionSocket extends Connection implements Runnable{
                 disconnectClient();
             }
         }
+    }
+
+    @Override
+    public void ping() {
+        sendMessage(new Ping());
     }
 
 }

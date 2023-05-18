@@ -9,11 +9,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 
-public class SocketServer {
+public class SocketServer extends Thread{
 
     private final Server server;
     private final int port;
-    ServerSocket serverSocket;
+    private ServerSocket serverSocket;
 
     public SocketServer(Server server, int port){
         this.server = server;
@@ -23,22 +23,23 @@ public class SocketServer {
     public void startSocketServer(){
         try {
             serverSocket = new ServerSocket(port);
+            start();
             Server.LOGGER.info(() -> "Socket server started on port 49674");
         } catch (IOException e) {
             Server.LOGGER.severe("Error while starting server");
         }
     }
 
-    public  void run() {
+    @Override
+    public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Socket client = serverSocket.accept();
 
-                client.setSoTimeout(5000);
-
-                ConnectionSocket connectionSocket = new ConnectionSocket(this, client);
-                Thread thread = new Thread(connectionSocket, "connectionSocket" + client.getInetAddress());
-                thread.start();
+                //client.setSoTimeout(5000);
+                new ConnectionSocket(this, client);
+                //Thread thread = new Thread(connectionSocket, "connectionSocket" + client.getInetAddress());
+                //thread.start();
             } catch (IOException e) {
                 Server.LOGGER.severe("Connection lost");
             }
@@ -49,16 +50,8 @@ public class SocketServer {
         server.addClient(nickname, connection);
     }
 
-    public void receiveMessage(Message message) {
-        server.receiveMessage(message);
-    }
-
     public void clientDisconnection(Connection connection) throws RemoteException {
         server.clientDisconnection(connection);
-    }
-
-    public void sendMessage(Message message, String nickname) throws RemoteException {
-        server.sendMessage(message,nickname);
     }
 
     public void handleMessage(Message message) throws RemoteException {
