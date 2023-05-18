@@ -26,8 +26,8 @@ public class SocketClient extends Client implements Runnable{
 
     private static final int HEARTBEAT = 10000;
 
-    public SocketClient(String username) throws IOException {
-        super(username);
+    public SocketClient(String username, DisconnectionHandler disconnectionHandler) throws IOException {
+        super(username, disconnectionHandler);
         Client.LOGGER.info(() ->"Socket client started on port 49674");
     }
 
@@ -87,21 +87,22 @@ public class SocketClient extends Client implements Runnable{
             Message message;
             try {
                 message = (Message) input.readObject();
+                if(message!=null && !message.getMessageType().equals(MessageType.PING)){
+                    synchronized (messageQueue){
+                        messageQueue.add(message);
+                    }
+                }else if(message!=null && message.getMessageType().equals(MessageType.PING)){
+                    super.timer.cancel();
+                    super.timer = new Timer();
+                    super.timer.schedule(new PingTimer(super.disconnectionHandler, HEARTBEAT));
+                }
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                disconnect();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
 
-            if(message!=null && !message.getMessageType().equals(MessageType.PING)){
-                synchronized (messageQueue){
-                    messageQueue.add(message);
-                }
-            }else if(message!=null && message.getMessageType().equals(MessageType.PING)){
-                super.timer.cancel();
-                super.timer = new Timer();
-                super.timer.schedule(new Timer);
-            }
+
 
         }
     }

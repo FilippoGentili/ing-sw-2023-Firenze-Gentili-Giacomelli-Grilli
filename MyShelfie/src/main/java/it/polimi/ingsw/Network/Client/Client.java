@@ -19,15 +19,18 @@ public abstract class Client extends Observable implements Serializable {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
+
+    transient DisconnectionHandler disconnectionHandler;
     transient Timer timer;
 
     private String username;
 
     public final transient ArrayList<Message> messageQueue;
 
-    public Client(String username){
+    public Client(String username, DisconnectionHandler disconnectionHandler){
         this.username = username;
         this.messageQueue = new ArrayList<>();
+        this.disconnectionHandler = disconnectionHandler;
         this.timer = new Timer();
     }
 
