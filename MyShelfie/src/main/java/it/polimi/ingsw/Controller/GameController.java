@@ -76,7 +76,9 @@ public class GameController {
                 player.setNickname(nickname);
                 game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname,true,true),nickname);
-                vv.loginResult(true, true, nickname);
+
+                if(virtualViewMap.size() == numOfPlayers)
+                    startGame();
             } else
                 vv.loginResult(false, true, nickname);
         }else if(virtualViewMap.isEmpty()){
@@ -114,6 +116,7 @@ public class GameController {
     public void startGame() throws RemoteException {
         setGameState(PLAY);
         currentPlayer = game.pickFirstPlayer();
+        firstPlayer = currentPlayer;
         broadcastShowMessage("Game started!");
         newTurn();
     }
@@ -155,8 +158,7 @@ public class GameController {
                 map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
         }
 
-        virtualViewMap.get(currentPlayer).TilesRequest(game.getLivingRoom());
-
+        server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
     }
 
     /**
@@ -177,9 +179,10 @@ public class GameController {
             currentPlayer.setChosenTiles(TemporaryChosenTiles);
             ArrayList<Integer> availableColumns = new ArrayList<>();
             availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
-            virtualViewMap.get(currentPlayer).columnRequest(availableColumns);
+
+            server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }else{
-            virtualViewMap.get(currentPlayer).TilesRequest(game.getLivingRoom());
+            server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
         }
     }
 
@@ -194,11 +197,13 @@ public class GameController {
 
         if(inputController.selectedColumn(chosenColumn)){
             currentPlayer.setChosenColumn(chosen);
-            virtualViewMap.get(currentPlayer).OrderTiles(currentPlayer.getChosenTiles());
+
+            server.sendMessage(new OrderedTilesRequest(currentPlayer.getChosenTiles()),currentPlayer.getNickname());
         }else{
             ArrayList<Integer> availableColumns;
             availableColumns = currentPlayer.getBookshelf().getFreeColumns(currentPlayer.getChosenTiles().size());
-            virtualViewMap.get(currentPlayer).columnRequest(availableColumns);
+
+            server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }
     }
 
@@ -224,8 +229,9 @@ public class GameController {
     public void CheckCommonGoal(Player player) throws RemoteException {
 
         if(game.getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()){
-            virtualViewMap.get(player).showMessage("Congratulations! You reached the first common Goal! You earn " +
-                                                    game.getCommonGoal1().getValue() + " points!");
+            server.sendMessage(new GenericMessage("Congratulations! You reached the first common Goal! You earn "
+                    + game.getCommonGoal1().getValue() + " points!"),currentPlayer.getNickname());
+
             player.setScore(player.getScore()+ Game.getCommonGoal1().getValue());
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
@@ -234,8 +240,8 @@ public class GameController {
         }
 
         if(game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
-            virtualViewMap.get(player).showMessage("Congratulations! You reached the second common Goal! You earn " +
-                                                    game.getCommonGoal2().getValue() + " points!");
+            server.sendMessage(new GenericMessage("Congratulations! You reached the second common Goal! You earn "
+                    + game.getCommonGoal1().getValue() + " points!"),currentPlayer.getNickname());
             player.setScore(player.getScore()+Game.getCommonGoal2().getValue());
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
@@ -258,21 +264,25 @@ public class GameController {
             if(players.get(currPlayer+1).getLastPlayer()) {
                 findWinner();
             }else{
-                virtualViewMap.get(currentPlayer).showMessage("Your turn ended.");
+                server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
                 newTurn();
             }
         }else{
             if (currentPlayer.getBookshelf().fullBookshelf()) {
-                for (Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()) {
-                    map.getValue().showMessage("" + currentPlayer.getNickname() + " finished his bookshelf! Last Round!");
+
+                for(Player player : players){
+                    server.sendMessage(new GenericMessage("" + currentPlayer.getNickname() +
+                            " finished his bookshelf! Last Round!"),player.getNickname());
                 }
-                virtualViewMap.get(currentPlayer).showMessage("You earn one points for finishing your " +
-                        "bookshelf before the other players.");
+
+                server.sendMessage(new GenericMessage("You earn one points for finishing your " +
+                        "bookshelf before the other players."), currentPlayer.getNickname());
+
                 endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
                 lastRound(); //da rivedere
             } else {
-                virtualViewMap.get(currentPlayer).showMessage("Your turn ended.");
+                server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
                 newTurn(); //da rivedere
             }
@@ -291,31 +301,17 @@ public class GameController {
      * this method tells all the player who has won the game.
      */
     public void findWinner() throws RemoteException {
-        List<Integer> scorePlayers = new ArrayList<>();
-        List<Player> winnerPlayers = new ArrayList<>();
+        Player winner = new Player();
 
-        for(int i=0; i< players.size(); i++)
-            scorePlayers.add(players.get(i).getScore());
+        winner = game.getWinner();
 
-        Collections.sort(scorePlayers);
-
-        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
-            if(map.getKey().getScore()==scorePlayers.get(0))
-                winnerPlayers.add(map.getKey());
-        }
-
-        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
-            if(map.getKey().getScore()==scorePlayers.get(0)) {
-                map.getValue().showMessage("Congratulations! You won the game!");
-            }else{
-                if(winnerPlayers.size()>1){
-                    map.getValue().showMessage("You lost the game :( ... the winners are: ");
-                    for(int i=0; i<players.size(); i++)
-                        map.getValue().showMessage(players.get(i).getNickname());
-                }else{
-                    map.getValue().showMessage("You lost the game :( ... the winner is: " + players.get(0).getNickname());
-                }
-            }
+        for(Player player : players){
+            if(player.getNickname().equals(winner.getNickname()))
+                server.sendMessage(new GenericMessage("Congratulations! " +
+                        "You won the game!"),player.getNickname());
+            else
+                server.sendMessage(new GenericMessage("You lost :( " +
+                        winner.getNickname() + " won the game!"),player.getNickname());
         }
 
         setGameState(END);
@@ -347,14 +343,6 @@ public class GameController {
                 player.getBookshelf().removeObserver(vv);
     }
 
-    /*public void addPlayer(String nickname){
-        Player player = new Player();
-        player.setNickname(nickname);
-        VirtualView vv = new VirtualView();
-        virtualViewMap.put(player,vv);
-        game.addPlayer(player);
-    }*/
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -365,13 +353,6 @@ public class GameController {
 
     public void setGameState(GameState gameState){
         this.gameState = gameState;
-    }
-
-
-
-    public void setupGame(){
-        firstPlayer = game.pickFirstPlayer();
-        currentPlayer = firstPlayer;
     }
 
     public Map<Player,VirtualView> getVirtualViewMap(){
@@ -392,8 +373,8 @@ public class GameController {
      * @param message message to send
      */
     public void broadcastShowMessage(String message) throws RemoteException {
-        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
-            map.getValue().showMessage(message);
+        for(Player player : players){
+            server.sendMessage(new GenericMessage(message),player.getNickname());
         }
     }
 
