@@ -130,12 +130,8 @@ public class Server implements Runnable{
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
                 for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
-                    try {
-                        if (map.getValue() != null && map.getValue().checkConnection()) {
-                            map.getValue().ping();//da capire come gestire
-                        }
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
+                    if (map.getValue() != null && map.getValue().checkConnection()) {
+                        map.getValue().ping();
                     }
                 }
             }

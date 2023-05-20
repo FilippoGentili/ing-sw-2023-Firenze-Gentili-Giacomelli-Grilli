@@ -390,5 +390,12 @@ public class GameController {
         }
     }
 
+    public Player getPlayerByNickname(String nickname){
+        for(Player player : players)
+            if(player.getNickname().equals(nickname))
+                return player;
+        return null;
+    }
+
 }
 

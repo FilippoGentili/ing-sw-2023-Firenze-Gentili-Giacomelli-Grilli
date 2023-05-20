@@ -33,6 +33,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     private Client client;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
 
+    private GameController gameController;  // da settare per poi chiamare getPlayerByNickname
+
     private ClientUpdater clientUpdater;
 
 
@@ -61,6 +63,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     public String getNickname(){return this.client.getUsername();}
 
     //potrei far partire tanti thread quanti sono gli observable
+
 
 
     /**
