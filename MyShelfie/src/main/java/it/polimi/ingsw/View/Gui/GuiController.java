@@ -2,7 +2,7 @@ package it.polimi.ingsw.View.Gui;
 
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
-import it.polimi.ingsw.View.Gui.Scene.GenericScene;
+import it.polimi.ingsw.View.Gui.Scene.GenericSceneController;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GuiController {
     private static Scene currentScene;
-    private static GenericScene genericScene;
+    private static GenericSceneController genericSceneController;
 
 
     public static void changeScene(String fxml, Scene scene, List<ViewObserver> observers){
@@ -30,7 +30,7 @@ public class GuiController {
             ((ViewObservable) controller).addObserver(observer); // si aggiunge il controller agli observer
         }
 
-        genericScene = (GenericScene) controller; // il controller è la rappresentazione della pagina fxml
+        genericSceneController = (GenericSceneController) controller; // il controller è la rappresentazione della pagina fxml
 
     }
 
@@ -43,7 +43,7 @@ public class GuiController {
         return currentScene;
     }
 
-    public GenericScene getGenericScene() {
-        return genericScene;
+    public GenericSceneController getGenericScene() {
+        return genericSceneController;
     }
 }

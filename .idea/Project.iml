@@ -5,10 +5,11 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/MyShelfie/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MyShelfie/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/MyShelfie/src/main/resources" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/annotations-20.1.0.jar!/" />
@@ -85,14 +86,14 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="javafx-swt" level="application" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="javafx.base" level="application" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
     <orderEntry type="library" name="javafx.controls" level="application" />
     <orderEntry type="library" name="javafx.fxml" level="application" />
     <orderEntry type="library" name="javafx.graphics" level="application" />
     <orderEntry type="library" name="javafx.media" level="application" />
     <orderEntry type="library" name="javafx.swing" level="application" />
     <orderEntry type="library" name="javafx.web" level="application" />
+    <orderEntry type="library" name="javafx-swt" level="application" />
+    <orderEntry type="library" name="javafx.base" level="application" />
   </component>
 </module>

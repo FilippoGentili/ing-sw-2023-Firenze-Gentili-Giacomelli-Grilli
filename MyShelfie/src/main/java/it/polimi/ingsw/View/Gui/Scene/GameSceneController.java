@@ -1,4 +1,4 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
-public interface GenericScene {
+public class GameSceneController {
 }

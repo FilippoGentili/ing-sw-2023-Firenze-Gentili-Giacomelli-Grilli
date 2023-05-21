@@ -2,5 +2,5 @@ package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
 
-public class BookshelfScene extends ViewObservable {
+public class EndSceneController extends ViewObservable {
 }

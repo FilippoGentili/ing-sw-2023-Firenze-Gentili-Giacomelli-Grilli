@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionScene">
+<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../../../../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionSceneController">
     <stylesheets>
-        <URL value="@../css/style.css" />
+        <URL value="@../../../../../../../resources/css/style.css" />
     </stylesheets>
     <children>
       <BorderPane prefHeight="760.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
               <ImageView fitHeight="388.0" fitWidth="1000.0" BorderPane.alignment="CENTER">
-                  <Image url="@../images/publisherMaterial/smallTitle.png" />
+                  <Image url="@../../../../../../../resources/images/publisherMaterial/smallTitle.png" />
               </ImageView>
          </top>
          <center>

@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionScene">
+<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../../../../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionSceneController">
     <stylesheets>
-        <URL value="@../css/style.css" />
+        <URL value="@../../../../../../../resources/css/style.css" />
     </stylesheets>
     <children>
         <BorderPane prefHeight="760.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <ImageView fitHeight="279.0" fitWidth="1000.0" BorderPane.alignment="CENTER">
-                    <Image url="@../images/publisherMaterial/smallTitle.png" />
+                    <Image url="@../../../../../../../resources/images/publisherMaterial/smallTitle.png" />
                 </ImageView>
             </top>
             <left>
@@ -30,7 +30,7 @@
             <bottom>
                 <Pane prefHeight="138.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="exitButton" layoutX="583.0" layoutY="19.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Exit">
+                  <Button fx:id="exitButton" layoutX="583.0" layoutY="19.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" styleClass="generalButton" stylesheets="@../../../../../../../resources/css/style.css" text="Exit">
                      <font>
                         <Font name="Blackadder ITC" size="40.0" />
                      </font>
@@ -40,7 +40,7 @@
          <center>
              <AnchorPane prefHeight="351.0" prefWidth="966.0" BorderPane.alignment="CENTER">
                <children>
-                  <ListView id="leaderBoardMenu" fixedCellSize="4.0" layoutX="333.0" layoutY="27.0" prefHeight="300.0" prefWidth="300.0" styleClass="basePane" stylesheets="@../css/style.css" />
+                  <ListView id="leaderBoardMenu" fixedCellSize="4.0" layoutX="333.0" layoutY="27.0" prefHeight="300.0" prefWidth="300.0" styleClass="basePane" stylesheets="@../../../../../../../resources/css/style.css" />
                </children>
              </AnchorPane>
          </center>

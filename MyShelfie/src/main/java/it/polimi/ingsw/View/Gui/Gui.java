@@ -11,6 +11,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Gui extends ViewObservable implements View {
+
+    private static final String START_SCENE  = "startScene.fxml";
     @Override
     public void showMessage(String message) throws RemoteException {
 

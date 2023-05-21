@@ -2,12 +2,14 @@ package it.polimi.ingsw.View.Gui;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.View.Gui.Scene.MenuScene;
+import it.polimi.ingsw.View.Gui.Scene.StartSceneController;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +23,6 @@ public class GuiJavaFX extends Application {
         guiView.addObserver(clientController);
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-
         fxmlLoader.setLocation(getClass().getResource("/fxml/startScene.fxml"));
         Parent layout = null;
 
@@ -32,13 +33,18 @@ public class GuiJavaFX extends Application {
             System.exit(0);
         }
 
-        MenuScene menuScene = fxmlLoader.getController();
-        menuScene.addObserver(clientController);
+        StartSceneController startSceneController = fxmlLoader.getController();
+        startSceneController.addObserver(clientController);
 
         Scene scene = new Scene(layout);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setFullScreen(true);
+        stage.setMaximized(true);
+        stage.setWidth(1366d);
+        stage.setHeight(768d);
+        stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setTitle("MyShelfie");
         stage.show();
 
@@ -46,6 +52,7 @@ public class GuiJavaFX extends Application {
 
     @Override
     public void stop() throws Exception {
-        super.stop();
+        Platform.exit();
+        System.exit(0);
     }
 }
