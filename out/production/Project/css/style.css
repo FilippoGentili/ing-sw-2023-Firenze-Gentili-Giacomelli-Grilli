@@ -11,10 +11,11 @@
     -fx-background-color : #228B22;
 }
 
-.generalLabel{
+/*.generalLabel{
     -fx-text-fill : #dbe07b;
-    -fx-font : Blackadder ITC;
-}
+    -fx-font : "Blackadder ITC";
+    -fx-font-size : 20;
+}*/
 
 .generalBaseLabel{
     -fx-background-image: url("../images/misc/base_pagina2.jpg");
