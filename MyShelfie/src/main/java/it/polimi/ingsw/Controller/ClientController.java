@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
@@ -111,15 +110,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case GAME_STATE:
-                GameStateMessage gameStateMessage = (GameStateMessage) message;
-                queue.add(() -> {
-                    try {
-                        view.updateGameState(gameStateMessage.getPlayer());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+            case MATCH_INFO:
                 break;
             case DISCONNECTION_REQUEST:
 
@@ -160,9 +151,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     view.showWinner(winnerMessage.getWinnerNickname());
                 });
                 break;
-            case MATCH_INFO:
-
-                break;
             case SERVER_INFO:
 
                 break;
@@ -198,7 +186,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler);
-            this.client.connect();
+            //this.client.connection();
             this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server

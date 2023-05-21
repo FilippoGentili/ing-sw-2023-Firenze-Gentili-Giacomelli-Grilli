@@ -49,7 +49,6 @@ public class ConnectionSocket extends Connection implements Runnable{
             try{
                 synchronized (inputLock){
                     Message message = (Message) input.readObject();
-
                     if(message != null){
                         if(message.getMessageType().equals(MessageType.LOGIN_REQUEST)){
                             socketServer.login(message.getNickname(), this);

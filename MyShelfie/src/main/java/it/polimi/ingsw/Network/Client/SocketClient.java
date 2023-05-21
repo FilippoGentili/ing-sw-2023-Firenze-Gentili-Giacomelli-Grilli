@@ -28,20 +28,28 @@ public class SocketClient extends Client implements Runnable{
 
     public SocketClient(DisconnectionHandler disconnectionHandler) throws IOException {
         super(disconnectionHandler);
+        this.socket = new Socket();
+        this.socket.connect(new InetSocketAddress("127.0.0.1", 49673), HEARTBEAT);
+        this.output = new ObjectOutputStream(socket.getOutputStream());
+        this.input = new ObjectInputStream(socket.getInputStream());
+        //sendMessage(new LoginRequest(getUsername()));
+
+        this.thread = new Thread(this);
+        thread.start();
         Client.LOGGER.info(() ->"Socket client started on port 49674");
     }
 
     @Override
-    public void connect() throws IOException {
+    public void connection() throws IOException {
         this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress("127.0.0.1", 49674), HEARTBEAT);
+        this.socket.connect(new InetSocketAddress("127.0.0.1", 49673), HEARTBEAT);
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
-
         //sendMessage(new LoginRequest(getUsername()));
 
-        this.thread = new Thread();
+        this.thread = new Thread(this);
         thread.start();
+        Client.LOGGER.info(() ->"Socket client started on port 49674");
     }
 
     @Override
@@ -68,6 +76,7 @@ public class SocketClient extends Client implements Runnable{
     public void sendMessage(Message message){
         try {
             output.writeObject(message);
+            Client.LOGGER.info("message sent");
             output.reset();
         } catch (IOException e) {
             disconnect();
@@ -83,10 +92,9 @@ public class SocketClient extends Client implements Runnable{
     @Override
     public void run() {
         while(!Thread.currentThread().isInterrupted()){
-            Message message;
             try {
-                message = (Message) input.readObject();
-                if(message!=null && !message.getMessageType().equals(MessageType.PING)){
+                Message message = (Message) input.readObject();
+                if(message!=null && message.getMessageType() != MessageType.PING){
                     synchronized (messageQueue){
                         messageQueue.add(message);
                     }

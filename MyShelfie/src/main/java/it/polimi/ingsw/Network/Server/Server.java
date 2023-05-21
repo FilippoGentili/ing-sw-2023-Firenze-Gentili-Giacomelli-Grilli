@@ -31,7 +31,7 @@ public class Server implements Runnable{
 
     public void startServers() {
 
-        int port = 49674;
+        int port = 49673;
         SocketServer ss = new SocketServer(this, port);
         ss.startSocketServer();
     }
@@ -126,8 +126,6 @@ public class Server implements Runnable{
     }
 
     public void handleMessage(Message message) throws RemoteException {
-        if(message.getMessageType().equals(MessageType.LOGIN_REQUEST))
-
         gameController.forwardMessage(message);
     }
 

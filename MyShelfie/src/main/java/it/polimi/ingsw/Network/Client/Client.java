@@ -19,7 +19,7 @@ public abstract class Client extends Observable implements Serializable {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
-
+    private int port = 49673;
     transient DisconnectionHandler disconnectionHandler;
     transient Timer timer;
 
@@ -41,7 +41,7 @@ public abstract class Client extends Observable implements Serializable {
         this.username = username;
     }
 
-    public abstract void connect() throws IOException;
+    public abstract void connection() throws IOException;
 
     public abstract void disconnect();
 
@@ -60,5 +60,4 @@ public abstract class Client extends Observable implements Serializable {
         }
         return messages;
     }
-
 }

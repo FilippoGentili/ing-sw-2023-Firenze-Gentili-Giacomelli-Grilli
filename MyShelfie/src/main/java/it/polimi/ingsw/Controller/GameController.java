@@ -50,6 +50,7 @@ public class GameController {
             case LOGIN:
                 if(message.getMessageType()==MessageType.NUM_OF_PLAYERS_REPLY) {
                     setNumOfPlayers(message);
+                    server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
                 }
