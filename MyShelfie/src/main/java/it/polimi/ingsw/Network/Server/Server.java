@@ -32,7 +32,7 @@ public class Server implements Runnable{
     public void startServers() {
 
         int port = 49674;
-        SocketServer ss = new SocketServer(this,port);
+        SocketServer ss = new SocketServer(this, port);
         ss.startSocketServer();
     }
 
@@ -122,7 +122,7 @@ public class Server implements Runnable{
                 }
             }
         }
-        LOGGER.log(Level.INFO, "Sending to {0}, message '{1}", new Object[]{nickname, message});
+        LOGGER.log(Level.INFO, "Sending to {0}, message {1}", new Object[]{nickname, message});
     }
 
     public void handleMessage(Message message) throws RemoteException {

@@ -38,7 +38,7 @@ public class SocketClient extends Client implements Runnable{
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
 
-        sendMessage(new LoginRequest(getUsername()));
+        //sendMessage(new LoginRequest(getUsername()));
 
         this.thread = new Thread();
         thread.start();

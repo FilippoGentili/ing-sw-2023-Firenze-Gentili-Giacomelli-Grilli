@@ -55,7 +55,7 @@ public abstract class Client extends Observable implements Serializable {
         ArrayList<Message> messages;
 
         synchronized(messageQueue){
-            messages=new ArrayList<>(List.copyOf(messageQueue));
+            messages = new ArrayList<>(List.copyOf(messageQueue));
             messageQueue.clear();
         }
         return messages;
