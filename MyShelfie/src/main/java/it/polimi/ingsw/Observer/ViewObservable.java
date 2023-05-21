@@ -3,6 +3,7 @@ package it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public abstract class ViewObservable {
@@ -11,6 +12,9 @@ public abstract class ViewObservable {
 
     public void addObserver(ViewObserver observer){
         observers.add(observer);
+    }
+    public void addAllObserver(List<ViewObserver> observer){
+        this.observers.addAll(observer);
     }
 
     public void removeObserver(Observer observer){

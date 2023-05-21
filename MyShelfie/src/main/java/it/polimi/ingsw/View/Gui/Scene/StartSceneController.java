@@ -10,8 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
-import javax.swing.text.html.ImageView;
+import javafx.scene.image.ImageView;
 
 /**
  * This class is the controller for the start scene.
@@ -33,7 +32,7 @@ public class StartSceneController extends ViewObservable implements GenericScene
     private Button resumeButton;
 
     @FXML
-    public void setUp(){
+    public void initialize(){
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::playButtonClicked);
         resumeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::resumeButtonClicked);
     }
@@ -42,7 +41,7 @@ public class StartSceneController extends ViewObservable implements GenericScene
      * This method is called when the play button is clicked. It starts a new game.
      * @param event
      */
-    private void playButtonClicked(Event event){
+    private void playButtonClicked(MouseEvent event){
         GuiController.changeScene("connectionScene.fxml",event,observers);
     }
 
@@ -50,7 +49,7 @@ public class StartSceneController extends ViewObservable implements GenericScene
      * This method is called when the resume button is clicked. It resumes the game from the last saved state.
      * @param event
      */
-    private void resumeButtonClicked(Event event){
+    private void resumeButtonClicked(MouseEvent event){
         GuiController.changeScene("gameScene.fxml",event,observers);
     }
 }

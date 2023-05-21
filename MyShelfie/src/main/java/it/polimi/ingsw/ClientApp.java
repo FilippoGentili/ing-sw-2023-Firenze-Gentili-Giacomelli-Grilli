@@ -2,6 +2,8 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.View.Cli;
+import it.polimi.ingsw.View.Gui.GuiJavaFX;
+import javafx.application.Application;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -36,8 +38,7 @@ public class ClientApp {
                 view.start();
             }
             if (guiCheck) {
-                //gui
-                System.out.println("ciao");
+                Application.launch(GuiJavaFX.class);
             }
         }
 }
