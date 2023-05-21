@@ -77,7 +77,7 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void updateGameState(String username) throws Exception {
+    public void updateGameState(Player player) throws Exception {
 
     }
 
