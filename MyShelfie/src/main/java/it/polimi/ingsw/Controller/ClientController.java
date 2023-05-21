@@ -221,7 +221,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
    @Override
     public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler) throws RemoteException {
-        this.client = new RMIClient(client.getUsername(), this);
+        //this.client = new RMIClient(client.getUsername(), this);
         this.client.addObserver(this);
         view.nicknameRequest();
         this.clientUpdater = new ClientUpdater(this.client, this);
