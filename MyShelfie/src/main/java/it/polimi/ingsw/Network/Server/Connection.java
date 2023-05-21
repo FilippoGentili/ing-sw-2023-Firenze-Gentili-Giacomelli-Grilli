@@ -14,5 +14,4 @@ public abstract class Connection {
     public abstract void sendMessage(Message message);
 
     public abstract void ping();
-
 }
