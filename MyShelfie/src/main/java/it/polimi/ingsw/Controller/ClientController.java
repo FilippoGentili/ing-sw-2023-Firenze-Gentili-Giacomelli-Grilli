@@ -197,7 +197,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler) throws IOException {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            this.client =  new SocketClient(client.getUsername(), disconnectionHandler);
+            this.client =  new SocketClient(disconnectionHandler);
+            this.client.connect();
             this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server

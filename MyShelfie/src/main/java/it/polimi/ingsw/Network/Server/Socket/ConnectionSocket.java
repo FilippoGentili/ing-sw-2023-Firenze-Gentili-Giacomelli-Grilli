@@ -50,9 +50,9 @@ public class ConnectionSocket extends Connection implements Runnable{
                 synchronized (inputLock){
                     Message message = (Message) input.readObject();
 
-                    if(message != null){
-                        socketServer.handleMessage(message);
-                    }
+                    if(message.getMessageType().equals(MessageType.LOGIN_REQUEST)){
+                        socketServer.login(message.getNickname(), this);
+                    }else socketServer.handleMessage(message);
                 }
             } catch (IOException | ClassNotFoundException e) {
                 Server.LOGGER.severe(e.getMessage());

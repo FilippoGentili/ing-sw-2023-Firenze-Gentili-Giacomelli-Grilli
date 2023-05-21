@@ -26,8 +26,8 @@ public class SocketClient extends Client implements Runnable{
 
     private static final int HEARTBEAT = 10000;
 
-    public SocketClient(String username, DisconnectionHandler disconnectionHandler) throws IOException {
-        super(username, disconnectionHandler);
+    public SocketClient(DisconnectionHandler disconnectionHandler) throws IOException {
+        super(disconnectionHandler);
         Client.LOGGER.info(() ->"Socket client started on port 49674");
     }
 

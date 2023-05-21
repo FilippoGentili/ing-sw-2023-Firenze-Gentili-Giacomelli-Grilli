@@ -46,6 +46,10 @@ public class SocketServer extends Thread{
         }
     }
 
+    public void login(String nickname, Connection connection) throws IOException {
+        server.login(nickname, connection);
+    }
+
     public void addClient(String nickname, Connection connection) throws RemoteException {
         server.addClient(nickname, connection);
     }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Client.PingTimer;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -37,7 +38,7 @@ public class Server implements Runnable{
 
     public void login(String nickname, Connection connection) throws IOException {
         try{
-            addClient(nickname,connection);
+            addClient(nickname, connection);
         }catch (IOException e){
             connection.disconnectClient();
         }
@@ -122,6 +123,8 @@ public class Server implements Runnable{
     }
 
     public void handleMessage(Message message) throws RemoteException {
+        if(message.getMessageType().equals(MessageType.LOGIN_REQUEST))
+
         gameController.forwardMessage(message);
     }
 

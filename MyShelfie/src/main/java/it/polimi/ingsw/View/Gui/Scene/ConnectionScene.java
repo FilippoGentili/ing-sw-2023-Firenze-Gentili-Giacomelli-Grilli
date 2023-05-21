@@ -17,7 +17,7 @@ public class ConnectionScene extends ViewObservable {
     private Button connectSocketButton;
     private Hyperlink goBackLink;
 
-    public void setUp(){
+    /*public void setUp(){
         connectRMIButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 connectRMIButtonClicked();
@@ -35,9 +35,9 @@ public class ConnectionScene extends ViewObservable {
         });
 
         goBackLink.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> goBackLinkClicked());
-    }
+    }*/
 
-    private void connectRMIButtonClicked() throws IOException {
+    /*private void connectRMIButtonClicked() throws IOException {
         notifyObserver(obs -> {
             try {
                 obs.updateServerInfoSocket();
@@ -45,7 +45,7 @@ public class ConnectionScene extends ViewObservable {
                 throw new RuntimeException(e);
             }
         });
-    }
+    }*/
 
     private void connectSocketButtonClicked() throws IOException{
 
