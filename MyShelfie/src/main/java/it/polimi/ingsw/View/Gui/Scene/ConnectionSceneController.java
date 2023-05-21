@@ -36,7 +36,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private Button rmiButton;
 
     @FXML
-    public void setUp(){
+    public void initialize(){
         socketButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::socketButtonClicked);
         rmiButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::rmiButtonClicked);
     }
