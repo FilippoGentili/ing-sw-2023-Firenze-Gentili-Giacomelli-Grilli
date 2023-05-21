@@ -32,7 +32,7 @@ public class Server implements Runnable{
 
         int port = 49674;
         SocketServer ss = new SocketServer(this,port);
-        ss.run();
+        ss.startSocketServer();
     }
 
     public void login(String nickname, Connection connection) throws IOException {
