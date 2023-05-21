@@ -37,11 +37,14 @@ public class Server implements Runnable{
     }
 
     public void login(String nickname, Connection connection) throws IOException {
-        try{
-            addClient(nickname, connection);
-        }catch (IOException e){
-            connection.disconnectClient();
+        if(nickname != null){
+            try{
+                addClient(nickname, connection);
+            }catch (IOException e){
+                connection.disconnectClient();
+            }
         }
+
     }
 
     public void addClient(String nickname, Connection connection) throws RemoteException {

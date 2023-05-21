@@ -215,6 +215,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         this.client.addObserver(this);
         view.nicknameRequest();
         this.clientUpdater = new ClientUpdater(this.client, this);
+        this.clientUpdater.run();
+        this.clientUpdater.start();
     }
 
     @Override

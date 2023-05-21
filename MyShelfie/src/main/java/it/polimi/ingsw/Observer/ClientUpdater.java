@@ -48,4 +48,14 @@ public class ClientUpdater implements Runnable{
         }
     }
 
+    public void start() {
+        if (this.thread.isInterrupted()) {
+            this.thread.start();
+        }
+    }
+
+    public void stop(){
+        this.thread.interrupt();
+    }
+
 }

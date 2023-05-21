@@ -33,9 +33,9 @@ public class GameController {
         this.game = new Game();
         this.server = server;
         //this.numOfPlayers = num;
-        this.inputController = new InputController(this,virtualViewMap);
+        this.inputController = new InputController(this, virtualViewMap);
         setGameState(LOGIN);
-        virtualViewMap = new HashMap<>();
+        //virtualViewMap = new HashMap<>();
     }
 
     /**
@@ -70,7 +70,13 @@ public class GameController {
     public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
         Player player = new Player();
 
-        if(virtualViewMap.size() < numOfPlayers) {
+        if(numOfPlayers==0){
+            addVirtualView(player, vv);
+            player.setNickname(nickname);
+            game.addPlayer(player);
+            vv.loginResult(true, true, nickname);
+            vv.askNumberOfPlayers();
+        }else if(virtualViewMap.size() < numOfPlayers){
             if (inputController.checkNickname(nickname, vv)) {
                 addVirtualView(player, vv);
                 player.setNickname(nickname);
@@ -81,16 +87,11 @@ public class GameController {
                     startGame();
             } else
                 vv.loginResult(false, true, nickname);
-        }else if(virtualViewMap.isEmpty()){
-            addVirtualView(player, vv);
-            player.setNickname(nickname);
-            game.addPlayer(player);
-            vv.loginResult(true, true, nickname);
-            vv.askNumberOfPlayers();
-        }else {
+        }else if(virtualViewMap.size()==numOfPlayers){
             vv.loginResult(true, false, nickname);
             vv.getConnection().disconnectClient();
         }
+
     }
 
     /**
@@ -341,6 +342,9 @@ public class GameController {
     }
 
     public void addVirtualView(Player player, VirtualView vv){
+        if(numOfPlayers==0){
+            virtualViewMap = new HashMap<>();
+        }
         virtualViewMap.put(player, vv);
         game.addObserver(vv);
         game.getLivingRoom().addObserver(vv);
