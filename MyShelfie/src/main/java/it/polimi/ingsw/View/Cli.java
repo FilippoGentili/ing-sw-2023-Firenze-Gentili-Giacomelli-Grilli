@@ -537,7 +537,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
-    public void updateGameState(String username) throws Exception {
+    public void updateGameState(Player player) throws Exception {
         out.flush();
         showLivingRoom(player.getGame().getLivingRoom());
         for(Player p : player.getGame().getPlayers())

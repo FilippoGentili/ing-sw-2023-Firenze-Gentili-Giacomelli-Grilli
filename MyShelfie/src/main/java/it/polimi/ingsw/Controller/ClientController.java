@@ -112,24 +112,16 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 });
                 break;
             case GAME_STATE:
+                GameStateMessage gameStateMessage = (GameStateMessage) message;
                 queue.add(() -> {
                     try {
-                        view.updateGameState(client.getUsername());
+                        view.updateGameState(gameStateMessage.getPlayer());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 });
                 break;
             case DISCONNECTION_REQUEST:
-
-                break;
-            case DISCONNECTION_REPLY:
-
-                break;
-            case PING:
-
-                break;
-            case ACK:
 
                 break;
             case CHOSEN_TILES_REQUEST:
@@ -196,9 +188,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case HEARTBEAT:
-
-                break;
             default:
                 break;
         }
@@ -208,7 +197,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler) throws IOException {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            this.client =  new SocketClient(client.getUsername(), disconnectionHandler;
+            this.client =  new SocketClient(client.getUsername(), disconnectionHandler);
             this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server

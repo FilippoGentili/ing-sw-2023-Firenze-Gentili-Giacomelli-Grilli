@@ -33,7 +33,7 @@ public interface View {
 
     void showPersonalGoalCard(Player player) throws Exception;
 
-    void updateGameState(String username) throws Exception;
+    void updateGameState(Player player) throws Exception;
 
     void showWinner(String winner);
 }
