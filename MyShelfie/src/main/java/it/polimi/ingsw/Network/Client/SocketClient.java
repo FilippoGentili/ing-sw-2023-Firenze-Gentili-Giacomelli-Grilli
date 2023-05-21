@@ -42,7 +42,6 @@ public class SocketClient extends Client implements Runnable{
 
         this.thread = new Thread();
         thread.start();
-
     }
 
     @Override

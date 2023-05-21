@@ -35,11 +35,7 @@ public class SocketServer extends Thread{
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Socket client = serverSocket.accept();
-
-                //client.setSoTimeout(5000);
                 new ConnectionSocket(this, client);
-                //Thread thread = new Thread(connectionSocket, "connectionSocket" + client.getInetAddress());
-                //thread.start();
             } catch (IOException e) {
                 Server.LOGGER.severe("Connection lost");
             }
