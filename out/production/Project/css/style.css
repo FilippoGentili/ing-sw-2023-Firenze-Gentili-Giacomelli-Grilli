@@ -1,0 +1,333 @@
+.basePane{
+    -fx-background-image : url("../images/misc/sfondoParquet.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalButton{
+    /*-fx-background-image: url("../images/misc/playbutton2.png");*/
+    -fx-alignment : center;
+    -fx-text-fill : #ffffff;
+    -fx-border-color : #EEEE00;
+    -fx-background-color : #228B22;
+}
+
+.generalLabel{
+    -fx-text-fill : #dbe07b;
+    -fx-font : Blackadder ITC;
+}
+
+.generalBaseLabel{
+    -fx-background-image: url("../images/misc/base_pagina2.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalUsernameScene{
+    -fx-background-image: url("../images/publisherMaterial/Display_5.jpg");
+    -fx-background-size : stretch;
+}
+
+/*Boards*/
+.generalBookshelf{
+    -fx-background-image : url("../images/boards/bookshelf_orth.png");
+    -fx-background-size : stretch;
+}
+
+.generalBookshelfTilted{
+    -fx-background-image : url("../images/boards/bookshelf.png");
+    -fx-background-size : stretch;
+}
+
+.generalLivingRoom{
+    -fx-background-image : url("../images/boards/livingroom.png");
+    -fx-background-size : stretch;
+}
+
+/*CommonGoalCards*/
+.generalCommonGoalCardBack{
+    -fx-background-image : url("../images/commonGoalCards/back.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard1{
+    -fx-background-image : url("../images/commonGoalCards/1.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard2{
+    -fx-background-image : url("../images/commonGoalCards/2.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard3{
+    -fx-background-image : url("../images/commonGoalCards/3.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard4{
+    -fx-background-image : url("../images/commonGoalCards/4.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard5{
+    -fx-background-image : url("../images/commonGoalCards/5.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard6{
+    -fx-background-image : url("../images/commonGoalCards/6.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard7{
+    -fx-background-image : url("../images/commonGoalCards/7.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard8{
+    -fx-background-image : url("../images/commonGoalCards/8.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard9{
+    -fx-background-image : url("../images/commonGoalCards/9.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard10{
+    -fx-background-image : url("../images/commonGoalCards/10.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard11{
+    -fx-background-image : url("../images/commonGoalCards/11.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalCommonGoalCard12{
+    -fx-background-image : url("../images/commonGoalCards/12.jpg");
+    -fx-background-size : stretch;
+}
+
+/*PersonalGoalCards*/
+.generalPersonalGoalCardBack{
+    -fx-background-image : url("../images/personalGoalCards/back.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalFrontEmpty{
+    -fx-background-image : url("../images/personalGoalCards/front_EMPTY.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard1{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals1.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard2{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals2.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard3{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals3.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard4{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals4.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard5{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals5.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard6{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals6.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard7{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals7.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard8{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals8.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard9{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals9.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard10{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals10.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard11{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals11.png");
+    -fx-background-size : stretch;
+}
+
+.generalPersonalGoalCard12{
+    -fx-background-image : url("../images/personalGoalCards/Personal_Goals12.png");
+    -fx-background-size : stretch;
+}
+
+/*Item tiles*/
+.generalFrames1{
+    -fx-background-image : url("../images/itemTiles/Cornici1.png");
+    -fx-background-size : stretch;
+}
+
+.generalFrames2{
+    -fx-background-image : url("../images/itemTiles/Cornici2.png");
+    -fx-background-size : stretch;
+}
+
+.generalFrames3{
+    -fx-background-image : url("../images/itemTiles/Cornici3.png");
+    -fx-background-size : stretch;
+}
+
+.generalCats1{
+    -fx-background-image : url("../images/itemTiles/Gatti1.png");
+    -fx-background-size : stretch;
+}
+
+.generalCats2{
+    -fx-background-image : url("../images/itemTiles/Gatti2.png");
+    -fx-background-size : stretch;
+}
+
+.generalCats3{
+    -fx-background-image : url("../images/itemTiles/Gatti3.png");
+    -fx-background-size : stretch;
+}
+
+.generalCats1{
+    -fx-background-image : url("../images/itemTiles/Giochi1.png");
+    -fx-background-size : stretch;
+}
+
+.generalGames2{
+    -fx-background-image : url("../images/itemTiles/Giochi2.png");
+    -fx-background-size : stretch;
+}
+
+.generalGames3{
+    -fx-background-image : url("../images/itemTiles/Giochi3.png");
+    -fx-background-size : stretch;
+}
+
+.generalBooks1{
+    -fx-background-image : url("../images/itemTiles/Libri1.png");
+    -fx-background-size : stretch;
+}
+
+.generalBooks2{
+    -fx-background-image : url("../images/itemTiles/Libri2.png");
+    -fx-background-size : stretch;
+}
+
+.generalBooks3{
+    -fx-background-image : url("../images/itemTiles/Libri3.png");
+    -fx-background-size : stretch;
+}
+
+.generalPlants1{
+    -fx-background-image : url("../images/itemTiles/Piante1.png");
+    -fx-background-size : stretch;
+}
+
+.generalPlants2{
+    -fx-background-image : url("../images/itemTiles/Piante2.png");
+    -fx-background-size : stretch;
+}
+
+.generalPlats3{
+    -fx-background-image : url("../images/itemTiles/Piante3.png");
+    -fx-background-size : stretch;
+}
+
+.generalTrophies1{
+    -fx-background-image : url("../images/itemTiles/Trofei1.png");
+    -fx-background-size : stretch;
+}
+
+.generalTrophies2{
+    -fx-background-image : url("../images/itemTiles/Trofei2.png");
+    -fx-background-size : stretch;
+}
+
+.generalTrophies3{
+    -fx-background-image : url("../images/itemTiles/Trofei3.png");
+    -fx-background-size : stretch;
+}
+
+/*Miscellaneous*/
+.generalClosedBag{
+    -fx-background-image : url("../images/misc/SacchettoChiuso.png");
+    -fx-background-size : stretch;
+}
+
+.generalOpenBag{
+    -fx-background-image : url("../images/misc/SacchettoAperto.png");
+    -fx-background-size : stretch;
+}
+
+.generalLogo{
+    -fx-background-image : url("../images/publisherMaterial/bigTitle.png");
+    -fx-background-size : stretch;
+}
+
+.generalFirstPlayerChair{
+    -fx-background-image : url("../images/misc/firstplayertoken.png");
+    -fx-background-size : stretch;
+}
+
+/*ScoringTokens*/
+.generalEndGameToken{
+    -fx-background-image : url("../images/scoringTokens/endGame.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalScoring{
+    -fx-background-image : url("../images/scoringTokens/scoring.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalScoring2{
+    -fx-background-image : url("../images/scoringTokens/scoring_2.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalScoring4{
+    -fx-background-image : url("../images/scoringTokens/scoring_4.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalScoring6{
+    -fx-background-image : url("../images/scoringTokens/scoring_6.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalScoring8{
+    -fx-background-image : url("../images/scoringTokens/scoring_8.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalScoringBack{
+    -fx-background-image : url("../images/scoringTokens/scoring_back_EMPTY.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalDisplay5{
+    -fx-background-image : url("../images/publisherMaterial/Display_5.jpg");
+    -fx-background-size : stretch;
+}

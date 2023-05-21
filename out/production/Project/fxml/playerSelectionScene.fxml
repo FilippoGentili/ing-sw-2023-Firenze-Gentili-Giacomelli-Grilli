@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../../../../../../../resources/css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ConnectionSceneController">
+    <stylesheets>
+        <URL value="@../../../../../../../resources/css/style.css" />
+    </stylesheets>
+    <children>
+        <BorderPane prefHeight="760.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <ImageView fitHeight="388.0" fitWidth="1000.0" BorderPane.alignment="CENTER">
+                    <Image url="@../../../../../../../resources/images/publisherMaterial/smallTitle.png" />
+                </ImageView>
+            </top>
+            <left>
+                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            </left>
+            <right>
+                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            </right>
+            <bottom>
+                <Pane prefHeight="95.0" prefWidth="1300.0" BorderPane.alignment="CENTER" />
+            </bottom>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" layoutX="333.0" layoutY="43.0" prefHeight="200.0" prefWidth="300.0" spacing="40.0">
+                     <children>
+                         <ComboBox fx:id="numberOfPlayersMenu" prefWidth="200.0" promptText="Select number of players" styleClass="generalButton" stylesheets="@../../../../../../../resources/css/style.css" visibleRowCount="3">
+                             <items>
+                                 <FXCollections fx:factory="observableArrayList">
+                                     <String fx:value="2 Players" />
+                                     <String fx:value="3 Players" />
+                                     <String fx:value="4 Players" />
+                                 </FXCollections>
+                             </items>
+                         </ComboBox>
+                        <Button fx:id="enterButton" mnemonicParsing="false" prefWidth="150.0" styleClass="generalButton" stylesheets="@../../../../../../../resources/css/style.css" text="Enter">
+                           <font>
+                              <Font name="Blackadder ITC" size="30.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
