@@ -324,7 +324,8 @@ public class GameController {
         for(Player player : players){
             server.sendMessage(new LivingRoomMessage(game.getLivingRoom()),player.getNickname());
             for(Player otherPlayer : players){
-                server.sendMessage(new PlayerMessage(otherPlayer),player.getNickname());
+                if(!otherPlayer.equals(player))
+                    server.sendMessage(new GameStateMessage(otherPlayer,game),player.getNickname());
             }
         }
     }
