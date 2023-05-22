@@ -14,7 +14,7 @@ import java.util.Map;
 
 public interface ViewObserver{
 
-    void updateServerInfoSocket(DisconnectionHandler disconnectionHandler) throws IOException;
+    void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException;
 
     void updateServerInfoRmi(DisconnectionHandler disconnectionHandler) throws RemoteException;
 

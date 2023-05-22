@@ -7,10 +7,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.Timer;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import static java.lang.Integer.parseInt;
 
 public class SocketClient extends Client implements Runnable{
 
@@ -26,10 +23,11 @@ public class SocketClient extends Client implements Runnable{
 
     private static final int HEARTBEAT = 10000;
 
-    public SocketClient(DisconnectionHandler disconnectionHandler) throws IOException {
+    public SocketClient(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException {
         super(disconnectionHandler);
         this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress("127.0.0.1", 49673), HEARTBEAT);
+        int portNum = Integer.parseInt(port);
+        this.socket.connect(new InetSocketAddress(address, portNum), HEARTBEAT);
         this.output = new ObjectOutputStream(socket.getOutputStream());
         this.input = new ObjectInputStream(socket.getInputStream());
         //sendMessage(new LoginRequest(getUsername()));

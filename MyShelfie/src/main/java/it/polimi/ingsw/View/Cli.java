@@ -67,17 +67,17 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         if (input.equals("-rmi"))
             rmi = true;
 
+        String address;
         do {
             System.out.println("Insert the Server address:");
             input = scanner.nextLine().trim();
-            String address = input;
+            address = input;
         } while (!validAddress(address));
 
-        int port;
+        String port;
         do {
             System.out.println("Insert the Server port:");
-            input = scanner.nextLine().trim();
-            port = parseInt(input);
+            port = scanner.nextLine().trim();
         } while (!validPort(port));
 
         if (rmi) {
@@ -91,13 +91,33 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         } else {
             notifyObserver(obs -> {
                 try {
-                    obs.updateServerInfoSocket(this);
+                    obs.updateServerInfoSocket(this,address,port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
         }
 
+    }
+
+    public boolean validAddress(String address){
+        if (address == null || address.equals("localhost")) {
+            return true;
+        }
+        return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
+    }
+
+    public boolean validPort(String port){
+        try {
+            int portNum = Integer.parseInt(port);
+            if (portNum >= 1 && portNum <= 25565) {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            // Handled with the return
+        }
+
+        return false;
     }
 
     @Override

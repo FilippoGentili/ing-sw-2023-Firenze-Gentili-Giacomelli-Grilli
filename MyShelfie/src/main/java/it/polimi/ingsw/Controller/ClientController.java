@@ -182,10 +182,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     @Override
-    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler) throws IOException {
+    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
-            this.client =  new SocketClient(disconnectionHandler);
+            this.client =  new SocketClient(disconnectionHandler,address,port);
             //this.client.connection();
             this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
