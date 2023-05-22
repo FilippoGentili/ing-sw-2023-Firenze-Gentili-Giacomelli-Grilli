@@ -76,7 +76,6 @@ public class SocketClient extends Client implements Runnable{
     public void sendMessage(Message message){
         try {
             output.writeObject(message);
-            Client.LOGGER.info("message sent");
             output.reset();
         } catch (IOException e) {
             disconnect();

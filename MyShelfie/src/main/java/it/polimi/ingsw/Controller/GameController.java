@@ -32,6 +32,7 @@ public class GameController {
     public GameController(Server server){
         this.game = new Game();
         this.server = server;
+        this.players = new ArrayList<>();
         //this.numOfPlayers = num;
         this.inputController = new InputController(this, virtualViewMap);
         setGameState(LOGIN);
@@ -51,6 +52,7 @@ public class GameController {
                 if(message.getMessageType()==MessageType.NUM_OF_PLAYERS_REPLY) {
                     setNumOfPlayers(message);
                     server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
+                    restoreMatchElements();
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
                 }
@@ -73,6 +75,7 @@ public class GameController {
 
         if(numOfPlayers==0){
             addVirtualView(player, vv);
+            players.add(player);
             player.setNickname(nickname);
             game.addPlayer(player);
             server.sendMessage(new LoginResult(nickname,true,true),nickname);
@@ -80,6 +83,7 @@ public class GameController {
         }else if(virtualViewMap.size() < numOfPlayers){
             if (inputController.checkNickname(nickname, vv)) {
                 addVirtualView(player, vv);
+                players.add(player);
                 player.setNickname(nickname);
                 game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname,true,true),nickname);
@@ -117,6 +121,7 @@ public class GameController {
 
     public void startGame() throws RemoteException {
         setGameState(PLAY);
+        game.initializeLivingRoom();
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
         broadcastShowMessage("Game started!");

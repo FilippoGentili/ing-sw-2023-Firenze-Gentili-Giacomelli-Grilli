@@ -19,7 +19,6 @@ public class Game extends Observable implements Serializable {
 
     public Game() {
         listOfPlayers = new ArrayList<>();
-        //this.initializeLivingRoom();
     }
 
     /**
