@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
+import it.polimi.ingsw.Network.Client.DisconnectionHandler;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 
 import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.io.IOException;
 
 
 public class ConnectionSceneController extends ViewObservable implements GenericSceneController{
@@ -47,6 +49,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
      */
     private void socketButtonClicked(MouseEvent event){
         GuiController.changeScene("loginScene.fxml",event,observers);
+        //fai partire un socket client
     }
 
     /**

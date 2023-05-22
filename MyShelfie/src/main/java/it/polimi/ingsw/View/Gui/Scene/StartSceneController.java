@@ -50,6 +50,10 @@ public class StartSceneController extends ViewObservable implements GenericScene
      * @param event
      */
     private void resumeButtonClicked(MouseEvent event){
-        GuiController.changeScene("gameScene.fxml",event,observers);
+        /*if(!GuiController.getGuiView().isGameStarted()){
+            GuiController.showAlert("No game to resume");
+        }else{
+            GuiController.changeScene("gameScene.fxml",event,observers);
+        }*/
     }
 }

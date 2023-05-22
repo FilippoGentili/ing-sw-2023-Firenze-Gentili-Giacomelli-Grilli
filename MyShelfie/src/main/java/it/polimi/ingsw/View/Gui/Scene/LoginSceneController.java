@@ -6,13 +6,18 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.w3c.dom.Text;
 
-import javax.swing.text.html.ImageView;
+import javafx.scene.image.ImageView;
+import java.rmi.RemoteException;
 
 public class LoginSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -26,15 +31,44 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     @FXML
     private VBox vBox;
     @FXML
-    private HBox hBox;
+    private Text text;
     @FXML
-    private Button socketButton;
+    private TextField usernameField;
     @FXML
-    private Button rmiButton;
+    private Button loginButton;
 
     @FXML
-    public void setUp(){
+    public void initialize() {
+        loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::loginButtonClicked);
+        usernameField.setOnKeyPressed(this::enterButtonClicked);
     }
 
+    /**
+     * This method is called when the login button is clicked. It starts a new game with the username inserted.
+     * @param event
+     */
+    private void loginButtonClicked(Event event) {
+        if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
+            String username = usernameField.getText();
+            new Thread(() -> notifyObserver(obs -> {
+                try {
+                    obs.updateNickname(username);
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
+            })).start();
+            GuiController.changeScene("waitingRoomScene.fxml", event, observers);
+        }
+    }
 
+    /**
+     * This method is called when the enter key is pressed. It calls the loginButtonClicked method.
+     * @param event
+     */
+    @FXML
+    private void enterButtonClicked(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            loginButtonClicked(event);
+        }
+    }
 }
