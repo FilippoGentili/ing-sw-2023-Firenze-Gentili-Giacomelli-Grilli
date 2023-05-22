@@ -15,7 +15,7 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     @FXML
     public void initialize(){
         setConnectedPlayers(2);
-        setMaxPlayers(2);
+        setMaxPlayers(4);
         setPlayersConnected(connectedPlayers,maxPlayers);
         checkNumPlayers();
 
