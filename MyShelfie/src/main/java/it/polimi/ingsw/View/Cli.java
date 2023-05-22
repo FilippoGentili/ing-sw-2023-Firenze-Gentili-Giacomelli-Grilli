@@ -52,6 +52,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void serverInfo() throws IOException {
 
         boolean rmi = false;
+        final String address;
+        final String port;
 
         //choose type of connection
         System.out.println("Which type of connection do you want to use?");
@@ -67,18 +69,19 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         if (input.equals("-rmi"))
             rmi = true;
 
-        String address;
         do {
             System.out.println("Insert the Server address:");
             input = scanner.nextLine().trim();
-            address = input;
-        } while (!validAddress(address));
+        } while (!validAddress(input));
 
-        String port;
+        address = input;
+
         do {
             System.out.println("Insert the Server port:");
-            port = scanner.nextLine().trim();
-        } while (!validPort(port));
+            input = scanner.nextLine().trim();
+        } while (!validPort(input));
+
+        port = input;
 
         if (rmi) {
             notifyObserver(obs -> {
@@ -110,7 +113,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public boolean validPort(String port){
         try {
             int portNum = Integer.parseInt(port);
-            if (portNum >= 1 && portNum <= 25565) {
+            if (portNum >= 1 && portNum <= 65536) {
                 return true;
             }
         } catch (NumberFormatException e) {
