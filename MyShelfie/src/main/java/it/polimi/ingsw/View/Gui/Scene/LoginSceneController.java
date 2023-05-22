@@ -58,6 +58,11 @@ public class LoginSceneController extends ViewObservable implements GenericScene
                 }
             })).start();
             GuiController.changeScene("waitingRoomScene.fxml", event, observers);
+            /*if(è il primo gioccatore che si connette){
+                GuiController.changeScene("PlayerSelectionScene.fxml", event, observers);
+            }else{
+                GuiController.changeScene("waitingRoomScene.fxml", event, observers);
+            }*/
         }
     }
 
