@@ -65,11 +65,11 @@ public class InputController {
         if(chosenTiles.size() > max){
             virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("You can't choose so many tiles");
             ArrayList<Tile> otherTiles = new ArrayList<>();
-            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(gameController.getGame().getLivingRoom());
+            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(gameController.getGame().getLivingRoom().getInstance());
             return false;       //ma qui è giusto ritornare false dopo aver fatto una seconda TilesRequest??
         }
 
-        boolean valid = gameController.getGame().getLivingRoom().checkValid(chosenTiles);
+        boolean valid = gameController.getGame().getLivingRoom().getInstance().checkValid(chosenTiles);
         if(!valid){
             virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("the selected tiles are not valid");
             return false;

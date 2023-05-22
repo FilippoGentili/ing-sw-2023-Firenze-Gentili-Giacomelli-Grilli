@@ -19,11 +19,10 @@ public class Game extends Observable implements Serializable {
     private static LivingRoom living;
     private static final String SERVER_NAME = "Server";
 
-    private static Bag bag;
 
     public Game() {
         listOfPlayers = new ArrayList<>();
-        bag = new Bag();
+        living = LivingRoom.getInstance();
     }
 
     /**
@@ -36,10 +35,6 @@ public class Game extends Observable implements Serializable {
      * the next player of the list becomes the current player and the state is set to start
      *
      */
-
-    public Bag getBag(){
-        return bag;
-    }
 
     public void setNumOfPlayers(int num){
         this.numOfPlayers = num;
@@ -182,8 +177,6 @@ public class Game extends Observable implements Serializable {
      * sets the valid cells of the living room
      */
     public void initializeLivingRoom(){
-
-        living = LivingRoom.getInstance();
 
         switch(numberOfTiles()){
             case 29:

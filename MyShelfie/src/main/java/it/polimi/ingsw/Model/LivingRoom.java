@@ -15,17 +15,22 @@ public class LivingRoom extends Observable implements Serializable {
     private final int rows = 9;
     private final int columns = 9;
 
+    private static Bag bag;
+
+
     /**
      * private constructor because of the singleton pattern
      */
     private LivingRoom(){
         board = new Tile[rows][columns];
         valid = new boolean[rows][columns];
+        bag = new Bag();
     }
 
-    public Tile[][] getBoard(){
-        return board;
+    public Bag getBag(){
+        return bag;
     }
+
 
     /**
      * Method to get the instance of the singleton

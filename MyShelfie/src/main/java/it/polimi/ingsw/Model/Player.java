@@ -158,7 +158,7 @@ public class Player extends Observable implements Serializable {
     }
 
     public void drawTile(int i, int j){
-        chosenTiles.add(getGame().getLivingRoom().pickTile(i, j));
+        chosenTiles.add(getGame().getLivingRoom().getInstance().pickTile(i, j));
     }
 
     public ArrayList<Tile> getChosenTiles(){

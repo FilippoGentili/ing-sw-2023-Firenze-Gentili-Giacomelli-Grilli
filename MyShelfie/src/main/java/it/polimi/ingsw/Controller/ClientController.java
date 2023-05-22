@@ -119,7 +119,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
                 queue.add(() -> {
                     try {
-                        view.TilesRequest(chosenTilesRequest.getLivingroom());
+                        view.TilesRequest(chosenTilesRequest.getLivingroom().getInstance());
                     } catch (RemoteException e) {
                         throw new RuntimeException(e);
                     }
@@ -156,7 +156,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 break;
             case LIVING_ROOM:
                 LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;
-                LivingRoom livingRoom = livingRoomMessage.getLivingRoom();
+                LivingRoom livingRoom = livingRoomMessage.getLivingRoom().getInstance();
                 queue.add(() -> {
                     try {
                         view.showLivingRoom(livingRoom);

@@ -53,8 +53,6 @@ public class GameController {
                     NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
                     setNumOfPlayers(message);
                     game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
-                    game.initializeLivingRoom();
-                    //game.getLivingRoom().insertTiles(game.getBag().extract(game.numberOfTiles()));
                     server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
                     //restoreMatchElements();
                 }else {
@@ -131,6 +129,7 @@ public class GameController {
     public void startGame() throws RemoteException {
         setGameState(PLAY);
         game.initializeLivingRoom();
+        game.getLivingRoom().getInstance().insertTiles(game.getLivingRoom().getInstance().getBag().extract(game.numberOfTiles()));
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
         broadcastShowMessage("Game started!");
@@ -174,7 +173,7 @@ public class GameController {
                 map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
         }
 
-        server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
+        server.sendMessage(new ChosenTilesRequest(game.getLivingRoom().getInstance()),currentPlayer.getNickname());
     }
 
     /**
@@ -198,7 +197,7 @@ public class GameController {
 
             server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }else{
-            server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
+            server.sendMessage(new ChosenTilesRequest(game.getLivingRoom().getInstance()),currentPlayer.getNickname());
         }
     }
 
@@ -338,7 +337,7 @@ public class GameController {
 
     public void restoreMatchElements() throws RemoteException {
         for(Player player : players){
-            server.sendMessage(new LivingRoomMessage(game.getLivingRoom()),player.getNickname());
+            server.sendMessage(new LivingRoomMessage(game.getLivingRoom().getInstance()),player.getNickname());
             for(Player otherPlayer : players){
                 if(!otherPlayer.equals(player))
                     server.sendMessage(new GameStateMessage(otherPlayer,game),player.getNickname());
@@ -362,14 +361,14 @@ public class GameController {
         }
         virtualViewMap.put(player, vv);
         game.addObserver(vv);
-        game.getLivingRoom().addObserver(vv);
+        game.getLivingRoom().getInstance().addObserver(vv);
         player.getBookshelf().addObserver(vv);
     }
 
     public void removeVirtualView(String nickname){
         VirtualView vv = virtualViewMap.remove(nickname);
         game.removeObserver(vv);
-        game.getLivingRoom().removeObserver(vv);
+        game.getLivingRoom().getInstance().removeObserver(vv);
         for(Player player : players)
             if(player.getNickname().equals(nickname))
                 player.getBookshelf().removeObserver(vv);
