@@ -59,16 +59,28 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
         //check if input is right
-        while(!input.equals("-rmi") && !input.equals("-socket")){
+        while (!input.equals("-rmi") && !input.equals("-socket")) {
             System.out.println("Invalid statement!");
             System.out.println("Type -rmi or -socket");
             input = scanner.nextLine().trim();
         }
-        if(input.equals("-rmi"))
+        if (input.equals("-rmi"))
             rmi = true;
 
+        do {
+            System.out.println("Insert the Server address:");
+            input = scanner.nextLine().trim();
+            String address = input;
+        } while (!validAddress(address));
 
-        if(rmi){
+        int port;
+        do {
+            System.out.println("Insert the Server port:");
+            input = scanner.nextLine().trim();
+            port = parseInt(input);
+        } while (!validPort(port));
+
+        if (rmi) {
             notifyObserver(obs -> {
                 try {
                     obs.updateServerInfoRmi(this);
@@ -76,7 +88,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                     throw new RuntimeException(e);
                 }
             });
-        }else{
+        } else {
             notifyObserver(obs -> {
                 try {
                     obs.updateServerInfoSocket(this);
