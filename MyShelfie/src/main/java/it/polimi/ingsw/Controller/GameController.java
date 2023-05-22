@@ -54,8 +54,9 @@ public class GameController {
                     setNumOfPlayers(message);
                     game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
                     game.initializeLivingRoom();
+                    //game.getLivingRoom().insertTiles(game.getBag().extract(game.numberOfTiles()));
                     server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
-                    restoreMatchElements();
+                    //restoreMatchElements();
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
                 }
@@ -63,6 +64,11 @@ public class GameController {
             case PLAY:
                 handleGame(message);
                 break;
+            case END:
+                EndTurn();
+                break;
+            default:
+                Server.LOGGER.severe("Error while receiving message");
         }
     }
 
