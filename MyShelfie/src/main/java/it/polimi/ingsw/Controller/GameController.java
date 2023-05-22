@@ -50,7 +50,10 @@ public class GameController {
         switch (gameState) {
             case LOGIN:
                 if(message.getMessageType()==MessageType.NUM_OF_PLAYERS_REPLY) {
+                    NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
                     setNumOfPlayers(message);
+                    game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
+                    game.initializeLivingRoom();
                     server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
                     restoreMatchElements();
                 }else {

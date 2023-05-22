@@ -9,6 +9,8 @@ import java.util.*;
 public class Game extends Observable implements Serializable {
     private static final long serialVersionUID = -4957685347178142310L;
     private static ArrayList<Player> listOfPlayers;
+
+    private int numOfPlayers;
     private static Player currentPlayer;
     private static Player nextPlayer;
     private static Player winner;
@@ -31,6 +33,10 @@ public class Game extends Observable implements Serializable {
      * the next player of the list becomes the current player and the state is set to start
      *
      */
+
+    public void setNumOfPlayers(int num){
+        this.numOfPlayers = num;
+    }
 
 
     /**
@@ -157,7 +163,7 @@ public class Game extends Observable implements Serializable {
      */
     public int numberOfTiles() {
 
-        return switch (listOfPlayers.size()) {
+        return switch (numOfPlayers) {
             case 2 -> 29;
             case 3 -> 37;
             case 4 -> 45;
