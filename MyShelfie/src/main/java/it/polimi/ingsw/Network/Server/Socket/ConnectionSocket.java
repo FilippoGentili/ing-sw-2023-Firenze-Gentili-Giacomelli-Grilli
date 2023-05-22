@@ -55,8 +55,10 @@ public class ConnectionSocket extends Connection implements Runnable{
                         }else socketServer.handleMessage(message);
                     }
                 }
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 Server.LOGGER.severe(e.getMessage());
+            } catch (IOException e){
+                disconnectClient();
             }
         }
     }
