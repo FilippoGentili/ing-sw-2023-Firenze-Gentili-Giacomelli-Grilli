@@ -69,12 +69,12 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="290.0" prefWidth="591.0" spacing="80.0">
                            <children>
-                              <TextField fx:id="addressBox" alignment="CENTER" prefHeight="60.0" prefWidth="240.0" styleClass="generalButton" stylesheets="@../css/style.css">
+                              <TextField fx:id="portBox" alignment="CENTER" prefHeight="60.0" prefWidth="240.0" styleClass="generalButton" stylesheets="@../css/style.css">
                                  <font>
                                     <Font name="Blackadder ITC" size="26.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="portBox" prefHeight="60.0" prefWidth="240.0" styleClass="generalButton" stylesheets="@../css/style.css">
+                              <TextField fx:id="addressBox" prefHeight="60.0" prefWidth="240.0" styleClass="generalButton" stylesheets="@../css/style.css">
                                  <font>
                                     <Font name="Blackadder ITC" size="26.0" />
                                  </font></TextField>
