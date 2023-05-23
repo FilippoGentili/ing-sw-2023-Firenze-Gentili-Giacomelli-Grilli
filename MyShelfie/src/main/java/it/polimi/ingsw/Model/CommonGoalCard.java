@@ -2,8 +2,6 @@ package it.polimi.ingsw.Model;
 
 import java.io.Serializable;
 
-import static java.util.Objects.isNull;
-
 /**
  * Abstract class for CommonGoalCard
  * @author silvia
@@ -75,24 +73,24 @@ public abstract class CommonGoalCard implements Serializable {
                 count++;
 
                 if(tile.getCol()==0){
-                    if (!isNull(bookshelf.getTile(tile.getRow(),tile.getCol() + 1)))
+                    if (bookshelf.getTile(tile.getRow(),tile.getCol() + 1).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow(),tile.getCol() + 1).getTileType())
                             count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(),tile.getCol() + 1),bookshelf,checkTile,limit, counter+1);
 
                 }else if(tile.getCol()==4){
-                    if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                    if (bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
                             count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile, limit, counter+1);
 
                 }else{
-                    if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1)))
+                    if (bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType()) {
                             count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile, limit, counter + 1);
                             counter+=count;
                         }
 
                     if(counter<limit){
-                        if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                        if (bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType() != TileType.NULL)
                             if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
                                 count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile, limit, counter);
 
@@ -102,24 +100,24 @@ public abstract class CommonGoalCard implements Serializable {
 
                 if(counter<limit){
                     if(tile.getRow()==0){
-                        if(!isNull(bookshelf.getTile(tile.getRow()+1,tile.getCol())))
+                        if(bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType() != TileType.NULL)
                             if(tile.getTileType() == bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())
                                 count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter+1);
 
                     }else if(tile.getRow()==5){
-                        if(!isNull(bookshelf.getTile(tile.getRow()-1,tile.getCol())))
+                        if(bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType() != TileType.NULL)
                             if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())
                                 count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter+1);
 
                     }else{
-                        if(!isNull(bookshelf.getTile(tile.getRow()-1,tile.getCol())))
+                        if(bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType() != TileType.NULL)
                             if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType()) {
                                 count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter + 1);
                                 counter += count;
                             }
 
                         if(counter<limit){
-                            if(!isNull(bookshelf.getTile(tile.getRow()+1,tile.getCol())))
+                            if(bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType() != TileType.NULL)
                                 if(tile.getTileType() == bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())
                                     count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter);
 
@@ -146,41 +144,41 @@ public abstract class CommonGoalCard implements Serializable {
             checkTile[tile.getRow()][tile.getCol()] = false;
 
             if (tile.getCol() == 0) {
-                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1)))
+                if (bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType() != TileType.NULL)
                     if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())
                         ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile);
 
             } else if (tile.getCol() == 4) {
-                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                if (bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType() != TileType.NULL)
                     if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
                         ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile);
             } else {
-                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() + 1)))
+                if (bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType() != TileType.NULL)
                     if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType())
                         ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile);
 
-                if (!isNull(bookshelf.getTile(tile.getRow(), tile.getCol() - 1)))
+                if (bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType() != TileType.NULL)
                     if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
                         ResetCheckTile(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile);
             }
 
 
             if (tile.getRow() == 0) {
-                if (!isNull(bookshelf.getTile(tile.getRow() + 1, tile.getCol()))) {
+                if (bookshelf.getTile(tile.getRow() + 1, tile.getCol()).getTileType() != TileType.NULL) {
                     if (tile.getTileType() == bookshelf.getTile(tile.getRow() + 1, tile.getCol()).getTileType())
                         ResetCheckTile(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile);
 
                 } else if (tile.getRow() == 5) {
-                    if (!isNull(bookshelf.getTile(tile.getRow() - 1, tile.getCol())))
+                    if (bookshelf.getTile(tile.getRow() - 1, tile.getCol()).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow() - 1, tile.getCol()).getTileType())
                             ResetCheckTile(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile);
 
                 } else {
-                    if (!isNull(bookshelf.getTile(tile.getRow() - 1, tile.getCol())))
+                    if (bookshelf.getTile(tile.getRow() - 1, tile.getCol()).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow() - 1, tile.getCol()).getTileType())
                             ResetCheckTile(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile);
 
-                    if (!isNull(bookshelf.getTile(tile.getRow() + 1, tile.getCol())))
+                    if (bookshelf.getTile(tile.getRow() + 1, tile.getCol()).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow() + 1, tile.getCol()).getTileType())
                             ResetCheckTile(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile);
 

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-import static java.util.Objects.isNull;
-
 public class CommonGoalCard2 extends CommonGoalCard {
 
     private static final long serialVersionUID = -7708799244357708421L;
@@ -17,7 +15,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         //rispetti la specifica
 
         for(row=0, col=0; row<4 && col<4 && trovato; row++, col++){
-            if(isNull(bookshelf.getTile(row,col))){
+            if(bookshelf.getTile(row,col).getTileType() == TileType.NULL){
                 trovato = false;
             }else {
                 if (!(bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row + 1, col + 1).getTileType()))
@@ -27,7 +25,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         if(!trovato){
             trovato=true;
             for(row=1, col=0; row<5 && col<4 && trovato; row++, col++){
-                if(isNull(bookshelf.getTile(row,col))){
+                if(bookshelf.getTile(row,col).getTileType() == TileType.NULL){
                     trovato = false;
                 }else {
                     if (!(bookshelf.getTile(row,col).getTileType() == bookshelf.getTile(row + 1,col + 1).getTileType()))
@@ -39,7 +37,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         if(!trovato){
             trovato=true;
             for(row=0, col=4; row<4 && col>0 && trovato; row++, col--){
-                if(isNull(bookshelf.getTile(row,col))){
+                if(bookshelf.getTile(row,col).getTileType() == TileType.NULL){
                     trovato = false;
                 }else {
                     if (!(bookshelf.getTile(row,col).getTileType() == bookshelf.getTile(row + 1,col - 1).getTileType()))
@@ -51,7 +49,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         if(!trovato){
             trovato=true;
             for(row=1, col=4; row<5 && col>0 && trovato; row++, col--){
-                if(isNull(bookshelf.getTile(row,col))){
+                if(bookshelf.getTile(row,col).getTileType() == TileType.NULL){
                     trovato = false;
                 }else {
                     if (!(bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row + 1, col - 1).getTileType()))

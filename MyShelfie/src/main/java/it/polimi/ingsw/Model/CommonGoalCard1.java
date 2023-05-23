@@ -1,8 +1,5 @@
 package it.polimi.ingsw.Model;
 
-
-import static java.util.Objects.isNull;
-
 public class CommonGoalCard1 extends CommonGoalCard {
 
     private static final long serialVersionUID = -2155701438769337191L;
@@ -22,7 +19,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
         for(row=0; row<6; row++){
             for(col=0, count=1; col<4; col++){
                 if(!checkTile[row][col]){
-                    if(!isNull(bookshelf.getTile(row,col)) && !isNull(bookshelf.getTile(row,col+1))) {
+                    if(bookshelf.getTile(row,col).getTileType() != TileType.NULL && bookshelf.getTile(row,col+1).getTileType() != TileType.NULL) {
                         if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row, col + 1).getTileType()) {
                             count++;
                             checkTile[row][col] = true;
@@ -40,7 +37,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
             for(row=0; row<5; row++) {
                 for (col = 0, count=1; col < 5; col++) {
                     if (!checkTile[row][col]) {
-                        if(!isNull(bookshelf.getTile(row,col)) && !isNull(bookshelf.getTile(row+1,col))) {
+                        if(bookshelf.getTile(row,col).getTileType() != TileType.NULL && bookshelf.getTile(row+1,col).getTileType() != TileType.NULL) {
                             if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row + 1, col).getTileType()) {
                                 count++;
                                 checkTile[row][col] = true;
