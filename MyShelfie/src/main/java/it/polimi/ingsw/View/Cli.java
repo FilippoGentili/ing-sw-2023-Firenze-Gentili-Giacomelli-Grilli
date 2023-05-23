@@ -373,7 +373,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         System.out.println("+-------+-------+-------+-------+-------+");
         System.out.println("|"+player.getBookshelf().getTile(5,0).getTileType().toCliString()+"|"+player.getBookshelf().getTile(5,1).getTileType().toCliString()+"|"+player.getBookshelf().getTile(5,2).getTileType().toCliString()+"|"+player.getBookshelf().getTile(5,3).getTileType().toCliString()+"|"+player.getBookshelf().getTile(5,4).getTileType().toCliString()+"|");
         System.out.println("+-------+-------+-------+-------+-------+");
-        System.out.println();
     }
 
     @Override
