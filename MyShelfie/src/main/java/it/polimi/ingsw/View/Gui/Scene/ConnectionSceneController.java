@@ -19,7 +19,10 @@ import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.io.IOException;
 
-
+/**
+ * Second scene of the game.
+ * This class is the controller for the connection scene.
+ */
 public class ConnectionSceneController extends ViewObservable implements GenericSceneController, DisconnectionHandler{
     @FXML
     private Parent anchorPane;

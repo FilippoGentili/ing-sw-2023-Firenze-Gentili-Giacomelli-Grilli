@@ -20,25 +20,17 @@ import javafx.scene.image.ImageView;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * Third scene of the game.
+ * This class is the controller for the login scene.
+ */
 public class LoginSceneController extends ViewObservable implements GenericSceneController{
-    @FXML
-    private Parent anchorPane;
-    @FXML
-    private BorderPane borderPane;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private Pane pane;
-    @FXML
-    private VBox vBox;
-    @FXML
-    private Text text;
     @FXML
     private TextField usernameField;
     @FXML
     private Button loginButton;
 
-    private static int numOfPlayers=0;
+    private static int numOfPlayers = 0;
 
     @FXML
     public void initialize() {
@@ -81,10 +73,17 @@ public class LoginSceneController extends ViewObservable implements GenericScene
         }
     }
 
+    /**
+     * This method sets the number of current players connected.
+     */
     public void setNumberOfConnectedPlayers(){
         numOfPlayers++;
     }
 
+    /**
+     * This method returns the number of current players connected.
+     * @return numOfPlayers
+     */
     public static int getNumberOfConnectedPlayers(){
         return numOfPlayers;
     }

@@ -7,6 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 
+/**
+ * Fourth scene of the game.
+ * This class is the controller for the waiting room scene.
+ */
 public class WaitingRoomSceneController extends ViewObservable implements GenericSceneController{
 
     private int connectedPlayers;
@@ -15,18 +19,18 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     private Text playersConnectedText;
     @FXML
     public void initialize(){
-        while(LoginSceneController.getNumberOfConnectedPlayers() < PlayerSelectionSceneController.getMaxPlayers()){
-            setVisualPlayersConnected(connectedPlayers,maxPlayers);
+        connectedPlayers = LoginSceneController.getNumberOfConnectedPlayers();
+        maxPlayers = PlayerSelectionSceneController.getMaxPlayers();
+
+        while(connectedPlayers < maxPlayers){
+            setVisualPlayersConnected();
         }
+
         checkStartGame();
     }
 
-    /**
-     * Sets the visual number of players connected to the game in the gui
-     * @param connectedPlayers number of players connected
-     * @param maxPlayers maximum number of players
-     */
-    public void setVisualPlayersConnected(int connectedPlayers, int maxPlayers) {
+
+    public void setVisualPlayersConnected() {
         playersConnectedText.setText("Players connected: " + connectedPlayers + " of " + maxPlayers);
     }
 
