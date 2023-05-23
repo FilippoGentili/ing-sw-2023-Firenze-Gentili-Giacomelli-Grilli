@@ -130,11 +130,7 @@ public class Game extends Observable implements Serializable {
      */
     public static ArrayList<Player> getPlayers() {
 
-        ArrayList<Player> players = new ArrayList<>();
-
-
-
-        return players;
+        return listOfPlayers;
     }
 
     /**
