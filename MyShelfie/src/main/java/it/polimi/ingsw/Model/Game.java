@@ -130,8 +130,7 @@ public class Game extends Observable implements Serializable {
      */
     public static ArrayList<Player> getPlayers() {
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.addAll(listOfPlayers);
+        ArrayList<Player> players = (ArrayList<Player>) listOfPlayers.clone();
 
         return players;
     }
@@ -140,7 +139,7 @@ public class Game extends Observable implements Serializable {
      * adds player to the list of players
      */
 
-    public void addPlayer(Player player) {
+    public static void addPlayer(Player player) {
 
         listOfPlayers.add(player);
     }
