@@ -166,6 +166,7 @@ public class GameController {
         }else{
             nextPlayer();
         }
+        restoreMatchElements();
         for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
             if(!map.getKey().equals(currentPlayer))
                 map.getValue().showMessage("It's the turn of " + currentPlayer.getNickname());
@@ -337,11 +338,7 @@ public class GameController {
 
     public void restoreMatchElements() throws RemoteException {
         for(Player player : players){
-            server.sendMessage(new LivingRoomMessage(game.getLivingRoom().getInstance()),player.getNickname());
-            for(Player otherPlayer : players){
-                if(!otherPlayer.equals(player))
-                    server.sendMessage(new GameStateMessage(otherPlayer,game),player.getNickname());
-            }
+                    server.sendMessage(new GameStateMessage(player,game),player.getNickname());
         }
     }
 
