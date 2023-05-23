@@ -114,7 +114,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 GameStateMessage gameStateMessage = (GameStateMessage) message;
                 queue.add(() -> {
                     try {
-                        view.updateGameState(gameStateMessage.getPlayer());
+                        view.updateGameState(gameStateMessage.getPlayer(), gameStateMessage.getGame());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
