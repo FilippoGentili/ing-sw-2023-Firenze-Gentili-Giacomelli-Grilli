@@ -139,7 +139,7 @@ public class Game extends Observable implements Serializable {
      * adds player to the list of players
      */
 
-    public void addPlayer(Player player) {
+    public static void addPlayer(Player player) {
 
         listOfPlayers.add(player);
     }
