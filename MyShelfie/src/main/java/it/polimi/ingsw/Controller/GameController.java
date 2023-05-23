@@ -78,7 +78,7 @@ public class GameController {
      * @throws RemoteException
      */
     public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
-        Player player = new Player();
+        Player player = new Player(this.game);
 
         if(numOfPlayers==0){
             addVirtualView(player, vv);
@@ -320,7 +320,7 @@ public class GameController {
      * this method tells all the player who has won the game.
      */
     public void findWinner() throws RemoteException {
-        Player winner = new Player();
+        Player winner;
 
         winner = game.getWinner();
 
