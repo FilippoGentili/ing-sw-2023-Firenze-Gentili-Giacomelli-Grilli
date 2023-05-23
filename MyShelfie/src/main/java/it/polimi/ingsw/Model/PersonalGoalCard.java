@@ -289,100 +289,244 @@ public class PersonalGoalCard implements Serializable {
 
         switch(getID()){
             case 1:
-                goal[0][0] = new Tile(TileType.PLANT);
-                goal[0][2] = new Tile(TileType.FRAME);
-                goal[1][4] = new Tile(TileType.CAT);
-                goal[2][3] = new Tile(TileType.BOOK);
-                goal[3][1] = new Tile(TileType.GAME);
-                goal[5][2] = new Tile(TileType.TROPHIE);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==0)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==0 && j==2)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==1 && j==4)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==2 && j==3)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==3 && j==1)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==5 && j==2)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 2:
-                goal[1][1] = new Tile(TileType.PLANT);
-                goal[2][0] = new Tile(TileType.CAT);
-                goal[2][2] = new Tile(TileType.GAME);
-                goal[3][4] = new Tile(TileType.BOOK);
-                goal[4][3] = new Tile(TileType.TROPHIE);
-                goal[5][4] = new Tile(TileType.FRAME);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==1 && j==1)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==2 && j==0)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==2 && j==2)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==3 && j==4)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==4 && j==3)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==5 && j==4)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 3:
-                goal[1][0] = new Tile(TileType.FRAME);
-                goal[1][3] = new Tile(TileType.GAME);
-                goal[2][2] = new Tile(TileType.PLANT);
-                goal[3][1] = new Tile(TileType.CAT);
-                goal[3][4] = new Tile(TileType.TROPHIE);
-                goal[5][0] = new Tile(TileType.BOOK);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==1 && j==0)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==1 && j==3)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==2 && j==2)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==3 && j==1)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==3 && j==4)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==5 && j==0)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 4:
-                goal[0][4] = new Tile(TileType.GAME);
-                goal[2][0] = new Tile(TileType.TROPHIE);
-                goal[2][2] = new Tile(TileType.FRAME);
-                goal[3][3] = new Tile(TileType.PLANT);
-                goal[4][1] = new Tile(TileType.BOOK);
-                goal[4][2] = new Tile(TileType.CAT);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==4)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==2 && j==0)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==2 && j==2)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==3 && j==3)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==4 && j==1)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==4 && j==2)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 5:
-                goal[1][1] = new Tile(TileType.TROPHIE);
-                goal[3][1] = new Tile(TileType.FRAME);
-                goal[3][2] = new Tile(TileType.BOOK);
-                goal[4][4] = new Tile(TileType.PLANT);
-                goal[5][0] = new Tile(TileType.GAME);
-                goal[5][3] = new Tile(TileType.CAT);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==1 && j==1)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==3 && j==1)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==3 && j==2)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==4 && j==4)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==5 && j==0)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==5 && j==3)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 6:
-                goal[0][2] = new Tile(TileType.TROPHIE);
-                goal[0][4] = new Tile(TileType.CAT);
-                goal[2][3] = new Tile(TileType.BOOK);
-                goal[4][1] = new Tile(TileType.GAME);
-                goal[4][3] = new Tile(TileType.FRAME);
-                goal[5][0] = new Tile(TileType.PLANT);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==2)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==0 && j==4)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==2 && j==3)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==4 && j==1)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==4 && j==3)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==5 && j==0)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 7:
-                goal[0][0] = new Tile(TileType.CAT);
-                goal[1][3] = new Tile(TileType.FRAME);
-                goal[2][1] = new Tile(TileType.PLANT);
-                goal[3][0] = new Tile(TileType.TROPHIE);
-                goal[4][4] = new Tile(TileType.GAME);
-                goal[5][2] = new Tile(TileType.BOOK);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==0)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==1 && j==3)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==2 && j==1)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==3 && j==0)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==4 && j==4)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==5 && j==2)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 8:
-                goal[0][4] = new Tile(TileType.FRAME);
-                goal[1][1] = new Tile(TileType.CAT);
-                goal[2][2] = new Tile(TileType.TROPHIE);
-                goal[3][0] = new Tile(TileType.PLANT);
-                goal[4][3] = new Tile(TileType.BOOK);
-                goal[5][3] = new Tile(TileType.GAME);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==4)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==1 && j==1)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==2 && j==2)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==3 && j==0)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==4 && j==3)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==5 && j==3)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 9:
-                goal[0][2] = new Tile(TileType.GAME);
-                goal[2][2] = new Tile(TileType.CAT);
-                goal[3][4] = new Tile(TileType.BOOK);
-                goal[4][1] = new Tile(TileType.TROPHIE);
-                goal[4][4] = new Tile(TileType.PLANT);
-                goal[5][0] = new Tile(TileType.FRAME);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==2)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==2 && j==2)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==3 && j==4)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==4 && j==1)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==4 && j==4)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==5 && j==0)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 10:
-                goal[0][4] = new Tile(TileType.TROPHIE);
-                goal[1][1] = new Tile(TileType.GAME);
-                goal[2][0] = new Tile(TileType.BOOK);
-                goal[3][3] = new Tile(TileType.CAT);
-                goal[4][2] = new Tile(TileType.FRAME);
-                goal[5][3] = new Tile(TileType.PLANT);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==4)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==1 && j==1)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==2 && j==0)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==3 && j==3)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==4 && j==2)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==5 && j==3)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 11:
-                goal[0][2] = new Tile(TileType.PLANT);
-                goal[1][1] = new Tile(TileType.BOOK);
-                goal[2][0] = new Tile(TileType.GAME);
-                goal[3][2] = new Tile(TileType.FRAME);
-                goal[4][4] = new Tile(TileType.CAT);
-                goal[5][3] = new Tile(TileType.TROPHIE);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==2)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==1 && j==1)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==2 && j==0)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==3 && j==2)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==4 && j==4)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else if(i==5 && j==3)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             case 12:
-                goal[0][2] = new Tile(TileType.BOOK);
-                goal[1][1] = new Tile(TileType.PLANT);
-                goal[2][2] = new Tile(TileType.FRAME);
-                goal[3][3] = new Tile(TileType.TROPHIE);
-                goal[4][4] = new Tile(TileType.GAME);
-                goal[5][0] = new Tile(TileType.CAT);
+                for(int i=0; i<6; i++){
+                    for(int j=0; j<5; j++){
+                        if(i==0 && j==2)
+                            goal[i][j]= new Tile(TileType.BOOK);
+                        else if(i==1 && j==1)
+                            goal[i][j]= new Tile(TileType.PLANT);
+                        else if(i==2 && j==2)
+                            goal[i][j]= new Tile(TileType.FRAME);
+                        else if(i==3 && j==3)
+                            goal[i][j]= new Tile(TileType.TROPHIE);
+                        else if(i==4 && j==4)
+                            goal[i][j]= new Tile(TileType.GAME);
+                        else if(i==5 && j==0)
+                            goal[i][j]= new Tile(TileType.CAT);
+                        else
+                            goal[i][j] = new Tile(TileType.NULL);
+                    }
+                }
                 return goal;
             default:
                 throw new Exception("An error occured");
