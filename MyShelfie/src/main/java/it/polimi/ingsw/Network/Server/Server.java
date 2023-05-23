@@ -31,7 +31,7 @@ public class Server implements Runnable{
 
     public void startServers() {
 
-        int port = 49673;
+        int port = 1098;
         SocketServer ss = new SocketServer(this, port);
         ss.startSocketServer();
     }

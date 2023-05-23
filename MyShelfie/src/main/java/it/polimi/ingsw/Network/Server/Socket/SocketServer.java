@@ -24,7 +24,7 @@ public class SocketServer extends Thread{
         try {
             serverSocket = new ServerSocket(port);
             start();
-            Server.LOGGER.info(() -> "Socket server started on port 49674");
+            Server.LOGGER.info(() -> "Socket server started on port 1098");
         } catch (IOException e) {
             Server.LOGGER.severe("Error while starting server");
         }
