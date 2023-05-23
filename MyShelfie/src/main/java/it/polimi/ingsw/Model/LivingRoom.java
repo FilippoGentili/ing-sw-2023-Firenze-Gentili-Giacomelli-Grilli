@@ -23,6 +23,11 @@ public class LivingRoom extends Observable implements Serializable {
      */
     private LivingRoom(){
         board = new Tile[rows][columns];
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                setTile(new Tile(TileType.NULL), i, j);
+            }
+        }
         valid = new boolean[rows][columns];
         bag = new Bag();
     }
