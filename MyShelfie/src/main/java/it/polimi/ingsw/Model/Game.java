@@ -21,6 +21,7 @@ public class Game extends Observable implements Serializable {
 
     public Game() {
         listOfPlayers = new ArrayList<Player>();
+        pickCommonGoalCards();
         living = LivingRoom.getInstance();
     }
 
