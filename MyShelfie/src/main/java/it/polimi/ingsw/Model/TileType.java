@@ -2,7 +2,7 @@ package it.polimi.ingsw.Model;
 
 
 public enum TileType {
-    CAT, BOOK, GAME, FRAME, TROPHIE, PLANT;
+    CAT, BOOK, GAME, FRAME, TROPHIE, PLANT, NULL;
 
     public String toString(){
         return switch (this.ordinal()) {
@@ -12,6 +12,7 @@ public enum TileType {
             case 3 -> "frame";
             case 4 -> "trophie";
             case 5 -> "plant";
+            case 6 -> "null";
             default -> null;
         };
     }
@@ -24,6 +25,7 @@ public enum TileType {
             case 3 -> " frame ";
             case 4 -> "trophie";
             case 5 -> " plant ";
+            case 6 -> "       ";
             default -> "       ";
         };
     }

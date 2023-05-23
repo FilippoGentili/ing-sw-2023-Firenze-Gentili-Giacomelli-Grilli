@@ -178,6 +178,12 @@ public class Game extends Observable implements Serializable {
      */
     public void initializeLivingRoom(){
 
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                living.setTile(new Tile(TileType.NULL), i, j);
+            }
+        }
+
         switch(numberOfTiles()){
             case 29:
                 for(int i=0; i<9; i++){

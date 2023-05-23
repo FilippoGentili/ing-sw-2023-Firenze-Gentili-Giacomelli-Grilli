@@ -71,7 +71,7 @@ public class LivingRoom extends Observable implements Serializable {
     }
 
     public void setNull(int i, int j){
-        board[i][j]=null;
+        setTile(new Tile(TileType.NULL), i, j);
     }
 
     public int getNumberOfTiles(){
@@ -126,9 +126,9 @@ public class LivingRoom extends Observable implements Serializable {
 
         Tile app;  //nuova istanza da creare?
 
-        if(valid[i][j] && getTile(i,j)!=null){
+        if(valid[i][j] && getTile(i,j).getTileType()!= TileType.NULL){
             app = getTile(i, j);
-            board[i][j]=null;
+            setTile(new Tile(TileType.NULL), i, j);
             numberOfTiles--;
 
             return app;
@@ -146,7 +146,7 @@ public class LivingRoom extends Observable implements Serializable {
         while (x< chosen.size()) {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
-                    if (valid[i][j] && getTile(i, j) == null) {
+                    if (valid[i][j] && getTile(i, j).getTileType() == TileType.NULL) {
                         setTile(chosen.get(0), i, j);
                         chosen.remove(0);
                         numberOfTiles++;
