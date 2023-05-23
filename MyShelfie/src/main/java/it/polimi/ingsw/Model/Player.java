@@ -39,7 +39,8 @@ public class Player extends Observable implements Serializable {
     /**
      * creates a player identified by a nickname and with a personal goal card and a score, initially of zero points
      */
-    public Player(){
+    public Player(Game game){
+        this.game = game;
         this.score = 0;
         this.bookshelf = new Bookshelf();
         this.personalGoalCard = new PersonalGoalCard();
