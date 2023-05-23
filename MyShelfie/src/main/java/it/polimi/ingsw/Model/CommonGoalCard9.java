@@ -16,10 +16,10 @@ public class CommonGoalCard9 extends CommonGoalCard {
 
         for(col=0, countCol=0; col<5; col++){
 
-            if(!isNull(bookshelf.getTile(0,col))) {
+            if(bookshelf.getTile(0,col).getTileType()!=TileType.NULL) {
 
                 for (row = 1, countTile = 1, cellaVuota=false; row < 6 && !cellaVuota; row++) {
-                    if(!isNull(bookshelf.getTile(row,col))) {
+                    if(bookshelf.getTile(row,col).getTileType()!=TileType.NULL) {
 
                         for (k = 0, uguale = false; k < row && !uguale; k++) {
                             if (bookshelf.getTile(k, col).getTileType() == bookshelf.getTile(row, col).getTileType())

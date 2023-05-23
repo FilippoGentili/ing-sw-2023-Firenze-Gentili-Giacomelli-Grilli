@@ -20,8 +20,8 @@ public class CommonGoalCard7 extends CommonGoalCard {
 
         for(row=0; row<5; row++){
             for(col=0; col<4; col++){
-                if(!isNull(bookshelf.getTile(row,col)) && !isNull(bookshelf.getTile(row,col+1)) &&
-                !isNull(bookshelf.getTile(row+1,col)) && !isNull(bookshelf.getTile(row+1,col+1))){
+                if(bookshelf.getTile(row,col).getTileType()!=TileType.NULL && bookshelf.getTile(row,col+1).getTileType()!=TileType.NULL &&
+                bookshelf.getTile(row+1,col).getTileType()!=TileType.NULL && bookshelf.getTile(row+1,col+1).getTileType()!=TileType.NULL){
                     if(!checkTile[row][col] && !checkTile[row][col+1] && !checkTile[row+1][col] && !checkTile[row+1][col+1]) {
                         if (bookshelf.getTile(row,col).getTileType() == bookshelf.getTile(row,col + 1).getTileType() &&
                         bookshelf.getTile(row,col).getTileType() == bookshelf.getTile(row + 1,col).getTileType() &&
