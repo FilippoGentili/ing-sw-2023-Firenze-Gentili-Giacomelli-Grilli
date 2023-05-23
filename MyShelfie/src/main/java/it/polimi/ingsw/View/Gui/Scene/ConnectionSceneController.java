@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.event.Event;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -24,18 +25,6 @@ import java.io.IOException;
  * This class is the controller for the connection scene.
  */
 public class ConnectionSceneController extends ViewObservable implements GenericSceneController, DisconnectionHandler{
-    @FXML
-    private Parent anchorPane;
-    @FXML
-    private BorderPane borderPane;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private Pane pane;
-    @FXML
-    private VBox vBox;
-    @FXML
-    private HBox hBox;
     @FXML
     private Button socketButton;
     @FXML
