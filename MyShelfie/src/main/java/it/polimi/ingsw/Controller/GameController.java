@@ -128,6 +128,7 @@ public class GameController {
     public void startGame() throws RemoteException {
         setGameState(PLAY);
         game.initializeLivingRoom();
+        game.setPersonalGoalCard();
         game.getLivingRoom().getInstance().insertTiles(game.getLivingRoom().getInstance().getBag().extract(game.numberOfTiles()));
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
