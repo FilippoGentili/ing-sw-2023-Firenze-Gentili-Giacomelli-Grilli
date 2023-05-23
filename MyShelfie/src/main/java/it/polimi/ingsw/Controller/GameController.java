@@ -10,7 +10,6 @@ import it.polimi.ingsw.View.VirtualView;
 import java.rmi.RemoteException;
 import java.util.*;
 
-import static it.polimi.ingsw.Model.Game.endGameTrigger;
 import static it.polimi.ingsw.Model.GameState.*;
 
 public class GameController {
@@ -248,20 +247,20 @@ public class GameController {
             server.sendMessage(new GenericMessage("Congratulations! You reached the first common Goal! You earn "
                     + game.getCommonGoal1().getValue() + " points!"),currentPlayer.getNickname());
 
-            player.setScore(player.getScore()+ Game.getCommonGoal1().getValue());
+            player.setScore(player.getScore()+ game.getCommonGoal1().getValue());
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
-            Game.getCommonGoal1().updateValue();
+            game.getCommonGoal1().updateValue();
             player.setPointscg1();
         }
 
         if(game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
             server.sendMessage(new GenericMessage("Congratulations! You reached the second common Goal! You earn "
                     + game.getCommonGoal1().getValue() + " points!"),currentPlayer.getNickname());
-            player.setScore(player.getScore()+Game.getCommonGoal2().getValue());
+            player.setScore(player.getScore()+game.getCommonGoal2().getValue());
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
-            Game.getCommonGoal2().updateValue();
+            game.getCommonGoal2().updateValue();
             player.setPointscg2();
         }
 
@@ -296,7 +295,7 @@ public class GameController {
                 server.sendMessage(new GenericMessage("You earn one points for finishing your " +
                         "bookshelf before the other players."), currentPlayer.getNickname());
 
-                endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+                game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
                 restoreMatchElements();
                 lastRound(); //da rivedere
             } else {

@@ -10,17 +10,18 @@ public class Game extends Observable implements Serializable {
     private static final long serialVersionUID = -4957685347178142310L;
     private ArrayList<Player> listOfPlayers;
     private int numOfPlayers;
-    private static Player currentPlayer;
-    private static Player nextPlayer;
-    private static Player winner;
-    private static Player firstPlayer;
-    private static CommonGoalCard CommonGoal1, CommonGoal2;
-    private static LivingRoom living;
+    private  Player currentPlayer;
+    private  Player nextPlayer;
+    private  Player winner;
+    private  Player firstPlayer;
+    private  CommonGoalCard CommonGoal1, CommonGoal2;
+    private LivingRoom living;
     private static final String SERVER_NAME = "Server";
 
 
     public Game() {
         listOfPlayers = new ArrayList<Player>();
+        pickCommonGoalCards();
         living = LivingRoom.getInstance();
     }
 
@@ -70,7 +71,7 @@ public class Game extends Observable implements Serializable {
      * sets current player
      * @param player
      */
-    public static void setCurrentPlayer(Player player) {
+    public  void setCurrentPlayer(Player player) {
         currentPlayer = player;
 
     }
@@ -90,7 +91,7 @@ public class Game extends Observable implements Serializable {
      * sets next player
      */
 
-    public static void setNextPlayer(Player player){
+    public void setNextPlayer(Player player){
         nextPlayer = player;
     }
 
@@ -314,7 +315,7 @@ public class Game extends Observable implements Serializable {
      * @param bookshelf
      * @param player
      */
-    public static void endGameTrigger(Bookshelf bookshelf, Player player) {
+    public void endGameTrigger(Bookshelf bookshelf, Player player) {
         if(player==null)
             throw new IllegalArgumentException("Player can't be null");
 
@@ -355,7 +356,7 @@ public class Game extends Observable implements Serializable {
      *
      * @return common goal card 1
      */
-    public static CommonGoalCard getCommonGoal1(){
+    public CommonGoalCard getCommonGoal1(){
         return CommonGoal1;
     }
 
@@ -363,7 +364,7 @@ public class Game extends Observable implements Serializable {
      *
      * @return common goal card 2
      */
-    public static CommonGoalCard getCommonGoal2(){
+    public CommonGoalCard getCommonGoal2(){
         return CommonGoal2;
     }
 
@@ -371,7 +372,7 @@ public class Game extends Observable implements Serializable {
      *
      * @return living room
      */
-    public static LivingRoom getLivingRoom(){
+    public LivingRoom getLivingRoom(){
         LivingRoom livingRoom = LivingRoom.getInstance();
         return livingRoom;
     }
