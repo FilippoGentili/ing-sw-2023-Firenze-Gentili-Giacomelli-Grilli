@@ -1,8 +1,5 @@
 package it.polimi.ingsw.Model;
 
-
-import static java.util.Objects.isNull;
-
 public class CommonGoalCard4 extends CommonGoalCard {
 
     private static final long serialVersionUID = 2215764961371107103L;
@@ -16,10 +13,10 @@ public class CommonGoalCard4 extends CommonGoalCard {
 
         for(row=0, countRow=0; row<6; row++){
 
-            if(!isNull(bookshelf.getTile(row,0))) {
+            if(bookshelf.getTile(row,0).getTileType() != TileType.NULL) {
                 for (col = 1, countTile = 1, cellaVuota=false; col < 5 && !cellaVuota; col++) {
 
-                    if(!isNull(bookshelf.getTile(row,col))) {
+                    if(bookshelf.getTile(row,col).getTileType() != TileType.NULL) {
                         for (k = 0, uguale = false; k < col && !uguale; k++) {
 
                             if (bookshelf.getTile(row, k).getTileType() == bookshelf.getTile(row, col).getTileType())
