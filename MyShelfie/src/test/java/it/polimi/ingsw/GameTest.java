@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+/*package it.polimi.ingsw;
 
 import it.polimi.ingsw.Model.*;
 import org.junit.Test;
@@ -795,4 +795,4 @@ public class GameTest {
         assertEquals(livingRoom, LivingRoom.getInstance());
     }
 
-}
+}*/

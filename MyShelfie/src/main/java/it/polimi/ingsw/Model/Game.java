@@ -8,7 +8,7 @@ import java.util.*;
 //le classi che estendono observable sono quelle che notificheranno l'evento all'esterno
 public class Game extends Observable implements Serializable {
     private static final long serialVersionUID = -4957685347178142310L;
-    private static ArrayList<Player> listOfPlayers;
+    private ArrayList<Player> listOfPlayers;
     private int numOfPlayers;
     private static Player currentPlayer;
     private static Player nextPlayer;
@@ -45,7 +45,7 @@ public class Game extends Observable implements Serializable {
      * @return the first player of the match
      * @throws IllegalStateException if the list of players is empty
      */
-    public static Player pickFirstPlayer(){
+    public Player pickFirstPlayer(){
         if(listOfPlayers.isEmpty())
             throw new IllegalStateException("There are no players");
         Random random = new Random();
@@ -60,7 +60,7 @@ public class Game extends Observable implements Serializable {
      * @return the current player that is playing
      * @throws IllegalStateException if the list of players is empty
      */
-    public static Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         if(listOfPlayers.isEmpty())
             throw new IllegalStateException("There are no players");
         return currentPlayer;
@@ -79,7 +79,7 @@ public class Game extends Observable implements Serializable {
      * @return the next player int the list of players
      */
 
-    public static Player getNextPlayer() {
+    public Player getNextPlayer() {
         nextPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer)+1) % listOfPlayers.size());
         currentPlayer = nextPlayer;
         return nextPlayer;
@@ -97,7 +97,7 @@ public class Game extends Observable implements Serializable {
     /** If there is a tie, the most distant player from the first player wins the game
      * @return winner of the game
      */
-    public static Player getWinner(){
+    public Player getWinner(){
         int maxScore = 0;
         for(Player player : listOfPlayers){
             int score = player.getScore();
@@ -105,7 +105,7 @@ public class Game extends Observable implements Serializable {
                 maxScore = score;
                 winner = player;
             }else if(score == maxScore){
-                int firstPlayer = listOfPlayers.indexOf(Game.pickFirstPlayer());
+                int firstPlayer = listOfPlayers.indexOf(pickFirstPlayer());
                 int var = (listOfPlayers.indexOf(player) - firstPlayer + listOfPlayers.size()) % listOfPlayers.size();
                 int win = (listOfPlayers.indexOf(winner) - firstPlayer + listOfPlayers.size()) % listOfPlayers.size();
                 if(var > win){
@@ -128,7 +128,7 @@ public class Game extends Observable implements Serializable {
      *
      * @return list of all players
      */
-    public static ArrayList<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
 
         ArrayList<Player> players = new ArrayList<>();
 
@@ -141,7 +141,7 @@ public class Game extends Observable implements Serializable {
      * adds player to the list of players
      */
 
-    public static void addPlayer(Player player) {
+    public void addPlayer(Player player) {
 
         listOfPlayers.add(player);
     }

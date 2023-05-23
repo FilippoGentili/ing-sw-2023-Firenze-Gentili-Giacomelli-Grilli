@@ -84,7 +84,7 @@ public class GameController {
             addVirtualView(player, vv);
             players.add(player);
             player.setNickname(nickname);
-            Game.addPlayer(player);
+            game.addPlayer(player);
             server.sendMessage(new LoginResult(nickname,true,true),nickname);
             server.sendMessage(new NumOfPlayersRequest(), nickname);
         }else if(virtualViewMap.size() < numOfPlayers){
@@ -92,7 +92,7 @@ public class GameController {
                 addVirtualView(player, vv);
                 players.add(player);
                 player.setNickname(nickname);
-                Game.addPlayer(player);
+                game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname,true,true),nickname);
 
                 if(virtualViewMap.size() == numOfPlayers)
