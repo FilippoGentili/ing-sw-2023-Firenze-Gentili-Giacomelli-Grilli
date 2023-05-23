@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.event.Event;
 
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -19,7 +20,7 @@ import java.awt.*;
 import java.io.IOException;
 
 
-public class ConnectionSceneController extends ViewObservable implements GenericSceneController{
+public class ConnectionSceneController extends ViewObservable implements GenericSceneController, DisconnectionHandler{
     @FXML
     private Parent anchorPane;
     @FXML
@@ -36,6 +37,10 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private Button socketButton;
     @FXML
     private Button rmiButton;
+    @FXML
+    private TextField portBox;
+    @FXML
+    private TextField addressBox;
 
     @FXML
     public void initialize(){
@@ -48,8 +53,17 @@ public class ConnectionSceneController extends ViewObservable implements Generic
      * @param event
      */
     private void socketButtonClicked(MouseEvent event){
-        GuiController.changeScene("loginScene.fxml",event,observers);
-        //fai partire un socket client
+        String port = portBox.getText();
+        String address = addressBox.getText();
+        notifyObserver(obs -> {
+            try {
+                obs.updateServerInfoSocket(this,address,port);
+                GuiController.changeScene("loginScene.fxml",event,observers);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+                //fai partire un allert dicendo che non è valida
+            }
+        });
     }
 
     /**
@@ -57,6 +71,18 @@ public class ConnectionSceneController extends ViewObservable implements Generic
      * @param event
      */
     private void rmiButtonClicked(MouseEvent event){
+        notifyObserver(obs -> {
+            try {
+                obs.updateServerInfoRmi(this);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         GuiController.changeScene("loginScene.fxml",event,observers);
+    }
+
+    @Override
+    public void handleDisconnection() {
+
     }
 }
