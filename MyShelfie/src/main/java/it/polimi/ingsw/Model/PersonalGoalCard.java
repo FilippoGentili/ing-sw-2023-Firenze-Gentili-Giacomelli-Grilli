@@ -285,7 +285,7 @@ public class PersonalGoalCard implements Serializable {
     }
 
     public Tile[][] buildPersonalGoalCard() throws Exception {
-        Tile[][] goal = new Tile[5][6];
+        Tile[][] goal = new Tile[6][5];
 
         switch(getID()){
             case 1:
