@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
+import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.fxml.FXML;
@@ -14,42 +15,26 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     private Text playersConnectedText;
     @FXML
     public void initialize(){
-        setConnectedPlayers(2);
-        setMaxPlayers(4);
-        setPlayersConnected(connectedPlayers,maxPlayers);
-        checkNumPlayers();
-
+        while(LoginSceneController.getNumberOfConnectedPlayers() < PlayerSelectionSceneController.getMaxPlayers()){
+            setVisualPlayersConnected(connectedPlayers,maxPlayers);
+        }
+        checkStartGame();
     }
 
     /**
-     * Sets the number of players connected to the game
+     * Sets the visual number of players connected to the game in the gui
      * @param connectedPlayers number of players connected
      * @param maxPlayers maximum number of players
      */
-    public void setPlayersConnected(int connectedPlayers, int maxPlayers) {
+    public void setVisualPlayersConnected(int connectedPlayers, int maxPlayers) {
         playersConnectedText.setText("Players connected: " + connectedPlayers + " of " + maxPlayers);
     }
 
-    /**
-     * Sets the number of players connected to the game
-     * @param connectedPlayers
-     */
-    public void setConnectedPlayers(int connectedPlayers) {
-        this.connectedPlayers = connectedPlayers;
-    }
 
     /**
-     * Sets the maximum number of players
-     * @param maxPlayers
+     * Checks if the number of players connected is equal to the maximum number of players of the game
      */
-    public void setMaxPlayers(int maxPlayers) {
-        this.maxPlayers = maxPlayers;
-    }
-
-    /**
-     * Checks if the number of players connected is equal to the maximum number of players
-     */
-    public void checkNumPlayers() {
+    public void checkStartGame() {
         if(connectedPlayers == maxPlayers)
             GuiController.changeScene("gameScene.fxml", (Scene) null,observers);
     }

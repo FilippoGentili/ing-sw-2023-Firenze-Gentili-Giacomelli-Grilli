@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import javafx.scene.image.ImageView;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class LoginSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -36,6 +37,8 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     private TextField usernameField;
     @FXML
     private Button loginButton;
+
+    private static int numOfPlayers=0;
 
     @FXML
     public void initialize() {
@@ -57,13 +60,14 @@ public class LoginSceneController extends ViewObservable implements GenericScene
                     throw new RuntimeException(e);
                 }
             })).start();
-            GuiController.changeScene("waitingRoomScene.fxml",event,observers);
-        }
-        /*if(è il primo gioccatore che si connette){
+            setNumberOfConnectedPlayers();
+            if(getNumberOfConnectedPlayers()==1){
                 GuiController.changeScene("PlayerSelectionScene.fxml", event, observers);
             }else{
                 GuiController.changeScene("waitingRoomScene.fxml", event, observers);
-            }*/
+            }
+        }
+
     }
 
     /**
@@ -76,4 +80,13 @@ public class LoginSceneController extends ViewObservable implements GenericScene
             loginButtonClicked(event);
         }
     }
+
+    public void setNumberOfConnectedPlayers(){
+        numOfPlayers++;
+    }
+
+    public static int getNumberOfConnectedPlayers(){
+        return numOfPlayers;
+    }
+
 }
