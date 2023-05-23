@@ -1,7 +1,9 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
+import it.polimi.ingsw.View.Gui.Gui;
 import it.polimi.ingsw.View.Gui.GuiController;
+import it.polimi.ingsw.View.VirtualView;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -15,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.w3c.dom.Text;
+
 
 import javafx.scene.image.ImageView;
 import java.rmi.RemoteException;
@@ -30,7 +33,7 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     @FXML
     private Button loginButton;
 
-    private static int numOfPlayers = 0;
+    private static int numberOfConnectedPlayers = 0;
 
     @FXML
     public void initialize() {
@@ -52,12 +55,12 @@ public class LoginSceneController extends ViewObservable implements GenericScene
                     throw new RuntimeException(e);
                 }
             })).start();
-            setNumberOfConnectedPlayers();
-            if(getNumberOfConnectedPlayers()==1){
+            //new Thread(() -> notifyObserver(obs -> obs.askNumberOfPlayer())).start();
+            /*if(getNumberOfConnectedPlayers()==1){
                 GuiController.changeScene("PlayerSelectionScene.fxml", event, observers);
             }else{
                 GuiController.changeScene("waitingRoomScene.fxml", event, observers);
-            }
+            }*/
         }
 
     }
@@ -76,8 +79,8 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     /**
      * This method sets the number of current players connected.
      */
-    public void setNumberOfConnectedPlayers(){
-        numOfPlayers++;
+    public void setNumberOfConnectedPlayers(int numberOfConnectedPlayers){
+        this.numberOfConnectedPlayers++;
     }
 
     /**
@@ -85,7 +88,7 @@ public class LoginSceneController extends ViewObservable implements GenericScene
      * @return numOfPlayers
      */
     public static int getNumberOfConnectedPlayers(){
-        return numOfPlayers;
+        return numberOfConnectedPlayers;
     }
 
 }

@@ -3,6 +3,7 @@ package it.polimi.ingsw.View.Gui;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
+import it.polimi.ingsw.View.Gui.Scene.BannerSceneController;
 import it.polimi.ingsw.View.Gui.Scene.GenericSceneController;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +73,24 @@ public class GuiController {
 
     public static void changeScene(String fxml, GenericSceneController controller) {
         changeScene(fxml, currentScene, controller);
+    }
+
+    public static void showBanner(String title, String message) {
+        FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/BannerScene.fxml"));
+
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (IOException e) {
+            Client.LOGGER.severe(e.getMessage());
+            return;
+        }
+        BannerSceneController alertSceneController = loader.getController();
+        Scene alertScene = new Scene(parent);
+        BannerSceneController.setScene(alertScene);
+        BannerSceneController.setAlertTitle(title);
+        BannerSceneController.setAlertMessage(message);
+        BannerSceneController.displayAlert();
     }
     public Scene getCurrentScene() {
         return currentScene;
