@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Bookshelf extends Observable implements Serializable {
     private static final long serialVersionUID = 8979967644213276996L;
-    private static Tile[][] shelf;
+    private Tile[][] shelf;
 
     private final int rows=6;
     private final int columns=5;
