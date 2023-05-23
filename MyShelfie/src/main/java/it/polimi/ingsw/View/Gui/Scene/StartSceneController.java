@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.image.ImageView;
 
 /**
+ * First scene of the game.
  * This class is the controller for the start scene.
  */
 public class StartSceneController extends ViewObservable implements GenericSceneController{

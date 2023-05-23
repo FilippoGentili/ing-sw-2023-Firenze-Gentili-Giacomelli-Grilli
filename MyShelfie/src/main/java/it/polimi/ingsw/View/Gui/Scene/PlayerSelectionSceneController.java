@@ -12,39 +12,53 @@ import javafx.scene.input.MouseEvent;
 
 import java.rmi.RemoteException;
 
+/**
+ * Third-A scene of the game.
+ * This class is the controller for the player selection scene.
+ */
 public class PlayerSelectionSceneController extends ViewObservable {
 
     @FXML
     private Button enterButton;
-
     @FXML
-    private ComboBox comboBox;
+    private ComboBox numberOfPlayersMenu;
 
-    private int max =4;
-    private int min =2;
     private static int maxPlayers;
-
 
     @FXML
     public void initialize(){
         enterButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::enterButtonClicked);
     }
 
+    /**
+     * This method is only accessible by the first player that enters the game
+     * sets the number of players and puts the player in the waiting room
+     * @param event
+     */
     private void enterButtonClicked(MouseEvent event) {
-        maxPlayers = comboBox.getVisibleRowCount();
+        setMaxPlayers(numberOfPlayersMenu.getVisibleRowCount());
         notifyObserver(obs -> {
             try {
-                obs.updateNumOfPlayers(maxPlayers);
+                obs.updateNumOfPlayers(getMaxPlayers());
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }
         });
         GuiController.changeScene("waitingRoomScene.fxml", event, observers);
     }
+
+    /**
+     * sets the max number of players
+     * @param maxPlayers
+     */
     public void setMaxPlayers(int maxPlayers){
         this.maxPlayers = maxPlayers;
     }
 
+    /**
+     * gets the max number of players
+     * @return
+     */
     public static int getMaxPlayers(){
        return maxPlayers;
     }
