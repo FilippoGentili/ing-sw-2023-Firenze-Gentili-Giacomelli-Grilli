@@ -1,9 +1,7 @@
 package it.polimi.ingsw.Controller;
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.GameState;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.Message.*;
+import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -129,7 +127,8 @@ public class GameController {
         setGameState(PLAY);
         game.initializeLivingRoom();
         game.setPersonalGoalCard();
-        game.getLivingRoom().getInstance().insertTiles(game.getLivingRoom().getInstance().getBag().extract(game.numberOfTiles()));
+        //game.getLivingRoom().getInstance().insertTiles(game.getLivingRoom().getInstance().getBag().extract(game.numberOfTiles()));
+        LivingRoom.getInstance().insertTiles(LivingRoom.getInstance().getBag().extract(game.numberOfTiles()));
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
         broadcastShowMessage("Game started!");
