@@ -22,7 +22,7 @@ public class CommonGoalCard5 extends CommonGoalCard {
         for(row=0, countGroup=0; row<6; row++){
             for(col=0; col<5; col++){
                 count=0;
-                if(!isNull(bookshelf.getTile(row,col))) {
+                if(bookshelf.getTile(row,col).getTileType() != TileType.NULL) {
                     if (!checkTile[row][col])
                         count = FindAdjacentTiles(bookshelf.getTile(row,col),bookshelf,checkTile,4,0);
 
