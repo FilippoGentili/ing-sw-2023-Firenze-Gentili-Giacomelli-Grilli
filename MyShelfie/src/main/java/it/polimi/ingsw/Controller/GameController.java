@@ -32,7 +32,7 @@ public class GameController {
     public GameController(Server server){
         this.game = new Game();
         this.server = server;
-        this.players = new ArrayList<>();
+        this.players = new ArrayList<Player>();
         //this.numOfPlayers = num;
         this.inputController = new InputController(this, virtualViewMap);
         setGameState(LOGIN);

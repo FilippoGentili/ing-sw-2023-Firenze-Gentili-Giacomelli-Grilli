@@ -9,7 +9,6 @@ import java.util.*;
 public class Game extends Observable implements Serializable {
     private static final long serialVersionUID = -4957685347178142310L;
     private static ArrayList<Player> listOfPlayers;
-
     private int numOfPlayers;
     private static Player currentPlayer;
     private static Player nextPlayer;
@@ -21,7 +20,7 @@ public class Game extends Observable implements Serializable {
 
 
     public Game() {
-        listOfPlayers = new ArrayList<>();
+        listOfPlayers = new ArrayList<Player>();
         living = LivingRoom.getInstance();
     }
 
