@@ -20,6 +20,11 @@ public class Bookshelf extends Observable implements Serializable {
 
     public Bookshelf(){
         shelf = new Tile[rows][columns];
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                shelf[i][j] = new Tile(TileType.NULL);
+            }
+        }
         alreadyChecked = new boolean[rows][columns];
     }
 
@@ -29,7 +34,7 @@ public class Bookshelf extends Observable implements Serializable {
      * @return true if the cell is empty, false if there is a tile
      */
     public boolean isEmpty(int i, int j){
-        if(shelf[i][j] != null)
+        if(shelf[i][j].getTileType() != TileType.NULL)
             return false;
         else
             return true;
@@ -79,16 +84,16 @@ public class Bookshelf extends Observable implements Serializable {
      */
     public ArrayList<Tile> getSameAdjacentTiles(Tile curr){
         ArrayList<Tile> adjacents = new ArrayList<Tile>();
-        if(curr.getRow()-1 >= 0 && shelf[curr.getRow()-1][curr.getCol()]!=null)
+        if(curr.getRow()-1 >= 0 && shelf[curr.getRow()-1][curr.getCol()].getTileType() != TileType.NULL)
             if(curr.getTileType().equals(shelf[curr.getRow()-1][curr.getCol()].getTileType()))
                 adjacents.add(shelf[curr.getRow()-1][curr.getCol()]);
-        if(curr.getCol()-1 >= 0 && shelf[curr.getRow()][curr.getCol()-1]!=null)
+        if(curr.getCol()-1 >= 0 && shelf[curr.getRow()][curr.getCol()-1].getTileType() != TileType.NULL)
             if(curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()-1].getTileType()))
                 adjacents.add(shelf[curr.getRow()][curr.getCol()-1]);
-        if(curr.getCol()+1 <= columns-1 && shelf[curr.getRow()][curr.getCol()+1]!=null)
+        if(curr.getCol()+1 <= columns-1 && shelf[curr.getRow()][curr.getCol()+1].getTileType() != TileType.NULL)
             if(curr.getTileType().equals(shelf[curr.getRow()][curr.getCol()+1].getTileType()))
                 adjacents.add(shelf[curr.getRow()][curr.getCol()+1]);
-        if(curr.getRow()+1 <= rows-1 && shelf[curr.getRow()+1][curr.getCol()]!=null)
+        if(curr.getRow()+1 <= rows-1 && shelf[curr.getRow()+1][curr.getCol()].getTileType() != TileType.NULL)
             if(curr.getTileType().equals(shelf[curr.getRow()+1][curr.getCol()].getTileType()))
                 adjacents.add(shelf[curr.getRow()+1][curr.getCol()]);
 
@@ -137,7 +142,7 @@ public class Bookshelf extends Observable implements Serializable {
 
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
-                if(!alreadyChecked[i][j] && getTile(i, j)!=null){
+                if(!alreadyChecked[i][j] && getTile(i, j).getTileType() != TileType.NULL){
                     numAd=1;
                     alreadyChecked[i][j] = true;
                     adj = getSameAdjacentTiles(this.getTile(i,j));
@@ -165,7 +170,7 @@ public class Bookshelf extends Observable implements Serializable {
      */
     public boolean fullBookshelf(){
         for(int j=0; j<columns; j++){
-            if(shelf[0][j] == null)
+            if(shelf[0][j].getTileType() == TileType.NULL)
                 return false;
         }
 

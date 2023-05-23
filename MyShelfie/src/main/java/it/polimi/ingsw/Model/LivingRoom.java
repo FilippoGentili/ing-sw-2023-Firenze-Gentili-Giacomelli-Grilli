@@ -189,16 +189,16 @@ public class LivingRoom extends Observable implements Serializable {
 
             //se non ha almeno uno spazio adiacente libero return false
             if(x >= 1)
-                if(getTile(x-1, y) != null)
+                if(getTile(x-1, y).getTileType() != TileType.NULL)
                     num++;
             if(x <= 7)
-                if(getTile(x+1, y) != null)
+                if(getTile(x+1, y).getTileType() != TileType.NULL)
                     num++;
             if(y >= 1)
-                if(getTile(x, y-1) != null)
+                if(getTile(x, y-1).getTileType() != TileType.NULL)
                     num++;
             if(y <= 7)
-                if(getTile(x, y+1) != null)
+                if(getTile(x, y+1).getTileType() != TileType.NULL)
                     num++;
 
             if(num==4)
