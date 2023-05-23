@@ -577,7 +577,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         //showLivingRoom(player.getGame().getLivingRoom().getInstance());
         showLivingRoom(game.getLivingRoom().getInstance());
         //for(Player p : player.getGame().getPlayers())
-        for(Player p : Game.getPlayers())
+        for(Player p : game.getPlayers())
             showBookshelf(p);
         showCommonGoalCards(game);
         showPersonalGoalCard(player);
