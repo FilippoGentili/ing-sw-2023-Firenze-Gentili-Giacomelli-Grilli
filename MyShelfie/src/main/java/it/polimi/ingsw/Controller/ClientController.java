@@ -110,6 +110,15 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
+            case GAME_STATE:
+                GameStateMessage gameStateMessage = (GameStateMessage) message;
+                queue.add(() -> {
+                    try {
+                        view.updateGameState(gameStateMessage.getPlayer());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             case MATCH_INFO:
                 break;
             case DISCONNECTION_REQUEST:
