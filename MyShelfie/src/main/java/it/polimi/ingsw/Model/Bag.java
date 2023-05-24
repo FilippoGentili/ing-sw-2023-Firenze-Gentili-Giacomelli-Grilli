@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -36,7 +37,7 @@ public class Bag implements Serializable {
      * @return an array list of the tiles chosen from the bag
      */
 
-    public ArrayList<Tile> extract(int numStartTile){
+    public ArrayList<Tile> extract(int numStartTile) throws RemoteException {
 
         ArrayList<Tile> chosen = new ArrayList<Tile>();
         LivingRoom living = LivingRoom.getInstance();

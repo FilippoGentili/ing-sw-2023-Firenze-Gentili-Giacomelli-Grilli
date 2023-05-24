@@ -18,15 +18,15 @@ public interface ViewObserver{
 
     void updateServerInfoRmi(DisconnectionHandler disconnectionHandler,String address,String port) throws RemoteException;
 
-    void updateNickname(String nickname) throws RemoteException;
+    void updateNickname(String nickname) throws IOException;
 
-    void updateNumOfPlayers(int num) throws RemoteException;
+    void updateNumOfPlayers(int num) throws IOException;
 
-    void updateChosenTiles(ArrayList<Tile> chosen) throws RemoteException;
+    void updateChosenTiles(ArrayList<Tile> chosen) throws IOException;
 
-    void updateOrderedTiles(ArrayList<Tile> chosen) throws RemoteException;
+    void updateOrderedTiles(ArrayList<Tile> chosen) throws IOException;
 
-    void updateChosenColumn(int col,ArrayList<Integer> availableColumns) throws RemoteException;
+    void updateChosenColumn(int col,ArrayList<Integer> availableColumns) throws IOException;
 
-    void handleDisconnection() throws RemoteException;
+    void handleDisconnection() throws IOException;
 }

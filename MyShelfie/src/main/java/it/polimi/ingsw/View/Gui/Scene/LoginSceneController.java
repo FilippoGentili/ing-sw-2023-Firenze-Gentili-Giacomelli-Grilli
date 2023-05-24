@@ -20,6 +20,8 @@ import org.w3c.dom.Text;
 
 
 import javafx.scene.image.ImageView;
+
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -52,6 +54,8 @@ public class LoginSceneController extends ViewObservable implements GenericScene
                 try {
                     obs.updateNickname(username);
                 } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             })).start();

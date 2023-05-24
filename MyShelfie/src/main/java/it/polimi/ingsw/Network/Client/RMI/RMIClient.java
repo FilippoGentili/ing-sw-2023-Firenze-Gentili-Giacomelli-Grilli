@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client.RMI;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
 import it.polimi.ingsw.Network.Server.Server;
 
@@ -26,7 +27,8 @@ public class RMIClient extends Client implements RMIClientHandler{
     @Override
     public void connection() throws IOException {
         try {
-            Registry registry = LocateRegistry.getRegistry();
+            int rmiport = Integer.parseInt(port);
+            Registry registry = LocateRegistry.getRegistry(address,rmiport);
             server = (RMIServerHandler) registry.lookup("MyShelfieServer");
             Client.LOGGER.info(() ->"RMIClient client started on port 1099");
         }catch (NotBoundException e){
@@ -40,8 +42,12 @@ public class RMIClient extends Client implements RMIClientHandler{
     }
 
     @Override
-    public void sendMessage(Message message) throws RemoteException {
-        server.receiveMessage(message);
+    public void sendMessage(Message message) throws IOException {
+        if(message.getMessageType() == MessageType.LOGIN_REQUEST){
+            server.login(message.getNickname(),this);
+        }else {
+            server.receiveMessage(message);
+        }
     }
 
     @Override

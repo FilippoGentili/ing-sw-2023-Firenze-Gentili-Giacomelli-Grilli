@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Observer.Observable;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.*;
 
 //le classi che estendono observable sono quelle che notificheranno l'evento all'esterno
@@ -19,7 +20,7 @@ public class Game extends Observable implements Serializable {
     private static final String SERVER_NAME = "Server";
 
 
-    public Game() {
+    public Game() throws RemoteException {
         listOfPlayers = new ArrayList<Player>();
         pickCommonGoalCards();
         living = LivingRoom.getInstance();
@@ -372,7 +373,7 @@ public class Game extends Observable implements Serializable {
      *
      * @return living room
      */
-    public LivingRoom getLivingRoom(){
+    public LivingRoom getLivingRoom() throws RemoteException {
         LivingRoom livingRoom = LivingRoom.getInstance();
         return livingRoom;
     }

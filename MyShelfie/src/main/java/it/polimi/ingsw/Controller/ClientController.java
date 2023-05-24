@@ -72,7 +72,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      * @param message
      */
     @Override
-    public void update(Message message) {
+    public void update(Message message) throws RemoteException {
         switch(message.getMessageType()){
             case GENERIC_MESSAGE:
                 queue.add(() -> {
@@ -200,7 +200,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler,address,port);
-            //this.client.connection();
+            client.connection();
             this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             //attendo il messaggio dal server
@@ -213,39 +213,44 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
    @Override
     public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
-        this.client = new RMIClient(disconnectionHandler,address,port);
-        this.client.addObserver(this);
-        this.clientUpdater = new ClientUpdater(this.client, this);
-       view.nicknameRequest();
+        try {
+            this.client = new RMIClient(disconnectionHandler, address, port);
+            this.client.connection();
+            this.client.addObserver(this);
+            this.clientUpdater = new ClientUpdater(this.client, this);
+            view.nicknameRequest();
+        }catch (IOException e){
+            this.view.loginResult(false,false,null);
+        }
     }
 
     @Override
-    public void updateNickname(String nickname) throws RemoteException {
+    public void updateNickname(String nickname) throws IOException {
         this.client.setUsername(nickname);
         client.sendMessage(new LoginRequest(nickname));
     }
 
     @Override
-    public void updateNumOfPlayers(int num) throws RemoteException {
+    public void updateNumOfPlayers(int num) throws IOException {
         client.sendMessage(new NumOfPlayersReply(client.getUsername(), num));
     }
 
     @Override
-    public void updateChosenTiles(ArrayList<Tile> chosen) throws RemoteException {
+    public void updateChosenTiles(ArrayList<Tile> chosen) throws IOException {
         client.sendMessage(new ChosenTilesReply(client.getUsername(), chosen));
     }
 
     @Override
-    public void updateChosenColumn(int col, ArrayList<Integer> availableColumns) throws RemoteException {
+    public void updateChosenColumn(int col, ArrayList<Integer> availableColumns) throws IOException {
         client.sendMessage(new ColumnReply(client.getUsername(), col,availableColumns));
     }
 
-    public void updateOrderedTiles(ArrayList<Tile> orderedTiles) throws RemoteException {
+    public void updateOrderedTiles(ArrayList<Tile> orderedTiles) throws IOException {
         client.sendMessage(new OrderedTilesReply(client.getUsername(), orderedTiles));
     }
 
     @Override
-    public void handleDisconnection() throws RemoteException {
+    public void handleDisconnection() throws IOException {
         client.sendMessage(new DisconnectionRequest(client.getUsername()));
     }
 

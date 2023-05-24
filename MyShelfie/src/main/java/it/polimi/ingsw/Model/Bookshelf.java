@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Observer.Observable;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,7 @@ public class Bookshelf extends Observable implements Serializable {
 
     private static boolean[][] alreadyChecked;
 
-    public Bookshelf(){
+    public Bookshelf() throws RemoteException {
         shelf = new Tile[rows][columns];
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){

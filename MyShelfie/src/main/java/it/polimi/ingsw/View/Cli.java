@@ -133,6 +133,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 obs.updateNickname(nickname);
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
     }
@@ -145,7 +147,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         notifyObserver(obs -> {
             try {
                 obs.updateNumOfPlayers(num);
-            } catch (RemoteException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -248,7 +250,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         notifyObserver(obs -> {
             try {
                 obs.updateChosenTiles(chosenTiles);
-            } catch (RemoteException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -286,7 +288,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         notifyObserver(obs -> {
             try {
                 obs.updateOrderedTiles(orderedTiles);
-            } catch (RemoteException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -311,7 +313,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         notifyObserver(obs -> {
             try {
                 obs.updateChosenColumn(choice, AvailableColumns);
-            } catch (RemoteException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });

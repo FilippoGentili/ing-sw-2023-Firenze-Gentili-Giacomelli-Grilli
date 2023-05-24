@@ -24,7 +24,7 @@ public class Server implements Runnable{
     private final Object lock;
 
 
-    public Server(){
+    public Server() throws RemoteException {
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
@@ -72,7 +72,7 @@ public class Server implements Runnable{
         return null;
     }
 
-    public void removeClient(Connection connection){
+    public void removeClient(Connection connection) throws RemoteException {
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue().equals(connection)) {
                 connectionMap.remove(map.getKey());

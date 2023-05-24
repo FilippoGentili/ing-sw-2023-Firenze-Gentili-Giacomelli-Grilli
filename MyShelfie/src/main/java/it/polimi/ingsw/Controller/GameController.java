@@ -26,7 +26,7 @@ public class GameController {
     /**
      * constructor
      */
-    public GameController(Server server){
+    public GameController(Server server) throws RemoteException {
         this.game = new Game();
         this.server = server;
         this.players = new ArrayList<Player>();
@@ -349,7 +349,7 @@ public class GameController {
         else return false;
     }
 
-    public void addVirtualView(Player player, VirtualView vv){
+    public void addVirtualView(Player player, VirtualView vv) throws RemoteException {
         if(numOfPlayers==0){
             virtualViewMap = new HashMap<>();
         }
@@ -359,7 +359,7 @@ public class GameController {
         player.getBookshelf().addObserver(vv);
     }
 
-    public void removeVirtualView(String nickname){
+    public void removeVirtualView(String nickname) throws RemoteException {
         VirtualView vv = virtualViewMap.remove(nickname);
         game.removeObserver(vv);
         game.getLivingRoom().getInstance().removeObserver(vv);

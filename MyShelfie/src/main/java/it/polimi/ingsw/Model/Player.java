@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Observer.Observable;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class Player extends Observable implements Serializable {
@@ -39,7 +40,7 @@ public class Player extends Observable implements Serializable {
     /**
      * creates a player identified by a nickname and with a personal goal card and a score, initially of zero points
      */
-    public Player(Game game){
+    public Player(Game game) throws RemoteException {
         this.game = game;
         this.score = 0;
         this.bookshelf = new Bookshelf();
@@ -158,8 +159,8 @@ public class Player extends Observable implements Serializable {
         this.Pointscg2=true;
     }
 
-    public void drawTile(int i, int j){
-        chosenTiles.add(getGame().getLivingRoom().getInstance().pickTile(i, j));
+    public void drawTile(int i, int j) throws RemoteException {
+        chosenTiles.add(LivingRoom.getInstance().pickTile(i, j));
     }
 
     public ArrayList<Tile> getChosenTiles(){

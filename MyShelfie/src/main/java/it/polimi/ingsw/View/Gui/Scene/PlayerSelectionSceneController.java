@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 /**
@@ -41,6 +42,8 @@ public class PlayerSelectionSceneController extends ViewObservable {
             try {
                 obs.updateNumOfPlayers(getMaxPlayers());
             } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
