@@ -254,5 +254,24 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         client.sendMessage(new DisconnectionRequest(client.getUsername()));
     }
 
+    public static boolean validAddress(String address) {
+        if (address == null || address.equals("localhost")) {
+            return true;
+        }
+        return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
+    }
+
+    public static boolean validPort(String port){
+        try {
+            int portNum = Integer.parseInt(port);
+            if (portNum >= 1 && portNum <= 65536) {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            // Handled with the return
+        }
+
+        return false;
+    }
 
 }

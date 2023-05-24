@@ -35,7 +35,6 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     @FXML
     private Button loginButton;
 
-    private static int numberOfConnectedPlayers = 0;
 
     @FXML
     public void initialize() {
@@ -78,21 +77,6 @@ public class LoginSceneController extends ViewObservable implements GenericScene
         if (event.getCode() == KeyCode.ENTER) {
             loginButtonClicked(event);
         }
-    }
-
-    /**
-     * This method sets the number of current players connected.
-     */
-    public void setNumberOfConnectedPlayers(int numberOfConnectedPlayers){
-        this.numberOfConnectedPlayers++;
-    }
-
-    /**
-     * This method returns the number of current players connected.
-     * @return numOfPlayers
-     */
-    public static int getNumberOfConnectedPlayers(){
-        return numberOfConnectedPlayers;
     }
 
 }

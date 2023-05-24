@@ -13,14 +13,12 @@ import javafx.scene.text.Text;
  */
 public class WaitingRoomSceneController extends ViewObservable implements GenericSceneController{
 
-    private int connectedPlayers;
-    private int maxPlayers;
+    private int connectedPlayers=1;
+    private int maxPlayers = PlayerSelectionSceneController.getMaxPlayers();
     @FXML
     private Text playersConnectedText;
     @FXML
     public void initialize(){
-        connectedPlayers = LoginSceneController.getNumberOfConnectedPlayers();
-        maxPlayers = PlayerSelectionSceneController.getMaxPlayers();
 
         while(connectedPlayers < maxPlayers){
             setVisualPlayersConnected();

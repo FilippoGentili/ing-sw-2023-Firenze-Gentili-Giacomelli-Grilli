@@ -11,14 +11,13 @@ import it.polimi.ingsw.View.View;
 import javafx.application.Platform;
 import it.polimi.ingsw.Network.Message.MessageType;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Gui extends ViewObservable implements View {
-
-    private static final String START_SCENE_FXML  = "startScene.fxml";
-    private static final String ERROR = "Error";
+    private static final String ERROR = "Login Error";
     @Override
     public void showMessage(String message) throws RemoteException {
 
@@ -29,13 +28,19 @@ public class Gui extends ViewObservable implements View {
         if (!validNickname || !connection) {
             if (!validNickname && connection) {
                 Platform.runLater(() -> {
-                    GuiController.showBanner(ERROR, "Nickname already taken.");
-                    GuiController.changeScene( "loginScene.fxml",observers);
+                    Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
                 });
             } else {
                 Platform.runLater(() -> {
-                    GuiController.showBanner(ERROR, "Could not contact server.");
-                    GuiController.changeScene(START_SCENE_FXML, observers);
+                    Platform.runLater(() -> GuiController.showBanner(ERROR, "Error connecting to server"));
+                    new Thread(() -> notifyObserver(obs -> {
+                        try {
+                            obs.handleDisconnection();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })).start();
+                    GuiController.changeScene("startScene.fxml", observers);
                 });
             }
         }
@@ -50,7 +55,7 @@ public class Gui extends ViewObservable implements View {
     public void askNumberOfPlayers() throws RemoteException {
         PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
         playerSelectionSceneController.addAllObserver(observers);
-        Platform.runLater(() -> GuiController.changeScene("playerSelectionScene.fxml", (GenericSceneController) playerSelectionSceneController));
+        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
     }
 
     @Override
@@ -75,7 +80,10 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void someoneDisconnected(String nickname) throws RemoteException {
-
+        Platform.runLater(() -> {
+            GuiController.showBanner("GAME OVER", "The player disconnected.");
+            GuiController.changeScene("startScene.fxml", observers);
+        });
     }
 
     @Override

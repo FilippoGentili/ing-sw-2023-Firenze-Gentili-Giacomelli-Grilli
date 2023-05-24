@@ -17,7 +17,7 @@ import java.rmi.RemoteException;
  * Third-A scene of the game.
  * This class is the controller for the player selection scene.
  */
-public class PlayerSelectionSceneController extends ViewObservable {
+public class PlayerSelectionSceneController extends ViewObservable implements GenericSceneController {
 
     @FXML
     private Button enterButton;
@@ -37,12 +37,10 @@ public class PlayerSelectionSceneController extends ViewObservable {
      * @param event
      */
     private void enterButtonClicked(MouseEvent event) {
-        setMaxPlayers(numberOfPlayersMenu.getVisibleRowCount());
+        int maxPlayers = numberOfPlayersMenu.getVisibleRowCount();
         notifyObserver(obs -> {
             try {
-                obs.updateNumOfPlayers(getMaxPlayers());
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
+                obs.updateNumOfPlayers(maxPlayers);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -50,13 +48,6 @@ public class PlayerSelectionSceneController extends ViewObservable {
         GuiController.changeScene("waitingRoomScene.fxml", event, observers);
     }
 
-    /**
-     * sets the max number of players
-     * @param maxPlayers
-     */
-    public void setMaxPlayers(int maxPlayers){
-        this.maxPlayers = maxPlayers;
-    }
 
     /**
      * gets the max number of players

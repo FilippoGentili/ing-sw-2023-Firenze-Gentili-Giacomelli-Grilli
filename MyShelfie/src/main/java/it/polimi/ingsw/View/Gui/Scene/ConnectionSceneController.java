@@ -1,8 +1,11 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
+import javafx.application.Platform;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.TextField;
@@ -10,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+
 
 /**
  * Second scene of the game.
@@ -25,6 +29,9 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     @FXML
     private TextField addressBox;
 
+    private final PseudoClass ERROR = PseudoClass.getPseudoClass("error");
+    private static final String ERROR_MESSAGE = "Network Error";
+
     @FXML
     public void initialize(){
         socketButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::socketButtonClicked);
@@ -38,15 +45,29 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private void socketButtonClicked(MouseEvent event){
         String port = portBox.getText();
         String address = addressBox.getText();
-        notifyObserver(obs -> {
-            try {
-                obs.updateServerInfoSocket(this,address,port);
-                GuiController.changeScene("loginScene.fxml",event,observers);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-                //fai partire un allert dicendo che non è valida
-            }
-        });
+        boolean validPort = ClientController.validPort(port);
+        boolean validAddress = ClientController.validAddress(address);
+
+        addressBox.pseudoClassStateChanged(ERROR, !validAddress);
+        portBox.pseudoClassStateChanged(ERROR, !validPort);
+
+        if(validPort && validAddress){
+            new Thread(() -> notifyObserver(obs -> {
+                try {
+                    obs.updateServerInfoSocket(this,address,port);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            })).start();
+        }else if(validPort){
+            Platform.runLater(() -> {
+                GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
+            });
+        }else{
+            Platform.runLater(() -> {
+                GuiController.showBanner(ERROR_MESSAGE, "Invalid port");
+            });
+        }
     }
 
     /**
@@ -56,14 +77,29 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private void rmiButtonClicked(MouseEvent event){
         String port = portBox.getText();
         String address = addressBox.getText();
-        notifyObserver(obs -> {
-            try {
-                obs.updateServerInfoRmi(this,address,port);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        GuiController.changeScene("loginScene.fxml",event,observers);
+
+        boolean validPort = ClientController.validPort(port);
+        boolean validAddress = ClientController.validAddress(address);
+
+        addressBox.pseudoClassStateChanged(ERROR, !validAddress);
+        portBox.pseudoClassStateChanged(ERROR, !validPort);
+        if(validPort && validAddress) {
+            new Thread(() -> notifyObserver(obs -> {
+                try {
+                    obs.updateServerInfoRmi(this, address, port);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            })).start();
+        }else if(validPort){
+            Platform.runLater(() -> {
+                GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
+            });
+        }else{
+            Platform.runLater(() -> {
+                GuiController.showBanner(ERROR_MESSAGE, "Invalid port");
+            });
+        }
     }
 
     @Override
