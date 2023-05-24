@@ -99,7 +99,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showWinner(String winner) {
+    public void showWinner(String winner) throws RemoteException {
         connection.sendMessage(new WinnerMessage(winner));
     }
 }

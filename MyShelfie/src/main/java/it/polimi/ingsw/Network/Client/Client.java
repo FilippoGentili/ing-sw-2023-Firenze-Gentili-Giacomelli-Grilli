@@ -19,7 +19,6 @@ public abstract class Client extends Observable implements Serializable {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
-    private int port = 49673;
     transient DisconnectionHandler disconnectionHandler;
     transient Timer timer;
 

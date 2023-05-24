@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Client.PingTimer;
 import it.polimi.ingsw.Network.Message.LoginReply;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -31,9 +32,13 @@ public class Server implements Runnable{
 
     public void startServers() {
 
-        int port = 1098;
-        SocketServer ss = new SocketServer(this, port);
+        int Socketport = 1098;
+        SocketServer ss = new SocketServer(this, Socketport);
         ss.startSocketServer();
+
+        int rmiPort = 1099;
+        RMIServer rs = new RMIServer(this,rmiPort);
+        rs.startRMIServer();
     }
 
     public void login(String nickname, Connection connection) throws IOException {
@@ -95,16 +100,7 @@ public class Server implements Runnable{
 
     }
 
-    public void receiveMessage(Message message){
-        if(message!=null && message.getNickname()!=null){
-            String messageContent = message.toString();
-            LOGGER.log(Level.INFO, messageContent);
-        } else {
-            LOGGER.log(Level.INFO, "Received invalid message: {0}", message);
-        }
-    }
-
-    public void SendMessageBroadcast(Message message) {
+    public void SendMessageBroadcast(Message message) throws RemoteException {
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue()!=null && map.getValue().checkConnection()){
                 map.getValue().sendMessage(message);

@@ -157,7 +157,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             case WINNER:
                 WinnerMessage winnerMessage = (WinnerMessage) message;
                 queue.add(() -> {
-                    view.showWinner(winnerMessage.getWinnerNickname());
+                    try {
+                        view.showWinner(winnerMessage.getWinnerNickname());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
                 break;
             case SERVER_INFO:

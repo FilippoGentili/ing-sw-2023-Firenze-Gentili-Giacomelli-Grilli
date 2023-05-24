@@ -188,16 +188,14 @@ public class GameController {
         if(inputController.livingRoomChosenTiles(chosenTilesMessage)){
             ArrayList<Tile> TemporaryChosenTiles = new ArrayList<>();
 
-            for(int i=0; i<chosen.size(); i++)
-                TemporaryChosenTiles.add(chosen.get(i));
+            TemporaryChosenTiles.addAll(chosen);
 
             currentPlayer.setChosenTiles(TemporaryChosenTiles);
-            ArrayList<Integer> availableColumns = new ArrayList<>();
-            availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
+            ArrayList<Integer> availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
 
             server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }else{
-            server.sendMessage(new ChosenTilesRequest(game.getLivingRoom().getInstance()),currentPlayer.getNickname());
+            server.sendMessage(new ChosenTilesRequest(LivingRoom.getInstance()),currentPlayer.getNickname());
         }
     }
 
