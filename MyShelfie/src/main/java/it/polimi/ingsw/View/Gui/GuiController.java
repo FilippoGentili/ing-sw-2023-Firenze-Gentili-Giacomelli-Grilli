@@ -76,23 +76,23 @@ public class GuiController {
     }
 
     public static void showBanner(String title, String message) {
-        FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/BannerScene.fxml"));
-
+        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/bannerScene.fxml"));
         Parent parent;
+
         try {
-            parent = loader.load();
+            parent = fxmlLoader.load();
         } catch (IOException e) {
             Client.LOGGER.severe(e.getMessage());
             return;
         }
-        BannerSceneController alertSceneController = loader.getController();
-        Scene alertScene = new Scene(parent);
-        BannerSceneController.setScene(alertScene);
-        BannerSceneController.setAlertTitle(title);
-        BannerSceneController.setAlertMessage(message);
-        BannerSceneController.displayAlert();
+        BannerSceneController bannerSceneController = fxmlLoader.getController();
+        Scene bannerScene = new Scene(parent);
+        bannerSceneController.setScene(bannerScene);
+        bannerSceneController.setBannerTitle(title);
+        bannerSceneController.setBannerMessage(message);
+        bannerSceneController.showBanner();
     }
-    public Scene getCurrentScene() {
+    public static Scene getCurrentScene() {
         return currentScene;
     }
 
