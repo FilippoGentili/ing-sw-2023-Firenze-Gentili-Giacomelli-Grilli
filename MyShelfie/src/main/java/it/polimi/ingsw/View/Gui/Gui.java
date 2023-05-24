@@ -23,6 +23,13 @@ public class Gui extends ViewObservable implements View {
 
     }
 
+    /**
+     * This method is used to get the login result after the player has chosen the nickname
+     * @param validNickname
+     * @param connection
+     * @param nickname
+     * @throws RemoteException
+     */
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
         if (!validNickname || !connection) {
@@ -46,16 +53,25 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
+    /**
+     * This method is used to ask the nickname to the player
+     * @throws RemoteException if there are connection problems
+     */
     @Override
     public void nicknameRequest() throws RemoteException {
         Platform.runLater(() -> GuiController.changeScene( "loginScene.fxml",observers));
     }
 
+    /**
+     * This method is used to ask the max number of players in the game
+     * @throws RemoteException if there are connection problems
+     */
     @Override
     public void askNumberOfPlayers() throws RemoteException {
-        PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
+        /* PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
         playerSelectionSceneController.addAllObserver(observers);
-        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
+        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));*/
+        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",observers));
     }
 
     @Override
@@ -73,11 +89,22 @@ public class Gui extends ViewObservable implements View {
 
     }
 
+    /**
+     * This method is used to show the list of players in the game
+     * @param listOfPlayers is the list of players in the game
+     * @param player is the player that is playing
+     * @throws RemoteException if there are connection problems
+     */
     @Override
     public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException {
 
     }
 
+    /**
+     * This method is used to show the message that a player has disconnected
+     * @param nickname
+     * @throws RemoteException
+     */
     @Override
     public void someoneDisconnected(String nickname) throws RemoteException {
         Platform.runLater(() -> {
@@ -113,6 +140,9 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showWinner(String winner) {
-
+        Platform.runLater(() -> {
+            GuiController.showEnd(winner);
+            GuiController.changeScene("endScene.fxml", observers);
+        });
     }
 }

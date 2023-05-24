@@ -37,7 +37,8 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
      * @param event
      */
     private void enterButtonClicked(MouseEvent event) {
-        int maxPlayers = numberOfPlayersMenu.getVisibleRowCount();
+        String selectedValue = numberOfPlayersMenu.getSelectionModel().getSelectedItem().toString();
+        int maxPlayers = Integer.parseInt(selectedValue.split(" ")[0]);
         notifyObserver(obs -> {
             try {
                 obs.updateNumOfPlayers(maxPlayers);
@@ -47,14 +48,4 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
         });
         GuiController.changeScene("waitingRoomScene.fxml", event, observers);
     }
-
-
-    /**
-     * gets the max number of players
-     * @return
-     */
-    public static int getMaxPlayers(){
-       return maxPlayers;
-    }
-
 }

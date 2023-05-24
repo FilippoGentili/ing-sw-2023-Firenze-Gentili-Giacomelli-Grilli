@@ -4,6 +4,7 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.BannerSceneController;
+import it.polimi.ingsw.View.Gui.Scene.EndSceneController;
 import it.polimi.ingsw.View.Gui.Scene.GenericSceneController;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -98,5 +99,22 @@ public class GuiController {
 
     public GenericSceneController getGenericScene() {
         return genericSceneController;
+    }
+
+    public static void showEnd(String nickname) {
+        FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/endScene.fxml"));
+
+        Parent parent;
+        try {
+            parent = loader.load();
+        } catch (IOException e) {
+            Client.LOGGER.severe(e.getMessage());
+            return;
+        }
+        EndSceneController endSceneController = loader.getController();
+        Scene winScene = new Scene(parent);
+        endSceneController.setScene(winScene);
+        endSceneController.setWinner(nickname);
+        endSceneController.displayEndScene();
     }
 }

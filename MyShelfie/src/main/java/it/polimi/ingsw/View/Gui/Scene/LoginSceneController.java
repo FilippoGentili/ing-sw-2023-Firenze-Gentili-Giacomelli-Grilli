@@ -13,17 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import org.w3c.dom.Text;
-
-
-import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 /**
  * Third scene of the game.
@@ -52,20 +44,11 @@ public class LoginSceneController extends ViewObservable implements GenericScene
             new Thread(() -> notifyObserver(obs -> {
                 try {
                     obs.updateNickname(username);
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             })).start();
-            //new Thread(() -> notifyObserver(obs -> obs.askNumberOfPlayer())).start();
-            /*if(getNumberOfConnectedPlayers()==1){
-                GuiController.changeScene("PlayerSelectionScene.fxml", event, observers);
-            }else{
-                GuiController.changeScene("waitingRoomScene.fxml", event, observers);
-            }*/
         }
-
     }
 
     /**
