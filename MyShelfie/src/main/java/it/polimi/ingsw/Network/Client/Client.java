@@ -1,26 +1,23 @@
 package it.polimi.ingsw.Network.Client;
 
-import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.View.Cli;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class Client extends Observable implements Serializable {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
-    transient DisconnectionHandler disconnectionHandler;
-    transient Timer timer;
+    protected transient DisconnectionHandler disconnectionHandler;
+    protected transient Timer timer;
     private String username;
     public final transient ArrayList<Message> messageQueue;
 

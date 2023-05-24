@@ -1,11 +1,10 @@
 package it.polimi.ingsw.Network.Client.RMI;
 
 import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.Network.Client.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
-import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;

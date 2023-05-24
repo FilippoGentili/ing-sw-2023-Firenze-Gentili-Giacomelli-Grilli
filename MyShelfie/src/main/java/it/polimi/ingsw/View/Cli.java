@@ -1,7 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Network.Client.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Observer.ViewObservable;
 
 import java.io.IOException;

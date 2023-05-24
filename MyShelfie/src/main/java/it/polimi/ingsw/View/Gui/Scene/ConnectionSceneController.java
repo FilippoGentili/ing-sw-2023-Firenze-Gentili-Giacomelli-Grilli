@@ -1,23 +1,14 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
-import it.polimi.ingsw.Network.Client.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.event.Event;
 
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 
-import javax.swing.text.html.ImageView;
-import java.awt.*;
 import java.io.IOException;
 
 /**

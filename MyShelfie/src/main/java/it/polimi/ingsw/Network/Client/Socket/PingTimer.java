@@ -1,4 +1,6 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Network.Client.Socket;
+
+import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 
 import java.util.TimerTask;
 

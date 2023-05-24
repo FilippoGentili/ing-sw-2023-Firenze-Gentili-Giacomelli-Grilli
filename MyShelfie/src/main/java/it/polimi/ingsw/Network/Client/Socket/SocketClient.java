@@ -1,5 +1,8 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Network.Client.Socket;
 
+import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.Socket.PingTimer;
 import it.polimi.ingsw.Network.Message.*;
 
 import java.io.*;
@@ -25,7 +28,7 @@ public class SocketClient extends Client implements Runnable{
 
     private static final int HEARTBEAT = 10000;
 
-    public SocketClient(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException {
+    public SocketClient(DisconnectionHandler disconnectionHandler, String address, String port) throws IOException {
         super(disconnectionHandler);
         this.address = address;
         this.port = port;
