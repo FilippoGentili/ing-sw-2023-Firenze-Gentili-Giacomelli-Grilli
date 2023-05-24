@@ -5,13 +5,17 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 //manda eventi
 
-public class Observable{
+public class Observable extends UnicastRemoteObject {
 
     public ArrayList<Observer> observers = new ArrayList<>();
+
+    protected Observable() throws RemoteException {
+    }
 
     public void addObserver(Observer obs){
         observers.add(obs);

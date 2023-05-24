@@ -13,6 +13,8 @@ public class SocketClient extends Client implements Runnable{
 
     private static final long serialVersionUID = -7451963301034418721L;
     private transient Socket socket;
+    private final String address;
+    private final String port;
 
     private transient ObjectOutputStream output;
     private transient ObjectInputStream input;
@@ -25,6 +27,12 @@ public class SocketClient extends Client implements Runnable{
 
     public SocketClient(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException {
         super(disconnectionHandler);
+        this.address = address;
+        this.port = port;
+    }
+
+    @Override
+    public void connection() throws IOException {
         this.socket = new Socket();
         int portNum = Integer.parseInt(port);
         this.socket.connect(new InetSocketAddress(address, portNum), HEARTBEAT);
@@ -34,20 +42,7 @@ public class SocketClient extends Client implements Runnable{
 
         this.thread = new Thread(this);
         thread.start();
-        Client.LOGGER.info(() ->"Socket client started on port 49674");
-    }
-
-    @Override
-    public void connection() throws IOException {
-        this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress("127.0.0.1", 49673), HEARTBEAT);
-        this.output = new ObjectOutputStream(socket.getOutputStream());
-        this.input = new ObjectInputStream(socket.getInputStream());
-        //sendMessage(new LoginRequest(getUsername()));
-
-        this.thread = new Thread(this);
-        thread.start();
-        Client.LOGGER.info(() ->"Socket client started on port 49674");
+        Client.LOGGER.info(() ->"Socket client started on port 1098");
     }
 
     @Override

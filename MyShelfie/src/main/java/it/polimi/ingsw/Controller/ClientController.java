@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -211,13 +212,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
    @Override
-    public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler) throws RemoteException {
-        //this.client = new RMIClient(client.getUsername(), this);
+    public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
+        this.client = new RMIClient(disconnectionHandler,address,port);
         this.client.addObserver(this);
-        view.nicknameRequest();
         this.clientUpdater = new ClientUpdater(this.client, this);
-        this.clientUpdater.run();
-        this.clientUpdater.start();
+       view.nicknameRequest();
     }
 
     @Override

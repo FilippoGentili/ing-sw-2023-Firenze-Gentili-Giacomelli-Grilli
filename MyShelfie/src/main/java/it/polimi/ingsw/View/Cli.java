@@ -86,7 +86,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         if (rmi) {
             notifyObserver(obs -> {
                 try {
-                    obs.updateServerInfoRmi(this);
+                    obs.updateServerInfoRmi(this,address,port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

@@ -21,12 +21,11 @@ public abstract class Client extends Observable implements Serializable {
     private static final long serialVersionUID = -3679938076760254410L;
     transient DisconnectionHandler disconnectionHandler;
     transient Timer timer;
-
     private String username;
-
     public final transient ArrayList<Message> messageQueue;
 
-    public Client(DisconnectionHandler disconnectionHandler){
+
+    public Client(DisconnectionHandler disconnectionHandler) throws RemoteException {
         this.messageQueue = new ArrayList<>();
         this.disconnectionHandler = disconnectionHandler;
         this.timer = new Timer();

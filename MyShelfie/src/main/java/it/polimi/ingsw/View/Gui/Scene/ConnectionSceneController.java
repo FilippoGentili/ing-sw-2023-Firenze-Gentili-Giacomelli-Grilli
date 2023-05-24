@@ -63,9 +63,11 @@ public class ConnectionSceneController extends ViewObservable implements Generic
      * @param event
      */
     private void rmiButtonClicked(MouseEvent event){
+        String port = portBox.getText();
+        String address = addressBox.getText();
         notifyObserver(obs -> {
             try {
-                obs.updateServerInfoRmi(this);
+                obs.updateServerInfoRmi(this,address,port);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

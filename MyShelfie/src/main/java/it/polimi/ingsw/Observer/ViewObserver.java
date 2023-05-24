@@ -16,7 +16,7 @@ public interface ViewObserver{
 
     void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException;
 
-    void updateServerInfoRmi(DisconnectionHandler disconnectionHandler) throws RemoteException;
+    void updateServerInfoRmi(DisconnectionHandler disconnectionHandler,String address,String port) throws RemoteException;
 
     void updateNickname(String nickname) throws RemoteException;
 
