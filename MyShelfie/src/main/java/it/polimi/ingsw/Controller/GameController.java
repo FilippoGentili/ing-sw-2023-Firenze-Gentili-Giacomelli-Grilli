@@ -31,7 +31,7 @@ public class GameController {
         this.server = server;
         this.players = new ArrayList<Player>();
         //this.numOfPlayers = num;
-        this.inputController = new InputController(this, virtualViewMap);
+        this.inputController = new InputController(this, server);
         setGameState(LOGIN);
         //virtualViewMap = new HashMap<>();
     }
@@ -173,7 +173,7 @@ public class GameController {
                 map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
         }
 
-        server.sendMessage(new ChosenTilesRequest(game.getLivingRoom().getInstance()),currentPlayer.getNickname());
+        server.sendMessage(new ChosenTilesRequest(LivingRoom.getInstance()),currentPlayer.getNickname());
     }
 
     /**

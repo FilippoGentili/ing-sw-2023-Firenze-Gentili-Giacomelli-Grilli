@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.View;
 import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.Network.Message.*;
@@ -14,17 +16,15 @@ import java.util.Map;
  * this class is used to handle and check all the input messages arriving from the client
  */
 public class InputController {
-    private GameController gameController;
-    private Map<Player, VirtualView> virtualViewMap;
+    private final GameController gameController;
+    private final Server server;
 
     /**
      * constructor
-     * @param gameController
-     * @param virtualViewMap
      */
-    public InputController(GameController gameController, Map<Player, VirtualView> virtualViewMap){
+    public InputController(GameController gameController, Server server){
         this.gameController = gameController;
-        this.virtualViewMap = virtualViewMap;
+        this.server = server;
     }
 
     /**
@@ -63,15 +63,13 @@ public class InputController {
         int max = gameController.getCurrentPlayer().getBookshelf().getMaxPossibleTiles();
 
         if(chosenTiles.size() > max){
-            virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("You can't choose so many tiles");
-            ArrayList<Tile> otherTiles = new ArrayList<>();
-            virtualViewMap.get(gameController.getCurrentPlayer()).TilesRequest(gameController.getGame().getLivingRoom().getInstance());
-            return false;       //ma qui è giusto ritornare false dopo aver fatto una seconda TilesRequest??
+            server.sendMessage(new GenericMessage("You can't choose so many tiles"), gameController.getCurrentPlayer().getNickname());
+            return false;
         }
 
-        boolean valid = gameController.getGame().getLivingRoom().getInstance().checkValid(chosenTiles);
+        boolean valid = LivingRoom.getInstance().checkValid(chosenTiles);
         if(!valid){
-            virtualViewMap.get(gameController.getCurrentPlayer()).showMessage("the selected tiles are not valid");
+            server.sendMessage(new GenericMessage("the selected tiles are not valid"),gameController.getCurrentPlayer().getNickname());
             return false;
         }
 
