@@ -84,6 +84,8 @@ public class GameController {
             game.addPlayer(player);
             server.sendMessage(new LoginResult(nickname,true,true),nickname);
             server.sendMessage(new NumOfPlayersRequest(), nickname);
+            if(virtualViewMap.size() == numOfPlayers)   //da togliere per evitare di giocare da soli
+                startGame();
         }else if(virtualViewMap.size() < numOfPlayers){
             if (inputController.checkNickname(nickname, vv)) {
                 addVirtualView(player, vv);
@@ -120,8 +122,12 @@ public class GameController {
                 break;
             case ORDERED_TILES_REPLY:
                 InsertTiles(message);
+                break;
+            case DISCONNECTION_REPLY:
+                handleDisconnection(message);
         }
     }
+
 
     public void startGame() throws RemoteException {
         setGameState(PLAY);
@@ -233,6 +239,13 @@ public class GameController {
         CheckCommonGoal(currentPlayer);
         /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
     }
+
+    public void handleDisconnection(Message message) throws RemoteException {
+        DisconnectionReply disconnectionReply = (DisconnectionReply) message;
+        server.broadcastMessage(disconnectionReply);
+    }
+
+
 
     /**
      * this method check if the player has reached the common goals. if he did, he receives his points, otherwise nothing

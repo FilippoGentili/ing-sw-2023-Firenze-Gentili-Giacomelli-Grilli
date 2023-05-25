@@ -11,7 +11,7 @@ public class LivingRoom extends Observable implements Serializable {
     private static final long serialVersionUID = 5403724841040315028L;
     private static LivingRoom single_instance = null;
     private static int numberOfTiles=0;
-    private static Tile[][] board;
+    private Tile[][] board;
     private static boolean[][] valid;
     private final int rows = 9;
     private final int columns = 9;

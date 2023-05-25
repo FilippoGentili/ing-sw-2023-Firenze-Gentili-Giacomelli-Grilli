@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Network.Message.DisconnectionReply;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
@@ -87,8 +88,9 @@ public class Server implements Runnable{
 
             if(!gameController.waitingForPlayers()){
                 for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
-                    if(map.getValue().equals(connection))
+                    if(map.getValue().equals(connection)){
                         gameController.broadcastShowMessage(map.getKey() + " disconnected from the server. Game finished :(");
+                    }
                     break;
                 }
                     //fine partita, cancella tutto
@@ -97,7 +99,7 @@ public class Server implements Runnable{
 
     }
 
-    public void SendMessageBroadcast(Message message) throws RemoteException {
+    public void broadcastMessage(Message message) throws RemoteException {
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue()!=null && map.getValue().checkConnection()){
                 map.getValue().sendMessage(message);
