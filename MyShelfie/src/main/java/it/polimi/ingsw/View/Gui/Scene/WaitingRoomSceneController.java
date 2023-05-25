@@ -1,8 +1,9 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
-import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
+import it.polimi.ingsw.View.View;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -13,33 +14,31 @@ import javafx.scene.text.Text;
  */
 public class WaitingRoomSceneController extends ViewObservable implements GenericSceneController{
 
-    private int connectedPlayers;
+    private AnimationTimer timer;
     private int maxPlayers;
+
     @FXML
     private Text playersConnectedText;
     @FXML
     public void initialize(){
 
-        connectedPlayers =0;
-        maxPlayers = 4;
-       /* while(connectedPlayers < maxPlayers){
-            setVisualPlayersConnected();
-        }
+        timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                setVisualPlayersConnected();
+            }
+        };
 
-        checkStartGame();*/
+        timer.start();
     }
 
 
     public void setVisualPlayersConnected() {
-        playersConnectedText.setText("Players connected: " + connectedPlayers + " of " + maxPlayers);
+        playersConnectedText.setText("Players connected: "   + " of " + maxPlayers);
     }
 
-
-    /**
-     * Checks if the number of players connected is equal to the maximum number of players of the game
-     */
-    public void checkStartGame() {
-        if(connectedPlayers == maxPlayers)
-            GuiController.changeScene("gameScene.fxml", (Scene) null,observers);
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
     }
+
 }

@@ -47,6 +47,5 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
                 throw new RuntimeException(e);
             }
         });
-        Platform.runLater(() -> {GuiController.changeScene("waitingRoomScene.fxml", event, observers);} );
     }
 }

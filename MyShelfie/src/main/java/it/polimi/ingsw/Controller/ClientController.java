@@ -197,6 +197,15 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
+            case WAITING_ROOM:
+                WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
+                queue.add(() -> {
+                    try {
+                        view.showWaitingRoom(waitingRoomMessage.getMaxPlayers());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             default:
                 break;
         }

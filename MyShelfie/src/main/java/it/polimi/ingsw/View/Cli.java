@@ -609,6 +609,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
+    public void showWaitingRoom(int maxPlayers) throws RemoteException {
+        System.out.println("Waiting for other players to join. Max players: " + maxPlayers);
+    }
+
+    @Override
     public void showWinner(String winner) {
 
     }

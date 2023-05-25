@@ -97,7 +97,7 @@ public class GuiController {
         return currentScene;
     }
 
-    public GenericSceneController getGenericScene() {
+    public static GenericSceneController getCurrentController() {
         return genericSceneController;
     }
 

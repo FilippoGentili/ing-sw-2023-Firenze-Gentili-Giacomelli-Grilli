@@ -27,6 +27,7 @@ public enum MessageType {
     BOOKSHELF,
     CHOSEN_TILES_REPLY,
     PLAYER_MESSAGE,
-    GAME_STATE
+    GAME_STATE,
+    WAITING_ROOM
 }
 

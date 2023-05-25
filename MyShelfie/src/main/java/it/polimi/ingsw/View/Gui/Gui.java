@@ -5,16 +5,12 @@ import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.*;
 import it.polimi.ingsw.View.View;
 import javafx.application.Platform;
-import it.polimi.ingsw.Network.Message.MessageType;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
@@ -34,19 +30,10 @@ public class Gui extends ViewObservable implements View {
     public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
         if (!validNickname || !connection) {
             if (!validNickname && connection) {
-                Platform.runLater(() -> {
-                    Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
-                });
+                Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
             } else {
                 Platform.runLater(() -> {
-                    Platform.runLater(() -> GuiController.showBanner(ERROR, "Error connecting to server"));
-                    new Thread(() -> notifyObserver(obs -> {
-                        try {
-                            obs.handleDisconnection();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    })).start();
+                    GuiController.showBanner(ERROR, "Error connecting to server");
                     GuiController.changeScene("startScene.fxml", observers);
                 });
             }
@@ -108,7 +95,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void someoneDisconnected(String nickname) throws RemoteException {
         Platform.runLater(() -> {
-            GuiController.showBanner("GAME OVER", "The player disconnected.");
+            GuiController.showBanner("GAME OVER", "The player" + nickname + " disconnected");
             GuiController.changeScene("startScene.fxml", observers);
         });
     }
@@ -137,11 +124,36 @@ public class Gui extends ViewObservable implements View {
     public void updateGameState(Player player, Game game) throws Exception {
 
     }
+    @Override
+    public void showWaitingRoom(int maxPlayers) throws RemoteException {
+
+        WaitingRoomSceneController waitingRoomSceneController;
+
+        try {
+            waitingRoomSceneController = (WaitingRoomSceneController) GuiController.getCurrentController();
+            waitingRoomSceneController.setMaxPlayers(maxPlayers);
+            Platform.runLater(waitingRoomSceneController::setVisualPlayersConnected);
+        } catch (ClassCastException e) {
+            waitingRoomSceneController = new WaitingRoomSceneController();
+            waitingRoomSceneController.addAllObserver(observers);
+            waitingRoomSceneController.setMaxPlayers(maxPlayers);
+            WaitingRoomSceneController waitingRoomSceneController1 = waitingRoomSceneController;
+            Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController1));
+        }
+
+        /*Platform.runLater(() -> {
+            WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
+            waitingRoomSceneController.addAllObserver(observers);
+            waitingRoomSceneController.setMaxPlayers(maxPlayers);
+            GuiController.changeScene("waitingRoomScene.fxml", waitingRoomSceneController);
+        });*/
+    }
 
     @Override
     public void showWinner(String winner) {
         Platform.runLater(() -> {
             GuiController.showEnd(winner);
+            GuiController.showBanner("GAME OVER", "The winner is " + winner);
             GuiController.changeScene("endScene.fxml", observers);
         });
     }
