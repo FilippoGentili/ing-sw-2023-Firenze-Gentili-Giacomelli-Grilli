@@ -22,11 +22,11 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
 
         connectedPlayers =0;
         maxPlayers = 4;
-        while(connectedPlayers < maxPlayers){
+       /* while(connectedPlayers < maxPlayers){
             setVisualPlayersConnected();
         }
 
-        checkStartGame();
+        checkStartGame();*/
     }
 
 

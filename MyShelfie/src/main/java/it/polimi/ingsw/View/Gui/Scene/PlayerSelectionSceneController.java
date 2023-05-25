@@ -2,6 +2,7 @@ package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -46,6 +47,6 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
                 throw new RuntimeException(e);
             }
         });
-        GuiController.changeScene("waitingRoomScene.fxml", event, observers);
+        Platform.runLater(() -> {GuiController.changeScene("waitingRoomScene.fxml", event, observers);} );
     }
 }
