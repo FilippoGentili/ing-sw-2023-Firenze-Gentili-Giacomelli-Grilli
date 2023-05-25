@@ -16,7 +16,6 @@ public abstract class Message implements Serializable {
     public Message(String nickname, MessageType messageType/*byte[] data*/){
             this.nickname = nickname;
             this.type = messageType;
-            /*this.data = data;*/
         }
 
         public String getNickname(){
@@ -32,25 +31,7 @@ public abstract class Message implements Serializable {
             return "Message from: "+ nickname + ", of type: " + type + "}";
         }
 
-        /*public byte[] getData() {
-             return data;
-        }
-
-         */
-
-        /*public void setData(byte[] data) {
-             this.data = data;
-         }
-
-         */
 }
 
 
-/* In socket client e socket server aggiungere:
-    private final ObjectOutputStream outputStream;
-    private final ObjectInputStream inputStream;
-
-    this.outputStm = new ObjectOutputStream(socket.getOutputStream());
-    this.inputStm = new ObjectInputStream(socket.getInputStream());
- */
 

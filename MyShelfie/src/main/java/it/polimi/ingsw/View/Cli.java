@@ -157,7 +157,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void askNumberOfPlayers() {
         int num;
         System.out.println("Insert the number of players you want to play with: ");
-        num = checkValidNumOfPlayers();
+            num = checkValidNumOfPlayers();
         notifyObserver(obs -> {
             try {
                 obs.updateNumOfPlayers(num);
@@ -609,9 +609,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
+
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) throws RemoteException {
         System.out.println("Waiting for other players to join."+ numOfPlayersConnected + "/" + maxPlayers + " players connected.");
     }
+
 
     @Override
     public void showWinner(String winner) {

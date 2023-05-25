@@ -197,7 +197,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
-            case WAITING_ROOM:
+            /*case WAITING_ROOM:
                 WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
                 queue.add(() -> {
                     try {
@@ -206,6 +206,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         throw new RuntimeException(e);
                     }
                 });
+
+             */
             default:
                 break;
         }

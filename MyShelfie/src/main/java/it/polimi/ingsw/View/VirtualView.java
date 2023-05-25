@@ -50,22 +50,23 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showBookshelf(Player player) throws RemoteException {
-        connection.sendMessage(new BookshelfMessage(player));  //BookshelfMessage da creare
+        connection.sendMessage(new BookshelfMessage(player));
     }
 
     @Override
-    public void showCommonGoalCards(Game game) {
-
-    }
-
-    @Override
-    public void showPersonalGoalCard(Player player) throws Exception {
+    public void showCommonGoalCards(Game game) throws RemoteException {
 
     }
 
     @Override
-    public void updateGameState(Player player, Game game) {
+    public void showPersonalGoalCard(Player player) throws RemoteException {
 
+    }
+
+
+    @Override
+    public void updateGameState(Player player, Game game) throws RemoteException {
+        connection.sendMessage(new GameStateMessage(player, game));
     }
 
     @Override
