@@ -69,8 +69,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showWaitingRoom(int maxPlayers) throws RemoteException {
-        connection.sendMessage(new WaitingRoomMessage(maxPlayers));
+    public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) throws RemoteException {
+        connection.sendMessage(new WaitingRoomMessage(maxPlayers, numOfPlayersConnected));
     }
 
     @Override

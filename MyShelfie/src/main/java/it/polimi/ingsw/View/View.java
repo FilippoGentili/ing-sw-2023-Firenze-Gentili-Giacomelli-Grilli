@@ -35,7 +35,7 @@ public interface View {
 
     void updateGameState(Player player, Game game) throws Exception;
 
-    void showWaitingRoom(int maxPlayers) throws RemoteException;
+    void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) throws RemoteException;
 
     void showWinner(String winner) throws RemoteException;
 }

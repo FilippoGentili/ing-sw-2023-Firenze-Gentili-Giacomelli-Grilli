@@ -17,6 +17,8 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     private AnimationTimer timer;
     private int maxPlayers;
 
+    private int numOfPlayersConnected;
+
     @FXML
     private Text playersConnectedText;
     @FXML
@@ -34,11 +36,15 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
 
 
     public void setVisualPlayersConnected() {
-        playersConnectedText.setText("Players connected: "   + " of " + maxPlayers);
+        playersConnectedText.setText("Players connected: " + numOfPlayersConnected + " of " + maxPlayers);
     }
 
     public void setMaxPlayers(int maxPlayers) {
         this.maxPlayers = maxPlayers;
+    }
+
+    public void setNumOfPlayersConnected(int numOfPlayersConnected) {
+        this.numOfPlayersConnected = numOfPlayersConnected;
     }
 
 }
