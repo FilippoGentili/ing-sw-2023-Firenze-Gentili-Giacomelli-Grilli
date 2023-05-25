@@ -55,6 +55,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         boolean rmi = false;
         final String address;
         final String port;
+        final String SocketPort = "1098";
+        final String RMIPort = "1099";
+        String tempPort = SocketPort;
+
 
         //choose type of connection
         System.out.println("Which type of connection do you want to use?");
@@ -67,8 +71,13 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             System.out.println("Type -rmi or -socket");
             input = scanner.nextLine().trim();
         }
-        if (input.equals("-rmi"))
+
+        if (input.equals("-rmi")){
             rmi = true;
+            tempPort = RMIPort;
+        }
+
+        port = tempPort;
 
         do {
             System.out.println("Insert the Server address:");
@@ -77,14 +86,14 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         address = input;
 
-        do {
-            System.out.println("Insert the Server port:");
-            input = scanner.nextLine().trim();
-                if(!validPort(input))
-                    System.out.println("Please insert a valid port");
-        } while (!validPort(input));
+        //do {
+        //    System.out.println("Insert the Server port:");
+         //   input = scanner.nextLine().trim();
+         //       if(!validPort(input))
+         //           System.out.println("Please insert a valid port");
+       // } while (!validPort(input));
 
-        port = input;
+        //port = input;
 
         if (rmi) {
             notifyObserver(obs -> {
@@ -113,7 +122,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
     }
 
-    public boolean validPort(String port){
+    /*public boolean validPort(String port){
         try {
             int portNum = Integer.parseInt(port);
             if ((portNum >= 1 && portNum <= 65536)) {
@@ -125,6 +134,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         return false;
     }
+
+     */
 
     @Override
     public void nicknameRequest(){
@@ -158,16 +169,22 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     public int checkValidNumOfPlayers(){
             int num;
-            do {
-                num = parseInt(readLine());
-                if ((num < 2 || num > 4) || (num>='a' && num<='z' || num>='A' && num<='Z' ))
-                    System.out.println("Invalid number of players! Enter a number between 2 and 4:");
-            } while (num < 2 || num > 4);
-        /*} catch(NumberFormatException e){
-            System.out.println("Invalid input, the number of players must be of type int, please enter a number between 2 and 4:");
+            String old;
 
-        }
-         */
+            old = readLine();
+
+            while ((!old.matches("\\d+")) || (parseInt(old) < 2 || parseInt(old) > 4)){
+                if(!old.matches("\\d+")){
+                    System.out.println("Invalid input, number of players must be of type int");
+                } else if((parseInt(old) < 2 || parseInt(old) > 4)){
+                    System.out.println("Invalid number of players! Enter a number between 2 and 4:");
+                }
+
+                old=readLine();
+            }
+
+            num=parseInt(old);
+
         return num;
     }
 
