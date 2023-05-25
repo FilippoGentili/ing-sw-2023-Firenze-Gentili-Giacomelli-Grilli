@@ -115,7 +115,7 @@ public class Server implements Runnable{
                 }
             }
         }
-        LOGGER.log(Level.INFO, "Sending to {0}, message {1}", new Object[]{nickname, message});
+        LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{nickname, message});
     }
 
     public void handleMessage(Message message) throws RemoteException {

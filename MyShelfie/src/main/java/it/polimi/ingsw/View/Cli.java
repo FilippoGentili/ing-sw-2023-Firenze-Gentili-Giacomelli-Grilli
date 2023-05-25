@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
@@ -79,6 +80,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         do {
             System.out.println("Insert the Server port:");
             input = scanner.nextLine().trim();
+                if(!validPort(input))
+                    System.out.println("Please insert a valid port");
         } while (!validPort(input));
 
         port = input;
@@ -113,7 +116,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public boolean validPort(String port){
         try {
             int portNum = Integer.parseInt(port);
-            if (portNum >= 1 && portNum <= 65536) {
+            if ((portNum >= 1 && portNum <= 65536)) {
                 return true;
             }
         } catch (NumberFormatException e) {
@@ -154,14 +157,17 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     public int checkValidNumOfPlayers(){
-        int num;
-        do{
-            num = parseInt(readLine());
-            if(num<2 || num>4)
-                System.out.println("Invalid number of players! Enter a number between 2 and 4:");
+            int num;
+            do {
+                num = parseInt(readLine());
+                if ((num < 2 || num > 4) || (num>='a' && num<='z' || num>='A' && num<='Z' ))
+                    System.out.println("Invalid number of players! Enter a number between 2 and 4:");
+            } while (num < 2 || num > 4);
+        /*} catch(NumberFormatException e){
+            System.out.println("Invalid input, the number of players must be of type int, please enter a number between 2 and 4:");
 
-        }while(num<2 || num>4);
-
+        }
+         */
         return num;
     }
 

@@ -31,6 +31,6 @@ public class LoginReply extends Message {
 
     @Override
     public String toString() {
-        return " Successful access = " + isSuccessfulAccess() + ", nickname accepted = " + isNicknameAccepted();
+        return "Successful access = " + isSuccessfulAccess() + ",nickname accepted = " + isNicknameAccepted();
     }
 }

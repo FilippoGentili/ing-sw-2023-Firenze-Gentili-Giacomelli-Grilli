@@ -28,6 +28,6 @@ public class LoginResult extends Message{
 
     @Override
     public String toString() {
-        return " Successful access = " + isSuccessfulAccess() + ", nickname accepted = " + isNicknameAccepted() + ", chosenNickname = " +getChosenNickname();
+        return "Successful access = " + isSuccessfulAccess() + ", nickname accepted = " + isNicknameAccepted() + ", chosenNickname = " +getChosenNickname();
     }
 }
