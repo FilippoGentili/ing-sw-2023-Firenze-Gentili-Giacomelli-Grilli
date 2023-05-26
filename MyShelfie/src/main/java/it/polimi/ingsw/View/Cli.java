@@ -190,7 +190,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) {
-        out.flush();
+       /* out.flush();
         if(validNickname && connection)
             System.out.println("Hello " + nickname + ", you are connected to the server!");
         else {

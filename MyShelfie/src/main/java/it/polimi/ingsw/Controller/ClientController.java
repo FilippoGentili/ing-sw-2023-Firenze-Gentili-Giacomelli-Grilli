@@ -102,6 +102,16 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     }
                 });
                 break;
+            case LOGIN_REPLY:
+                LoginReply loginReply = (LoginReply) message;
+                queue.add(() -> {
+                    try {
+                        view.showMessage(message.toString());
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                break;
             case NUM_OF_PLAYERS_REQUEST:
                 queue.add(() -> {
                     try {

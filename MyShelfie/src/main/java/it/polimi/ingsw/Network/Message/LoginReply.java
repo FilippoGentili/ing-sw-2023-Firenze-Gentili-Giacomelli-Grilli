@@ -5,32 +5,20 @@ import it.polimi.ingsw.Model.Game;
 public class LoginReply extends Message {
 
     private static final long serialVersionUID = -9191023129086531699L;
-    private final boolean nicknameAccepted;
-    private final boolean successfulAccess;
+    private String nickname;
 
-    /**
-     * Message used to respond to a login request from the Server to the Client
-     *
-     * @param nicknameAccepted
-     * @param successfulAccess
-     */
-    public LoginReply(boolean nicknameAccepted, boolean successfulAccess) {
+    public LoginReply(String nickname) {
         super(Game.getServerName(), MessageType.LOGIN_REPLY);
-        this.nicknameAccepted = nicknameAccepted;
-        this.successfulAccess = successfulAccess;
+        this.nickname=nickname;
     }
 
-    public boolean isSuccessfulAccess() {
-        return successfulAccess;
-    }
-
-    public boolean isNicknameAccepted() {
-        return nicknameAccepted;
+    public String getNickname(){
+        return nickname;
     }
 
 
     @Override
     public String toString() {
-        return "Successful access = " + isSuccessfulAccess() + ",nickname accepted = " + isNicknameAccepted();
+        return "Hello " + getNickname() + " you are connected to the server!";
     }
 }

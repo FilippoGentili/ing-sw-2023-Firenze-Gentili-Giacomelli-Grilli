@@ -30,7 +30,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void nicknameRequest() throws RemoteException {
-        connection.sendMessage(new LoginReply(false, true));
+
     }
 
     @Override

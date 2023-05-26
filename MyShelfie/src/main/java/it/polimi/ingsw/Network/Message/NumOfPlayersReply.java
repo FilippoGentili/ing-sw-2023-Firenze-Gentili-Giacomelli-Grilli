@@ -24,7 +24,7 @@ public class NumOfPlayersReply extends Message{
 
     @Override
     public String toString(){
-        return " "+ getNickname() +" wants to play with " + getNumOfPlayers() + " players";
+        return ""+ getNickname() +" wants to play with " + getNumOfPlayers() + " players";
     }
 
 }
