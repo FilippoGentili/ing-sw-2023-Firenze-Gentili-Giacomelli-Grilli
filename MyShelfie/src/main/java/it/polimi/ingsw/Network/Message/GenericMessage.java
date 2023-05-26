@@ -22,7 +22,7 @@ public class GenericMessage extends Message{
 
     @Override
     public String toString(){
-        return " " + getNickname() + " : " + getMessage();
+        return "" + getNickname() + " : " + getMessage();
     }
 
 }
