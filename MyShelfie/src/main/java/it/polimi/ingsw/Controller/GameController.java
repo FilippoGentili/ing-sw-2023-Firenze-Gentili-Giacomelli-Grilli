@@ -53,8 +53,6 @@ public class GameController {
                     game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
                     //server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
                     server.sendMessage(new WaitingRoomMessage(numOfPlayersReply.getNumOfPlayers(), virtualViewMap.size()), message.getNickname());
-                    server.sendMessage((new WaitingRoomMessage(numOfPlayers, virtualViewMap.size())), message.getNickname());
-
                     //restoreMatchElements();
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
