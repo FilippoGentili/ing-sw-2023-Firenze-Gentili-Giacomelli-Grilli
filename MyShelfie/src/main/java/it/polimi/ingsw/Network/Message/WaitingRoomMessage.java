@@ -26,4 +26,9 @@ public class WaitingRoomMessage extends Message{
         return numOfPlayersConnected;
     }
 
+    @Override
+    public String toString() {
+        return "Waiting for other players to join." + numOfPlayersConnected + "/" + maxPlayers;
+    }
+
 }
