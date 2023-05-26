@@ -86,8 +86,7 @@ public class GameController {
             server.sendMessage(new LoginResult(nickname,true,true),nickname);
             server.sendMessage(new NumOfPlayersRequest(), nickname);
             server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
-            if(virtualViewMap.size() == numOfPlayers)   //da togliere per evitare di giocare da soli
-                startGame();
+
         }else if(virtualViewMap.size() < numOfPlayers){
             if (inputController.checkNickname(nickname, vv)) {
                 addVirtualView(player, vv);
@@ -95,6 +94,7 @@ public class GameController {
                 player.setNickname(nickname);
                 game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname,true,true),nickname);
+                server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
 
                 if(virtualViewMap.size() == numOfPlayers)
                     startGame();
