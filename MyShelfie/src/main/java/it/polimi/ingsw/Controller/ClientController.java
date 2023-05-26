@@ -212,6 +212,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 queue.add(() -> {
                     try {
                         view.showMessage(message.toString());
+                        view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
                     } catch (RemoteException e) {
                         throw new RuntimeException(e);
                     }
