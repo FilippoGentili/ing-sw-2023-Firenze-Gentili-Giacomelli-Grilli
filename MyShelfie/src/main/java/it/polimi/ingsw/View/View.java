@@ -37,7 +37,7 @@ public interface View {
     void updateGameState(Player player, Game game) throws Exception;
 
 
-    void showGameStarted(ArrayList<Player> players, Game game);
+    void showGameStarted();
 
     void showWaitingRoom(int maxPlayers, int numOfPlayersConnected);
 

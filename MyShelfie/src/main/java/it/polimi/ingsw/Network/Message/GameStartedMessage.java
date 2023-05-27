@@ -14,10 +14,10 @@ public class GameStartedMessage extends Message{
 
     private Game game;
     private ArrayList<Player> players;
-    public GameStartedMessage(ArrayList<Player> players, Game game) {
+    public GameStartedMessage() {
         super(Game.getServerName(), MessageType.GAME_STARTED);
-        this.game = game;
-        this.players = players;
+        /*this.game = game;
+        this.players = players;*/
     }
 
     public Game getGame(){

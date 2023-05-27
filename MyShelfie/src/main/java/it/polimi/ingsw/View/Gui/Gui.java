@@ -129,7 +129,7 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showGameStarted(ArrayList<Player> players, Game game) {
+    public void showGameStarted() {
         Platform.runLater(() -> GuiController.changeScene( "gameScene.fxml",observers));
     }
 

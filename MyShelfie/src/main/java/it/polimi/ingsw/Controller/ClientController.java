@@ -169,7 +169,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 GameStartedMessage gameStartedMessage = (GameStartedMessage) message;
                 queue.add(() -> {
                     view.showMessage(message.toString());
-                    view.showGameStarted(gameStartedMessage.getPlayers(), gameStartedMessage.getGame());
+                    //view.showGameStarted(gameStartedMessage.getPlayers(), gameStartedMessage.getGame());
+                    view.showGameStarted();
                 });
                 break;
             default:
