@@ -46,7 +46,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         String port = portBox.getText();
         String address = addressBox.getText();
         socketButton.setDisable(true);
-
+        rmiButton.setDisable(true);
         boolean validPort = ClientController.validPort(port);
         boolean validAddress = ClientController.validAddress(address);
 
@@ -80,6 +80,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         String port = portBox.getText();
         String address = addressBox.getText();
         rmiButton.setDisable(true);
+        socketButton.setDisable(true);
 
         boolean validPort = ClientController.validPort(port);
         boolean validAddress = ClientController.validAddress(address);

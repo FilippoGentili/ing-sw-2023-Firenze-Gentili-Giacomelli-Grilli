@@ -126,13 +126,14 @@ public class Gui extends ViewObservable implements View {
     }
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
+
         WaitingRoomSceneController waitingRoomSceneController;
 
         try {
             waitingRoomSceneController = (WaitingRoomSceneController) GuiController.getCurrentController();
             waitingRoomSceneController.setMaxPlayers(maxPlayers);
             waitingRoomSceneController.setNumOfPlayersConnected(numOfPlayersConnected);
-            Platform.runLater(waitingRoomSceneController::setVisualPlayersConnected);
+            Platform.runLater(waitingRoomSceneController::startAnimationTimer);
         } catch (ClassCastException e) {
             waitingRoomSceneController = new WaitingRoomSceneController();
             waitingRoomSceneController.addAllObserver(observers);
@@ -141,7 +142,6 @@ public class Gui extends ViewObservable implements View {
             WaitingRoomSceneController waitingRoomSceneController1 = waitingRoomSceneController;
             Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController1));
         }
-
     }
 
 

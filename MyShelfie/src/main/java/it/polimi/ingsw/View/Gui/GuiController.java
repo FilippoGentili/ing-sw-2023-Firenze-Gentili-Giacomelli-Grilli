@@ -116,4 +116,6 @@ public class GuiController {
         endSceneController.setWinner(nickname);
         endSceneController.displayEndScene();
     }
+
+
 }
