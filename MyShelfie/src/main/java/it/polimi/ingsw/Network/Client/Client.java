@@ -36,7 +36,7 @@ public abstract class Client extends Observable implements Serializable {
         this.username = username;
     }
 
-    public abstract void connection();
+    public abstract void connection() throws IOException;
 
     public abstract void disconnect();
 
