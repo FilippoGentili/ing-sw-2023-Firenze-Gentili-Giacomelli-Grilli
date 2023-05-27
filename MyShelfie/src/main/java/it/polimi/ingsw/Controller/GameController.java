@@ -318,7 +318,6 @@ public class GameController {
             }else{
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
-                restoreMatchElements();
                 newTurn();
             }
         }else{
@@ -333,12 +332,10 @@ public class GameController {
                         "bookshelf before the other players."), currentPlayer.getNickname());
 
                 game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
-                restoreMatchElements();
                 lastRound(); //da rivedere
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
-                restoreMatchElements();
                 newTurn(); //da rivedere
             }
         }
