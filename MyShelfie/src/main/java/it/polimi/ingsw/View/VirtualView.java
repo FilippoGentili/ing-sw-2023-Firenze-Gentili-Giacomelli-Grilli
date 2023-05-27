@@ -7,6 +7,7 @@ import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Observer.Observer;
+import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -68,6 +69,12 @@ public class VirtualView implements View, Observer {
     public void updateGameState(Player player, Game game)  {
         connection.sendMessage(new GameStateMessage(player, game));
     }
+
+    @Override
+    public void showGameStarted(ArrayList<Player> players, Game game) {
+        connection.sendMessage(new GameStartedMessage(players, game));
+    }
+
 
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {

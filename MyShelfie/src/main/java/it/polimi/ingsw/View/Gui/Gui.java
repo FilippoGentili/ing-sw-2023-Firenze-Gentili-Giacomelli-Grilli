@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
+    private static final String END = "GAME OVER";
     @Override
     public void showMessage(String message){
 
@@ -55,9 +56,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askNumberOfPlayers() {
-        /* PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
-        playerSelectionSceneController.addAllObserver(observers);
-        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));*/
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",observers));
     }
 
@@ -95,35 +93,65 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void someoneDisconnected(String nickname) {
         Platform.runLater(() -> {
-            GuiController.showBanner("GAME OVER", "The player" + nickname + " disconnected");
+            GuiController.showBanner(END, "The player" + nickname + " disconnected");
             GuiController.changeScene("startScene.fxml", observers);
         });
     }
 
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
 
     }
 
     @Override
     public void showBookshelf(Player player) {
-
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.updateBookShelf(player));
     }
 
     @Override
     public void showCommonGoalCards(Game game) {
-
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.setCommonGoalCards(game));
     }
 
     @Override
     public void showPersonalGoalCard(Player player) {
-
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
     @Override
     public void updateGameState(Player player, Game game) {
 
     }
+
+    @Override
+    public void showGameStarted(ArrayList<Player> players, Game game) {
+        Platform.runLater(() -> GuiController.changeScene( "gameScene.fxml",observers));
+    }
+
+    public  GameSceneController getGameSceneController(){
+        GameSceneController gameSceneController;
+        try {
+            gameSceneController = (GameSceneController) GuiController.getCurrentController();
+        } catch (ClassCastException e) {
+            gameSceneController = new GameSceneController();
+            gameSceneController.addAllObserver(observers);
+            GameSceneController gameSceneController1 = gameSceneController;
+            Platform.runLater(() -> GuiController.changeScene( "gameScene.fxml", gameSceneController1));
+        }
+        return gameSceneController;
+    }
+
+    /**
+     * This method is used to show the waiting room
+     * @param maxPlayers is the max number of players in the game
+     * @param numOfPlayersConnected is the number of players connected
+     * @throws RemoteException if there are connection problems
+     */
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
 
@@ -145,13 +173,16 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
-
-
+    /**
+     * This method is used to show the end scene of the game
+     * @param winner is the player that won the game
+     * @throws RemoteException if there are connection problems
+     */
     @Override
     public void showWinner(String winner) {
         Platform.runLater(() -> {
             GuiController.showEnd(winner);
-            GuiController.showBanner("GAME OVER", "The winner is " + winner);
+            GuiController.showBanner(END, "The winner is " + winner);
             GuiController.changeScene("endScene.fxml", observers);
         });
     }

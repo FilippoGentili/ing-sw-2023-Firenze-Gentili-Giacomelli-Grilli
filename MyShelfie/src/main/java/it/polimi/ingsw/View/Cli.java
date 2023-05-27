@@ -3,6 +3,7 @@ package it.polimi.ingsw.View;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Observer.ViewObservable;
+import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -622,7 +623,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
+    public void showGameStarted(ArrayList<Player> players, Game game) {
 
+    }
+
+
+    @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
     }
 
