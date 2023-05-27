@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Client.RMI;
 
-import it.polimi.ingsw.Network.Client.Client;
+/*import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
@@ -55,4 +55,4 @@ public class RMIClient extends Client implements RMIClientHandler{
             messageQueue.add(message);
         }
     }
-}
+}*/

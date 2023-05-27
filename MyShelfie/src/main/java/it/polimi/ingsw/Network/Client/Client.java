@@ -40,7 +40,7 @@ public abstract class Client extends Observable implements Serializable {
 
     public abstract void disconnect();
 
-    public abstract void sendMessage(Message message) throws IOException;
+    public abstract void sendMessage(Message message);
 
     /**
      * Method used to get the entire messageQueue and clear it
