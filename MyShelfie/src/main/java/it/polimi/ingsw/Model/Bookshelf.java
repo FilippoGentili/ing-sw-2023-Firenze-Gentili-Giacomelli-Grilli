@@ -72,10 +72,7 @@ public class Bookshelf extends Observable implements Serializable {
                 i--;
             }
             Tile def = new Tile(app.getTileType());
-            def.setRow(i);
-            def.setCol(col);
             shelf[i][col]=def;
-            //shelf[i][col].setLocation(Location.BOOKSHELF);
         }
     }
 

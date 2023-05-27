@@ -62,6 +62,10 @@ public class GameController {
                 handleGame(message);
                 break;
             case END:
+                if(message.getMessageType() == MessageType.INDEX_MESSAGE){
+                    IndexMessage indexMessage = (IndexMessage) message;
+                    removeTilesFromLivingRoom(message.getIndexTiles());
+                }
                 EndTurn();
                 break;
             default:

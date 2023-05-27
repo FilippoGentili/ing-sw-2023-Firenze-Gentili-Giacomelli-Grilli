@@ -231,6 +231,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
         ArrayList<Tile> chosenTiles = new ArrayList<>();
+        HashMap<Integer, Integer> index = new HashMap<>();
         int row;
         String input;
         List<String> columns = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
@@ -255,6 +256,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             }while(!columns.contains(input));
 
             chosenTiles.add(livingRoom.getTile(row-1, indexTranslator(input)));
+            index.put(row-1, indexTranslator(input));
             i++;
 
             if(i<4){
@@ -272,6 +274,14 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         notifyObserver(obs -> {
             try {
                 obs.updateChosenTiles(chosenTiles);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        notifyObserver(obs -> {
+            try {
+                obs.updateLivingRoomTiles(index);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
