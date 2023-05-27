@@ -244,7 +244,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             System.out.println(i+":");
             do{
                 System.out.println("row: ");
-                row = parseInt(readLine());
+                do{
+                    input = readLine();
+                }while(!input.matches("\\d+"));
+                row = parseInt(input);
                 if(row<1 || row>9)
                     System.out.println("Index out of bound. Please insert a number between 1 and 9");
             }while(row<1 || row>9);
