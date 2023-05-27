@@ -298,7 +298,7 @@ public class Game extends Observable implements Serializable {
     public void setPersonalGoalCard(){
 
         ArrayList<Integer> availablePersonaGoalCards = new ArrayList<>();
-        for(int i=0; i<12; i++) {
+        for(int i=1; i<=12; i++) {
             availablePersonaGoalCards.add(i);
         }
         Collections.shuffle(availablePersonaGoalCards);
