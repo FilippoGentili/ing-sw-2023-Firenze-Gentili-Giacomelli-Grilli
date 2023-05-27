@@ -1,6 +1,7 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public interface View {
     void showPersonalGoalCard(Player player) throws Exception;
 
     void updateGameState(Player player, Game game) throws Exception;
+
+
+    void showGameStarted(ArrayList<Player> players, Game game);
 
     void showWaitingRoom(int maxPlayers, int numOfPlayersConnected);
 

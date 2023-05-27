@@ -30,5 +30,6 @@ public enum MessageType {
     GAME_STATE,
     WAITING_ROOM,
     INDEX_TILES,
+    GAME_STARTED,
 }
 
