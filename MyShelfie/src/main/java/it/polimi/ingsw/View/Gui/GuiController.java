@@ -55,7 +55,6 @@ public class GuiController {
         try {
             FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/" + fxml));
 
-            // Setting the controller BEFORE the load() method.
             loader.setController(controller);
             genericSceneController = controller;
             Parent root = loader.load();

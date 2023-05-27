@@ -141,7 +141,6 @@ public class Gui extends ViewObservable implements View {
             WaitingRoomSceneController waitingRoomSceneController1 = waitingRoomSceneController;
             Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController1));
         }
-        Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",observers));
 
     }
 
