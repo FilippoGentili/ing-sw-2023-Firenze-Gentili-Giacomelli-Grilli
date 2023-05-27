@@ -30,7 +30,7 @@ public class GameController {
     public GameController(Server server) {
         this.game = new Game();
         this.server = server;
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
         //this.numOfPlayers = num;
         this.inputController = new InputController(this, server);
         setGameState(LOGIN);
@@ -161,10 +161,10 @@ public class GameController {
     public void nextPlayer(){
         int indexPlayer = players.indexOf(currentPlayer);
 
-        if(indexPlayer+1 < players.size())
-            currentPlayer = players.get(indexPlayer + 1);
-        else
+        if(indexPlayer+1 >= players.size())
             currentPlayer = players.get(0);
+        else
+            currentPlayer = players.get(indexPlayer + 1);
 
         setCurrentPlayer(currentPlayer);
     }
