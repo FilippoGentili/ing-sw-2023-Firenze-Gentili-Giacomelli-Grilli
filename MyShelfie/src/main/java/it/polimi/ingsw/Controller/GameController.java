@@ -237,7 +237,7 @@ public class GameController {
         OrderedTilesReply orderedTilesReply = (OrderedTilesReply) message;
         ArrayList<Tile> chosenTiles = orderedTilesReply.getOrderedTiles();
 
-        currentPlayer.InsertTiles(chosenTiles, currentPlayer.getChosenColumn());
+        currentPlayer.getBookshelf().insertTiles(chosenTiles, currentPlayer.getChosenColumn());
 
         CheckCommonGoal(currentPlayer);
         /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
@@ -266,6 +266,8 @@ public class GameController {
             broadcastShowMessage(newScore);
             game.getCommonGoal1().updateValue();
             player.setPointscg1();
+        }else{
+            server.sendMessage(new GenericMessage("You haven't reached the first common goal. No points for you >:("),currentPlayer.getNickname());
         }
 
         if(game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
@@ -276,6 +278,8 @@ public class GameController {
             broadcastShowMessage(newScore);
             game.getCommonGoal2().updateValue();
             player.setPointscg2();
+        }else{
+            server.sendMessage(new GenericMessage("You haven't reached the second common goal. No points for you >:("),currentPlayer.getNickname());
         }
 
         EndTurn();

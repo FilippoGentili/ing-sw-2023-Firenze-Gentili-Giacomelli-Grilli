@@ -48,10 +48,6 @@ public class Player extends Observable implements Serializable {
         this.lastPlayer = false;
     }
 
-    public void InsertTiles(ArrayList<Tile> chosenTiles, int column){
-
-    }
-
     /**
      * @return the bookshelf of the player
      */
