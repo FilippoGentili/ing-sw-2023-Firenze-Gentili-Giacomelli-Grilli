@@ -10,8 +10,8 @@ public class IndexMessage extends Message{
     private static final long serialVersionUID = 169983083844552426L;
     private HashMap<Integer,Integer> indexTiles;
 
-    public IndexMessage(HashMap<Integer,Integer> indexTiles) {
-        super(Game.getServerName(), MessageType.INDEX_TILES);
+    public IndexMessage(String username, HashMap<Integer,Integer> indexTiles) {
+        super(username, MessageType.INDEX_TILES);
         this.indexTiles = indexTiles;
     }
 
