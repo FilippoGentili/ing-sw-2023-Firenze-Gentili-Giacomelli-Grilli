@@ -35,6 +35,7 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
         this.numOfPlayersConnected = numOfPlayersConnected;
     }
 
+
     public void startAnimationTimer() {
         timer = new AnimationTimer() {
             @Override

@@ -140,6 +140,7 @@ public class Gui extends ViewObservable implements View {
             waitingRoomSceneController.setMaxPlayers(maxPlayers);
             waitingRoomSceneController.setNumOfPlayersConnected(numOfPlayersConnected);
             WaitingRoomSceneController waitingRoomSceneController1 = waitingRoomSceneController;
+            Platform.runLater(waitingRoomSceneController::startAnimationTimer);
             Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController1));
         }
     }
