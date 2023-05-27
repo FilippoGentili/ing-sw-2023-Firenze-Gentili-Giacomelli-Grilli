@@ -62,9 +62,9 @@ public class GameController {
                 handleGame(message);
                 break;
             case END:
-                if(message.getMessageType() == MessageType.INDEX_MESSAGE){
+                if(message.getMessageType() == MessageType.INDEX_TILES){
                     IndexMessage indexMessage = (IndexMessage) message;
-                    removeTilesFromLivingRoom(message.getIndexTiles());
+                    removeTilesFromLivingRoom(indexMessage.getIndexTiles());
                 }
                 EndTurn();
                 break;
@@ -287,6 +287,12 @@ public class GameController {
         }
 
         EndTurn();
+    }
+
+    public void removeTilesFromLivingRoom(HashMap<Integer, Integer> index){
+        for(Map.Entry<Integer, Integer> map : index.entrySet()){
+            game.getLivingRoom().setTile(new Tile(TileType.NULL), map.getKey(), map.getValue());
+        }
     }
 
     /**
