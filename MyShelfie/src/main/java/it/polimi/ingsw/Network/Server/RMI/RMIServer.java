@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
-/*import it.polimi.ingsw.Network.Server.Server;
+import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
@@ -26,4 +26,4 @@ public class RMIServer {
             Server.LOGGER.severe(e.getMessage());
         }
     }
-}*/
+}

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
-/*import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
+import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
@@ -20,10 +20,6 @@ public class ConnectionRMI extends Connection {
 
     }
 
-    /**
-     * this method is used to send message to the client
-     * @param message
-
     @Override
     public void sendMessage(Message message) throws RemoteException {
         rmiClientHandler.receiveMessage(message);
@@ -33,4 +29,4 @@ public class ConnectionRMI extends Connection {
     public void ping() {
 
     }
-}*/
+}

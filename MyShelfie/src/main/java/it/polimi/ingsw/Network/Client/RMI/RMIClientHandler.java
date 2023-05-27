@@ -9,11 +9,7 @@ import java.rmi.RemoteException;
  * this interface is used to allow the server to send message to the client
  */
 
-/*public interface RMIClientHandler extends Remote {
-
-    /**
-     * this method sends a message to the client
-     * @throws RemoteException
+public interface RMIClientHandler extends Remote {
 
     void receiveMessage(Message message) throws RemoteException;
-}*/
+}
