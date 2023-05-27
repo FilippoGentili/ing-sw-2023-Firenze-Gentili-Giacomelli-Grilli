@@ -238,8 +238,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     @Override
-    public void updateLivingRoomTiles(HashMap<Integer, Integer> index) throws IOException {
-        client.sendMessage(new IndexMessage(client.getUsername(), index));
+    public void updateLivingRoomTiles(ArrayList<Tile> chosen) throws IOException {
+        client.sendMessage(new IndexMessage(client.getUsername(), chosen));
     }
 
     public static boolean validAddress(String address) {

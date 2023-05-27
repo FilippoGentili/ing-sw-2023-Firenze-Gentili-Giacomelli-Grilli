@@ -292,14 +292,11 @@ public class GameController {
 
     public void removeTilesFromLivingRoom(Message message){
         IndexMessage indexMessage = (IndexMessage) message;
-        HashMap<Integer, Integer> index = indexMessage.getIndexTiles();
-        ArrayList<Tile> chosen = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> map : index.entrySet()){
-            chosen.add(game.getLivingRoom().getTile(map.getKey(), map.getValue()));
-        }
+        ArrayList<Tile> chosen = indexMessage.getChosen();
+
         if(game.getLivingRoom().checkValid(chosen)){
-            for(Map.Entry<Integer, Integer> map : index.entrySet()){
-                game.getLivingRoom().setTile(new Tile(TileType.NULL), map.getKey(), map.getValue());
+            for(Tile tile : chosen){
+                game.getLivingRoom().setTile(new Tile(TileType.NULL), tile.getRow(), tile.getCol());
             }
         }
     }

@@ -1,21 +1,23 @@
 package it.polimi.ingsw.Network.Message;
 
 import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.Tile;
 
 import java.io.Serial;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class IndexMessage extends Message{
     @Serial
     private static final long serialVersionUID = 169983083844552426L;
-    private HashMap<Integer,Integer> indexTiles;
+    private ArrayList<Tile> chosen;
 
-    public IndexMessage(String username, HashMap<Integer,Integer> indexTiles) {
+    public IndexMessage(String username, ArrayList<Tile> chosen) {
         super(username, MessageType.INDEX_TILES);
-        this.indexTiles = indexTiles;
+        this.chosen = chosen;
     }
 
-    public HashMap<Integer,Integer> getIndexTiles(){
-        return indexTiles;
+    public ArrayList<Tile> getChosen(){
+        return chosen;
     }
 }

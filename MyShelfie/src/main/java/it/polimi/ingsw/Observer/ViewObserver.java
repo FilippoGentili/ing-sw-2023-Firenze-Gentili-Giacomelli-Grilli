@@ -29,5 +29,5 @@ public interface ViewObserver{
 
     void handleDisconnection() throws IOException;
 
-    void updateLivingRoomTiles(HashMap<Integer, Integer> index) throws IOException;
+    void updateLivingRoomTiles(ArrayList<Tile> chosen) throws IOException;
 }
