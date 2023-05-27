@@ -30,6 +30,6 @@ public class GameStartedMessage extends Message{
 
     @Override
     public String toString(){
-        return "Game started";
+        return "Game started!";
     }
 }

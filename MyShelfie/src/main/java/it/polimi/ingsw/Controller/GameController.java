@@ -145,7 +145,7 @@ public class GameController {
         game.getLivingRoom().insertTiles(chosen);
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
-        server.sendMessage(new GameStartedMessage(players, game), Game.getServerName());
+        server.broadcastMessage(new GameStartedMessage(players, game));
         newTurn();
     }
 
