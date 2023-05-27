@@ -289,9 +289,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         boolean done = false;
         do{
             System.out.println("Here are the tiles you chose: ");
-            for (Tile chosenTile : chosenTiles){
-                tilesTypes.add(chosenTile.getTileType().toString());
-                System.out.println(chosenTile.getTileType().toString());
+            for (Tile tile : chosenTiles){
+                tilesTypes.add(tile.getTileType().toString());
+                System.out.println(tile.getTileType().toString());
             }
 
             System.out.println("Select the " + i + " tile type:");
@@ -312,7 +312,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 i++;
             }
 
-        }while(!chosenTiles.toString().contains(input));
+        }while(!chosenTiles.toString().contains(input) && chosenTiles.size()>0);
 
         notifyObserver(obs -> {
             try {
