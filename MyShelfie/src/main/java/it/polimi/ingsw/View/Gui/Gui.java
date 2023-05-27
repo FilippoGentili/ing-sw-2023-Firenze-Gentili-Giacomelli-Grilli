@@ -27,7 +27,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException
      */
     @Override
-    public void loginResult(boolean validNickname, boolean connection, String nickname) throws RemoteException {
+    public void loginResult(boolean validNickname, boolean connection, String nickname){
         if (!validNickname || !connection) {
             if (!validNickname && connection) {
                 Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
@@ -45,7 +45,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException if there are connection problems
      */
     @Override
-    public void nicknameRequest() throws RemoteException {
+    public void nicknameRequest(){
         Platform.runLater(() -> GuiController.changeScene( "loginScene.fxml",observers));
     }
 
@@ -54,7 +54,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException if there are connection problems
      */
     @Override
-    public void askNumberOfPlayers() throws RemoteException {
+    public void askNumberOfPlayers() {
         /* PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
         playerSelectionSceneController.addAllObserver(observers);
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));*/
@@ -62,17 +62,17 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns) throws RemoteException {
+    public void columnRequest(ArrayList<Integer> AvailableColumns) {
 
     }
 
     @Override
-    public void TilesRequest(LivingRoom livingRoom) throws RemoteException {
+    public void TilesRequest(LivingRoom livingRoom) {
 
     }
 
     @Override
-    public void OrderTiles(ArrayList<Tile> chosenTiles) throws RemoteException {
+    public void OrderTiles(ArrayList<Tile> chosenTiles) {
 
     }
 
@@ -83,7 +83,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException if there are connection problems
      */
     @Override
-    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException {
+    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) {
 
     }
 
@@ -93,7 +93,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException
      */
     @Override
-    public void someoneDisconnected(String nickname) throws RemoteException {
+    public void someoneDisconnected(String nickname) {
         Platform.runLater(() -> {
             GuiController.showBanner("GAME OVER", "The player" + nickname + " disconnected");
             GuiController.changeScene("startScene.fxml", observers);
@@ -101,12 +101,12 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showLivingRoom(LivingRoom livingRoom) throws RemoteException {
+    public void showLivingRoom(LivingRoom livingRoom) {
 
     }
 
     @Override
-    public void showBookshelf(Player player) throws RemoteException {
+    public void showBookshelf(Player player) {
 
     }
 
@@ -116,16 +116,16 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showPersonalGoalCard(Player player) throws Exception {
+    public void showPersonalGoalCard(Player player) {
 
     }
 
     @Override
-    public void updateGameState(Player player, Game game) throws Exception {
+    public void updateGameState(Player player, Game game) {
 
     }
     @Override
-    public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) throws RemoteException {
+    public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
         WaitingRoomSceneController waitingRoomSceneController;
 
         try {
@@ -141,6 +141,8 @@ public class Gui extends ViewObservable implements View {
             WaitingRoomSceneController waitingRoomSceneController1 = waitingRoomSceneController;
             Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController1));
         }
+        Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",observers));
+
     }
 
 
