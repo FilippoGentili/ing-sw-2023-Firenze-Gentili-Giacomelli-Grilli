@@ -168,6 +168,7 @@ public class Player extends Observable implements Serializable {
     }
 
     public void setChosenTiles(ArrayList<Tile> chosen){
+        chosenTiles = new ArrayList<>();
         for(int i=0; i<chosen.size(); i++)
             chosenTiles.add(chosen.get(i));
     }

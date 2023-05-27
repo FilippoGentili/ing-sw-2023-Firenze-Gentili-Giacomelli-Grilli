@@ -136,8 +136,8 @@ public class GameController {
         setGameState(PLAY);
         game.initializeLivingRoom();
         game.setPersonalGoalCard();
-        //game.getLivingRoom().getInstance().insertTiles(game.getLivingRoom().getInstance().getBag().extract(game.numberOfTiles()));
-        LivingRoom.getInstance().insertTiles(LivingRoom.getInstance().getBag().extract(game.numberOfTiles()));
+        ArrayList<Tile> chosen = LivingRoom.getInstance().getBag().extract(game.numberOfTiles());
+        LivingRoom.getInstance().insertTiles(chosen);
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
         broadcastShowMessage("Game started!");
