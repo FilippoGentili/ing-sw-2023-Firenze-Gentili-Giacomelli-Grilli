@@ -25,8 +25,6 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
     @FXML
     private ComboBox numberOfPlayersMenu;
 
-    private static int maxPlayers;
-
     @FXML
     public void initialize(){
         enterButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::enterButtonClicked);
