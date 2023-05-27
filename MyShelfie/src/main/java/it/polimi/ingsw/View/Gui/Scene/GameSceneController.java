@@ -11,7 +11,9 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void initialize(){
 
     }
+    public void setUpGame(Game game){
 
+    }
     public void updateLivingRoom(LivingRoom livingRoom){
 
     }

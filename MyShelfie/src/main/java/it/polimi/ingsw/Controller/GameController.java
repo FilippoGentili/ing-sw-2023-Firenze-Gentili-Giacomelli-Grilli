@@ -95,7 +95,7 @@ public class GameController {
                 game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname,true,true),nickname);
                 server.sendMessage(new LoginReply(nickname), nickname);
-                server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
+                server.sendPeriodicMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()));
 
                 if(virtualViewMap.size() == numOfPlayers)
                     startGame();

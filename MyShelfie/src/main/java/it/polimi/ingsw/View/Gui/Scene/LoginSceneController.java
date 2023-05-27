@@ -50,6 +50,7 @@ public class LoginSceneController extends ViewObservable implements GenericScene
                 }
             })).start();
         }
+
     }
 
     /**

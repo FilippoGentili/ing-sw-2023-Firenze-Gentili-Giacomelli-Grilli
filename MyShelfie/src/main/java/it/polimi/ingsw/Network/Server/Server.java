@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -102,6 +104,20 @@ public class Server implements Runnable{
         }
         LOGGER.log(Level.INFO, "Send to all: {0}", message);
     }
+
+    public void sendPeriodicMessage(Message message) {
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                broadcastMessage(message);
+            }
+        };
+
+        // Esegui il task ogni secondo (1000 millisecondi)
+        timer.scheduleAtFixedRate(task, 0, 1000);
+    }
+
 
     public void sendMessage(Message message, String nickname) {
         synchronized(lock){
