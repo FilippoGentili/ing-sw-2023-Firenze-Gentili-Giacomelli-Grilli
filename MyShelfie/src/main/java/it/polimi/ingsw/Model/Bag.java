@@ -25,8 +25,10 @@ public class Bag implements Serializable {
         remainingTiles = new ArrayList<Tile>();
 
         for(TileType type: TileType.values() ){
-            for(int i=0; i<22; i++)
-                remainingTiles.add(new Tile(type));
+            if(type != TileType.NULL){
+                for(int i=0; i<22; i++)
+                    remainingTiles.add(new Tile(type));
+            }
         }
     }
 
