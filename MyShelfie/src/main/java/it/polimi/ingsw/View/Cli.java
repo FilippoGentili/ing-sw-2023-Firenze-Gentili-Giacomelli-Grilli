@@ -282,29 +282,36 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
         String input;
         ArrayList<Tile> orderedTiles = new ArrayList<>();
+        ArrayList<String> tilesTypes = new ArrayList<>();
 
         System.out.println("Choose the order of the tiles, from the bottom to the top");
         int i=1;
         boolean done = false;
         do{
             System.out.println("Here are the tiles you chose: ");
-            for (Tile chosenTile : chosenTiles)
-                System.out.println(chosenTile.toString());
+            for (Tile chosenTile : chosenTiles){
+                tilesTypes.add(chosenTile.getTileType().toString());
+                System.out.println(chosenTile.getTileType().toString());
+            }
+
             System.out.println("Select the " + i + " tile type:");
             input = readLine();
 
-            if(!chosenTiles.toString().contains(input)) {
+
+            if(!tilesTypes.contains(input)) {
                 System.out.println("You didn't choose this type of tile");
             }else{
                 for (int x=0; x<chosenTiles.size() && !done; x++) {
                     if (input.equals(chosenTiles.get(x).getTileType().toString())) {
                         orderedTiles.add(chosenTiles.get(x));
                         chosenTiles.remove(x);
+                        tilesTypes.remove(x);
                         done = true;
                     }
                 }
                 i++;
             }
+
         }while(!chosenTiles.toString().contains(input));
 
         notifyObserver(obs -> {
