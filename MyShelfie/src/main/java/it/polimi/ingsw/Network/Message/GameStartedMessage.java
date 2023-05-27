@@ -28,6 +28,7 @@ public class GameStartedMessage extends Message{
         return players;
     }
 
+    @Override
     public String toString(){
         return "Game started";
     }
