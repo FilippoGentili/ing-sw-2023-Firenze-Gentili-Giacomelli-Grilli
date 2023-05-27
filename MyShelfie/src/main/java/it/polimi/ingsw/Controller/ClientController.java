@@ -17,7 +17,6 @@ import it.polimi.ingsw.View.View;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
@@ -159,10 +158,16 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     view.showBookshelf(player);
                 });
                 break;
-            case WAITING_ROOM:
-                WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
+            case WAITING_ROOM_CLI:
+                WaitingRoomMessageCli waitingRoomMessageCli = (WaitingRoomMessageCli) message;
                 queue.add(() -> {
                     view.showMessage(message.toString());
+                    view.showWaitingRoom(waitingRoomMessageCli.getMaxPlayers(), waitingRoomMessageCli.getNumOfPlayersConnected());
+                });
+                break;
+            case WAITING_ROOM_GUI:
+                WaitingRoomMessageGui waitingRoomMessage = (WaitingRoomMessageGui) message;
+                queue.add(() -> {
                     view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
                 });
                 break;

@@ -7,9 +7,7 @@ import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VirtualView implements View, Observer {
@@ -78,7 +76,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
-        connection.sendMessage(new WaitingRoomMessage(maxPlayers, numOfPlayersConnected));
+        connection.sendMessage(new WaitingRoomMessageCli(maxPlayers, numOfPlayersConnected));
     }
 
     @Override

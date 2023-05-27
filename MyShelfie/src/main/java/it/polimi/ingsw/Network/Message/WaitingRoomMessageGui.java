@@ -2,18 +2,18 @@ package it.polimi.ingsw.Network.Message;
 
 import it.polimi.ingsw.Model.Game;
 
-import java.io.Serial;
 
-public class WaitingRoomMessage extends Message{
+public class WaitingRoomMessageGui extends Message{
 
-    private static final long serialVersionUID = -664182128288885094L;
+
+    private static final long serialVersionUID = 5626083275365376694L;
     private final int maxPlayers;
 
     private  int numOfPlayersConnected;
 
 
-    public WaitingRoomMessage(int maxPlayers, int numOfPlayersConnected) {
-        super(Game.getServerName(), MessageType.WAITING_ROOM);
+    public WaitingRoomMessageGui(int maxPlayers, int numOfPlayersConnected) {
+        super(Game.getServerName(), MessageType.WAITING_ROOM_GUI);
         this.maxPlayers = maxPlayers;
         this.numOfPlayersConnected = numOfPlayersConnected;
     }

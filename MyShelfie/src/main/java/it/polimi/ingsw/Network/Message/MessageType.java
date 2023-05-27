@@ -28,7 +28,8 @@ public enum MessageType {
     CHOSEN_TILES_REPLY,
     PLAYER_MESSAGE,
     GAME_STATE,
-    WAITING_ROOM,
+    WAITING_ROOM_CLI,
+    WAITING_ROOM_GUI,
     INDEX_TILES,
     GAME_STARTED,
 }
