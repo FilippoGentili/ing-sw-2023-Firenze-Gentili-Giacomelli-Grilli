@@ -312,6 +312,10 @@ public class GameController {
             }else{
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
+                if(game.getLivingRoom().checkEmptyLivingRoom()){
+                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                    game.getLivingRoom().insertTiles(chosen);
+                }
                 newTurn();
             }
         }else{
@@ -327,10 +331,18 @@ public class GameController {
 
                 game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
                 nextPlayer();
+                if(game.getLivingRoom().checkEmptyLivingRoom()){
+                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                    game.getLivingRoom().insertTiles(chosen);
+                }
                 lastRound(); //da rivedere
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
+                if(game.getLivingRoom().checkEmptyLivingRoom()){
+                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                    game.getLivingRoom().insertTiles(chosen);
+                }
                 newTurn(); //da rivedere
             }
         }
