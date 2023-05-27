@@ -55,9 +55,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         boolean rmi = false;
         final String address;
         final String port;
-        final String SocketPort = "1098";
-        final String RMIPort = "1099";
-        String tempPort = SocketPort;
+
+        //final String SocketPort;
+        //final String RMIPort;
+        //String tempPort = SocketPort;
 
 
         //choose type of connection
@@ -74,10 +75,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         if (input.equals("-rmi")){
             rmi = true;
-            tempPort = RMIPort;
+            //tempPort = RMIPort;
         }
 
-        port = tempPort;
+       // port = tempPort;
 
         do {
             System.out.println("Insert the Server address:");
@@ -86,14 +87,14 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         address = input;
 
-        //do {
-        //    System.out.println("Insert the Server port:");
-         //   input = scanner.nextLine().trim();
-         //       if(!validPort(input))
-         //           System.out.println("Please insert a valid port");
-       // } while (!validPort(input));
+        do {
+            System.out.println("Insert the Server port:");
+            input = scanner.nextLine().trim();
+               if(!validPort(input))
+                   System.out.println("Please insert a valid port");
+        } while (!validPort(input));
 
-        //port = input;
+        port = input;
 
         if (rmi) {
             notifyObserver(obs -> {
@@ -122,7 +123,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
     }
 
-    /*public boolean validPort(String port){
+    public boolean validPort(String port){
         try {
             int portNum = Integer.parseInt(port);
             if ((portNum >= 1 && portNum <= 65536)) {
@@ -135,7 +136,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         return false;
     }
 
-     */
+
 
     @Override
     public void nicknameRequest(){
