@@ -294,6 +294,7 @@ public class GameController {
         if(game.getLivingRoom().checkValid(chosen)){
             for(Tile tile : chosen){
                 game.getLivingRoom().setTile(new Tile(TileType.NULL), tile.getRow(), tile.getCol());
+                game.getLivingRoom().decrementNumberOfTiles();
             }
         }
     }
