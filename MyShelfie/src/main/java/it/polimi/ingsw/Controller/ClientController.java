@@ -120,7 +120,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             case CHOSEN_TILES_REQUEST:
                 ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
                 queue.add(() -> {
-                    view.TilesRequest(chosenTilesRequest.getLivingroom().getInstance());
+                    view.TilesRequest(chosenTilesRequest.getLivingroom());
                 });
                 break;
             case ORDERED_TILES_REQUEST:
@@ -146,7 +146,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 break;
             case LIVING_ROOM:
                 LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;
-                LivingRoom livingRoom = livingRoomMessage.getLivingRoom().getInstance();
+                LivingRoom livingRoom = livingRoomMessage.getLivingRoom();
                 queue.add(() -> {
                     view.showLivingRoom(livingRoom);
                 });

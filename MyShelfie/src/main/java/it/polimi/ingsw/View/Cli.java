@@ -599,7 +599,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void updateGameState(Player player, Game game) throws Exception {
         out.flush();
         //showLivingRoom(player.getGame().getLivingRoom().getInstance());
-        showLivingRoom(LivingRoom.getInstance());
+        showLivingRoom(game.getLivingRoom());
         //for(Player p : player.getGame().getPlayers())
         for(Player p : game.getPlayers())
             showBookshelf(p);

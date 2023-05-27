@@ -17,13 +17,19 @@ public class Game extends Observable implements Serializable {
     private  Player firstPlayer;
     private  CommonGoalCard CommonGoal1, CommonGoal2;
     private LivingRoom living;
+    private Bag bag;
     private static final String SERVER_NAME = "Server";
 
 
     public Game() {
         listOfPlayers = new ArrayList<Player>();
         pickCommonGoalCards();
-        living = LivingRoom.getInstance();
+        living = new LivingRoom();
+        bag = new Bag(this);
+    }
+
+    public Bag getBag() {
+        return bag;
     }
 
     /**
@@ -374,8 +380,7 @@ public class Game extends Observable implements Serializable {
      * @return living room
      */
     public LivingRoom getLivingRoom() {
-        LivingRoom livingRoom = LivingRoom.getInstance();
-        return livingRoom;
+        return living;
     }
 
 }

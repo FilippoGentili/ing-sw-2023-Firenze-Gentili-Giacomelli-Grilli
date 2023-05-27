@@ -14,13 +14,16 @@ public class Bag implements Serializable {
 
     private static final long serialVersionUID = 4089040294542656250L;
     private static int numOfTiles=132;
+    private Game game;
     private static ArrayList<Tile> remainingTiles;
 
     /**
      * Bag constructor
      * creates 132 tiles, 22 for each type
      */
-    public Bag(){
+    public Bag(Game game){
+
+        this.game = game;
 
         remainingTiles = new ArrayList<Tile>();
 
@@ -42,7 +45,7 @@ public class Bag implements Serializable {
     public ArrayList<Tile> extract(int numStartTile) {
 
         ArrayList<Tile> chosen = new ArrayList<Tile>();
-        LivingRoom living = LivingRoom.getInstance();
+        LivingRoom living = game.getLivingRoom();
 
         Collections.shuffle(remainingTiles);
 

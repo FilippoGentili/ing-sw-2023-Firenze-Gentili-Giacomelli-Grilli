@@ -9,20 +9,17 @@ import java.util.ArrayList;
 public class LivingRoom extends Observable implements Serializable {
 
     private static final long serialVersionUID = 5403724841040315028L;
-    private static LivingRoom single_instance = null;
     private static int numberOfTiles=0;
     private Tile[][] board;
     private static boolean[][] valid;
     private final int rows = 9;
     private final int columns = 9;
 
-    private static Bag bag;
-
 
     /**
      * private constructor because of the singleton pattern
      */
-    private LivingRoom() {
+    public LivingRoom() {
         board = new Tile[rows][columns];
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
@@ -30,11 +27,6 @@ public class LivingRoom extends Observable implements Serializable {
             }
         }
         valid = new boolean[rows][columns];
-        bag = new Bag();
-    }
-
-    public Bag getBag(){
-        return bag;
     }
 
 
@@ -42,12 +34,12 @@ public class LivingRoom extends Observable implements Serializable {
      * Method to get the instance of the singleton
      * @return the instance of the livingroom
      */
-    public static LivingRoom getInstance() {
+    /*public static LivingRoom getInstance() {
         if(single_instance == null)
             single_instance = new LivingRoom();
 
         return  single_instance;
-    }
+    }*/
 
     /**
      * Set a cell either true or false, to keep track of the cell to consider on the board

@@ -136,8 +136,8 @@ public class GameController {
         setGameState(PLAY);
         game.initializeLivingRoom();
         game.setPersonalGoalCard();
-        ArrayList<Tile> chosen = LivingRoom.getInstance().getBag().extract(game.numberOfTiles());
-        LivingRoom.getInstance().insertTiles(chosen);
+        ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+        game.getLivingRoom().insertTiles(chosen);
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
         broadcastShowMessage("Game started!");
@@ -182,7 +182,7 @@ public class GameController {
                 map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
         }
 
-        server.sendMessage(new ChosenTilesRequest(LivingRoom.getInstance()),currentPlayer.getNickname());
+        server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
     }
 
     /**
@@ -204,7 +204,7 @@ public class GameController {
 
             server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }else{
-            server.sendMessage(new ChosenTilesRequest(LivingRoom.getInstance()),currentPlayer.getNickname());
+            server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
         }
     }
 
@@ -371,14 +371,14 @@ public class GameController {
         }
         virtualViewMap.put(player, vv);
         game.addObserver(vv);
-        game.getLivingRoom().getInstance().addObserver(vv);
+        game.getLivingRoom().addObserver(vv);
         player.getBookshelf().addObserver(vv);
     }
 
     public void removeVirtualView(String nickname) {
         VirtualView vv = virtualViewMap.remove(nickname);
         game.removeObserver(vv);
-        game.getLivingRoom().getInstance().removeObserver(vv);
+        game.getLivingRoom().removeObserver(vv);
         for(Player player : players)
             if(player.getNickname().equals(nickname))
                 player.getBookshelf().removeObserver(vv);

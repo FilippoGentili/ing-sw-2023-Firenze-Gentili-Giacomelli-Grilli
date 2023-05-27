@@ -160,7 +160,7 @@ public class Player extends Observable implements Serializable {
     }
 
     public void drawTile(int i, int j) throws RemoteException {
-        chosenTiles.add(LivingRoom.getInstance().pickTile(i, j));
+        chosenTiles.add(game.getLivingRoom().pickTile(i, j));
     }
 
     public ArrayList<Tile> getChosenTiles(){

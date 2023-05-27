@@ -67,7 +67,7 @@ public class InputController {
             return false;
         }
 
-        boolean valid = LivingRoom.getInstance().checkValid(chosenTiles);
+        boolean valid = gameController.getGame().getLivingRoom().checkValid(chosenTiles);
         if(!valid){
             server.sendMessage(new GenericMessage("the selected tiles are not valid"),gameController.getCurrentPlayer().getNickname());
             return false;
