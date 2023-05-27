@@ -199,8 +199,8 @@ public class Bookshelf extends Observable implements Serializable {
         int max=0;
         int curr=0;
         for(int i=0; i<columns; i++){
+            curr=0;
             for(int j=0; j<rows; j++){
-                curr=0;
                 if(isEmpty(j, i))
                     curr++;
             }
