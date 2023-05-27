@@ -286,7 +286,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         System.out.println("Choose the order of the tiles, from the bottom to the top");
         int i=1;
-        boolean done = false;
         do{
             System.out.println("Here are the tiles you chose: ");
             for (Tile tile : chosenTiles){
@@ -301,12 +300,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             if(!tilesTypes.contains(input)) {
                 System.out.println("You didn't choose this type of tile");
             }else{
-                for (int x=0; x<chosenTiles.size() && !done; x++) {
+                for (int x=0; x<chosenTiles.size(); x++) {
                     if (input.equals(chosenTiles.get(x).getTileType().toString())) {
                         orderedTiles.add(chosenTiles.get(x));
                         chosenTiles.remove(x);
                         tilesTypes.remove(x);
-                        done = true;
+                        break;
                     }
                 }
                 i++;

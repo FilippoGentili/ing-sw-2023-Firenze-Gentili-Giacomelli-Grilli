@@ -181,9 +181,6 @@ public class LivingRoom extends Observable implements Serializable {
             x= curr.getRow();
             y= curr.getCol();
 
-            /*if(!curr.getLocation().equals(Location.LIVING_ROOM))
-                return false;
-            */
 
             //se non ha almeno uno spazio adiacente libero return false
             if(x >= 1)
@@ -214,8 +211,12 @@ public class LivingRoom extends Observable implements Serializable {
             case 3:
                 if((isAdjacent(chosen.get(0), chosen.get(1)) && isAdjacent(chosen.get(1), chosen.get(2))) ||
                         (isAdjacent(chosen.get(0), chosen.get(2)) && isAdjacent(chosen.get(1), chosen.get(2))) ||
-                        (isAdjacent(chosen.get(0), chosen.get(1)) && isAdjacent(chosen.get(0), chosen.get(2))))
-                    return true;
+                        (isAdjacent(chosen.get(0), chosen.get(1)) && isAdjacent(chosen.get(0), chosen.get(2)))){
+                    if((chosen.get(0).getRow() == chosen.get(1).getRow() && chosen.get(1).getRow() == chosen.get(2).getRow()) ||
+                            (chosen.get(0).getCol() == chosen.get(1).getCol() && chosen.get(1).getCol() == chosen.get(2).getCol())){
+                        return true;
+                    }
+                }
                 break;
             default:
                 throw new IllegalArgumentException("il numero di tessere selezionato è sbagliato");
