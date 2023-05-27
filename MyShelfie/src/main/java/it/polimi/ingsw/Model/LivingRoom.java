@@ -76,6 +76,10 @@ public class LivingRoom extends Observable implements Serializable {
         return numberOfTiles;
     }
 
+    public void decrementNumberOfTiles(){
+        numberOfTiles--;
+    }
+
     public Tile getTile(int i, int j){
         return board[i][j];
     }
