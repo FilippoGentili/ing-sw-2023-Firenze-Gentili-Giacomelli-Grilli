@@ -88,7 +88,7 @@ public class InputController {
         int column = chosenColumn.getColumn();
         ArrayList<Integer> availableColumns = chosenColumn.getAvailableColumns();
 
-        for(int i=0; i> availableColumns.size(); i++){
+        for(int i=0; i < availableColumns.size(); i++){
             if(column == availableColumns.get(i))
                 return true;
         }
