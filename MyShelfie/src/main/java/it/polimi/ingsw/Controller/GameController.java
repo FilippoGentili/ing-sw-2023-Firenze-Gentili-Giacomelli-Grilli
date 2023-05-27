@@ -162,11 +162,10 @@ public class GameController {
         int indexPlayer = players.indexOf(currentPlayer);
 
         if(indexPlayer+1 >= players.size())
-            currentPlayer = players.get(0);
+            this.currentPlayer = players.get(0);
         else
-            currentPlayer = players.get(indexPlayer + 1);
+            this.currentPlayer = players.get(indexPlayer + 1);
 
-        setCurrentPlayer(currentPlayer);
     }
 
     /**
@@ -176,8 +175,6 @@ public class GameController {
         //yourTurn(gameController.getCurrentPlayer());
         if(firstTurn){
             firstTurn = false;
-        }else{
-            nextPlayer();
         }
         restoreMatchElements();
         for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
@@ -329,6 +326,7 @@ public class GameController {
                         "bookshelf before the other players."), currentPlayer.getNickname());
 
                 game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+                nextPlayer();
                 lastRound(); //da rivedere
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
