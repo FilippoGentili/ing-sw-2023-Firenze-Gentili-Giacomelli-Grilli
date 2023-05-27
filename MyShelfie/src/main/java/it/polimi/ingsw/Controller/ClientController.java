@@ -165,6 +165,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     view.showMessage(message.toString());
                     view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
                 });
+                break;
             case GAME_STARTED:
                 GameStartedMessage gameStartedMessage = (GameStartedMessage) message;
                 queue.add(() -> {
