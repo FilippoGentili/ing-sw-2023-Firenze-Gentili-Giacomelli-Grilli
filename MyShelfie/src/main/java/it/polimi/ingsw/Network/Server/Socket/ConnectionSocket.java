@@ -85,7 +85,7 @@ public class ConnectionSocket extends Connection implements Runnable{
     }
 
     @Override
-    public void sendMessage(Message message){
+    public void sendMessage(Message message) throws RemoteException{
         if(isConnected){
             try{
                 synchronized (outputLock){
@@ -100,7 +100,7 @@ public class ConnectionSocket extends Connection implements Runnable{
     }
 
     @Override
-    public void ping() {
+    public void ping() throws RemoteException {
         sendMessage(new Ping());
     }
 
