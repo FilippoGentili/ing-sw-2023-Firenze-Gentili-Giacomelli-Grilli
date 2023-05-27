@@ -29,5 +29,6 @@ public enum MessageType {
     PLAYER_MESSAGE,
     GAME_STATE,
     WAITING_ROOM,
+    INDEX_TILES,
 }
 
