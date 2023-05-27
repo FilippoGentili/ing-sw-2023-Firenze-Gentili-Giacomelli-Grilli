@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIClient extends Client implements RMIClientHandler{
+/*public class RMIClient extends Client implements RMIClientHandler{
     private transient RMIServerHandler server;
     private final String address;
     private final String port;
@@ -55,4 +55,4 @@ public class RMIClient extends Client implements RMIClientHandler{
             messageQueue.add(message);
         }
     }
-}
+}*/

@@ -33,7 +33,7 @@ public class InputController {
      * @param view view of the client
      * @return {code @true} if nickname is valid {code @false} if nickname is not valid
      */
-    public boolean checkNickname(String nickname, View view) throws RemoteException {
+    public boolean checkNickname(String nickname, View view) {
         if(nickname.isEmpty()){
             view.showMessage("nickname missing");
             return false;
@@ -55,7 +55,7 @@ public class InputController {
      * @param message message from the client
      * @return {code @true} if the tiles are valid {code @false} if the tiles are invalid.
      */
-    public boolean livingRoomChosenTiles(Message message) throws RemoteException {
+    public boolean livingRoomChosenTiles(Message message) {
 
         ChosenTilesReply chosen = (ChosenTilesReply) message;
         ArrayList<Tile> chosenTiles = chosen.getChosenTiles();

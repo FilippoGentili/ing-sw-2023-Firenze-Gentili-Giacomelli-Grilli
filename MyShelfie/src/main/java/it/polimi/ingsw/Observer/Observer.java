@@ -7,5 +7,5 @@ import java.rmi.RemoteException;
 //gestisce l'arrivo di eventi
 
 public interface Observer {
-    void update(Message message) throws RemoteException;
+    void update(Message message);
 }

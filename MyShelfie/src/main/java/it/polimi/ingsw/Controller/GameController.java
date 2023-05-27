@@ -27,7 +27,7 @@ public class GameController {
     /**
      * constructor
      */
-    public GameController(Server server) throws RemoteException {
+    public GameController(Server server) {
         this.game = new Game();
         this.server = server;
         this.players = new ArrayList<Player>();
@@ -43,7 +43,7 @@ public class GameController {
      * @param message
      * @throws RemoteException
      */
-    public void forwardMessage(Message message) throws RemoteException {
+    public void forwardMessage(Message message) {
 
         switch (gameState) {
             case LOGIN:
@@ -76,7 +76,7 @@ public class GameController {
      * @param vv virtual view of the player
      * @throws RemoteException
      */
-    public void handleLogin(String nickname, VirtualView vv) throws RemoteException {
+    public void handleLogin(String nickname, VirtualView vv) {
         Player player = new Player(this.game);
 
         if(numOfPlayers==0){
@@ -114,7 +114,7 @@ public class GameController {
      * @param message
      * @throws RemoteException
      */
-    public void handleGame(Message message) throws RemoteException {
+    public void handleGame(Message message) {
 
         switch (message.getMessageType()){
             case CHOSEN_TILES_REPLY:
@@ -132,7 +132,7 @@ public class GameController {
     }
 
 
-    public void startGame() throws RemoteException {
+    public void startGame() {
         setGameState(PLAY);
         game.initializeLivingRoom();
         game.setPersonalGoalCard();
@@ -167,7 +167,7 @@ public class GameController {
     /**
      * this method initializes a new turn.
      */
-    public void newTurn() throws RemoteException {
+    public void newTurn() {
         //yourTurn(gameController.getCurrentPlayer());
         if(firstTurn){
             firstTurn = false;
@@ -190,7 +190,7 @@ public class GameController {
      * it asks the client to select the column, otherwise it asks to select the tiles again.
      * @param message tiles the client chose
      */
-    public void chooseTiles(Message message) throws RemoteException {
+    public void chooseTiles(Message message) {
         ChosenTilesReply chosenTilesMessage = (ChosenTilesReply) message;
         ArrayList<Tile> chosen = chosenTilesMessage.getChosenTiles();
 
@@ -213,7 +213,7 @@ public class GameController {
      * column, otherwise it asks him to order the tiles he has already chosen.
      * @param message
      */
-    public void SelectedColumn(Message message) throws RemoteException {
+    public void SelectedColumn(Message message) {
         ColumnReply chosenColumn = (ColumnReply) message;
         int chosen = chosenColumn.getColumn();
 
@@ -233,7 +233,7 @@ public class GameController {
      * this method receives the ordered tiles and inserts them in the bookshelf of the currentPlayer.
      * @param message
      */
-    public void InsertTiles(Message message) throws RemoteException {
+    public void InsertTiles(Message message) {
         OrderedTilesReply orderedTilesReply = (OrderedTilesReply) message;
         ArrayList<Tile> chosenTiles = orderedTilesReply.getOrderedTiles();
 
@@ -243,7 +243,7 @@ public class GameController {
         /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
     }
 
-    public void handleDisconnection(Message message) throws RemoteException {
+    public void handleDisconnection(Message message) {
         DisconnectionReply disconnectionReply = (DisconnectionReply) message;
         server.broadcastMessage(disconnectionReply);
     }
@@ -255,7 +255,7 @@ public class GameController {
      * happens.
      * @param player the player whose library must be checked.
      */
-    public void CheckCommonGoal(Player player) throws RemoteException {
+    public void CheckCommonGoal(Player player) {
 
         if(game.getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()){
             server.sendMessage(new GenericMessage("Congratulations! You reached the first common Goal! You earn "
@@ -286,7 +286,7 @@ public class GameController {
      * If he has, "endGameTrigger" is called and the last round starts. If he hasn't, a new turn start with another player.
      * If it already was the round, the method check if it was the last turn
      */
-    public void EndTurn() throws RemoteException {
+    public void EndTurn() {
 
         if(lastRound){
             int currPlayer = players.indexOf(currentPlayer);
@@ -324,7 +324,7 @@ public class GameController {
     /**
      * beginning of the last round
      */
-    public void lastRound() throws RemoteException {
+    public void lastRound() {
         lastRound = true;
         newTurn();
     }
@@ -332,7 +332,7 @@ public class GameController {
     /**
      * this method tells all the player who has won the game.
      */
-    public void findWinner() throws RemoteException {
+    public void findWinner() {
         Player winner;
 
         winner = game.getWinner();
@@ -349,7 +349,7 @@ public class GameController {
         setGameState(END);
     }
 
-    public void restoreMatchElements() throws RemoteException {
+    public void restoreMatchElements() {
         for(Player player : players){
                     server.sendMessage(new GameStateMessage(player,game),player.getNickname());
         }
@@ -365,7 +365,7 @@ public class GameController {
         else return false;
     }
 
-    public void addVirtualView(Player player, VirtualView vv) throws RemoteException {
+    public void addVirtualView(Player player, VirtualView vv) {
         if(numOfPlayers==0){
             virtualViewMap = new HashMap<>();
         }
@@ -375,7 +375,7 @@ public class GameController {
         player.getBookshelf().addObserver(vv);
     }
 
-    public void removeVirtualView(String nickname) throws RemoteException {
+    public void removeVirtualView(String nickname) {
         VirtualView vv = virtualViewMap.remove(nickname);
         game.removeObserver(vv);
         game.getLivingRoom().getInstance().removeObserver(vv);
@@ -413,7 +413,7 @@ public class GameController {
      * sends message to all the virtualView of the clients
      * @param message message to send
      */
-    public void broadcastShowMessage(String message) throws RemoteException {
+    public void broadcastShowMessage(String message) {
         for(Player player : players){
             server.sendMessage(new GenericMessage(message),player.getNickname());
         }

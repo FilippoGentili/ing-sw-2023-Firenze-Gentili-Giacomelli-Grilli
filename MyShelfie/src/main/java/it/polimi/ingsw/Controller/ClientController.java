@@ -5,7 +5,6 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
-import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.Socket.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -38,7 +37,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     private ClientUpdater clientUpdater;
 
 
-    public ClientController(View view) throws RemoteException {
+    public ClientController(View view) {
         this.view = view;
         //taskQueue = Executors.newSingleThreadExecutor();
         new Thread(this).start();
@@ -72,53 +71,33 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      * @param message
      */
     @Override
-    public void update(Message message) throws RemoteException {
+    public void update(Message message) {
         switch(message.getMessageType()){
             case GENERIC_MESSAGE:
                 queue.add(() -> {
-                    try {
-                        view.showMessage(message.toString());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.showMessage(message.toString());
                 });
                 break;
             case LOGIN_REQUEST:
                 queue.add(() -> {
-                    try {
-                        view.nicknameRequest();
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.nicknameRequest();
                 });
                 break;
             case LOGIN_RESULT:
                 LoginResult loginResult = (LoginResult) message;
                 queue.add(() -> {
-                    try {
-                        view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getChosenNickname());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getChosenNickname());
                 });
                 break;
             case LOGIN_REPLY:
                 LoginReply loginReply = (LoginReply) message;
                 queue.add(() -> {
-                    try {
-                        view.showMessage(message.toString());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.showMessage(message.toString());
                 });
                 break;
             case NUM_OF_PLAYERS_REQUEST:
                 queue.add(() -> {
-                    try {
-                        view.askNumberOfPlayers();
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.askNumberOfPlayers();
                 });
                 break;
             case GAME_STATE:
@@ -135,51 +114,31 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             case DISCONNECTION_REPLY:
                 DisconnectionReply disconnectionReply = (DisconnectionReply) message;
                 queue.add(() -> {
-                    try {
-                        view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
                 });
                 break;
             case CHOSEN_TILES_REQUEST:
                 ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
                 queue.add(() -> {
-                    try {
-                        view.TilesRequest(chosenTilesRequest.getLivingroom().getInstance());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.TilesRequest(chosenTilesRequest.getLivingroom().getInstance());
                 });
                 break;
             case ORDERED_TILES_REQUEST:
                 OrderedTilesRequest orderedTilesRequest = (OrderedTilesRequest) message;
                 queue.add(() -> {
-                    try {
-                        view.OrderTiles(orderedTilesRequest.getChosenTiles());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.OrderTiles(orderedTilesRequest.getChosenTiles());
                 });
                 break;
             case COLUMN_REQUEST:
                 ColumnRequest columnRequest = (ColumnRequest) message;
                 queue.add(() -> {
-                    try {
-                        view.columnRequest(columnRequest.getAvailableColumns());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.columnRequest(columnRequest.getAvailableColumns());
                 });
                 break;
             case WINNER:
                 WinnerMessage winnerMessage = (WinnerMessage) message;
                 queue.add(() -> {
-                    try {
-                        view.showWinner(winnerMessage.getWinnerNickname());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.showWinner(winnerMessage.getWinnerNickname());
                 });
                 break;
             case SERVER_INFO:
@@ -189,33 +148,21 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;
                 LivingRoom livingRoom = livingRoomMessage.getLivingRoom().getInstance();
                 queue.add(() -> {
-                    try {
-                        view.showLivingRoom(livingRoom);
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.showLivingRoom(livingRoom);
                 });
                 break;
             case PLAYER_MESSAGE:
                 PlayerMessage playerMessage = (PlayerMessage) message;
                 Player player = playerMessage.getPlayer();
                 queue.add(() -> {
-                    try {
-                        view.showBookshelf(player);
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.showBookshelf(player);
                 });
                 break;
             case WAITING_ROOM:
                 WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
                 queue.add(() -> {
-                    try {
-                        view.showMessage(message.toString());
-                        view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    view.showMessage(message.toString());
+                    view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
                 });
             default:
                 break;
@@ -223,7 +170,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     @Override
-    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException {
+    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) {
         try{
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler,address,port);
@@ -240,7 +187,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
    @Override
     public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
-        try {
+        /*try {
             this.client = new RMIClient(disconnectionHandler, address, port);
             this.client.connection();
             this.client.addObserver(this);
@@ -248,36 +195,36 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,null);
-        }
+        }*/
     }
 
     @Override
-    public void updateNickname(String nickname) throws IOException {
+    public void updateNickname(String nickname) {
         this.client.setUsername(nickname);
         client.sendMessage(new LoginRequest(nickname));
     }
 
     @Override
-    public void updateNumOfPlayers(int num) throws IOException {
+    public void updateNumOfPlayers(int num) {
         client.sendMessage(new NumOfPlayersReply(client.getUsername(), num));
     }
 
     @Override
-    public void updateChosenTiles(ArrayList<Tile> chosen) throws IOException {
+    public void updateChosenTiles(ArrayList<Tile> chosen) {
         client.sendMessage(new ChosenTilesReply(client.getUsername(), chosen));
     }
 
     @Override
-    public void updateChosenColumn(int col, ArrayList<Integer> availableColumns) throws IOException {
+    public void updateChosenColumn(int col, ArrayList<Integer> availableColumns) {
         client.sendMessage(new ColumnReply(client.getUsername(), col,availableColumns));
     }
 
-    public void updateOrderedTiles(ArrayList<Tile> orderedTiles) throws IOException {
+    public void updateOrderedTiles(ArrayList<Tile> orderedTiles) {
         client.sendMessage(new OrderedTilesReply(client.getUsername(), orderedTiles));
     }
 
     @Override
-    public void handleDisconnection() throws IOException {
+    public void handleDisconnection() {
         client.sendMessage(new DisconnectionRequest(client.getUsername()));
     }
 

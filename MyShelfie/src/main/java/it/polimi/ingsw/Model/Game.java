@@ -20,7 +20,7 @@ public class Game extends Observable implements Serializable {
     private static final String SERVER_NAME = "Server";
 
 
-    public Game() throws RemoteException {
+    public Game() {
         listOfPlayers = new ArrayList<Player>();
         pickCommonGoalCards();
         living = LivingRoom.getInstance();
@@ -373,7 +373,7 @@ public class Game extends Observable implements Serializable {
      *
      * @return living room
      */
-    public LivingRoom getLivingRoom() throws RemoteException {
+    public LivingRoom getLivingRoom() {
         LivingRoom livingRoom = LivingRoom.getInstance();
         return livingRoom;
     }

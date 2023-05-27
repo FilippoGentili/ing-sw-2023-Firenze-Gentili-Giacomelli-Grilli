@@ -22,7 +22,7 @@ public abstract class Client extends Observable implements Serializable {
     public final transient ArrayList<Message> messageQueue;
 
 
-    public Client(DisconnectionHandler disconnectionHandler) throws RemoteException {
+    public Client(DisconnectionHandler disconnectionHandler) {
         this.messageQueue = new ArrayList<>();
         this.disconnectionHandler = disconnectionHandler;
         this.timer = new Timer();
@@ -36,11 +36,11 @@ public abstract class Client extends Observable implements Serializable {
         this.username = username;
     }
 
-    public abstract void connection() throws IOException;
+    public abstract void connection();
 
     public abstract void disconnect();
 
-    public abstract void sendMessage(Message message) throws IOException;
+    public abstract void sendMessage(Message message);
 
     /**
      * Method used to get the entire messageQueue and clear it

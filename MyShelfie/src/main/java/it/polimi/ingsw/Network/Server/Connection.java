@@ -13,7 +13,7 @@ public abstract class Connection {
 
     public abstract void disconnectClient();
 
-    public abstract void sendMessage(Message message) throws RemoteException;
+    public abstract void sendMessage(Message message);
 
     public abstract void ping() throws RemoteException;
 }

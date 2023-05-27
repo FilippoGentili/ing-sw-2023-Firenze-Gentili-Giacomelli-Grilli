@@ -85,7 +85,7 @@ public class ConnectionSocket extends Connection implements Runnable{
     }
 
     @Override
-    public void sendMessage(Message message) throws RemoteException{
+    public void sendMessage(Message message){
         if(isConnected){
             try{
                 synchronized (outputLock){
