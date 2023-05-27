@@ -158,16 +158,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     view.showBookshelf(player);
                 });
                 break;
-            case WAITING_ROOM_CLI:
-                WaitingRoomMessageCli waitingRoomMessageCli = (WaitingRoomMessageCli) message;
+            case WAITING_ROOM:
+                WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
                 queue.add(() -> {
                     view.showMessage(message.toString());
-                    view.showWaitingRoom(waitingRoomMessageCli.getMaxPlayers(), waitingRoomMessageCli.getNumOfPlayersConnected());
-                });
-                break;
-            case WAITING_ROOM_GUI:
-                WaitingRoomMessageGui waitingRoomMessage = (WaitingRoomMessageGui) message;
-                queue.add(() -> {
                     view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
                 });
                 break;

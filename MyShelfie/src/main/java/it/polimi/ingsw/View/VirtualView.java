@@ -76,7 +76,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
-        connection.sendMessage(new WaitingRoomMessageCli(maxPlayers, numOfPlayersConnected));
+        connection.sendMessage(new WaitingRoomMessage(maxPlayers, numOfPlayersConnected));
     }
 
     @Override
