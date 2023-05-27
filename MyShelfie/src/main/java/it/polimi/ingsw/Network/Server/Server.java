@@ -3,7 +3,6 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Message.DisconnectionReply;
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -22,7 +21,7 @@ public class Server implements Runnable{
     private final Object lock;
 
 
-    public Server() throws RemoteException {
+    public Server() {
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
@@ -34,23 +33,19 @@ public class Server implements Runnable{
         SocketServer ss = new SocketServer(this, Socketport);
         ss.startSocketServer();
 
-        int rmiPort = 1099;
+       /* int rmiPort = 1099;
         RMIServer rs = new RMIServer(this,rmiPort);
-        rs.startRMIServer();
+        rs.startRMIServer();*/
     }
 
     public void login(String nickname, Connection connection) throws IOException {
         if(nickname != null){
-            try{
-                addClient(nickname, connection);
-            }catch (IOException e){
-                connection.disconnectClient();
-            }
+            addClient(nickname, connection);
         }
 
     }
 
-    public void addClient(String nickname, Connection connection) throws RemoteException {
+    public void addClient(String nickname, Connection connection){
         VirtualView vv = new VirtualView(connection);
 
         if(gameController.waitingForPlayers()){
@@ -70,7 +65,7 @@ public class Server implements Runnable{
         return null;
     }
 
-    public void removeClient(Connection connection) throws RemoteException {
+    public void removeClient(Connection connection) {
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue().equals(connection)) {
                 connectionMap.remove(map.getKey());
@@ -81,7 +76,7 @@ public class Server implements Runnable{
         }
     }
 
-    public void clientDisconnection(Connection connection) throws RemoteException {
+    public void clientDisconnection(Connection connection) {
         synchronized (lock){
 
             removeClient(connection);
@@ -99,7 +94,7 @@ public class Server implements Runnable{
 
     }
 
-    public void broadcastMessage(Message message) throws RemoteException {
+    public void broadcastMessage(Message message){
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue()!=null && map.getValue().checkConnection()){
                 map.getValue().sendMessage(message);
@@ -108,7 +103,7 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Send to all: {0}", message);
     }
 
-    public void sendMessage(Message message, String nickname) throws RemoteException {
+    public void sendMessage(Message message, String nickname) {
         synchronized(lock){
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
@@ -120,7 +115,7 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{nickname, message});
     }
 
-    public void handleMessage(Message message) throws RemoteException {
+    public void handleMessage(Message message) {
         gameController.forwardMessage(message);
     }
 

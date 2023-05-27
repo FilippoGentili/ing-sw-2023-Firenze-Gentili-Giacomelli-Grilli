@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
-import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
+/*import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
@@ -26,4 +26,4 @@ public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServ
         ConnectionRMI connectionRMI = new ConnectionRMI(connection,server);
         server.login(username, connectionRMI);
     }
-}
+}*/

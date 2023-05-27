@@ -348,7 +348,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
-    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) throws RemoteException {
+    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) {
         System.out.println("Lobby: ");
         for(int i=1; i<=listOfPlayers.size(); i++)
             System.out.println(i+") "+listOfPlayers.get(i-1));
@@ -609,7 +609,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
 
-    public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) throws RemoteException {
+    public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
     }
 
 

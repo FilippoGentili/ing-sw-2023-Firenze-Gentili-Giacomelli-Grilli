@@ -19,7 +19,7 @@ public class Bookshelf extends Observable implements Serializable {
 
     private static boolean[][] alreadyChecked;
 
-    public Bookshelf() throws RemoteException {
+    public Bookshelf() {
         shelf = new Tile[rows][columns];
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){

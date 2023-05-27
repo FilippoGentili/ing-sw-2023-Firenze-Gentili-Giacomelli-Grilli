@@ -22,7 +22,7 @@ public class LivingRoom extends Observable implements Serializable {
     /**
      * private constructor because of the singleton pattern
      */
-    private LivingRoom() throws RemoteException {
+    private LivingRoom() {
         board = new Tile[rows][columns];
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
@@ -42,7 +42,7 @@ public class LivingRoom extends Observable implements Serializable {
      * Method to get the instance of the singleton
      * @return the instance of the livingroom
      */
-    public static LivingRoom getInstance() throws RemoteException {
+    public static LivingRoom getInstance() {
         if(single_instance == null)
             single_instance = new LivingRoom();
 

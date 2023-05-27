@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 //manda eventi
 
-public class Observable extends UnicastRemoteObject {
+public class Observable {
 
     public ArrayList<Observer> observers = new ArrayList<>();
 
-    protected Observable() throws RemoteException {
+    protected Observable() {
     }
 
     public void addObserver(Observer obs){

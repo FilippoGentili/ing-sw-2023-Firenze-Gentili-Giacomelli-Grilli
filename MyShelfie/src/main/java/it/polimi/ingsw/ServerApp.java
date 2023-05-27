@@ -8,12 +8,8 @@ import java.rmi.RemoteException;
 public class ServerApp {
 
     public static void main(String[] args) {
-        try {
-            Server server = new Server();
+        Server server = new Server();
 
-            server.startServers();
-        }catch (RemoteException e){
-            //
-        }
+        server.startServers();
     }
 }

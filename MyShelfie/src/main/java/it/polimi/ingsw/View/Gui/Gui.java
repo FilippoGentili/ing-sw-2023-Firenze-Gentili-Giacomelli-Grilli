@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
     @Override
-    public void showMessage(String message) throws RemoteException {
+    public void showMessage(String message){
 
     }
 

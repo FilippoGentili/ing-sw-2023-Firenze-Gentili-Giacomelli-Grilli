@@ -37,7 +37,7 @@ public class Bag implements Serializable {
      * @return an array list of the tiles chosen from the bag
      */
 
-    public ArrayList<Tile> extract(int numStartTile) throws RemoteException {
+    public ArrayList<Tile> extract(int numStartTile) {
 
         ArrayList<Tile> chosen = new ArrayList<Tile>();
         LivingRoom living = LivingRoom.getInstance();

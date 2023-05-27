@@ -40,7 +40,7 @@ public class Player extends Observable implements Serializable {
     /**
      * creates a player identified by a nickname and with a personal goal card and a score, initially of zero points
      */
-    public Player(Game game) throws RemoteException {
+    public Player(Game game) {
         this.game = game;
         this.score = 0;
         this.bookshelf = new Bookshelf();
@@ -168,6 +168,7 @@ public class Player extends Observable implements Serializable {
     }
 
     public void setChosenTiles(ArrayList<Tile> chosen){
+        chosenTiles = new ArrayList<>();
         for(int i=0; i<chosen.size(); i++)
             chosenTiles.add(chosen.get(i));
     }

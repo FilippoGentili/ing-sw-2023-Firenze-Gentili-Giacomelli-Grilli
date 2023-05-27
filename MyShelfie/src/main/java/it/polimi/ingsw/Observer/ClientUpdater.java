@@ -38,11 +38,7 @@ public class ClientUpdater implements Runnable{
                 }while(messages.isEmpty());
 
                 for(Message msg : messages) {
-                    try {
-                        observer.update(msg);
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
+                    observer.update(msg);
                 }
             }
         }

@@ -4,7 +4,6 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
-import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -12,7 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIClient extends Client implements RMIClientHandler{
+/*public class RMIClient extends Client implements RMIClientHandler{
     private transient RMIServerHandler server;
     private final String address;
     private final String port;
@@ -55,4 +54,4 @@ public class RMIClient extends Client implements RMIClientHandler{
             messageQueue.add(message);
         }
     }
-}
+}*/
