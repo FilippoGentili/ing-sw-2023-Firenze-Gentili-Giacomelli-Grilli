@@ -232,7 +232,7 @@ public class LivingRoom extends Observable implements Serializable {
     public boolean checkEmptyLivingRoom(){
         for(int i=1; i<rows-1; i++){
             for(int j=1; j<columns-1; j++){
-                if(validCell(i,j)){
+                if(validCell(i,j) && getTile(i,j).getTileType() != TileType.NULL){
                     if(getTile(i-1,j).getTileType()!=TileType.NULL || getTile(i+1,j).getTileType()!=TileType.NULL
                             || getTile(i,j-1).getTileType()!=TileType.NULL || getTile(i,j+1).getTileType()!=TileType.NULL){
                         return false;
