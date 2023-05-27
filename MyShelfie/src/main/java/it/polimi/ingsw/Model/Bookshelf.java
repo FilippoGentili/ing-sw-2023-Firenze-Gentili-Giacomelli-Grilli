@@ -23,7 +23,7 @@ public class Bookshelf extends Observable implements Serializable {
         shelf = new Tile[rows][columns];
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
-                shelf[i][j] = new Tile(TileType.NULL);
+                setTile(i,j,TileType.NULL);
             }
         }
         alreadyChecked = new boolean[rows][columns];
@@ -71,8 +71,7 @@ public class Bookshelf extends Observable implements Serializable {
             while(!isEmpty(i, col) && i>=0){
                 i--;
             }
-            Tile def = new Tile(app.getTileType());
-            shelf[i][col]=def;
+            setTile(i,col,app.getTileType());
         }
     }
 
