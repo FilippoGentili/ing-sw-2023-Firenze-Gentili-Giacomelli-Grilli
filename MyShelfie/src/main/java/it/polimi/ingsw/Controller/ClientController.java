@@ -17,6 +17,7 @@ import it.polimi.ingsw.View.View;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
@@ -226,6 +227,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     @Override
     public void handleDisconnection() {
         client.sendMessage(new DisconnectionRequest(client.getUsername()));
+    }
+
+    @Override
+    public void updateLivingRoomTiles(HashMap<Integer, Integer> index) throws IOException {
+        client.sendMessage(new IndexMessage(client.getUsername(), index));
     }
 
     public static boolean validAddress(String address) {
