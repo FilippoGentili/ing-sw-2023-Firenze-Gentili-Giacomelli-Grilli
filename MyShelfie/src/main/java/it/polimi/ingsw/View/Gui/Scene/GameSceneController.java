@@ -4,12 +4,12 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.ViewObservable;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
-
     @FXML
     private AnchorPane bookshelfPlayer1;
     @FXML
@@ -68,6 +68,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             personalGoalCard2.setVisible(false);
         }
     }
+
     public void updateLivingRoom(LivingRoom livingRoom){
 
     }
@@ -83,4 +84,5 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void setPersonalGoalCard(Player player){
 
     }
+
 }
