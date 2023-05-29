@@ -69,8 +69,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showGameStarted() {
-        connection.sendMessage(new GameStartedMessage());
+    public void showGameStarted(Game game) {
+        connection.sendMessage(new GameStartedMessage(game));
     }
 
 

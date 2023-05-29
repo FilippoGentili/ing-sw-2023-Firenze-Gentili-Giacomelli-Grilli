@@ -43,6 +43,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         new Thread(this).start();
     }
 
+    public void setGameController(GameController gameController){
+        this.gameController = gameController;
+    }
+
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
@@ -169,8 +173,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 GameStartedMessage gameStartedMessage = (GameStartedMessage) message;
                 queue.add(() -> {
                     view.showMessage(message.toString());
-                    //view.showGameStarted(gameStartedMessage.getPlayers(), gameStartedMessage.getGame());
-                    view.showGameStarted();
+                    view.showGameStarted(gameController.getGame());
                 });
                 break;
             default:

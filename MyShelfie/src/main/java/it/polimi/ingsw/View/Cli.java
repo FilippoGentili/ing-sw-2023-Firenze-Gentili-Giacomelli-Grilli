@@ -624,7 +624,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
-    public void showGameStarted() {
+    public void showGameStarted(Game game) {
 
     }
 

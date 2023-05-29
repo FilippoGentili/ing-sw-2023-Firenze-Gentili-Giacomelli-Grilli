@@ -14,18 +14,13 @@ public class GameStartedMessage extends Message{
 
     private Game game;
     private ArrayList<Player> players;
-    public GameStartedMessage() {
+    public GameStartedMessage(Game game) {
         super(Game.getServerName(), MessageType.GAME_STARTED);
-        /*this.game = game;
-        this.players = players;*/
+        this.game = game;
     }
 
     public Game getGame(){
         return game;
-    }
-
-    public ArrayList<Player> getPlayers(){
-        return players;
     }
 
     @Override
