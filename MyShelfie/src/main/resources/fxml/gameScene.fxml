@@ -65,9 +65,9 @@
               </rowConstraints>
             </GridPane>
          </children></AnchorPane>
-      <AnchorPane layoutX="30.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
+      <AnchorPane fx:id="bookshelfPlayer1" layoutX="30.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
          <children>
-            <GridPane fx:id="bookshelfPlayer1" prefHeight="200.0" prefWidth="200.0">
+            <GridPane prefHeight="200.0" prefWidth="200.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
@@ -89,9 +89,9 @@
               </rowConstraints>
             </GridPane>
          </children></AnchorPane>
-      <AnchorPane layoutX="30.0" layoutY="322.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
+      <AnchorPane fx:id="bookshelfPlayer2" layoutX="30.0" layoutY="322.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
          <children>
-            <GridPane fx:id="bookshelfPlayer2" prefHeight="200.0" prefWidth="200.0">
+            <GridPane prefHeight="200.0" prefWidth="200.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
@@ -113,7 +113,7 @@
               </rowConstraints>
             </GridPane>
          </children></AnchorPane>
-      <AnchorPane layoutX="30.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
+      <AnchorPane fx:id="bookshelfPlayer3" layoutX="30.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
          <children>
             <GridPane prefHeight="200.0" prefWidth="200.0">
               <columnConstraints>
@@ -142,7 +142,7 @@
             <Font name="Blackadder ITC" size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="102.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3">
+      <Text fx:id="namePlayer3" fill="WHITE" layoutX="102.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3">
          <font>
             <Font name="Blackadder ITC" size="20.0" />
          </font>
@@ -152,9 +152,9 @@
             <Font name="Blackadder ITC" size="20.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="1136.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
+      <AnchorPane fx:id="bookShelfPlayerYou" layoutX="1136.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
          <children>
-            <GridPane fx:id="bookShelfPlayerYou" prefHeight="200.0" prefWidth="200.0">
+            <GridPane prefHeight="200.0" prefWidth="200.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />

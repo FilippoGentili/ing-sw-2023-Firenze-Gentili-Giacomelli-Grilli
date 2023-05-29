@@ -134,10 +134,12 @@ public class Gui extends ViewObservable implements View {
 
         try {
             gameSceneController = (GameSceneController) GuiController.getCurrentController();
+            //Platform.runLater(gameSceneController::setUpGame(game));
         } catch (ClassCastException e) {
             gameSceneController = new GameSceneController();
             gameSceneController.addAllObserver(observers);
             GameSceneController gameSceneController1 = gameSceneController;
+            //Platform.runLater(gameSceneController::setUpGame(game));
             Platform.runLater(() -> GuiController.changeScene("gameScene.fxml",gameSceneController1));
         }
     }
