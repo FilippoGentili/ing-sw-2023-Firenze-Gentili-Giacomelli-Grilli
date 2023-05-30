@@ -17,7 +17,8 @@ public class CommonGoalCard1 extends CommonGoalCard {
                 checkTile[row][col]=false;
 
         for(row=0; row<6; row++){
-            for(col=0, count=1; col<4; col++){
+            for(col=0; col<4; col++){
+                count =1;
                 if(!checkTile[row][col]){
                     if(bookshelf.getTile(row,col).getTileType() != TileType.NULL && bookshelf.getTile(row,col+1).getTileType() != TileType.NULL) {
                         if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row, col + 1).getTileType()) {
@@ -35,7 +36,8 @@ public class CommonGoalCard1 extends CommonGoalCard {
 
         if(countGroup<6){
             for(row=0; row<5; row++) {
-                for (col = 0, count=1; col < 5; col++) {
+                for (col = 0; col < 5; col++) {
+                    count = 1;
                     if (!checkTile[row][col]) {
                         if(bookshelf.getTile(row,col).getTileType() != TileType.NULL && bookshelf.getTile(row+1,col).getTileType() != TileType.NULL) {
                             if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row + 1, col).getTileType()) {

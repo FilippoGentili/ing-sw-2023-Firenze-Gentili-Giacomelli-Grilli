@@ -213,4 +213,21 @@ class CommonGoalCard1Test {
         assertFalse(Card.check(bookshelf));
     }
 
+    @Test
+    void fiveCouples(){
+        CommonGoalCard Card = new CommonGoalCard1();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int i=0; i<2; i++){
+            for(int j=0; j<5; j++){
+                Tile cat = new Tile(TileType.CAT);
+                ArrayList<Tile> TileCat = new ArrayList<>();
+                TileCat.add(cat);
+                bookshelf.insertTiles(TileCat, j);
+            }
+        }
+
+        assertFalse(Card.check(bookshelf));
+    }
+
 }
