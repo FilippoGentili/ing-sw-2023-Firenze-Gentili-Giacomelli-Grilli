@@ -83,34 +83,32 @@ public class GameController {
     public void handleLogin(String nickname, VirtualView vv) {
         Player player = new Player(this.game);
 
-        synchronized (lock) {
-            if (numOfPlayers == 0) {
+        if (numOfPlayers == 0) {
+            addVirtualView(player, vv);
+            players.add(player);
+            player.setNickname(nickname);
+            game.addPlayer(player);
+            server.sendMessage(new LoginResult(nickname, true, true), nickname);
+            server.sendMessage(new NumOfPlayersRequest(), nickname);
+            server.sendMessage(new LoginReply(nickname), nickname);
+        } else if (virtualViewMap.size() < numOfPlayers) {
+            if (inputController.checkNickname(nickname, vv)) {
                 addVirtualView(player, vv);
                 players.add(player);
                 player.setNickname(nickname);
                 game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname, true, true), nickname);
-                server.sendMessage(new NumOfPlayersRequest(), nickname);
                 server.sendMessage(new LoginReply(nickname), nickname);
-            } else if (virtualViewMap.size() < numOfPlayers) {
-                if (inputController.checkNickname(nickname, vv)) {
-                    addVirtualView(player, vv);
-                    players.add(player);
-                    player.setNickname(nickname);
-                    game.addPlayer(player);
-                    server.sendMessage(new LoginResult(nickname, true, true), nickname);
-                    server.sendMessage(new LoginReply(nickname), nickname);
-                    //server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
-                    server.broadcastMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()));
+                //server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
+                server.broadcastMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()));
 
-                    if (virtualViewMap.size() == numOfPlayers)
-                        startGame();
-                } else
-                    vv.loginResult(false, true, nickname);
-            } else if (virtualViewMap.size() == numOfPlayers) {
-                vv.loginResult(true, false, nickname);
-                vv.getConnection().disconnectClient();
-            }
+                if (virtualViewMap.size() == numOfPlayers)
+                    startGame();
+            } else
+                vv.loginResult(false, true, nickname);
+        } else if (virtualViewMap.size() == numOfPlayers) {
+            vv.loginResult(true, false, nickname);
+            vv.getConnection().disconnectClient();
         }
 
     }
