@@ -46,14 +46,16 @@ public class Server implements Runnable{
             }
     }
 
-    public synchronized void addClient(String nickname, Connection connection){
+    public void addClient(String nickname, Connection connection){
         VirtualView vv = new VirtualView(connection);
 
-        if (gameController.waitingForPlayers()) {
-            connectionMap.put(nickname, connection);
-            gameController.handleLogin(nickname, vv);
-        } else {
-            vv.loginResult(true, false, null);
+        synchronized (gameController){
+            if (gameController.waitingForPlayers()) {
+                connectionMap.put(nickname, connection);
+                gameController.handleLogin(nickname, vv);
+            } else {
+                vv.loginResult(true, false, null);
+            }
         }
     }
 
