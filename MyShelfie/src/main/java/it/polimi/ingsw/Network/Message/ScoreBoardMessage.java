@@ -11,7 +11,7 @@ public class ScoreBoardMessage extends Message{
     HashMap<String, Integer> scoreboard;
 
     public ScoreBoardMessage(HashMap<String, Integer> scoreboard) {
-        super(Game.getServerName(), MessageType.PLAYER_MESSAGE);
+        super(Game.getServerName(), MessageType.SCOREBOARD_MESSAGE);
         this.scoreboard = scoreboard;
     }
 
