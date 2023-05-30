@@ -51,6 +51,8 @@ public class GameController {
                     NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
                     setNumOfPlayers(message);
                     game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
+                    game.getCommonGoal1().setDelta(numOfPlayersReply.getNumOfPlayers());
+                    game.getCommonGoal2().setDelta(numOfPlayersReply.getNumOfPlayers());
                     //server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
                     server.sendMessage(new WaitingRoomMessage(numOfPlayersReply.getNumOfPlayers(), virtualViewMap.size()), message.getNickname());
                     //restoreMatchElements();
@@ -146,7 +148,7 @@ public class GameController {
         game.getLivingRoom().insertTiles(chosen);
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
-        server.broadcastMessage(new GameStartedMessage(players, game));
+        server.broadcastMessage(new GameStartedMessage(game));
         newTurn();
     }
 

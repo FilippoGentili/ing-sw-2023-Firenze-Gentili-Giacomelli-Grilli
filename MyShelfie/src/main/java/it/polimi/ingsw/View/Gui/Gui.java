@@ -129,8 +129,19 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showGameStarted(ArrayList<Player> players, Game game) {
-        Platform.runLater(() -> GuiController.changeScene( "gameScene.fxml",observers));
+    public void showGameStarted(Game game) {
+        GameSceneController gameSceneController;
+
+        try {
+            gameSceneController = (GameSceneController) GuiController.getCurrentController();
+            gameSceneController.setUpGame(game);
+        } catch (ClassCastException e) {
+            gameSceneController = new GameSceneController();
+            gameSceneController.addAllObserver(observers);
+            GameSceneController gameSceneController1 = gameSceneController;
+            gameSceneController.setUpGame(game);
+            Platform.runLater(() -> GuiController.changeScene("gameScene.fxml",gameSceneController1));
+        }
     }
 
     public  GameSceneController getGameSceneController(){
