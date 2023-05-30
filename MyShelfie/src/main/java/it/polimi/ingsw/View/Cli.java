@@ -296,34 +296,36 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         ArrayList<Tile> orderedTiles = new ArrayList<>();
         ArrayList<String> tilesTypes = new ArrayList<>();
 
-        System.out.println("Choose the order of the tiles, from the bottom to the top");
-        int i=1;
-        do{
-            System.out.println("Here are the tiles you chose: ");
-            for (Tile tile : chosenTiles){
-                tilesTypes.add(tile.getTileType().toString());
-                System.out.println(tile.getTileType().toString());
-            }
-
-            System.out.println("Select the " + i + " tile type:");
-            input = readLine();
-
-
-            if(!tilesTypes.contains(input)) {
-                System.out.println("You didn't choose this type of tile");
-            }else{
-                for (int x=0; x<chosenTiles.size(); x++) {
-                    if (input.equals(chosenTiles.get(x).getTileType().toString())) {
-                        orderedTiles.add(chosenTiles.get(x));
-                        chosenTiles.remove(x);
-                        tilesTypes.remove(x);
-                        break;
-                    }
+        if(chosenTiles.size() > 1){
+            System.out.println("Choose the order of the tiles, from the bottom to the top");
+            int i=1;
+            do{
+                System.out.println("Here are the tiles you chose: ");
+                for (Tile tile : chosenTiles){
+                    tilesTypes.add(tile.getTileType().toString());
+                    System.out.println(tile.getTileType().toString());
                 }
-                i++;
-            }
 
-        }while(!chosenTiles.toString().contains(input) && chosenTiles.size()>0);
+                System.out.println("Select the " + i + " tile type:");
+                input = readLine();
+
+
+                if(!tilesTypes.contains(input)) {
+                    System.out.println("You didn't choose this type of tile");
+                }else{
+                    for (int x=0; x<chosenTiles.size(); x++) {
+                        if (input.equals(chosenTiles.get(x).getTileType().toString())) {
+                            orderedTiles.add(chosenTiles.get(x));
+                            chosenTiles.remove(x);
+                            tilesTypes.remove(x);
+                            break;
+                        }
+                    }
+                    i++;
+                }
+
+            }while(!chosenTiles.toString().contains(input) && chosenTiles.size()>0);
+        }
 
         notifyObserver(obs -> {
             try {
@@ -367,8 +369,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void showListOfPlayers(HashMap<String, Integer> scoreboard) {
-        for(int i=1; i<=scoreboard.size(); i++)
-            System.out.println(i+") "+scoreboard.get(i-1));
+        for(Map.Entry<String, Integer> map : scoreboard.entrySet())
+            System.out.println(map.getKey() + ": "+ map.getValue()+" points");
     }
 
     @Override
