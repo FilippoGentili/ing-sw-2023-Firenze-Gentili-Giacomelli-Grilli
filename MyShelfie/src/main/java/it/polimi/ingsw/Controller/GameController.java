@@ -22,7 +22,7 @@ public class GameController {
     private final Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;
-    //private final Object lock;
+    private final Object lock;
 
 
     /**
@@ -35,7 +35,7 @@ public class GameController {
         //this.numOfPlayers = num;
         this.inputController = new InputController(this, server);
         setGameState(LOGIN);
-        //this.lock = new Object();
+        this.lock = new Object();
         //virtualViewMap = new HashMap<>();
     }
 
@@ -80,9 +80,10 @@ public class GameController {
      * @param vv virtual view of the player
      * @throws RemoteException
      */
-    public synchronized void handleLogin(String nickname, VirtualView vv) {
+    public void handleLogin(String nickname, VirtualView vv) {
         Player player = new Player(this.game);
 
+        synchronized (lock) {
             if (numOfPlayers == 0) {
                 addVirtualView(player, vv);
                 players.add(player);
@@ -110,6 +111,7 @@ public class GameController {
                 vv.loginResult(true, false, nickname);
                 vv.getConnection().disconnectClient();
             }
+        }
 
     }
 
