@@ -225,7 +225,6 @@ public class LivingRoom extends Observable implements Serializable {
             default:
                 throw new IllegalArgumentException("il numero di tessere selezionato è sbagliato");
         }
-
         return false;
     }
 

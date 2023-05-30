@@ -434,6 +434,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 System.out.println("Points: " + game.getCommonGoal2().getValue());
             }
 
+
             switch(gc[i]){
                 case 1:
                     System.out.println("Six groups each containing at least 2 tiles of the same type (not necessarily in the depicted shape).\n" +
@@ -615,12 +616,21 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void updateGameState(Player player, Game game) throws Exception {
+
         out.flush();
-        showLivingRoom(game.getLivingRoom());
-        for(Player p : game.getPlayers())
-            showBookshelf(p);
+        System.out.print("\033[H\033[2J");
+        System.out.println();
         showCommonGoalCards(game);
+        System.out.println();
         showPersonalGoalCard(player);
+        System.out.println();
+        showLivingRoom(game.getLivingRoom());
+        System.out.println();
+        for(Player p : game.getPlayers()) {
+            showBookshelf(p);
+            System.out.println();
+        }
+
     }
 
     @Override
