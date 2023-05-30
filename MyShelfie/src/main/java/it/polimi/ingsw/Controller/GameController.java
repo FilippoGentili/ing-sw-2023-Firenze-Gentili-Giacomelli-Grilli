@@ -278,7 +278,7 @@ public class GameController {
 
         if(game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
             server.sendMessage(new GenericMessage("Congratulations! You reached the second common Goal! You earn "
-                    + game.getCommonGoal1().getValue() + " points!"),currentPlayer.getNickname());
+                    + game.getCommonGoal2().getValue() + " points!"),currentPlayer.getNickname());
             player.setScore(player.getScore()+game.getCommonGoal2().getValue());
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
