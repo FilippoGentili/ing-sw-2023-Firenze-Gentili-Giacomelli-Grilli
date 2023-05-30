@@ -179,7 +179,17 @@ public class GameController {
         if(firstTurn){
             firstTurn = false;
         }
+
+        HashMap<String, Integer> ranking;
+
+        ranking = getScoreBoard();
+
+        for(Player player : players){
+            server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
+        }
+
         restoreMatchElements();
+
         for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
             if(!map.getKey().equals(currentPlayer))
                 map.getValue().showMessage("It's the turn of " + currentPlayer.getNickname());
