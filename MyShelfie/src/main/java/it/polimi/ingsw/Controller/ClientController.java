@@ -68,7 +68,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      */
     @Override
     public void update(Message message) {
-        synchronized (this){
+        synchronized (client){
             switch(message.getMessageType()){
                 case GENERIC_MESSAGE:
                     queue.add(() -> {
@@ -106,10 +106,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                             throw new RuntimeException(e);
                         }
                     });
+                    break;
                 case SCOREBOARD_MESSAGE:
                     ScoreBoardMessage scoreBoardMessage = (ScoreBoardMessage) message;
                     queue.add(() -> {
-                        view.showListOfPlayers(scoreBoardMessage.getScoreboard());
+                        view.showScoreboard(scoreBoardMessage.getScoreboard());
                     });
                     break;
                 case DISCONNECTION_REPLY:
@@ -141,9 +142,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     queue.add(() -> {
                         view.showWinner(winnerMessage.getWinnerNickname());
                     });
-                    break;
-                case SERVER_INFO:
-
                     break;
                 case LIVING_ROOM:
                     LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;

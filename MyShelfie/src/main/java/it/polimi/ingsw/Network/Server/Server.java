@@ -40,22 +40,20 @@ public class Server implements Runnable{
         rs.startRMIServer();*/
     }
 
-    public synchronized void login(String nickname, Connection connection) throws IOException {
+    public synchronized void login(String nickname, Connection connection) throws IOException, InterruptedException {
             if (nickname != null) {
                 addClient(nickname, connection);
             }
     }
 
-    public void addClient(String nickname, Connection connection){
+    public synchronized void addClient(String nickname, Connection connection) throws InterruptedException {
         VirtualView vv = new VirtualView(connection);
 
-        synchronized (gameController){
-            if (gameController.waitingForPlayers()) {
-                connectionMap.put(nickname, connection);
-                gameController.handleLogin(nickname, vv);
-            } else {
-                vv.loginResult(true, false, null);
-            }
+        if (gameController.waitingForPlayers()) {
+            connectionMap.put(nickname, connection);
+            gameController.handleLogin(nickname, vv);
+        } else {
+            vv.loginResult(true, false, null);
         }
     }
 
@@ -132,8 +130,10 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{nickname, message});
     }
 
-    public void handleMessage(Message message) {
-        gameController.forwardMessage(message);
+    public void handleMessage(Message message) throws InterruptedException {
+        synchronized (lock) {
+            gameController.forwardMessage(message);
+        }
     }
 
     @Override

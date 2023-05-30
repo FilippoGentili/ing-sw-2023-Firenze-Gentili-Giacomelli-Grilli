@@ -23,7 +23,7 @@ public interface View {
 
     void OrderTiles(ArrayList<Tile> chosenTiles) ;
 
-    void showListOfPlayers(HashMap<String, Integer> scoreboard);
+    void showScoreboard(ArrayList<Player> scoreboard);
 
     void someoneDisconnected(String nickname) ;
 

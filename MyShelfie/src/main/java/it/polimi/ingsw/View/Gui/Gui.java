@@ -82,7 +82,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException if there are connection problems
      */
     @Override
-    public void showListOfPlayers(HashMap<String, Integer> scoreboard) {
+    public void showScoreboard(ArrayList<Player> scoreboard) {
 
     }
 

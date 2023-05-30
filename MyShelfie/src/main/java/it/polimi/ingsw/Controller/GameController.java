@@ -7,6 +7,9 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static it.polimi.ingsw.Model.GameState.*;
 
@@ -22,7 +25,8 @@ public class GameController {
     private final Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;
-    private final Object lock;
+
+    private Lock lock = new ReentrantLock();
 
 
     /**
@@ -35,7 +39,6 @@ public class GameController {
         //this.numOfPlayers = num;
         this.inputController = new InputController(this, server);
         setGameState(LOGIN);
-        this.lock = new Object();
         //virtualViewMap = new HashMap<>();
     }
 
@@ -45,7 +48,7 @@ public class GameController {
      * @param message
      * @throws RemoteException
      */
-    public void forwardMessage(Message message) {
+    public synchronized void forwardMessage(Message message) throws InterruptedException {
 
         switch (gameState) {
             case LOGIN:
@@ -80,7 +83,7 @@ public class GameController {
      * @param vv virtual view of the player
      * @throws RemoteException
      */
-    public void handleLogin(String nickname, VirtualView vv) {
+    public synchronized void handleLogin(String nickname, VirtualView vv) throws InterruptedException {
         Player player = new Player(this.game);
 
         if (numOfPlayers == 0) {
@@ -109,9 +112,9 @@ public class GameController {
         } else if (virtualViewMap.size() == numOfPlayers) {
             vv.loginResult(true, false, nickname);
             vv.getConnection().disconnectClient();
-        }
-
+        }else handleLogin(nickname, vv);
     }
+
 
     /**
      * this method is called when the game is already started and a message from the client arrives. It decides what
@@ -154,7 +157,7 @@ public class GameController {
         newTurn();
     }
 
-    public void setNumOfPlayers(Message message){
+    public synchronized void setNumOfPlayers(Message message){
         NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
         int num = numOfPlayersReply.getNumOfPlayers();
         this.numOfPlayers = num;
@@ -182,13 +185,13 @@ public class GameController {
             firstTurn = false;
         }
 
-        HashMap<String, Integer> ranking;
+        /*HashMap<String, Integer> ranking;
 
         ranking = getScoreBoard();
 
         for(Player player : players){
             server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
-        }
+        }*/
 
         restoreMatchElements();
 
@@ -381,13 +384,13 @@ public class GameController {
         Player winner;
 
         winner = game.getWinner();
-        HashMap<String, Integer> ranking;
+        /*HashMap<String, Integer> ranking;
 
         ranking = getScoreBoard();
 
         for(Player player : players){
             server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
-        }
+        }*/
 
         for(Player player : players){
             if(player.getNickname().equals(winner.getNickname()))
@@ -471,14 +474,14 @@ public class GameController {
         }
     }
 
-    public HashMap<String, Integer> getScoreBoard(){
+    /*public HashMap<String, Integer> getScoreBoard(){
         HashMap<String, Integer> scoreBoard = new HashMap<>();
 
         for(Player player : players){
             scoreBoard.put(player.getNickname(), player.getScore());
         }
         return scoreBoard;
-    }
+    }*/
 
     public Player getPlayerByNickname(String nickname){
         for(Player player : players)

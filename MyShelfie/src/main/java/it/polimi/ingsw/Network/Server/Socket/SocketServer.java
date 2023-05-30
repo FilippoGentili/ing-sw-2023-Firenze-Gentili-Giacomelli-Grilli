@@ -42,11 +42,11 @@ public class SocketServer extends Thread{
         }
     }
 
-    public void login(String nickname, Connection connection) throws IOException {
+    public void login(String nickname, Connection connection) throws IOException, InterruptedException {
         server.login(nickname, connection);
     }
 
-    public void addClient(String nickname, Connection connection) throws RemoteException {
+    public void addClient(String nickname, Connection connection) throws RemoteException, InterruptedException {
         server.addClient(nickname, connection);
     }
 
@@ -54,7 +54,7 @@ public class SocketServer extends Thread{
         server.clientDisconnection(connection);
     }
 
-    public void handleMessage(Message message) throws RemoteException {
+    public void handleMessage(Message message) throws RemoteException, InterruptedException {
         server.handleMessage(message);
     }
 }

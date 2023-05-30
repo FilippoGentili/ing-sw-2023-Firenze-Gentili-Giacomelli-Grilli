@@ -39,7 +39,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showListOfPlayers(HashMap<String, Integer> scoreboard) {
+    public void showScoreboard(ArrayList<Player> scoreboard) {
         connection.sendMessage(new ScoreBoardMessage(scoreboard));
     }
 

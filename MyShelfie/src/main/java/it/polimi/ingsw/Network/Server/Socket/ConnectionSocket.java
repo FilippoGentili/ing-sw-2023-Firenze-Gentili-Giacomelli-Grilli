@@ -59,6 +59,8 @@ public class ConnectionSocket extends Connection implements Runnable{
                 Server.LOGGER.severe(e.getMessage());
             } catch (IOException e){
                 disconnectClient();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
