@@ -11,6 +11,7 @@ import javafx.application.Platform;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
@@ -81,7 +82,7 @@ public class Gui extends ViewObservable implements View {
      * @throws RemoteException if there are connection problems
      */
     @Override
-    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) {
+    public void showListOfPlayers(HashMap<String, Integer> scoreboard) {
 
     }
 

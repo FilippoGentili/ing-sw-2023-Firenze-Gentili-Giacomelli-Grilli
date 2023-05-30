@@ -9,6 +9,7 @@ import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VirtualView implements View, Observer {
 
@@ -38,8 +39,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player) {
-        connection.sendMessage(new MatchInfo(listOfPlayers, player.getNickname()));
+    public void showListOfPlayers(HashMap<String, Integer> scoreboard) {
+        connection.sendMessage(new ScoreBoardMessage(scoreboard));
     }
 
     @Override

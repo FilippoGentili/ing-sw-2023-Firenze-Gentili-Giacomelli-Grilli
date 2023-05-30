@@ -5,6 +5,7 @@ import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface View {
 
@@ -22,7 +23,7 @@ public interface View {
 
     void OrderTiles(ArrayList<Tile> chosenTiles) ;
 
-    void showListOfPlayers(ArrayList<Player> listOfPlayers, Player player);
+    void showListOfPlayers(HashMap<String, Integer> scoreboard);
 
     void someoneDisconnected(String nickname) ;
 
