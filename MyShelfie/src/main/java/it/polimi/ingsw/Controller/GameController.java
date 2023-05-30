@@ -80,7 +80,7 @@ public class GameController {
      * @param vv virtual view of the player
      * @throws RemoteException
      */
-    public synchronized void handleLogin(String nickname, VirtualView vv) {
+    public void handleLogin(String nickname, VirtualView vv) {
         Player player = new Player(this.game);
 
             if (numOfPlayers == 0) {
