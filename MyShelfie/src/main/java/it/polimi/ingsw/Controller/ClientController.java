@@ -30,19 +30,18 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     private Client client;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
     private ClientUpdater clientUpdater;
-    private final Object lock;
 
 
     public ClientController(View view) {
         this.view = view;
         //taskQueue = Executors.newSingleThreadExecutor();
         new Thread(this).start();
-        this.lock = new Object();
+        //this.lock = new Object();
     }
 
     @Override
     public void run() {
-        synchronized (lock){
+        synchronized (this){
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     queue.take().run();
@@ -71,7 +70,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      */
     @Override
     public void update(Message message) {
-        synchronized (lock){
+        synchronized (this){
             switch(message.getMessageType()){
                 case GENERIC_MESSAGE:
                     queue.add(() -> {
