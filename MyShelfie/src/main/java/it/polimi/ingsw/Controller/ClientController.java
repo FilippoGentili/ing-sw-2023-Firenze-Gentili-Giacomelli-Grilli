@@ -41,7 +41,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
     @Override
     public void run() {
-        synchronized (this){
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     queue.take().run();
@@ -50,7 +49,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     Thread.currentThread().interrupt();
                 }
             }
-        }
     }
 
     public void setClient(Client client){
