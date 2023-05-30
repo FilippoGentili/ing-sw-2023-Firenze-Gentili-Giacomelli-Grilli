@@ -40,12 +40,10 @@ public class Server implements Runnable{
         rs.startRMIServer();*/
     }
 
-    public void login(String nickname, Connection connection) throws IOException {
-        synchronized (lock) {
+    public synchronized void login(String nickname, Connection connection) throws IOException {
             if (nickname != null) {
                 addClient(nickname, connection);
             }
-        }
     }
 
     public void addClient(String nickname, Connection connection){
