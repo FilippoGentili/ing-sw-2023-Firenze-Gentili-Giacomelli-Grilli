@@ -41,22 +41,21 @@ public class Server implements Runnable{
     }
 
     public void login(String nickname, Connection connection) throws IOException {
-        if(nickname != null){
-            addClient(nickname, connection);
+        synchronized (lock) {
+            if (nickname != null) {
+                addClient(nickname, connection);
+            }
         }
-
     }
 
     public void addClient(String nickname, Connection connection){
         VirtualView vv = new VirtualView(connection);
 
-        synchronized (lock) {
-            if (gameController.waitingForPlayers()) {
-                connectionMap.put(nickname, connection);
-                gameController.handleLogin(nickname, vv);
-            } else {
-                vv.loginResult(true, false, null);
-            }
+        if (gameController.waitingForPlayers()) {
+            connectionMap.put(nickname, connection);
+            gameController.handleLogin(nickname, vv);
+        } else {
+            vv.loginResult(true, false, null);
         }
     }
 
