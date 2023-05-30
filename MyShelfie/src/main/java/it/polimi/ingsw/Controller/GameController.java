@@ -367,6 +367,13 @@ public class GameController {
         Player winner;
 
         winner = game.getWinner();
+        HashMap<String, Integer> ranking;
+
+        ranking = getScoreBoard();
+
+        for(Player player : players){
+            server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
+        }
 
         for(Player player : players){
             if(player.getNickname().equals(winner.getNickname()))
@@ -448,6 +455,15 @@ public class GameController {
         for(Player player : players){
             server.sendMessage(new GenericMessage(message),player.getNickname());
         }
+    }
+
+    public HashMap<String, Integer> getScoreBoard(){
+        HashMap<String, Integer> scoreBoard = new HashMap<>();
+
+        for(Player player : players){
+            scoreBoard.put(player.getNickname(), player.getScore());
+        }
+        return scoreBoard;
     }
 
     public Player getPlayerByNickname(String nickname){
