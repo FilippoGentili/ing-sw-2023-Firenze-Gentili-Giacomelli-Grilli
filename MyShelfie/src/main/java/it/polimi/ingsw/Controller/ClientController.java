@@ -109,7 +109,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         throw new RuntimeException(e);
                     }
                 });
-            case MATCH_INFO:
+            case SCOREBOARD_MESSAGE:
+                ScoreBoardMessage scoreBoardMessage = (ScoreBoardMessage) message;
+                queue.add(() -> {
+                    view.showListOfPlayers(scoreBoardMessage.getScoreboard());
+                });
                 break;
             case DISCONNECTION_REPLY:
                 DisconnectionReply disconnectionReply = (DisconnectionReply) message;

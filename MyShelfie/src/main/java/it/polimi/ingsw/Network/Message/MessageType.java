@@ -31,5 +31,6 @@ public enum MessageType {
     WAITING_ROOM,
     INDEX_TILES,
     GAME_STARTED,
+    SCOREBOARD_MESSAGE
 }
 
