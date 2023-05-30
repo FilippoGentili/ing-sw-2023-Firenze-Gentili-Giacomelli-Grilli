@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Message.DisconnectionReply;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -35,9 +36,9 @@ public class Server implements Runnable{
         SocketServer ss = new SocketServer(this, Socketport);
         ss.startSocketServer();
 
-       /* int rmiPort = 1099;
+       int rmiPort = 1099;
         RMIServer rs = new RMIServer(this,rmiPort);
-        rs.startRMIServer();*/
+        rs.startRMIServer();
     }
 
     public synchronized void login(String nickname, Connection connection) throws IOException, InterruptedException {

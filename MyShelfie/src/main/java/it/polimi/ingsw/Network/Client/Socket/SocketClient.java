@@ -59,11 +59,7 @@ public class SocketClient extends Client implements Runnable{
             output = null;
 
         } catch (IOException e) {
-            try {
-                notifyObserver(new GenericMessage("Could not disconnect."));
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            Client.LOGGER.severe(e.getMessage());
         }
 
     }
@@ -74,12 +70,8 @@ public class SocketClient extends Client implements Runnable{
             output.writeObject(message);
             output.reset();
         } catch (IOException e) {
+            Client.LOGGER.severe("Couldn't send message. Must disconnect");
             disconnect();
-            try {
-                notifyObserver(new GenericMessage("Could not send message."));
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
         }
     }
 

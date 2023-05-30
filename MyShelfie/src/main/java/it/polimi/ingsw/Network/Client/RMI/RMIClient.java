@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Client.RMI;
 
-/*import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
@@ -41,11 +41,15 @@ public class RMIClient extends Client implements RMIClientHandler{
     }
 
     @Override
-    public void sendMessage(Message message) throws IOException {
-        if(message.getMessageType() == MessageType.LOGIN_REQUEST){
-            server.login(message.getNickname(),this);
-        }else {
-            server.receiveMessage(message);
+    public void sendMessage(Message message) {
+        try {
+            if (message.getMessageType() == MessageType.LOGIN_REQUEST) {
+                server.login(message.getNickname(), this);
+            } else {
+                server.receiveMessage(message);
+            }
+        }catch (IOException | InterruptedException e){
+            Client.LOGGER.severe(e.getMessage());
         }
     }
 
@@ -55,4 +59,4 @@ public class RMIClient extends Client implements RMIClientHandler{
             messageQueue.add(message);
         }
     }
-}*/
+}

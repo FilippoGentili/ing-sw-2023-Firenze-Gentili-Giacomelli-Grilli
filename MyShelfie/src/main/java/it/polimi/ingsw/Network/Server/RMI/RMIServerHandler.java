@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
-/*import it.polimi.ingsw.Network.Client.RMI.RMIClient;
+import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Connection;
@@ -11,6 +11,6 @@ import java.rmi.RemoteException;
 
 public interface RMIServerHandler extends Remote {
 
-    void receiveMessage(Message message) throws RemoteException;
-    void login(String username, RMIClientHandler connection) throws IOException;
-}*/
+    void receiveMessage(Message message) throws RemoteException, InterruptedException;
+    void login(String username, RMIClientHandler connection) throws IOException, InterruptedException;
+}

@@ -325,6 +325,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 }
 
             }while(!chosenTiles.toString().contains(input) && chosenTiles.size()>0);
+        }else{
+            orderedTiles.add(chosenTiles.get(0));
         }
 
         notifyObserver(obs -> {

@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Client.Socket.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
@@ -183,10 +184,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler,address,port);
             client.connection();
-            this.client.addObserver(this);
+            //this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
-            //attendo il messaggio dal server
-            //this.client.readMessage();
             this.view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,this.client.getUsername());
@@ -195,15 +194,15 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
    @Override
     public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
-        /*try {
+        try {
             this.client = new RMIClient(disconnectionHandler, address, port);
             this.client.connection();
-            this.client.addObserver(this);
+            //this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,null);
-        }*/
+        }
     }
 
     @Override

@@ -7,12 +7,13 @@ import it.polimi.ingsw.Observer.Observable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.logging.Logger;
 
-public abstract class Client extends Observable implements Serializable {
+public abstract class Client extends UnicastRemoteObject {
 
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private static final long serialVersionUID = -3679938076760254410L;
@@ -22,7 +23,8 @@ public abstract class Client extends Observable implements Serializable {
     public final transient ArrayList<Message> messageQueue;
 
 
-    public Client(DisconnectionHandler disconnectionHandler) {
+    public Client(DisconnectionHandler disconnectionHandler) throws RemoteException {
+        super();
         this.messageQueue = new ArrayList<>();
         this.disconnectionHandler = disconnectionHandler;
         this.timer = new Timer();

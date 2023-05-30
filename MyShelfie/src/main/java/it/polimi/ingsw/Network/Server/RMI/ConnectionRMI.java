@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
-/*import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
+import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
@@ -21,12 +21,16 @@ public class ConnectionRMI extends Connection {
     }
 
     @Override
-    public void sendMessage(Message message) throws RemoteException {
-        rmiClientHandler.receiveMessage(message);
+    public void sendMessage(Message message) {
+        try {
+            rmiClientHandler.receiveMessage(message);
+        }catch (RemoteException e){
+            Server.LOGGER.severe(e.getMessage());
+        }
     }
 
     @Override
     public void ping() {
 
     }
-}*/
+}
