@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class Player extends Observable implements Serializable {
+public class Player implements Serializable {
     private static final long serialVersionUID = 859312485853764712L;
     private String nickname;
     private int score;

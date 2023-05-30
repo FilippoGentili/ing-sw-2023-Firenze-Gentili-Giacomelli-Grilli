@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 //le classi che estendono observable sono quelle che notificheranno l'evento all'esterno
-public class Game extends Observable implements Serializable {
+public class Game implements Serializable {
     private static final long serialVersionUID = -4957685347178142310L;
     private ArrayList<Player> listOfPlayers;
     private int numOfPlayers;

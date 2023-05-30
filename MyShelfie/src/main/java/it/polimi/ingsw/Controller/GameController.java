@@ -425,18 +425,18 @@ public class GameController {
             virtualViewMap = new HashMap<>();
         }
         virtualViewMap.put(player, vv);
-        game.addObserver(vv);
+        /*game.addObserver(vv);
         game.getLivingRoom().addObserver(vv);
-        player.getBookshelf().addObserver(vv);
+        player.getBookshelf().addObserver(vv);*/
     }
 
     public void removeVirtualView(String nickname) {
         VirtualView vv = virtualViewMap.remove(nickname);
-        game.removeObserver(vv);
+        /*game.removeObserver(vv);
         game.getLivingRoom().removeObserver(vv);
         for(Player player : players)
             if(player.getNickname().equals(nickname))
-                player.getBookshelf().removeObserver(vv);
+                player.getBookshelf().removeObserver(vv);*/
     }
 
     public Player getCurrentPlayer() {

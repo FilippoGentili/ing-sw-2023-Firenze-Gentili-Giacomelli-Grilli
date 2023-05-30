@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class LivingRoom extends Observable implements Serializable {
+public class LivingRoom implements Serializable {
 
     private static final long serialVersionUID = 5403724841040315028L;
     private static int numberOfTiles=0;
