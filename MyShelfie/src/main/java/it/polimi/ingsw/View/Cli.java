@@ -367,8 +367,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void showListOfPlayers(HashMap<String, Integer> scoreboard) {
-        for(int i=1; i<=listOfPlayers.size(); i++)
-            System.out.println(i+") "+listOfPlayers.get(i-1));
+        for(int i=1; i<=scoreboard.size(); i++)
+            System.out.println(i+") "+scoreboard.get(i-1));
     }
 
     @Override

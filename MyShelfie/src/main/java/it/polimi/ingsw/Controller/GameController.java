@@ -272,7 +272,8 @@ public class GameController {
             game.getCommonGoal1().updateValue();
             player.setPointscg1();
         }else{
-            server.sendMessage(new GenericMessage("You haven't reached the first common goal. No points for you >:("),currentPlayer.getNickname());
+            if(!player.getPointscg1())
+                server.sendMessage(new GenericMessage("You haven't reached the first common goal. No points for you >:("),currentPlayer.getNickname());
         }
 
         if(game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
@@ -284,7 +285,8 @@ public class GameController {
             game.getCommonGoal2().updateValue();
             player.setPointscg2();
         }else{
-            server.sendMessage(new GenericMessage("You haven't reached the second common goal. No points for you >:("),currentPlayer.getNickname());
+            if(!player.getPointscg2())
+                server.sendMessage(new GenericMessage("You haven't reached the second common goal. No points for you >:("),currentPlayer.getNickname());
         }
 
         EndTurn();
