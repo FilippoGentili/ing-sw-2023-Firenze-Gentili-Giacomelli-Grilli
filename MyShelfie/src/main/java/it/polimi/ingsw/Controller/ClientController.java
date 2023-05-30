@@ -26,31 +26,30 @@ import static java.lang.Integer.parseInt;
 public class ClientController implements Observer, ViewObserver, Runnable {
 
     public static final Logger LOGGER = Logger.getLogger("MyShelfie client");
-
-
     private final View view;
     private Client client;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
-
-    private GameController gameController;  // da settare per poi chiamare getPlayerByNickname
-
     private ClientUpdater clientUpdater;
+    private final Object lock;
 
 
     public ClientController(View view) {
         this.view = view;
         //taskQueue = Executors.newSingleThreadExecutor();
         new Thread(this).start();
+        this.lock = new Object();
     }
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
-                queue.take().run();
-            } catch (InterruptedException e) {
-                LOGGER.severe(e.getMessage());
-                Thread.currentThread().interrupt();
+        synchronized (lock){
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    queue.take().run();
+                } catch (InterruptedException e) {
+                    LOGGER.severe(e.getMessage());
+                    Thread.currentThread().interrupt();
+                }
             }
         }
     }
@@ -72,112 +71,114 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      */
     @Override
     public void update(Message message) {
-        switch(message.getMessageType()){
-            case GENERIC_MESSAGE:
-                queue.add(() -> {
-                    view.showMessage(message.toString());
-                });
-                break;
-            case LOGIN_REQUEST:
-                queue.add(() -> {
-                    view.nicknameRequest();
-                });
-                break;
-            case LOGIN_RESULT:
-                LoginResult loginResult = (LoginResult) message;
-                queue.add(() -> {
-                    view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getChosenNickname());
-                });
-                break;
-            case LOGIN_REPLY:
-                LoginReply loginReply = (LoginReply) message;
-                queue.add(() -> {
-                    view.showMessage(message.toString());
-                });
-                break;
-            case NUM_OF_PLAYERS_REQUEST:
-                queue.add(() -> {
-                    view.askNumberOfPlayers();
-                });
-                break;
-            case GAME_STATE:
-                GameStateMessage gameStateMessage = (GameStateMessage) message;
-                queue.add(() -> {
-                    try {
-                        view.updateGameState(gameStateMessage.getPlayer(), gameStateMessage.getGame());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            case SCOREBOARD_MESSAGE:
-                ScoreBoardMessage scoreBoardMessage = (ScoreBoardMessage) message;
-                queue.add(() -> {
-                    view.showListOfPlayers(scoreBoardMessage.getScoreboard());
-                });
-                break;
-            case DISCONNECTION_REPLY:
-                DisconnectionReply disconnectionReply = (DisconnectionReply) message;
-                queue.add(() -> {
-                    view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
-                });
-                break;
-            case CHOSEN_TILES_REQUEST:
-                ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
-                queue.add(() -> {
-                    view.TilesRequest(chosenTilesRequest.getLivingroom());
-                });
-                break;
-            case ORDERED_TILES_REQUEST:
-                OrderedTilesRequest orderedTilesRequest = (OrderedTilesRequest) message;
-                queue.add(() -> {
-                    view.OrderTiles(orderedTilesRequest.getChosenTiles());
-                });
-                break;
-            case COLUMN_REQUEST:
-                ColumnRequest columnRequest = (ColumnRequest) message;
-                queue.add(() -> {
-                    view.columnRequest(columnRequest.getAvailableColumns());
-                });
-                break;
-            case WINNER:
-                WinnerMessage winnerMessage = (WinnerMessage) message;
-                queue.add(() -> {
-                    view.showWinner(winnerMessage.getWinnerNickname());
-                });
-                break;
-            case SERVER_INFO:
+        synchronized (lock){
+            switch(message.getMessageType()){
+                case GENERIC_MESSAGE:
+                    queue.add(() -> {
+                        view.showMessage(message.toString());
+                    });
+                    break;
+                case LOGIN_REQUEST:
+                    queue.add(() -> {
+                        view.nicknameRequest();
+                    });
+                    break;
+                case LOGIN_RESULT:
+                    LoginResult loginResult = (LoginResult) message;
+                    queue.add(() -> {
+                        view.loginResult(loginResult.isNicknameAccepted(), loginResult.isSuccessfulAccess(), loginResult.getChosenNickname());
+                    });
+                    break;
+                case LOGIN_REPLY:
+                    LoginReply loginReply = (LoginReply) message;
+                    queue.add(() -> {
+                        view.showMessage(message.toString());
+                    });
+                    break;
+                case NUM_OF_PLAYERS_REQUEST:
+                    queue.add(() -> {
+                        view.askNumberOfPlayers();
+                    });
+                    break;
+                case GAME_STATE:
+                    GameStateMessage gameStateMessage = (GameStateMessage) message;
+                    queue.add(() -> {
+                        try {
+                            view.updateGameState(gameStateMessage.getPlayer(), gameStateMessage.getGame());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                case SCOREBOARD_MESSAGE:
+                    ScoreBoardMessage scoreBoardMessage = (ScoreBoardMessage) message;
+                    queue.add(() -> {
+                        view.showListOfPlayers(scoreBoardMessage.getScoreboard());
+                    });
+                    break;
+                case DISCONNECTION_REPLY:
+                    DisconnectionReply disconnectionReply = (DisconnectionReply) message;
+                    queue.add(() -> {
+                        view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
+                    });
+                    break;
+                case CHOSEN_TILES_REQUEST:
+                    ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
+                    queue.add(() -> {
+                        view.TilesRequest(chosenTilesRequest.getLivingroom());
+                    });
+                    break;
+                case ORDERED_TILES_REQUEST:
+                    OrderedTilesRequest orderedTilesRequest = (OrderedTilesRequest) message;
+                    queue.add(() -> {
+                        view.OrderTiles(orderedTilesRequest.getChosenTiles());
+                    });
+                    break;
+                case COLUMN_REQUEST:
+                    ColumnRequest columnRequest = (ColumnRequest) message;
+                    queue.add(() -> {
+                        view.columnRequest(columnRequest.getAvailableColumns());
+                    });
+                    break;
+                case WINNER:
+                    WinnerMessage winnerMessage = (WinnerMessage) message;
+                    queue.add(() -> {
+                        view.showWinner(winnerMessage.getWinnerNickname());
+                    });
+                    break;
+                case SERVER_INFO:
 
-                break;
-            case LIVING_ROOM:
-                LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;
-                LivingRoom livingRoom = livingRoomMessage.getLivingRoom();
-                queue.add(() -> {
-                    view.showLivingRoom(livingRoom);
-                });
-                break;
-            case PLAYER_MESSAGE:
-                PlayerMessage playerMessage = (PlayerMessage) message;
-                Player player = playerMessage.getPlayer();
-                queue.add(() -> {
-                    view.showBookshelf(player);
-                });
-                break;
-            case WAITING_ROOM:
-                WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
-                queue.add(() -> {
-                    view.showMessage(message.toString());
-                    view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
-                });
-                break;
-            case GAME_STARTED:
-                GameStartedMessage gameStartedMessage = (GameStartedMessage) message;
-                queue.add(() -> {
-                    view.showMessage(message.toString());
-                    view.showGameStarted(gameStartedMessage.getGame());
-                });
-                break;
-            default:
-                break;
+                    break;
+                case LIVING_ROOM:
+                    LivingRoomMessage livingRoomMessage = (LivingRoomMessage) message;
+                    LivingRoom livingRoom = livingRoomMessage.getLivingRoom();
+                    queue.add(() -> {
+                        view.showLivingRoom(livingRoom);
+                    });
+                    break;
+                case PLAYER_MESSAGE:
+                    PlayerMessage playerMessage = (PlayerMessage) message;
+                    Player player = playerMessage.getPlayer();
+                    queue.add(() -> {
+                        view.showBookshelf(player);
+                    });
+                    break;
+                case WAITING_ROOM:
+                    WaitingRoomMessage waitingRoomMessage = (WaitingRoomMessage) message;
+                    queue.add(() -> {
+                        view.showMessage(message.toString());
+                        view.showWaitingRoom(waitingRoomMessage.getMaxPlayers(), waitingRoomMessage.getNumOfPlayersConnected());
+                    });
+                    break;
+                case GAME_STARTED:
+                    GameStartedMessage gameStartedMessage = (GameStartedMessage) message;
+                    queue.add(() -> {
+                        view.showMessage(message.toString());
+                        view.showGameStarted(gameStartedMessage.getGame());
+                    });
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
