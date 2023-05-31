@@ -112,7 +112,7 @@ public class GameController {
         } else if (virtualViewMap.size() == numOfPlayers) {
             vv.loginResult(true, false, nickname);
             vv.getConnection().disconnectClient();
-        }else handleLogin(nickname, vv);
+        }
     }
 
 
@@ -402,6 +402,7 @@ public class GameController {
         }
 
         setGameState(END);
+
     }
 
     public void restoreMatchElements() {
@@ -471,6 +472,12 @@ public class GameController {
     public void broadcastShowMessage(String message) {
         for(Player player : players){
             server.sendMessage(new GenericMessage(message),player.getNickname());
+        }
+    }
+
+    public void broadcastMessage(Message message) {
+        for(Player player : players){
+            server.sendMessage(message,player.getNickname());
         }
     }
 

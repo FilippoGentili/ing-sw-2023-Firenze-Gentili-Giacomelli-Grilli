@@ -90,7 +90,7 @@ public class Server implements Runnable{
                     }
                     break;
                 }
-                    //fine partita, cancella tutto
+                    gameController.broadcastMessage(new DisconnectionReply("Server"));
                 }
             }
 

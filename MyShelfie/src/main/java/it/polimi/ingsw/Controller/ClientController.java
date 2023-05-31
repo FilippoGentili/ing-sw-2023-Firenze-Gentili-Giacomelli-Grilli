@@ -119,6 +119,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     queue.add(() -> {
                         view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
                     });
+                    handleDisconnection();
                     break;
                 case CHOSEN_TILES_REQUEST:
                     ChosenTilesRequest chosenTilesRequest = (ChosenTilesRequest) message;
