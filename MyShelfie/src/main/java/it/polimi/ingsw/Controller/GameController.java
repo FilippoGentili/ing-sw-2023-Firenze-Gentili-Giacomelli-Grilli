@@ -418,6 +418,8 @@ public class GameController {
 
     public void endGame(){
         if(gameState == END){
+            ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
+            server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
             for(Player player : players){
                 server.sendMessage(new DisconnectionReply(player.getNickname()), player.getNickname());
             }

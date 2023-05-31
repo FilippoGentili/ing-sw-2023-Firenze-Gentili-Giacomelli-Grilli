@@ -124,10 +124,10 @@ public class Server implements Runnable{
         synchronized(lock){
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
+                    map.getValue().sendMessage(message);
                     if(message.getMessageType() == MessageType.DISCONNECTION_REPLY){
                         clientDisconnection(map.getValue());
                     }
-                    map.getValue().sendMessage(message);
                     break;
 
                 }
