@@ -7,7 +7,6 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.rmi.RemoteException;
 import java.util.*;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 

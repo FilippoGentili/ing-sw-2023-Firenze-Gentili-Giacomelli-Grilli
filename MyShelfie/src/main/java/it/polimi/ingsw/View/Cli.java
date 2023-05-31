@@ -245,9 +245,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             System.out.println(i+":");
             do{
                 System.out.println("row: ");
-                do{
+                input = readLine();
+                while(!input.matches("\\d+")){
+                    System.out.println("Input incorrect. Please insert a number between 1 and 9");
+                    System.out.println("row: ");
                     input = readLine();
-                }while(!input.matches("\\d+"));
+                }
                 row = parseInt(input);
                 if(row<1 || row>9)
                     System.out.println("Index out of bound. Please insert a number between 1 and 9");
@@ -341,17 +344,26 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns) {
-        int col;
+        boolean correct = false;
+        String input;
+        int col = 0;
 
         System.out.println("Insert the number of the column where you want to insert the tiles");
 
         do{
-            col = parseInt(readLine());
+            input = readLine();
 
-            if(!AvailableColumns.contains(col-1))
-                System.out.println("Column index Not valid. Please select a column with enough space");
 
-        }while(!AvailableColumns.contains(col-1));
+            if(input.matches("\\d+")){
+                col = parseInt(input);
+                correct = AvailableColumns.contains(col-1);
+                if(!correct)
+                    System.out.println("Column index Not valid. Please select a column with enough space");
+            }else {
+                System.out.println("Input not valid. Please insert a number instead of a string");
+            }
+
+        }while(!correct || !input.matches("\\d+"));
 
         final int choice = col-1;
 
