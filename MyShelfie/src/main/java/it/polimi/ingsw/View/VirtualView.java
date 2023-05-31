@@ -114,4 +114,9 @@ public class VirtualView implements View, Observer {
     public void showWinner(String winner) {
         connection.sendMessage(new WinnerMessage(winner));
     }
+
+    @Override
+    public void handleDisconnection() {
+
+    }
 }
