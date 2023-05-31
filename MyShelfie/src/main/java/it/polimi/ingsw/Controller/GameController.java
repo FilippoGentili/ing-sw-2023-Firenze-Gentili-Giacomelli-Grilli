@@ -185,13 +185,8 @@ public class GameController {
             firstTurn = false;
         }
 
-        /*HashMap<String, Integer> ranking;
-
-        ranking = getScoreBoard();
-
-        for(Player player : players){
-            server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
-        }*/
+        ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
+        server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
 
         restoreMatchElements();
 
@@ -328,17 +323,32 @@ public class GameController {
 
         if(lastRound){
             int currPlayer = players.indexOf(currentPlayer);
-            if(players.get(currPlayer+1).getLastPlayer()) {
-                findWinner();
-                setGameState(END);
-            }else{
-                server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
-                nextPlayer();
-                if(game.getLivingRoom().checkEmptyLivingRoom()){
-                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
-                    game.getLivingRoom().insertTiles(chosen);
+            if(currPlayer == players.size()-1){
+                if(players.get(0).getLastPlayer()){
+                    findWinner();
+                    setGameState(END);
+                }else{
+                    server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
+                    nextPlayer();
+                    if (game.getLivingRoom().checkEmptyLivingRoom()) {
+                        ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                        game.getLivingRoom().insertTiles(chosen);
+                    }
+                    newTurn();
                 }
-                newTurn();
+            }else {
+                if (players.get(currPlayer + 1).getLastPlayer()) {
+                    findWinner();
+                    setGameState(END);
+                } else {
+                    server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
+                    nextPlayer();
+                    if (game.getLivingRoom().checkEmptyLivingRoom()) {
+                        ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                        game.getLivingRoom().insertTiles(chosen);
+                    }
+                    newTurn();
+                }
             }
         }else{
             if (currentPlayer.getBookshelf().fullBookshelf()) {
