@@ -8,6 +8,7 @@ import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.rmi.RemoteException;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -364,12 +365,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     @Override
-    public void someoneDisconnected(String nickname) {
-        System.out.println(nickname + " disconnected. Game finished :(");
-        System.exit(1);
-    }
-
-    @Override
     public void showScoreboard(ArrayList<Player> scoreboard) {
         for(Player p : scoreboard)
             System.out.println(p.getNickname() + ": "+ p.getScore()+" points");
@@ -655,6 +650,21 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void handleDisconnection() {
+        System.out.println("You will be disconnected.");
 
+        notifyObserver(obs -> {
+            try {
+                obs.handleDisconnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        System.exit(1);
+    }
+
+    @Override
+    public void someoneDisconnected(String nickname) {
+        System.out.println(nickname + " disconnected. Game finished :(");
     }
 }

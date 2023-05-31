@@ -134,7 +134,7 @@ public class GameController {
             case ORDERED_TILES_REPLY:
                 InsertTiles(message);
                 break;
-            case DISCONNECTION_REPLY:
+            case DISCONNECTION_REQUEST:
                 handleDisconnection(message);
                 break;
             case INDEX_TILES:
