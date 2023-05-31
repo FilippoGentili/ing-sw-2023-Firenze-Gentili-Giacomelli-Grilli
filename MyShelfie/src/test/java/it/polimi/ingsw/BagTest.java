@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Model.Bag;
+import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Tile;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,8 @@ class BagTest {
     @Test
     void printChosen(){
 
-        Bag bag = new Bag();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = new ArrayList<Tile>();
 
         chosen = bag.extract(132);

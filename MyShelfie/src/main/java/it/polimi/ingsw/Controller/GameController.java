@@ -264,8 +264,8 @@ public class GameController {
     }
 
     public void handleDisconnection(Message message) {
-        DisconnectionReply disconnectionReply = (DisconnectionReply) message;
-        server.broadcastMessage(disconnectionReply);
+        DisconnectionRequest disconnectionRequest = (DisconnectionRequest) message;
+        server.sendMessage(new DisconnectionReply(disconnectionRequest.getDisconnectedUser()),message.getNickname());
     }
 
 
@@ -330,6 +330,7 @@ public class GameController {
             int currPlayer = players.indexOf(currentPlayer);
             if(players.get(currPlayer+1).getLastPlayer()) {
                 findWinner();
+                setGameState(END);
             }else{
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
@@ -383,6 +384,7 @@ public class GameController {
     public void findWinner() {
         Player winner;
 
+        game.assignPoints(game.getPlayers());
         winner = game.getWinner();
         /*HashMap<String, Integer> ranking;
 
@@ -401,8 +403,16 @@ public class GameController {
                         winner.getNickname() + " won the game!"),player.getNickname());
         }
 
-        setGameState(END);
+        endGame();
 
+    }
+
+    public void endGame(){
+        if(gameState == END){
+            for(Player player : players){
+                server.sendMessage(new DisconnectionReply(player.getNickname()), player.getNickname());
+            }
+        }
     }
 
     public void restoreMatchElements() {

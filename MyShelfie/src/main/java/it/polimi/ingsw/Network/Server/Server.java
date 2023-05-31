@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Message.DisconnectionReply;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
@@ -123,8 +124,12 @@ public class Server implements Runnable{
         synchronized(lock){
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
+                    if(message.getMessageType() == MessageType.DISCONNECTION_REPLY){
+                        clientDisconnection(map.getValue());
+                    }
                     map.getValue().sendMessage(message);
                     break;
+
                 }
             }
         }

@@ -1,9 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Model.Bag;
-import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Tile;
-import it.polimi.ingsw.Model.TileType;
+import it.polimi.ingsw.Model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,15 +11,16 @@ class LivingRoomTest {
 
     @Test
     void getNumTiles0(){
-        LivingRoom living = LivingRoom.getInstance();
+        LivingRoom living = new LivingRoom();
 
         assertEquals(0, living.getNumberOfTiles());
     }
 
     @Test
     void getNumTiles45(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -46,8 +44,9 @@ class LivingRoomTest {
 
     @Test
     void getNumTiles37(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(37);
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -71,8 +70,9 @@ class LivingRoomTest {
 
     @Test
     void getNumTiles29(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(29);
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -94,7 +94,7 @@ class LivingRoomTest {
 
     @Test
     void getTileTest(){
-        LivingRoom living = LivingRoom.getInstance();
+        LivingRoom living = new LivingRoom();
         Tile t1 = new Tile(TileType.CAT);
         living.setTile(t1, 4, 0);
 
@@ -103,7 +103,7 @@ class LivingRoomTest {
 
     @Test
     void checkAdjacentVertical(){
-        LivingRoom living = LivingRoom.getInstance();
+        LivingRoom living = new LivingRoom();
         Tile t1 = new Tile(TileType.TROPHIE);
         Tile t2 = new Tile(TileType.TROPHIE);
 
@@ -120,7 +120,7 @@ class LivingRoomTest {
 
     @Test
     void checkAdjacentHorizontal(){
-        LivingRoom living = LivingRoom.getInstance();
+        LivingRoom living = new LivingRoom();
         Tile t1 = new Tile(TileType.TROPHIE);
         Tile t2 = new Tile(TileType.TROPHIE);
 
@@ -137,7 +137,7 @@ class LivingRoomTest {
 
     @Test
     void checkAdjacentFalse(){
-        LivingRoom living = LivingRoom.getInstance();
+        LivingRoom living = new LivingRoom();
         Tile t1 = new Tile(TileType.TROPHIE);
         Tile t2 = new Tile(TileType.TROPHIE);
 
@@ -154,8 +154,9 @@ class LivingRoomTest {
 
     @Test
     void insertTest(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> copy = new ArrayList<Tile>();
         for(int i=0; i<9; i++){
@@ -194,8 +195,9 @@ class LivingRoomTest {
 
     @Test
     void checkValidTest1True(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> check = new ArrayList<Tile>();
 
@@ -224,8 +226,9 @@ class LivingRoomTest {
 
     @Test
     void checkValidTest1False(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> check = new ArrayList<Tile>();
 
@@ -254,8 +257,9 @@ class LivingRoomTest {
 
     @Test
     void checkValidTest2True(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> check = new ArrayList<Tile>();
 
@@ -285,8 +289,9 @@ class LivingRoomTest {
 
     @Test
     void checkValidTest2False(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> check = new ArrayList<Tile>();
 
@@ -316,8 +321,9 @@ class LivingRoomTest {
 
     @Test
     void checkValidTest3True(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> check = new ArrayList<Tile>();
 
@@ -351,8 +357,9 @@ class LivingRoomTest {
 
     @Test
     void checkValidTest3False(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
         ArrayList<Tile> check = new ArrayList<Tile>();
 
@@ -384,8 +391,9 @@ class LivingRoomTest {
 
     @Test
     void pickTilesTest(){
-        LivingRoom living = LivingRoom.getInstance();
-        Bag bag = new Bag();
+        LivingRoom living = new LivingRoom();
+        Game game = new Game();
+        Bag bag = new Bag(game);
         ArrayList<Tile> chosen = bag.extract(45);
 
         for(int i=0; i<9; i++){
