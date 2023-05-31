@@ -337,8 +337,8 @@ public class GameController {
                 }
             }else {
                 if (players.get(currPlayer + 1).getLastPlayer()) {
-                    findWinner();
                     setGameState(END);
+                    findWinner();
                 } else {
                     server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
                     nextPlayer();
