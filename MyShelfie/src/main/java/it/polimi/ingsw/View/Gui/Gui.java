@@ -77,8 +77,6 @@ public class Gui extends ViewObservable implements View {
 
     /**
      * This method is used to show the list of players in the game
-     * @param listOfPlayers is the list of players in the game
-     * @param player is the player that is playing
      * @throws RemoteException if there are connection problems
      */
     @Override
@@ -197,5 +195,10 @@ public class Gui extends ViewObservable implements View {
             GuiController.showBanner(END, "The winner is " + winner);
             GuiController.changeScene("endScene.fxml", observers);
         });
+    }
+
+    @Override
+    public void handleDisconnection() {
+
     }
 }
