@@ -206,23 +206,23 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     public int indexTranslator(String input){
         switch(input){
-            case "A":
+            case "A", "a":
                 return 0;
-            case "B":
+            case "B", "b":
                 return 1;
-            case "C":
+            case "C", "c":
                 return 2;
-            case "D":
+            case "D", "d":
                 return 3;
-            case "E":
+            case "E", "e":
                 return 4;
-            case "F":
+            case "F", "f":
                 return 5;
-            case "G":
+            case "G", "g":
                 return 6;
-            case "H":
+            case "H", "h":
                 return 7;
-            case "I":
+            case "I", "i":
                 return 8;
             default:
                 System.out.println("Error");
@@ -235,7 +235,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
         String input;
-        List<String> columns = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
+        List<String> columns1 = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
+        List<String> columns2 = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i");
 
         System.out.println("Choose up to 3 tiles from the board. Insert the coordinates of the tiles you want to choose: ");
         int i=1;
@@ -258,9 +259,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             do{
                 System.out.println("column: ");
                 input = readLine();
-                if(!columns.contains(input))
+                if(!columns1.contains(input) && !columns2.contains(input))
                     System.out.println("Index not valid. Please insert a character between A and I");
-            }while(!columns.contains(input));
+            }while(!columns1.contains(input) && !columns2.contains(input));
 
             chosenTiles.add(livingRoom.getTile(row-1, indexTranslator(input)));
             i++;
