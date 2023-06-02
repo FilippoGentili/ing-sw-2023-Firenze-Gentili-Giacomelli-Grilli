@@ -10,6 +10,9 @@ public abstract class Connection {
     public boolean checkConnection(){
         return isConnected;
     }
+    public void setIsConnected(){
+        isConnected=false;
+    }
 
     public abstract void disconnectClient();
 

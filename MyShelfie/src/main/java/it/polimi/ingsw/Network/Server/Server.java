@@ -9,13 +9,13 @@ import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static java.net.InetAddress.getLocalHost;
 
 public class Server implements Runnable{
 
@@ -24,7 +24,6 @@ public class Server implements Runnable{
     private final Map<String, Connection> connectionMap;
     private final Object lock;
 
-
     public Server() {
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
@@ -32,7 +31,6 @@ public class Server implements Runnable{
     }
 
     public void startServers() {
-
         int Socketport = 1098;
         SocketServer ss = new SocketServer(this, Socketport);
         ss.startSocketServer();
@@ -40,6 +38,14 @@ public class Server implements Runnable{
        int rmiPort = 1099;
         RMIServer rs = new RMIServer(this,rmiPort);
         rs.startRMIServer();
+        try {
+            String address;
+            address=getLocalHost().toString();
+            address=address.substring(address.indexOf("/1")+1);
+            Server.LOGGER.log(Level.INFO,"Server IP Address is: {0}. Have the players type the address when prompted.", address);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public synchronized void login(String nickname, Connection connection) throws IOException, InterruptedException {
@@ -71,6 +77,7 @@ public class Server implements Runnable{
     public void removeClient(Connection connection) {
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue().equals(connection)) {
+                connection.setIsConnected();
                 connectionMap.remove(map.getKey());
                 gameController.removeVirtualView(map.getKey());
                 LOGGER.info(() -> map.getKey() + " was removed from the client list");
@@ -164,5 +171,6 @@ public class Server implements Runnable{
             }
         }
     }
+
 
 }

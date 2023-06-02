@@ -5,9 +5,14 @@ import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+
+
+import static java.net.InetAddress.getLocalHost;
 
 public class SocketServer extends Thread{
 
@@ -25,6 +30,7 @@ public class SocketServer extends Thread{
             serverSocket = new ServerSocket(port);
             start();
             Server.LOGGER.info(() -> "Socket server started on port 1098");
+
         } catch (IOException e) {
             Server.LOGGER.severe("Error while starting server");
         }
