@@ -41,7 +41,7 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     private void loginButtonClicked(Event event) {
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
             String username = usernameField.getText();
-            loginButton.setDisable(true);
+
             new Thread(() -> notifyObserver(obs -> {
                 try {
                     obs.updateNickname(username);

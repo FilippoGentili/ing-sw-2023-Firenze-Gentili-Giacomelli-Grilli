@@ -45,8 +45,8 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private void socketButtonClicked(MouseEvent event){
         String port = portBox.getText();
         String address = addressBox.getText();
-        socketButton.setDisable(true);
-        rmiButton.setDisable(true);
+
+
         boolean validPort = ClientController.validPort(port);
         boolean validAddress = ClientController.validAddress(address);
 
@@ -54,6 +54,8 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         portBox.pseudoClassStateChanged(ERROR, !validPort);
 
         if(validPort && validAddress){
+            socketButton.setDisable(true);
+            rmiButton.setDisable(true);
             new Thread(() -> notifyObserver(obs -> {
                 try {
                     obs.updateServerInfoSocket(this,address,port);
@@ -79,8 +81,6 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private void rmiButtonClicked(MouseEvent event){
         String port = portBox.getText();
         String address = addressBox.getText();
-        rmiButton.setDisable(true);
-        socketButton.setDisable(true);
 
         boolean validPort = ClientController.validPort(port);
         boolean validAddress = ClientController.validAddress(address);
@@ -88,6 +88,8 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         addressBox.pseudoClassStateChanged(ERROR, !validAddress);
         portBox.pseudoClassStateChanged(ERROR, !validPort);
         if(validPort && validAddress) {
+            socketButton.setDisable(true);
+            rmiButton.setDisable(true);
             new Thread(() -> notifyObserver(obs -> {
                 try {
                     obs.updateServerInfoRmi(this, address, port);

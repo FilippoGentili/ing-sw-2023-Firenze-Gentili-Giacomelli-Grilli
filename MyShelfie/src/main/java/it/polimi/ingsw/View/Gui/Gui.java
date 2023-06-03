@@ -30,15 +30,13 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname){
-        if (!validNickname || !connection) {
-            if (!validNickname && connection) {
-                Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
-            } else {
-                Platform.runLater(() -> {
+        if (!validNickname) {
+            Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
+        } else if(!connection) {
+            Platform.runLater(() -> {
                     GuiController.showBanner(ERROR, "Error connecting to server");
                     GuiController.changeScene("startScene.fxml", observers);
                 });
-            }
         }
     }
 
@@ -81,7 +79,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showScoreboard(ArrayList<Player> scoreboard) {
-
+        Platform.runLater(() -> GuiController.changeScene( "endScene.fxml",observers));
     }
 
     /**
