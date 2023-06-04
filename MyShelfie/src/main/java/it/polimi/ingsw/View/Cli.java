@@ -58,9 +58,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         final String address;
         final String port;
 
-        final String SocketPort = "1098";
-        final String RMIPort = "1099";
-        String tempPort = SocketPort;
+        //final String SocketPort = "1098";
+        //final String RMIPort = "1099";
+        //String tempPort = SocketPort;
 
 
         //choose type of connection
@@ -77,10 +77,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         if (input.equals("-rmi")){
             rmi = true;
-            tempPort = RMIPort;
+            //tempPort = RMIPort;
         }
 
-        port = tempPort;
+        //port = tempPort;
 
         do {
             System.out.println("Server is going to give you the IP Address.\nPlease insert it:");
@@ -89,7 +89,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         address = input;
 
-        /*do {
+        do {
             System.out.println("Insert the Server port:");
             input = scanner.nextLine().trim();
                if(!validPort(input))
@@ -97,7 +97,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         } while (!validPort(input));
 
         port = input;
-         */
+
 
         if (rmi) {
             notifyObserver(obs -> {
@@ -126,7 +126,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
     }
 
-   /* public boolean validPort(String port){
+    public boolean validPort(String port){
         try {
             int portNum = Integer.parseInt(port);
             if ((portNum >= 1 && portNum <= 65536)) {
@@ -138,7 +138,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         return false;
     }
-    */
+
 
 
 
