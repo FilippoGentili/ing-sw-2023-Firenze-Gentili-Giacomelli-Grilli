@@ -37,7 +37,7 @@ public class RMIClient extends Client implements RMIClientHandler{
 
     @Override
     public void disconnect() {
-
+        server = null;
     }
 
     @Override

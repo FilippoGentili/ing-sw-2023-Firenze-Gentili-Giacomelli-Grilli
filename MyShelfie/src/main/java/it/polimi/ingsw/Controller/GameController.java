@@ -90,7 +90,7 @@ public class GameController {
         if (numOfPlayers == 0) {
             if(!firstLogin) {
                 vv.loginResult(true, false, nickname);
-                vv.getConnection().disconnectClient();
+                vv.handleDisconnection();
             }
             firstLogin=false;
             addVirtualView(player, vv);
@@ -117,7 +117,7 @@ public class GameController {
                 vv.loginResult(false, true, nickname);
         } else if (virtualViewMap.size() == numOfPlayers) {
             vv.loginResult(true, false, nickname);
-            vv.getConnection().disconnectClient();
+            vv.handleDisconnection();
         }
     }
 

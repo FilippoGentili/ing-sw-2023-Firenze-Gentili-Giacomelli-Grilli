@@ -261,4 +261,18 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         return false;
     }
 
+    public void closeConnection(){
+        if(clientUpdater!= null){
+            clientUpdater.stop();
+            clientUpdater=null;
+        }
+
+        try{
+            client.disconnect();
+        } catch (Exception e){
+
+        }
+        client = null;
+    }
+
 }
