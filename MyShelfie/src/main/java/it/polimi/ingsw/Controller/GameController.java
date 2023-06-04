@@ -463,7 +463,7 @@ public class GameController {
     }
 
     public void removeVirtualView(String nickname) {
-        VirtualView vv = virtualViewMap.remove(nickname);
+        virtualViewMap.remove(getPlayerByNickname(nickname));
         /*game.removeObserver(vv);
         game.getLivingRoom().removeObserver(vv);
         for(Player player : players)
