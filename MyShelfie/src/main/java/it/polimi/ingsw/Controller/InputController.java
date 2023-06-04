@@ -28,7 +28,7 @@ public class InputController {
     }
 
     /**
-     * this method check if the nickname inseted from the client during the login is valid.
+     * this method check if the nickname inserted from the client during the login is valid.
      * @param nickname nickname chosen by the client
      * @param view view of the client
      * @return {code @true} if nickname is valid {code @false} if nickname is not valid
