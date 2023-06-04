@@ -25,6 +25,8 @@ public class GameController {
     private boolean lastRound = false;
     private boolean firstTurn = true;
 
+    private boolean firstLogin = true;
+
     private Lock lock = new ReentrantLock();
 
 
@@ -86,6 +88,11 @@ public class GameController {
         Player player = new Player(this.game);
 
         if (numOfPlayers == 0) {
+            if(!firstLogin) {
+                vv.loginResult(true, false, nickname);
+                vv.getConnection().disconnectClient();
+            }
+            firstLogin=false;
             addVirtualView(player, vv);
             players.add(player);
             player.setNickname(nickname);
