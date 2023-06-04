@@ -162,13 +162,13 @@ public class Game implements Serializable {
         if(!listOfPlayers.contains(player)){
             System.out.println("The player is not part of the game");
             return;
-        }
-        int i = listOfPlayers.indexOf(player);
+        }else listOfPlayers.remove(player);
+        /*int i = listOfPlayers.indexOf(player);
         listOfPlayers.remove(player);
         if(listOfPlayers.indexOf(currentPlayer) == i){
             currentPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer) + 1) % listOfPlayers.size());
         }
-        System.out.println("The player has been removed from the game");
+        System.out.println("The player has been removed from the game");*/
     }
 
     /**

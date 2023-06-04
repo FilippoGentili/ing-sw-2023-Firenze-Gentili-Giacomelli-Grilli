@@ -91,6 +91,7 @@ public class GameController {
             if(!firstLogin) {
                 vv.loginResult(false, false, nickname);
                 vv.handleDisconnection();
+                handleDisconnection(new DisconnectionReply(nickname));
             }
             firstLogin=false;
             addVirtualView(player, vv);
