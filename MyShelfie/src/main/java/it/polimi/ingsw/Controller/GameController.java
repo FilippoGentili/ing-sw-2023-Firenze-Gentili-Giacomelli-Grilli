@@ -268,6 +268,8 @@ public class GameController {
     public void handleDisconnection(Message message) {
         DisconnectionRequest disconnectionRequest = (DisconnectionRequest) message;
         server.sendMessage(new DisconnectionReply(disconnectionRequest.getDisconnectedUser()),message.getNickname());
+        players.remove(getPlayerByNickname(message.getNickname()));
+        game.removePlayer(getPlayerByNickname(message.getNickname()));
     }
 
 
