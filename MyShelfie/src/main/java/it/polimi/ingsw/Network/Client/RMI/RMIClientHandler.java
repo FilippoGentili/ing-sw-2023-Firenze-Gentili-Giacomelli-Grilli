@@ -12,4 +12,6 @@ import java.rmi.RemoteException;
 public interface RMIClientHandler extends Remote {
 
     void receiveMessage(Message message) throws RemoteException;
+
+    void disconnectMe();
 }

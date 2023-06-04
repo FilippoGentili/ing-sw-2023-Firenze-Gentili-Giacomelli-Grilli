@@ -117,6 +117,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void handleDisconnection() {
+        connection.sendMessage(new DisconnectionReply("Server"));
         connection.disconnectClient();
     }
 }

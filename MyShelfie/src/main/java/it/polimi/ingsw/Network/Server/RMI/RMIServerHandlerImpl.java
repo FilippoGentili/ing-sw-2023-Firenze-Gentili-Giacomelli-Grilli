@@ -11,6 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServerHandler{
     private final transient Server server;
+    private transient ConnectionRMI connectionRMI;
 
     public RMIServerHandlerImpl(Server server) throws RemoteException {
         this.server = server;
@@ -23,7 +24,12 @@ public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServ
 
     @Override
     public void login(String username, RMIClientHandler connection) throws IOException, InterruptedException {
-        ConnectionRMI connectionRMI = new ConnectionRMI(connection,server);
+        connectionRMI = new ConnectionRMI(connection,server);
         server.login(username, connectionRMI);
+    }
+
+    @Override
+    public void disconnectMe() {
+        connectionRMI.disconnectClient();
     }
 }

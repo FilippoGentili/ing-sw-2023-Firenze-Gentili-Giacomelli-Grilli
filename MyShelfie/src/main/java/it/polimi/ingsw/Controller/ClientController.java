@@ -119,6 +119,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     queue.add(() -> {
                         view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
                         view.handleDisconnection();
+                        closeConnection();
                     });
                     break;
                 case CHOSEN_TILES_REQUEST:
@@ -268,7 +269,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
 
         try{
-            client.disconnect();
+            client.disconnectMe();
         } catch (Exception e){
 
         }

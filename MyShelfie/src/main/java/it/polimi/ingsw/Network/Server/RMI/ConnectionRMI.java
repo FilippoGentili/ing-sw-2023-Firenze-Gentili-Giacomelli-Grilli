@@ -18,6 +18,14 @@ public class ConnectionRMI extends Connection {
     @Override
     public void disconnectClient() {
 
+        if (isConnected) {
+            isConnected = false;
+
+            rmiClientHandler.disconnectMe();
+
+            server.clientDisconnection(this);
+        }
+
     }
 
     @Override

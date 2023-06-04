@@ -49,7 +49,7 @@ public class SocketClient extends Client implements Runnable{
     }
 
     @Override
-    public void disconnect(){
+    public void disconnectMe(){
         try {
             if (!socket.isClosed()) {
                 socket.close();
@@ -71,7 +71,7 @@ public class SocketClient extends Client implements Runnable{
             output.reset();
         } catch (IOException e) {
             Client.LOGGER.severe("Couldn't send message. Must disconnect");
-            disconnect();
+            disconnectMe();
         }
     }
 
@@ -91,7 +91,7 @@ public class SocketClient extends Client implements Runnable{
                     super.timer.schedule(new PingTimer(super.disconnectionHandler), HEARTBEAT);
                 }
             } catch (IOException e) {
-                disconnect();
+                disconnectMe();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
