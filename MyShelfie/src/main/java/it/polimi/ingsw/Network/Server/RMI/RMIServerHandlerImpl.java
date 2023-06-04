@@ -29,7 +29,7 @@ public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServ
     }
 
     @Override
-    public void disconnectMe() {
+    public void disconnectMe() throws RemoteException{
         connectionRMI.disconnectClient();
     }
 }

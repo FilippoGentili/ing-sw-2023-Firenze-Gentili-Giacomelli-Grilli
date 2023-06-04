@@ -13,5 +13,5 @@ public interface RMIServerHandler extends Remote {
 
     void receiveMessage(Message message) throws RemoteException, InterruptedException;
     void login(String username, RMIClientHandler connection) throws IOException, InterruptedException;
-    void disconnectMe();
+    void disconnectMe() throws RemoteException;
 }

@@ -78,7 +78,7 @@ public class Server implements Runnable{
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue().equals(connection)) {
                 connection.setIsConnected();
-                connectionMap.remove(map.getKey());
+                connectionMap.remove(map.getKey(), map.getValue());
                 gameController.removeVirtualView(map.getKey());
                 LOGGER.info(() -> map.getKey() + " was removed from the client list");
                 break;
