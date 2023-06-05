@@ -48,7 +48,7 @@ public class ConnectionRMI extends Connection {
         try {
             rmiClientHandler.ping();
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            disconnectClient();
         }
     }
 }
