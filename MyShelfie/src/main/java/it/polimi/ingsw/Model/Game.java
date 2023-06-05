@@ -160,7 +160,7 @@ public class Game implements Serializable {
      */
     public void removePlayer(Player player) {
         if(!listOfPlayers.contains(player)){
-            System.out.println("The player is not part of the game");
+            //System.out.println("The player is not part of the game");
             return;
         }else listOfPlayers.remove(player);
         /*int i = listOfPlayers.indexOf(player);

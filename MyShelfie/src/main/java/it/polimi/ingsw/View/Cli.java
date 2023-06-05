@@ -687,13 +687,13 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     @Override
     public void someoneDisconnected(String nickname) {
         System.out.println(nickname + " disconnected. Game finished :(");
-        notifyObserver(obs -> {
+        /*notifyObserver(obs -> {
             try {
                 obs.handleDisconnection();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        });
+        });*/
 
         System.exit(1);
     }

@@ -89,9 +89,8 @@ public class GameController {
 
         if (numOfPlayers == 0) {
             if(!firstLogin) {
-                vv.loginResult(false, false, nickname);
-                vv.handleDisconnection(nickname);
-                handleDisconnection(new DisconnectionReply(nickname));
+                server.sendMessage(new LoginResult(nickname,false,false),nickname);
+                handleDisconnection(new DisconnectionRequest(nickname));
             }
             firstLogin=false;
             addVirtualView(player, vv);
@@ -331,76 +330,20 @@ public class GameController {
     public void EndTurn() {
 
         if(lastRound){
-            int currPlayer = players.indexOf(currentPlayer);
-            if(currPlayer == players.size()-1){
-                if(players.get(0).getLastPlayer()){
-                    findWinner();
-                    setGameState(END);
-                }else{
-                    server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
-                    nextPlayer();
-                    if (game.getLivingRoom().checkEmptyLivingRoom()) {
-                        ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
-                        game.getLivingRoom().insertTiles(chosen);
-                    }
-                    newTurn();
-                }
-            }else {
-                if (players.get(currPlayer + 1).getLastPlayer()) {
-                    setGameState(END);
-                    findWinner();
-                } else {
-                    server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
-                    nextPlayer();
-                    if (game.getLivingRoom().checkEmptyLivingRoom()) {
-                        ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
-                        game.getLivingRoom().insertTiles(chosen);
-                    }
-                    newTurn();
-                }
-            }
+            lastRound();
         }else{
             if (currentPlayer.getBookshelf().fullBookshelf()) {
+
+                server.sendMessage(new GenericMessage("You earn one points for finishing your " +
+                        "bookshelf before the other players."), currentPlayer.getNickname());
 
                 for(Player player : players){
                     server.sendMessage(new GenericMessage("" + currentPlayer.getNickname() +
                             " finished his bookshelf! Last Round!"),player.getNickname());
                 }
 
-                server.sendMessage(new GenericMessage("You earn one points for finishing your " +
-                        "bookshelf before the other players."), currentPlayer.getNickname());
-
                 game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
-                int currPlayer = players.indexOf(currentPlayer);
-                if(currPlayer == players.size()-1){
-                    if(players.get(0).getLastPlayer()){
-                        findWinner();
-                        setGameState(END);
-                    }else{
-                        lastRound();
-                        server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
-                        nextPlayer();
-                        if (game.getLivingRoom().checkEmptyLivingRoom()) {
-                            ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
-                            game.getLivingRoom().insertTiles(chosen);
-                        }
-                        newTurn();
-                    }
-                }else {
-                    if (players.get(currPlayer + 1).getLastPlayer()) {
-                        setGameState(END);
-                        findWinner();
-                    } else {
-                        lastRound();
-                        server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
-                        nextPlayer();
-                        if (game.getLivingRoom().checkEmptyLivingRoom()) {
-                            ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
-                            game.getLivingRoom().insertTiles(chosen);
-                        }
-                        newTurn();
-                    }
-                }
+                lastRound();
 
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
@@ -419,7 +362,35 @@ public class GameController {
      */
     public void lastRound() {
         lastRound = true;
-        newTurn();
+
+        int currPlayer = players.indexOf(currentPlayer);
+        if(currPlayer == players.size()-1){
+            if(players.get(0).equals(firstPlayer)){
+                findWinner();
+                setGameState(END);
+            }else{
+                server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
+                nextPlayer();
+                if (game.getLivingRoom().checkEmptyLivingRoom()) {
+                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                    game.getLivingRoom().insertTiles(chosen);
+                }
+                newTurn();
+            }
+        }else {
+            if (players.get(currPlayer + 1).equals(firstPlayer)) {
+                setGameState(END);
+                findWinner();
+            } else {
+                server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
+                nextPlayer();
+                if (game.getLivingRoom().checkEmptyLivingRoom()) {
+                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                    game.getLivingRoom().insertTiles(chosen);
+                }
+                newTurn();
+            }
+        }
     }
 
     /**
@@ -430,13 +401,6 @@ public class GameController {
 
         game.assignPoints(game.getPlayers());
         winner = game.getWinner();
-        /*HashMap<String, Integer> ranking;
-
-        ranking = getScoreBoard();
-
-        for(Player player : players){
-            server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
-        }*/
 
         ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
         server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
