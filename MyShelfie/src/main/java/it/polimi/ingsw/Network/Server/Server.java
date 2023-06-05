@@ -29,6 +29,8 @@ public class Server implements Runnable{
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
+        Thread ping = new Thread(this);
+        ping.start();
     }
 
     public void startServers() {
