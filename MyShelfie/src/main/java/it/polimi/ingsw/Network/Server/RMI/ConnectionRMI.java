@@ -45,6 +45,10 @@ public class ConnectionRMI extends Connection {
 
     @Override
     public void ping() {
-        rmiClientHandler.ping();
+        try {
+            rmiClientHandler.ping();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -64,7 +64,7 @@ public class RMIClient extends Client implements RMIClientHandler{
     }
 
     @Override
-    public void ping(){
+    public void ping() throws RemoteException{
         super.timer.cancel();
         super.timer = new Timer();
         super.timer.schedule(new PingTimer(super.disconnectionHandler), HEARTBEAT);
