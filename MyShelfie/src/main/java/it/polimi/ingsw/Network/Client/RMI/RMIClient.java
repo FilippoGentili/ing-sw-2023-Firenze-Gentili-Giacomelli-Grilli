@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.Client.RMI;
 
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.Socket.PingTimer;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
@@ -11,11 +12,13 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Timer;
 
 public class RMIClient extends Client implements RMIClientHandler{
     private transient RMIServerHandler server;
     private final String address;
     private final String port;
+    private static final int HEARTBEAT = 10000;
 
     public RMIClient(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
         super(disconnectionHandler);
@@ -58,5 +61,12 @@ public class RMIClient extends Client implements RMIClientHandler{
         synchronized (messageQueue){
             messageQueue.add(message);
         }
+    }
+
+    @Override
+    public void ping(){
+        super.timer.cancel();
+        super.timer = new Timer();
+        super.timer.schedule(new PingTimer(super.disconnectionHandler), HEARTBEAT);
     }
 }
