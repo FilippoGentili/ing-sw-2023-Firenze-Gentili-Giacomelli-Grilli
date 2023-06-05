@@ -274,8 +274,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                         System.out.println("Index not valid. Please insert a character between A and I");
                 }while(!columns1.contains(input) && !columns2.contains(input));
 
-                if(!chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input)))){
-                    chosenTiles.add(livingRoom.getTile(row-1, indexTranslator(input)));
+                int col = indexTranslator(input);
+
+                if(!chosenTiles.contains(livingRoom.getTile(row-1, col))){
+                    chosenTiles.add(livingRoom.getTile(row-1, col));
                     i++;
 
                     if(i<4){
@@ -288,7 +290,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                                 System.out.println("Command not valid");
                         }while(!input.equals("y") && !input.equals("n"));
                     }
-                }
+                }else System.out.println("You already selected this tile");
+
             }while(chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input))));
         }
 
