@@ -40,7 +40,7 @@ public abstract class Client extends UnicastRemoteObject {
 
     public abstract void connection() throws IOException;
 
-    public abstract void disconnectMe();
+    public abstract void disconnectMe() throws RemoteException;
 
     public abstract void sendMessage(Message message);
 

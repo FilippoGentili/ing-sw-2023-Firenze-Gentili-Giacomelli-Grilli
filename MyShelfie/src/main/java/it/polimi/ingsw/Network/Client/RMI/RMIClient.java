@@ -39,7 +39,8 @@ public class RMIClient extends Client implements RMIClientHandler{
     }
 
     @Override
-    public void disconnectMe() {
+    public void disconnectMe() throws RemoteException {
+        server.disconnectMe();
         server = null;
     }
 
@@ -53,6 +54,11 @@ public class RMIClient extends Client implements RMIClientHandler{
             }
         }catch (IOException | InterruptedException e){
             Client.LOGGER.severe(e.getMessage());
+            try {
+                disconnectMe();
+            } catch (RemoteException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 

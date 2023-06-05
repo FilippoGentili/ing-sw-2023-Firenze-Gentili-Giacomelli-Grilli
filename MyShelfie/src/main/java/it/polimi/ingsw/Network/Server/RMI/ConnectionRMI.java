@@ -20,7 +20,7 @@ public class ConnectionRMI extends Connection {
     @Override
     public void disconnectClient(){
 
-        if (isConnected) {
+        if (checkConnection()) {
             isConnected = false;
 
             try {
@@ -40,6 +40,7 @@ public class ConnectionRMI extends Connection {
             rmiClientHandler.receiveMessage(message);
         }catch (RemoteException e){
             Server.LOGGER.severe(e.getMessage());
+            disconnectClient();
         }
     }
 
