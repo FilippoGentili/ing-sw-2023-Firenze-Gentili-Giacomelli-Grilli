@@ -251,28 +251,34 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         boolean valid = true;
 
         while(i<4 && valid){
-            System.out.println(i+":");
+
             do{
-                System.out.println("row: ");
-                input = readLine();
-                while(!input.matches("\\d+")){
-                    System.out.println("Input incorrect. Please insert a number between 1 and 9");
+                System.out.println(i+":");
+
+                do{
                     System.out.println("row: ");
                     input = readLine();
-                }
-                row = parseInt(input);
-                if(row<1 || row>9)
-                    System.out.println("Index out of bound. Please insert a number between 1 and 9");
-            }while(row<1 || row>9);
-            do{
-                System.out.println("column: ");
-                input = readLine();
-                if(!columns1.contains(input) && !columns2.contains(input))
-                    System.out.println("Index not valid. Please insert a character between A and I");
-            }while(!columns1.contains(input) && !columns2.contains(input));
+                    while(!input.matches("\\d+")){
+                        System.out.println("Input incorrect. Please insert a number between 1 and 9");
+                        System.out.println("row: ");
+                        input = readLine();
+                    }
+                    row = parseInt(input);
+                    if(row<1 || row>9)
+                        System.out.println("Index out of bound. Please insert a number between 1 and 9");
+                }while(row<1 || row>9);
+                do{
+                    System.out.println("column: ");
+                    input = readLine();
+                    if(!columns1.contains(input) && !columns2.contains(input))
+                        System.out.println("Index not valid. Please insert a character between A and I");
+                }while(!columns1.contains(input) && !columns2.contains(input));
 
-            chosenTiles.add(livingRoom.getTile(row-1, indexTranslator(input)));
-            i++;
+                if(!chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input)))){
+                    chosenTiles.add(livingRoom.getTile(row-1, indexTranslator(input)));
+                    i++;
+                }
+            }while(chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input))));
 
             if(i<4){
                 do{
