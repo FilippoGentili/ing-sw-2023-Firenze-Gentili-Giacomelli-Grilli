@@ -242,6 +242,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void TilesRequest(LivingRoom livingRoom) {
         ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
+        int col;
         String input;
         List<String> columns1 = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
         List<String> columns2 = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i");
@@ -257,7 +258,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
                 do{
                     System.out.println("row: ");
-                    input = readLine();
+                    input = readLine().trim();
                     while(!input.matches("\\d+")){
                         System.out.println("Input incorrect. Please insert a number between 1 and 9");
                         System.out.println("row: ");
@@ -269,30 +270,34 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 }while(row<1 || row>9);
                 do{
                     System.out.println("column: ");
-                    input = readLine();
+                    input = readLine().trim();
                     if(!columns1.contains(input) && !columns2.contains(input))
                         System.out.println("Index not valid. Please insert a character between A and I");
                 }while(!columns1.contains(input) && !columns2.contains(input));
 
-                int col = indexTranslator(input);
+                col = indexTranslator(input);
 
-                if(!chosenTiles.contains(livingRoom.getTile(row-1, col))){
+                if(!chosenTiles.contains(livingRoom.getTile(row-1, col)) && livingRoom.getTile(row,col).getTileType() != TileType.NULL){
                     chosenTiles.add(livingRoom.getTile(row-1, col));
                     i++;
 
                     if(i<4){
                         do{
                             System.out.println("Do you want to select another tile? (y/n)");
-                            input = readLine();
+                            input = readLine().trim();
                             if(input.equals("n"))
                                 valid=false;
                             else if(!input.equals("y"))
                                 System.out.println("Command not valid");
                         }while(!input.equals("y") && !input.equals("n"));
                     }
-                }else System.out.println("You already selected this tile");
+                }else{
+                    if(livingRoom.getTile(row,col).getTileType() == TileType.NULL)
+                        System.out.println("You can't select this tile");
+                    else System.out.println("You already selected this tile");
+                }
 
-            }while(chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input))));
+            }while(chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input))) || livingRoom.getTile(row,col).getTileType() == TileType.NULL);
         }
 
         notifyObserver(obs -> {
