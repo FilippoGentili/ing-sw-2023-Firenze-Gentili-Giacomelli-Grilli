@@ -341,7 +341,8 @@ public class Game implements Serializable {
 
         for (Player player : players) {
             int personalGoalCardPoints = player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID());
-            int totalPoints = player.getScore() + personalGoalCardPoints ;
+            int bookshelfPoints = player.getBookshelf().countPoints();
+            int totalPoints = player.getScore() + personalGoalCardPoints + bookshelfPoints;
             player.setScore(totalPoints);
         }
 
