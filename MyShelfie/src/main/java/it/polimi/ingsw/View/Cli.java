@@ -277,7 +277,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
                 col = indexTranslator(input);
 
-                if(!chosenTiles.contains(livingRoom.getTile(row-1, col)) && livingRoom.getTile(row,col).getTileType() != TileType.NULL){
+                if(!chosenTiles.contains(livingRoom.getTile(row-1, col)) && livingRoom.getTile(row-1,col).getTileType() != TileType.NULL){
                     chosenTiles.add(livingRoom.getTile(row-1, col));
                     i++;
 
@@ -297,7 +297,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                     else System.out.println("You already selected this tile");
                 }
 
-            }while(chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input))) || livingRoom.getTile(row,col).getTileType() == TileType.NULL);
+            }while((chosenTiles.contains(livingRoom.getTile(row-1, col)) || livingRoom.getTile(row-1,col).getTileType() == TileType.NULL) && valid);
         }
 
         notifyObserver(obs -> {
