@@ -43,7 +43,7 @@ public class Server implements Runnable{
             String address;
             address=getLocalHost().toString();
             address=address.substring(address.indexOf("/1")+1);
-            Server.LOGGER.log(Level.INFO,"Server IP Address is: {0}. Have the players type the address when prompted.", address);
+            Server.LOGGER.log(Level.INFO,"Server IP Address is: {0} - Have the players type the address when prompted.", address);
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
