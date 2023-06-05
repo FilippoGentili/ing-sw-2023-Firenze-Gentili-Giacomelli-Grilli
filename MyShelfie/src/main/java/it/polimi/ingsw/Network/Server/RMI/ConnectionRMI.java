@@ -26,7 +26,7 @@ public class ConnectionRMI extends Connection {
             try {
                 rmiClientHandler.disconnectMe();
             } catch (RemoteException e) {
-                throw new RuntimeException(e);
+                //
             }
 
             server.clientDisconnection(this);

@@ -370,13 +370,39 @@ public class GameController {
                 server.sendMessage(new GenericMessage("You earn one points for finishing your " +
                         "bookshelf before the other players."), currentPlayer.getNickname());
 
-                game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
-                nextPlayer();
-                if(game.getLivingRoom().checkEmptyLivingRoom()){
-                    ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
-                    game.getLivingRoom().insertTiles(chosen);
+                int currPlayer = players.indexOf(currentPlayer);
+                if(currPlayer == players.size()-1){
+                    if(players.get(0).getLastPlayer()){
+                        findWinner();
+                        setGameState(END);
+                    }else{
+                        game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+                        lastRound();
+                        server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
+                        nextPlayer();
+                        if (game.getLivingRoom().checkEmptyLivingRoom()) {
+                            ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                            game.getLivingRoom().insertTiles(chosen);
+                        }
+                        newTurn();
+                    }
+                }else {
+                    if (players.get(currPlayer + 1).getLastPlayer()) {
+                        setGameState(END);
+                        findWinner();
+                    } else {
+                        game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
+                        lastRound();
+                        server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
+                        nextPlayer();
+                        if (game.getLivingRoom().checkEmptyLivingRoom()) {
+                            ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
+                            game.getLivingRoom().insertTiles(chosen);
+                        }
+                        newTurn();
+                    }
                 }
-                lastRound(); //da rivedere
+
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."),currentPlayer.getNickname());
                 nextPlayer();
@@ -413,6 +439,9 @@ public class GameController {
             server.sendMessage(new ScoreBoardMessage(ranking),player.getNickname());
         }*/
 
+        ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
+        server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
+
         for(Player player : players){
             if(player.getNickname().equals(winner.getNickname()))
                 server.sendMessage(new GenericMessage("Congratulations! " +
@@ -428,8 +457,6 @@ public class GameController {
 
     public void endGame(){
         if(gameState == END){
-            ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
-            server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
             for(Player player : players){
                 server.sendMessage(new DisconnectionReply(player.getNickname()), player.getNickname());
             }
