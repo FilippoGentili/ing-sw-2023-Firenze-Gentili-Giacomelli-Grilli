@@ -277,19 +277,19 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 if(!chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input)))){
                     chosenTiles.add(livingRoom.getTile(row-1, indexTranslator(input)));
                     i++;
+
+                    if(i<4){
+                        do{
+                            System.out.println("Do you want to select another tile? (y/n)");
+                            input = readLine();
+                            if(input.equals("n"))
+                                valid=false;
+                            else if(!input.equals("y"))
+                                System.out.println("Command not valid");
+                        }while(!input.equals("y") && !input.equals("n"));
+                    }
                 }
             }while(chosenTiles.contains(livingRoom.getTile(row-1, indexTranslator(input))));
-
-            if(i<4){
-                do{
-                    System.out.println("Do you want to select another tile? (y/n)");
-                    input = readLine();
-                    if(input.equals("n"))
-                        valid=false;
-                    else if(!input.equals("y"))
-                        System.out.println("Command not valid");
-                }while(!input.equals("y") && !input.equals("n"));
-            }
         }
 
         notifyObserver(obs -> {
