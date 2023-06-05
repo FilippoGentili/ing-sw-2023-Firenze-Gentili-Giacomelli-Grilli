@@ -290,7 +290,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                             else if(!input.equals("y"))
                                 System.out.println("Command not valid");
                         }while(!input.equals("y") && !input.equals("n"));
-                    }
+                    }else
+                        valid = false;
                 }else{
                     if(livingRoom.getTile(row,col).getTileType() == TileType.NULL)
                         System.out.println("You can't select this tile");
