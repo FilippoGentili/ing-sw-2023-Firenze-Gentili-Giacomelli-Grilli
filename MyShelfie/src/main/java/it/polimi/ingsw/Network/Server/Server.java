@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.DisconnectionReply;
+import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
@@ -94,18 +95,13 @@ public class Server implements Runnable{
 
             String app = "Server";
 
-            removeClient(connection);
-
-            if(!gameController.waitingForPlayers()){
-                for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
-                    if(map.getValue().equals(connection)){
-                        gameController.broadcastShowMessage(map.getKey() + " disconnected from the server. Game finished :(");
-                        app=map.getKey();
-                    }
-                    break;
-                }
-                gameController.broadcastMessage(new DisconnectionReply(app));
+            for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+                if(map.getValue().equals(connection))
+                    app=map.getKey();
+                break;
             }
+            broadcastMessage(new GenericMessage(app + " disconnected from the server. Game finished :("));
+            removeClient(connection);
         }
 
     }
