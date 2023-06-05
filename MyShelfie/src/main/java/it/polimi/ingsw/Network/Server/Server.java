@@ -89,18 +89,21 @@ public class Server implements Runnable{
     public void clientDisconnection(Connection connection) {
         synchronized (lock){
 
+            String app = "Server";
+
             removeClient(connection);
 
             if(!gameController.waitingForPlayers()){
                 for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                     if(map.getValue().equals(connection)){
                         gameController.broadcastShowMessage(map.getKey() + " disconnected from the server. Game finished :(");
+                        app=map.getKey();
                     }
                     break;
                 }
-                    gameController.broadcastMessage(new DisconnectionReply("Server"));
-                }
+                gameController.broadcastMessage(new DisconnectionReply(app));
             }
+        }
 
     }
 

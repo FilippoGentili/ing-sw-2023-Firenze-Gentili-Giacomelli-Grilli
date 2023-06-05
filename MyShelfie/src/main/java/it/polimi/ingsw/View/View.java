@@ -44,5 +44,5 @@ public interface View {
 
     void showWinner(String winner);
 
-    void handleDisconnection();
+    void handleDisconnection(String nickname);
 }
