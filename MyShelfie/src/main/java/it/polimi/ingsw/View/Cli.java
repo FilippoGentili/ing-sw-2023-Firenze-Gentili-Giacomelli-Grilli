@@ -88,7 +88,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         } while (!validAddress(input));
 
         address = input;
-    /*
+        /*
         do {
             System.out.println("Insert the Server port:");
             input = scanner.nextLine().trim();
@@ -98,7 +98,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         port = input;
 
-     */
+         */
 
 
         if (rmi) {
@@ -127,8 +127,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         }
         return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
     }
-
-    /*public boolean validPort(String port){
+    /*
+    public boolean validPort(String port){
         try {
             int portNum = Integer.parseInt(port);
             if ((portNum >= 1 && portNum <= 65536)) {
@@ -142,6 +142,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
      */
+
+
 
 
 
