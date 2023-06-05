@@ -24,7 +24,7 @@ public abstract class Client extends UnicastRemoteObject {
 
 
     public Client(DisconnectionHandler disconnectionHandler) throws RemoteException {
-        super();
+        //super();
         this.messageQueue = new ArrayList<>();
         this.disconnectionHandler = disconnectionHandler;
         this.timer = new Timer();

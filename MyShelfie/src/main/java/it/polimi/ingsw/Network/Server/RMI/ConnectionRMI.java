@@ -16,12 +16,16 @@ public class ConnectionRMI extends Connection {
         this.server = server;
     }
     @Override
-    public void disconnectClient() {
+    public void disconnectClient(){
 
         if (isConnected) {
             isConnected = false;
 
-            rmiClientHandler.disconnectMe();
+            try {
+                rmiClientHandler.disconnectMe();
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
 
             server.clientDisconnection(this);
         }

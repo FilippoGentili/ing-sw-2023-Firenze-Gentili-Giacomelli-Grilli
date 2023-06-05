@@ -14,7 +14,7 @@ public abstract class Connection {
         isConnected=false;
     }
 
-    public abstract void disconnectClient();
+    public abstract void disconnectClient() throws RemoteException;
 
     public abstract void sendMessage(Message message);
 

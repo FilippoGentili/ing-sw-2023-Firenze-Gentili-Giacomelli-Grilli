@@ -8,6 +8,7 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Observer.Observer;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -118,6 +119,10 @@ public class VirtualView implements View, Observer {
     @Override
     public void handleDisconnection() {
         connection.sendMessage(new DisconnectionReply("Server"));
-        connection.disconnectClient();
+        try {
+            connection.disconnectClient();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

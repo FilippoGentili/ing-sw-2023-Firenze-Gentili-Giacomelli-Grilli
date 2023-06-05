@@ -13,5 +13,5 @@ public interface RMIClientHandler extends Remote {
 
     void receiveMessage(Message message) throws RemoteException;
 
-    void disconnectMe();
+    void disconnectMe() throws RemoteException;
 }
