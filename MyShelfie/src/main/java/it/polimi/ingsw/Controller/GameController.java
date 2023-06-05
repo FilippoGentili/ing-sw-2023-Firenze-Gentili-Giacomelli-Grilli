@@ -370,13 +370,13 @@ public class GameController {
                 server.sendMessage(new GenericMessage("You earn one points for finishing your " +
                         "bookshelf before the other players."), currentPlayer.getNickname());
 
+                game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
                 int currPlayer = players.indexOf(currentPlayer);
                 if(currPlayer == players.size()-1){
                     if(players.get(0).getLastPlayer()){
                         findWinner();
                         setGameState(END);
                     }else{
-                        game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
                         lastRound();
                         server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
                         nextPlayer();
@@ -391,7 +391,6 @@ public class GameController {
                         setGameState(END);
                         findWinner();
                     } else {
-                        game.endGameTrigger(currentPlayer.getBookshelf(), currentPlayer);
                         lastRound();
                         server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
                         nextPlayer();
