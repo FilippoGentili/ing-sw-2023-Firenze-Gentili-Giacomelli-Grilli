@@ -117,8 +117,9 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 case DISCONNECTION_REPLY:
                     DisconnectionReply disconnectionReply = (DisconnectionReply) message;
                     queue.add(() -> {
-                        view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
-                        view.handleDisconnection(disconnectionReply.getDisconnectedUser());
+                        if(disconnectionReply.getDisconnectedUser().equals("Server"))
+                            view.handleDisconnection(disconnectionReply.getDisconnectedUser());
+                        else view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
                         closeConnection();
                     });
                     break;
