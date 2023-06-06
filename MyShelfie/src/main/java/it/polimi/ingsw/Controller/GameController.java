@@ -89,15 +89,16 @@ public class GameController {
             if(!firstLogin) {
                 server.sendMessage(new LoginResult(nickname,false,false),nickname);
                 handleDisconnection(new DisconnectionRequest(nickname));
+            }else {
+                firstLogin = false;
+                addVirtualView(player, vv);
+                players.add(player);
+                player.setNickname(nickname);
+                game.addPlayer(player);
+                server.sendMessage(new LoginResult(nickname, true, true), nickname);
+                server.sendMessage(new NumOfPlayersRequest(), nickname);
+                server.sendMessage(new LoginReply(nickname), nickname);
             }
-            firstLogin=false;
-            addVirtualView(player, vv);
-            players.add(player);
-            player.setNickname(nickname);
-            game.addPlayer(player);
-            server.sendMessage(new LoginResult(nickname, true, true), nickname);
-            server.sendMessage(new NumOfPlayersRequest(), nickname);
-            server.sendMessage(new LoginReply(nickname), nickname);
         } else if (virtualViewMap.size() < numOfPlayers) {
             if (inputController.checkNickname(nickname, vv)) {
                 addVirtualView(player, vv);
@@ -394,6 +395,7 @@ public class GameController {
     public void findWinner() {
         Player winner;
 
+        restoreMatchElements();
         game.assignPoints(game.getPlayers());
         winner = game.getWinner();
 
@@ -425,10 +427,6 @@ public class GameController {
         for(Player player : players){
                     server.sendMessage(new GameStateMessage(player,game),player.getNickname());
         }
-    }
-
-    public int getNumOfPlayers(){
-        return numOfPlayers;
     }
 
     public boolean isFull(){

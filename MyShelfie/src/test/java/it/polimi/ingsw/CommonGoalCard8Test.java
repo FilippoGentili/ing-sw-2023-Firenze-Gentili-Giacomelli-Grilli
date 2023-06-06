@@ -76,7 +76,7 @@ class CommonGoalCard8Test {
     }
 
     @Test
-    void JustTowRowsAreDifferent(){
+    void JustTwoRowsAreDifferent(){
         CommonGoalCard Card = new CommonGoalCard8();
         Bookshelf bookshelf = new Bookshelf();
 
@@ -105,7 +105,7 @@ class CommonGoalCard8Test {
                     ArrayList<Tile> TileGame = new ArrayList<>();
                     TileGame.add(game);
                     bookshelf.insertTiles(TileGame, j);
-                }else {
+                }else if(j==4) {
                     Tile plant = new Tile(TileType.PLANT);
                     ArrayList<Tile> TilePlant = new ArrayList<>();
                     TilePlant.add(plant);

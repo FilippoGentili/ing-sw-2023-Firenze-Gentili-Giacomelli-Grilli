@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import javafx.scene.control.Cell;
+
 import static java.util.Objects.isNull;
 
 public class CommonGoalCard8 extends CommonGoalCard {
@@ -10,21 +12,21 @@ public class CommonGoalCard8 extends CommonGoalCard {
     public int getId(){return this.id;}
     @Override
     public boolean check(Bookshelf bookshelf) {
-        int row, col, k, count=0;
-        boolean verifica=false, uguali, CellaVuota;
+        int row, k, count=0;
+        boolean verifica=false, uguali;
 
         for(row=0; row<6 && count<2; row++){
-            for(col=0, uguali=false, CellaVuota=false; col<4 && !uguali && !CellaVuota; col++){
-                if(bookshelf.getTile(row,col).getTileType()!=TileType.NULL) {
-                    for (k = col + 1; k < 5 && !uguali; k++) {
-                        if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row, k).getTileType())
-                            uguali = true;
-                    }
-                }else{
-                    CellaVuota = true;
+            uguali=false;
+            if(bookshelf.getTile(row,0).getTileType()!=TileType.NULL) {
+                for (k = 1; k < 5 && !uguali; k++) {
+                    if (bookshelf.getTile(row,0).getTileType() == bookshelf.getTile(row, k).getTileType() ||
+                            bookshelf.getTile(row,k).getTileType() == TileType.NULL)
+                        uguali = true;
                 }
+            }else{
+                uguali=true;
             }
-            if(!uguali && !CellaVuota)
+            if(!uguali)
                 count++;
         }
         if(count==2)
