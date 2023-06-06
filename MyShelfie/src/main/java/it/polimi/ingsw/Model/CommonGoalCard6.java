@@ -11,21 +11,21 @@ public class CommonGoalCard6 extends CommonGoalCard {
     public int getId(){return this.id;}
     @Override
     public boolean check(Bookshelf bookshelf) {
-        int row, col, k, count=0;
-        boolean verifica=false, uguali, CellaVuota;
+        int col, k, count=0;
+        boolean verifica=false, uguali;
 
         for(col=0; col<5 && count<2; col++){
-            for(row=0, uguali=false, CellaVuota=false; row<5 && !uguali && !CellaVuota; row++){
-                if(bookshelf.getTile(row,col).getTileType() != TileType.NULL) {
-                    for (k = row + 1; k < 6 && !uguali; k++) {
-                        if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(k, col).getTileType())
-                            uguali = true;
-                    }
-                }else{
-                    CellaVuota = true;
+            uguali=false;
+            if(bookshelf.getTile(0,col).getTileType() != TileType.NULL) {
+                for (k = 1; k < 6 && !uguali; k++) {
+                    if (bookshelf.getTile(0, col).getTileType() == bookshelf.getTile(k, col).getTileType() ||
+                    bookshelf.getTile(k,col).getTileType()==TileType.NULL)
+                        uguali = true;
                 }
+            }else{
+                uguali=true;
             }
-            if(!uguali && !CellaVuota)
+            if(!uguali)
                 count++;
         }
         if(count==2)
