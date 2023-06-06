@@ -13,12 +13,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import static it.polimi.ingsw.Model.GameState.*;
 
 public class GameController {
-    private Game game;
+    private final Game game;
     private GameState gameState;
     private  int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
-    private InputController inputController;
+    private final InputController inputController;
     private ArrayList<Player> players;
     private Map<Player, VirtualView> virtualViewMap;
     private final Server server;
@@ -47,7 +47,6 @@ public class GameController {
      * this method receives the message from the client and decides what method must be called based on
      * the actual state of the game
      * @param message
-     * @throws RemoteException
      */
     public synchronized void forwardMessage(Message message) throws InterruptedException {
 
@@ -82,7 +81,6 @@ public class GameController {
      * this method asks what is the number of players.
      * @param nickname nickname of the player
      * @param vv virtual view of the player
-     * @throws RemoteException
      */
     public synchronized void handleLogin(String nickname, VirtualView vv) throws InterruptedException {
         Player player = new Player(this.game);
@@ -125,8 +123,6 @@ public class GameController {
     /**
      * this method is called when the game is already started and a message from the client arrives. It decides what
      * method must be called based on the type of the message.
-     * @param message
-     * @throws RemoteException
      */
     public void handleGame(Message message) {
 
@@ -165,8 +161,7 @@ public class GameController {
 
     public synchronized void setNumOfPlayers(Message message){
         NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
-        int num = numOfPlayersReply.getNumOfPlayers();
-        this.numOfPlayers = num;
+        this.numOfPlayers = numOfPlayersReply.getNumOfPlayers();
     }
 
     /**
@@ -447,18 +442,10 @@ public class GameController {
             virtualViewMap = new HashMap<>();
         }
         virtualViewMap.put(player, vv);
-        /*game.addObserver(vv);
-        game.getLivingRoom().addObserver(vv);
-        player.getBookshelf().addObserver(vv);*/
     }
 
     public void removeVirtualView(String nickname) {
         virtualViewMap.remove(getPlayerByNickname(nickname));
-        /*game.removeObserver(vv);
-        game.getLivingRoom().removeObserver(vv);
-        for(Player player : players)
-            if(player.getNickname().equals(nickname))
-                player.getBookshelf().removeObserver(vv);*/
     }
 
     public Player getCurrentPlayer() {
@@ -477,10 +464,6 @@ public class GameController {
         return virtualViewMap;
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
     public boolean waitingForPlayers(){
         if(gameState == GameState.LOGIN) return true;
         else return false;
@@ -495,21 +478,6 @@ public class GameController {
             server.sendMessage(new GenericMessage(message),player.getNickname());
         }
     }
-
-    public void broadcastMessage(Message message) {
-        for(Player player : players){
-            server.sendMessage(message,player.getNickname());
-        }
-    }
-
-    /*public HashMap<String, Integer> getScoreBoard(){
-        HashMap<String, Integer> scoreBoard = new HashMap<>();
-
-        for(Player player : players){
-            scoreBoard.put(player.getNickname(), player.getScore());
-        }
-        return scoreBoard;
-    }*/
 
     public Player getPlayerByNickname(String nickname){
         for(Player player : players)
