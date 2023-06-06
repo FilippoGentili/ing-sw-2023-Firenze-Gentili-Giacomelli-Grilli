@@ -366,8 +366,8 @@ public class GameController {
         int currPlayer = players.indexOf(currentPlayer);
         if(currPlayer == players.size()-1){
             if(players.get(0).equals(firstPlayer)){
-                findWinner();
                 setGameState(END);
+                findWinner();
             }else{
                 server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
                 nextPlayer();

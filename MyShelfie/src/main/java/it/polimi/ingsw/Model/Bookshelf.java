@@ -145,7 +145,7 @@ public class Bookshelf implements Serializable {
                     adj = getSameAdjacentTiles(this.getTile(i,j));
                     numAd = MatrixWalk(adj, numAd);
 
-                    System.out.println(numAd);
+                    //System.out.println(numAd);
 
                     if(numAd==3)
                         points+=2;
