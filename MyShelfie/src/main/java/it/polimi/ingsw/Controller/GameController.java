@@ -361,7 +361,7 @@ public class GameController {
      * beginning of the last round
      */
     public void lastRound() {
-        lastRound = true;
+        if(!lastRound) lastRound = true;
 
         int currPlayer = players.indexOf(currentPlayer);
         if(currPlayer == players.size()-1){
