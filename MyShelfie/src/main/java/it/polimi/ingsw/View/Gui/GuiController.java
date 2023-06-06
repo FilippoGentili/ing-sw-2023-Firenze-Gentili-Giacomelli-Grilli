@@ -16,24 +16,20 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class GuiController {
+public class GuiController extends ViewObservable{
     private static Scene currentScene;
-    private static GenericSceneController genericSceneController;
+    private static GenericSceneController currentController;
 
 
-    public static <C> C changeScene(String fxml, Scene scene, List<ViewObserver> observers) {
-        C controller = null;
+    public static <T> T changeScene(String fxml, Scene scene, List<ViewObserver> observers) {
+        T controller = null;
         try {
             FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/" + fxml));
             Parent root = loader.load();
             controller = loader.getController();
             ((ViewObservable) controller).addAllObserver(observers);
 
-            for (ViewObserver observer : observers) {
-                ((ViewObservable) controller).addObserver(observer);
-            }
-
-            genericSceneController = (GenericSceneController) controller;
+            currentController = (GenericSceneController) controller;
             currentScene = scene;
             currentScene.setRoot(root);
         } catch (IOException e) {
@@ -42,23 +38,21 @@ public class GuiController {
         return controller;
     }
 
-    public static <C> C changeScene(String fxml, Event event,List<ViewObserver> observers) {
+    public static <T> T changeScene(String fxml, Event event,List<ViewObserver> observers) {
         Scene scene = ((Node) event.getSource()).getScene();
         return changeScene(fxml, scene, observers);
     }
 
-    public static <C> C changeScene(String fxml,  List<ViewObserver> observers){
+    public static <T> T changeScene(String fxml,  List<ViewObserver> observers){
         return changeScene(fxml, currentScene, observers);
     }
 
     public static void changeScene(String fxml, Scene scene,GenericSceneController controller) {
         try {
             FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/" + fxml));
-
             loader.setController(controller);
-            genericSceneController = controller;
+            currentController = controller;
             Parent root = loader.load();
-
             currentScene = scene;
             currentScene.setRoot(root);
         } catch (IOException e) {
@@ -97,7 +91,7 @@ public class GuiController {
     }
 
     public static GenericSceneController getCurrentController() {
-        return genericSceneController;
+        return currentController;
     }
 
     public static void showEnd(String nickname) {

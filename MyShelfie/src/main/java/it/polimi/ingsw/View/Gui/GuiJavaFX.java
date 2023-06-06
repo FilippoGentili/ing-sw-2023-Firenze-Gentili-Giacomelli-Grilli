@@ -19,7 +19,6 @@ public class GuiJavaFX extends Application {
     public void start(Stage stage) throws Exception {
         Gui guiView = new Gui();
         ClientController clientController = new ClientController(guiView);
-
         guiView.addObserver(clientController);
 
         FXMLLoader fxmlLoader = new FXMLLoader();

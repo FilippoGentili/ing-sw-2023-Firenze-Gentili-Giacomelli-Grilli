@@ -7,27 +7,13 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.image.ImageView;
 
 /**
  * First scene of the game.
  * This class is the controller for the start scene.
  */
 public class StartSceneController extends ViewObservable implements GenericSceneController{
-    @FXML
-    private AnchorPane anchorPane;
-    @FXML
-    private BorderPane borderPane;
-    @FXML
-    private Pane pane;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private HBox hBox;
+
     @FXML
     private Button playButton;
     @FXML

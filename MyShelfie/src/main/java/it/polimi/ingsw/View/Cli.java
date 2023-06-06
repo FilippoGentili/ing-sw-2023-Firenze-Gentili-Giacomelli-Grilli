@@ -52,7 +52,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         System.out.println(message);
     }
 
-    public void serverInfo() throws IOException {
+    public void serverInfo() {
 
         boolean rmi = false;
         final String address;

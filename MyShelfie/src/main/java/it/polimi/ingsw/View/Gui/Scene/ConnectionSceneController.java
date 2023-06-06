@@ -28,9 +28,11 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private TextField portBox;
     @FXML
     private TextField addressBox;
-
+    final String SocketPort = "1098";
+    final String RMIPort = "1099";
     private final PseudoClass ERROR = PseudoClass.getPseudoClass("error");
     private static final String ERROR_MESSAGE = "Network Error";
+
 
     @FXML
     public void initialize(){
@@ -42,34 +44,26 @@ public class ConnectionSceneController extends ViewObservable implements Generic
      * This method is called when the socket button is clicked. It starts a new game with socket connection.
      * @param event
      */
-    private void socketButtonClicked(MouseEvent event){
-        String port = portBox.getText();
+    private void socketButtonClicked(MouseEvent event) {
         String address = addressBox.getText();
+        String port = SocketPort;
 
-
-        boolean validPort = ClientController.validPort(port);
         boolean validAddress = ClientController.validAddress(address);
-
         addressBox.pseudoClassStateChanged(ERROR, !validAddress);
-        portBox.pseudoClassStateChanged(ERROR, !validPort);
 
-        if(validPort && validAddress){
+        if (validAddress) {
             socketButton.setDisable(true);
             rmiButton.setDisable(true);
             new Thread(() -> notifyObserver(obs -> {
                 try {
-                    obs.updateServerInfoSocket(this,address,port);
+                    obs.updateServerInfoSocket(this, address, port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             })).start();
-        }else if(validPort){
+        } else {
             Platform.runLater(() -> {
                 GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
-            });
-        }else{
-            Platform.runLater(() -> {
-                GuiController.showBanner(ERROR_MESSAGE, "Invalid port");
             });
         }
     }
@@ -79,31 +73,26 @@ public class ConnectionSceneController extends ViewObservable implements Generic
      * @param event
      */
     private void rmiButtonClicked(MouseEvent event){
-        String port = portBox.getText();
         String address = addressBox.getText();
+        String port = RMIPort;
 
-        boolean validPort = ClientController.validPort(port);
         boolean validAddress = ClientController.validAddress(address);
 
         addressBox.pseudoClassStateChanged(ERROR, !validAddress);
-        portBox.pseudoClassStateChanged(ERROR, !validPort);
-        if(validPort && validAddress) {
+
+        if(validAddress) {
             socketButton.setDisable(true);
             rmiButton.setDisable(true);
-            new Thread(() -> notifyObserver(obs -> {
+            new Thread(() ->notifyObserver(obs -> {
                 try {
-                    obs.updateServerInfoRmi(this, address, port);
+                    obs.updateServerInfoRmi(this,address,port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             })).start();
-        }else if(validPort){
-            Platform.runLater(() -> {
-                GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
-            });
         }else{
             Platform.runLater(() -> {
-                GuiController.showBanner(ERROR_MESSAGE, "Invalid port");
+                GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
             });
         }
     }

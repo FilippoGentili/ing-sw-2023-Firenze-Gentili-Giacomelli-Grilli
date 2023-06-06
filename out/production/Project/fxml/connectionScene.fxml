@@ -47,18 +47,9 @@
                         </AnchorPane>
                         <HBox alignment="CENTER" prefHeight="200.0" prefWidth="591.0" spacing="60.0">
                            <children>
-                              <AnchorPane prefHeight="0.0" prefWidth="200.0" stylesheets="@../css/style.css">
-                                 <children>
-                                    <Text fill="WHITE" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Port">
-                                       <font>
-                                          <Font name="Blackadder ITC" size="30.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Text fill="WHITE" layoutX="47.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Address">
+                                    <Text fill="WHITE" layoutX="24.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Address">
                                        <font>
                                           <Font name="Blackadder ITC" size="30.0" />
                                        </font>
@@ -67,13 +58,8 @@
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="290.0" prefWidth="591.0" spacing="80.0">
+                        <HBox alignment="CENTER" prefHeight="189.0" prefWidth="700.0" spacing="80.0">
                            <children>
-                              <TextField fx:id="portBox" alignment="CENTER" prefHeight="60.0" prefWidth="240.0" styleClass="generalButton" stylesheets="@../css/style.css">
-                                 <font>
-                                    <Font name="Blackadder ITC" size="26.0" />
-                                 </font>
-                              </TextField>
                               <TextField fx:id="addressBox" prefHeight="60.0" prefWidth="240.0" styleClass="generalButton" stylesheets="@../css/style.css">
                                  <font>
                                     <Font name="Blackadder ITC" size="26.0" />

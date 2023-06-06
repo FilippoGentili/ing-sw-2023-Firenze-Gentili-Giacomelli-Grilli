@@ -49,6 +49,7 @@ public class LoginSceneController extends ViewObservable implements GenericScene
                     throw new RuntimeException(e);
                 }
             })).start();
+
         }
 
     }

@@ -16,46 +16,57 @@ import java.util.HashMap;
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
     private static final String END = "GAME OVER";
+    private static final String INFO = "Info";
+
+    /**
+     * This method is used to show a message
+     * @param message is the message to show
+     */
     @Override
     public void showMessage(String message){
-
+       // Platform.runLater(() -> GuiController.showBanner(INFO, message));
+        //per ora lo lasciamo commentato, perchè ogni messsaggio che manda il server è un banner nella gui
     }
 
     /**
      * This method is used to get the login result after the player has chosen the nickname
-     * @param validNickname
-     * @param connection
-     * @param nickname
-     * @throws RemoteException
+     * @param validNickname is true if the nickname is valid, false otherwise
+     * @param connection is true if the connection is valid, false otherwise
+     * @param nickname is the nickname chosen by the player
      */
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname){
-        if (!validNickname) {
-            Platform.runLater(() -> GuiController.showBanner(ERROR, "Nickname already taken"));
-        } else if(!connection) {
-            Platform.runLater(() -> {
-                    GuiController.showBanner(ERROR, "Error connecting to server");
+        if (!validNickname || !connection) {
+            if (!validNickname && connection) {
+                Platform.runLater(() -> {
+                    GuiController.showBanner(ERROR, "Nickname already taken");
+                    GuiController.changeScene("loginScene.fxml", observers);
+                });
+            } else {
+                Platform.runLater(() -> {
+                    GuiController.showBanner(ERROR, "Server Error");
                     GuiController.changeScene("startScene.fxml", observers);
                 });
-        }
-    }
+            }
+        }    }
 
     /**
-     * This method is used to ask the nickname to the player
-     * @throws RemoteException if there are connection problems
+     * This method is used to change scene where the player can choose the nickname
      */
     @Override
     public void nicknameRequest(){
         Platform.runLater(() -> GuiController.changeScene( "loginScene.fxml",observers));
     }
 
+
     /**
-     * This method is used to ask the max number of players in the game
-     * @throws RemoteException if there are connection problems
+     * This method is used to change scene where the player can choose the max number of players in the game
      */
     @Override
     public void askNumberOfPlayers() {
-        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",observers));
+        PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
+        playerSelectionSceneController.addAllObserver(observers);
+        Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
     }
 
     @Override
@@ -74,8 +85,7 @@ public class Gui extends ViewObservable implements View {
     }
 
     /**
-     * This method is used to show the list of players in the game
-     * @throws RemoteException if there are connection problems
+     * This method is used to change scene and display the scoreboard
      */
     @Override
     public void showScoreboard(ArrayList<Player> scoreboard) {
@@ -84,13 +94,12 @@ public class Gui extends ViewObservable implements View {
 
     /**
      * This method is used to show the message that a player has disconnected
-     * @param nickname
-     * @throws RemoteException
+     * @param nickname is the nickname of the player that has disconnected
      */
     @Override
     public void someoneDisconnected(String nickname) {
         Platform.runLater(() -> {
-            GuiController.showBanner(END, "The player" + nickname + " disconnected");
+            GuiController.showBanner(END, "The player " + nickname + " disconnected");
             GuiController.changeScene("startScene.fxml", observers);
         });
     }
@@ -158,7 +167,6 @@ public class Gui extends ViewObservable implements View {
      * This method is used to show the waiting room
      * @param maxPlayers is the max number of players in the game
      * @param numOfPlayersConnected is the number of players connected
-     * @throws RemoteException if there are connection problems
      */
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
@@ -184,7 +192,6 @@ public class Gui extends ViewObservable implements View {
     /**
      * This method is used to show the end scene of the game
      * @param winner is the player that won the game
-     * @throws RemoteException if there are connection problems
      */
     @Override
     public void showWinner(String winner) {
