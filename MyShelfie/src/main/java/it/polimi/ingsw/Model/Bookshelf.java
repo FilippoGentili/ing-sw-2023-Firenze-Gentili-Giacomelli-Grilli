@@ -126,7 +126,7 @@ public class Bookshelf implements Serializable {
      */
     public int countPoints(){
 
-        int numAd = 0;
+        int numAd;
         ArrayList<Tile> adj;
         int points=0;
 
@@ -144,8 +144,6 @@ public class Bookshelf implements Serializable {
                     alreadyChecked[i][j] = true;
                     adj = getSameAdjacentTiles(this.getTile(i,j));
                     numAd = MatrixWalk(adj, numAd);
-
-                    //System.out.println(numAd);
 
                     if(numAd==3)
                         points+=2;
@@ -173,9 +171,6 @@ public class Bookshelf implements Serializable {
 
         return true;
     }
-
-
-
 
     /**
      * Set a tile in a given position
