@@ -1,7 +1,9 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
+import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
@@ -14,14 +16,50 @@ import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
-public class Cli extends ViewObservable implements View, DisconnectionHandler {
+public class Cli extends ViewObservable implements View, DisconnectionHandler,Runnable {
 
     private final PrintStream out;
     Scanner scanner;
+    private boolean myTurn = false;
+    private Thread chatThread;
 
     public Cli(){
         out = System.out;
         scanner = new Scanner(System.in);
+    }
+
+    public String chooseAction(){
+        String decision;
+        myTurn = true;
+
+        System.out.println("Write 'chat' if you want to send a message; 'disconnect' if you want to leave the game; 'continue' if you want to play");
+
+        decision = scanner.nextLine();
+
+        switch (decision) {
+            case "disconnect":
+                do {
+                    System.out.println("Are you sure you want to leave the game? [yes/no]");
+                    if (scanner.nextLine().equalsIgnoreCase("yes")) {
+                        handleDisconnection();
+                    } else if(scanner.nextLine().equalsIgnoreCase("no")) {
+                        chooseAction();
+                    }else{
+                        System.out.println("invalid argument");
+                    }
+                } while (!scanner.nextLine().equalsIgnoreCase("yes") || !scanner.nextLine().equalsIgnoreCase("no"));
+                break;
+            case "chat":
+                sendChatMessages();
+                return "chat";
+            case "continue":
+                break;
+            default:
+                System.out.println("command not valid.");
+                break;
+        }
+
+        return decision;
     }
 
     public String readLine(){
@@ -142,12 +180,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
      */
-
-
-
-
-
-
     @Override
     public void nicknameRequest(){
         String nickname;
@@ -238,8 +270,61 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         }
     }
 
+    public void startChat(){
+        this.chatThread = new Thread(this);
+        chatThread.start();
+        /*System.out.println("you can now write in the chat. Plaese write 'chat' every time you want to send a message to the other players.");
+
+        Thread chatTread = new Thread(() ->{
+            Scanner scanner1 = new Scanner(System.in);
+            while(true){
+                String chatInput = scanner1.nextLine().trim();
+
+                if(chatInput.equals("chat")){
+                    System.out.println("Write your mesage:");
+                    String chatMessage = scanner1.nextLine().trim();
+
+                    notifyObserver(obs -> {
+                        obs.sendChatMessage(chatMessage);
+                    });
+                }
+            }
+        });
+
+        chatTread.start();*/
+    }
+
+    public void sendChatMessages(){
+        boolean quit = false;
+
+        System.out.println("write 'quit' if you want to stop send messages");
+        while (!quit) {
+            System.out.print("> ");
+            String message = scanner.nextLine();
+            if (message.toLowerCase().equals("quit")) {
+                quit = true;
+            } else {
+                System.out.println("to [playerName]: ");
+                String receiver = scanner.nextLine().trim();
+                if (receiver.length() == 0)
+                    receiver = null;
+
+                notifyObserver(obs -> {
+                    obs.sendChatMessage(message);
+                });
+            }
+        }
+    }
+    @Override
+    public void showChatMessage(ChatMessage message) {
+        System.out.println("new message from the chat: " + message.showMessage());
+    }
+
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
+
+        String decision = chooseAction();
+
         ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
         int col;
@@ -364,6 +449,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 throw new RuntimeException(e);
             }
         });
+
+        myTurn = false;
     }
 
     @Override
@@ -686,7 +773,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void someoneDisconnected(String nickname) {
-        System.out.println(nickname + " disconnected. Game finished :(");
+        System.out.println(nickname + " disconnected.");
         /*notifyObserver(obs -> {
             try {
                 obs.handleDisconnection();
@@ -700,7 +787,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void handleDisconnection(String nickname) {
-        System.out.println("You will be disconnected.");
+        System.out.println("You will be disconnected. Game finished :(");
 
         notifyObserver(obs -> {
             try {
@@ -715,16 +802,36 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void handleDisconnection() {
-        System.out.println("You will be disconnected.");
+        System.out.println("You will be disconnected. Game finished :(");
 
-        notifyObserver(obs -> {
+       /* notifyObserver(obs -> {
             try {
                 obs.handleDisconnection();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        });
+        });*/
 
         System.exit(1);
+    }
+
+    @Override
+    public void run() {
+        Client.LOGGER.info("chat started");
+        Scanner scanner1 = new Scanner(System.in);
+        while(!Thread.currentThread().isInterrupted()){
+            if(!myTurn) {
+                String chatInput = scanner1.nextLine().trim();
+
+                if (chatInput.equals("chat")) {
+                    System.out.println("Write your mesage:");
+                    String chatMessage = scanner1.nextLine().trim();
+
+                    notifyObserver(obs -> {
+                        obs.sendChatMessage(chatMessage);
+                    });
+                }
+            }
+        }
     }
 }

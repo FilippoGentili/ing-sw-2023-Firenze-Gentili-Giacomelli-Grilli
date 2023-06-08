@@ -92,6 +92,16 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void startChat() {
+
+    }
+
+    @Override
+    public void showChatMessage(ChatMessage message) {
+
+    }
+
+    @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns)  {
         connection.sendMessage(new ColumnRequest(AvailableColumns)); //da sistemare gestione request e reply perche non coincidono
     }

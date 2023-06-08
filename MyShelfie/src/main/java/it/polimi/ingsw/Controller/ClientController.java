@@ -3,9 +3,11 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Client.Chat;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
+import it.polimi.ingsw.Network.Client.Socket.SocketClientChat;
 import it.polimi.ingsw.Network.Client.Socket.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -29,6 +31,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     public static final Logger LOGGER = Logger.getLogger("MyShelfie client");
     private final View view;
     private Client client;
+    private Chat chat;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
     private ClientUpdater clientUpdater;
 
@@ -175,6 +178,19 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         view.showGameStarted(gameStartedMessage.getGame());
                     });
                     break;
+                case STARTING_CHAT_MESSAGE:
+                    try {
+                        startChat();
+                    }catch (IOException e){
+                        //
+                    }
+                    break;
+                case CHAT_MESSAGE:
+                    ChatMessage chatMessage = (ChatMessage) message;
+                    queue.add(() -> {
+                       view.showChatMessage(chatMessage);
+                    });
+                    break;
                 default:
                     break;
             }
@@ -187,8 +203,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler,address,port);
             client.connection();
+            this.chat = new SocketClientChat(address,disconnectionHandler);
+            chat.connectChat();
             //this.client.addObserver(this);
-            this.clientUpdater = new ClientUpdater(this.client, this);
+            this.clientUpdater = new ClientUpdater(this.client, this,this.chat);
             this.view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,this.client.getUsername());
@@ -201,11 +219,15 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             this.client = new RMIClient(disconnectionHandler, address, port);
             this.client.connection();
             //this.client.addObserver(this);
-            this.clientUpdater = new ClientUpdater(this.client, this);
+            this.clientUpdater = new ClientUpdater(this.client, this, this.chat);
             view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,null);
         }
+    }
+
+    public void sendChatMessage(String message){
+        chat.sendChatMessage(new ChatMessage(message));
     }
 
     @Override
@@ -241,6 +263,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     @Override
     public void updateLivingRoomTiles(ArrayList<Tile> chosen) throws IOException {
         client.sendMessage(new IndexMessage(client.getUsername(), chosen));
+    }
+
+    public void startChat() throws IOException {
+        this.view.startChat();
     }
 
     public static boolean validAddress(String address) {

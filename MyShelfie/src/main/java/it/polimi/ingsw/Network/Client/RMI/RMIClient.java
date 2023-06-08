@@ -3,9 +3,10 @@ package it.polimi.ingsw.Network.Client.RMI;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Client.Socket.PingTimer;
+import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
-import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
+import it.polimi.ingsw.Model.RMI.RMIServerHandler;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;

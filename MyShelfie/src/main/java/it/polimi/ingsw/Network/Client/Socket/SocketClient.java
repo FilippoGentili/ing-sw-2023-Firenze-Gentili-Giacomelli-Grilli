@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Client.Socket;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Client.Socket.PingTimer;
@@ -18,14 +19,12 @@ public class SocketClient extends Client implements Runnable{
     private transient Socket socket;
     private final String address;
     private final String port;
-
     private transient ObjectOutputStream output;
     private transient ObjectInputStream input;
     //private ExecutorService executorService;
     //private ScheduledExecutorService pinger;
 
     private transient Thread thread;
-
     private static final int HEARTBEAT = 10000;
 
     public SocketClient(DisconnectionHandler disconnectionHandler, String address, String port) throws IOException {
@@ -74,7 +73,6 @@ public class SocketClient extends Client implements Runnable{
             disconnectMe();
         }
     }
-
 
     @Override
     public void run() {

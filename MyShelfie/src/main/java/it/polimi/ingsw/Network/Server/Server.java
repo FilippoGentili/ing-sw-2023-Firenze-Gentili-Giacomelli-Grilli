@@ -1,12 +1,11 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.Network.Message.DisconnectionReply;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
-import it.polimi.ingsw.Network.Server.RMI.RMIServer;
+import it.polimi.ingsw.Model.RMI.RMIServer;
+import it.polimi.ingsw.Network.Server.Socket.SocketChat;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -42,6 +41,10 @@ public class Server implements Runnable{
        int rmiPort = 1099;
         RMIServer rs = new RMIServer(this,rmiPort);
         rs.startRMIServer();
+
+        int socketChat = 49671;
+        SocketChat sc = new SocketChat(this,socketChat);
+        sc.startSocketChat();
         try {
             String address;
             address=getLocalHost().toString();
@@ -147,7 +150,11 @@ public class Server implements Runnable{
 
     public void handleMessage(Message message) throws InterruptedException {
         synchronized (lock) {
-            gameController.forwardMessage(message);
+            if(message.getMessageType() == MessageType.CHAT_MESSAGE){
+                broadcastMessage(message);
+            }else {
+                gameController.forwardMessage(message);
+            }
         }
     }
 

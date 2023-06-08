@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.Scene.*;
 import it.polimi.ingsw.View.View;
@@ -67,6 +68,16 @@ public class Gui extends ViewObservable implements View {
         PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
         playerSelectionSceneController.addAllObserver(observers);
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
+    }
+
+    @Override
+    public void startChat() {
+
+    }
+
+    @Override
+    public void showChatMessage(ChatMessage message) {
+
     }
 
     @Override

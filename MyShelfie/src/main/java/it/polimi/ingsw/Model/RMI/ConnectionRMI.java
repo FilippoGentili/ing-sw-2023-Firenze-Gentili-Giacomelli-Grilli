@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Server.RMI;
+package it.polimi.ingsw.Model.RMI;
 
 import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
 import it.polimi.ingsw.Network.Client.Socket.PingTimer;
