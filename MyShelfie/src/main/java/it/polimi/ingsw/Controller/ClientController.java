@@ -7,7 +7,6 @@ import it.polimi.ingsw.Network.Client.Chat;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
-import it.polimi.ingsw.Network.Client.Socket.SocketClientChat;
 import it.polimi.ingsw.Network.Client.Socket.SocketClient;
 import it.polimi.ingsw.Network.Message.LoginRequest;
 import it.polimi.ingsw.Network.Message.*;
@@ -203,8 +202,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler,address,port);
             client.connection();
-            this.chat = new SocketClientChat(address,disconnectionHandler);
-            chat.connectChat();
+            //this.chat = new SocketClientChat(address,disconnectionHandler);
+            //chat.connectChat();
             //this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this,this.chat);
             this.view.nicknameRequest();
@@ -227,7 +226,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     public void sendChatMessage(String message){
-        chat.sendChatMessage(new ChatMessage(message));
+        client.sendMessage(new ChatMessage(message));
     }
 
     @Override

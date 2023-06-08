@@ -4,8 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
-import it.polimi.ingsw.Model.RMI.RMIServer;
-import it.polimi.ingsw.Network.Server.Socket.SocketChat;
+import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
 
@@ -42,9 +41,9 @@ public class Server implements Runnable{
         RMIServer rs = new RMIServer(this,rmiPort);
         rs.startRMIServer();
 
-        int socketChat = 49671;
+        /*int socketChat = 49671;
         SocketChat sc = new SocketChat(this,socketChat);
-        sc.startSocketChat();
+        sc.startSocketChat();*/
         try {
             String address;
             address=getLocalHost().toString();

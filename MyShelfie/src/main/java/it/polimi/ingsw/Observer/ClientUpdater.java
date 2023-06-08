@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ClientUpdater implements Runnable{
 
     private final Client client;
-    private final Chat chat;
+    //private final Chat chat;
     private Observer observer;
     private Thread thread;
 
@@ -21,7 +21,7 @@ public class ClientUpdater implements Runnable{
         this.observer = observer;
         this.thread = new Thread(this);
         this.thread.start();
-        this.chat = chat;
+        //this.chat = chat;
     }
 
     @Override
@@ -29,11 +29,11 @@ public class ClientUpdater implements Runnable{
         while(!Thread.currentThread().isInterrupted()){
             synchronized (client){
                 ArrayList<Message> messages;
-                ArrayList<ChatMessage> chatMessages;
+                //ArrayList<ChatMessage> chatMessages;
 
                 do{
                     messages = client.receiveMessages();
-                    chatMessages = chat.receiveMessages();
+                    //chatMessages = chat.receiveMessages();
                     try{
                         client.wait(100);
                     }catch (InterruptedException e) {
@@ -45,9 +45,9 @@ public class ClientUpdater implements Runnable{
                 for(Message msg : messages) {
                     observer.update(msg);
                 }
-                for(ChatMessage chatMessage : chatMessages){
+                /*for(ChatMessage chatMessage : chatMessages){
                     observer.update(chatMessage);
-                }
+                }*/
             }
         }
     }

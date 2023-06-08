@@ -271,8 +271,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
     }
 
     public void startChat(){
-        this.chatThread = new Thread(this);
-        chatThread.start();
+        //this.chatThread = new Thread(this);
+        //chatThread.start();
         /*System.out.println("you can now write in the chat. Plaese write 'chat' every time you want to send a message to the other players.");
 
         Thread chatTread = new Thread(() ->{
