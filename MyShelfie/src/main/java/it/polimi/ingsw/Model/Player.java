@@ -48,6 +48,28 @@ public class Player implements Serializable {
         this.lastPlayer = false;
     }
 
+    public void loadPlayer(Player savedPlayer){
+        this.game = savedPlayer.getGame();
+        this.score = savedPlayer.getScore();
+        this.bookshelf = savedPlayer.getBookshelf();
+        this.personalGoalCard = savedPlayer.getPersonalGoalCard();
+        this.lastPlayer = savedPlayer.isLastPlayer();
+        this.Pointscg1 = savedPlayer.hasPointscg1();
+        this.Pointscg2 = savedPlayer.hasPointscg2();
+    }
+
+    private boolean hasPointscg2() {
+        return Pointscg2;
+    }
+
+    private boolean hasPointscg1() {
+        return Pointscg1;
+    }
+
+    private boolean isLastPlayer() {
+        return lastPlayer;
+    }
+
     /**
      * @return the bookshelf of the player
      */
