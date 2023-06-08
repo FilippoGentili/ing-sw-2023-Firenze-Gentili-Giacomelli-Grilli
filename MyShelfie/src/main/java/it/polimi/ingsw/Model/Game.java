@@ -384,4 +384,29 @@ public class Game implements Serializable {
         return living;
     }
 
+    public void loadGame(Game savedGame){
+        listOfPlayers=savedGame.getPlayers();
+        numOfPlayers=savedGame.getNumOfPlayers();
+        currentPlayer=savedGame.getCurrentPlayer();
+        nextPlayer=savedGame.getNextPlayer();
+        winner=savedGame.getWinner();
+        firstPlayer=savedGame.getFirstPlayer();
+        CommonGoal1=savedGame.getCommonGoal1();
+        CommonGoal2= savedGame.getCommonGoal2();
+        living=savedGame.getLivingRoom();
+        bag=savedGame.getBag();
+
+        for(Player player : listOfPlayers){
+            player.loadPlayer(player);
+        }
+    }
+
+    private Player getFirstPlayer() {
+        return firstPlayer;
+    }
+
+    private int getNumOfPlayers() {
+        return numOfPlayers;
+    }
+
 }
