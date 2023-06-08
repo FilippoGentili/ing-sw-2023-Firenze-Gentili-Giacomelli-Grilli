@@ -4,6 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
 import it.polimi.ingsw.View.VirtualView;
@@ -20,7 +21,7 @@ import static java.net.InetAddress.getLocalHost;
 public class Server implements Runnable{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
-    private final GameController gameController;
+    private GameController gameController;
     private final Map<String, Connection> connectionMap;
     private final Object lock;
 
@@ -28,6 +29,17 @@ public class Server implements Runnable{
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
+        Thread ping = new Thread(this);
+        ping.start();
+    }
+
+    private void loadMatch() {
+        startServers();
+
+        this.gameController = GameSaved.loadGame(this);
+
+        LOGGER.log(Level.INFO, "Game loaded successfully.");
+
         Thread ping = new Thread(this);
         ping.start();
     }
