@@ -43,6 +43,45 @@ public class GameController {
         //virtualViewMap = new HashMap<>();
     }
 
+    public GameController(Server server, GameController savedGameController) {
+        this.game = savedGameController.getGame();
+        this.gameState = savedGameController.getGameState();
+        this.numOfPlayers = savedGameController.getNumOfPlayers();
+        this.currentPlayer = savedGameController.getCurrentPlayer();
+        this.firstPlayer = savedGameController.getFirstPlayer();
+        this.inputController = new InputController(this, server);
+        this.players = savedGameController.getPlayers();
+        this.virtualViewMap = savedGameController.getVirtualViewMap();
+        this.lastRound = savedGameController.isLastRound();
+        this.firstTurn = savedGameController.isFirstTurn();
+        this.firstLogin = savedGameController.isFirstLogin();
+        this.server = server;
+
+
+
+    }
+
+    public int getNumOfPlayers(){
+        return numOfPlayers;
+    }
+
+
+    public Player getFirstPlayer(){
+        return firstPlayer;
+    }
+
+    public boolean isLastRound(){
+        return lastRound;
+    }
+
+    public boolean isFirstTurn(){
+        return firstTurn;
+    }
+
+    public boolean isFirstLogin(){
+        return firstLogin;
+    }
+
     /**
      * this method receives the message from the client and decides what method must be called based on
      * the actual state of the game
@@ -484,6 +523,14 @@ public class GameController {
             if(player.getNickname().equals(nickname))
                 return player;
         return null;
+    }
+
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
+
+    public GameState getGameState(){
+        return gameState;
     }
 
 }
