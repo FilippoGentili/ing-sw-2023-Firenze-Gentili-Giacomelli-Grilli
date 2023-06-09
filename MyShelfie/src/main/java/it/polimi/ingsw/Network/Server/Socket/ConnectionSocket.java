@@ -29,6 +29,7 @@ public class ConnectionSocket extends Connection implements Runnable{
         this.socket=socket;
         this.connected = true;
 
+
         try{
             synchronized(inputLock){
                 this.input = new ObjectInputStream(socket.getInputStream());

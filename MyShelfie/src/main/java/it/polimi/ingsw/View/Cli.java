@@ -9,7 +9,11 @@ import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.*;
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLOutput;
 import java.util.*;
 import java.util.logging.Logger;
@@ -123,7 +127,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         do {
             System.out.println("Server is going to give you the IP Address.\nPlease insert it:");
             input = scanner.nextLine().trim();
-        } while (!validAddress(input));
+        } while (!validAddress(input, rmi));
 
         address = input;
         /*
@@ -159,11 +163,40 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
     }
 
-    public boolean validAddress(String address){
-        if (address == null || address.equals("localhost")) {
-            return true;
+    public boolean validAddress(String address, boolean connection){
+        boolean isValid=true;
+        String SocketPort = "1098";
+        String RMIPort = "1099";
+        boolean rmi=connection;
+
+        if (rmi) {
+            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+                try {
+                    Registry registry = LocateRegistry.getRegistry(address, parseInt(RMIPort));
+                    registry.list();
+                } catch (RemoteException e) {
+                    System.out.println("Unable to connect to RMI server");
+                    isValid = false;
+                }
+            }else {
+                isValid = false;
+            }
+        } else {
+            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+                try {
+                    Socket socket = new Socket();
+                    socket.connect(new InetSocketAddress(address, parseInt(SocketPort)), 5000);
+                    socket.close();
+                } catch (IOException e) {
+                    System.out.println("Unable to connect to Socket server");
+                    isValid = false;
+                }
+            } else {
+                isValid = false;
+            }
         }
-        return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
+
+        return isValid;
     }
     /*
     public boolean validPort(String port){
