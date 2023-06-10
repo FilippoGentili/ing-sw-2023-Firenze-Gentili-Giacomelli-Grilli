@@ -2,12 +2,17 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.Network.Server.Server;
 
+import java.util.Scanner;
+
 
 public class ServerApp {
 
     public static void main(String[] args) {
 
-        if(args.length > 1 && args[1].equals("-r")){
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        if(input.equalsIgnoreCase("r")){
             Server server = new Server(true);
             Server.LOGGER.info("Loading an existing match");
             server.startServers();

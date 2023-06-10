@@ -15,13 +15,13 @@ public class GameController implements Serializable {
 
     private static final long serialVersionUID = -4469014821443887480L;
     private final Game game;
-    private GameState gameState;
+    private transient GameState gameState;
     private  int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
-    private final InputController inputController;
+    private final transient InputController inputController;
     private ArrayList<Player> players;
-    private Map<Player, VirtualView> virtualViewMap;
+    private transient Map<Player, VirtualView> virtualViewMap;
     private final transient Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;

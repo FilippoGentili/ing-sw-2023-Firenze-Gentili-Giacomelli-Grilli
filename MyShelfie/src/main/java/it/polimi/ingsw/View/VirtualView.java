@@ -8,11 +8,15 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Observer.Observer;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class VirtualView implements View, Observer {
+public class VirtualView implements View, Observer, Serializable {
 
+    @Serial
+    private static final long serialVersionUID = -1283988823487689171L;
     private final Connection connection;
 
     public VirtualView(Connection connection){

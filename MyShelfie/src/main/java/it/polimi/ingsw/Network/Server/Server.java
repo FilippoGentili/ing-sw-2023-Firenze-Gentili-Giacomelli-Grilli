@@ -91,7 +91,7 @@ public class Server implements Runnable{
             for(Player p : gameController.getPlayers()){
                 if(p.getNickname().equals(nickname)){
                     connectionMap.put(nickname, connection);
-                    sendMessage(new GenericMessage("Welcome back "+ nickname), Game.getServerName());
+                    sendMessage(new GenericMessage("Welcome back "+ nickname), nickname);
                     break;
                 }else{
                     vv.loginResult(false, false, null);
