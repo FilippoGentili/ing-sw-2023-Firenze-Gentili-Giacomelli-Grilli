@@ -9,9 +9,11 @@ public class ServerApp {
 
         if(args.length > 1 && args[1].equals("-r")){
             Server server = new Server();
+            Server.LOGGER.info("Loading an existing match");
             server.loadMatch();
         }else{
             Server server = new Server();
+            Server.LOGGER.info("Creating a new match");
             server.startServers();
         }
 
