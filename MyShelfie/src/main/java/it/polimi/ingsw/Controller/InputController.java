@@ -7,13 +7,14 @@ import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Model.Tile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * this class is used to handle and check all the input messages arriving from the client
  */
-public class InputController {
+public class InputController implements Serializable {
     private final GameController gameController;
     private final Server server;
 

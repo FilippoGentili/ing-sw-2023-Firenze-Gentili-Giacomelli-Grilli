@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.GenericMessage;
@@ -37,9 +38,14 @@ public class Server implements Runnable{
         ping.start();
     }
 
-    public void loadMatch() {
-        reloadedGame = true;
+    public Server(Boolean b) {
+        reloadedGame = b;
         this.gameController = GameSaved.loadGame(this);
+        this.connectionMap = new HashMap<>();
+        this.lock = new Object();
+        Thread ping = new Thread(this);
+        ping.start();
+
         startServers();
         LOGGER.log(Level.INFO, "Game loaded successfully.");
     }

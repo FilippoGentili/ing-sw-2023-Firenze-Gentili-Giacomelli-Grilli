@@ -6,13 +6,15 @@ import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.VirtualView;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static it.polimi.ingsw.Model.GameState.*;
 
-public class GameController {
+public class GameController implements Serializable {
     private final Game game;
     private GameState gameState;
     private  int numOfPlayers;
