@@ -90,7 +90,8 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
-
+        //GameSceneController gameSceneController = getGameSceneController();
+        //Platform.runLater(() -> gameSceneController.
     }
 
     /**
@@ -115,8 +116,8 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
-       GameSceneController gameSceneController = getGameSceneController();
-
+       //GameSceneController gameSceneController = getGameSceneController();
+       //Platform.runLater(() -> gameSceneController.updateLivingRoom(player));
     }
 
     @Override

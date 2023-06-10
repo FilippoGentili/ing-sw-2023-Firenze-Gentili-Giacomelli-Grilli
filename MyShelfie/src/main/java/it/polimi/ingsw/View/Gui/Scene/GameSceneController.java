@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 
 import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.io.IOException;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -54,19 +55,16 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private AnchorPane chairPlayerYou;
     @FXML
     private GridPane boardGrid;
+
     @FXML
-    private Button confirmSelectionButton;
-    @FXML
-    private Button confirmOrderButton;
+    private Button confirmButton;
     @FXML
     private TextField tileTypeField;
 
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
-        confirmSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmSelectionButtonClicked);
-        confirmOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmOrderButtonClicked);
-
+        confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmButtonClicked);
     }
 
     public void setUp(Game game){
@@ -96,13 +94,33 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     }
 
-    private void tileClicked(MouseEvent event) {
+    public void tileClicked(MouseEvent event) {
+        confirmButton.setVisible(true);
     }
 
-    private void confirmSelectionButtonClicked(MouseEvent event) {
+    public void tileOrder() {
+        confirmButton.setVisible(true);
     }
 
-    private void confirmOrderButtonClicked(MouseEvent event) {
+    /**
+     * This method is called when the confirm button is clicked for the chosen tiles and also for the order for those tiles
+     * @param event mouse event
+     */
+    private void confirmButtonClicked(MouseEvent event) {
+        confirmButton.setVisible(false);
+        boolean firstClick = true;
+        if(firstClick){
+            firstClick = false;
+            new Thread(() -> notifyObserver(obs -> {
+                //obs.updateChosenTiles(chosenTiles);
+            })).start();
+        } else {
+            new Thread(() -> notifyObserver(obs -> {
+                //obs.updateOrderedTiles(orderedTiles);
+            })).start();
+            firstClick = true;
+        }
+
     }
 
 
@@ -116,29 +134,28 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void setCommonGoalCards(Game game){
        int id1 = game.getCommonGoal1().getId();
        int id2 = game.getCommonGoal2().getId();
-       String styleClass1 = "generalCommonGoalCard" + id1;
+       String styleCommonGoalCard1 = "generalCommonGoalCard" + id1;
        commonGoalCard1.getStyleClass().clear();
-       commonGoalCard1.getStyleClass().add(styleClass1);
-       String styleClass2 = "generalCommonGoalCard" + id2;
+       commonGoalCard1.getStyleClass().add(styleCommonGoalCard1);
+       String styleCommonGoalCard2 = "generalCommonGoalCard" + id2;
        commonGoalCard2.getStyleClass().clear();
-       commonGoalCard2.getStyleClass().add(styleClass2);
+       commonGoalCard2.getStyleClass().add(styleCommonGoalCard2);
     }
 
     public void setPersonalGoalCard(Player player) {
-       /*int id = player.getPersonalGoalCard().getID();
-       String styleClass = "generalPersonalGoalCard" + id;
+       int id = player.getPersonalGoalCard().getID();
+       String stylePersonalGoalCard = "generalPersonalGoalCard" + id;
        personalGoalCardYou.getStyleClass().clear();
-       personalGoalCardYou.getStyleClass().add(styleClass);*/
+       personalGoalCardYou.getStyleClass().add(stylePersonalGoalCard);
     }
 
     public void setChair(Player player, Game game) {
-        /*chairPlayer1.setVisible(false);
+        chairPlayer1.setVisible(false);
         chairPlayer2.setVisible(false);
         chairPlayer3.setVisible(false);
         chairPlayerYou.setVisible(false);
         if (player.equals(game.getFirstPlayer())) {
-            chairPlayerYou.setVisible(true);}
+            chairPlayerYou.setVisible(true);
         }
-       */
     }
 }
