@@ -117,42 +117,42 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
-        GameSceneController gameSceneController = getGameSceneController();
-        Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
+       // GameSceneController gameSceneController = getGameSceneController();
+       // Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
 
     }
 
     @Override
     public void showBookshelf(Player player) {
-        GameSceneController gameSceneController = getGameSceneController();
-        Platform.runLater(() -> gameSceneController.updateBookShelf(player));
+       // GameSceneController gameSceneController = getGameSceneController();
+       // Platform.runLater(() -> gameSceneController.updateBookShelf(player));
     }
 
     @Override
     public void showCommonGoalCards(Game game) {
-        GameSceneController gameSceneController = getGameSceneController();
-        Platform.runLater(() -> gameSceneController.setCommonGoalCards(game));
+       // GameSceneController gameSceneController = getGameSceneController();
+       // Platform.runLater(() -> gameSceneController.setCommonGoalCards(game));
     }
 
     @Override
     public void showPersonalGoalCard(Player player) {
-       GameSceneController gameSceneController = getGameSceneController();
-       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
+      // GameSceneController gameSceneController = getGameSceneController();
+      // Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
     @Override
     public void updateGameState(Player player, Game game) {
-        showCommonGoalCards(game);
+      /*  showCommonGoalCards(game);
         showPersonalGoalCard(player);
         showLivingRoom(game.getLivingRoom());
         for(Player p : game.getPlayers()) {
             showBookshelf(p);
-        }
+        }*/
     }
 
     @Override
     public void showGameStarted(Game game) {
-       /* GameSceneController gameSceneController;
+        GameSceneController gameSceneController;
 
         try {
             gameSceneController = (GameSceneController) GuiController.getCurrentController();
@@ -161,7 +161,7 @@ public class Gui extends ViewObservable implements View {
             gameSceneController.addAllObserver(observers);
             GameSceneController gameSceneController1 = gameSceneController;
             Platform.runLater(() -> GuiController.changeScene("gameScene.fxml",gameSceneController1));
-        }*/
+        }
     }
 
     public  GameSceneController getGameSceneController(){
