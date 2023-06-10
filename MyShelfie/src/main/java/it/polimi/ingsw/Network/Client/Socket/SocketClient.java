@@ -64,7 +64,7 @@ public class SocketClient extends Client implements Runnable{
         try {
             output.writeObject(message);
             output.reset();
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             Client.LOGGER.severe("Couldn't send message. Must disconnect");
             disconnectMe();
         }

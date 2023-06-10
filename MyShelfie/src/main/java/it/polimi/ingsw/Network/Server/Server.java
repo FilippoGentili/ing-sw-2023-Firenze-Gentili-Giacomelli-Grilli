@@ -37,7 +37,6 @@ public class Server implements Runnable{
         startServers();
 
         this.gameController = GameSaved.loadGame(this);
-
         LOGGER.log(Level.INFO, "Game loaded successfully.");
 
         Thread ping = new Thread(this);
