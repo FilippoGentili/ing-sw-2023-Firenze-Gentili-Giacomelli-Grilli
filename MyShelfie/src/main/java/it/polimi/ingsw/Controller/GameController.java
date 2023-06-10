@@ -6,7 +6,6 @@ import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.VirtualView;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.locks.Lock;

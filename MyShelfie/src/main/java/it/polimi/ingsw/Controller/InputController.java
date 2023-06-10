@@ -7,6 +7,7 @@ import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Model.Tile;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
@@ -15,6 +16,8 @@ import java.util.Map;
  * this class is used to handle and check all the input messages arriving from the client
  */
 public class InputController implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 6905901343913742095L;
     private final GameController gameController;
     private final Server server;
 
