@@ -26,6 +26,7 @@ public class GameController implements Serializable {
     private boolean lastRound = false;
     private boolean firstTurn = true;
     private boolean firstLogin = true;
+    private ArrayList<String> returnPlayers = new ArrayList<>();
 
 
     /**
@@ -523,6 +524,13 @@ public class GameController implements Serializable {
 
     public GameState getGameState(){
         return gameState;
+    }
+
+    public void addingPlayersAgain(String username){
+        returnPlayers.add(username);
+
+        if(returnPlayers.size() == players.size())
+            restoreMatchElements();
     }
 
 }

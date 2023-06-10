@@ -92,6 +92,7 @@ public class Server implements Runnable{
                 if(p.getNickname().equals(nickname)){
                     connectionMap.put(nickname, connection);
                     sendMessage(new GenericMessage("Welcome back "+ nickname), nickname);
+                    gameController.addingPlayersAgain(nickname);
                     break;
                 }else{
                     vv.loginResult(false, false, null);
@@ -116,7 +117,6 @@ public class Server implements Runnable{
             if(map.getValue().equals(connection)) {
                 connection.setIsConnected();
                 connectionMap.remove(map.getKey(), map.getValue());
-                gameController.removeVirtualView(map.getKey());
                 LOGGER.info(() -> map.getKey() + " was removed from the client list");
                 break;
             }
