@@ -27,6 +27,7 @@ public class GameController implements Serializable {
     private boolean firstTurn = true;
     private boolean firstLogin = true;
     private ArrayList<String> returnPlayers = new ArrayList<>();
+    private Message lastMessage;
 
 
     /**
@@ -164,6 +165,8 @@ public class GameController implements Serializable {
      * method must be called based on the type of the message.
      */
     public void handleGame(Message message) {
+
+        lastMessage = message;
 
         switch (message.getMessageType()){
             case CHOSEN_TILES_REPLY:
@@ -529,8 +532,10 @@ public class GameController implements Serializable {
     public void addingPlayersAgain(String username){
         returnPlayers.add(username);
 
-        if(returnPlayers.size() == players.size())
+        if(returnPlayers.size() == players.size()) {
             restoreMatchElements();
+            handleGame(lastMessage);
+        }
     }
 
 }
