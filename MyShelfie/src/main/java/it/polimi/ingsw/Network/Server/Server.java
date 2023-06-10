@@ -22,8 +22,8 @@ public class Server implements Runnable{
 
     public static final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private GameController gameController;
-    private final Map<String, Connection> connectionMap;
-    private final Object lock;
+    private Map<String, Connection> connectionMap;
+    private Object lock;
 
     public Server() {
         this.gameController = new GameController(this);
@@ -33,14 +33,11 @@ public class Server implements Runnable{
         ping.start();
     }
 
-    private void loadMatch() {
-        startServers();
+    public void loadMatch() {
 
         this.gameController = GameSaved.loadGame(this);
+        startServers();
         LOGGER.log(Level.INFO, "Game loaded successfully.");
-
-        Thread ping = new Thread(this);
-        ping.start();
     }
 
     public void startServers() {
