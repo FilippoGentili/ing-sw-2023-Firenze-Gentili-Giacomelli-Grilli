@@ -38,7 +38,7 @@ public class GuiJavaFX extends Application {
         Scene scene = new Scene(layout);
         stage.setScene(scene);
         stage.setResizable(false);
-        //stage.setFullScreen(true);
+        stage.setFullScreen(true);
         stage.setMaximized(true);
         stage.setWidth(1366d);
         stage.setHeight(768d);
