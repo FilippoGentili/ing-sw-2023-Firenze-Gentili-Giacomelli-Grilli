@@ -15,6 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import static it.polimi.ingsw.Model.GameState.*;
 
 public class GameController implements Serializable {
+
+    private static final long serialVersionUID = -4469014821443887480L;
     private final Game game;
     private GameState gameState;
     private  int numOfPlayers;

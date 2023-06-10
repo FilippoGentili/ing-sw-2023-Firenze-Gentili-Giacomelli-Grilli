@@ -46,7 +46,6 @@ public class Server implements Runnable{
         Thread ping = new Thread(this);
         ping.start();
 
-        startServers();
         LOGGER.log(Level.INFO, "Game loaded successfully.");
     }
 
