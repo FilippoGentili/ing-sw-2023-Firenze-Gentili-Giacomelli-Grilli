@@ -398,11 +398,11 @@ public class Game implements Serializable {
         }
     }
 
-    private Player getFirstPlayer() {
+    public Player getFirstPlayer() {
         return firstPlayer;
     }
 
-    private int getNumOfPlayers() {
+    public int getNumOfPlayers() {
         return numOfPlayers;
     }
 
