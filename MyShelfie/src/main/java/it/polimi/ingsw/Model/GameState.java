@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Model;
 
-public enum GameState {
+import java.io.Serializable;
+
+public enum GameState implements Serializable {
+
     LOGIN, PLAY, END;
 }

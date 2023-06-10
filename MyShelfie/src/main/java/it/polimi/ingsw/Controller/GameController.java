@@ -8,8 +8,6 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import static it.polimi.ingsw.Model.GameState.*;
 
@@ -24,7 +22,7 @@ public class GameController implements Serializable {
     private final InputController inputController;
     private ArrayList<Player> players;
     private Map<Player, VirtualView> virtualViewMap;
-    private final Server server;
+    private final transient Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;
     private boolean firstLogin = true;
