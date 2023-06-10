@@ -100,7 +100,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showScoreboard(ArrayList<Player> scoreboard) {
-        Platform.runLater(() -> GuiController.changeScene( "endScene.fxml",observers));
+        //Platform.runLater(() -> GuiController.changeScene( "endScene.fxml",observers));
     }
 
     /**
@@ -136,29 +136,32 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showPersonalGoalCard(Player player) {
-        GameSceneController gameSceneController = getGameSceneController();
-        Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
+       GameSceneController gameSceneController = getGameSceneController();
+       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
     @Override
     public void updateGameState(Player player, Game game) {
-
+        showCommonGoalCards(game);
+        showPersonalGoalCard(player);
+        showLivingRoom(game.getLivingRoom());
+        for(Player p : game.getPlayers()) {
+            showBookshelf(p);
+        }
     }
 
     @Override
     public void showGameStarted(Game game) {
-        GameSceneController gameSceneController;
+       /* GameSceneController gameSceneController;
 
         try {
             gameSceneController = (GameSceneController) GuiController.getCurrentController();
-            gameSceneController.setUpGame(game);
         } catch (ClassCastException e) {
             gameSceneController = new GameSceneController();
             gameSceneController.addAllObserver(observers);
             GameSceneController gameSceneController1 = gameSceneController;
-            gameSceneController.setUpGame(game);
             Platform.runLater(() -> GuiController.changeScene("gameScene.fxml",gameSceneController1));
-        }
+        }*/
     }
 
     public  GameSceneController getGameSceneController(){

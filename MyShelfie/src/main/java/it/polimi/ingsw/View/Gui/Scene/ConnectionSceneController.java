@@ -48,7 +48,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         String address = addressBox.getText();
         String port = SocketPort;
 
-        boolean validAddress = ClientController.validAddress(address);
+        boolean validAddress = ClientController.validAddress(address, "socket");
         addressBox.pseudoClassStateChanged(ERROR, !validAddress);
 
         if (validAddress) {
@@ -76,7 +76,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         String address = addressBox.getText();
         String port = RMIPort;
 
-        boolean validAddress = ClientController.validAddress(address);
+        boolean validAddress = ClientController.validAddress(address, "rmi");
 
         addressBox.pseudoClassStateChanged(ERROR, !validAddress);
 

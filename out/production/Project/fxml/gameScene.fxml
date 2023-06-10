@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -36,7 +37,7 @@
       </MenuBar>
       <AnchorPane layoutX="465.0" layoutY="194.0" prefHeight="500.0" prefWidth="500.0" styleClass="generalLivingRoom" stylesheets="@../css/style.css">
          <children>
-            <GridPane prefHeight="500.0" prefWidth="500.0">
+            <GridPane fx:id="boardGrid" prefHeight="500.0" prefWidth="500.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="19.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
@@ -196,5 +197,14 @@
       <AnchorPane fx:id="chairPlayer2" layoutX="246.0" layoutY="322.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="chairPlayer3" layoutX="256.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="chairPlayerYou" layoutX="1072.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+      <AnchorPane layoutX="650.0" layoutY="701.0" prefHeight="65.0" prefWidth="175.0" stylesheets="@../css/style.css">
+         <children>
+            <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
+               <font>
+                  <Font name="Blackadder ITC" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

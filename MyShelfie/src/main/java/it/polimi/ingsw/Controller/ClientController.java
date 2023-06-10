@@ -17,8 +17,14 @@ import it.polimi.ingsw.View.View;
 
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
@@ -268,11 +274,40 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         this.view.startChat();
     }
 
-    public static boolean validAddress(String address) {
-        if (address == null || address.equals("localhost")) {
-            return true;
+    public static boolean validAddress(String address, String connectionType){
+        boolean isValid=true;
+        String SocketPort = "1098";
+        String RMIPort = "1099";
+        String connection = connectionType;
+
+        if (connection.equals("rmi")) {
+            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+                try {
+                    Registry registry = LocateRegistry.getRegistry(address, parseInt(RMIPort));
+                    registry.list();
+                } catch (RemoteException e) {
+                    System.out.println("Unable to connect to RMI server");
+                    isValid = false;
+                }
+            }else {
+                isValid = false;
+            }
+        } else {
+            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+                try {
+                    Socket socket = new Socket();
+                    socket.connect(new InetSocketAddress(address, parseInt(SocketPort)), 5000);
+                    socket.close();
+                } catch (IOException e) {
+                    System.out.println("Unable to connect to Socket server");
+                    isValid = false;
+                }
+            } else {
+                isValid = false;
+            }
         }
-        return address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
+
+        return isValid;
     }
 
     public static boolean validPort(String port){

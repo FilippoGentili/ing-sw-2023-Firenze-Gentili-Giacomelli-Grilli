@@ -1,13 +1,16 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.ViewObservable;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -46,28 +49,32 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private AnchorPane chairPlayer3;
     @FXML
     private AnchorPane chairPlayerYou;
+    @FXML
+    private GridPane boardGrid;
+    @FXML
+    private Button confirmSelectionButton;
+    @FXML
+    private Button confirmOrderButton;
+    @FXML
+    private TextField tileTypeField;
 
     @FXML
     public void initialize(){
+        boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
+        confirmSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmSelectionButtonClicked);
+        confirmOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmOrderButtonClicked);
 
     }
-    public void setUpGame(Game game){
-        int numOfPlayers = game.getPlayers().size();
-        if(numOfPlayers == 2){
-            bookshelfPlayer1.setVisible(false);
-            namePlayer1.setVisible(false);
-            personalGoalCard1.setVisible(false);
 
-            bookshelfPlayer3.setVisible(false);
-            namePlayer3.setVisible(false);
-            personalGoalCard3.setVisible(false);
-
-        }else if(numOfPlayers == 3){
-            bookshelfPlayer2.setVisible(false);
-            namePlayer2.setVisible(false);
-            personalGoalCard2.setVisible(false);
-        }
+    private void tileClicked(MouseEvent event) {
     }
+
+    private void confirmSelectionButtonClicked(MouseEvent event) {
+    }
+
+    private void confirmOrderButtonClicked(MouseEvent event) {
+    }
+
 
     public void updateLivingRoom(LivingRoom livingRoom){
 
@@ -78,11 +85,16 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     public void setCommonGoalCards(Game game){
+        CommonGoalCard id1 = game.getCommonGoal1();
+        CommonGoalCard id2 = game.getCommonGoal1();
+       // commonGoalCard1.setStyle("-fx-background-image: url('/images/commonGoalCards/" + id1 + ".jpg')");
+        //commonGoalCard2.setStyle("-fx-background-image: url('/images/commonGoalCards/" + id2 + ".jpg')");
 
     }
 
-    public void setPersonalGoalCard(Player player){
-
+    public void setPersonalGoalCard(Player player) {
+        PersonalGoalCard id = player.getPersonalGoalCard();
+        //personalGoalCardYou.setStyle("-fx-background-image: url('/images/personalGoalCards/Personal_Goals" + id + ".png')");
     }
 
 }
