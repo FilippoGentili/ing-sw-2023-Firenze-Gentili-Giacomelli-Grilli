@@ -53,6 +53,8 @@ public class SocketClient extends Client implements Runnable{
             input = null;
             output = null;
 
+            System.exit(0);
+
         } catch (IOException e) {
             Client.LOGGER.severe(e.getMessage());
         }

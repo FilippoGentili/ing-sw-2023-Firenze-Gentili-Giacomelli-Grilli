@@ -41,6 +41,5 @@ public class GameSaved {
             Server.LOGGER.severe(e.getMessage());
             return null;
         }
-
     }
 }
