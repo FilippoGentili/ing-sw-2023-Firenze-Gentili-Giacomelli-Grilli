@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.GenericMessage;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
@@ -25,6 +27,8 @@ public class Server implements Runnable{
     private Map<String, Connection> connectionMap;
     private Object lock;
 
+    private boolean reloadedGame = false;
+
     public Server() {
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
@@ -34,7 +38,7 @@ public class Server implements Runnable{
     }
 
     public void loadMatch() {
-
+        reloadedGame = true;
         this.gameController = GameSaved.loadGame(this);
         startServers();
         LOGGER.log(Level.INFO, "Game loaded successfully.");
@@ -71,12 +75,26 @@ public class Server implements Runnable{
     public synchronized void addClient(String nickname, Connection connection) throws InterruptedException {
         VirtualView vv = new VirtualView(connection);
 
-        if (gameController.waitingForPlayers()) {
-            connectionMap.put(nickname, connection);
-            gameController.handleLogin(nickname, vv);
-        } else {
-            vv.loginResult(true, false, null);
+        if(!reloadedGame){
+            if (gameController.waitingForPlayers()) {
+                connectionMap.put(nickname, connection);
+                gameController.handleLogin(nickname, vv);
+            } else {
+                vv.loginResult(true, false, null);
+            }
+        }else{
+            for(Player p : gameController.getPlayers()){
+                if(p.getNickname().equals(nickname)){
+                    connectionMap.put(nickname, connection);
+                    sendMessage(new GenericMessage("Welcome back "+ nickname), Game.getServerName());
+                    break;
+                }else{
+                    vv.loginResult(false, false, null);
+                }
+            }
         }
+
+
     }
 
 
