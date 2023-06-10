@@ -10,9 +10,7 @@ import it.polimi.ingsw.View.Gui.Scene.*;
 import it.polimi.ingsw.View.View;
 import javafx.application.Platform;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";

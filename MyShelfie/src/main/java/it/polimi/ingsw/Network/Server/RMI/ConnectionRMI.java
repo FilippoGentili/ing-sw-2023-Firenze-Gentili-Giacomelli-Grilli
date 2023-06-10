@@ -1,13 +1,11 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
 import it.polimi.ingsw.Network.Client.RMI.RMIClientHandler;
-import it.polimi.ingsw.Network.Client.Socket.PingTimer;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.rmi.RemoteException;
-import java.util.Timer;
 
 public class ConnectionRMI extends Connection {
     private final RMIClientHandler rmiClientHandler;

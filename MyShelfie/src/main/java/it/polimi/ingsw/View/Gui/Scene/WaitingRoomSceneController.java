@@ -1,11 +1,8 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.View.Gui.GuiController;
-import it.polimi.ingsw.View.View;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.text.Text;
 
 /**

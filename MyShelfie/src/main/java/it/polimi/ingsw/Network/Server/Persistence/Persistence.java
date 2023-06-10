@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Network.Server.Persistence;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Controller.GameController;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Persistence implements Serializable {
     private static final long serialVersionUID = -674292120191950383L;

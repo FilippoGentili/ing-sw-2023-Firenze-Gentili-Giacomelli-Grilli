@@ -1,13 +1,5 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Tile;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 /*
 class CliTest {
 

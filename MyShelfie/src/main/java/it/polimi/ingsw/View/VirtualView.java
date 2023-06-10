@@ -10,7 +10,6 @@ import it.polimi.ingsw.Observer.Observer;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class VirtualView implements View, Observer {
 

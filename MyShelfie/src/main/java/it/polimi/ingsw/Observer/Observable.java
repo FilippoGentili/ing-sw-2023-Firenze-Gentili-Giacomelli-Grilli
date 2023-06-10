@@ -1,11 +1,8 @@
 package it.polimi.ingsw.Observer;
 
-import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 //manda eventi

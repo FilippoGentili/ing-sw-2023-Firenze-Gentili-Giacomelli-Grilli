@@ -2,9 +2,6 @@ package it.polimi.ingsw.Network.Message;
 
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Tile;
-
-import java.util.Arrays;
 
 public class LivingRoomMessage extends Message{
     private static final long serialVersionUID = -7965460809484303772L;

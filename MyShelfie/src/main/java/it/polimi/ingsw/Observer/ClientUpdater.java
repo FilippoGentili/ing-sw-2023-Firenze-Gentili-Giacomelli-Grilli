@@ -3,10 +3,8 @@ package it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Network.Client.Chat;
 import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Network.Message.Message;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ClientUpdater implements Runnable{

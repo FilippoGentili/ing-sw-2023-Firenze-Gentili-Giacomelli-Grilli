@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.View;
@@ -8,7 +7,6 @@ import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Model.Tile;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -75,7 +73,6 @@ public class InputController {
 
         return true;
     }
-
 
     /**
      * this method checks if the column selected from the client has enough free cells for inserting

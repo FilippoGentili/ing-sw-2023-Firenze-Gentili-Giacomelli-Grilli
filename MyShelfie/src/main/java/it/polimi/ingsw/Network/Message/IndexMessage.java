@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Network.Message;
 
-import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Tile;
 
 import java.io.Serial;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class IndexMessage extends Message{
     @Serial

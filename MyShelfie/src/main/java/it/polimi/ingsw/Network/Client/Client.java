@@ -1,12 +1,9 @@
 package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
-import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Observer.Observable;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;

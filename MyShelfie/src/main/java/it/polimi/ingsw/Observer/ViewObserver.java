@@ -9,7 +9,6 @@ import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public interface ViewObserver{
 

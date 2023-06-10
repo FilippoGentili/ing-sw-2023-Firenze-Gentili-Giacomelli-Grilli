@@ -1,15 +1,11 @@
 package it.polimi.ingsw.Network.Client.Socket;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Network.Client.Client;
-import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
-import it.polimi.ingsw.Network.Client.Socket.PingTimer;
 import it.polimi.ingsw.Network.Message.*;
 
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.rmi.RemoteException;
 import java.util.Timer;
 import static java.lang.Integer.parseInt;
 

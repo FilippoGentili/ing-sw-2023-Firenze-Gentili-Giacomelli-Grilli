@@ -1,18 +1,12 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.View.Gui.GuiController;
-import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 /**
  * Third-A scene of the game.

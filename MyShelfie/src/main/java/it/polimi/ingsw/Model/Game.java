@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Observer.Observable;
-
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.*;
 
 //le classi che estendono observable sono quelle che notificheranno l'evento all'esterno

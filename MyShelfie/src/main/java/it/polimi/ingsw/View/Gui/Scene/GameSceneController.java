@@ -2,7 +2,6 @@ package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.ViewObservable;
-import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;

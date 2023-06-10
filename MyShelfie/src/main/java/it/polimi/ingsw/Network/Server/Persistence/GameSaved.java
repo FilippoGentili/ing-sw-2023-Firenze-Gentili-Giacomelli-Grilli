@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network.Server.Persistence;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.*;

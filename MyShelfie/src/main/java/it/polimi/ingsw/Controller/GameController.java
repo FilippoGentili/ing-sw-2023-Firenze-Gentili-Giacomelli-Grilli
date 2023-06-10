@@ -2,10 +2,10 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Message.Message;
+import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.View.VirtualView;
 
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -24,14 +24,11 @@ public class GameController {
     private final Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;
-
     private boolean firstLogin = true;
-
-    private Lock lock = new ReentrantLock();
 
 
     /**
-     * constructor
+     * constructor use to create a new game
      */
     public GameController(Server server) {
         this.game = new Game();
@@ -43,6 +40,9 @@ public class GameController {
         //virtualViewMap = new HashMap<>();
     }
 
+    /**
+     * this constructor is called when a saved game must be reloaded
+     */
     public GameController(Server server, GameController savedGameController) {
         this.game = savedGameController.getGame();
         this.gameState = savedGameController.getGameState();
@@ -56,15 +56,11 @@ public class GameController {
         this.firstTurn = savedGameController.isFirstTurn();
         this.firstLogin = savedGameController.isFirstLogin();
         this.server = server;
-
-
-
     }
 
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
-
 
     public Player getFirstPlayer(){
         return firstPlayer;
@@ -161,7 +157,6 @@ public class GameController {
         }
     }
 
-
     /**
      * this method is called when the game is already started and a message from the client arrives. It decides what
      * method must be called based on the type of the message.
@@ -187,7 +182,6 @@ public class GameController {
 
         }
     }
-
 
     public void startGame() {
         setGameState(PLAY);
@@ -223,7 +217,6 @@ public class GameController {
      * this method initializes a new turn.
      */
     public void newTurn() {
-        //yourTurn(gameController.getCurrentPlayer());
         if(firstTurn){
             firstTurn = false;
         }
@@ -233,11 +226,11 @@ public class GameController {
 
         restoreMatchElements();
 
-        for(Map.Entry<Player, VirtualView> map : virtualViewMap.entrySet()){
-            if(!map.getKey().equals(currentPlayer))
-                map.getValue().showMessage("It's the turn of " + currentPlayer.getNickname());
+        for(Player player : players){
+            if(!player.equals(currentPlayer))
+                server.sendMessage(new GenericMessage("It's the turn of " + currentPlayer.getNickname()),player.getNickname());
             else
-                map.getValue().showMessage("It's your turn, " + currentPlayer.getNickname() + "!");
+                server.sendMessage(new GenericMessage("It's your turn, " + currentPlayer.getNickname() + "!"),player.getNickname());
         }
 
         server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
@@ -260,6 +253,7 @@ public class GameController {
             currentPlayer.setChosenTiles(TemporaryChosenTiles);
             ArrayList<Integer> availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
 
+            GameSaved.saveGame(this);
             server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }else{
             server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
@@ -267,7 +261,7 @@ public class GameController {
     }
 
     /**
-     * this method check if the column chosen by the client is valid. If it's not, it asks the user to select another
+     * this method checks if the column chosen by the client is valid. If it's not, it asks the user to select another
      * column, otherwise it asks him to order the tiles he has already chosen.
      * @param message
      */
@@ -278,6 +272,7 @@ public class GameController {
         if(inputController.selectedColumn(chosenColumn)){
             currentPlayer.setChosenColumn(chosen);
 
+            GameSaved.saveGame(this);
             server.sendMessage(new OrderedTilesRequest(currentPlayer.getChosenTiles()),currentPlayer.getNickname());
         }else{
             ArrayList<Integer> availableColumns;
@@ -297,6 +292,7 @@ public class GameController {
 
         currentPlayer.getBookshelf().insertTiles(chosenTiles, currentPlayer.getChosenColumn());
 
+        GameSaved.saveGame(this);
         CheckCommonGoal(currentPlayer);
         /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
     }
@@ -389,6 +385,7 @@ public class GameController {
                     ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
                     game.getLivingRoom().insertTiles(chosen);
                 }
+                GameSaved.saveGame(this);
                 newTurn(); //da rivedere
             }
         }
@@ -470,12 +467,6 @@ public class GameController {
         }
     }
 
-    public boolean isFull(){
-        if(game.getPlayers().size() == numOfPlayers)
-            return true;
-        else return false;
-    }
-
     public void addVirtualView(Player player, VirtualView vv) {
         if(numOfPlayers==0){
             virtualViewMap = new HashMap<>();
@@ -509,7 +500,7 @@ public class GameController {
     }
 
     /**
-     * sends message to all the virtualView of the clients
+     * sends message to all the clients
      * @param message message to send
      */
     public void broadcastShowMessage(String message) {

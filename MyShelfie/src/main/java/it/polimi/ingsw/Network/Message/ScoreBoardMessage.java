@@ -3,9 +3,7 @@ package it.polimi.ingsw.Network.Message;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
-import java.io.Serial;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ScoreBoardMessage extends Message{
 

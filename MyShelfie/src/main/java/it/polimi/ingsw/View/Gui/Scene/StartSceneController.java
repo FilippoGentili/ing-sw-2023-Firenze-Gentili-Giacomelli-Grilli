@@ -1,9 +1,7 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.ServerApp;
 import it.polimi.ingsw.View.Gui.GuiController;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
