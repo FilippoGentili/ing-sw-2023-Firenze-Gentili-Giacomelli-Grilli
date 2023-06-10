@@ -62,6 +62,8 @@ public class ConnectionSocket extends Connection implements Runnable{
                 disconnectClient();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
+            } catch(NullPointerException e){
+                //
             }
         }
     }
