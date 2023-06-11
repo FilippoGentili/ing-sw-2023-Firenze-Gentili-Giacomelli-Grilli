@@ -8,6 +8,7 @@ import it.polimi.ingsw.View.VirtualView;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.logging.Level;
 
 import static it.polimi.ingsw.Model.GameState.*;
 
@@ -15,7 +16,7 @@ public class GameController implements Serializable {
 
     private static final long serialVersionUID = -4469014821443887480L;
     private final Game game;
-    private transient GameState gameState;
+    private GameState gameState;
     private  int numOfPlayers;
     private Player currentPlayer;
     private Player firstPlayer;
@@ -58,6 +59,7 @@ public class GameController implements Serializable {
         this.lastRound = savedGameController.isLastRound();
         this.firstTurn = savedGameController.isFirstTurn();
         this.firstLogin = savedGameController.isFirstLogin();
+        this.lastMessage = savedGameController.getLastMessage();
         this.server = server;
     }
 
@@ -167,6 +169,8 @@ public class GameController implements Serializable {
     public void handleGame(Message message) {
 
         lastMessage = message;
+        Server.LOGGER.log(Level.INFO, "Sending {0}, to {1}", new Object[]{lastMessage, currentPlayer});
+        GameSaved.saveGame(this);
 
         switch (message.getMessageType()){
             case CHOSEN_TILES_REPLY:
@@ -251,6 +255,7 @@ public class GameController implements Serializable {
         ArrayList<Tile> chosen = chosenTilesMessage.getChosenTiles();
 
         if(inputController.livingRoomChosenTiles(chosenTilesMessage)){
+            removeTilesFromLivingRoom(message);
             ArrayList<Tile> TemporaryChosenTiles = new ArrayList<>();
 
             TemporaryChosenTiles.addAll(chosen);
@@ -258,7 +263,6 @@ public class GameController implements Serializable {
             currentPlayer.setChosenTiles(TemporaryChosenTiles);
             ArrayList<Integer> availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
 
-            GameSaved.saveGame(this);
             server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
         }else{
             server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
@@ -277,7 +281,6 @@ public class GameController implements Serializable {
         if(inputController.selectedColumn(chosenColumn)){
             currentPlayer.setChosenColumn(chosen);
 
-            GameSaved.saveGame(this);
             server.sendMessage(new OrderedTilesRequest(currentPlayer.getChosenTiles()),currentPlayer.getNickname());
         }else{
             ArrayList<Integer> availableColumns;
@@ -297,7 +300,6 @@ public class GameController implements Serializable {
 
         currentPlayer.getBookshelf().insertTiles(chosenTiles, currentPlayer.getChosenColumn());
 
-        GameSaved.saveGame(this);
         CheckCommonGoal(currentPlayer);
         /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
     }
@@ -349,8 +351,8 @@ public class GameController implements Serializable {
     }
 
     public void removeTilesFromLivingRoom(Message message){
-        IndexMessage indexMessage = (IndexMessage) message;
-        ArrayList<Tile> chosen = indexMessage.getChosen();
+        ChosenTilesReply indexMessage = (ChosenTilesReply) message;
+        ArrayList<Tile> chosen = indexMessage.getChosenTiles();
 
         if(game.getLivingRoom().checkValid(chosen)){
             for(Tile tile : chosen){
@@ -390,7 +392,7 @@ public class GameController implements Serializable {
                     ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
                     game.getLivingRoom().insertTiles(chosen);
                 }
-                GameSaved.saveGame(this);
+
                 newTurn(); //da rivedere
             }
         }
@@ -525,6 +527,10 @@ public class GameController implements Serializable {
         return players;
     }
 
+    public Message getLastMessage(){
+        return lastMessage;
+    }
+
     public GameState getGameState(){
         return gameState;
     }
@@ -534,8 +540,13 @@ public class GameController implements Serializable {
 
         if(returnPlayers.size() == players.size()) {
             restoreMatchElements();
+            Server.LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{lastMessage, currentPlayer});
             handleGame(lastMessage);
         }
+    }
+
+    public ArrayList<String> getReturnPlayers(){
+        return returnPlayers;
     }
 
 }

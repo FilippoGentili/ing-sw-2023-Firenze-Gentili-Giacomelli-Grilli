@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.GenericMessage;
+import it.polimi.ingsw.Network.Message.LoginResult;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
@@ -89,13 +90,13 @@ public class Server implements Runnable{
             }
         }else{
             for(Player p : gameController.getPlayers()){
-                if(p.getNickname().equals(nickname)){
+                if(p.getNickname().equals(nickname) && !gameController.getReturnPlayers().contains(nickname)){
                     connectionMap.put(nickname, connection);
                     sendMessage(new GenericMessage("Welcome back "+ nickname), nickname);
                     gameController.addingPlayersAgain(nickname);
                     break;
                 }else{
-                    vv.loginResult(false, false, null);
+                    sendMessage(new LoginResult(nickname,false,false),nickname);
                 }
             }
         }

@@ -356,8 +356,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
 
-        String decision = chooseAction();
-
         ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
         int col;
@@ -422,14 +420,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         notifyObserver(obs -> {
             try {
                 obs.updateChosenTiles(chosenTiles);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        notifyObserver(obs -> {
-            try {
-                obs.updateLivingRoomTiles(chosenTiles);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
