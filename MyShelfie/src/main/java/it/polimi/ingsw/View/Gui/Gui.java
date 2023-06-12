@@ -78,20 +78,34 @@ public class Gui extends ViewObservable implements View {
 
     }
 
+    /**
+     * This method is used to ask the player the column where he wants to put the tiles in the bookshelf
+     * @param AvailableColumns
+     */
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns) {
-
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(gameSceneController::selectColumn);
     }
 
+    /**
+     * This method is used to ask the player to choose the tiles from the board
+     * @param livingRoom is the living room of the game
+     */
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
-
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(gameSceneController::selectTiles);
     }
 
+    /**
+     * This method is used to ask the order of the tiles to put in the bookshelf
+     * @param chosenTiles are the tiles chosen by the player
+     */
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
-        //GameSceneController gameSceneController = getGameSceneController();
-        //Platform.runLater(() -> gameSceneController.
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(gameSceneController::tileOrder);
     }
 
     /**

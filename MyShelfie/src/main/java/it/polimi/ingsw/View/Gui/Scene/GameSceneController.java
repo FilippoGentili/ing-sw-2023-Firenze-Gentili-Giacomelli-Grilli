@@ -2,9 +2,13 @@ package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.ViewObservable;
+import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -13,10 +17,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+
+import static java.lang.Integer.parseInt;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -66,22 +74,32 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private GridPane boardGrid;
     @FXML
-    private Button confirmButton;
+    private Button confirmTileOrderButton;
     @FXML
-    private TextField tileTypeField;
-    boolean firstClick = true;
+    private Button confirmTileSelectionButton;
+    @FXML
+    private Button confirmColumnButton;
+    @FXML
+    private TextField tilesField;
+    boolean yourTurn = false;
 
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
-        confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmButtonClicked);
+        confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
+        confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
+        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event));
     }
+
     /**
      * This method is called to set up the initial game scene
      * @param game the current game
      */
     public void setUp(Game game){
-        confirmButton.setVisible(false);
+        confirmTileOrderButton.setVisible(false);
+        confirmTileSelectionButton.setVisible(false);
+        confirmColumnButton.setVisible(false);
+        tilesField.setVisible(false);
 
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
@@ -139,38 +157,171 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
 }
 
+    public void selectTiles(){
+        Platform.runLater(() -> {
+            GuiController.showBanner("INFO", "Choose up to 3 tiles from the board");
+        });
+       yourTurn = true;
+    }
     /**
      * This method is called when a tile has been clicked during the current player's turn
      * @param event mouse event
      */
     public void tileClicked(MouseEvent event) {
-        confirmButton.setVisible(true);
+        Node source = (Node) event.getSource();
+        Integer columnIndex = GridPane.getColumnIndex(source);
+        Integer rowIndex = GridPane.getRowIndex(source);
+        int i=1;
+        boolean valid = true;
+        if(yourTurn) {
+
+            while (i < 4 && valid) {
+                if (columnIndex > 3 && columnIndex < 6 && rowIndex == 1) {        //first row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 3 && columnIndex < 7 && rowIndex == 2) { //second row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 2 && columnIndex < 8 && rowIndex == 3) { //third row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 1 && columnIndex < 10 && rowIndex == 4) { //fourth row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 0 && columnIndex < 10 && rowIndex == 5) { //fifth row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 0 && columnIndex < 9 && rowIndex == 6) { //sixth row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 2 && columnIndex < 8 && rowIndex == 7) { //seventh row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 3 && columnIndex < 7 && rowIndex == 8) { //eighth row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                } else if (columnIndex > 4 && columnIndex < 7 && rowIndex == 9) { //ninth row
+                    i++;
+                    confirmTileSelectionButton.setVisible(true);
+                }
+
+                confirmTileSelectionButton.setVisible(false);
+            }
+        }
+    }
+
+    public void confirmTileSelectionButtonClicked(MouseEvent event){
+
+    }
+
+    /**
+     * Tjis is method is called when the player has to choose the column to put the tiles in
+     */
+    public void selectColumn(){
+        tilesField.setVisible(true);
+        String input = tilesField.getText();
+        if (input != null) {
+            confirmColumnButton.setVisible(true);
+        }
+    }
+
+    public void confirmColumnButtonClicked(MouseEvent event, ArrayList<Integer> AvailableColumns) {
+        confirmColumnButton.setVisible(false);
+        boolean correct = false;
+        int col = 0;
+        String input;
+
+        do {
+             input = tilesField.getText();
+            tilesField.setVisible(false);
+
+            if (input.matches("\\d+")) {
+                col = parseInt(input);
+                correct = AvailableColumns.contains(col - 1);
+                if (!correct)
+                    Platform.runLater(() -> {
+                        GuiController.showBanner("Try again", "The column is full");
+                    });
+            } else {
+                Platform.runLater(() -> {
+                    GuiController.showBanner("Error", "Input not valid");
+                });
+            }
+        }while(!correct || !input.matches("\\d+"));
+
+        final int choice = col-1;
+
+        notifyObserver(obs -> {
+            try {
+                obs.updateChosenColumn(choice, AvailableColumns);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        tilesField.clear();
     }
 
     /**
      * This method is called when the player has to choose the order of the tiles to put in the bookshelf
      */
     public void tileOrder() {
-        confirmButton.setVisible(true);
+        tilesField.setVisible(true);
+        String tile = tilesField.getText();
+        if (tile != null) {
+            confirmTileOrderButton.setVisible(true);
+        }
     }
 
     /**
      * This method is called when the confirm button is clicked for the chosen tiles and also for the order for those tiles
      * @param event mouse event
      */
-    private void confirmButtonClicked(MouseEvent event) {
-        confirmButton.setVisible(false);
-        if(firstClick){
-            firstClick = false;
-            new Thread(() -> notifyObserver(obs -> {
-                //obs.updateChosenTiles(chosenTiles);
-            })).start();
-        } else {
-            new Thread(() -> notifyObserver(obs -> {
-                //obs.updateOrderedTiles(orderedTiles);
-            })).start();
-            firstClick = true;
+    private void confirmTileOrderButtonClicked(MouseEvent event, ArrayList<Tile> chosenTiles) {
+        confirmTileOrderButton.setVisible(false);
+        String input;
+
+        ArrayList<Tile> orderedTiles = new ArrayList<>();
+        ArrayList<String> tilesTypes = new ArrayList<>();
+
+        if(chosenTiles.size() > 1){
+            int i=1;
+            do{
+                for (Tile tile : chosenTiles){
+                    tilesTypes.add(tile.getTileType().toString());
+                }
+                input = tilesField.getText();
+
+                if(!tilesTypes.contains(input)) {
+                    Platform.runLater(() -> {
+                        GuiController.showBanner("Try again", "You don't have that tile");
+                    });
+                }else{
+                    for (int x=0; x<chosenTiles.size(); x++) {
+                        if (input.equals(chosenTiles.get(x).getTileType().toString())) {
+                            orderedTiles.add(chosenTiles.get(x));
+                            chosenTiles.remove(x);
+                            tilesTypes.remove(x);
+                            break;
+                        }
+                    }
+                    i++;
+                }
+
+            }while(!chosenTiles.toString().contains(input) && chosenTiles.size()>0);
+        }else{
+            orderedTiles.add(chosenTiles.get(0));
         }
+
+        notifyObserver(obs -> {
+            try {
+                obs.updateOrderedTiles(orderedTiles);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        tilesField.clear();
+        yourTurn = false;
 
     }
 
@@ -703,7 +854,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
-    public Node setTiles(TileType tileType) {
+    /**
+     * This method is called to convert the tile type into an image
+     * @param tileType the type of the tile
+     * @return the image of the tile
+     */
+    public ImageView setTiles(TileType tileType) {
         Random random = new Random();
         int randomNumber = random.nextInt(3);
 
@@ -774,6 +930,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 break;
             }
 
-        return null;
+        if (imageName != null) {
+            Image image =  new Image(getClass().getResourceAsStream("/resources/images/itemTiles/" + imageName));
+            ImageView imageView = new ImageView(image);
+            return imageView;
+        } else {
+            return null;
         }
+    }
 }
