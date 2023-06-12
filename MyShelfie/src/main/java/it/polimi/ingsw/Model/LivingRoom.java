@@ -1,14 +1,16 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LivingRoom implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 5403724841040315028L;
     private static int numberOfTiles=0;
     private Tile[][] board;
-    private static boolean[][] valid;
+    private boolean[][] valid;
     private final int rows = 9;
     private final int columns = 9;
 

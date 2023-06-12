@@ -540,7 +540,7 @@ public class GameController implements Serializable {
 
         if(returnPlayers.size() == players.size()) {
             restoreMatchElements();
-            Server.LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{lastMessage, currentPlayer});
+            Server.LOGGER.log(Level.INFO, "{0}", new Object[]{game.getLivingRoom()});
             handleGame(lastMessage);
         }
     }
