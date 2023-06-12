@@ -279,9 +279,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         String SocketPort = "1098";
         String RMIPort = "1099";
         String connection = connectionType;
+        boolean bc=notBroadcastAddress(address);
 
         if (connection.equals("rmi")) {
-            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+            if (/*(address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))*/ bc) {
                 try {
                     Registry registry = LocateRegistry.getRegistry(address, parseInt(RMIPort));
                     registry.list();
@@ -293,7 +294,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 isValid = false;
             }
         } else {
-            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+            if (/*(address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))*/ bc) {
                 try {
                     Socket socket = new Socket();
                     socket.connect(new InetSocketAddress(address, parseInt(SocketPort)), 5000);
@@ -308,6 +309,25 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
 
         return isValid;
+    }
+
+    public static boolean notBroadcastAddress(String address){
+        boolean bc=true;
+        String tempAddress = address;
+
+        if((tempAddress.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || tempAddress.equals("localhost") || tempAddress==null){
+            if(!tempAddress.equals("localhost") || tempAddress==null){
+                tempAddress=tempAddress.substring(0, tempAddress.indexOf("."));
+                if(tempAddress.equals("127")) {
+                    bc = false;
+                }
+            }
+        }else{
+            bc=false;
+        }
+
+
+        return bc;
     }
 
     public static boolean validPort(String port){
