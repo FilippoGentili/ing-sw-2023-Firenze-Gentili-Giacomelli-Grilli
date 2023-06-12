@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.ViewObservable;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -15,16 +16,25 @@ import javafx.scene.control.Button;
 import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Random;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
     private AnchorPane bookshelfPlayer1;
     @FXML
+    private GridPane bookShelf1;
+    @FXML
     private AnchorPane bookshelfPlayer2;
+    @FXML
+    private GridPane bookShelf2;
     @FXML
     private AnchorPane bookshelfPlayer3;
     @FXML
+    private GridPane bookShelf3;
+    @FXML
     private AnchorPane bookshelfPlayer4;
+    @FXML
+    private GridPane bookShelf4;
     @FXML
     private Text namePlayer1;
     @FXML
@@ -129,10 +139,17 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
 }
 
+    /**
+     * This method is called when a tile has been clicked during the current player's turn
+     * @param event mouse event
+     */
     public void tileClicked(MouseEvent event) {
         confirmButton.setVisible(true);
     }
 
+    /**
+     * This method is called when the player has to choose the order of the tiles to put in the bookshelf
+     */
     public void tileOrder() {
         confirmButton.setVisible(true);
     }
@@ -157,12 +174,416 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     }
 
-
+    /**
+     * This method is called to update the tiles on the living room board
+     * @param livingRoom of the current game
+     */
     public void updateLivingRoom(LivingRoom livingRoom){
+        boardGrid.add(setTiles(livingRoom.getTile(0,3).getTileType()),1,4);
+        boardGrid.add(setTiles(livingRoom.getTile(0,4).getTileType()),1,5);
 
+        boardGrid.add(setTiles(livingRoom.getTile(1,3).getTileType()),2,4);
+        boardGrid.add(setTiles(livingRoom.getTile(1,4).getTileType()),2,5);
+        boardGrid.add(setTiles(livingRoom.getTile(1,5).getTileType()),2,6);
+
+        boardGrid.add(setTiles(livingRoom.getTile(2,2).getTileType()),3,3);
+        boardGrid.add(setTiles(livingRoom.getTile(2,3).getTileType()),3,4);
+        boardGrid.add(setTiles(livingRoom.getTile(2,4).getTileType()),3,5);
+        boardGrid.add(setTiles(livingRoom.getTile(2,5).getTileType()),3,6);
+        boardGrid.add(setTiles(livingRoom.getTile(2,6).getTileType()),3,7);
+
+        boardGrid.add(setTiles(livingRoom.getTile(3,1).getTileType()),4,2);
+        boardGrid.add(setTiles(livingRoom.getTile(3,2).getTileType()),4,3);
+        boardGrid.add(setTiles(livingRoom.getTile(3,3).getTileType()),4,4);
+        boardGrid.add(setTiles(livingRoom.getTile(3,4).getTileType()),4,5);
+        boardGrid.add(setTiles(livingRoom.getTile(3,5).getTileType()),4,6);
+        boardGrid.add(setTiles(livingRoom.getTile(3,6).getTileType()),4,7);
+        boardGrid.add(setTiles(livingRoom.getTile(3,7).getTileType()),4,8);
+        boardGrid.add(setTiles(livingRoom.getTile(3,8).getTileType()),4,9);
+
+        boardGrid.add(setTiles(livingRoom.getTile(4,0).getTileType()),5,1);
+        boardGrid.add(setTiles(livingRoom.getTile(4,1).getTileType()),5,2);
+        boardGrid.add(setTiles(livingRoom.getTile(4,2).getTileType()),5,3);
+        boardGrid.add(setTiles(livingRoom.getTile(4,3).getTileType()),5,4);
+        boardGrid.add(setTiles(livingRoom.getTile(4,4).getTileType()),5,5);
+        boardGrid.add(setTiles(livingRoom.getTile(4,5).getTileType()),5,6);
+        boardGrid.add(setTiles(livingRoom.getTile(4,6).getTileType()),5,7);
+        boardGrid.add(setTiles(livingRoom.getTile(4,7).getTileType()),5,8);
+        boardGrid.add(setTiles(livingRoom.getTile(4,8).getTileType()),5,9);
+
+        boardGrid.add(setTiles(livingRoom.getTile(5,0).getTileType()),6,1);
+        boardGrid.add(setTiles(livingRoom.getTile(5,1).getTileType()),6,2);
+        boardGrid.add(setTiles(livingRoom.getTile(5,2).getTileType()),6,3);
+        boardGrid.add(setTiles(livingRoom.getTile(5,3).getTileType()),6,4);
+        boardGrid.add(setTiles(livingRoom.getTile(5,4).getTileType()),6,5);
+        boardGrid.add(setTiles(livingRoom.getTile(5,5).getTileType()),6,6);
+        boardGrid.add(setTiles(livingRoom.getTile(5,6).getTileType()),6,7);
+        boardGrid.add(setTiles(livingRoom.getTile(5,7).getTileType()),6,8);
+
+        boardGrid.add(setTiles(livingRoom.getTile(6,2).getTileType()),7,3);
+        boardGrid.add(setTiles(livingRoom.getTile(6,3).getTileType()),7,4);
+        boardGrid.add(setTiles(livingRoom.getTile(6,4).getTileType()),7,5);
+        boardGrid.add(setTiles(livingRoom.getTile(6,5).getTileType()),7,6);
+        boardGrid.add(setTiles(livingRoom.getTile(6,6).getTileType()),7,7);
+
+        boardGrid.add(setTiles(livingRoom.getTile(7,3).getTileType()),8,4);
+        boardGrid.add(setTiles(livingRoom.getTile(7,4).getTileType()),8,5);
+        boardGrid.add(setTiles(livingRoom.getTile(7,5).getTileType()),8,6);
+
+        boardGrid.add(setTiles(livingRoom.getTile(8,4).getTileType()),9,5);
+        boardGrid.add(setTiles(livingRoom.getTile(8,5).getTileType()),9,6);
     }
 
+    /**
+     * This method is called to update the tiles on the bookshelf
+     * @param player of the bookshelf
+     */
     public void updateBookShelf(Player player){
+        Game game = player.getGame();
+        int index = game.getPlayers().indexOf(player);
+        if (game.getPlayers().size() == 2) {
+            switch (index) {
+                case 0 -> {
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+                case 1 ->{
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+            }
+        }else if(game.getPlayers().size()==3){
+            switch (index) {
+                case 0 -> {
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+                case 1 ->{
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+                case 2 ->{
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+            }
+        }else if(game.getPlayers().size()==4){
+            switch (index) {
+                case 0 -> {
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+                case 1 ->{
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+                case 2 ->{
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+                case 3 ->{
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
+
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
+
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
+
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
+
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
+
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
+                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                }
+            }
+        }
     }
 
     /**
@@ -253,7 +674,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 if (game.getPlayers().size() == 2) {
                     switch (chairIndex) {
                         case 1 -> chairPlayer1.setVisible(true);
-                        case 2 -> chairPlayer2.setVisible(true);
+                        case 2 -> chairPlayer3.setVisible(true);
                         default -> {
                         }
                     }
@@ -279,7 +700,80 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     break;
                 }
             }
-
         }
     }
+
+    public Node setTiles(TileType tileType) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(3);
+
+        String imageName = null;
+
+        switch (tileType) {
+            case CAT:
+                switch (randomNumber) {
+                    case 0:
+                        imageName = "Gatti1.png";
+                    case 1:
+                        imageName = "Gatti2.png";
+                    case 2:
+                        imageName = "Gatti3.png";
+                }
+                break;
+            case BOOK:
+                switch (randomNumber) {
+                    case 0:
+                        imageName = "Libri1.png";
+                    case 1:
+                        imageName = "Libri2.png";
+                    case 2:
+                        imageName = "Libri3.png";
+                }
+                break;
+            case GAME:
+                switch (randomNumber) {
+                    case 0:
+                        imageName = "Giochi1.png";
+                    case 1:
+                        imageName = "Giochi2.png";
+                    case 2:
+                        imageName = "Giochi3.png";
+                }
+                break;
+            case FRAME:
+                switch (randomNumber) {
+                    case 0:
+                        imageName = "Cornici1.png";
+                    case 1:
+                        imageName = "Cornici2.png";
+                    case 2:
+                        imageName = "Cornici3.png";
+                }
+                break;
+            case TROPHIE:
+                switch (randomNumber) {
+                    case 0:
+                        imageName = "Trofei1.png";
+                    case 1:
+                        imageName = "Trofei2.png";
+                    case 2:
+                        imageName = "Trofei3.png";
+                }
+                break;
+            case PLANT:
+                switch (randomNumber) {
+                    case 0:
+                        imageName = "Piante1.png";
+                    case 1:
+                        imageName = "Piante2.png";
+                    case 2:
+                        imageName = "Piante3.png";
+                }
+                break;
+            case NULL:
+                break;
+            }
+
+        return null;
+        }
 }

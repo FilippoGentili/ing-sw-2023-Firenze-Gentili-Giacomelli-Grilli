@@ -114,46 +114,74 @@ public class Gui extends ViewObservable implements View {
         });
     }
 
+    /**
+     * This method is used to show the living room of the game
+     * @param livingRoom is the living room of the game
+     */
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
-       //GameSceneController gameSceneController = getGameSceneController();
-       //Platform.runLater(() -> gameSceneController.updateLivingRoom(player));
+       GameSceneController gameSceneController = getGameSceneController();
+       Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
     }
 
+    /**
+     * This method is used to show the bookshelf of a player
+     * @param player is the player whose bookshelf has to be shown
+     */
     @Override
     public void showBookshelf(Player player) {
-        //GameSceneController gameSceneController = getGameSceneController();
-        //Platform.runLater(() -> gameSceneController.updateBookShelf(player));
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.updateBookShelf(player));
     }
 
+    /**
+     * This method is used to show the common goal cards of the game
+     * @param game is the game
+     */
     @Override
     public void showCommonGoalCards(Game game) {
         GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(() -> gameSceneController.setCommonGoalCards(game));
     }
 
+    /**
+     * This method is used to show the personal goal card of a player
+     * @param player is the player whose personal goal card has to be shown
+     */
     @Override
     public void showPersonalGoalCard(Player player) {
        GameSceneController gameSceneController = getGameSceneController();
        Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
+    /**
+     * This method is used update the state of the game
+     * @param player is the current player
+     * @param game is the current game
+     */
     @Override
     public void updateGameState(Player player, Game game) {
         showCommonGoalCards(game);
         showPersonalGoalCard(player);
-        //showLivingRoom(game.getLivingRoom());
-        /*for(Player p : game.getPlayers()) {
+        showLivingRoom(game.getLivingRoom());
+        for(Player p : game.getPlayers()) {
              showBookshelf(p);
-        }*/
+        }
     }
 
+    /**
+     * This method is used to set up the initial game
+     * @param game is the game started
+     */
     @Override
     public void showGameStarted(Game game) {
         GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(() -> gameSceneController.setUp(game));
     }
 
+    /**
+     * This method is used get the game scene controller
+     */
     public  GameSceneController getGameSceneController(){
         GameSceneController gameSceneController;
         try {
@@ -214,6 +242,10 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
+    /**
+     * This method is used to handle the disconnections of the players
+     * @param nickname is the nickname of the player that has disconnected
+     */
     @Override
     public void handleDisconnection(String nickname) {
 
