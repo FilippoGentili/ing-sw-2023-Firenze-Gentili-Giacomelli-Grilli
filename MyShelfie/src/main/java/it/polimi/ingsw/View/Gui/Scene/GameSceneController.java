@@ -24,7 +24,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private AnchorPane bookshelfPlayer3;
     @FXML
-    private AnchorPane bookshelfPlayerYou;
+    private AnchorPane bookshelfPlayer4;
     @FXML
     private Text namePlayer1;
     @FXML
@@ -32,15 +32,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private Text namePlayer3;
     @FXML
-    private Text namePlayerYou;
+    private Text namePlayer4;
     @FXML
-    private AnchorPane personalGoalCard1;
+    private AnchorPane personalGoalCardPlayer1;
     @FXML
-    private AnchorPane personalGoalCard2;
+    private AnchorPane personalGoalCardPlayer2;
     @FXML
-    private AnchorPane personalGoalCard3;
+    private AnchorPane personalGoalCardPlayer3;
     @FXML
-    private AnchorPane personalGoalCardYou;
+    private AnchorPane personalGoalCardPlayer4;
     @FXML
     private AnchorPane commonGoalCard1;
     @FXML
@@ -52,7 +52,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private AnchorPane chairPlayer3;
     @FXML
-    private AnchorPane chairPlayerYou;
+    private AnchorPane chairPlayer4;
     @FXML
     private GridPane boardGrid;
 
@@ -60,36 +60,71 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private Button confirmButton;
     @FXML
     private TextField tileTypeField;
+    boolean firstClick = true;
 
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmButtonClicked);
     }
-
+    /**
+     * This method is called to set up the initial game scene
+     * @param game the current game
+     */
     public void setUp(Game game){
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
         bookshelfPlayer3.setVisible(false);
+        bookshelfPlayer4.setVisible(false);
         namePlayer1.setVisible(false);
         namePlayer2.setVisible(false);
         namePlayer3.setVisible(false);
+        namePlayer4.setVisible(false);
+        personalGoalCardPlayer1.setVisible(false);
+        personalGoalCardPlayer2.setVisible(false);
+        personalGoalCardPlayer3.setVisible(false);
+        personalGoalCardPlayer4.setVisible(false);
+        setChair(game);
 
         if(game.getPlayers().size()==2){
-            bookshelfPlayer2.setVisible(true);
+            bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
-        } else if (game.getPlayers().size()==3){
-            bookshelfPlayer1.setVisible(false);
-            bookshelfPlayer3.setVisible(false);
-            namePlayer1.setVisible(true);
+            namePlayer1.setText(game.getPlayers().get(0).getNickname());
+            personalGoalCardPlayer1.setVisible(true);
+            bookshelfPlayer3.setVisible(true);
             namePlayer3.setVisible(true);
+            namePlayer3.setText(game.getPlayers().get(1).getNickname());
+            personalGoalCardPlayer3.setVisible(true);
+        } else if (game.getPlayers().size()==3){
+            bookshelfPlayer1.setVisible(true);
+            namePlayer1.setVisible(true);
+            namePlayer1.setText(game.getPlayers().get(0).getNickname());
+            personalGoalCardPlayer1.setVisible(true);
+            bookshelfPlayer2.setVisible(true);
+            namePlayer2.setVisible(true);
+            namePlayer2.setText(game.getPlayers().get(1).getNickname());
+            personalGoalCardPlayer2.setVisible(true);
+            bookshelfPlayer3.setVisible(true);
+            namePlayer3.setVisible(true);
+            namePlayer3.setText(game.getPlayers().get(2).getNickname());
+            personalGoalCardPlayer3.setVisible(true);
         }else{
             bookshelfPlayer1.setVisible(true);
-            bookshelfPlayer2.setVisible(true);
-            bookshelfPlayer3.setVisible(true);
             namePlayer1.setVisible(true);
+            namePlayer1.setText(game.getPlayers().get(0).getNickname());
+            personalGoalCardPlayer1.setVisible(true);
+            bookshelfPlayer2.setVisible(true);
             namePlayer2.setVisible(true);
+            namePlayer2.setText(game.getPlayers().get(1).getNickname());
+            personalGoalCardPlayer2.setVisible(true);
+            bookshelfPlayer3.setVisible(true);
             namePlayer3.setVisible(true);
+            namePlayer3.setText(game.getPlayers().get(2).getNickname());
+            personalGoalCardPlayer3.setVisible(true);
+            bookshelfPlayer4.setVisible(true);
+            namePlayer4.setVisible(true);
+            namePlayer4.setText(game.getPlayers().get(3).getNickname());
+            personalGoalCardPlayer4.setVisible(true);
         }
 
     }
@@ -108,7 +143,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     private void confirmButtonClicked(MouseEvent event) {
         confirmButton.setVisible(false);
-        boolean firstClick = true;
         if(firstClick){
             firstClick = false;
             new Thread(() -> notifyObserver(obs -> {
@@ -131,6 +165,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void updateBookShelf(Player player){
     }
 
+    /**
+     * This method is called to set the common goal cards of the game
+     * @param game the current game
+     */
     public void setCommonGoalCards(Game game){
        int id1 = game.getCommonGoal1().getId();
        int id2 = game.getCommonGoal2().getId();
@@ -142,20 +180,67 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
        commonGoalCard2.getStyleClass().add(styleCommonGoalCard2);
     }
 
-    public void setPersonalGoalCard(Player player) {
-       int id = player.getPersonalGoalCard().getID();
-       String stylePersonalGoalCard = "generalPersonalGoalCard" + id;
-       personalGoalCardYou.getStyleClass().clear();
-       personalGoalCardYou.getStyleClass().add(stylePersonalGoalCard);
+    /**
+     * This method is called to set the personal goal cards of the players
+     * @param player the current player
+     */
+    public void setPersonalGoalCard(Game game, Player player) {
+        int index = game.getPlayers().indexOf(player);
+        int id = player.getPersonalGoalCard().getID();
+        String name = player.getNickname();
+        String stylePersonalGoalCard = "generalPersonalGoalCard" + id;
+        switch (index) {
+            case 0:
+                personalGoalCardPlayer1.getStyleClass().clear();
+                personalGoalCardPlayer1.getStyleClass().add(stylePersonalGoalCard);
+                break;
+            case 1:
+                personalGoalCardPlayer2.getStyleClass().clear();
+                personalGoalCardPlayer2.getStyleClass().add(stylePersonalGoalCard);
+                break;
+            case 2:
+                personalGoalCardPlayer3.getStyleClass().clear();
+                personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
+                break;
+            case 3:
+                personalGoalCardPlayer4.getStyleClass().clear();
+                personalGoalCardPlayer4.getStyleClass().add(stylePersonalGoalCard);
+                break;
+        }
     }
 
-    public void setChair(Player player, Game game) {
+    /**
+     * This method is called to set the chair of the first player
+     * @param game the current game
+     */
+    public void setChair(Game game) {
         chairPlayer1.setVisible(false);
         chairPlayer2.setVisible(false);
         chairPlayer3.setVisible(false);
-        chairPlayerYou.setVisible(false);
-        if (player.equals(game.getFirstPlayer())) {
-            chairPlayerYou.setVisible(true);
+        chairPlayer4.setVisible(false);
+        for(Player player : game.getPlayers()) {
+            int index = game.getPlayers().indexOf(player);
+            if (player.equals(game.getFirstPlayer())) {
+                int chairIndex = index + 1;
+                switch (chairIndex) {
+                    case 1:
+                        chairPlayer1.setVisible(true);
+                        break;
+                    case 2:
+                        chairPlayer2.setVisible(true);
+                        break;
+                    case 3:
+                        chairPlayer3.setVisible(true);
+                        break;
+                    case 4:
+                        chairPlayer4.setVisible(true);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            }
         }
+
     }
 }

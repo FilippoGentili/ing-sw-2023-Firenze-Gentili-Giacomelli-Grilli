@@ -153,7 +153,7 @@
                 <Font name="Blackadder ITC" size="20.0" />
             </font>
         </Text>
-        <AnchorPane fx:id="bookShelfPlayerYou" layoutX="1136.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
+        <AnchorPane fx:id="bookshelfPlayer4" layoutX="1136.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
             <children>
                 <GridPane prefHeight="200.0" prefWidth="200.0">
                     <columnConstraints>
@@ -177,13 +177,13 @@
                     </rowConstraints>
                 </GridPane>
             </children></AnchorPane>
-        <Text fx:id="namePlayerYou" fill="WHITE" layoutX="1210.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU">
+        <Text fx:id="namePlayer4" fill="WHITE" layoutX="1210.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4">
             <font>
                 <Font name="Blackadder ITC" size="20.0" />
             </font>
         </Text>
         <AnchorPane fx:id="personalGoalCardPlayer1" layoutX="246.0" layoutY="153.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="personalGoalCardYou" layoutX="1027.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="personalGoalCardPlayer4" layoutX="1027.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer3" layoutX="256.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer2" layoutX="256.0" layoutY="402.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="commonGoalCard1" layoutX="1109.0" layoutY="72.0" prefHeight="130.0" prefWidth="220.0" styleClass="generalCommonGoalCardBack" stylesheets="@../css/style.css" />
@@ -196,7 +196,7 @@
         <AnchorPane fx:id="chairPlayer1" layoutX="231.0" layoutY="73.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="chairPlayer2" layoutX="246.0" layoutY="322.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="chairPlayer3" layoutX="256.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="chairPlayerYou" layoutX="1072.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer4" layoutX="1072.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane layoutX="650.0" layoutY="701.0" prefHeight="65.0" prefWidth="175.0" stylesheets="@../css/style.css">
             <children>
                 <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">

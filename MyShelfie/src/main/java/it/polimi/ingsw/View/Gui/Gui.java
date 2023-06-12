@@ -133,17 +133,16 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showPersonalGoalCard(Player player) {
+    public void showPersonalGoalCard(Game game,Player player) {
        GameSceneController gameSceneController = getGameSceneController();
-       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
+       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(Game, player));
     }
 
     @Override
     public void updateGameState(Player player, Game game) {
-        showGameStarted(game);
-        showCommonGoalCards(game);
-        showPersonalGoalCard(player);
-        chairFirstPlayer(player, game);
+//      showCommonGoalCards(game);
+        showPersonalGoalCard(game, player);
+
 
         //showLivingRoom(game.getLivingRoom());
         //for(Player p : game.getPlayers()) {
@@ -170,10 +169,6 @@ public class Gui extends ViewObservable implements View {
         return gameSceneController;
     }
 
-    public void chairFirstPlayer(Player player, Game game){
-        GameSceneController gameSceneController = getGameSceneController();
-        Platform.runLater(() -> gameSceneController.setChair(player, game));
-    }
 
     /**
      * This method is used to show the waiting room
