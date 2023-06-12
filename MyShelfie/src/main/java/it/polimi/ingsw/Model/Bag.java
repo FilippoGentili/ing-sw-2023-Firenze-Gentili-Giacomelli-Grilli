@@ -12,9 +12,9 @@ import java.util.*;
 public class Bag implements Serializable {
 
     private static final long serialVersionUID = 4089040294542656250L;
-    private static int numOfTiles=132;
+    private int numOfTiles=132;
     private Game game;
-    private static ArrayList<Tile> remainingTiles;
+    private ArrayList<Tile> remainingTiles;
 
     /**
      * Bag constructor
