@@ -4,10 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Network.Message.GenericMessage;
-import it.polimi.ingsw.Network.Message.LoginResult;
-import it.polimi.ingsw.Network.Message.Message;
-import it.polimi.ingsw.Network.Message.MessageType;
+import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
@@ -86,7 +83,8 @@ public class Server implements Runnable{
                 connectionMap.put(nickname, connection);
                 gameController.handleLogin(nickname, vv);
             } else {
-                vv.loginResult(true, false, null);
+                sendMessage(new GenericMessage("We are sorry, the game already started :( ... you have to wait until the end of the match"),nickname);
+                sendMessage(new DisconnectionReply(nickname),nickname);
             }
         }else{
             for(Player p : gameController.getPlayers()){
@@ -96,7 +94,8 @@ public class Server implements Runnable{
                     gameController.addingPlayersAgain(nickname);
                     break;
                 }else{
-                    sendMessage(new LoginResult(nickname,false,false),nickname);
+                    sendMessage(new GenericMessage("Someone else reconnected with this nickname... You will be disconnected."),nickname);
+                    sendMessage(new DisconnectionReply(nickname),nickname);
                 }
             }
         }
