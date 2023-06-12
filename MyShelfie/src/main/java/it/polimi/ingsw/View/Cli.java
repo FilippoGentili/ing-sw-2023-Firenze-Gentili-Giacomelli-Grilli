@@ -124,8 +124,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         port = tempPort;
 
+        System.out.println("Server is going to give you the IP Address.\nPlease insert it:");
         do {
-            System.out.println("Server is going to give you the IP Address.\nPlease insert it:");
             input = scanner.nextLine().trim();
         } while (!validAddress(input, rmi));
 
@@ -168,9 +168,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         String SocketPort = "1098";
         String RMIPort = "1099";
         boolean rmi=connection;
+        boolean bc=notBroadcastAddress(address);
 
         if (rmi) {
-            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+            if (/*((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) &&*/ bc) {
                 try {
                     Registry registry = LocateRegistry.getRegistry(address, parseInt(RMIPort));
                     registry.list();
@@ -182,7 +183,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                 isValid = false;
             }
         } else {
-            if ((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) {
+            if (/*((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) &&*/ bc) {
                 try {
                     Socket socket = new Socket();
                     socket.connect(new InetSocketAddress(address, parseInt(SocketPort)), 5000);
@@ -196,7 +197,29 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
             }
         }
 
+        if(!isValid)
+            System.out.println("Invalid server address.\nPlease insert a valid server address:");
+
         return isValid;
+    }
+
+    public boolean notBroadcastAddress(String address){
+        boolean bc=true;
+        String tempAddress = address;
+
+        if((tempAddress.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || tempAddress.equals("localhost") || tempAddress==null){
+            if(!tempAddress.equals("localhost") || tempAddress==null){
+                tempAddress=tempAddress.substring(0, tempAddress.indexOf("."));
+                if(tempAddress.equals("127")) {
+                    bc = false;
+                }
+            }
+        }else{
+            bc=false;
+        }
+
+
+        return bc;
     }
     /*
     public boolean validPort(String port){
