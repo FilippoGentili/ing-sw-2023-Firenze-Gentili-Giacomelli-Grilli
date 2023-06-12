@@ -23,6 +23,10 @@ public class GameStartedMessage extends Message{
         return game;
     }
 
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
+
     @Override
     public String toString(){
         return "Game started!";
