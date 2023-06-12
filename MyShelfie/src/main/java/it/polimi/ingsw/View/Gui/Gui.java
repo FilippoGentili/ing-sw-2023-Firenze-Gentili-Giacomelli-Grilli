@@ -133,21 +133,19 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showPersonalGoalCard(Game game,Player player) {
+    public void showPersonalGoalCard(Player player) {
        GameSceneController gameSceneController = getGameSceneController();
-       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(Game, player));
+       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
     @Override
     public void updateGameState(Player player, Game game) {
-//      showCommonGoalCards(game);
-        showPersonalGoalCard(game, player);
-
-
+        showCommonGoalCards(game);
+        showPersonalGoalCard(player);
         //showLivingRoom(game.getLivingRoom());
-        //for(Player p : game.getPlayers()) {
-          //  showBookshelf(p);
-        //}
+        /*for(Player p : game.getPlayers()) {
+             showBookshelf(p);
+        }*/
     }
 
     @Override

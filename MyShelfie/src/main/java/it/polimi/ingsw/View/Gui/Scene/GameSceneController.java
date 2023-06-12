@@ -55,7 +55,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private AnchorPane chairPlayer4;
     @FXML
     private GridPane boardGrid;
-
     @FXML
     private Button confirmButton;
     @FXML
@@ -72,6 +71,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param game the current game
      */
     public void setUp(Game game){
+        confirmButton.setVisible(false);
+
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
         bookshelfPlayer3.setVisible(false);
@@ -86,7 +87,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         personalGoalCardPlayer4.setVisible(false);
         setChair(game);
 
-        if(game.getPlayers().size()==2){
+        if (game.getPlayers().size() == 2) {
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
@@ -95,7 +96,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             namePlayer3.setVisible(true);
             namePlayer3.setText(game.getPlayers().get(1).getNickname());
             personalGoalCardPlayer3.setVisible(true);
-        } else if (game.getPlayers().size()==3){
+        } else if (game.getPlayers().size() == 3) {
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
@@ -108,7 +109,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             namePlayer3.setVisible(true);
             namePlayer3.setText(game.getPlayers().get(2).getNickname());
             personalGoalCardPlayer3.setVisible(true);
-        }else{
+        } else {
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
@@ -126,8 +127,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             namePlayer4.setText(game.getPlayers().get(3).getNickname());
             personalGoalCardPlayer4.setVisible(true);
         }
-
-    }
+}
 
     public void tileClicked(MouseEvent event) {
         confirmButton.setVisible(true);
@@ -184,28 +184,56 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to set the personal goal cards of the players
      * @param player the current player
      */
-    public void setPersonalGoalCard(Game game, Player player) {
+    public void setPersonalGoalCard(Player player) {
+        Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         int id = player.getPersonalGoalCard().getID();
-        String name = player.getNickname();
         String stylePersonalGoalCard = "generalPersonalGoalCard" + id;
-        switch (index) {
-            case 0:
-                personalGoalCardPlayer1.getStyleClass().clear();
-                personalGoalCardPlayer1.getStyleClass().add(stylePersonalGoalCard);
-                break;
-            case 1:
-                personalGoalCardPlayer2.getStyleClass().clear();
-                personalGoalCardPlayer2.getStyleClass().add(stylePersonalGoalCard);
-                break;
-            case 2:
-                personalGoalCardPlayer3.getStyleClass().clear();
-                personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
-                break;
-            case 3:
-                personalGoalCardPlayer4.getStyleClass().clear();
-                personalGoalCardPlayer4.getStyleClass().add(stylePersonalGoalCard);
-                break;
+        if (game.getPlayers().size() == 2) {
+            switch (index) {
+                case 0 -> {
+                    personalGoalCardPlayer1.getStyleClass().clear();
+                    personalGoalCardPlayer1.getStyleClass().add(stylePersonalGoalCard);
+                }
+                case 1 -> {
+                    personalGoalCardPlayer3.getStyleClass().clear();
+                    personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
+                }
+            }
+        } else if (game.getPlayers().size() == 3) {
+            switch (index) {
+                case 0 -> {
+                    personalGoalCardPlayer1.getStyleClass().clear();
+                    personalGoalCardPlayer1.getStyleClass().add(stylePersonalGoalCard);
+                }
+                case 1 -> {
+                    personalGoalCardPlayer2.getStyleClass().clear();
+                    personalGoalCardPlayer2.getStyleClass().add(stylePersonalGoalCard);
+                }
+                case 2 -> {
+                    personalGoalCardPlayer3.getStyleClass().clear();
+                    personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
+                }
+            }
+        } else if (game.getPlayers().size() == 4) {
+            switch (index) {
+                case 0 -> {
+                    personalGoalCardPlayer1.getStyleClass().clear();
+                    personalGoalCardPlayer1.getStyleClass().add(stylePersonalGoalCard);
+                }
+                case 1 -> {
+                    personalGoalCardPlayer2.getStyleClass().clear();
+                    personalGoalCardPlayer2.getStyleClass().add(stylePersonalGoalCard);
+                }
+                case 2 -> {
+                    personalGoalCardPlayer3.getStyleClass().clear();
+                    personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
+                }
+                case 3 -> {
+                    personalGoalCardPlayer4.getStyleClass().clear();
+                    personalGoalCardPlayer4.getStyleClass().add(stylePersonalGoalCard);
+                }
+            }
         }
     }
 
@@ -218,29 +246,40 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         chairPlayer2.setVisible(false);
         chairPlayer3.setVisible(false);
         chairPlayer4.setVisible(false);
-        for(Player player : game.getPlayers()) {
+        for (Player player : game.getPlayers()) {
             int index = game.getPlayers().indexOf(player);
             if (player.equals(game.getFirstPlayer())) {
                 int chairIndex = index + 1;
-                switch (chairIndex) {
-                    case 1:
-                        chairPlayer1.setVisible(true);
-                        break;
-                    case 2:
-                        chairPlayer2.setVisible(true);
-                        break;
-                    case 3:
-                        chairPlayer3.setVisible(true);
-                        break;
-                    case 4:
-                        chairPlayer4.setVisible(true);
-                        break;
-                    default:
-                        break;
+                if (game.getPlayers().size() == 2) {
+                    switch (chairIndex) {
+                        case 1 -> chairPlayer1.setVisible(true);
+                        case 2 -> chairPlayer2.setVisible(true);
+                        default -> {
+                        }
+                    }
+                    break;
+                } else if (game.getPlayers().size() == 3) {
+                    switch (chairIndex) {
+                        case 1 -> chairPlayer1.setVisible(true);
+                        case 2 -> chairPlayer2.setVisible(true);
+                        case 3 -> chairPlayer3.setVisible(true);
+                        default -> {
+                        }
+                    }
+                    break;
+                } else if (game.getPlayers().size() == 4) {
+                    switch (chairIndex) {
+                        case 1 -> chairPlayer1.setVisible(true);
+                        case 2 -> chairPlayer2.setVisible(true);
+                        case 3 -> chairPlayer3.setVisible(true);
+                        case 4 -> chairPlayer4.setVisible(true);
+                        default -> {
+                        }
+                    }
+                    break;
                 }
-                break;
             }
-        }
 
+        }
     }
 }
