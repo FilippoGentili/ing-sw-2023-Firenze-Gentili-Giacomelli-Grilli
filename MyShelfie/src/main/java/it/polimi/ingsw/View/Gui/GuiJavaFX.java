@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,13 +36,16 @@ public class GuiJavaFX extends Application {
         StartSceneController startSceneController = fxmlLoader.getController();
         startSceneController.addObserver(clientController);
 
+        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+
         Scene scene = new Scene(layout);
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         //stage.setFullScreen(true);
         stage.setMaximized(true);
-        stage.setWidth(1366d);
-        stage.setHeight(768d);
+        stage.setWidth(screenWidth);
+        stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setTitle("MyShelfie");

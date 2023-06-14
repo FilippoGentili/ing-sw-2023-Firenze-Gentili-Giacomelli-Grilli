@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 <!---->
 
 <AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
@@ -22,18 +23,18 @@
                 </ImageView>
             </top>
             <left>
-                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                <Pane maxHeight="200.0" maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
             </left>
             <right>
-                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                <Pane maxHeight="200.0" maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
             </right>
             <bottom>
-                <Pane prefHeight="95.0" prefWidth="1300.0" BorderPane.alignment="CENTER" />
+                <Pane maxHeight="95.0" maxWidth="1300.0" minHeight="95.0" minWidth="1300.0" prefHeight="95.0" prefWidth="1300.0" BorderPane.alignment="CENTER" />
             </bottom>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane maxHeight="200.0" maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" layoutX="333.0" layoutY="43.0" prefHeight="200.0" prefWidth="300.0" spacing="40.0">
+                  <VBox alignment="CENTER" layoutX="-50.0" prefHeight="200.0" prefWidth="300.0" spacing="40.0">
                      <children>
                          <ComboBox fx:id="numberOfPlayersMenu" prefWidth="200.0" promptText="Select number of players" styleClass="generalButton" stylesheets="@../css/style.css" visibleRowCount="3">
                              <items>
