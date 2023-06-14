@@ -36,7 +36,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     public static final Logger LOGGER = Logger.getLogger("MyShelfie client");
     private final View view;
     private Client client;
-    private Chat chat;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
     private ClientUpdater clientUpdater;
 
@@ -211,7 +210,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             //this.chat = new SocketClientChat(address,disconnectionHandler);
             //chat.connectChat();
             //this.client.addObserver(this);
-            this.clientUpdater = new ClientUpdater(this.client, this,this.chat);
+            this.clientUpdater = new ClientUpdater(this.client, this);
             this.view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,this.client.getUsername());
@@ -224,7 +223,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             this.client = new RMIClient(disconnectionHandler, address, port);
             this.client.connection();
             //this.client.addObserver(this);
-            this.clientUpdater = new ClientUpdater(this.client, this, this.chat);
+            this.clientUpdater = new ClientUpdater(this.client, this);
             view.nicknameRequest();
         }catch (IOException e){
             this.view.loginResult(false,false,null);

@@ -205,21 +205,21 @@
                         <Font name="Blackadder ITC" size="20.0" />
                     </font>
                 </Button>
-            <TextField id="usernameBox" fx:id="tilesField" alignment="CENTER" layoutX="-62.0" layoutY="8.0" onKeyPressed="#enterButtonClicked" prefHeight="30.0" prefWidth="300.0" styleClass="generalButton" stylesheets="@../css/style.css">
-               <font>
-                  <Font name="Blackadder ITC" size="20.0" />
-               </font>
-            </TextField>
-            <Button fx:id="confirmColumnButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
-               <font>
-                  <Font name="Blackadder ITC" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="confirmTileSelectionButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
-               <font>
-                  <Font name="Blackadder ITC" size="20.0" />
-               </font>
-            </Button>
+                <TextField id="usernameBox" fx:id="tilesField" alignment="CENTER" layoutX="-62.0" layoutY="8.0" prefHeight="30.0" prefWidth="300.0" styleClass="generalButton" stylesheets="@../css/style.css">
+                    <font>
+                        <Font name="Blackadder ITC" size="20.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="confirmColumnButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
+                    <font>
+                        <Font name="Blackadder ITC" size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="confirmTileSelectionButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
+                    <font>
+                        <Font name="Blackadder ITC" size="20.0" />
+                    </font>
+                </Button>
             </children>
         </AnchorPane>
     </children>

@@ -1,14 +1,17 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -17,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 
+import javax.swing.text.Position;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -330,7 +334,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param livingRoom of the current game
      */
     public void updateLivingRoom(LivingRoom livingRoom){
-        boardGrid.add(setTiles(livingRoom.getTile(0,3).getTileType()),1,4);
+
+        ObservableList<Node> livingRoomSpaces = boardGrid.getChildren();
+        for(Node node : livingRoomSpaces){
+            if(isCellValid(node)){
+
+                boardGrid.add(setTiles(livingRoom.getTile(GridPane.getRowIndex(node),GridPane.getColumnIndex(node)).getTileType()), GridPane.getRowIndex(node)+1, GridPane.getColumnIndex(node)+1);
+            }
+        }
+        /*boardGrid.add(setTiles(livingRoom.getTile(0,3).getTileType()),1,4);
         boardGrid.add(setTiles(livingRoom.getTile(0,4).getTileType()),1,5);
 
         boardGrid.add(setTiles(livingRoom.getTile(1,3).getTileType()),2,4);
@@ -382,7 +394,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         boardGrid.add(setTiles(livingRoom.getTile(7,5).getTileType()),8,6);
 
         boardGrid.add(setTiles(livingRoom.getTile(8,4).getTileType()),9,5);
-        boardGrid.add(setTiles(livingRoom.getTile(8,5).getTileType()),9,6);
+        boardGrid.add(setTiles(livingRoom.getTile(8,5).getTileType()),9,6);*/
     }
 
     /**
@@ -931,7 +943,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             }
 
         if (imageName != null) {
-            Image image =  new Image(getClass().getResourceAsStream("/resources/images/itemTiles/" + imageName));
+            Image image =  new Image(getClass().getResourceAsStream("images/itemTiles/" + imageName));
             ImageView imageView = new ImageView(image);
             return imageView;
         } else {
@@ -947,5 +959,35 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         } else {
             return null;
         }
+    }
+
+    public boolean isCellValid(Node node){
+        switch (GridPane.getRowIndex(node)){
+            case 0:
+                if(GridPane.getColumnIndex(node) == 3 || GridPane.getColumnIndex(node) == 4) return true;
+                else return false;
+            case 1,7:
+                if(GridPane.getColumnIndex(node) == 3 || GridPane.getColumnIndex(node) == 4 || GridPane.getColumnIndex(node) == 5) return true;
+                else return false;
+            case 2,6:
+                if(GridPane.getColumnIndex(node) == 0 || GridPane.getColumnIndex(node) == 1 || GridPane.getColumnIndex(node) == 7 || GridPane.getColumnIndex(node) == 8) return false;
+                else return true;
+            case 3:
+                if(GridPane.getColumnIndex(node) == 0) return false;
+                else return true;
+            case 4:
+                return true;
+            case 5:
+                if(GridPane.getColumnIndex(node) == 8) return false;
+                else return true;
+            case 8:
+                if(GridPane.getColumnIndex(node) == 4 || GridPane.getColumnIndex(node) == 5) return true;
+                else return false;
+            default:
+                return false;
+        }
+    }
+
+    public void enterButtonClicked(KeyEvent keyEvent) {
     }
 }

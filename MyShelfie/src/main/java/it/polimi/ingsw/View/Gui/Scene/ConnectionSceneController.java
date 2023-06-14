@@ -54,13 +54,13 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         if (validAddress) {
             socketButton.setDisable(true);
             rmiButton.setDisable(true);
-            new Thread(() -> notifyObserver(obs -> {
+            notifyObserver(obs -> {
                 try {
                     obs.updateServerInfoSocket(this, address, port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            })).start();
+            });
         } else {
             Platform.runLater(() -> {
                 GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
@@ -83,13 +83,13 @@ public class ConnectionSceneController extends ViewObservable implements Generic
         if(validAddress) {
             socketButton.setDisable(true);
             rmiButton.setDisable(true);
-            new Thread(() ->notifyObserver(obs -> {
+            notifyObserver(obs -> {
                 try {
                     obs.updateServerInfoRmi(this,address,port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            })).start();
+            });
         }else{
             Platform.runLater(() -> {
                 GuiController.showBanner(ERROR_MESSAGE, "Invalid address");
