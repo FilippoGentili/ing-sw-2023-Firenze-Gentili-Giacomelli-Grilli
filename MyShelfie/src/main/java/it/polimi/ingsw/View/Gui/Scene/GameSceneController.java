@@ -88,7 +88,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
-        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event));
+        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmTileSelectionButtonClicked);
     }
 
     /**
@@ -930,6 +930,16 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 break;
             }
 
+        if (imageName != null) {
+            Image image =  new Image(getClass().getResourceAsStream("/resources/images/itemTiles/" + imageName));
+            ImageView imageView = new ImageView(image);
+            return imageView;
+        } else {
+            return null;
+        }
+    }
+
+    public ImageView getTiles(ImageView imageName){
         if (imageName != null) {
             Image image =  new Image(getClass().getResourceAsStream("/resources/images/itemTiles/" + imageName));
             ImageView imageView = new ImageView(image);
