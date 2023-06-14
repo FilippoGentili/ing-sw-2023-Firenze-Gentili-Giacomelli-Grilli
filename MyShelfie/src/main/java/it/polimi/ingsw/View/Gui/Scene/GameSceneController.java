@@ -7,8 +7,10 @@ import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -85,6 +87,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private Button confirmColumnButton;
     @FXML
     private TextField tilesField;
+    @FXML
+    private MenuItem openChatButton;
     boolean yourTurn = false;
 
     @FXML
@@ -93,6 +97,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
         confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmTileSelectionButtonClicked);
+        openChatButton.setOnAction(this::openChatButtonClicked);
     }
 
     /**
@@ -989,5 +994,9 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     public void enterButtonClicked(KeyEvent keyEvent) {
+    }
+
+    public void openChatButtonClicked(ActionEvent event) {
+        Platform.runLater(GuiController::showChat);
     }
 }

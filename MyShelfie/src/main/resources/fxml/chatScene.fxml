@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" styleClass="basePane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ChatSceneController">
+    <center>
+        <AnchorPane prefHeight="463.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+    </center>
+   <top>
+      <AnchorPane prefHeight="27.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="20.0" prefWidth="20.0">
+               <children>
+                  <Button fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="X" />
+               </children>
+            </AnchorPane>
+                <ComboBox fx:id="playerList" layoutX="29.0" prefHeight="30.0" prefWidth="570.0" promptText="Select Player" visibleRowCount="5">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="All players" />
+                            <String fx:value="Player 1" />
+                            <String fx:value="Player 2" />
+                            <String fx:value="Player 3" />
+                            <String fx:value="Player 4" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

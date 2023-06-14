@@ -4,6 +4,7 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.BannerSceneController;
+import it.polimi.ingsw.View.Gui.Scene.ChatSceneController;
 import it.polimi.ingsw.View.Gui.Scene.EndSceneController;
 import it.polimi.ingsw.View.Gui.Scene.GenericSceneController;
 import javafx.event.Event;
@@ -111,5 +112,20 @@ public class GuiController extends ViewObservable{
         endSceneController.displayEndScene();
     }
 
+    public static void showChat() {
+        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
+        Parent parent;
+
+        try {
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            Client.LOGGER.severe(e.getMessage());
+            return;
+        }
+        ChatSceneController chatSceneController = fxmlLoader.getController();
+        Scene chatScene = new Scene(parent);
+        chatSceneController.setScene(chatScene);
+        chatSceneController.showChat();
+    }
 
 }
