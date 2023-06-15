@@ -3,6 +3,7 @@ package it.polimi.ingsw.View.Gui.Scene;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.ViewObservable;
+import it.polimi.ingsw.View.Gui.Gui;
 import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -89,6 +90,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private TextField tilesField;
     @FXML
     private MenuItem openChatButton;
+    @FXML
+    private MenuItem quitButton;
+    @FXML
+    private MenuItem leaderboardButton;
     boolean yourTurn = false;
 
     @FXML
@@ -98,6 +103,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
         confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmTileSelectionButtonClicked);
         openChatButton.setOnAction(this::openChatButtonClicked);
+        quitButton.setOnAction(this::quitButtonClicked);
+        leaderboardButton.setOnAction(this::leaderboardButtonClicked);
     }
 
     /**
@@ -999,4 +1006,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void openChatButtonClicked(ActionEvent event) {
         Platform.runLater(GuiController::showChat);
     }
+
+    public void quitButtonClicked(ActionEvent event) {
+        Platform.runLater(() ->GuiController.changeScene("startScene.fxml", observers));
+    }
+
+    public void leaderboardButtonClicked(ActionEvent event) {
+        Platform.runLater(GuiController::showLeaderboard);
+    }
+
 }

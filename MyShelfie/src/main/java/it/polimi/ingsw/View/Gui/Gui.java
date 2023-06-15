@@ -262,6 +262,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void handleDisconnection(String nickname) {
-
+        Platform.runLater(() ->GuiController.changeScene("startScene.fxml", observers));
     }
 }

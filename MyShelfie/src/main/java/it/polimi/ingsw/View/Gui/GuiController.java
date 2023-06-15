@@ -3,10 +3,7 @@ package it.polimi.ingsw.View.Gui;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
-import it.polimi.ingsw.View.Gui.Scene.BannerSceneController;
-import it.polimi.ingsw.View.Gui.Scene.ChatSceneController;
-import it.polimi.ingsw.View.Gui.Scene.EndSceneController;
-import it.polimi.ingsw.View.Gui.Scene.GenericSceneController;
+import it.polimi.ingsw.View.Gui.Scene.*;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -126,6 +123,22 @@ public class GuiController extends ViewObservable{
         Scene chatScene = new Scene(parent);
         chatSceneController.setScene(chatScene);
         chatSceneController.showChat();
+    }
+
+    public static void showLeaderboard() {
+        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/leaderboardScene.fxml"));
+        Parent parent;
+
+        try {
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            Client.LOGGER.severe(e.getMessage());
+            return;
+        }
+        LeaderboardSceneController leaderboardSceneController = fxmlLoader.getController();
+        Scene leaderboardScene = new Scene(parent);
+        leaderboardSceneController.setScene(leaderboardScene);
+        leaderboardSceneController.showLeaderboard();
     }
 
 }

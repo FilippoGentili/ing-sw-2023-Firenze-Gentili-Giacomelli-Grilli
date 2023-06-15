@@ -20,8 +20,8 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Game">
                     <items>
-                        <MenuItem fx:id="leaderboardMenuButton" mnemonicParsing="false" text="Leaderboard" />
-                        <MenuItem fx:id="quitGameMenuButton" mnemonicParsing="false" text="Quit" />
+                        <MenuItem fx:id="leaderboardButton" mnemonicParsing="false" text="Leaderboard" />
+                        <MenuItem fx:id="quitButton" mnemonicParsing="false" text="Quit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Chat">
@@ -31,7 +31,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem fx:id="aboutMenuButton" mnemonicParsing="false" text="About" />
+                        <MenuItem fx:id="aboutButton" mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
             </menus>
