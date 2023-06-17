@@ -124,6 +124,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         namePlayer2.setVisible(false);
         namePlayer3.setVisible(false);
         namePlayer4.setVisible(false);
+        commonGoalCard1.setVisible(true);
+        commonGoalCard2.setVisible(true);
         personalGoalCardPlayer1.setVisible(false);
         personalGoalCardPlayer2.setVisible(false);
         personalGoalCardPlayer3.setVisible(false);
@@ -134,49 +136,42 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
-            personalGoalCardPlayer1.setVisible(true);
+            //personalGoalCardPlayer1.setVisible(true);
             bookshelfPlayer3.setVisible(true);
             namePlayer3.setVisible(true);
             namePlayer3.setText(game.getPlayers().get(1).getNickname());
-            personalGoalCardPlayer3.setVisible(true);
+            //personalGoalCardPlayer3.setVisible(true);
         } else if (game.getPlayers().size() == 3) {
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
-            personalGoalCardPlayer1.setVisible(true);
             bookshelfPlayer2.setVisible(true);
             namePlayer2.setVisible(true);
             namePlayer2.setText(game.getPlayers().get(1).getNickname());
-            personalGoalCardPlayer2.setVisible(true);
             bookshelfPlayer3.setVisible(true);
             namePlayer3.setVisible(true);
             namePlayer3.setText(game.getPlayers().get(2).getNickname());
-            personalGoalCardPlayer3.setVisible(true);
         } else {
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
-            personalGoalCardPlayer1.setVisible(true);
             bookshelfPlayer2.setVisible(true);
             namePlayer2.setVisible(true);
             namePlayer2.setText(game.getPlayers().get(1).getNickname());
-            personalGoalCardPlayer2.setVisible(true);
             bookshelfPlayer3.setVisible(true);
             namePlayer3.setVisible(true);
             namePlayer3.setText(game.getPlayers().get(2).getNickname());
-            personalGoalCardPlayer3.setVisible(true);
             bookshelfPlayer4.setVisible(true);
             namePlayer4.setVisible(true);
             namePlayer4.setText(game.getPlayers().get(3).getNickname());
-            personalGoalCardPlayer4.setVisible(true);
         }
-}
+    }
 
     public void selectTiles(){
         Platform.runLater(() -> {
             GuiController.showBanner("INFO", "Choose up to 3 tiles from the board");
         });
-       yourTurn = true;
+        yourTurn = true;
     }
     /**
      * This method is called when a tile has been clicked during the current player's turn
@@ -247,7 +242,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         String input;
 
         do {
-             input = tilesField.getText();
+            input = tilesField.getText();
             tilesField.setVisible(false);
 
             if (input.matches("\\d+")) {
@@ -764,22 +759,22 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to set the common goal cards of the game
      * @param game the current game
      */
-    public synchronized void setCommonGoalCards(Game game){
-       int id1 = game.getCommonGoal1().getId();
-       int id2 = game.getCommonGoal2().getId();
-       String styleCommonGoalCard1 = "generalCommonGoalCard" + id1;
-       commonGoalCard1.getStyleClass().clear();
-       commonGoalCard1.getStyleClass().add(styleCommonGoalCard1);
-       String styleCommonGoalCard2 = "generalCommonGoalCard" + id2;
-       commonGoalCard2.getStyleClass().clear();
-       commonGoalCard2.getStyleClass().add(styleCommonGoalCard2);
+    public void setCommonGoalCards(Game game){
+        int id1 = game.getCommonGoal1().getId();
+        int id2 = game.getCommonGoal2().getId();
+        String styleCommonGoalCard1 = "generalCommonGoalCard" + id1;
+        commonGoalCard1.getStyleClass().clear();
+        commonGoalCard1.getStyleClass().add(styleCommonGoalCard1);
+        String styleCommonGoalCard2 = "generalCommonGoalCard" + id2;
+        commonGoalCard2.getStyleClass().clear();
+        commonGoalCard2.getStyleClass().add(styleCommonGoalCard2);
     }
 
     /**
      * This method is called to set the personal goal cards of the players
      * @param player the current player
      */
-    public synchronized void setPersonalGoalCard(Player player) {
+    public void setPersonalGoalCard(Player player) {
         Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         int id = player.getPersonalGoalCard().getID();
@@ -797,6 +792,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 default -> {
                 }
             }
+
+            personalGoalCardPlayer1.setVisible(true);
+            personalGoalCardPlayer3.setVisible(true);
+
         } else if (game.getPlayers().size() == 3) {
             switch (index) {
                 case 0 -> {
@@ -814,6 +813,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 default -> {
                 }
             }
+
+            personalGoalCardPlayer1.setVisible(true);
+            personalGoalCardPlayer2.setVisible(true);
+            personalGoalCardPlayer3.setVisible(true);
+
         } else if (game.getPlayers().size() == 4) {
             switch (index) {
                 case 0 -> {
@@ -835,11 +839,17 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 default -> {
                 }
             }
+
+            personalGoalCardPlayer1.setVisible(true);
+            personalGoalCardPlayer2.setVisible(true);
+            personalGoalCardPlayer3.setVisible(true);
+            personalGoalCardPlayer4.setVisible(true);
+
         }
     }
 
     /**
-     * This method is called to set the chair of the first player
+     * This method is called  set the chair of the first player
      * @param game the current game
      */
     public void setChair(Game game) {
@@ -957,7 +967,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 break;
             case NULL:
                 break;
-            }
+        }
 
         if (imageName != null) {
             Image image =  new Image(getClass().getResourceAsStream("images/itemTiles/" + imageName));

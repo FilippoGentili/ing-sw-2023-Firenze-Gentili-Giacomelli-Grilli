@@ -17,13 +17,15 @@ public class Gui extends ViewObservable implements View {
     private static final String END = "GAME OVER";
     private static final String INFO = "Info";
 
+    private GameSceneController gameSceneController;
+
     /**
      * This method is used to show a message
      * @param message is the message to show
      */
     @Override
     public void showMessage(String message){
-       // Platform.runLater(() -> GuiController.showBanner(INFO, message));
+        // Platform.runLater(() -> GuiController.showBanner(INFO, message));
         //per ora lo lasciamo commentato, perchè ogni messsaggio che manda il server è un banner nella gui
     }
 
@@ -134,8 +136,8 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
-       GameSceneController gameSceneController = getGameSceneController();
-       Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
+        GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
     }
 
     /**
@@ -153,8 +155,8 @@ public class Gui extends ViewObservable implements View {
      * @param game is the game
      */
     @Override
-    public void showCommonGoalCards(Game game) {
-        GameSceneController gameSceneController = getGameSceneController();
+    public synchronized void showCommonGoalCards(Game game) {
+        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(() -> gameSceneController.setCommonGoalCards(game));
     }
 
@@ -163,9 +165,9 @@ public class Gui extends ViewObservable implements View {
      * @param player is the player whose personal goal card has to be shown
      */
     @Override
-    public void showPersonalGoalCard(Player player) {
-       GameSceneController gameSceneController = getGameSceneController();
-       Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
+    public synchronized void showPersonalGoalCard(Player player) {
+        //GameSceneController gameSceneController = getGameSceneController();
+        Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
     /**
@@ -179,7 +181,7 @@ public class Gui extends ViewObservable implements View {
         showPersonalGoalCard(player);
         showLivingRoom(game.getLivingRoom());
         for(Player p : game.getPlayers()) {
-             showBookshelf(p);
+            showBookshelf(p);
         }
     }
 
@@ -189,7 +191,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public synchronized void showGameStarted(Game game) {
-        GameSceneController gameSceneController = getGameSceneController();
+        gameSceneController = new GameSceneController();
         Platform.runLater(() -> GuiController.changeScene( "gameScene.fxml", gameSceneController));
         Platform.runLater(() -> gameSceneController.setUp(game));
     }
