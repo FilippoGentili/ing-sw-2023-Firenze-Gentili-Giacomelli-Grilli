@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static it.polimi.ingsw.Model.TileType.NULL;
 import static java.lang.Integer.parseInt;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
@@ -341,73 +342,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public synchronized void updateLivingRoom(LivingRoom livingRoom){
 
-        /*ObservableList<Node> livingRoomSpaces = boardGrid.getChildren();
-        for(Node node : livingRoomSpaces){
-            if(isCellValid(node)){
-                boardGrid.add(setTiles(livingRoom.getTile(GridPane.getRowIndex(node),GridPane.getColumnIndex(node)).getTileType()), GridPane.getRowIndex(node)+1, GridPane.getColumnIndex(node)+1);
-            }
-        }*/
-
-        for(int i=0; i<8; i++){
-            for(int j=0; j<8; j++){
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
                 if(isCellValid(livingRoom.getTile(i,j))){
-                    boardGrid.add(setTiles(livingRoom.getTile(i,j).getTileType()),i+1,j+1);
+                    if(livingRoom.getTile(i,j).getTileType() != NULL) {
+                        boardGrid.add(setTiles(livingRoom.getTile(i, j).getTileType()), i + 1, j + 1);
+                    }
                 }
             }
         }
-        /*boardGrid.add(setTiles(livingRoom.getTile(0,3).getTileType()),1,4);
-        boardGrid.add(setTiles(livingRoom.getTile(0,4).getTileType()),1,5);
-
-        boardGrid.add(setTiles(livingRoom.getTile(1,3).getTileType()),2,4);
-        boardGrid.add(setTiles(livingRoom.getTile(1,4).getTileType()),2,5);
-        boardGrid.add(setTiles(livingRoom.getTile(1,5).getTileType()),2,6);
-
-        boardGrid.add(setTiles(livingRoom.getTile(2,2).getTileType()),3,3);
-        boardGrid.add(setTiles(livingRoom.getTile(2,3).getTileType()),3,4);
-        boardGrid.add(setTiles(livingRoom.getTile(2,4).getTileType()),3,5);
-        boardGrid.add(setTiles(livingRoom.getTile(2,5).getTileType()),3,6);
-        boardGrid.add(setTiles(livingRoom.getTile(2,6).getTileType()),3,7);
-
-        boardGrid.add(setTiles(livingRoom.getTile(3,1).getTileType()),4,2);
-        boardGrid.add(setTiles(livingRoom.getTile(3,2).getTileType()),4,3);
-        boardGrid.add(setTiles(livingRoom.getTile(3,3).getTileType()),4,4);
-        boardGrid.add(setTiles(livingRoom.getTile(3,4).getTileType()),4,5);
-        boardGrid.add(setTiles(livingRoom.getTile(3,5).getTileType()),4,6);
-        boardGrid.add(setTiles(livingRoom.getTile(3,6).getTileType()),4,7);
-        boardGrid.add(setTiles(livingRoom.getTile(3,7).getTileType()),4,8);
-        boardGrid.add(setTiles(livingRoom.getTile(3,8).getTileType()),4,9);
-
-        boardGrid.add(setTiles(livingRoom.getTile(4,0).getTileType()),5,1);
-        boardGrid.add(setTiles(livingRoom.getTile(4,1).getTileType()),5,2);
-        boardGrid.add(setTiles(livingRoom.getTile(4,2).getTileType()),5,3);
-        boardGrid.add(setTiles(livingRoom.getTile(4,3).getTileType()),5,4);
-        boardGrid.add(setTiles(livingRoom.getTile(4,4).getTileType()),5,5);
-        boardGrid.add(setTiles(livingRoom.getTile(4,5).getTileType()),5,6);
-        boardGrid.add(setTiles(livingRoom.getTile(4,6).getTileType()),5,7);
-        boardGrid.add(setTiles(livingRoom.getTile(4,7).getTileType()),5,8);
-        boardGrid.add(setTiles(livingRoom.getTile(4,8).getTileType()),5,9);
-
-        boardGrid.add(setTiles(livingRoom.getTile(5,0).getTileType()),6,1);
-        boardGrid.add(setTiles(livingRoom.getTile(5,1).getTileType()),6,2);
-        boardGrid.add(setTiles(livingRoom.getTile(5,2).getTileType()),6,3);
-        boardGrid.add(setTiles(livingRoom.getTile(5,3).getTileType()),6,4);
-        boardGrid.add(setTiles(livingRoom.getTile(5,4).getTileType()),6,5);
-        boardGrid.add(setTiles(livingRoom.getTile(5,5).getTileType()),6,6);
-        boardGrid.add(setTiles(livingRoom.getTile(5,6).getTileType()),6,7);
-        boardGrid.add(setTiles(livingRoom.getTile(5,7).getTileType()),6,8);
-
-        boardGrid.add(setTiles(livingRoom.getTile(6,2).getTileType()),7,3);
-        boardGrid.add(setTiles(livingRoom.getTile(6,3).getTileType()),7,4);
-        boardGrid.add(setTiles(livingRoom.getTile(6,4).getTileType()),7,5);
-        boardGrid.add(setTiles(livingRoom.getTile(6,5).getTileType()),7,6);
-        boardGrid.add(setTiles(livingRoom.getTile(6,6).getTileType()),7,7);
-
-        boardGrid.add(setTiles(livingRoom.getTile(7,3).getTileType()),8,4);
-        boardGrid.add(setTiles(livingRoom.getTile(7,4).getTileType()),8,5);
-        boardGrid.add(setTiles(livingRoom.getTile(7,5).getTileType()),8,6);
-
-        boardGrid.add(setTiles(livingRoom.getTile(8,4).getTileType()),9,5);
-        boardGrid.add(setTiles(livingRoom.getTile(8,5).getTileType()),9,6);*/
     }
 
     /**
@@ -415,7 +358,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param player of the bookshelf
      */
     public synchronized void updateBookShelf(Player player){
-        Game game = player.getGame();
+       /* Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         if (game.getPlayers().size() == 2) {
             switch (index) {
@@ -759,7 +702,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
                 }
             }
-        }
+        }*/
     }
 
     /**
@@ -906,93 +849,84 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @return the image of the tile
      */
     public ImageView setTiles(TileType tileType) {
+
         Random random = new Random();
         int randomNumber = random.nextInt(3);
-
         String imageName = null;
 
         switch (tileType) {
             case CAT:
                 switch (randomNumber) {
-                    case 0:
-                        imageName = "Gatti1.png";
-                    case 1:
-                        imageName = "Gatti2.png";
-                    case 2:
-                        imageName = "Gatti3.png";
+                    case 0 -> imageName = "Gatti1.png";
+                    case 1 -> imageName = "Gatti2.png";
+                    case 2 -> imageName = "Gatti3.png";
+                    default -> {
+                    }
                 }
                 break;
             case BOOK:
                 switch (randomNumber) {
-                    case 0:
-                        imageName = "Libri1.png";
-                    case 1:
-                        imageName = "Libri2.png";
-                    case 2:
-                        imageName = "Libri3.png";
+                    case 0 -> imageName = "Libri1.png";
+                    case 1 -> imageName = "Libri2.png";
+                    case 2 -> imageName = "Libri3.png";
+                    default -> {
+                    }
                 }
                 break;
             case GAME:
                 switch (randomNumber) {
-                    case 0:
-                        imageName = "Giochi1.png";
-                    case 1:
-                        imageName = "Giochi2.png";
-                    case 2:
-                        imageName = "Giochi3.png";
+                    case 0 -> imageName = "Giochi1.png";
+                    case 1 -> imageName = "Giochi2.png";
+                    case 2 -> imageName = "Giochi3.png";
+                    default -> {
+                    }
                 }
                 break;
             case FRAME:
                 switch (randomNumber) {
-                    case 0:
-                        imageName = "Cornici1.png";
-                    case 1:
-                        imageName = "Cornici2.png";
-                    case 2:
-                        imageName = "Cornici3.png";
+                    case 0 -> imageName = "Cornici1.png";
+                    case 1 -> imageName = "Cornici2.png";
+                    case 2 -> imageName = "Cornici3.png";
+                    default -> {
+                    }
                 }
                 break;
             case TROPHIE:
                 switch (randomNumber) {
-                    case 0:
-                        imageName = "Trofei1.png";
-                    case 1:
-                        imageName = "Trofei2.png";
-                    case 2:
-                        imageName = "Trofei3.png";
+                    case 0 -> imageName = "Trofei1.png";
+                    case 1 -> imageName = "Trofei2.png";
+                    case 2 -> imageName = "Trofei3.png";
+                    default -> {
+                    }
                 }
                 break;
             case PLANT:
                 switch (randomNumber) {
-                    case 0:
-                        imageName = "Piante1.png";
-                    case 1:
-                        imageName = "Piante2.png";
-                    case 2:
-                        imageName = "Piante3.png";
+                    case 0 -> imageName = "Piante1.png";
+                    case 1 -> imageName = "Piante2.png";
+                    case 2 -> imageName = "Piante3.png";
+                    default -> {
+                    }
                 }
-                break;
-            case NULL:
                 break;
         }
 
-        if (imageName != null) {
-            Image image =  new Image(getClass().getResourceAsStream("images/itemTiles/" + imageName));
-            ImageView imageView = new ImageView(image);
-            return imageView;
-        } else {
-            return null;
-        }
+        Image image =  new Image("images/itemTiles/" + imageName);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(48);
+        imageView.setFitWidth(48);
+        return imageView;
     }
 
     public ImageView getTiles(ImageView imageName){
-        if (imageName != null) {
+       /* if (imageName != null) {
             Image image =  new Image(getClass().getResourceAsStream("/resources/images/itemTiles/" + imageName));
             ImageView imageView = new ImageView(image);
             return imageView;
         } else {
             return null;
-        }
+        }*/
+        return null;
     }
 
     public boolean isCellValid(Tile tile){
