@@ -27,9 +27,9 @@ public class GameSaved {
     public static GameController loadGame(Server server){
         Persistence persistence;
 
-        try(FileInputStream savedGame=new FileInputStream(new File("MyShelfie.savedGame"))){
+        try(FileInputStream savedGame=new FileInputStream("MyShelfie.savedGame")){
             ObjectInputStream in = new ObjectInputStream(savedGame);
-            persistence=(Persistence) in.readObject();
+            persistence = (Persistence) in.readObject();
             GameController newGameController= new GameController(server, persistence.getGameController());
             newGameController.getGame().loadGame(persistence.getGameController().getGame());
 

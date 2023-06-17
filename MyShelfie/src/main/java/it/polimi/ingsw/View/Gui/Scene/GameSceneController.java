@@ -96,7 +96,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     boolean yourTurn = false;
 
     @FXML
-    public void initialize() {
+    public synchronized void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
@@ -110,7 +110,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to set up the initial game scene
      * @param game the current game
      */
-    public void setUp(Game game){
+    public synchronized void setUp(Game game){
         confirmTileOrderButton.setVisible(false);
         confirmTileSelectionButton.setVisible(false);
         confirmColumnButton.setVisible(false);

@@ -19,7 +19,7 @@ public class GuiController extends ViewObservable{
     private static GenericSceneController currentController;
 
 
-    public static <T> T changeScene(String fxml, Scene scene, List<ViewObserver> observers) {
+    public synchronized static <T> T changeScene(String fxml, Scene scene, List<ViewObserver> observers) {
         T controller = null;
         try {
             FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/" + fxml));
@@ -36,16 +36,16 @@ public class GuiController extends ViewObservable{
         return controller;
     }
 
-    public static <T> T changeScene(String fxml, Event event,List<ViewObserver> observers) {
+    public synchronized static <T> T changeScene(String fxml, Event event,List<ViewObserver> observers) {
         Scene scene = ((Node) event.getSource()).getScene();
         return changeScene(fxml, scene, observers);
     }
 
-    public static <T> T changeScene(String fxml,  List<ViewObserver> observers){
+    public synchronized static <T> T changeScene(String fxml,  List<ViewObserver> observers){
         return changeScene(fxml, currentScene, observers);
     }
 
-    public static void changeScene(String fxml, Scene scene,GenericSceneController controller) {
+    public synchronized static void changeScene(String fxml, Scene scene,GenericSceneController controller) {
         try {
             FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/" + fxml));
             loader.setController(controller);
@@ -58,16 +58,16 @@ public class GuiController extends ViewObservable{
         }
     }
 
-    public static void changeScene(String fxml, Event event,GenericSceneController controller) {
+    public synchronized static void changeScene(String fxml, Event event,GenericSceneController controller) {
         Scene scene = ((Node) event.getSource()).getScene();
         changeScene(fxml, scene, controller);
     }
 
-    public static void changeScene(String fxml, GenericSceneController controller) {
+    public synchronized static void changeScene(String fxml, GenericSceneController controller) {
         changeScene(fxml, currentScene, controller);
     }
 
-    public static void showBanner(String title, String message) {
+    public synchronized static void showBanner(String title, String message) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/bannerScene.fxml"));
         Parent parent;
 
