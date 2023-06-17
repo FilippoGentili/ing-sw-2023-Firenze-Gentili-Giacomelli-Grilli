@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -87,8 +88,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private Button confirmColumnButton;
     @FXML
-    private TextField tilesField;
-    @FXML
     private MenuItem openChatButton;
     @FXML
     private MenuItem quitButton;
@@ -115,7 +114,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         confirmTileOrderButton.setVisible(false);
         confirmTileSelectionButton.setVisible(false);
         confirmColumnButton.setVisible(false);
-        tilesField.setVisible(false);
 
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
@@ -179,7 +177,18 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param event mouse event
      */
     public void tileClicked(MouseEvent event) {
-        Node source = (Node) event.getSource();
+        ObservableList<Node> children = boardGrid.getChildren();
+        for(Node node : children) {
+            if(node instanceof ImageView) {
+                if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+                    if (yourTurn) {
+                        node.setEffect(new Glow(0.5));
+                        confirmTileSelectionButton.setVisible(true);
+                    }
+                }
+            }
+        }
+        /*Node source = (Node) event.getSource();
         Integer columnIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
         int i=1;
@@ -218,7 +227,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
                 confirmTileSelectionButton.setVisible(false);
             }
-        }
+        }*/
     }
 
     public void confirmTileSelectionButtonClicked(MouseEvent event){
@@ -229,58 +238,18 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * Tjis is method is called when the player has to choose the column to put the tiles in
      */
     public void selectColumn(){
-        tilesField.setVisible(true);
-        String input = tilesField.getText();
-        if (input != null) {
-            confirmColumnButton.setVisible(true);
-        }
+
     }
 
     public void confirmColumnButtonClicked(MouseEvent event, ArrayList<Integer> AvailableColumns) {
-        confirmColumnButton.setVisible(false);
-        boolean correct = false;
-        int col = 0;
-        String input;
 
-        do {
-            input = tilesField.getText();
-            tilesField.setVisible(false);
 
-            if (input.matches("\\d+")) {
-                col = parseInt(input);
-                correct = AvailableColumns.contains(col - 1);
-                if (!correct)
-                    Platform.runLater(() -> {
-                        GuiController.showBanner("Try again", "The column is full");
-                    });
-            } else {
-                Platform.runLater(() -> {
-                    GuiController.showBanner("Error", "Input not valid");
-                });
-            }
-        }while(!correct || !input.matches("\\d+"));
-
-        final int choice = col-1;
-
-        notifyObserver(obs -> {
-            try {
-                obs.updateChosenColumn(choice, AvailableColumns);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        tilesField.clear();
     }
 
     /**
      * This method is called when the player has to choose the order of the tiles to put in the bookshelf
      */
     public void tileOrder() {
-        tilesField.setVisible(true);
-        String tile = tilesField.getText();
-        if (tile != null) {
-            confirmTileOrderButton.setVisible(true);
-        }
     }
 
     /**
@@ -288,51 +257,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param event mouse event
      */
     private void confirmTileOrderButtonClicked(MouseEvent event, ArrayList<Tile> chosenTiles) {
-        confirmTileOrderButton.setVisible(false);
-        String input;
-
-        ArrayList<Tile> orderedTiles = new ArrayList<>();
-        ArrayList<String> tilesTypes = new ArrayList<>();
-
-        if(chosenTiles.size() > 1){
-            int i=1;
-            do{
-                for (Tile tile : chosenTiles){
-                    tilesTypes.add(tile.getTileType().toString());
-                }
-                input = tilesField.getText();
-
-                if(!tilesTypes.contains(input)) {
-                    Platform.runLater(() -> {
-                        GuiController.showBanner("Try again", "You don't have that tile");
-                    });
-                }else{
-                    for (int x=0; x<chosenTiles.size(); x++) {
-                        if (input.equals(chosenTiles.get(x).getTileType().toString())) {
-                            orderedTiles.add(chosenTiles.get(x));
-                            chosenTiles.remove(x);
-                            tilesTypes.remove(x);
-                            break;
-                        }
-                    }
-                    i++;
-                }
-
-            }while(!chosenTiles.toString().contains(input) && chosenTiles.size()>0);
-        }else{
-            orderedTiles.add(chosenTiles.get(0));
-        }
-
-        notifyObserver(obs -> {
-            try {
-                obs.updateOrderedTiles(orderedTiles);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        tilesField.clear();
-        yourTurn = false;
 
     }
 
@@ -940,9 +864,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             case 8 -> tile.getCol() == 4 || tile.getCol() == 5;
             default -> false;
         };
-    }
-
-    public void enterButtonClicked(KeyEvent keyEvent) {
     }
 
     public void openChatButtonClicked(ActionEvent event) {
