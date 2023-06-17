@@ -136,7 +136,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
-        GameSceneController gameSceneController = getGameSceneController();
+        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
     }
 
@@ -146,7 +146,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showBookshelf(Player player) {
-        GameSceneController gameSceneController = getGameSceneController();
+        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(() -> gameSceneController.updateBookShelf(player));
     }
 
