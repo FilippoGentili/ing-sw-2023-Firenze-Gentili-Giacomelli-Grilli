@@ -86,7 +86,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns) {
-        GameSceneController gameSceneController = getGameSceneController();
+        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(gameSceneController::selectColumn);
     }
 
@@ -96,7 +96,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
-        GameSceneController gameSceneController = getGameSceneController();
+        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(gameSceneController::selectTiles);
     }
 
@@ -106,7 +106,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
-        GameSceneController gameSceneController = getGameSceneController();
+        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(gameSceneController::tileOrder);
     }
 

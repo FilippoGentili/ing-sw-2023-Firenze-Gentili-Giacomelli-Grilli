@@ -177,10 +177,14 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param event mouse event
      */
     public void tileClicked(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        Integer columnIndex = GridPane.getColumnIndex(source);
+        Integer rowIndex = GridPane.getRowIndex(source);
         ObservableList<Node> children = boardGrid.getChildren();
         for(Node node : children) {
             if(node instanceof ImageView) {
-                if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+                //if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+                if(columnIndex == GridPane.getColumnIndex(node) && rowIndex == GridPane.getRowIndex(node)) {
                     if (yourTurn) {
                         node.setEffect(new Glow(0.5));
                         confirmTileSelectionButton.setVisible(true);
