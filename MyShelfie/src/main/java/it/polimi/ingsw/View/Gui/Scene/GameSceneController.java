@@ -12,12 +12,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.scene.control.TextField;
@@ -183,10 +185,9 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         ObservableList<Node> children = boardGrid.getChildren();
         for(Node node : children) {
             if(node instanceof ImageView) {
-                //if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
-                if(columnIndex == GridPane.getColumnIndex(node) && rowIndex == GridPane.getRowIndex(node)) {
+                if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
                     if (yourTurn) {
-                        node.setEffect(new Glow(0.5));
+                        node.setEffect(new DropShadow(10, Color.YELLOW));
                         confirmTileSelectionButton.setVisible(true);
                     }
                 }
