@@ -346,7 +346,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             for(int j=0; j<9; j++){
                 if(isCellValid(livingRoom.getTile(i,j))){
                     if(livingRoom.getTile(i,j).getTileType() != NULL) {
-                        boardGrid.add(setTiles(livingRoom.getTile(i, j).getTileType()), i + 1, j + 1);
+                        boardGrid.add(setTiles(livingRoom.getTile(i, j).getTileType()), j + 1, i + 1);
                     }
                 }
             }
@@ -930,30 +930,16 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     public boolean isCellValid(Tile tile){
-        switch (tile.getRow()){
-            case 0:
-                if(tile.getCol() == 3 || tile.getCol() == 4) return true;
-                else return false;
-            case 1,7:
-                if(tile.getCol() == 3 || tile.getCol() == 4 || tile.getCol() == 5) return true;
-                else return false;
-            case 2,6:
-                if(tile.getCol() == 0 || tile.getCol() == 1 || tile.getCol() == 7 || tile.getCol() == 8) return false;
-                else return true;
-            case 3:
-                if(tile.getCol() == 0) return false;
-                else return true;
-            case 4:
-                return true;
-            case 5:
-                if(tile.getCol() == 8) return false;
-                else return true;
-            case 8:
-                if(tile.getCol() == 4 || tile.getCol() == 5) return true;
-                else return false;
-            default:
-                return false;
-        }
+        return switch (tile.getRow()) {
+            case 0 -> tile.getCol() == 3 || tile.getCol() == 4;
+            case 1, 7 -> tile.getCol() == 3 || tile.getCol() == 4 || tile.getCol() == 5;
+            case 2, 6 -> tile.getCol() != 0 && tile.getCol() != 1 && tile.getCol() != 7 && tile.getCol() != 8;
+            case 3 -> tile.getCol() != 0;
+            case 4 -> true;
+            case 5 -> tile.getCol() != 8;
+            case 8 -> tile.getCol() == 4 || tile.getCol() == 5;
+            default -> false;
+        };
     }
 
     public void enterButtonClicked(KeyEvent keyEvent) {
