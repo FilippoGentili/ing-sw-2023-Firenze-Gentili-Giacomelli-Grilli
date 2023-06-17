@@ -341,11 +341,18 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public synchronized void updateLivingRoom(LivingRoom livingRoom){
 
-        ObservableList<Node> livingRoomSpaces = boardGrid.getChildren();
+        /*ObservableList<Node> livingRoomSpaces = boardGrid.getChildren();
         for(Node node : livingRoomSpaces){
             if(isCellValid(node)){
-
                 boardGrid.add(setTiles(livingRoom.getTile(GridPane.getRowIndex(node),GridPane.getColumnIndex(node)).getTileType()), GridPane.getRowIndex(node)+1, GridPane.getColumnIndex(node)+1);
+            }
+        }*/
+
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(isCellValid(livingRoom.getTile(i,j))){
+                    boardGrid.add(setTiles(livingRoom.getTile(i,j).getTileType()),i+1,j+1);
+                }
             }
         }
         /*boardGrid.add(setTiles(livingRoom.getTile(0,3).getTileType()),1,4);
@@ -988,27 +995,27 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
-    public boolean isCellValid(Node node){
-        switch (GridPane.getRowIndex(node)){
+    public boolean isCellValid(Tile tile){
+        switch (tile.getRow()){
             case 0:
-                if(GridPane.getColumnIndex(node) == 3 || GridPane.getColumnIndex(node) == 4) return true;
+                if(tile.getCol() == 3 || tile.getCol() == 4) return true;
                 else return false;
             case 1,7:
-                if(GridPane.getColumnIndex(node) == 3 || GridPane.getColumnIndex(node) == 4 || GridPane.getColumnIndex(node) == 5) return true;
+                if(tile.getCol() == 3 || tile.getCol() == 4 || tile.getCol() == 5) return true;
                 else return false;
             case 2,6:
-                if(GridPane.getColumnIndex(node) == 0 || GridPane.getColumnIndex(node) == 1 || GridPane.getColumnIndex(node) == 7 || GridPane.getColumnIndex(node) == 8) return false;
+                if(tile.getCol() == 0 || tile.getCol() == 1 || tile.getCol() == 7 || tile.getCol() == 8) return false;
                 else return true;
             case 3:
-                if(GridPane.getColumnIndex(node) == 0) return false;
+                if(tile.getCol() == 0) return false;
                 else return true;
             case 4:
                 return true;
             case 5:
-                if(GridPane.getColumnIndex(node) == 8) return false;
+                if(tile.getCol() == 8) return false;
                 else return true;
             case 8:
-                if(GridPane.getColumnIndex(node) == 4 || GridPane.getColumnIndex(node) == 5) return true;
+                if(tile.getCol() == 4 || tile.getCol() == 5) return true;
                 else return false;
             default:
                 return false;
