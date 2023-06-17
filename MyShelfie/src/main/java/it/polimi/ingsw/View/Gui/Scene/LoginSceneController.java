@@ -36,13 +36,13 @@ public class LoginSceneController extends ViewObservable implements GenericScene
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
             String username = usernameField.getText();
 
-            new Thread(() -> notifyObserver(obs -> {
+            notifyObserver(obs -> {
                 try {
                     obs.updateNickname(username);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            })).start();
+            });
 
         }
 

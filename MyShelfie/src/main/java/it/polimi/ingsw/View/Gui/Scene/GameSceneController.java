@@ -23,7 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 
-import javax.swing.text.Position;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -1008,7 +1007,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     public void quitButtonClicked(ActionEvent event) {
-        Platform.runLater(() ->GuiController.changeScene("startScene.fxml", observers));
+        System.exit(1);
     }
 
     public void leaderboardButtonClicked(ActionEvent event) {
