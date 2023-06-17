@@ -96,7 +96,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     boolean yourTurn = false;
 
     @FXML
-    public synchronized void initialize() {
+    public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
@@ -344,7 +344,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to update the tiles on the living room board
      * @param livingRoom of the current game
      */
-    public void updateLivingRoom(LivingRoom livingRoom){
+    public synchronized void updateLivingRoom(LivingRoom livingRoom){
 
         ObservableList<Node> livingRoomSpaces = boardGrid.getChildren();
         for(Node node : livingRoomSpaces){
@@ -412,7 +412,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to update the tiles on the bookshelf
      * @param player of the bookshelf
      */
-    public void updateBookShelf(Player player){
+    public synchronized void updateBookShelf(Player player){
         Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         if (game.getPlayers().size() == 2) {
@@ -764,7 +764,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to set the common goal cards of the game
      * @param game the current game
      */
-    public void setCommonGoalCards(Game game){
+    public synchronized void setCommonGoalCards(Game game){
        int id1 = game.getCommonGoal1().getId();
        int id2 = game.getCommonGoal2().getId();
        String styleCommonGoalCard1 = "generalCommonGoalCard" + id1;
@@ -779,7 +779,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called to set the personal goal cards of the players
      * @param player the current player
      */
-    public void setPersonalGoalCard(Player player) {
+    public synchronized void setPersonalGoalCard(Player player) {
         Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         int id = player.getPersonalGoalCard().getID();
@@ -793,6 +793,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 case 1 -> {
                     personalGoalCardPlayer3.getStyleClass().clear();
                     personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
+                }
+                default -> {
                 }
             }
         } else if (game.getPlayers().size() == 3) {
@@ -808,6 +810,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 case 2 -> {
                     personalGoalCardPlayer3.getStyleClass().clear();
                     personalGoalCardPlayer3.getStyleClass().add(stylePersonalGoalCard);
+                }
+                default -> {
                 }
             }
         } else if (game.getPlayers().size() == 4) {
@@ -827,6 +831,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 case 3 -> {
                     personalGoalCardPlayer4.getStyleClass().clear();
                     personalGoalCardPlayer4.getStyleClass().add(stylePersonalGoalCard);
+                }
+                default -> {
                 }
             }
         }
