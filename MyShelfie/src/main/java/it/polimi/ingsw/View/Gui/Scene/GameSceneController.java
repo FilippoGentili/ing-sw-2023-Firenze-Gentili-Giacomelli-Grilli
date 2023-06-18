@@ -131,18 +131,26 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private AnchorPane tile2;
     @FXML
     private AnchorPane tile3;
+    @FXML
+    private AnchorPane numberOfTile1;
+    @FXML
+    private AnchorPane numberOfTile2;
+    @FXML
+    private AnchorPane numberOfTile3;
 
     boolean yourTurn = false;
     private ArrayList<Integer> availableColumns = new ArrayList<>();
+    private ArrayList<TileType> orderList = new ArrayList<>();
+    private Integer counter = 0;
 
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event, new ArrayList<>()));
-        tile1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::orderClicked);
-        tile2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::orderClicked);
-        tile3.addEventHandler(MouseEvent.MOUSE_CLICKED, this::orderClicked);
+        tile1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile1));
+        tile2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile2));
+        tile3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile3));
         arrowB1C1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,1, arrowB1C1));
         arrowB1C2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,2, arrowB1C2));
         arrowB1C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,3, arrowB1C3));
@@ -201,8 +209,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C5.setVisible(false);
 
         tile1.setVisible(false);
+        numberOfTile1.setVisible(false);
         tile2.setVisible(false);
+        numberOfTile2.setVisible(false);
         tile3.setVisible(false);
+        numberOfTile3.setVisible(false);
 
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
@@ -313,17 +324,112 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     /**
      * This method shows thw banner when the player has to choose the order for the tiles
      */
-    public void tileOrder() {
-        Platform.runLater(() -> {
-            GuiController.showBanner("INFO", "Choose the order of the tiles");
-        });
+    public void tileOrder(ArrayList<Tile> choseTiles) {
+        Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the order of the tiles"));
+        switch (choseTiles.size()) {
+            case 1 -> {
+                tile2.setVisible(true);
+                tile2.getStyleClass().clear();
+                tile2.getStyleClass().add(setStyleTile(choseTiles.get(0).getTileType()));
+            }
+            case 2 -> {
+                tile1.setVisible(true);
+                tile1.getStyleClass().clear();
+                tile1.getStyleClass().add(setStyleTile(choseTiles.get(0).getTileType()));
+                tile3.setVisible(true);
+                tile3.getStyleClass().clear();
+                tile3.getStyleClass().add(setStyleTile(choseTiles.get(1).getTileType()));
+            }
+            case 3 -> {
+                tile1.setVisible(true);
+                tile1.getStyleClass().clear();
+                tile1.getStyleClass().add(setStyleTile(choseTiles.get(0).getTileType()));
+                tile2.setVisible(true);
+                tile2.getStyleClass().clear();
+                tile2.getStyleClass().add(setStyleTile(choseTiles.get(1).getTileType()));
+                tile3.setVisible(true);
+                tile3.getStyleClass().clear();
+                tile3.getStyleClass().add(setStyleTile(choseTiles.get(2).getTileType()));
+            }
+            default -> {
+            }
+        }
+    }
+
+    /**
+     * This method is used to set the style of the tile
+     * @param tileType of the chosen tile
+     * @return the style of the tile
+     */
+    public String setStyleTile(TileType tileType){
+        return switch (tileType) {
+            case PLANT -> "generalPlants1";
+            case BOOK -> "generalBooks1";
+            case TROPHIE -> "generalTrophies1";
+            case CAT -> "generalCats1";
+            case FRAME -> "generalFrames1";
+            case GAME -> "generalGames1";
+            default -> "";
+        };
     }
 
     /**
      * This method is used to select the order of the tiles
      */
-    public void orderClicked(MouseEvent event){
+    public void orderClicked(AnchorPane tile){
+        ArrayList<TileType> orderedList = new ArrayList<>();
+        setCounter(getCounter()+1);
+        if (tile1.equals(tile)) {
+            numberOfTile1.getStyleClass().clear();
+            numberOfTile1.getStyleClass().add("generalNumber" + getCounter());
+        } else if (tile2.equals(tile)) {
+            numberOfTile2.getStyleClass().clear();
+            numberOfTile2.getStyleClass().add("generalNumber" + getCounter());
+        } else if (tile3.equals(tile)) {
+            numberOfTile3.getStyleClass().clear();
+            numberOfTile3.getStyleClass().add("generalNumber" + getCounter());
+        }
+        String style = tile.getStyleClass().get(0);
+        switch (style){
+            case "generalPlants1" -> orderedList.add(TileType.PLANT);
+            case "generalPlants2" -> orderedList.add(TileType.PLANT);
+            case "generalPlants3" -> orderedList.add(TileType.PLANT);
+            case "generalBooks1" -> orderedList.add(TileType.BOOK);
+            case "generalBooks2" -> orderedList.add(TileType.BOOK);
+            case "generalBooks3" -> orderedList.add(TileType.BOOK);
+            case "generalTrophies1" -> orderedList.add(TileType.TROPHIE);
+            case "generalTrophies2" -> orderedList.add(TileType.TROPHIE);
+            case "generalTrophies3" -> orderedList.add(TileType.TROPHIE);
+            case "generalCats1" -> orderedList.add(TileType.CAT);
+            case "generalCats2" -> orderedList.add(TileType.CAT);
+            case "generalCats3" -> orderedList.add(TileType.CAT);
+            case "generalFrames1" -> orderedList.add(TileType.FRAME);
+            case "generalFrames2" -> orderedList.add(TileType.FRAME);
+            case "generalFrames3" -> orderedList.add(TileType.FRAME);
+            case "generalGames1" -> orderedList.add(TileType.GAME);
+            case "generalGames2" -> orderedList.add(TileType.GAME);
+            case "generalGames3" -> orderedList.add(TileType.GAME);
+            default -> {
+            }
+        }
+        setOrderList(orderedList);
+    }
 
+    private void setOrderList(ArrayList<TileType> orderList) {
+        this.orderList = orderList;
+    }
+
+    private ArrayList<TileType> getOrderList() {
+        return orderList;
+    }
+    private void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    private int getCounter() {
+        if(counter == 3)
+            setCounter(0);
+        return counter;
     }
 
     /**
@@ -332,6 +438,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     private void confirmTileOrderButtonClicked(MouseEvent event, ArrayList<Tile> orderedTiles) {
         confirmTileOrderButton.setVisible(false);
+        tile1.setEffect(null);
+        tile1.setVisible(false);
+        tile2.setEffect(null);
+        tile2.setVisible(false);
+        tile3.setEffect(null);
+        tile3.setVisible(false);
 
         notifyObserver(obs -> {
             try {

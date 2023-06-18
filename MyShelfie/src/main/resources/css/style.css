@@ -341,3 +341,18 @@
     -fx-background-image: url("../images/misc/arrow.png");
     -fx-background-size: stretch;
 }
+
+.generalNumber1 {
+    -fx-background-image: url("../images/misc/number1.png");
+    -fx-background-size: stretch;
+}
+
+.generalNumber2 {
+    -fx-background-image: url("../images/misc/number2.png");
+    -fx-background-size: stretch;
+}
+
+.generalNumber3 {
+    -fx-background-image: url("../images/misc/number3.png");
+    -fx-background-size: stretch;
+}

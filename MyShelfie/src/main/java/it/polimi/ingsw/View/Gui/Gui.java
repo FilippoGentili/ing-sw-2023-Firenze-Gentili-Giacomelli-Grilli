@@ -85,7 +85,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
-        Platform.runLater(gameSceneController::tileOrder);
+        Platform.runLater(() -> gameSceneController.tileOrder(chosenTiles));
     }
 
     /**
