@@ -263,7 +263,7 @@ public class GameController implements Serializable {
             currentPlayer.setChosenTiles(TemporaryChosenTiles);
             ArrayList<Integer> availableColumns = currentPlayer.getBookshelf().getFreeColumns(chosen.size());
 
-            server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
+            server.sendMessage(new ColumnRequest(availableColumns, currentPlayer),currentPlayer.getNickname());
         }else{
             server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
         }
@@ -286,7 +286,7 @@ public class GameController implements Serializable {
             ArrayList<Integer> availableColumns;
             availableColumns = currentPlayer.getBookshelf().getFreeColumns(currentPlayer.getChosenTiles().size());
 
-            server.sendMessage(new ColumnRequest(availableColumns),currentPlayer.getNickname());
+            server.sendMessage(new ColumnRequest(availableColumns, currentPlayer),currentPlayer.getNickname());
         }
     }
 

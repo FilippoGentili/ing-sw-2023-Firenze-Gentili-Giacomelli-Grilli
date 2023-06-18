@@ -85,7 +85,7 @@ public class Gui extends ViewObservable implements View {
      * @param AvailableColumns
      */
     @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns, String nickname) {
+    public void columnRequest(ArrayList<Integer> AvailableColumns, Player player) {
         Platform.runLater(gameSceneController::selectColumn(Game, Player, AvailableColumns));
     }
 

@@ -13,7 +13,7 @@ public interface View {
     void askNumberOfPlayers() ;
     void startChat();
     void showChatMessage(ChatMessage message);
-    void columnRequest(ArrayList<Integer> AvailableColumns, String nickname);
+    void columnRequest(ArrayList<Integer> AvailableColumns, Player player);
     void TilesRequest(LivingRoom livingRoom) ;
     void OrderTiles(ArrayList<Tile> chosenTiles) ;
     void showScoreboard(ArrayList<Player> scoreboard);

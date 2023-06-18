@@ -105,8 +105,8 @@ public class VirtualView implements View, Observer, Serializable {
     }
 
     @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns, String nickname)  {
-        connection.sendMessage(new ColumnRequest(AvailableColumns)); //da sistemare gestione request e reply perche non coincidono
+    public void columnRequest(ArrayList<Integer> AvailableColumns, Player player)  {
+        connection.sendMessage(new ColumnRequest(AvailableColumns, player)); //da sistemare gestione request e reply perche non coincidono
     }
 
     @Override
