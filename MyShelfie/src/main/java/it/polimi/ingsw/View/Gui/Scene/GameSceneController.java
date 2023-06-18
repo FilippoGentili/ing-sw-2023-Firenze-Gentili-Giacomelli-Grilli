@@ -1,11 +1,8 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.View.Gui.Gui;
 import it.polimi.ingsw.View.Gui.GuiController;
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,28 +10,21 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import static it.polimi.ingsw.Model.TileType.NULL;
-import static java.lang.Integer.parseInt;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -101,12 +91,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
-        confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, new ArrayList<>()));
-        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmTileSelectionButtonClicked);
+        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event, new ArrayList<>()));
+        confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, 0,  new ArrayList<>()));
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(this::leaderboardButtonClicked);
     }
+
 
     /**
      * This method is called to set up the initial game scene
@@ -168,12 +159,16 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
+    /**
+     * This method shows thw banner when the player has to choose the tiles from the board
+     */
     public void selectTiles(){
         Platform.runLater(() -> {
             GuiController.showBanner("INFO", "Choose up to 3 tiles from the board");
         });
         yourTurn = true;
     }
+
     /**
      * This method is called when a tile has been clicked during the current player's turn
      * @param event mouse event
@@ -182,87 +177,123 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Node source = (Node) event.getSource();
         Integer columnIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
+        int numberOfTiles = 0;
         ObservableList<Node> children = boardGrid.getChildren();
         for(Node node : children) {
             if(node instanceof ImageView) {
                 if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
                     if (yourTurn) {
                         node.setEffect(new DropShadow(10, Color.YELLOW));
-                        confirmTileSelectionButton.setVisible(true);
+                        numberOfTiles++;
+                        //se cliccato di nuovo sopra
+                        //numberOfTiles--;
+                        //add tiles to chosen tiles
+                        if(numberOfTiles>1) {
+                            confirmTileSelectionButton.setVisible(true);
+                        }
                     }
                 }
             }
         }
-        /*Node source = (Node) event.getSource();
-        Integer columnIndex = GridPane.getColumnIndex(source);
-        Integer rowIndex = GridPane.getRowIndex(source);
-        int i=1;
-        boolean valid = true;
-        if(yourTurn) {
-
-            while (i < 4 && valid) {
-                if (columnIndex > 3 && columnIndex < 6 && rowIndex == 1) {        //first row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 3 && columnIndex < 7 && rowIndex == 2) { //second row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 2 && columnIndex < 8 && rowIndex == 3) { //third row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 1 && columnIndex < 10 && rowIndex == 4) { //fourth row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 0 && columnIndex < 10 && rowIndex == 5) { //fifth row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 0 && columnIndex < 9 && rowIndex == 6) { //sixth row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 2 && columnIndex < 8 && rowIndex == 7) { //seventh row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 3 && columnIndex < 7 && rowIndex == 8) { //eighth row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                } else if (columnIndex > 4 && columnIndex < 7 && rowIndex == 9) { //ninth row
-                    i++;
-                    confirmTileSelectionButton.setVisible(true);
-                }
-
-                confirmTileSelectionButton.setVisible(false);
-            }
-        }*/
     }
 
-    public void confirmTileSelectionButtonClicked(MouseEvent event){
+    /**
+     * This method is called when the confirm button is clicked for the chosen tiles
+     * @param event mouse event
+     */
+    public void confirmTileSelectionButtonClicked(MouseEvent event, ArrayList<Tile> chosenTiles){
+        confirmTileSelectionButton.setVisible(false);
 
+        notifyObserver(obs -> {
+            try {
+                obs.updateChosenTiles(chosenTiles);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
+    /**
+     * This method shows thw banner when the player has to choose the order for the tiles
+     */
+    public void tileOrder() {
+        Platform.runLater(() -> {
+            GuiController.showBanner("INFO", "Choose the order of the tiles");
+        });
+    }
+
+    /**
+     * This method is used to select the order of the tiles
+     */
+    public void oderClicked(){
+
+    }
+
+    /**
+     * This method is called when the confirm button is clicked for the chosen tiles
+     * @param event mouse event
+     */
+    private void confirmTileOrderButtonClicked(MouseEvent event, ArrayList<Tile> orderedTiles) {
+        confirmTileOrderButton.setVisible(false);
+
+        notifyObserver(obs -> {
+            try {
+                obs.updateOrderedTiles(orderedTiles);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**
      * Tjis is method is called when the player has to choose the column to put the tiles in
      */
     public void selectColumn(){
-
-    }
-
-    public void confirmColumnButtonClicked(MouseEvent event, ArrayList<Integer> AvailableColumns) {
-
-
+        Platform.runLater(() -> {
+            GuiController.showBanner("INFO", "Choose the column to put the tiles in");
+        });
     }
 
     /**
-     * This method is called when the player has to choose the order of the tiles to put in the bookshelf
+     * This is method is called when the arrow above the column is clicked
      */
-    public void tileOrder() {
+    public void arrowClicked(){
+
     }
 
     /**
-     * This method is called when the confirm button is clicked for the chosen tiles and also for the order for those tiles
+     * This method highlights the column when the player has dragged the mouse over it
+     * @param bookshelf of the player
+     * @return the column index
+     */
+    public Integer highlightColumn(GridPane bookshelf) {
+        Integer columnIndex = null;
+        for (Node node : bookshelf.getChildren()) {
+            Integer nodeColumnIndex = GridPane.getColumnIndex(node);
+            Integer nodeRowIndex = GridPane.getRowIndex(node);
+            if (nodeColumnIndex != null && nodeRowIndex != null && nodeRowIndex > 0 && nodeRowIndex <7 && nodeColumnIndex > 0 && nodeColumnIndex < 6) {
+                node.setEffect(new DropShadow(10, Color.YELLOW));
+                columnIndex = nodeColumnIndex;
+            }
+        }
+        return columnIndex;
+    }
+
+    /**
+     * This method is called when the confirm button is clicked for the chosen column
      * @param event mouse event
      */
-    private void confirmTileOrderButtonClicked(MouseEvent event, ArrayList<Tile> chosenTiles) {
+    public void confirmColumnButtonClicked(MouseEvent event, int choice, ArrayList<Integer> AvailableColumns) {
+        confirmColumnButton.setVisible(false);
 
+        notifyObserver(obs -> {
+            try {
+                obs.updateChosenColumn(choice, AvailableColumns);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**
@@ -287,351 +318,99 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param player of the bookshelf
      */
     public synchronized void updateBookShelf(Player player){
-       /* Game game = player.getGame();
+       Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         if (game.getPlayers().size() == 2) {
             switch (index) {
                 case 0 -> {
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf1.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
                 case 1 ->{
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf3.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
             }
         }else if(game.getPlayers().size()==3){
             switch (index) {
                 case 0 -> {
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf1.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
                 case 1 ->{
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf2.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
                 case 2 ->{
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf3.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
             }
         }else if(game.getPlayers().size()==4){
             switch (index) {
                 case 0 -> {
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf1.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf1.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
                 case 1 ->{
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf2.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf2.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
                 case 2 ->{
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf3.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf3.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
                 case 3 ->{
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 0).getTileType()),1,1);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 1).getTileType()),1,2);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 2).getTileType()),1,3);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 3).getTileType()),1,4);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(0, 4).getTileType()),1,5);
-
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 0).getTileType()),2,1);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 1).getTileType()),2,2);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 2).getTileType()),2,3);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 3).getTileType()),2,4);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(1, 4).getTileType()),2,5);
-
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 0).getTileType()),3,1);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 1).getTileType()),3,2);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 2).getTileType()),3,3);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 3).getTileType()),3,4);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(2, 4).getTileType()),3,5);
-
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 0).getTileType()),4,1);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 1).getTileType()),4,2);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 2).getTileType()),4,3);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 3).getTileType()),4,4);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(3, 4).getTileType()),4,5);
-
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 0).getTileType()),5,1);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 1).getTileType()),5,2);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 2).getTileType()),5,3);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 3).getTileType()),5,4);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(4, 4).getTileType()),5,5);
-
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 0).getTileType()),6,1);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 1).getTileType()),6,2);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 2).getTileType()),6,3);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 3).getTileType()),6,4);
-                    bookShelf4.add(setTiles(player.getBookshelf().getTile(5, 4).getTileType()),6,5);
+                    for(int i=0; i<6; i++){
+                        for(int j=0; j<5; j++){
+                            if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
+                                bookShelf4.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                            }
+                        }
+                    }
                 }
             }
-        }*/
+        }
     }
 
     /**
@@ -847,17 +626,21 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         return imageView;
     }
 
+    /**
+     * This method isa called to get the correct image of the tile form the board
+     * @param imageName od the tile
+     * @return the image of the tile
+     */
     public ImageView getTiles(ImageView imageName){
-       /* if (imageName != null) {
-            Image image =  new Image(getClass().getResourceAsStream("/resources/images/itemTiles/" + imageName));
-            ImageView imageView = new ImageView(image);
-            return imageView;
-        } else {
-            return null;
-        }*/
+
         return null;
     }
 
+    /**
+     * This method is called to check if the cell of the living room is valid
+     * @param tile of the cell
+     * @return true if the cell is valid, false otherwise
+     */
     public boolean isCellValid(Tile tile){
         return switch (tile.getRow()) {
             case 0 -> tile.getCol() == 3 || tile.getCol() == 4;
@@ -871,14 +654,26 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         };
     }
 
+    /**
+     * This method is called to open the chat from the menu bar
+     * @param event mouse click
+     */
     public void openChatButtonClicked(ActionEvent event) {
         Platform.runLater(GuiController::showChat);
     }
 
+    /**
+     * This method is called to quit the game from the menu bar
+     * @param event mouse click
+     */
     public void quitButtonClicked(ActionEvent event) {
         System.exit(1);
     }
 
+    /**
+     * This method is called to open the leaderboard from the menu bar
+     * @param event mouse click
+     */
     public void leaderboardButtonClicked(ActionEvent event) {
         Platform.runLater(GuiController::showLeaderboard);
     }
