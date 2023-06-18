@@ -199,11 +199,6 @@
         <AnchorPane fx:id="chairPlayer4" layoutX="1072.0" layoutY="551.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane layoutX="650.0" layoutY="701.0" prefHeight="65.0" prefWidth="175.0" stylesheets="@../css/style.css">
             <children>
-                <Button fx:id="confirmTileOrderButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
-                    <font>
-                        <Font name="Blackadder ITC" size="20.0" />
-                    </font>
-                </Button>
                 <Button fx:id="confirmTileSelectionButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
                     <font>
                         <Font name="Blackadder ITC" size="20.0" />
