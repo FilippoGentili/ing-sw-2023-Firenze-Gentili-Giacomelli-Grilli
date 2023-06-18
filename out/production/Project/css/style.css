@@ -336,3 +336,8 @@
     -fx-background-image : url("../images/publisherMaterial/Display_2.jpg");
     -fx-background-size : stretch;
 }
+
+.generalArrow {
+    -fx-background-image: url("../images/misc/arrow.png");
+    -fx-background-size: stretch;
+}

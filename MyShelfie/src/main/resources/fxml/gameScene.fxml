@@ -76,7 +76,8 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="7.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -88,6 +89,13 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
+               <children>
+                    <Text fx:id="namePlayer1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                        <font>
+                            <Font name="Blackadder ITC" size="20.0" />
+                        </font>
+                    </Text>
+               </children>
                 </GridPane>
             </children></AnchorPane>
         <AnchorPane fx:id="bookshelfPlayer2" layoutX="30.0" layoutY="322.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
@@ -99,8 +107,9 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="8.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="9.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -112,6 +121,13 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
+               <children>
+                    <Text fx:id="namePlayer2" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                        <font>
+                            <Font name="Blackadder ITC" size="20.0" />
+                        </font>
+                    </Text>
+               </children>
                 </GridPane>
             </children></AnchorPane>
         <AnchorPane fx:id="bookshelfPlayer3" layoutX="30.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
@@ -123,8 +139,9 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="0.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -136,23 +153,15 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
+               <children>
+                    <Text fx:id="namePlayer3" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                        <font>
+                            <Font name="Blackadder ITC" size="20.0" />
+                        </font>
+                    </Text>
+               </children>
                 </GridPane>
             </children></AnchorPane>
-        <Text fx:id="namePlayer1" fill="WHITE" layoutX="103.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER">
-            <font>
-                <Font name="Blackadder ITC" size="20.0" />
-            </font>
-        </Text>
-        <Text fx:id="namePlayer3" fill="WHITE" layoutX="102.0" layoutY="543.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER">
-            <font>
-                <Font name="Blackadder ITC" size="20.0" />
-            </font>
-        </Text>
-        <Text fx:id="namePlayer2" fill="WHITE" layoutX="102.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER">
-            <font>
-                <Font name="Blackadder ITC" size="20.0" />
-            </font>
-        </Text>
         <AnchorPane fx:id="bookshelfPlayer4" layoutX="1136.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
             <children>
                 <GridPane fx:id="bookShelf4" prefHeight="200.0" prefWidth="200.0">
@@ -160,10 +169,11 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="31.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -175,13 +185,15 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
+               <children>
+                    <Text fx:id="namePlayer4" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                        <font>
+                            <Font name="Blackadder ITC" size="20.0" />
+                        </font>
+                    </Text>
+               </children>
                 </GridPane>
             </children></AnchorPane>
-        <Text fx:id="namePlayer4" fill="WHITE" layoutX="1210.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
-            <font>
-                <Font name="Blackadder ITC" size="20.0" />
-            </font>
-        </Text>
         <AnchorPane fx:id="personalGoalCardPlayer1" layoutX="246.0" layoutY="153.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer4" layoutX="1027.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer3" layoutX="256.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
@@ -216,5 +228,25 @@
                 </Button>
             </children>
         </AnchorPane>
+      <AnchorPane fx:id="arrowB1C1" layoutX="51.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB1C2" layoutX="83.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB1C3" layoutX="118.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB1C4" layoutX="146.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB1C5" layoutX="182.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB2C1" layoutX="51.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB2C2" layoutX="83.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB2C3" layoutX="118.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB2C4" layoutX="146.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB2C5" layoutX="182.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB3C1" layoutX="51.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB3C2" layoutX="83.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB3C3" layoutX="118.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB3C4" layoutX="146.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB3C5" layoutX="182.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB4C1" layoutX="1160.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB4C2" layoutX="1194.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB4C3" layoutX="1224.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB4C4" layoutX="1258.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB4C5" layoutX="1289.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
     </children>
 </AnchorPane>

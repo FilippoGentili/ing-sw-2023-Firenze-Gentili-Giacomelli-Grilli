@@ -85,6 +85,46 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private MenuItem quitButton;
     @FXML
     private MenuItem leaderboardButton;
+    @FXML
+    private AnchorPane arrowB1C1;
+    @FXML
+    private AnchorPane arrowB1C2;
+    @FXML
+    private AnchorPane arrowB1C3;
+    @FXML
+    private AnchorPane arrowB1C4;
+    @FXML
+    private AnchorPane arrowB1C5;
+    @FXML
+    private AnchorPane arrowB2C1;
+    @FXML
+    private AnchorPane arrowB2C2;
+    @FXML
+    private AnchorPane arrowB2C3;
+    @FXML
+    private AnchorPane arrowB2C4;
+    @FXML
+    private AnchorPane arrowB2C5;
+    @FXML
+    private AnchorPane arrowB3C1;
+    @FXML
+    private AnchorPane arrowB3C2;
+    @FXML
+    private AnchorPane arrowB3C3;
+    @FXML
+    private AnchorPane arrowB3C4;
+    @FXML
+    private AnchorPane arrowB3C5;
+    @FXML
+    private AnchorPane arrowB4C1;
+    @FXML
+    private AnchorPane arrowB4C2;
+    @FXML
+    private AnchorPane arrowB4C3;
+    @FXML
+    private AnchorPane arrowB4C4;
+    @FXML
+    private AnchorPane arrowB4C5;
     boolean yourTurn = false;
 
     @FXML
@@ -92,6 +132,26 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event, new ArrayList<>()));
+        arrowB1C1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,1, arrowB1C1));
+        arrowB1C2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,2, arrowB1C2));
+        arrowB1C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,3, arrowB1C3));
+        arrowB1C4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,4, arrowB1C4));
+        arrowB1C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,5, arrowB1C5));
+        arrowB2C1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(2,1, arrowB2C1));
+        arrowB2C2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(2,2, arrowB2C2));
+        arrowB2C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(2,3, arrowB2C3));
+        arrowB2C4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(2,4, arrowB2C4));
+        arrowB2C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(2,5, arrowB2C5));
+        arrowB3C1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(3,1, arrowB3C1));
+        arrowB3C2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(3,2, arrowB3C2));
+        arrowB3C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(3,3, arrowB3C3));
+        arrowB3C4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(3,4, arrowB3C4));
+        arrowB3C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(3,5, arrowB3C5));
+        arrowB4C1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,1, arrowB4C1));
+        arrowB4C2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,2, arrowB4C2));
+        arrowB4C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,3, arrowB4C3));
+        arrowB4C4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,4, arrowB4C4));
+        arrowB4C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,5, arrowB4C5));
         confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, 0,  new ArrayList<>()));
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
@@ -107,6 +167,30 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         confirmTileOrderButton.setVisible(false);
         confirmTileSelectionButton.setVisible(false);
         confirmColumnButton.setVisible(false);
+
+        arrowB1C1.setVisible(false);
+        arrowB1C2.setVisible(false);
+        arrowB1C3.setVisible(false);
+        arrowB1C4.setVisible(false);
+        arrowB1C5.setVisible(false);
+
+        arrowB2C1.setVisible(false);
+        arrowB2C2.setVisible(false);
+        arrowB2C3.setVisible(false);
+        arrowB2C4.setVisible(false);
+        arrowB2C5.setVisible(false);
+
+        arrowB3C1.setVisible(false);
+        arrowB3C2.setVisible(false);
+        arrowB3C3.setVisible(false);
+        arrowB3C4.setVisible(false);
+        arrowB3C5.setVisible(false);
+
+        arrowB4C1.setVisible(false);
+        arrowB4C2.setVisible(false);
+        arrowB4C3.setVisible(false);
+        arrowB4C4.setVisible(false);
+        arrowB4C5.setVisible(false);
 
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
@@ -247,49 +331,124 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * Tjis is method is called when the player has to choose the column to put the tiles in
+     * This method shows the banner when the player has to choose the column to put the tiles in and shows the arrows above the available columns
      */
-    public void selectColumn(){
-        Platform.runLater(() -> {
-            GuiController.showBanner("INFO", "Choose the column to put the tiles in");
-        });
+    public void selectColumn(Game game, Player player, ArrayList<Integer> AvailableColumns){
+        Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the column to put the tiles in"));
+        if (game.getPlayers().size() == 2) {
+            if(game.getPlayers().get(0).equals(player)){
+                if(AvailableColumns.contains(1))
+                    arrowB1C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB1C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB1C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB1C4.setVisible(true);
+            }else{
+                if(AvailableColumns.contains(1))
+                    arrowB3C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB3C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB3C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB3C4.setVisible(true);
+            }
+        } else if (game.getPlayers().size() == 3) {
+            if(game.getPlayers().get(0).equals(player)){
+                if(AvailableColumns.contains(1))
+                    arrowB1C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB1C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB1C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB1C4.setVisible(true);
+            }else if(game.getPlayers().get(1).equals(player)){
+                if(AvailableColumns.contains(1))
+                    arrowB2C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB2C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB2C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB2C4.setVisible(true);
+            }else{
+                if(AvailableColumns.contains(1))
+                    arrowB3C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB3C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB3C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB3C4.setVisible(true);
+            }
+
+        } else {
+            if(game.getPlayers().get(0).equals(player)){
+                if(AvailableColumns.contains(1))
+                    arrowB1C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB1C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB1C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB1C4.setVisible(true);
+            }else if(game.getPlayers().get(1).equals(player)){
+                if(AvailableColumns.contains(1))
+                    arrowB2C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB2C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB2C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB2C4.setVisible(true);
+            }else if(game.getPlayers().get(2).equals(player)){
+                if(AvailableColumns.contains(1))
+                    arrowB3C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB3C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB3C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB3C4.setVisible(true);
+            }else{
+                if(AvailableColumns.contains(1))
+                    arrowB4C1.setVisible(true);
+                if(AvailableColumns.contains(2))
+                    arrowB4C2.setVisible(true);
+                if(AvailableColumns.contains(3))
+                    arrowB4C3.setVisible(true);
+                if(AvailableColumns.contains(4))
+                    arrowB4C4.setVisible(true);
+            }
+
+        }
+
     }
 
     /**
      * This is method is called when the arrow above the column is clicked
      */
-    public void arrowClicked(){
+    public int arrowClicked(int bookshelfNumber, int columnNumber, AnchorPane arrow){
+        confirmColumnButton.setVisible(true);
+        arrow.setEffect(new DropShadow(10, Color.YELLOW));
 
+        return columnNumber;
     }
 
-    /**
-     * This method highlights the column when the player has dragged the mouse over it
-     * @param bookshelf of the player
-     * @return the column index
-     */
-    public Integer highlightColumn(GridPane bookshelf) {
-        Integer columnIndex = null;
-        for (Node node : bookshelf.getChildren()) {
-            Integer nodeColumnIndex = GridPane.getColumnIndex(node);
-            Integer nodeRowIndex = GridPane.getRowIndex(node);
-            if (nodeColumnIndex != null && nodeRowIndex != null && nodeRowIndex > 0 && nodeRowIndex <7 && nodeColumnIndex > 0 && nodeColumnIndex < 6) {
-                node.setEffect(new DropShadow(10, Color.YELLOW));
-                columnIndex = nodeColumnIndex;
-            }
-        }
-        return columnIndex;
-    }
 
     /**
      * This method is called when the confirm button is clicked for the chosen column
      * @param event mouse event
      */
-    public void confirmColumnButtonClicked(MouseEvent event, int choice, ArrayList<Integer> AvailableColumns) {
+    public void confirmColumnButtonClicked(MouseEvent event, int column, ArrayList<Integer> AvailableColumns) {
         confirmColumnButton.setVisible(false);
 
         notifyObserver(obs -> {
             try {
-                obs.updateChosenColumn(choice, AvailableColumns);
+                obs.updateChosenColumn(column, AvailableColumns);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
