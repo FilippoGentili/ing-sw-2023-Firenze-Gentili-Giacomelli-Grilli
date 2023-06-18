@@ -3,6 +3,7 @@ package it.polimi.ingsw.View.Gui.Scene;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,8 +80,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private Button confirmTileSelectionButton;
     @FXML
-    private Button confirmColumnButton;
-    @FXML
     private MenuItem openChatButton;
     @FXML
     private MenuItem quitButton;
@@ -125,13 +125,24 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private AnchorPane arrowB4C4;
     @FXML
     private AnchorPane arrowB4C5;
+    @FXML
+    private AnchorPane tile1;
+    @FXML
+    private AnchorPane tile2;
+    @FXML
+    private AnchorPane tile3;
+
     boolean yourTurn = false;
+    private ArrayList<Integer> availableColumns = new ArrayList<>();
 
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
         confirmTileOrderButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileOrderButtonClicked(event, new ArrayList<>()));
         confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event, new ArrayList<>()));
+        tile1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::orderClicked);
+        tile2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::orderClicked);
+        tile3.addEventHandler(MouseEvent.MOUSE_CLICKED, this::orderClicked);
         arrowB1C1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,1, arrowB1C1));
         arrowB1C2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,2, arrowB1C2));
         arrowB1C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(1,3, arrowB1C3));
@@ -152,7 +163,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,3, arrowB4C3));
         arrowB4C4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,4, arrowB4C4));
         arrowB4C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,5, arrowB4C5));
-        confirmColumnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmColumnButtonClicked(event, 0,  new ArrayList<>()));
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(this::leaderboardButtonClicked);
@@ -165,7 +175,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public synchronized void setUp(Game game){
         confirmTileOrderButton.setVisible(false);
         confirmTileSelectionButton.setVisible(false);
-        confirmColumnButton.setVisible(false);
 
         arrowB1C1.setVisible(false);
         arrowB1C2.setVisible(false);
@@ -190,6 +199,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C3.setVisible(false);
         arrowB4C4.setVisible(false);
         arrowB4C5.setVisible(false);
+
+        tile1.setVisible(false);
+        tile2.setVisible(false);
+        tile3.setVisible(false);
 
         bookshelfPlayer1.setVisible(false);
         bookshelfPlayer2.setVisible(false);
@@ -309,7 +322,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     /**
      * This method is used to select the order of the tiles
      */
-    public void oderClicked(){
+    public void orderClicked(MouseEvent event){
 
     }
 
@@ -332,10 +345,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     /**
      * This method shows the banner when the player has to choose the column to put the tiles in and shows the arrows above the available columns
      */
-    public void selectColumn(Game game, Player player, ArrayList<Integer> AvailableColumns){
+    public void selectColumn(ArrayList<Integer> AvailableColumns, Player player){
         Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the column to put the tiles in"));
-        if (game.getPlayers().size() == 2) {
-            if(game.getPlayers().get(0).equals(player)){
+        if (player.getGame().getPlayers().size() == 2) {
+            if(player.getGame().getPlayers().get(0).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB1C1.setVisible(true);
                 if(AvailableColumns.contains(2))
@@ -354,8 +367,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 if(AvailableColumns.contains(4))
                     arrowB3C4.setVisible(true);
             }
-        } else if (game.getPlayers().size() == 3) {
-            if(game.getPlayers().get(0).equals(player)){
+        } else if (player.getGame().getPlayers().size() == 3) {
+            if(player.getGame().getPlayers().get(0).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB1C1.setVisible(true);
                 if(AvailableColumns.contains(2))
@@ -364,7 +377,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB1C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB1C4.setVisible(true);
-            }else if(game.getPlayers().get(1).equals(player)){
+            }else if(player.getGame().getPlayers().get(1).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB2C1.setVisible(true);
                 if(AvailableColumns.contains(2))
@@ -385,7 +398,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             }
 
         } else {
-            if(game.getPlayers().get(0).equals(player)){
+            if(player.getGame().getPlayers().get(0).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB1C1.setVisible(true);
                 if(AvailableColumns.contains(2))
@@ -394,7 +407,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB1C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB1C4.setVisible(true);
-            }else if(game.getPlayers().get(1).equals(player)){
+            }else if(player.getGame().getPlayers().get(1).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB2C1.setVisible(true);
                 if(AvailableColumns.contains(2))
@@ -403,7 +416,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB2C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB2C4.setVisible(true);
-            }else if(game.getPlayers().get(2).equals(player)){
+            }else if(player.getGame().getPlayers().get(2).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB3C1.setVisible(true);
                 if(AvailableColumns.contains(2))
@@ -424,58 +437,68 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             }
 
         }
+        setAvailableColumns(AvailableColumns);
+    }
 
+    /**
+     * Setter of the available columns
+     * @param availableColumns of a bookshelf
+     */
+    public void setAvailableColumns(ArrayList<Integer> availableColumns) {
+        this.availableColumns = availableColumns;
+    }
+
+    /**
+     * Getter of the available columns
+     * @return available columns of a bookshelf
+     */
+    public ArrayList<Integer> getAvailableColumns() {
+        return availableColumns;
     }
 
     /**
      * This is method is called when the arrow above the column is clicked
      */
-    public int arrowClicked(int bookshelfNumber, int columnNumber, AnchorPane arrow){
-        confirmColumnButton.setVisible(true);
+    public void arrowClicked(int bookshelfNumber, int columnNumber, AnchorPane arrow){
         arrow.setEffect(new DropShadow(10, Color.YELLOW));
-
-        return columnNumber;
-    }
-
-
-    /**
-     * This method is called when the confirm button is clicked for the chosen column
-     * @param event mouse event
-     */
-    public void confirmColumnButtonClicked(MouseEvent event, int column, ArrayList<Integer> AvailableColumns) {
-        confirmColumnButton.setVisible(false);
-
-        arrowB1C1.setVisible(false);
-        arrowB1C2.setVisible(false);
-        arrowB1C3.setVisible(false);
-        arrowB1C4.setVisible(false);
-        arrowB1C5.setVisible(false);
-
-        arrowB2C1.setVisible(false);
-        arrowB2C2.setVisible(false);
-        arrowB2C3.setVisible(false);
-        arrowB2C4.setVisible(false);
-        arrowB2C5.setVisible(false);
-
-        arrowB3C1.setVisible(false);
-        arrowB3C2.setVisible(false);
-        arrowB3C3.setVisible(false);
-        arrowB3C4.setVisible(false);
-        arrowB3C5.setVisible(false);
-
-        arrowB4C1.setVisible(false);
-        arrowB4C2.setVisible(false);
-        arrowB4C3.setVisible(false);
-        arrowB4C4.setVisible(false);
-        arrowB4C5.setVisible(false);
+        ArrayList<Integer> availableColumns = getAvailableColumns();
 
         notifyObserver(obs -> {
             try {
-                obs.updateChosenColumn(column, AvailableColumns);
+                obs.updateChosenColumn(columnNumber, availableColumns);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> {
+            arrow.setEffect(null);
+            arrowB1C1.setVisible(false);
+            arrowB1C2.setVisible(false);
+            arrowB1C3.setVisible(false);
+            arrowB1C4.setVisible(false);
+            arrowB1C5.setVisible(false);
+
+            arrowB2C1.setVisible(false);
+            arrowB2C2.setVisible(false);
+            arrowB2C3.setVisible(false);
+            arrowB2C4.setVisible(false);
+            arrowB2C5.setVisible(false);
+
+            arrowB3C1.setVisible(false);
+            arrowB3C2.setVisible(false);
+            arrowB3C3.setVisible(false);
+            arrowB3C4.setVisible(false);
+            arrowB3C5.setVisible(false);
+
+            arrowB4C1.setVisible(false);
+            arrowB4C2.setVisible(false);
+            arrowB4C3.setVisible(false);
+            arrowB4C4.setVisible(false);
+            arrowB4C5.setVisible(false);
+        });
+        pause.play();
     }
 
     /**
@@ -508,7 +531,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf1.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf1.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -517,7 +540,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf3.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf3.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -529,7 +552,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf1.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf1.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -538,7 +561,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf2.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf2.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -547,7 +570,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf3.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf3.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -559,7 +582,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf1.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf1.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -568,7 +591,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf2.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf2.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -577,7 +600,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf3.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf3.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -586,7 +609,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     for(int i=0; i<6; i++){
                         for(int j=0; j<5; j++){
                             if(player.getBookshelf().getTile(i,j).getTileType() != NULL) {
-                                bookShelf4.add(setTiles(player.getBookshelf().getTile(i, j).getTileType()), j + 1, i + 1);
+                                bookShelf4.add(resizeTiles(setTiles(player.getBookshelf().getTile(i, j).getTileType())), j + 1, i + 1);
                             }
                         }
                     }
@@ -809,11 +832,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method isa called to get the correct image of the tile form the board
+     * This method is called to resize thr tiles for the bookshelf
      * @param imageName od the tile
      * @return the image of the tile
      */
-    public ImageView getTiles(ImageView imageName){
+    public ImageView resizeTiles(ImageView imageName){
+        imageName.setFitHeight(24);
+        imageName.setFitWidth(24);
         return imageName;
     }
 

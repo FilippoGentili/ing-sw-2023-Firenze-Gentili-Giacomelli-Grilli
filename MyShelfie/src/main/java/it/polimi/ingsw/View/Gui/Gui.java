@@ -70,25 +70,6 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
     }
 
-    @Override
-    public void startChat() {
-
-    }
-
-    @Override
-    public void showChatMessage(ChatMessage message) {
-
-    }
-
-    /**
-     * This method is used to ask the player the column where he wants to put the tiles in the bookshelf
-     * @param AvailableColumns
-     */
-    @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns, Player player) {
-        Platform.runLater(gameSceneController::selectColumn(Game, Player, AvailableColumns));
-    }
-
     /**
      * This method is used to ask the player to choose the tiles from the board
      * @param livingRoom is the living room of the game
@@ -105,6 +86,16 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
         Platform.runLater(gameSceneController::tileOrder);
+    }
+
+    /**
+     * This method is used to ask the player to choose the column where to put the tile
+     * @param AvailableColumns are the columns where the player can put the tile
+     * @param player is the current player
+     */
+    @Override
+    public void columnRequest(ArrayList<Integer> AvailableColumns, Player player) {
+        Platform.runLater(() -> gameSceneController.selectColumn(AvailableColumns, player));
     }
 
     /**
@@ -239,6 +230,16 @@ public class Gui extends ViewObservable implements View {
             EndSceneController endSceneController1 = endSceneController;
             Platform.runLater(() -> GuiController.changeScene("endScene.fxml",endSceneController1));
         }
+    }
+
+    @Override
+    public void startChat() {
+
+    }
+
+    @Override
+    public void showChatMessage(ChatMessage message) {
+
     }
 
     /**

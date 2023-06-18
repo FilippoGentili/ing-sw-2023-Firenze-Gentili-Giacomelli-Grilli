@@ -70,14 +70,13 @@
             <children>
                 <GridPane fx:id="bookShelf1" prefHeight="200.0" prefWidth="200.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="22.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="29.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="3.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="52.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="56.0" minWidth="10.0" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="2.0" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="7.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -89,27 +88,24 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-               <children>
-                    <Text fx:id="namePlayer1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                        <font>
-                            <Font name="Blackadder ITC" size="20.0" />
-                        </font>
-                    </Text>
-               </children>
                 </GridPane>
+              <Text fx:id="namePlayer1" fill="WHITE" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" x="70.0">
+                  <font>
+                      <Font name="Blackadder ITC" size="20.0" />
+                  </font>
+              </Text>
             </children></AnchorPane>
         <AnchorPane fx:id="bookshelfPlayer2" layoutX="30.0" layoutY="322.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
             <children>
                 <GridPane fx:id="bookShelf2" prefHeight="200.0" prefWidth="200.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="21.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="29.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="8.0" prefWidth="30.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="35.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="34.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="8.0" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="9.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -121,14 +117,12 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-               <children>
-                    <Text fx:id="namePlayer2" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                        <font>
-                            <Font name="Blackadder ITC" size="20.0" />
-                        </font>
-                    </Text>
-               </children>
                 </GridPane>
+              <Text fx:id="namePlayer2" fill="WHITE" layoutX="70.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER">
+                  <font>
+                      <Font name="Blackadder ITC" size="20.0" />
+                  </font>
+              </Text>
             </children></AnchorPane>
         <AnchorPane fx:id="bookshelfPlayer3" layoutX="30.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
             <children>
@@ -137,11 +131,10 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="0.0" prefWidth="30.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="35.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="0.0" prefWidth="22.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -153,27 +146,24 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-               <children>
-                    <Text fx:id="namePlayer3" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                        <font>
-                            <Font name="Blackadder ITC" size="20.0" />
-                        </font>
-                    </Text>
-               </children>
                 </GridPane>
+              <Text fx:id="namePlayer3" fill="WHITE" layoutX="70.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" textAlignment="CENTER">
+                  <font>
+                      <Font name="Blackadder ITC" size="20.0" />
+                  </font>
+              </Text>
             </children></AnchorPane>
         <AnchorPane fx:id="bookshelfPlayer4" layoutX="1136.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" styleClass="generalBookshelf" stylesheets="@../css/style.css">
             <children>
                 <GridPane fx:id="bookShelf4" prefHeight="200.0" prefWidth="200.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="23.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="25.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="36.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="29.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="24.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -181,18 +171,16 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-               <children>
-                    <Text fx:id="namePlayer4" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                        <font>
-                            <Font name="Blackadder ITC" size="20.0" />
-                        </font>
-                    </Text>
-               </children>
                 </GridPane>
+              <Text fx:id="namePlayer4" fill="WHITE" layoutX="70.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
+                  <font>
+                      <Font name="Blackadder ITC" size="20.0" />
+                  </font>
+              </Text>
             </children></AnchorPane>
         <AnchorPane fx:id="personalGoalCardPlayer1" layoutX="246.0" layoutY="153.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer4" layoutX="1027.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
@@ -207,16 +195,11 @@
         </ImageView>
         <AnchorPane fx:id="chairPlayer1" layoutX="231.0" layoutY="73.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="chairPlayer2" layoutX="246.0" layoutY="322.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="chairPlayer3" layoutX="256.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="chairPlayer4" layoutX="1072.0" layoutY="561.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer3" layoutX="246.0" layoutY="551.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer4" layoutX="1072.0" layoutY="551.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane layoutX="650.0" layoutY="701.0" prefHeight="65.0" prefWidth="175.0" stylesheets="@../css/style.css">
             <children>
                 <Button fx:id="confirmTileOrderButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
-                    <font>
-                        <Font name="Blackadder ITC" size="20.0" />
-                    </font>
-                </Button>
-                <Button fx:id="confirmColumnButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
                     <font>
                         <Font name="Blackadder ITC" size="20.0" />
                     </font>
@@ -248,5 +231,8 @@
       <AnchorPane fx:id="arrowB4C3" layoutX="1224.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C4" layoutX="1258.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C5" layoutX="1289.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="tile1" layoutX="1037.0" layoutY="415.0" prefHeight="70.0" prefWidth="70.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="tile2" layoutX="1149.0" layoutY="415.0" prefHeight="70.0" prefWidth="70.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="tile3" layoutX="1254.0" layoutY="415.0" prefHeight="70.0" prefWidth="70.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
     </children>
 </AnchorPane>
