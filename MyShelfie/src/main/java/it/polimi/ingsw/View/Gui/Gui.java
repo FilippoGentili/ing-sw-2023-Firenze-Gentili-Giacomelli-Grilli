@@ -25,7 +25,8 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showMessage(String message){
-        // Platform.runLater(() -> GuiController.showBanner(INFO, message));
+        if(gameSceneController != null)
+            gameSceneController.showMessage(message);
         //per ora lo lasciamo commentato, perchè ogni messsaggio che manda il server è un banner nella gui
     }
 
@@ -177,8 +178,10 @@ public class Gui extends ViewObservable implements View {
     @Override
     public synchronized void showGameStarted(Game game) {
         gameSceneController = new GameSceneController();
+        gameSceneController.addAllObserver(observers);
         Platform.runLater(() -> GuiController.changeScene( "gameScene.fxml", gameSceneController));
         Platform.runLater(() -> gameSceneController.setUp(game));
+        gameSceneController.setNumOfPlayers(game.getNumOfPlayers());
     }
 
     /**

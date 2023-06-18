@@ -140,6 +140,9 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private ArrayList<Integer> availableColumns = new ArrayList<>();
     private ArrayList<Tile> orderedList = new ArrayList<>();
     private int counter = 0;
+    private int numOfPlayers;
+    private int numOfSelectedTiles = 0;
+    private LivingRoom livingRoom = new LivingRoom();
     private int i = 0;
 
     @FXML
@@ -263,6 +266,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
+    public void showMessage(String message){
+        Platform.runLater(() -> {
+            GuiController.showBanner("INFO", message);
+        });
+    }
+
     /**
      * This method shows thw banner when the player has to choose the tiles from the board
      */
@@ -278,7 +287,35 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param event mouse event
      */
     public void tileClicked(MouseEvent event) {
-        Node source = (Node) event.getSource();
+
+        Node selection = event.getPickResult().getIntersectedNode();
+        Integer row = GridPane.getRowIndex(selection);
+        Integer col = GridPane.getColumnIndex(selection);
+
+        if(row != null && col != null && numOfSelectedTiles < 3 && yourTurn){
+            Tile selectedTile = this.livingRoom.getTile(row,col);
+
+            if(validCellForNumOfPlayers(selectedTile)){
+                for(Tile tile : chosenTiles){
+                    if(tile.equals(selectedTile)){
+                        selection.setEffect(null);
+                        numOfSelectedTiles--;
+                        chosenTiles.remove(tile);
+                        return;
+                    }
+                }
+
+                selection.setEffect(new DropShadow(10, Color.YELLOW));
+                numOfSelectedTiles++;
+                chosenTiles.add(selectedTile);
+
+                if(numOfSelectedTiles > 0)
+                    confirmTileSelectionButton.setVisible(true);
+                else
+                    confirmTileSelectionButton.setVisible(false);
+            }
+        }
+        /*Node source = (Node) event.getSource();
         Integer columnIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
         int numberOfTiles = 0;
@@ -296,7 +333,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     }
                 }
             }
-        }
+        }*/
     }
 
     /**
@@ -591,6 +628,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
                 if(isCellValid(livingRoom.getTile(i,j))){
+                    this.livingRoom.setTile(livingRoom.getTile(i,j),i,j);
+
                     if(livingRoom.getTile(i,j).getTileType() != NULL) {
                         boardGrid.add(setTiles(livingRoom.getTile(i, j).getTileType()), j + 1, i + 1);
                     }
@@ -941,6 +980,36 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         };
     }
 
+    public boolean validCellForNumOfPlayers(Tile tile){
+
+        if(numOfPlayers == 2){
+            return switch (tile.getRow()) {
+                case 0,8 -> false;
+                case 1 -> tile.getCol() == 3 || tile.getCol() == 4;
+                case 2, 6 -> tile.getCol() == 3 || tile.getCol() == 4 || tile.getCol() == 5;
+                case 3 -> tile.getCol() != 0 && tile.getCol() != 1 && tile.getCol() != 8;
+                case 4 -> tile.getCol() != 0 && tile.getCol() != 8;
+                case 5 -> tile.getCol() != 0 && tile.getCol() != 8 && tile.getCol() != 7;
+                case 7 -> tile.getCol() == 4 || tile.getCol() == 5;
+                default -> false;
+            };
+        }else if (numOfPlayers == 3){
+            return switch (tile.getRow()) {
+                case 0 -> tile.getCol() == 3;
+                case 1 -> tile.getCol() == 3 || tile.getCol() == 4;
+                case 2, 6 -> tile.getCol() != 0 && tile.getCol() != 1 && tile.getCol() != 7 && tile.getCol() != 8;
+                case 3 -> tile.getCol() != 0 && tile.getCol() != 1;
+                case 4 -> tile.getCol() != 0 && tile.getCol() != 8;
+                case 5 -> tile.getCol() != 8 && tile.getCol() != 7;
+                case 7 -> tile.getCol() == 4 || tile.getCol() == 5;
+                case 8 -> tile.getCol() == 5;
+                default -> false;
+            };
+        }else{
+            return isCellValid(tile);
+        }
+    }
+
     /**
      * This method is called to open the chat from the menu bar
      * @param event mouse click
@@ -965,4 +1034,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Platform.runLater(GuiController::showLeaderboard);
     }
 
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
 }
