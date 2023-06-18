@@ -500,7 +500,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
     }
 
     @Override
-    public void columnRequest(ArrayList<Integer> AvailableColumns) {
+    public void columnRequest(ArrayList<Integer> AvailableColumns, String nickname) {
         boolean correct = false;
         String input;
         int col = 0;

@@ -15,8 +15,7 @@ public class ColumnRequest extends Message{
      */
     public ColumnRequest(ArrayList<Integer> availableColumns){
         super(Game.getServerName(),  MessageType.COLUMN_REQUEST);
-        this.availableColumns=availableColumns;
-    }
+        this.availableColumns=availableColumns;}
 
     public ArrayList<Integer> getAvailableColumns(){
         return availableColumns;

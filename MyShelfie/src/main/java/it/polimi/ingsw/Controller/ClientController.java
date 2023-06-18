@@ -145,7 +145,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 case COLUMN_REQUEST:
                     ColumnRequest columnRequest = (ColumnRequest) message;
                     queue.add(() -> {
-                        view.columnRequest(columnRequest.getAvailableColumns());
+                        view.columnRequest(columnRequest.getAvailableColumns(), columnRequest.getNickname());
                     });
                     break;
                 case WINNER:
