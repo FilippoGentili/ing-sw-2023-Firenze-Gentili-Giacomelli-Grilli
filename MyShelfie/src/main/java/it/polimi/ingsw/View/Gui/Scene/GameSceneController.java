@@ -158,7 +158,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         leaderboardButton.setOnAction(this::leaderboardButtonClicked);
     }
 
-
     /**
      * This method is called to set up the initial game scene
      * @param game the current game
@@ -445,6 +444,30 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public void confirmColumnButtonClicked(MouseEvent event, int column, ArrayList<Integer> AvailableColumns) {
         confirmColumnButton.setVisible(false);
+
+        arrowB1C1.setVisible(false);
+        arrowB1C2.setVisible(false);
+        arrowB1C3.setVisible(false);
+        arrowB1C4.setVisible(false);
+        arrowB1C5.setVisible(false);
+
+        arrowB2C1.setVisible(false);
+        arrowB2C2.setVisible(false);
+        arrowB2C3.setVisible(false);
+        arrowB2C4.setVisible(false);
+        arrowB2C5.setVisible(false);
+
+        arrowB3C1.setVisible(false);
+        arrowB3C2.setVisible(false);
+        arrowB3C3.setVisible(false);
+        arrowB3C4.setVisible(false);
+        arrowB3C5.setVisible(false);
+
+        arrowB4C1.setVisible(false);
+        arrowB4C2.setVisible(false);
+        arrowB4C3.setVisible(false);
+        arrowB4C4.setVisible(false);
+        arrowB4C5.setVisible(false);
 
         notifyObserver(obs -> {
             try {
@@ -791,8 +814,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @return the image of the tile
      */
     public ImageView getTiles(ImageView imageName){
-
-        return null;
+        return imageName;
     }
 
     /**
