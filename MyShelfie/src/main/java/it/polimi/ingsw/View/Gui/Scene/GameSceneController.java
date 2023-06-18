@@ -148,7 +148,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
-        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event, chosenTiles));
+        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event));
         tile1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile1, chosenTiles));
         tile2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile2, chosenTiles));
         tile3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile3, chosenTiles));
@@ -292,27 +292,42 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Integer row = GridPane.getRowIndex(selection);
         Integer col = GridPane.getColumnIndex(selection);
 
-        if(row != null && col != null && numOfSelectedTiles < 3 && yourTurn){
-            Tile selectedTile = this.livingRoom.getTile(row-1,col-1);
+        if(row != null && col != null && yourTurn){
+            if(numOfSelectedTiles < 3) {
+                Tile selectedTile = this.livingRoom.getTile(row - 1, col - 1);
 
-            if(validCellForNumOfPlayers(selectedTile)){
-                for(Tile tile : chosenTiles){
-                    if(tile.equals(selectedTile)){
-                        selection.setEffect(null);
-                        numOfSelectedTiles--;
-                        chosenTiles.remove(tile);
-                        return;
+                if (validCellForNumOfPlayers(selectedTile)) {
+                    for (Tile tile : chosenTiles) {
+                        if (tile.equals(selectedTile)) {
+                            selection.setEffect(null);
+                            numOfSelectedTiles--;
+                            chosenTiles.remove(tile);
+                            return;
+                        }
+                    }
+
+                    selection.setEffect(new DropShadow(10, Color.YELLOW));
+                    numOfSelectedTiles++;
+                    chosenTiles.add(selectedTile);
+
+                    if (numOfSelectedTiles > 0)
+                        confirmTileSelectionButton.setVisible(true);
+                    else
+                        confirmTileSelectionButton.setVisible(false);
+                }
+            }else{
+                Tile selectedTile = this.livingRoom.getTile(row - 1, col - 1);
+
+                if (validCellForNumOfPlayers(selectedTile)) {
+                    for (Tile tile : chosenTiles) {
+                        if (tile.equals(selectedTile)) {
+                            selection.setEffect(null);
+                            numOfSelectedTiles--;
+                            chosenTiles.remove(tile);
+                            return;
+                        }
                     }
                 }
-
-                selection.setEffect(new DropShadow(10, Color.YELLOW));
-                numOfSelectedTiles++;
-                chosenTiles.add(selectedTile);
-
-                if(numOfSelectedTiles > 0)
-                    confirmTileSelectionButton.setVisible(true);
-                else
-                    confirmTileSelectionButton.setVisible(false);
             }
         }
     }
@@ -321,7 +336,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is called when the confirm button is clicked for the chosen tiles
      * @param event mouse event
      */
-    public void confirmTileSelectionButtonClicked(MouseEvent event, ArrayList<Tile> chosenTiles){
+    public void confirmTileSelectionButtonClicked(MouseEvent event){
         confirmTileSelectionButton.setVisible(false);
 
         notifyObserver(obs -> {
@@ -452,108 +467,108 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the column to put the tiles in"));
         if (player.getGame().getPlayers().size() == 2) {
             if(player.getGame().getPlayers().get(0).equals(player)){
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB1C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB1C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB1C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB1C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB1C5.setVisible(true);
             }else{
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB3C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB3C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB3C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB3C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB3C5.setVisible(true);
             }
         } else if (player.getGame().getPlayers().size() == 3) {
             if(player.getGame().getPlayers().get(0).equals(player)){
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB1C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB1C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB1C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB1C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB1C5.setVisible(true);
             }else if(player.getGame().getPlayers().get(1).equals(player)){
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB2C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB2C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB2C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB2C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB2C5.setVisible(true);
             }else{
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB3C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB3C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB3C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB3C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB3C5.setVisible(true);
             }
 
         } else {
             if(player.getGame().getPlayers().get(0).equals(player)){
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB1C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB1C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB1C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB1C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB1C5.setVisible(true);
             }else if(player.getGame().getPlayers().get(1).equals(player)){
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB2C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB2C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB2C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB2C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB2C5.setVisible(true);
             }else if(player.getGame().getPlayers().get(2).equals(player)){
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB3C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB3C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB3C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB3C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB3C5.setVisible(true);
             }else{
-                if(AvailableColumns.contains(1))
+                if(AvailableColumns.contains(0))
                     arrowB4C1.setVisible(true);
-                if(AvailableColumns.contains(2))
+                if(AvailableColumns.contains(1))
                     arrowB4C2.setVisible(true);
-                if(AvailableColumns.contains(3))
+                if(AvailableColumns.contains(2))
                     arrowB4C3.setVisible(true);
-                if(AvailableColumns.contains(4))
+                if(AvailableColumns.contains(3))
                     arrowB4C4.setVisible(true);
-                if(AvailableColumns.contains(5))
+                if(AvailableColumns.contains(4))
                     arrowB4C5.setVisible(true);
             }
 
