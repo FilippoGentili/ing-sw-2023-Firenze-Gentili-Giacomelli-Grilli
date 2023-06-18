@@ -25,8 +25,8 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showMessage(String message){
-        if(gameSceneController != null)
-            gameSceneController.showMessage(message);
+        //if(gameSceneController != null)
+          //  gameSceneController.showMessage(message);
         //per ora lo lasciamo commentato, perchè ogni messsaggio che manda il server è un banner nella gui
     }
 

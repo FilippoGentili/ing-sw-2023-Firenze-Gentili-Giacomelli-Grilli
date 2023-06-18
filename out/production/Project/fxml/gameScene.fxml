@@ -210,33 +210,33 @@
       <AnchorPane fx:id="arrowB1C2" layoutX="83.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB1C3" layoutX="118.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB1C4" layoutX="146.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
-      <AnchorPane fx:id="arrowB1C5" layoutX="182.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB2C1" layoutX="51.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB2C2" layoutX="83.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB2C3" layoutX="118.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB2C4" layoutX="146.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
-      <AnchorPane fx:id="arrowB2C5" layoutX="182.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB3C1" layoutX="51.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB3C2" layoutX="83.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB3C3" layoutX="118.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB3C4" layoutX="146.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
-      <AnchorPane fx:id="arrowB3C5" layoutX="182.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C1" layoutX="1160.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C2" layoutX="1194.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C3" layoutX="1224.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C4" layoutX="1258.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
-      <AnchorPane fx:id="arrowB4C5" layoutX="1289.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="tile1" layoutX="1037.0" layoutY="415.0" prefHeight="70.0" prefWidth="70.0" styleClass="generalScoringBack" stylesheets="@../css/style.css">
          <children>
-            <AnchorPane fx:id="numberOfTile1" prefHeight="70.0" prefWidth="70.0" />
+            <AnchorPane fx:id="numberOfTile1" prefHeight="70.0" prefWidth="70.0" styleClass="generalNumber1" stylesheets="@../css/style.css" />
          </children></AnchorPane>
       <AnchorPane fx:id="tile2" layoutX="1149.0" layoutY="415.0" prefHeight="70.0" prefWidth="70.0" styleClass="generalScoringBack" stylesheets="@../css/style.css">
          <children>
-            <AnchorPane fx:id="numberOfTile2" prefHeight="70.0" prefWidth="70.0" />
+            <AnchorPane fx:id="numberOfTile2" prefHeight="70.0" prefWidth="70.0" styleClass="generalNumber2" stylesheets="@../css/style.css" />
          </children></AnchorPane>
       <AnchorPane fx:id="tile3" layoutX="1254.0" layoutY="415.0" prefHeight="70.0" prefWidth="70.0" styleClass="generalScoringBack" stylesheets="@../css/style.css">
          <children>
-            <AnchorPane fx:id="numberOfTile3" layoutX="1.0" prefHeight="70.0" prefWidth="70.0" />
+            <AnchorPane fx:id="numberOfTile3" prefHeight="70.0" prefWidth="70.0" styleClass="generalNumber3" stylesheets="@../css/style.css" />
          </children></AnchorPane>
+      <AnchorPane fx:id="arrowB3C5" layoutX="182.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB2C5" layoutX="182.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB1C5" layoutX="182.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="arrowB4C5" layoutX="1289.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
     </children>
 </AnchorPane>

@@ -395,12 +395,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
         //sets the number above the tile to show the order
         if (tile1.equals(tile)) {
+            numberOfTile1.setVisible(true);
             numberOfTile1.getStyleClass().clear();
             numberOfTile1.getStyleClass().add("generalNumber" + getCounter());
         } else if (tile2.equals(tile)) {
+            numberOfTile2.setVisible(true);
             numberOfTile2.getStyleClass().clear();
             numberOfTile2.getStyleClass().add("generalNumber" + getCounter());
         } else if (tile3.equals(tile)) {
+            numberOfTile3.setVisible(true);
             numberOfTile3.getStyleClass().clear();
             numberOfTile3.getStyleClass().add("generalNumber" + getCounter());
         }
@@ -418,18 +421,17 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             orderedList.clear();
             setCounter(0);
             i = 0;
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(event -> {
+                tile1.setEffect(null);
+                tile1.setVisible(false);
+                tile2.setEffect(null);
+                tile2.setVisible(false);
+                tile3.setEffect(null);
+                tile3.setVisible(false);
+            });
+            pause.play();
         }
-
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> {
-            tile1.setEffect(null);
-            tile1.setVisible(false);
-            tile2.setEffect(null);
-            tile2.setVisible(false);
-            tile3.setEffect(null);
-            tile3.setVisible(false);
-        });
-        pause.play();
     }
 
     private void setCounter(int counter) {
