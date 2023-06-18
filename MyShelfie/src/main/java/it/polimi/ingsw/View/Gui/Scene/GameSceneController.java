@@ -293,7 +293,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Integer col = GridPane.getColumnIndex(selection);
 
         if(row != null && col != null && numOfSelectedTiles < 3 && yourTurn){
-            Tile selectedTile = this.livingRoom.getTile(row,col);
+            Tile selectedTile = this.livingRoom.getTile(row-1,col-1);
 
             if(validCellForNumOfPlayers(selectedTile)){
                 for(Tile tile : chosenTiles){
@@ -315,25 +315,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     confirmTileSelectionButton.setVisible(false);
             }
         }
-        /*Node source = (Node) event.getSource();
-        Integer columnIndex = GridPane.getColumnIndex(source);
-        Integer rowIndex = GridPane.getRowIndex(source);
-        int numberOfTiles = 0;
-        ObservableList<Node> children = boardGrid.getChildren();
-        for(Node node : children) {
-            if(node instanceof ImageView) {
-                if(node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
-                    if (yourTurn) {
-                        node.setEffect(new DropShadow(10, Color.YELLOW));
-                        numberOfTiles++;
-                        chosenTiles.add((Tile) children);
-                        if(numberOfTiles>1) {
-                            confirmTileSelectionButton.setVisible(true);
-                        }
-                    }
-                }
-            }
-        }*/
     }
 
     /**
