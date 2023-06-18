@@ -455,6 +455,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB1C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB1C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB1C5.setVisible(true);
             }else{
                 if(AvailableColumns.contains(1))
                     arrowB3C1.setVisible(true);
@@ -464,6 +466,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB3C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB3C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB3C5.setVisible(true);
             }
         } else if (player.getGame().getPlayers().size() == 3) {
             if(player.getGame().getPlayers().get(0).equals(player)){
@@ -475,6 +479,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB1C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB1C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB1C5.setVisible(true);
             }else if(player.getGame().getPlayers().get(1).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB2C1.setVisible(true);
@@ -484,6 +490,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB2C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB2C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB2C5.setVisible(true);
             }else{
                 if(AvailableColumns.contains(1))
                     arrowB3C1.setVisible(true);
@@ -493,6 +501,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB3C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB3C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB3C5.setVisible(true);
             }
 
         } else {
@@ -505,6 +515,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB1C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB1C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB1C5.setVisible(true);
             }else if(player.getGame().getPlayers().get(1).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB2C1.setVisible(true);
@@ -514,6 +526,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB2C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB2C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB2C5.setVisible(true);
             }else if(player.getGame().getPlayers().get(2).equals(player)){
                 if(AvailableColumns.contains(1))
                     arrowB3C1.setVisible(true);
@@ -523,6 +537,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB3C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB3C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB3C5.setVisible(true);
             }else{
                 if(AvailableColumns.contains(1))
                     arrowB4C1.setVisible(true);
@@ -532,6 +548,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     arrowB4C3.setVisible(true);
                 if(AvailableColumns.contains(4))
                     arrowB4C4.setVisible(true);
+                if(AvailableColumns.contains(5))
+                    arrowB4C5.setVisible(true);
             }
 
         }
