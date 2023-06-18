@@ -425,10 +425,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             pause.setOnFinished(event -> {
                 tile1.setEffect(null);
                 tile1.setVisible(false);
+                numberOfTile1.setVisible(false);
                 tile2.setEffect(null);
                 tile2.setVisible(false);
+                numberOfTile2.setVisible(false);
                 tile3.setEffect(null);
                 tile3.setVisible(false);
+                numberOfTile3.setVisible(false);
             });
             pause.play();
         }
@@ -583,7 +586,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
         notifyObserver(obs -> {
             try {
-                obs.updateChosenColumn(columnNumber, availableColumns);
+                obs.updateChosenColumn(columnNumber-1, availableColumns);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
