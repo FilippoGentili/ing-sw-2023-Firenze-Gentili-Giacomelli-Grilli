@@ -296,35 +296,39 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             if(numOfSelectedTiles < 3) {
                 Tile selectedTile = this.livingRoom.getTile(row - 1, col - 1);
 
-                if (validCellForNumOfPlayers(selectedTile)) {
-                    for (Tile tile : chosenTiles) {
-                        if (tile.equals(selectedTile)) {
-                            selection.setEffect(null);
-                            numOfSelectedTiles--;
-                            chosenTiles.remove(tile);
-                            return;
+                if(selectedTile.getTileType() != TileType.NULL){
+                    if (validCellForNumOfPlayers(selectedTile)) {
+                        for (Tile tile : chosenTiles) {
+                            if (tile.equals(selectedTile)) {
+                                selection.setEffect(null);
+                                numOfSelectedTiles--;
+                                chosenTiles.remove(tile);
+                                return;
+                            }
                         }
+
+                        selection.setEffect(new DropShadow(10, Color.YELLOW));
+                        numOfSelectedTiles++;
+                        chosenTiles.add(selectedTile);
+
+                        if (numOfSelectedTiles > 0)
+                            confirmTileSelectionButton.setVisible(true);
+                        else
+                            confirmTileSelectionButton.setVisible(false);
                     }
-
-                    selection.setEffect(new DropShadow(10, Color.YELLOW));
-                    numOfSelectedTiles++;
-                    chosenTiles.add(selectedTile);
-
-                    if (numOfSelectedTiles > 0)
-                        confirmTileSelectionButton.setVisible(true);
-                    else
-                        confirmTileSelectionButton.setVisible(false);
                 }
             }else{
                 Tile selectedTile = this.livingRoom.getTile(row - 1, col - 1);
 
-                if (validCellForNumOfPlayers(selectedTile)) {
-                    for (Tile tile : chosenTiles) {
-                        if (tile.equals(selectedTile)) {
-                            selection.setEffect(null);
-                            numOfSelectedTiles--;
-                            chosenTiles.remove(tile);
-                            return;
+                if(selectedTile.getTileType() != TileType.NULL){
+                    if (validCellForNumOfPlayers(selectedTile)) {
+                        for (Tile tile : chosenTiles) {
+                            if (tile.equals(selectedTile)) {
+                                selection.setEffect(null);
+                                numOfSelectedTiles--;
+                                chosenTiles.remove(tile);
+                                return;
+                            }
                         }
                     }
                 }
@@ -644,14 +648,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public synchronized void updateLivingRoom(LivingRoom livingRoom){
 
+        boardGrid.getChildren().clear();
+
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
                 if(isCellValid(livingRoom.getTile(i,j))){
                     this.livingRoom.setTile(livingRoom.getTile(i,j),i,j);
-
-                    if(livingRoom.getTile(i,j).getTileType() != NULL) {
-                        boardGrid.add(setTiles(livingRoom.getTile(i, j).getTileType()), j + 1, i + 1);
-                    }
+                    boardGrid.add(setTiles(livingRoom.getTile(i, j).getTileType()), j + 1, i + 1);
                 }
             }
         }
@@ -961,6 +964,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     }
                 }
                 break;
+            default:
+                imageName = "Empty.png";
         }
 
         Image image =  new Image("images/itemTiles/" + imageName);
