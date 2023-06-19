@@ -357,6 +357,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                                 selection.setEffect(null);
                                 numOfSelectedTiles--;
                                 chosenTiles.remove(tile);
+
+                                if (numOfSelectedTiles > 0)
+                                    confirmTileSelectionButton.setVisible(true);
+                                else
+                                    confirmTileSelectionButton.setVisible(false);
+
                                 return;
                             }
                         }
@@ -381,10 +387,14 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                                 selection.setEffect(null);
                                 numOfSelectedTiles--;
                                 chosenTiles.remove(tile);
-                                return;
                             }
                         }
                     }
+
+                    if (numOfSelectedTiles > 0)
+                        confirmTileSelectionButton.setVisible(true);
+                    else
+                        confirmTileSelectionButton.setVisible(false);
                 }
             }
         }
@@ -397,7 +407,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void confirmTileSelectionButtonClicked(MouseEvent event){
         confirmTileSelectionButton.setVisible(false);
 
-        if(yourTurn) {
+        if(yourTurn && !chosenTiles.isEmpty()) {
             notifyObserver(obs -> {
                 try {
                     obs.updateChosenTiles(chosenTiles);
