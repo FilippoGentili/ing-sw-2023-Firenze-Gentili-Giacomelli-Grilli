@@ -227,19 +227,12 @@ public class Gui extends ViewObservable implements View {
      * @param winner is the player that won the game
      */
     @Override
-    public void showWinner(String winner) {
-        EndSceneController endSceneController;
-
-        try {
-            endSceneController = (EndSceneController) GuiController.getCurrentController();
-            endSceneController.setWinner(winner);
-        } catch (ClassCastException e) {
-            endSceneController = new EndSceneController();
-            endSceneController.addAllObserver(observers);
-            endSceneController.setWinner(winner);
-            EndSceneController endSceneController1 = endSceneController;
-            Platform.runLater(() -> GuiController.changeScene("endScene.fxml",endSceneController1));
-        }
+    public void showWinner(String winner, Game game) {
+        EndSceneController endSceneController = new EndSceneController();
+        endSceneController.addAllObserver(observers);
+        endSceneController.setWinner(winner);
+        endSceneController.setScoreBoard(game);
+        Platform.runLater(() -> GuiController.changeScene("endScene.fxml",endSceneController));
     }
 
     @Override

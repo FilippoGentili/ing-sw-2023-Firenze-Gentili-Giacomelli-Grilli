@@ -92,23 +92,6 @@ public class GuiController extends ViewObservable{
         return currentController;
     }
 
-    public static void showEnd(String nickname) {
-        FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/endScene.fxml"));
-
-        Parent parent;
-        try {
-            parent = loader.load();
-        } catch (IOException e) {
-            Client.LOGGER.severe(e.getMessage());
-            return;
-        }
-        EndSceneController endSceneController = loader.getController();
-        Scene winScene = new Scene(parent);
-        endSceneController.setScene(winScene);
-        endSceneController.setWinner(nickname);
-        endSceneController.displayEndScene();
-    }
-
     public static void showChat() {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;

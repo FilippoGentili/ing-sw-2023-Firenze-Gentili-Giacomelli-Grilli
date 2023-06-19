@@ -151,7 +151,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 case WINNER:
                     WinnerMessage winnerMessage = (WinnerMessage) message;
                     queue.add(() -> {
-                        view.showWinner(winnerMessage.getWinnerNickname());
+                        view.showWinner(winnerMessage.getWinnerNickname(), winnerMessage.getGame());
                     });
                     break;
                 case LIVING_ROOM:

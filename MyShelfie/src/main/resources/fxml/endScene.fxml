@@ -40,9 +40,9 @@
              <AnchorPane prefHeight="351.0" prefWidth="966.0" BorderPane.alignment="CENTER">
                <children>
                   <ListView id="leaderBoardMenu" fx:id="scoreBoard" fixedCellSize="4.0" layoutX="333.0" layoutY="75.0" prefHeight="283.0" prefWidth="300.0" styleClass="basePane" stylesheets="@../css/style.css" />
-                  <AnchorPane layoutX="284.0" layoutY="-12.0" prefHeight="75.0" prefWidth="400.0" styleClass="basePane" stylesheets="@../css/style.css">
-                     <children>
-                        <Text fx:id="winnerText" fill="#dbe13d" layoutX="2.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player won!" textAlignment="CENTER" wrappingWidth="403.21630859375">
+                   <AnchorPane fx:id="prova" layoutX="284.0" layoutY="-12.0" prefHeight="75.0" prefWidth="400.0" styleClass="basePane" stylesheets="@../css/style.css">
+                       <children>
+                        <Text fx:id="winnerText" fill="#d8dd36" layoutX="2.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player won!" textAlignment="CENTER" wrappingWidth="403.21630859375">
                            <font>
                               <Font name="Blackadder ITC" size="50.0" />
                            </font>

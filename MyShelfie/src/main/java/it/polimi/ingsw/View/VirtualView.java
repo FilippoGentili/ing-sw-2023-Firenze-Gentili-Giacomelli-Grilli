@@ -125,8 +125,8 @@ public class VirtualView implements View, Observer, Serializable {
     }
 
     @Override
-    public void showWinner(String winner) {
-        connection.sendMessage(new WinnerMessage(winner));
+    public void showWinner(String winner, Game game) {
+        connection.sendMessage(new WinnerMessage(winner, game));
     }
 
     @Override

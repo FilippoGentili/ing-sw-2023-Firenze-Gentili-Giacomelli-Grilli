@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="basePane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <MenuBar minWidth="1512.0" prefHeight="28.0" prefWidth="1647.0">
+        <MenuBar minWidth="1314.0" prefHeight="28.0" prefWidth="1314.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="Game">
                     <items>

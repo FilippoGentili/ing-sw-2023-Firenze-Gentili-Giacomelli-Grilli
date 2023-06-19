@@ -813,7 +813,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
 
     @Override
-    public void showWinner(String winner) {
+    public void showWinner(String winner, Game game) {
 
     }
 
