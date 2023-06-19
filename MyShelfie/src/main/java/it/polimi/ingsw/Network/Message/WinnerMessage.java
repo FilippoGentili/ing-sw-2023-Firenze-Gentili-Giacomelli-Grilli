@@ -12,7 +12,7 @@ public class WinnerMessage extends Message{
      * @param winner
      */
     public WinnerMessage(String winner, Game game) {
-        super(Game.getServerName(), MessageType.WINNER);
+        super(Game.getServerName(), MessageType.WINNER_MESSAGE);
         this.WinnerNickname=winner;
         this.game = game;
     }

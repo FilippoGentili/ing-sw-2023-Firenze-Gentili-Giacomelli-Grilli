@@ -15,8 +15,6 @@ import java.util.ArrayList;
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
     private static final String END = "GAME OVER";
-    private static final String INFO = "Info";
-
     private GameSceneController gameSceneController;
 
     /**
@@ -130,7 +128,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
-        //GameSceneController gameSceneController = getGameSceneController();
         Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
     }
 
@@ -213,7 +210,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
-
         WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
         waitingRoomSceneController.addAllObserver(observers);
         waitingRoomSceneController.setMaxPlayers(maxPlayers);

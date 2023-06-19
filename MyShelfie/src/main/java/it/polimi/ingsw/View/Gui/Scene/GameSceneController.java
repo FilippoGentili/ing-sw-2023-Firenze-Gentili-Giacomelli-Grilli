@@ -1352,7 +1352,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             endGameToken.setVisible(false);
                         } else {
                             firstPlayerFullBookshelf = false;
-                            endGameP2.setVisible(true);
+                            endGameP3.setVisible(true);
                             endGameToken.setVisible(false);
                         }
                     }

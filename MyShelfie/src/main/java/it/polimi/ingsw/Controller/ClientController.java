@@ -148,7 +148,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         view.columnRequest(columnRequest.getAvailableColumns(), columnRequest.getPlayer());
                     });
                     break;
-                case WINNER:
+                case WINNER_MESSAGE:
                     WinnerMessage winnerMessage = (WinnerMessage) message;
                     queue.add(() -> {
                         view.showWinner(winnerMessage.getWinnerNickname(), winnerMessage.getGame());

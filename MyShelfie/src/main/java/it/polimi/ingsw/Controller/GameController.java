@@ -456,8 +456,14 @@ public class GameController implements Serializable {
                 server.sendMessage(new GenericMessage("You lost :( " +
                         winner.getNickname() + " won the game!"),player.getNickname());
         }
+        server.broadcastMessage(new WinnerMessage(winner.getNickname(), game));
 
-        endGame();
+        System.out.println("Write 'exit' to leave the game.");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+        if(input.equalsIgnoreCase("exit")) {
+            endGame();
+        }
 
     }
 
