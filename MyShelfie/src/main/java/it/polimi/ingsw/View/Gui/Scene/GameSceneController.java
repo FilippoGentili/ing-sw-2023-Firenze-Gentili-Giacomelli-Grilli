@@ -530,12 +530,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
 
         if (orderedList.size() == chosenTiles.size()) {
-            for(Tile tileX : chosenTiles){
-                chosenTiles.remove(tileX);
-            }
-
-            numOfSelectedTiles = 0;
-            yourTurn = false;
 
             notifyObserver(obs -> {
                 try {
@@ -562,6 +556,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 tile3.setEffect(null);
                 tile3.setVisible(false);
                 numberOfTile3.setVisible(false);
+
+                chosenTiles.clear();
+
+                numOfSelectedTiles = 0;
+                yourTurn = false;
             });
 
             pause.play();
