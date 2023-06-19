@@ -1017,7 +1017,7 @@ class PersonalGoalCardTest {
         player.getBookshelf().setTile(1,1, TileType.GAME);
         player.getBookshelf().setTile(2,0, TileType.BOOK);
         player.getBookshelf().setTile(3,3, TileType.CAT);
-        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,1, TileType.FRAME);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(5, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
@@ -1032,7 +1032,7 @@ class PersonalGoalCardTest {
         player.getBookshelf().setTile(1,1, TileType.BOOK);
         player.getBookshelf().setTile(2,0, TileType.BOOK);
         player.getBookshelf().setTile(3,3, TileType.CAT);
-        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,1, TileType.FRAME);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(4, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
@@ -1047,7 +1047,7 @@ class PersonalGoalCardTest {
         player.getBookshelf().setTile(1,1, TileType.BOOK);
         player.getBookshelf().setTile(2,0, TileType.CAT);
         player.getBookshelf().setTile(3,3, TileType.CAT);
-        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,1, TileType.FRAME);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(3, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
@@ -1062,7 +1062,7 @@ class PersonalGoalCardTest {
         player.getBookshelf().setTile(1,1, TileType.BOOK);
         player.getBookshelf().setTile(2,0, TileType.CAT);
         player.getBookshelf().setTile(3,3, TileType.FRAME);
-        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,1, TileType.FRAME);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(2, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
@@ -1077,7 +1077,7 @@ class PersonalGoalCardTest {
         player.getBookshelf().setTile(1,1, TileType.BOOK);
         player.getBookshelf().setTile(2,0, TileType.CAT);
         player.getBookshelf().setTile(3,3, TileType.FRAME);
-        player.getBookshelf().setTile(4,2, TileType.PLANT);
+        player.getBookshelf().setTile(4,1, TileType.PLANT);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(1, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
@@ -1092,7 +1092,7 @@ class PersonalGoalCardTest {
         player.getBookshelf().setTile(1,1, TileType.BOOK);
         player.getBookshelf().setTile(2,0, TileType.CAT);
         player.getBookshelf().setTile(3,3, TileType.FRAME);
-        player.getBookshelf().setTile(4,2, TileType.PLANT);
+        player.getBookshelf().setTile(4,1, TileType.PLANT);
         player.getBookshelf().setTile(5,3, TileType.TROPHIE);
 
         assertEquals(0, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));

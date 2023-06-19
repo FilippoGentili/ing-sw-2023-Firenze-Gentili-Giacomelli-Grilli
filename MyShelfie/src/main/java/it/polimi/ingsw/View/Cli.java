@@ -705,9 +705,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                     System.out.println("+-------+");
                     System.out.println("|       |");
                     System.out.println("+-------+");
-                    System.out.println("|       |           +-------+");
-                    System.out.println("+-------+   MAX 3   |   !=  |");
-                    System.out.println("|       |           +-------+");
+                    System.out.println("|       |               +-------+");
+                    System.out.println("+-------+  X3   MAX 3   |   !=  |");
+                    System.out.println("|       |               +-------+");
                     System.out.println("+-------+");
                     System.out.println("|       |");
                     System.out.println("+-------+");

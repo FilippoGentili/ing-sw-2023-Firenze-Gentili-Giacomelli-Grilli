@@ -214,7 +214,7 @@ public class PersonalGoalCard implements Serializable {
                     matches++;
                 if(player.getBookshelf().getTile(3,3).getTileType().equals(TileType.CAT))
                     matches++;
-                if(player.getBookshelf().getTile(4,2).getTileType().equals(TileType.FRAME))
+                if(player.getBookshelf().getTile(4,1).getTileType().equals(TileType.FRAME))
                     matches++;
                 if(player.getBookshelf().getTile(5,3).getTileType().equals(TileType.PLANT))
                     matches++;
