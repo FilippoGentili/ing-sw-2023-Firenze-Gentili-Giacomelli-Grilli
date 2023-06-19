@@ -166,6 +166,8 @@ public class Gui extends ViewObservable implements View {
         showCommonGoalCards(game);
         showPersonalGoalCard(player);
         showLivingRoom(game.getLivingRoom());
+        Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(player));
+        Platform.runLater(() ->gameSceneController.updateVisualEndGameToken(game));
         for(Player p : game.getPlayers()) {
             showBookshelf(p);
         }
