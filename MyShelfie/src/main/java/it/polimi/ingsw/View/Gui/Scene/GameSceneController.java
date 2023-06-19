@@ -84,6 +84,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private MenuItem leaderboardButton;
     @FXML
+    private MenuItem rulebookButton;
+    @FXML
     private AnchorPane arrowB1C1;
     @FXML
     private AnchorPane arrowB1C2;
@@ -135,6 +137,36 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private AnchorPane numberOfTile2;
     @FXML
     private AnchorPane numberOfTile3;
+    @FXML
+    private AnchorPane endGameToken;
+    @FXML
+    private AnchorPane endGameP1;
+    @FXML
+    private AnchorPane endGameP2;
+    @FXML
+    private AnchorPane endGameP3;
+    @FXML
+    private AnchorPane endGameP4;
+    @FXML
+    private AnchorPane commonGoalP1C1;
+    @FXML
+    private AnchorPane commonGoalP1C2;
+    @FXML
+    private AnchorPane commonGoalP2C1;
+    @FXML
+    private AnchorPane commonGoalP2C2;
+    @FXML
+    private AnchorPane commonGoalP3C1;
+    @FXML
+    private AnchorPane commonGoalP3C2;
+    @FXML
+    private AnchorPane commonGoalP4C1;
+    @FXML
+    private AnchorPane commonGoalP4C2;
+    @FXML
+    private AnchorPane commonPoints1;
+    @FXML
+    private AnchorPane commonPoints2;
     boolean yourTurn = false;
     private ArrayList<Tile> chosenTiles = new ArrayList<>();
     private ArrayList<Integer> availableColumns = new ArrayList<>();
@@ -142,13 +174,16 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private int counter = 0;
     private int numOfPlayers;
     private int numOfSelectedTiles = 0;
+    private boolean til1Clicked = false;
+    private boolean til2Clicked = false;
+    private boolean til3Clicked = false;
     private LivingRoom livingRoom = new LivingRoom();
     private int i = 0;
 
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
-        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> confirmTileSelectionButtonClicked(event));
+        confirmTileSelectionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::confirmTileSelectionButtonClicked);
         tile1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile1, chosenTiles));
         tile2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile2, chosenTiles));
         tile3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> orderClicked(tile3, chosenTiles));
@@ -175,6 +210,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(this::leaderboardButtonClicked);
+        rulebookButton.setOnAction(this::rulebookButtonClicked);
     }
 
     /**
@@ -183,6 +219,24 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public synchronized void setUp(Game game){
         confirmTileSelectionButton.setVisible(false);
+
+        commonPoints1.setVisible(true);
+        commonPoints2.setVisible(true);
+
+        endGameToken.setVisible(true);
+        endGameP1.setVisible(false);
+        endGameP2.setVisible(false);
+        endGameP3.setVisible(false);
+        endGameP4.setVisible(false);
+
+        commonGoalP1C1.setVisible(false);
+        commonGoalP1C2.setVisible(false);
+        commonGoalP2C1.setVisible(false);
+        commonGoalP2C2.setVisible(false);
+        commonGoalP3C1.setVisible(false);
+        commonGoalP3C2.setVisible(false);
+        commonGoalP4C1.setVisible(false);
+        commonGoalP4C2.setVisible(false);
 
         arrowB1C1.setVisible(false);
         arrowB1C2.setVisible(false);
@@ -411,25 +465,32 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method is used to select the order of the tiles
      */
     public void orderClicked(AnchorPane tile, ArrayList<Tile> chosenTiles){
-        ArrayList<TileType> tmpList = new ArrayList<>();
-        setCounter(getCounter()+1);
 
-        //sets the number above the tile to show the order
-        if (tile1.equals(tile)) {
+        if (tile1.equals(tile) && !til1Clicked) {
+            setCounter(getCounter()+1);
+            til1Clicked = true;
             numberOfTile1.setVisible(true);
             numberOfTile1.getStyleClass().clear();
             numberOfTile1.getStyleClass().add("generalNumber" + getCounter());
-        } else if (tile2.equals(tile)) {
+            orderedList.add(chosenTiles.get(i));
+            i++;
+        } else if (tile2.equals(tile) && !til2Clicked) {
+            setCounter(getCounter()+1);
+            til2Clicked = true;
             numberOfTile2.setVisible(true);
             numberOfTile2.getStyleClass().clear();
             numberOfTile2.getStyleClass().add("generalNumber" + getCounter());
-        } else if (tile3.equals(tile)) {
+            orderedList.add(chosenTiles.get(i));
+            i++;
+        } else if (tile3.equals(tile) && !til3Clicked) {
+            setCounter(getCounter()+1);
+            til3Clicked = true;
             numberOfTile3.setVisible(true);
             numberOfTile3.getStyleClass().clear();
             numberOfTile3.getStyleClass().add("generalNumber" + getCounter());
+            orderedList.add(chosenTiles.get(i));
+            i++;
         }
-        orderedList.add(chosenTiles.get(i));
-        i++;
 
         if (orderedList.size() == chosenTiles.size()) {
             notifyObserver(obs -> {
@@ -441,7 +502,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             });
             orderedList.clear();
             setCounter(0);
+            til1Clicked = false;
+            til2Clicked = false;
+            til3Clicked = false;
             i = 0;
+
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(event -> {
                 tile1.setEffect(null);
@@ -674,7 +739,31 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param player of the bookshelf
      */
     public synchronized void updateBookShelf(Player player){
-       Game game = player.getGame();
+        if(player.equals(player.getGame().getCurrentPlayer())){
+            if(namePlayer1.getText().equals(player.getNickname())){
+                namePlayer1.setFill(Color.YELLOW);
+                namePlayer2.setFill(Color.WHITE);
+                namePlayer3.setFill(Color.WHITE);
+                namePlayer4.setFill(Color.WHITE);
+            }else if(namePlayer2.getText().equals(player.getNickname())){
+                namePlayer1.setFill(Color.WHITE);
+                namePlayer2.setFill(Color.YELLOW);
+                namePlayer3.setFill(Color.WHITE);
+                namePlayer4.setFill(Color.WHITE);
+            }else if(namePlayer3.getText().equals(player.getNickname())){
+                namePlayer1.setFill(Color.WHITE);
+                namePlayer2.setFill(Color.WHITE);
+                namePlayer3.setFill(Color.YELLOW);
+                namePlayer4.setFill(Color.WHITE);
+            } else if (namePlayer4.getText().equals(player.getNickname())) {
+                namePlayer1.setFill(Color.WHITE);
+                namePlayer2.setFill(Color.WHITE);
+                namePlayer3.setFill(Color.WHITE);
+                namePlayer4.setFill(Color.YELLOW);
+            }
+        }
+
+        Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
         if (game.getPlayers().size() == 2) {
             switch (index) {
@@ -990,8 +1079,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @return the image of the tile
      */
     public ImageView resizeTiles(ImageView imageName){
-        imageName.setFitHeight(24);
-        imageName.setFitWidth(24);
+        imageName.setFitHeight(25);
+        imageName.setFitWidth(25);
         return imageName;
     }
 
@@ -1067,7 +1156,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Platform.runLater(GuiController::showLeaderboard);
     }
 
+    public void rulebookButtonClicked(ActionEvent event) {
+        Platform.runLater(GuiController::showRulebook);
+    }
+
     public void setNumOfPlayers(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
     }
+
+
 }

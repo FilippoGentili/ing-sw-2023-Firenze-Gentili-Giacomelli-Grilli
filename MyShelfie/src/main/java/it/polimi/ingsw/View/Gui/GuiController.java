@@ -141,4 +141,21 @@ public class GuiController extends ViewObservable{
         leaderboardSceneController.showLeaderboard();
     }
 
+    public static void showRulebook(){
+        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/rulebookScene.fxml"));
+        Parent parent;
+
+        try {
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            Client.LOGGER.severe(e.getMessage());
+            return;
+        }
+        RulebookSceneController rulebookSceneController = fxmlLoader.getController();
+        Scene rulebookScene = new Scene(parent);
+        rulebookSceneController.setScene(rulebookScene);
+        rulebookSceneController.showRulebook();
+
+    }
+
 }

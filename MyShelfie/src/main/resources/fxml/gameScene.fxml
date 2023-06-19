@@ -30,6 +30,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
+                  <MenuItem fx:id="rulebookButton" mnemonicParsing="false" text="Rulebook" />
                         <MenuItem fx:id="aboutButton" mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
@@ -70,23 +71,23 @@
             <children>
                 <GridPane fx:id="bookShelf1" prefHeight="200.0" prefWidth="200.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="22.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="29.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="19.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="34.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="3.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="52.0" minWidth="10.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="56.0" minWidth="10.0" prefWidth="32.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="2.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="52.0" minWidth="10.0" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="56.0" minWidth="10.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="2.0" prefWidth="22.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="7.0" prefHeight="13.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                 </GridPane>
               <Text fx:id="namePlayer1" fill="WHITE" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" x="70.0">
@@ -101,18 +102,18 @@
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="21.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="29.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="35.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="34.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="8.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="8.0" prefWidth="21.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="9.0" prefHeight="13.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="28.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
@@ -130,11 +131,11 @@
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="35.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="34.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="0.0" prefWidth="22.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="0.0" prefWidth="21.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
@@ -142,8 +143,8 @@
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                 </GridPane>
@@ -157,23 +158,23 @@
             <children>
                 <GridPane fx:id="bookShelf4" prefHeight="200.0" prefWidth="200.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="23.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="25.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="36.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="20.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="33.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="32.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="32.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="29.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="24.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="31.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="21.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="13.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                 </GridPane>
               <Text fx:id="namePlayer4" fill="WHITE" layoutX="70.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4" textAlignment="CENTER">
@@ -182,21 +183,27 @@
                   </font>
               </Text>
             </children></AnchorPane>
-        <AnchorPane fx:id="personalGoalCardPlayer1" layoutX="246.0" layoutY="153.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="personalGoalCardPlayer1" layoutX="256.0" layoutY="153.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer4" layoutX="1027.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer3" layoutX="256.0" layoutY="641.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
         <AnchorPane fx:id="personalGoalCardPlayer2" layoutX="256.0" layoutY="402.0" prefHeight="120.0" prefWidth="90.0" styleClass="generalPersonalGoalCardBack" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="commonGoalCard1" layoutX="1109.0" layoutY="72.0" prefHeight="130.0" prefWidth="220.0" styleClass="generalCommonGoalCardBack" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="commonGoalCard2" layoutX="1109.0" layoutY="233.0" prefHeight="130.0" prefWidth="220.0" styleClass="generalCommonGoalCardBack" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="commonGoalCard1" layoutX="1109.0" layoutY="72.0" prefHeight="130.0" prefWidth="220.0" styleClass="generalCommonGoalCardBack" stylesheets="@../css/style.css">
+         <children>
+            <AnchorPane fx:id="commonPoints1" layoutX="128.0" layoutY="30.0" prefHeight="58.0" prefWidth="64.0" rotate="-8.1" styleClass="generalScoring8" stylesheets="@../css/style.css" />
+         </children></AnchorPane>
+        <AnchorPane fx:id="commonGoalCard2" layoutX="1109.0" layoutY="233.0" prefHeight="130.0" prefWidth="220.0" styleClass="generalCommonGoalCardBack" stylesheets="@../css/style.css">
+         <children>
+            <AnchorPane fx:id="commonPoints2" layoutX="128.0" layoutY="30.0" prefHeight="58.0" prefWidth="64.0" rotate="-8.1" styleClass="generalScoring8" stylesheets="@../css/style.css" />
+         </children></AnchorPane>
         <ImageView fitHeight="130.0" fitWidth="424.0" layoutX="505.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/publisherMaterial/smallTitle.png" />
             </image>
         </ImageView>
-        <AnchorPane fx:id="chairPlayer1" layoutX="231.0" layoutY="73.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="chairPlayer2" layoutX="246.0" layoutY="322.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="chairPlayer3" layoutX="246.0" layoutY="551.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
-        <AnchorPane fx:id="chairPlayer4" layoutX="1072.0" layoutY="551.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer1" layoutX="246.0" layoutY="57.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer2" layoutX="246.0" layoutY="313.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer3" layoutX="246.0" layoutY="543.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
+        <AnchorPane fx:id="chairPlayer4" layoutX="1072.0" layoutY="543.0" prefHeight="50.0" prefWidth="50.0" styleClass="generalFirstPlayerChair" stylesheets="@../css/style.css" />
         <AnchorPane layoutX="650.0" layoutY="701.0" prefHeight="65.0" prefWidth="175.0" stylesheets="@../css/style.css">
             <children>
                 <Button fx:id="confirmTileSelectionButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="175.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Confirm">
@@ -238,5 +245,18 @@
       <AnchorPane fx:id="arrowB2C5" layoutX="182.0" layoutY="298.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB1C5" layoutX="182.0" layoutY="52.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
       <AnchorPane fx:id="arrowB4C5" layoutX="1289.0" layoutY="536.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="generalArrow" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="endGameP1" layoutX="311.0" layoutY="77.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalEndGameToken" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP1C2" layoutX="311.0" layoutY="115.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="endGameP2" layoutX="311.0" layoutY="323.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalEndGameToken" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP2C2" layoutX="311.0" layoutY="369.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="endGameP3" layoutX="311.0" layoutY="561.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalEndGameToken" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP3C2" layoutX="311.0" layoutY="601.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="endGameP4" layoutX="1027.0" layoutY="561.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalEndGameToken" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP4C2" layoutX="1027.0" layoutY="601.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="endGameToken" layoutX="867.0" layoutY="540.0" prefHeight="56.0" prefWidth="56.0" rotate="8.7" styleClass="generalEndGameToken" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP1C1" layoutX="266.0" layoutY="115.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP2C1" layoutX="256.0" layoutY="369.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP3C1" layoutX="256.0" layoutY="601.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
+      <AnchorPane fx:id="commonGoalP4C1" layoutX="1082.0" layoutY="601.0" prefHeight="30.0" prefWidth="30.0" styleClass="generalScoringBack" stylesheets="@../css/style.css" />
     </children>
 </AnchorPane>
