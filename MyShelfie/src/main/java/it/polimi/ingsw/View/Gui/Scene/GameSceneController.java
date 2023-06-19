@@ -8,6 +8,8 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
@@ -785,6 +787,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf1);
                 }
                 case 1 ->{
                     for(int i=0; i<6; i++){
@@ -794,6 +798,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf3);
                 }
             }
         }else if(game.getPlayers().size()==3){
@@ -806,6 +812,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf1);
                 }
                 case 1 ->{
                     for(int i=0; i<6; i++){
@@ -815,6 +823,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf2);
                 }
                 case 2 ->{
                     for(int i=0; i<6; i++){
@@ -824,6 +834,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf3);
                 }
             }
         }else if(game.getPlayers().size()==4){
@@ -836,6 +848,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf1);
                 }
                 case 1 ->{
                     for(int i=0; i<6; i++){
@@ -845,6 +859,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf2);
                 }
                 case 2 ->{
                     for(int i=0; i<6; i++){
@@ -854,6 +870,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf3);
                 }
                 case 3 ->{
                     for(int i=0; i<6; i++){
@@ -863,6 +881,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                             }
                         }
                     }
+
+                    alignCenter(bookShelf4);
                 }
             }
         }
@@ -1172,6 +1192,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     public void setNumOfPlayers(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
+    }
+
+    public void alignCenter(GridPane gridPane){
+        ObservableList<Node> cells = gridPane.getChildren();
+
+        for(Node node : cells){
+            gridPane.setHalignment(node, HPos.CENTER);
+            gridPane.setValignment(node, VPos.CENTER);
+        }
     }
 
 
