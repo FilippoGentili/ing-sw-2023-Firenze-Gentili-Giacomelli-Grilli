@@ -71,13 +71,18 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
     }
 
+    @Override
+    public void turnDisplay(Player player) {
+        Platform.runLater(() -> gameSceneController.setVisualNames(player));
+    }
+
     /**
      * This method is used to ask the player to choose the tiles from the board
      * @param livingRoom is the living room of the game
      */
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
-        Platform.runLater(gameSceneController::selectTiles);
+        Platform.runLater(() -> gameSceneController.selectTiles());
     }
 
     /**

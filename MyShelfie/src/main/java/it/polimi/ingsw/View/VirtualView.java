@@ -138,4 +138,8 @@ public class VirtualView implements View, Observer, Serializable {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void turnDisplay(Player player) {
+    }
 }

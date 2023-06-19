@@ -195,6 +195,12 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                        view.showChatMessage(chatMessage);
                     });
                     break;
+                case Turn_Message:
+                    TurnMessage turnMessage = (TurnMessage) message;
+                    queue.add(() -> {
+                        view.turnDisplay(turnMessage.getPlayer());
+                    });
+                    break;
                 default:
                     break;
             }

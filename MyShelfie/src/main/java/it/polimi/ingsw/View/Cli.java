@@ -847,6 +847,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
     }
 
     @Override
+    public void turnDisplay(Player player) {
+
+    }
+
+    @Override
     public void handleDisconnection() {
         System.out.println("You will be disconnected. Game finished :(");
 

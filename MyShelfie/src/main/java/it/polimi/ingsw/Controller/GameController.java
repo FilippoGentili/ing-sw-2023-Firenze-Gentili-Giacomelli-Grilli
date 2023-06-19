@@ -238,8 +238,10 @@ public class GameController implements Serializable {
         for(Player player : players){
             if(!player.equals(currentPlayer))
                 server.sendMessage(new GenericMessage("It's the turn of " + currentPlayer.getNickname()),player.getNickname());
-            else
-                server.sendMessage(new GenericMessage("It's your turn, " + currentPlayer.getNickname() + "!"),player.getNickname());
+            else {
+                server.sendMessage(new GenericMessage("It's your turn, " + currentPlayer.getNickname() + "!"), player.getNickname());
+                server.broadcastMessage((new TurnMessage(player, MessageType.Turn_Message)));
+            }
         }
 
         server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());

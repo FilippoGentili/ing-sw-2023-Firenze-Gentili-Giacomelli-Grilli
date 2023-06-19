@@ -27,4 +27,5 @@ public interface View {
     void showWaitingRoom(int maxPlayers, int numOfPlayersConnected);
     void showWinner(String winner);
     void handleDisconnection(String nickname);
+    void turnDisplay(Player player);
 }

@@ -329,6 +329,30 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         });
     }
 
+    public void setVisualNames(Player player){
+        if(namePlayer1.getText().equals(player.getNickname())){
+            namePlayer1.setFill(Color.YELLOW);
+            namePlayer2.setFill(Color.WHITE);
+            namePlayer3.setFill(Color.WHITE);
+            namePlayer4.setFill(Color.WHITE);
+        }else if(namePlayer2.getText().equals(player.getNickname())){
+            namePlayer1.setFill(Color.WHITE);
+            namePlayer2.setFill(Color.YELLOW);
+            namePlayer3.setFill(Color.WHITE);
+            namePlayer4.setFill(Color.WHITE);
+        }else if(namePlayer3.getText().equals(player.getNickname())){
+            namePlayer1.setFill(Color.WHITE);
+            namePlayer2.setFill(Color.WHITE);
+            namePlayer3.setFill(Color.YELLOW);
+            namePlayer4.setFill(Color.WHITE);
+        } else if (namePlayer4.getText().equals(player.getNickname())) {
+            namePlayer1.setFill(Color.WHITE);
+            namePlayer2.setFill(Color.WHITE);
+            namePlayer3.setFill(Color.WHITE);
+            namePlayer4.setFill(Color.YELLOW);
+        }
+    }
+
     /**
      * This method shows thw banner when the player has to choose the tiles from the board
      */
@@ -734,7 +758,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param livingRoom of the current game
      */
     public synchronized void updateLivingRoom(LivingRoom livingRoom){
-
         boardGrid.getChildren().clear();
 
         for(int i=0; i<9; i++){
@@ -752,29 +775,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param player of the bookshelf
      */
     public synchronized void updateBookShelf(Player player){
-        if(player.equals(player.getGame().getCurrentPlayer())){
-            if(namePlayer1.getText().equals(player.getNickname())){
-                namePlayer1.setFill(Color.YELLOW);
-                namePlayer2.setFill(Color.WHITE);
-                namePlayer3.setFill(Color.WHITE);
-                namePlayer4.setFill(Color.WHITE);
-            }else if(namePlayer2.getText().equals(player.getNickname())){
-                namePlayer1.setFill(Color.WHITE);
-                namePlayer2.setFill(Color.YELLOW);
-                namePlayer3.setFill(Color.WHITE);
-                namePlayer4.setFill(Color.WHITE);
-            }else if(namePlayer3.getText().equals(player.getNickname())){
-                namePlayer1.setFill(Color.WHITE);
-                namePlayer2.setFill(Color.WHITE);
-                namePlayer3.setFill(Color.YELLOW);
-                namePlayer4.setFill(Color.WHITE);
-            } else if (namePlayer4.getText().equals(player.getNickname())) {
-                namePlayer1.setFill(Color.WHITE);
-                namePlayer2.setFill(Color.WHITE);
-                namePlayer3.setFill(Color.WHITE);
-                namePlayer4.setFill(Color.YELLOW);
-            }
-        }
 
         Game game = player.getGame();
         int index = game.getPlayers().indexOf(player);
