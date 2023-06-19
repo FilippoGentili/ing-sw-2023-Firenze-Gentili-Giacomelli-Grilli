@@ -343,13 +343,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public void confirmTileSelectionButtonClicked(MouseEvent event){
         confirmTileSelectionButton.setVisible(false);
 
-        notifyObserver(obs -> {
-            try {
-                obs.updateChosenTiles(chosenTiles);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if(yourTurn) {
+            notifyObserver(obs -> {
+                try {
+                    obs.updateChosenTiles(chosenTiles);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
 
     }
 
@@ -639,6 +641,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             arrowB4C5.setVisible(false);
         });
         pause.play();
+
+        for(Tile tile : chosenTiles){
+            chosenTiles.remove(tile);
+        }
+
+        numOfSelectedTiles = 0;
+
         yourTurn = false;
     }
 
