@@ -16,22 +16,10 @@ import java.util.ArrayList;
 
 
 public class EndSceneController extends ViewObservable implements GenericSceneController{
-    private final Stage stage;
-    private double xAxis;
-    private double yAxis;
     @FXML
     private Text winnerText;
     @FXML
     private ListView scoreBoard;
-    public EndSceneController() {
-        stage = new Stage();
-        stage.initOwner(GuiController.getCurrentScene().getWindow());
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setAlwaysOnTop(true);
-        xAxis = 0;
-        yAxis = 0;
-    }
     @FXML
     public void initialize(){
 
@@ -54,13 +42,5 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
 
         scoreBoard.getItems().addAll(scoreboardItems);
 
-    }
-
-    public void displayEndScene(){
-        stage.showAndWait();
-    }
-
-    public void setScene(Scene scene) {
-        stage.setScene(scene);
     }
 }
