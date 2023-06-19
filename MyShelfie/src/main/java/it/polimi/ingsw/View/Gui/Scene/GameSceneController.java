@@ -180,6 +180,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private boolean tile2Clicked = false;
     private boolean tile3Clicked = false;
     private boolean firstPlayerFullBookshelf = true;
+    private boolean firstTime = true;
     private LivingRoom livingRoom = new LivingRoom();
 
     @FXML
@@ -291,11 +292,9 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
             namePlayer1.setText(game.getPlayers().get(0).getNickname());
-            //personalGoalCardPlayer1.setVisible(true);
             bookshelfPlayer3.setVisible(true);
             namePlayer3.setVisible(true);
             namePlayer3.setText(game.getPlayers().get(1).getNickname());
-            //personalGoalCardPlayer3.setVisible(true);
         } else if (game.getPlayers().size() == 3) {
             bookshelfPlayer1.setVisible(true);
             namePlayer1.setVisible(true);
@@ -356,10 +355,17 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method shows thw banner when the player has to choose the tiles from the board
      */
     public void selectTiles(){
-        Platform.runLater(() -> {
-            GuiController.showBanner("INFO", "Choose up to 3 tiles from the board");
-        });
-        yourTurn = true;
+        if(firstTime) {
+            Platform.runLater(() -> {
+                GuiController.showBanner("INFO", "Choose up to 3 tiles from the board");
+            });
+            yourTurn = true;
+            firstTime = false;
+        }else{
+            Platform.runLater(() -> {
+                GuiController.showBanner("INFO", "Invalid tiles, try again!");
+            });
+        }
     }
 
     /**
@@ -579,6 +585,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public void selectColumn(ArrayList<Integer> AvailableColumns, Player player){
         Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the column to put the tiles in"));
+        firstTime = true;
         if (player.getGame().getPlayers().size() == 2) {
             if(player.getGame().getPlayers().get(0).equals(player)){
                 if(AvailableColumns.contains(0))
