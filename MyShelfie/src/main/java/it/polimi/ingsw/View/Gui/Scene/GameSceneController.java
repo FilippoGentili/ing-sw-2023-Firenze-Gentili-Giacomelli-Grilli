@@ -176,12 +176,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private int counter = 0;
     private int numOfPlayers;
     private int numOfSelectedTiles = 0;
-    private boolean til1Clicked = false;
-    private boolean til2Clicked = false;
-    private boolean til3Clicked = false;
+    private boolean tile1Clicked = false;
+    private boolean tile2Clicked = false;
+    private boolean tile3Clicked = false;
     private boolean firstPlayerFullBookshelf = true;
     private LivingRoom livingRoom = new LivingRoom();
-    private int i = 0;
 
     @FXML
     public void initialize() {
@@ -503,34 +502,38 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public void orderClicked(AnchorPane tile, ArrayList<Tile> chosenTiles){
 
-        if (tile1.equals(tile) && !til1Clicked) {
+        if (tile1.equals(tile) && !tile1Clicked) {
             setCounter(getCounter()+1);
-            til1Clicked = true;
+            tile1Clicked = true;
             numberOfTile1.setVisible(true);
             numberOfTile1.getStyleClass().clear();
             numberOfTile1.getStyleClass().add("generalNumber" + getCounter());
-            orderedList.add(chosenTiles.get(i));
-            i++;
-        } else if (tile2.equals(tile) && !til2Clicked) {
+            orderedList.add(chosenTiles.get(0));
+        } else if (tile2.equals(tile) && !tile2Clicked) {
             setCounter(getCounter()+1);
-            til2Clicked = true;
+            tile2Clicked = true;
             numberOfTile2.setVisible(true);
             numberOfTile2.getStyleClass().clear();
             numberOfTile2.getStyleClass().add("generalNumber" + getCounter());
-            orderedList.add(chosenTiles.get(i));
-            i++;
-        } else if (tile3.equals(tile) && !til3Clicked) {
+            if(chosenTiles.size() == 1) {
+                orderedList.add(chosenTiles.get(0));
+            }else if(chosenTiles.size() == 3) {
+                orderedList.add(chosenTiles.get(1));
+            }
+        } else if (tile3.equals(tile) && !tile3Clicked) {
             setCounter(getCounter()+1);
-            til3Clicked = true;
+            tile3Clicked = true;
             numberOfTile3.setVisible(true);
             numberOfTile3.getStyleClass().clear();
             numberOfTile3.getStyleClass().add("generalNumber" + getCounter());
-            orderedList.add(chosenTiles.get(i));
-            i++;
+            if (chosenTiles.size() == 2) {
+                orderedList.add(chosenTiles.get(1));
+            }else if (chosenTiles.size() == 3) {
+                orderedList.add(chosenTiles.get(2));
+            }
         }
 
         if (orderedList.size() == chosenTiles.size()) {
-
             notifyObserver(obs -> {
                 try {
                     obs.updateOrderedTiles(orderedList);
@@ -540,10 +543,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             });
             orderedList.clear();
             setCounter(0);
-            til1Clicked = false;
-            til2Clicked = false;
-            til3Clicked = false;
-            i = 0;
+            tile1Clicked = false;
+            tile2Clicked = false;
+            tile3Clicked = false;
+            chosenTiles.clear();
+            numOfSelectedTiles = 0;
+            yourTurn = false;
 
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(event -> {
@@ -556,13 +561,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 tile3.setEffect(null);
                 tile3.setVisible(false);
                 numberOfTile3.setVisible(false);
-
-                chosenTiles.clear();
-
-                numOfSelectedTiles = 0;
-                yourTurn = false;
             });
-
             pause.play();
         }
     }
