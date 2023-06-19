@@ -3,14 +3,12 @@ package it.polimi.ingsw.View.Gui.Scene;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 import java.util.ArrayList;
 
@@ -21,8 +19,10 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     @FXML
     private ListView scoreBoard;
     @FXML
+    private Button exitButton;
+    @FXML
     public void initialize(){
-
+        exitButton.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
     }
 
     public void setWinner(String nickname){
@@ -30,7 +30,7 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     }
 
     public void setScoreBoard(Game game){
-        ArrayList<Player> list = new ArrayList<>();
+        ArrayList<Player> list;
         list = game.getScoreBoard(game.getPlayers());
         ArrayList<String> scoreboardItems = new ArrayList<>();
 
@@ -41,6 +41,9 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         }
 
         scoreBoard.getItems().addAll(scoreboardItems);
+    }
 
+    public void exitButtonClicked(MouseEvent event){
+        System.exit(1);
     }
 }

@@ -447,31 +447,31 @@ public class GameController implements Serializable {
 
         ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
         server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
-
-        for(Player player : players){
-            if(player.getNickname().equals(winner.getNickname()))
-                server.sendMessage(new GenericMessage("Congratulations! " +
-                        "You won the game!"),player.getNickname());
-            else
-                server.sendMessage(new GenericMessage("You lost :( " +
-                        winner.getNickname() + " won the game!"),player.getNickname());
-        }
         server.broadcastMessage(new WinnerMessage(winner.getNickname(), game));
 
-        System.out.println("Write 'exit' to leave the game.");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-        if(input.equalsIgnoreCase("exit")) {
-            endGame();
-        }
 
+        for(Player player : players){
+            if(player.getNickname().equals(winner.getNickname())) {
+                server.sendMessage(new GenericMessage("Congratulations! " + "You won the game!"), player.getNickname());
+            }else {
+                server.sendMessage(new GenericMessage("You lost :( " + winner.getNickname() + " won the game!"), player.getNickname());
+            }
+            System.out.println("Write 'exit' to leave the game.");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine().trim();
+            while(!input.equalsIgnoreCase("exit")) {
+                System.out.println("Invalid statement!");
+                input = scanner.nextLine().trim();
+            }
+            if(input.equalsIgnoreCase("exit")) {
+                endGame(player);
+            }
+        }
     }
 
-    public void endGame(){
+    public void endGame(Player player){
         if(gameState == END){
-            for(Player player : players){
                 server.sendMessage(new DisconnectionReply(player.getNickname()), player.getNickname());
-            }
         }
     }
 
