@@ -169,7 +169,6 @@ public class GameController implements Serializable {
     public void handleGame(Message message) {
 
         lastMessage = message;
-        Server.LOGGER.log(Level.INFO, "Sending {0}, to {1}", new Object[]{lastMessage, currentPlayer});
         GameSaved.saveGame(this);
 
         switch (message.getMessageType()){

@@ -530,6 +530,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
 
         if (orderedList.size() == chosenTiles.size()) {
+            for(Tile tileX : chosenTiles){
+                chosenTiles.remove(tileX);
+            }
+
+            numOfSelectedTiles = 0;
+            yourTurn = false;
+
             notifyObserver(obs -> {
                 try {
                     obs.updateOrderedTiles(orderedList);
@@ -556,6 +563,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 tile3.setVisible(false);
                 numberOfTile3.setVisible(false);
             });
+
             pause.play();
         }
     }
@@ -743,14 +751,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             arrowB4C5.setVisible(false);
         });
         pause.play();
-
-        for(Tile tile : chosenTiles){
-            chosenTiles.remove(tile);
-        }
-
-        numOfSelectedTiles = 0;
-
-        yourTurn = false;
     }
 
     /**
