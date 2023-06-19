@@ -141,4 +141,23 @@ public class GuiController extends ViewObservable{
 
     }
 
+    public static void showCommonGoalCardInfo(int id){
+        FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/commonGoalCardInfoScene.fxml"));
+        Parent parent;
+
+        try {
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            Client.LOGGER.severe(e.getMessage());
+            return;
+        }
+        CommonGoalCardInfoSceneController commonGoalCardInfoSceneController = fxmlLoader.getController();
+        Scene commonGoalCardInfoScene = new Scene(parent);
+        commonGoalCardInfoSceneController.setScene(commonGoalCardInfoScene);
+        commonGoalCardInfoSceneController.setTitle(id);
+        commonGoalCardInfoSceneController.setInformations(id);
+        commonGoalCardInfoSceneController.showCommonGoalCardInfo();
+
+    }
+
 }

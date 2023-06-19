@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static it.polimi.ingsw.Model.TileType.NULL;
+import static it.polimi.ingsw.View.Gui.GuiController.showCommonGoalCardInfo;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -210,6 +211,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C3.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,3, arrowB4C3));
         arrowB4C4.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,4, arrowB4C4));
         arrowB4C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,5, arrowB4C5));
+        commonGoalCard1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard1));
+        commonGoalCard2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard2));
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(this::leaderboardButtonClicked);
@@ -1194,6 +1197,27 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     public void rulebookButtonClicked(ActionEvent event) {
         Platform.runLater(GuiController::showRulebook);
+    }
+
+    public void commonGoalCardClicked(AnchorPane commonGoal) {
+        String styleName = commonGoal.getStyleClass().get(0);
+        Integer id = switch (styleName) {
+            case "generalCommonGoalCard1" -> 1;
+            case "generalCommonGoalCard2" -> 2;
+            case "generalCommonGoalCard3" -> 3;
+            case "generalCommonGoalCard4" -> 4;
+            case "generalCommonGoalCard5" -> 5;
+            case "generalCommonGoalCard6" -> 6;
+            case "generalCommonGoalCard7" -> 7;
+            case "generalCommonGoalCard8" -> 8;
+            case "generalCommonGoalCard9" -> 9;
+            case "generalCommonGoalCard10" -> 10;
+            case "generalCommonGoalCard11" -> 11;
+            case "generalCommonGoalCard12" -> 12;
+            default -> 0;
+        };
+
+        Platform.runLater(() -> showCommonGoalCardInfo(id));
     }
 
     public void setNumOfPlayers(int numOfPlayers) {
