@@ -854,6 +854,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
     @Override
     public void welcomeBack(String nickname) {
         System.out.println("Welcome back "+nickname+"!");
+        System.out.println("The game will start when all the previous players are connected.");
     }
 
     @Override
