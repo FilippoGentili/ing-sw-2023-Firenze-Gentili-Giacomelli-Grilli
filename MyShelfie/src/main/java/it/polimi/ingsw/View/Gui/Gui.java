@@ -234,8 +234,8 @@ public class Gui extends ViewObservable implements View {
         EndSceneController endSceneController = new EndSceneController();
         endSceneController.addAllObserver(observers);
         endSceneController.setWinner(winner);
-        endSceneController.setScoreBoard(game);
-        Platform.runLater(() -> GuiController.changeScene("endScene.fxml",endSceneController));
+        //endSceneController.setScoreBoard(game);
+        Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
     }
 
     @Override

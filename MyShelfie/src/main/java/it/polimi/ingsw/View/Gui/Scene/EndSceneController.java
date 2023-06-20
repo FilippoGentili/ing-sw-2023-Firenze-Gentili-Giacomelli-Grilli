@@ -20,6 +20,7 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     private ListView scoreBoard;
     @FXML
     private Button exitButton;
+
     @FXML
     public void initialize(){
         exitButton.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
@@ -30,13 +31,12 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     }
 
     public void setScoreBoard(Game game){
-        ArrayList<Player> list;
-        list = game.getScoreBoard(game.getPlayers());
+        ArrayList<Player> list = game.getScoreBoard(game.getPlayers());
         ArrayList<String> scoreboardItems = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
             Player player = list.get(i);
-            String scoreboardItem = (i + 1) + ". " + player.getNickname() + player.getScore();
+            String scoreboardItem = (i + 1) + ". " + player.getNickname() + " " + player.getScore();
             scoreboardItems.add(scoreboardItem);
         }
 

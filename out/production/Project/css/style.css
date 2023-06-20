@@ -1,5 +1,10 @@
-.basePane{
+.basePane1{
     -fx-background-image : url("../images/misc/sfondoParquet.jpg");
+    -fx-background-size : stretch;
+}
+
+.basePane2{
+    -fx-background-image : url("../images/misc/base_pagina2.jpg");
     -fx-background-size : stretch;
 }
 
@@ -327,13 +332,29 @@
     -fx-background-size : stretch;
 }
 
-.generalDisplay5{
-    -fx-background-image : url("../images/publisherMaterial/Display_5.jpg");
+/*Display*/
+.generalDisplay1{
+    -fx-background-image : url("../images/publisherMaterial/Display_1.jpg");
     -fx-background-size : stretch;
 }
 
 .generalDisplay2{
     -fx-background-image : url("../images/publisherMaterial/Display_2.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalDisplay3{
+    -fx-background-image : url("../images/publisherMaterial/Display_3.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalDisplay4{
+    -fx-background-image : url("../images/publisherMaterial/Display_4.jpg");
+    -fx-background-size : stretch;
+}
+
+.generalDisplay5{
+    -fx-background-image : url("../images/publisherMaterial/Display_5.jpg");
     -fx-background-size : stretch;
 }
 
