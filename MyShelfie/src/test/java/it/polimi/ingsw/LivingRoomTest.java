@@ -98,7 +98,7 @@ class LivingRoomTest {
         Tile t1 = new Tile(TileType.CAT);
         living.setTile(t1, 4, 0);
 
-        assertSame(living.getTile(4, 0), t1);
+        assertSame(living.getTile(4, 0).getTileType(), t1.getTileType());
     }
 
     @Test
@@ -382,9 +382,9 @@ class LivingRoomTest {
         living.insertTiles(chosen);
 
 
-        check.add(living.getTile(7,3));
-        check.add(living.getTile(7, 4));
-        check.add(living.getTile(7, 5));
+        check.add(living.getTile(4, 5));
+        check.add(living.getTile(4, 6));
+        check.add(living.getTile(4, 7));
 
         assertFalse(living.checkValid(check));
     }
@@ -414,15 +414,13 @@ class LivingRoomTest {
 
         living.insertTiles(chosen);
 
-        String prova = living.getTile(4, 4).getTileType().toString();
+        String prova = living.getTile(7, 3).getTileType().toString();
 
-        Tile tile = living.pickTile(4, 4);
+        Tile tile = living.pickTile(7, 3);
 
         assertSame(tile.getTileType().toString(), prova);
-        assertNull(living.getTile(4, 4));
+        assertEquals(TileType.NULL, living.getTile(7, 3).getTileType());
 
     }
-
-
 
 }

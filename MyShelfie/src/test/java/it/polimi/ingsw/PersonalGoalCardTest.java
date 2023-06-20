@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
-/*import it.polimi.ingsw.Model.PersonalGoalCard;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.TileType;
+import it.polimi.ingsw.Model.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +52,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal1SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.PLANT);
@@ -68,7 +67,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void checkPGoal1FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.TROPHIE);
@@ -84,7 +84,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal1FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.TROPHIE);
@@ -99,7 +100,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal1ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.TROPHIE);
@@ -114,7 +116,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal1TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.TROPHIE);
@@ -129,7 +132,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal1OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.TROPHIE);
@@ -144,7 +148,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal1ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.TROPHIE);
@@ -159,7 +164,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal2SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.PLANT);
@@ -174,7 +180,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal2FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.CAT);
@@ -188,7 +195,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void checkPGoal2FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.CAT);
@@ -202,7 +210,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void checkPGoal2ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.CAT);
@@ -217,7 +226,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal2TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.CAT);
@@ -232,7 +242,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal2OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.CAT);
@@ -247,7 +258,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal2ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.CAT);
@@ -262,7 +274,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal3SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.FRAME);
@@ -277,7 +290,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal3FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.GAME);
@@ -292,7 +306,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal3FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.GAME);
@@ -307,7 +322,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal3ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.GAME);
@@ -322,7 +338,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal3TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.GAME);
@@ -336,7 +353,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void checkPGoal3OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.GAME);
@@ -351,7 +369,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal3ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.GAME);
@@ -366,7 +385,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal4SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -381,7 +401,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal4FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
@@ -396,7 +417,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal4FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
@@ -410,7 +432,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void checkPGoal4ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
@@ -425,7 +448,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal4TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
@@ -440,7 +464,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal4OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
@@ -455,7 +480,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal4ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
@@ -470,7 +496,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.TROPHIE);
@@ -485,7 +512,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.FRAME);
@@ -500,7 +528,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.FRAME);
@@ -515,7 +544,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.FRAME);
@@ -530,7 +560,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.FRAME);
@@ -545,7 +576,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.FRAME);
@@ -560,7 +592,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal5ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.FRAME);
@@ -575,7 +608,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.TROPHIE);
@@ -590,7 +624,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -605,7 +640,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -620,7 +656,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -635,7 +672,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -650,7 +688,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -665,7 +704,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal6ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -680,7 +720,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.CAT);
@@ -695,7 +736,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.FRAME);
@@ -710,7 +752,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.FRAME);
@@ -725,7 +768,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.FRAME);
@@ -740,7 +784,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.FRAME);
@@ -755,7 +800,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.FRAME);
@@ -770,7 +816,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal7ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.FRAME);
@@ -785,7 +832,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.FRAME);
@@ -800,7 +848,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.CAT);
@@ -815,7 +864,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.CAT);
@@ -830,7 +880,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.CAT);
@@ -845,7 +896,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.CAT);
@@ -860,7 +912,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.CAT);
@@ -875,7 +928,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal8ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.CAT);
@@ -890,7 +944,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.GAME);
@@ -905,7 +960,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -920,7 +976,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -935,7 +992,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -950,7 +1008,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -965,7 +1024,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -980,7 +1040,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal9ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.CAT);
@@ -995,14 +1056,15 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
         player.getBookshelf().setTile(1,1, TileType.GAME);
         player.getBookshelf().setTile(2,0, TileType.BOOK);
         player.getBookshelf().setTile(3,3, TileType.CAT);
-        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,1, TileType.FRAME);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(6, player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID()));
@@ -1010,7 +1072,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1025,7 +1088,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1040,7 +1104,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1055,7 +1120,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1070,7 +1136,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1085,7 +1152,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal10ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1100,7 +1168,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1115,7 +1184,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1130,7 +1200,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1145,7 +1216,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1160,7 +1232,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1175,7 +1248,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1190,7 +1264,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal11ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1205,7 +1280,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12SixMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1220,7 +1296,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12FiveMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1235,7 +1312,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12FourMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1250,7 +1328,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12ThreeMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1265,7 +1344,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12TwoMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1280,7 +1360,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12OneMatch(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1295,7 +1376,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void checkPGoal12ZeroMatches(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1310,7 +1392,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void assignPointsPGoal1(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(1);
 
         player.getBookshelf().setTile(0,0, TileType.PLANT);
@@ -1325,7 +1408,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void assignPointsPGoal2(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(2);
 
         player.getBookshelf().setTile(1,1, TileType.PLANT);
@@ -1340,7 +1424,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void assignPointsPGoal3(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(3);
 
         player.getBookshelf().setTile(1,0, TileType.FRAME);
@@ -1355,7 +1440,8 @@ class PersonalGoalCardTest {
 
     @Test
     public void assignPointsPGoal4(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(4);
 
         player.getBookshelf().setTile(0,4, TileType.GAME);
@@ -1369,7 +1455,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal5(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(5);
 
         player.getBookshelf().setTile(1,1, TileType.TROPHIE);
@@ -1383,7 +1470,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal6(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(6);
 
         player.getBookshelf().setTile(0,2, TileType.TROPHIE);
@@ -1397,7 +1485,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal7(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(7);
 
         player.getBookshelf().setTile(0,0, TileType.CAT);
@@ -1411,7 +1500,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal8(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(8);
 
         player.getBookshelf().setTile(0,4, TileType.FRAME);
@@ -1425,7 +1515,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal9(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(9);
 
         player.getBookshelf().setTile(0,2, TileType.GAME);
@@ -1439,21 +1530,23 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal10(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(10);
 
         player.getBookshelf().setTile(0,4, TileType.TROPHIE);
         player.getBookshelf().setTile(1,1, TileType.GAME);
         player.getBookshelf().setTile(2,0, TileType.BOOK);
         player.getBookshelf().setTile(3,3, TileType.CAT);
-        player.getBookshelf().setTile(4,2, TileType.FRAME);
+        player.getBookshelf().setTile(4,1, TileType.FRAME);
         player.getBookshelf().setTile(5,3, TileType.PLANT);
 
         assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
     }
     @Test
     public void assignPointsPGoal11(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(11);
 
         player.getBookshelf().setTile(0,2, TileType.PLANT);
@@ -1467,7 +1560,8 @@ class PersonalGoalCardTest {
     }
     @Test
     public void assignPointsPGoal12(){
-        Player player = new Player();
+        Game game=new Game();
+        Player player = new Player(game);
         player.setPersonalGoalCard(12);
 
         player.getBookshelf().setTile(0,2, TileType.BOOK);
@@ -1479,4 +1573,171 @@ class PersonalGoalCardTest {
 
         assertEquals(12, player.getPersonalGoalCard().assignPoints(player.getPersonalGoalCard().getID()));
     }
-}*/
+
+    @Test
+    public void buildPersonalGoalCard1Test() throws Exception {
+        PersonalGoalCard pGoal1 = new PersonalGoalCard();
+        pGoal1.setID(1);
+        Tile[][] pGoal = pGoal1.buildPersonalGoalCard();
+        assertEquals(TileType.PLANT, pGoal[0][0].getTileType());
+        assertEquals(TileType.FRAME, pGoal[0][2].getTileType());
+        assertEquals(TileType.CAT, pGoal[1][4].getTileType());
+        assertEquals(TileType.BOOK, pGoal[2][3].getTileType());
+        assertEquals(TileType.GAME, pGoal[3][1].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[5][2].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard2Test() throws Exception {
+        PersonalGoalCard pGoal2 = new PersonalGoalCard();
+        pGoal2.setID(2);
+        Tile[][] pGoal = pGoal2.buildPersonalGoalCard();
+        assertEquals(TileType.PLANT, pGoal[1][1].getTileType());
+        assertEquals(TileType.CAT, pGoal[2][0].getTileType());
+        assertEquals(TileType.GAME, pGoal[2][2].getTileType());
+        assertEquals(TileType.BOOK, pGoal[3][4].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[4][3].getTileType());
+        assertEquals(TileType.FRAME, pGoal[5][4].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard3Test() throws Exception {
+        PersonalGoalCard pGoal3 = new PersonalGoalCard();
+        pGoal3.setID(3);
+        Tile[][] pGoal = pGoal3.buildPersonalGoalCard();
+        assertEquals(TileType.FRAME, pGoal[1][0].getTileType());
+        assertEquals(TileType.GAME, pGoal[1][3].getTileType());
+        assertEquals(TileType.PLANT, pGoal[2][2].getTileType());
+        assertEquals(TileType.CAT, pGoal[3][1].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[3][4].getTileType());
+        assertEquals(TileType.BOOK, pGoal[5][0].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard4Test() throws Exception {
+        PersonalGoalCard pGoal4 = new PersonalGoalCard();
+        pGoal4.setID(4);
+        Tile[][] pGoal = pGoal4.buildPersonalGoalCard();
+        assertEquals(TileType.GAME, pGoal[0][4].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[2][0].getTileType());
+        assertEquals(TileType.FRAME, pGoal[2][2].getTileType());
+        assertEquals(TileType.PLANT, pGoal[3][3].getTileType());
+        assertEquals(TileType.BOOK, pGoal[4][1].getTileType());
+        assertEquals(TileType.CAT, pGoal[4][2].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard5Test() throws Exception {
+        PersonalGoalCard pGoal5 = new PersonalGoalCard();
+        pGoal5.setID(5);
+        Tile[][] pGoal = pGoal5.buildPersonalGoalCard();
+        assertEquals(TileType.TROPHIE, pGoal[1][1].getTileType());
+        assertEquals(TileType.FRAME, pGoal[3][1].getTileType());
+        assertEquals(TileType.BOOK, pGoal[3][2].getTileType());
+        assertEquals(TileType.PLANT, pGoal[4][4].getTileType());
+        assertEquals(TileType.GAME, pGoal[5][0].getTileType());
+        assertEquals(TileType.CAT, pGoal[5][3].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard6Test() throws Exception {
+        PersonalGoalCard pGoal6 = new PersonalGoalCard();
+        pGoal6.setID(6);
+        Tile[][] pGoal = pGoal6.buildPersonalGoalCard();
+        assertEquals(TileType.TROPHIE, pGoal[0][2].getTileType());
+        assertEquals(TileType.CAT, pGoal[0][4].getTileType());
+        assertEquals(TileType.BOOK, pGoal[2][3].getTileType());
+        assertEquals(TileType.GAME, pGoal[4][1].getTileType());
+        assertEquals(TileType.FRAME, pGoal[4][3].getTileType());
+        assertEquals(TileType.PLANT, pGoal[5][0].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard7Test() throws Exception {
+        PersonalGoalCard pGoal7 = new PersonalGoalCard();
+        pGoal7.setID(7);
+        Tile[][] pGoal = pGoal7.buildPersonalGoalCard();
+        assertEquals(TileType.CAT, pGoal[0][0].getTileType());
+        assertEquals(TileType.FRAME, pGoal[1][3].getTileType());
+        assertEquals(TileType.PLANT, pGoal[2][1].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[3][0].getTileType());
+        assertEquals(TileType.GAME, pGoal[4][4].getTileType());
+        assertEquals(TileType.BOOK, pGoal[5][2].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard8Test() throws Exception {
+        PersonalGoalCard pGoal8 = new PersonalGoalCard();
+        pGoal8.setID(8);
+        Tile[][] pGoal = pGoal8.buildPersonalGoalCard();
+        assertEquals(TileType.FRAME, pGoal[0][4].getTileType());
+        assertEquals(TileType.CAT, pGoal[1][1].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[2][2].getTileType());
+        assertEquals(TileType.PLANT, pGoal[3][0].getTileType());
+        assertEquals(TileType.BOOK, pGoal[4][3].getTileType());
+        assertEquals(TileType.GAME, pGoal[5][3].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard9Test() throws Exception {
+        PersonalGoalCard pGoal9 = new PersonalGoalCard();
+        pGoal9.setID(9);
+        Tile[][] pGoal = pGoal9.buildPersonalGoalCard();
+        assertEquals(TileType.GAME, pGoal[0][2].getTileType());
+        assertEquals(TileType.CAT, pGoal[2][2].getTileType());
+        assertEquals(TileType.BOOK, pGoal[3][4].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[4][1].getTileType());
+        assertEquals(TileType.PLANT, pGoal[4][4].getTileType());
+        assertEquals(TileType.FRAME, pGoal[5][0].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard10Test() throws Exception {
+        PersonalGoalCard pGoal10 = new PersonalGoalCard();
+        pGoal10.setID(10);
+        Tile[][] pGoal = pGoal10.buildPersonalGoalCard();
+        assertEquals(TileType.TROPHIE, pGoal[0][4].getTileType());
+        assertEquals(TileType.GAME, pGoal[1][1].getTileType());
+        assertEquals(TileType.BOOK, pGoal[2][0].getTileType());
+        assertEquals(TileType.CAT, pGoal[3][3].getTileType());
+        assertEquals(TileType.FRAME, pGoal[4][2].getTileType());
+        assertEquals(TileType.PLANT, pGoal[5][3].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard11Test() throws Exception {
+        PersonalGoalCard pGoal11 = new PersonalGoalCard();
+        pGoal11.setID(11);
+        Tile[][] pGoal = pGoal11.buildPersonalGoalCard();
+        assertEquals(TileType.PLANT, pGoal[0][2].getTileType());
+        assertEquals(TileType.BOOK, pGoal[1][1].getTileType());
+        assertEquals(TileType.GAME, pGoal[2][0].getTileType());
+        assertEquals(TileType.FRAME, pGoal[3][2].getTileType());
+        assertEquals(TileType.CAT, pGoal[4][4].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[5][3].getTileType());
+    }
+
+    @Test
+    public void buildPersonalGoalCard12Test() throws Exception {
+        PersonalGoalCard pGoal12 = new PersonalGoalCard();
+        pGoal12.setID(12);
+        Tile[][] pGoal = pGoal12.buildPersonalGoalCard();
+        assertEquals(TileType.BOOK, pGoal[0][2].getTileType());
+        assertEquals(TileType.PLANT, pGoal[1][1].getTileType());
+        assertEquals(TileType.FRAME, pGoal[2][2].getTileType());
+        assertEquals(TileType.TROPHIE, pGoal[3][3].getTileType());
+        assertEquals(TileType.GAME, pGoal[4][4].getTileType());
+        assertEquals(TileType.CAT, pGoal[5][0].getTileType());
+    }
+
+    @Test
+    public void NullPlayerException(){
+        Player player = null;
+        assertThrows(Exception.class, () -> {
+            player.setPersonalGoalCard(1);
+            player.getPersonalGoalCard().check(player.getPersonalGoalCard().getID());
+        });
+
+    }
+
+}

@@ -19,7 +19,7 @@ class BookshelfTest {
 
         Bookshelf bookshelf = new Bookshelf();
 
-        assertNull(bookshelf.getTile(i, j));
+        assertEquals(TileType.NULL, bookshelf.getTile(i, j).getTileType());
     }
 
     @Test
@@ -82,12 +82,12 @@ class BookshelfTest {
 
         bookshelf.insertTiles(tiles, col);
 
-        assertEquals(bookshelf.getTile(5, col), tiles.get(0));
-        assertEquals(bookshelf.getTile(4, col), tiles.get(1));
-        assertEquals(bookshelf.getTile(3, col), tiles.get(2));
-        assertEquals(bookshelf.getTile(2, col), tiles.get(3));
-        assertEquals(bookshelf.getTile(1, col), tiles.get(4));
-        assertEquals(bookshelf.getTile(0, col), tiles.get(5));
+        assertEquals(bookshelf.getTile(5, col).getTileType(), tiles.get(0).getTileType());
+        assertEquals(bookshelf.getTile(4, col).getTileType(), tiles.get(1).getTileType());
+        assertEquals(bookshelf.getTile(3, col).getTileType(), tiles.get(2).getTileType());
+        assertEquals(bookshelf.getTile(2, col).getTileType(), tiles.get(3).getTileType());
+        assertEquals(bookshelf.getTile(1, col).getTileType(), tiles.get(4).getTileType());
+        assertEquals(bookshelf.getTile(0, col).getTileType(), tiles.get(5).getTileType());
 
     }
 
