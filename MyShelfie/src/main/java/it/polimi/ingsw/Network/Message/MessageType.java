@@ -35,6 +35,7 @@ public enum MessageType {
     GAME_STARTED,
     SCOREBOARD_MESSAGE,
     Turn_Message,
-    WELCOMEBACK_MESSAGE
+    WELCOMEBACK_MESSAGE,
+    UPDATEGUIPOINTS_MESSAGE
 }
 
