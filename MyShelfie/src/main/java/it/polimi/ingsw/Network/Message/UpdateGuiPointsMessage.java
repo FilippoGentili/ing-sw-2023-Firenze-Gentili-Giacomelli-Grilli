@@ -12,6 +12,7 @@ public class UpdateGuiPointsMessage extends Message{
 
     public UpdateGuiPointsMessage(Game game) {
         super(Game.getServerName(), MessageType.UPDATEGUIPOINTS_MESSAGE);
+        this.game = game;
     }
 
     public Game getGame(){
