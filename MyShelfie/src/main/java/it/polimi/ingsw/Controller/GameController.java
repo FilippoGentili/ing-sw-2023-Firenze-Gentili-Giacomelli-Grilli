@@ -320,6 +320,8 @@ public class GameController implements Serializable {
      * @param player the player whose library must be checked.
      */
     public void CheckCommonGoal(Player player) {
+        int previousPoints1 = player.getGame().getCommonGoal1().getValue();
+        int previousPoints2 = player.getGame().getCommonGoal2().getValue();
 
         if(game.getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()){
             server.sendMessage(new GenericMessage("Congratulations! You reached the first common Goal! You earn "
@@ -329,7 +331,7 @@ public class GameController implements Serializable {
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
             game.getCommonGoal1().updateValue();
-            server.broadcastMessage(new UpdateGuiPointsMessage(game));
+            server.broadcastMessage(new UpdateGuiPointsMessage(game, previousPoints1, previousPoints2));
             player.setPointscg1();
         }else{
             if(!player.getPointscg1())
@@ -343,7 +345,7 @@ public class GameController implements Serializable {
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
             game.getCommonGoal2().updateValue();
-            server.broadcastMessage(new UpdateGuiPointsMessage(game));
+            server.broadcastMessage(new UpdateGuiPointsMessage(game, previousPoints1, previousPoints2));
             player.setPointscg2();
         }else{
             if(!player.getPointscg2())

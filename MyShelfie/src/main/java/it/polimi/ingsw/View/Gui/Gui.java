@@ -259,8 +259,8 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void updateGuiCommonGoalCardPoints(Game game){
-        Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(game));
+    public void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2){
+        Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(game, previousPoints1, previousPoints2));
     }
 
     /**

@@ -210,7 +210,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 case UPDATEGUIPOINTS_MESSAGE:
                     UpdateGuiPointsMessage guiPointsMessage = (UpdateGuiPointsMessage) message;
                     queue.add(()-> {
-                        view.updateGuiCommonGoalCardPoints(guiPointsMessage.getGame());
+                        view.updateGuiCommonGoalCardPoints(guiPointsMessage.getGame(), guiPointsMessage.getPreviousPoints1(), guiPointsMessage.getPreviousPoints2());
                     });
                     break;
                 default:
