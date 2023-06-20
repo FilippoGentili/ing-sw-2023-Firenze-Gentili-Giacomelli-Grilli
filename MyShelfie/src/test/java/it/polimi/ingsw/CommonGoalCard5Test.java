@@ -242,10 +242,13 @@ class CommonGoalCard5Test {
             }
         }
 
-        Tile game = new Tile(TileType.GAME);
-        ArrayList<Tile> TileGame = new ArrayList<>();
-        TileGame.add(game);
-        bookshelf.insertTiles(TileGame, 4);
+        boolean[][] checkTile = new boolean[6][5];
+
+        for(int row=0; row<6; row++)
+            for(int col=0; col<5; col++)
+                checkTile[row][col]=false;
+
+        int count = Card.FindAdjacentTiles(bookshelf.getTile(5,4),bookshelf,checkTile,4,0);
 
         assertTrue(Card.check(bookshelf));
     }

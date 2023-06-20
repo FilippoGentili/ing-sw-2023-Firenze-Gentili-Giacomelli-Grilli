@@ -65,7 +65,7 @@ public abstract class CommonGoalCard implements Serializable {
     public int FindAdjacentTiles(Tile tile, Bookshelf bookshelf, boolean[][] checkTile, int limit, int counter){
         int count=0;
 
-        if(counter<limit){
+        if(counter<=limit){
 
             if(!checkTile[tile.getRow()][tile.getCol()]){
 
