@@ -329,8 +329,8 @@ public class GameController implements Serializable {
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
             game.getCommonGoal1().updateValue();
-            player.setPointscg1();
             server.sendMessage(new UpdateGuiPointsMessage(game), currentPlayer.getNickname());
+            player.setPointscg1();
         }else{
             if(!player.getPointscg1())
                 server.sendMessage(new GenericMessage("You haven't reached the first common goal. No points for you >:("),currentPlayer.getNickname());
@@ -343,8 +343,8 @@ public class GameController implements Serializable {
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
             game.getCommonGoal2().updateValue();
-            player.setPointscg2();
             server.sendMessage(new UpdateGuiPointsMessage(game), currentPlayer.getNickname());
+            player.setPointscg2();
         }else{
             if(!player.getPointscg2())
                 server.sendMessage(new GenericMessage("You haven't reached the second common goal. No points for you >:("),currentPlayer.getNickname());
