@@ -206,5 +206,49 @@ class CommonGoalCard5Test {
 
     }
 
+    @Test
+    void genericTest(){
+        CommonGoalCard Card = new CommonGoalCard5();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                switch (j){
+                    case 0:
+                        Tile cat = new Tile(TileType.CAT);
+                        ArrayList<Tile> TileCat = new ArrayList<>();
+                        TileCat.add(cat);
+                        bookshelf.insertTiles(TileCat,j);
+                        break;
+                    case 1:
+                        Tile book = new Tile(TileType.BOOK);
+                        ArrayList<Tile> TileBook = new ArrayList<>();
+                        TileBook.add(book);
+                        bookshelf.insertTiles(TileBook, j);
+                        break;
+                    case 2:
+                        Tile frame = new Tile(TileType.FRAME);
+                        ArrayList<Tile> TileFrame = new ArrayList<>();
+                        TileFrame.add(frame);
+                        bookshelf.insertTiles(TileFrame, j);
+                        break;
+                    case 3:
+                        Tile game = new Tile(TileType.GAME);
+                        ArrayList<Tile> TileGame = new ArrayList<>();
+                        TileGame.add(game);
+                        bookshelf.insertTiles(TileGame, j);
+                        break;
+                }
+            }
+        }
+
+        Tile game = new Tile(TileType.GAME);
+        ArrayList<Tile> TileGame = new ArrayList<>();
+        TileGame.add(game);
+        bookshelf.insertTiles(TileGame, 4);
+
+        assertTrue(Card.check(bookshelf));
+    }
+
 
 }
