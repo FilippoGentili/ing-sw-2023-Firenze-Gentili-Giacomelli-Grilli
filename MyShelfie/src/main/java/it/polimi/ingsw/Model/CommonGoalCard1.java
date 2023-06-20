@@ -9,7 +9,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
 
     @Override
     public boolean check(Bookshelf bookshelf) {
-        int count, countGroup=0, row, col, i;
+        int countGroup=0, row, col;
         boolean[][] checkTile = new boolean[6][5];
 
         for(row=0; row<6; row++)
@@ -18,18 +18,14 @@ public class CommonGoalCard1 extends CommonGoalCard {
 
         for(row=0; row<6; row++){
             for(col=0; col<4; col++){
-                count =1;
                 if(!checkTile[row][col]){
                     if(bookshelf.getTile(row,col).getTileType() != TileType.NULL && bookshelf.getTile(row,col+1).getTileType() != TileType.NULL) {
                         if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row, col + 1).getTileType()) {
-                            count++;
+                            countGroup++;
                             checkTile[row][col] = true;
                             checkTile[row][col + 1] = true;
                         }
                     }
-                }
-                if(count==2) {
-                    countGroup++;
                 }
             }
         }
@@ -37,18 +33,14 @@ public class CommonGoalCard1 extends CommonGoalCard {
         if(countGroup<6){
             for(row=0; row<5; row++) {
                 for (col = 0; col < 5; col++) {
-                    count = 1;
                     if (!checkTile[row][col]) {
                         if(bookshelf.getTile(row,col).getTileType() != TileType.NULL && bookshelf.getTile(row+1,col).getTileType() != TileType.NULL) {
                             if (bookshelf.getTile(row, col).getTileType() == bookshelf.getTile(row + 1, col).getTileType()) {
-                                count++;
+                                countGroup++;
                                 checkTile[row][col] = true;
                                 checkTile[row + 1][col] = true;
                             }
                         }
-                    }
-                    if (count==2) {
-                        countGroup++;
                     }
                 }
             }

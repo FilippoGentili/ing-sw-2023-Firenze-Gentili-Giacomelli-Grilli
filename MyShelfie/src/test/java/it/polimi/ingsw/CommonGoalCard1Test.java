@@ -230,4 +230,38 @@ class CommonGoalCard1Test {
         assertFalse(Card.check(bookshelf));
     }
 
+    @Test
+    void simpleTest(){
+        CommonGoalCard Card = new CommonGoalCard1();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int i=0; i<2; i++){
+            for(int j=0; j<5; j++){
+                if(j%2==0){
+                    Tile cat = new Tile(TileType.CAT);
+                    ArrayList<Tile> TileCat = new ArrayList<>();
+                    TileCat.add(cat);
+                    bookshelf.insertTiles(TileCat, j);
+                }else{
+                    Tile game = new Tile(TileType.GAME);
+                    ArrayList<Tile> TileGame = new ArrayList<>();
+                    TileGame.add(game);
+                    bookshelf.insertTiles(TileGame, j);
+                }
+            }
+        }
+
+        Tile cat = new Tile(TileType.CAT);
+        ArrayList<Tile> TileCat = new ArrayList<>();
+        TileCat.add(cat);
+        bookshelf.insertTiles(TileCat, 0);
+
+        Tile cat1 = new Tile(TileType.CAT);
+        ArrayList<Tile> TileCat1 = new ArrayList<>();
+        TileCat1.add(cat1);
+        bookshelf.insertTiles(TileCat1, 1);
+
+        assertTrue(Card.check(bookshelf));
+    }
+
 }
