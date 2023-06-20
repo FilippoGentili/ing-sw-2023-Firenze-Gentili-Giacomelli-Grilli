@@ -135,5 +135,27 @@ class CommonGoalCard8Test {
         assertFalse(Card.check(bookshelf));
     }
 
+    @Test
+    void twoWrong(){
+        CommonGoalCard Card = new CommonGoalCard8();
+        Bookshelf bookshelf = new Bookshelf();
+
+        ArrayList<Tile> TileCat = new ArrayList<>();
+        TileCat.add(new Tile(TileType.CAT));
+        TileCat.add(new Tile(TileType.CAT));
+        bookshelf.insertTiles(TileCat, 0);
+
+        for(int i=0; i<2; i++) {
+            for (int j = 1; j < 5; j++) {
+                Tile plant = new Tile(TileType.PLANT);
+                ArrayList<Tile> TilePlant = new ArrayList<>();
+                TilePlant.add(plant);
+                bookshelf.insertTiles(TilePlant, j);
+            }
+        }
+
+        assertFalse(Card.check(bookshelf));
+    }
+
 
 }

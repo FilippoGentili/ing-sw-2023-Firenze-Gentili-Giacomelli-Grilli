@@ -8,16 +8,18 @@ public class CommonGoalCard8 extends CommonGoalCard {
     public int getId(){return this.id;}
     @Override
     public boolean check(Bookshelf bookshelf) {
-        int row, k, count=0;
+        int row, k, h, count=0;
         boolean verifica=false, uguali;
 
         for(row=0; row<6 && count<2; row++){
             uguali=false;
             if(bookshelf.getTile(row,0).getTileType()!=TileType.NULL) {
-                for (k = 1; k < 5 && !uguali; k++) {
-                    if (bookshelf.getTile(row,0).getTileType() == bookshelf.getTile(row, k).getTileType() ||
-                            bookshelf.getTile(row,k).getTileType() == TileType.NULL)
-                        uguali = true;
+                for (k = 0; k < 4 && !uguali; k++) {
+                    for(h=1; h<5 && !uguali; h++) {
+                        if (h != k)
+                            if (bookshelf.getTile(row, k).getTileType() == bookshelf.getTile(row, h).getTileType() || bookshelf.getTile(row, k).getTileType() == TileType.NULL)
+                                uguali = true;
+                    }
                 }
             }else{
                 uguali=true;
