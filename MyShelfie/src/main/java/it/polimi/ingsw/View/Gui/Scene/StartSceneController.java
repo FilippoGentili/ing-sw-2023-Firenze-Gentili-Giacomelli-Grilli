@@ -15,9 +15,6 @@ public class StartSceneController extends ViewObservable implements GenericScene
     @FXML
     private Button playButton;
     @FXML
-    private Button resumeButton;
-
-    @FXML
     public void initialize(){
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::playButtonClicked);
     }

@@ -17,7 +17,10 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     private int numOfPlayersConnected;
 
     @FXML
-    private Text playersConnectedText;
+    public Text playersConnectedText;
+
+    @FXML
+    private Text welcomeText;
 
 
     public void setVisualPlayersConnected() {
@@ -32,6 +35,10 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
         this.numOfPlayersConnected = numOfPlayersConnected;
     }
 
+    public void setWelcomeText(String string){
+        welcomeText.setVisible(true);
+        welcomeText.setText(string);
+    }
 
     public void startAnimationTimer() {
         timer = new AnimationTimer() {

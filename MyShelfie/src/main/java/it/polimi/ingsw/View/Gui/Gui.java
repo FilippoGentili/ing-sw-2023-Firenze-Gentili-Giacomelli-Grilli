@@ -69,10 +69,15 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
     }
 
+    /**
+     * This method is used to displlay the current player
+     * @param player current player
+     */
     @Override
     public void turnDisplay(Player player) {
         Platform.runLater(() -> gameSceneController.setVisualNames(player));
     }
+
 
     /**
      * This method is used to ask the player to choose the tiles from the board
@@ -241,6 +246,17 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showChatMessage(ChatMessage message) {
+
+    }
+
+    @Override
+    public void welcomeBack(String nickname){
+        WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
+        waitingRoomSceneController.addAllObserver(observers);
+        waitingRoomSceneController.playersConnectedText.setVisible(false);
+        waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
+        Platform.runLater(waitingRoomSceneController::startAnimationTimer);
+        Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
 
     }
 
