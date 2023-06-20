@@ -47,8 +47,6 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
                 setVisualPlayersConnected();
             }
         };
-
         timer.start();
     }
-
 }

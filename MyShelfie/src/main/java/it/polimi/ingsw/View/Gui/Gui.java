@@ -253,11 +253,10 @@ public class Gui extends ViewObservable implements View {
     public void welcomeBack(String nickname){
         WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
         waitingRoomSceneController.addAllObserver(observers);
-        waitingRoomSceneController.playersConnectedText.setVisible(false);
+        waitingRoomSceneController.playersConnectedText.setText("Waiting for other players to connect...");
         waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
         Platform.runLater(waitingRoomSceneController::startAnimationTimer);
         Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
-
     }
 
     /**
