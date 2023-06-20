@@ -140,6 +140,9 @@ public class VirtualView implements View, Observer, Serializable {
     }
 
     @Override
+    public void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2){
+    }
+    @Override
     public void turnDisplay(Player player) {
     }
 
