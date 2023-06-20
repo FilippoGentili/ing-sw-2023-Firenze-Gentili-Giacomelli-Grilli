@@ -406,7 +406,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
                         selection.setEffect(new DropShadow(10, Color.YELLOW));
                         InnerShadow innerShadow = new InnerShadow();
-                        innerShadow.setChoke(1.0); // Imposta il grado di sfocatura dell'effetto
+                        innerShadow.setChoke(0.5); // Imposta il grado di sfocatura dell'effetto
                         innerShadow.setColor(Color.YELLOW);
                         selection.setEffect(innerShadow);
                         numOfSelectedTiles++;
@@ -1246,127 +1246,131 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     /**
      * This method is called to update the common goal card points
-     * @param player of the game
+     * @param game current game
 
      */
-    public void updateVisualCommonGoalCardPoints(Player player){
-        int currentPointCGC1 = player.getGame().getCommonGoal1().getValue();
-        int currentPointCGC2 = player.getGame().getCommonGoal2().getValue();
+    public void updateVisualCommonGoalCardPoints(Game game) {
+        int currentPointCGC1 = game.getCommonGoal1().getValue();
+        int currentPointCGC2 = game.getCommonGoal2().getValue();
 
-        if(player.getGame().getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()){
-            switch (player.getGame().getPlayers().size()){
-                case 2 -> {
-                    if (player.getGame().getPlayers().get(0).equals(player)) {
-                        commonGoalP1C1.setVisible(true);
-                        commonGoalP1C1.getStyleClass().clear();
-                        commonGoalP1C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    } else {
-                        commonGoalP3C1.setVisible(true);
-                        commonGoalP3C1.getStyleClass().clear();
-                        commonGoalP3C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+        for (Player player : game.getPlayers()) {
+            if (game.getCommonGoal1().check(player.getBookshelf()) && !player.getPointscg1()) {
+                switch (game.getPlayers().size()) {
+                    case 2 -> {
+                        if (game.getPlayers().get(0).equals(player)) {
+                            commonGoalP1C1.setVisible(true);
+                            commonGoalP1C1.getStyleClass().clear();
+                            commonGoalP1C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        } else {
+                            commonGoalP3C1.setVisible(true);
+                            commonGoalP3C1.getStyleClass().clear();
+                            commonGoalP3C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        }
+                    }
+                    case 3 -> {
+                        if (game.getPlayers().get(0).equals(player)) {
+                            commonGoalP1C1.setVisible(true);
+                            commonGoalP1C1.getStyleClass().clear();
+                            commonGoalP1C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                            commonPoints1.getStyleClass().clear();
+                        } else if (game.getPlayers().get(1).equals(player)) {
+                            commonGoalP2C1.setVisible(true);
+                            commonGoalP2C1.getStyleClass().clear();
+                            commonGoalP2C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        } else {
+                            commonGoalP3C1.setVisible(true);
+                            commonGoalP3C1.getStyleClass().clear();
+                            commonGoalP3C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        }
+                    }
+                    case 4 -> {
+                        if (game.getPlayers().get(0).equals(player)) {
+                            commonGoalP1C1.setVisible(true);
+                            commonGoalP1C1.getStyleClass().clear();
+                            commonGoalP1C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        } else if (game.getPlayers().get(1).equals(player)) {
+                            commonGoalP2C1.setVisible(true);
+                            commonGoalP2C1.getStyleClass().clear();
+                            commonGoalP2C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        } else if (game.getPlayers().get(2).equals(player)) {
+                            commonGoalP3C1.setVisible(true);
+                            commonGoalP3C1.getStyleClass().clear();
+                            commonGoalP3C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        } else {
+                            commonGoalP4C1.setVisible(true);
+                            commonGoalP4C1.getStyleClass().clear();
+                            commonGoalP4C1.getStyleClass().add("generalScoring" + currentPointCGC1);
+                        }
+                    }
+                    default -> {
                     }
                 }
-                case 3 -> {
-                    if (player.getGame().getPlayers().get(0).equals(player)) {
-                        commonGoalP1C1.setVisible(true);
-                        commonGoalP1C1.getStyleClass().clear();
-                        commonGoalP1C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                        commonPoints1.getStyleClass().clear();
-                    } else if (player.getGame().getPlayers().get(1).equals(player)) {
-                        commonGoalP2C1.setVisible(true);
-                        commonGoalP2C1.getStyleClass().clear();
-                        commonGoalP2C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    } else {
-                        commonGoalP3C1.setVisible(true);
-                        commonGoalP3C1.getStyleClass().clear();
-                        commonGoalP3C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    }
-                }
-                case 4 -> {
-                    if (player.getGame().getPlayers().get(0).equals(player)) {
-                        commonGoalP1C1.setVisible(true);
-                        commonGoalP1C1.getStyleClass().clear();
-                        commonGoalP1C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    } else if (player.getGame().getPlayers().get(1).equals(player)) {
-                        commonGoalP2C1.setVisible(true);
-                        commonGoalP2C1.getStyleClass().clear();
-                        commonGoalP2C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    } else if (player.getGame().getPlayers().get(2).equals(player)) {
-                        commonGoalP3C1.setVisible(true);
-                        commonGoalP3C1.getStyleClass().clear();
-                        commonGoalP3C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    } else {
-                        commonGoalP4C1.setVisible(true);
-                        commonGoalP4C1.getStyleClass().clear();
-                        commonGoalP4C1.getStyleClass().add("generalScoring" + currentPointCGC1);
-                    }
-                }
-                default -> {
+                commonPoints1.getStyleClass().clear();
+                if (currentPointCGC1 - 2 == 0) {
+                    commonPoints1.setVisible(false);
+                } else {
+                    commonPoints1.getStyleClass().add("generalScoring" + (currentPointCGC1 - 2));
                 }
             }
-            commonPoints1.getStyleClass().clear();
-            if(currentPointCGC1-2 == 0){
-                commonPoints1.setVisible(false);
-            }else{
-                commonPoints1.getStyleClass().add("generalScoring" + (currentPointCGC1-2));
-            }
-        }else if(player.getGame().getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()){
-            switch (player.getGame().getPlayers().size()){
-                case 2 -> {
-                    if (player.getGame().getPlayers().get(0).equals(player)) {
-                        commonGoalP1C2.setVisible(true);
-                        commonGoalP1C2.getStyleClass().clear();
-                        commonGoalP1C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    } else {
-                        commonGoalP3C2.setVisible(true);
-                        commonGoalP3C2.getStyleClass().clear();
-                        commonGoalP3C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    }
-                }
-                case 3 -> {
-                    if (player.getGame().getPlayers().get(0).equals(player)) {
-                        commonGoalP1C2.setVisible(true);
-                        commonGoalP1C2.getStyleClass().clear();
-                        commonGoalP1C2.getStyleClass().add("generalScoring" + currentPointCGC2);
 
-                    } else if (player.getGame().getPlayers().get(1).equals(player)) {
-                        commonGoalP2C2.setVisible(true);
-                        commonGoalP2C2.getStyleClass().clear();
-                        commonGoalP2C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    } else {
-                        commonGoalP3C2.setVisible(true);
-                        commonGoalP3C2.getStyleClass().clear();
-                        commonGoalP3C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+            if (game.getCommonGoal2().check(player.getBookshelf()) && !player.getPointscg2()) {
+                switch (game.getPlayers().size()) {
+                    case 2 -> {
+                        if (game.getPlayers().get(0).equals(player)) {
+                            commonGoalP1C2.setVisible(true);
+                            commonGoalP1C2.getStyleClass().clear();
+                            commonGoalP1C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        } else {
+                            commonGoalP3C2.setVisible(true);
+                            commonGoalP3C2.getStyleClass().clear();
+                            commonGoalP3C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        }
                     }
-                }
-                case 4 -> {
-                    if (player.getGame().getPlayers().get(0).equals(player)) {
-                        commonGoalP1C2.setVisible(true);
-                        commonGoalP1C2.getStyleClass().clear();
-                        commonGoalP1C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    } else if (player.getGame().getPlayers().get(1).equals(player)) {
-                        commonGoalP2C2.setVisible(true);
-                        commonGoalP2C2.getStyleClass().clear();
-                        commonGoalP2C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    } else if (player.getGame().getPlayers().get(2).equals(player)) {
-                        commonGoalP3C2.setVisible(true);
-                        commonGoalP3C2.getStyleClass().clear();
-                        commonGoalP3C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    } else {
-                        commonGoalP4C2.setVisible(true);
-                        commonGoalP4C2.getStyleClass().clear();
-                        commonGoalP4C2.getStyleClass().add("generalScoring" + currentPointCGC2);
-                    }
-                }
-                default -> {
+                    case 3 -> {
+                        if (game.getPlayers().get(0).equals(player)) {
+                            commonGoalP1C2.setVisible(true);
+                            commonGoalP1C2.getStyleClass().clear();
+                            commonGoalP1C2.getStyleClass().add("generalScoring" + currentPointCGC2);
 
+                        } else if (game.getPlayers().get(1).equals(player)) {
+                            commonGoalP2C2.setVisible(true);
+                            commonGoalP2C2.getStyleClass().clear();
+                            commonGoalP2C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        } else {
+                            commonGoalP3C2.setVisible(true);
+                            commonGoalP3C2.getStyleClass().clear();
+                            commonGoalP3C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        }
+                    }
+                    case 4 -> {
+                        if (game.getPlayers().get(0).equals(player)) {
+                            commonGoalP1C2.setVisible(true);
+                            commonGoalP1C2.getStyleClass().clear();
+                            commonGoalP1C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        } else if (game.getPlayers().get(1).equals(player)) {
+                            commonGoalP2C2.setVisible(true);
+                            commonGoalP2C2.getStyleClass().clear();
+                            commonGoalP2C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        } else if (game.getPlayers().get(2).equals(player)) {
+                            commonGoalP3C2.setVisible(true);
+                            commonGoalP3C2.getStyleClass().clear();
+                            commonGoalP3C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        } else {
+                            commonGoalP4C2.setVisible(true);
+                            commonGoalP4C2.getStyleClass().clear();
+                            commonGoalP4C2.getStyleClass().add("generalScoring" + currentPointCGC2);
+                        }
+                    }
+                    default -> {
+
+                    }
                 }
-            }
-            commonPoints2.getStyleClass().clear();
-            if(currentPointCGC2-2 == 0){
-                commonPoints2.setVisible(false);
-            }else{
-                commonPoints2.getStyleClass().add("generalScoring" + (currentPointCGC1-2));
+                commonPoints2.getStyleClass().clear();
+                if (currentPointCGC2 - 2 == 0) {
+                    commonPoints2.setVisible(false);
+                } else {
+                    commonPoints2.getStyleClass().add("generalScoring" + (currentPointCGC1 - 2));
+                }
             }
         }
     }

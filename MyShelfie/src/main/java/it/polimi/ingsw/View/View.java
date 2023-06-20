@@ -28,6 +28,6 @@ public interface View {
     void showWinner(String winner, Game game);
     void handleDisconnection(String nickname);
     void turnDisplay(Player player);
-
     void welcomeBack(String nickname);
+    void updateGuiCommonGoalCardPoints(Game game);
 }

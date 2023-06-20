@@ -176,7 +176,6 @@ public class Gui extends ViewObservable implements View {
         showCommonGoalCards(game);
         showPersonalGoalCard(player);
         showLivingRoom(game.getLivingRoom());
-        Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(player));
         Platform.runLater(() ->gameSceneController.updateVisualEndGameToken(game));
         for(Player p : game.getPlayers()) {
             showBookshelf(p);
@@ -257,6 +256,11 @@ public class Gui extends ViewObservable implements View {
         waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
         Platform.runLater(waitingRoomSceneController::startAnimationTimer);
         Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
+    }
+
+    @Override
+    public void updateGuiCommonGoalCardPoints(Game game){
+        Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(game));
     }
 
     /**
