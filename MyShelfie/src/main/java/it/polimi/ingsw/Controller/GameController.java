@@ -329,7 +329,7 @@ public class GameController implements Serializable {
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
             game.getCommonGoal1().updateValue();
-            server.sendMessage(new UpdateGuiPointsMessage(game), currentPlayer.getNickname());
+            server.broadcastMessage(new UpdateGuiPointsMessage(game));
             player.setPointscg1();
         }else{
             if(!player.getPointscg1())
@@ -343,7 +343,7 @@ public class GameController implements Serializable {
             String newScore = String.valueOf(player.getScore());
             broadcastShowMessage(newScore);
             game.getCommonGoal2().updateValue();
-            server.sendMessage(new UpdateGuiPointsMessage(game), currentPlayer.getNickname());
+            server.broadcastMessage(new UpdateGuiPointsMessage(game));
             player.setPointscg2();
         }else{
             if(!player.getPointscg2())
