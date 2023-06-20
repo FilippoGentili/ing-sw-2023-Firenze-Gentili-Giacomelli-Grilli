@@ -92,8 +92,6 @@ public class SocketClient extends Client implements Runnable{
                 throw new RuntimeException(e);
             }
 
-
-
         }
     }
 }

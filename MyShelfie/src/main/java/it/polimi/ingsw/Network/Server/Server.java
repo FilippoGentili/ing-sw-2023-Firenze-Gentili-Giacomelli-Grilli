@@ -94,7 +94,7 @@ public class Server implements Runnable{
                     gameController.addingPlayersAgain(nickname);
                     break;
                 }else{
-                    sendMessage(new GenericMessage("Someone else reconnected with this nickname... You will be disconnected."),nickname);
+                    sendMessage(new GenericMessage("You cannot play this game... you have to wait until the end of the match"),nickname);
                     sendMessage(new DisconnectionReply(nickname),nickname);
                 }
             }

@@ -12,7 +12,9 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -403,6 +405,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                         }
 
                         selection.setEffect(new DropShadow(10, Color.YELLOW));
+                        InnerShadow innerShadow = new InnerShadow();
+                        innerShadow.setChoke(1.0); // Imposta il grado di sfocatura dell'effetto
+                        innerShadow.setColor(Color.YELLOW);
+                        selection.setEffect(innerShadow);
                         numOfSelectedTiles++;
                         chosenTiles.add(selectedTile);
 
@@ -458,6 +464,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * This method shows thw banner when the player has to choose the order for the tiles
      */
     public void tileOrder(ArrayList<Tile> chosenTiles) {
+
+        if(this.chosenTiles.isEmpty()){
+            this.chosenTiles.addAll(chosenTiles);
+        }
+
         Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the order of the tiles"));
         switch (chosenTiles.size()) {
             case 1 -> {

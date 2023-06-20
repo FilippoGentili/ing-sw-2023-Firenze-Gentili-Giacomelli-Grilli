@@ -6,6 +6,7 @@ import it.polimi.ingsw.Network.Client.Socket.PingTimer;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
+import it.polimi.ingsw.View.Cli;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -47,18 +48,18 @@ public class RMIClient extends Client implements RMIClientHandler{
     @Override
     public void sendMessage(Message message) {
         try {
-            if (message.getMessageType() == MessageType.LOGIN_REQUEST) {
-                server.login(message.getNickname(), this);
-            } else {
-                server.receiveMessage(message);
+            if(server == null){
+                throw new RemoteException();
+            }else {
+                if (message.getMessageType() == MessageType.LOGIN_REQUEST) {
+                    server.login(message.getNickname(), this);
+                } else {
+                    server.receiveMessage(message);
+                }
             }
         }catch (IOException | InterruptedException e){
-            Client.LOGGER.severe(e.getMessage());
-            try {
-                disconnectMe();
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            Client.LOGGER.severe("connection refused : must disconnect");
+            server = null;
         }
     }
 
