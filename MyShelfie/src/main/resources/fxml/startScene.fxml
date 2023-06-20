@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+
 <!---->
 
 <AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="768.0" prefWidth="1366.0" styleClass="generalDisplay5" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.StartSceneController">
@@ -22,11 +23,6 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="playButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Play">
-                     <font>
-                        <Font name="Blackadder ITC" size="40.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="resumeButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="220.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Resume ">
                      <font>
                         <Font name="Blackadder ITC" size="40.0" />
                      </font>
