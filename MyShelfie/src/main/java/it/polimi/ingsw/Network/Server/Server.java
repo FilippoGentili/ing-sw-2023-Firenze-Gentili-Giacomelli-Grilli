@@ -90,7 +90,7 @@ public class Server implements Runnable{
             for(Player p : gameController.getPlayers()){
                 if(p.getNickname().equals(nickname) && !gameController.getReturnPlayers().contains(nickname)){
                     connectionMap.put(nickname, connection);
-                    sendMessage(new GenericMessage("Welcome back "+ nickname), nickname);
+                    sendMessage(new WelcomeBackMessage(nickname), nickname);
                     gameController.addingPlayersAgain(nickname);
                     break;
                 }else{
@@ -99,8 +99,6 @@ public class Server implements Runnable{
                 }
             }
         }
-
-
     }
 
 

@@ -15,12 +15,8 @@ public class StartSceneController extends ViewObservable implements GenericScene
     @FXML
     private Button playButton;
     @FXML
-    private Button resumeButton;
-
-    @FXML
     public void initialize(){
         playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::playButtonClicked);
-        resumeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::resumeButtonClicked);
     }
 
     /**
@@ -31,15 +27,4 @@ public class StartSceneController extends ViewObservable implements GenericScene
         GuiController.changeScene("connectionScene.fxml",event,observers);
     }
 
-    /**
-     * This method is called when the resume button is clicked. It resumes the game from the last saved state.
-     * @param event
-     */
-    private void resumeButtonClicked(MouseEvent event){
-        /*if(!GuiController.getGuiView().isGameStarted()){
-            GuiController.showAlert("No game to resume");
-        }else{
-            GuiController.changeScene("gameScene.fxml",event,observers);
-        }*/
-    }
 }

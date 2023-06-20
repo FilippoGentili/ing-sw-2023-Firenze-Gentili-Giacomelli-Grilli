@@ -142,4 +142,9 @@ public class VirtualView implements View, Observer, Serializable {
     @Override
     public void turnDisplay(Player player) {
     }
+
+    @Override
+    public void welcomeBack(String nickname) {
+
+    }
 }
