@@ -201,6 +201,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         view.turnDisplay(turnMessage.getPlayer());
                     });
                     break;
+                case WELCOMEBACK_MESSAGE:
+                    WelcomeBackMessage welcomeBackMessage = (WelcomeBackMessage) message;
+                    queue.add(()-> {
+                        view.welcomeBack(welcomeBackMessage.getNickname());
+                    });
                 default:
                     break;
             }
