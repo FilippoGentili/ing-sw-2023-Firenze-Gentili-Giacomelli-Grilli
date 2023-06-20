@@ -65,13 +65,6 @@ class CommonGoalCardTest {
 
         int count = card.FindAdjacentTiles(bookshelf.getTile(5,0),bookshelf,checkTile,4,0);
 
-        for(int row=0; row<6; row++) {
-            for (int col = 0; col < 5; col++)
-                System.out.print(checkTile[row][col] + " ");
-
-            System.out.println();
-        }
-
         assertEquals(4,count);
 
     }
@@ -116,13 +109,6 @@ class CommonGoalCardTest {
         }
 
         int count2 = card.FindAdjacentTiles(bookshelf.getTile(5,3),bookshelf,checkTile,4,0);
-
-        for(int row=0; row<6; row++) {
-            for (int col = 0; col < 5; col++)
-                System.out.print(checkTile[row][col] + " ");
-
-            System.out.println();
-        }
 
         assertEquals(4,count2);
 
@@ -191,13 +177,6 @@ class CommonGoalCardTest {
         int count2 = Card.FindAdjacentTiles(bookshelf.getTile(3,2),bookshelf,checkTile,4,0);
         int count3 = Card.FindAdjacentTiles(bookshelf.getTile(2,2),bookshelf,checkTile,4,0);
 
-        for(int row=0; row<6; row++) {
-            for (int col = 0; col < 5; col++)
-                System.out.print(checkTile[row][col] + " ");
-
-            System.out.println();
-        }
-
         assertEquals(4,count0);
         assertEquals(4,count1);
         assertEquals(4,count2);
@@ -253,19 +232,59 @@ class CommonGoalCardTest {
         int count2 = Card.FindAdjacentTiles(bookshelf.getTile(4,2),bookshelf,checkTile,4,0);
         int count3 = Card.FindAdjacentTiles(bookshelf.getTile(2,4),bookshelf,checkTile,4,0);
 
-        for(int row=0; row<6; row++) {
-            for (int col = 0; col < 5; col++)
-                System.out.print(checkTile[row][col] + " ");
-
-            System.out.println();
-        }
-
         assertEquals(4,count0);
         assertEquals(4,count1);
         assertEquals(4,count2);
         assertEquals(4,count3);
 
 
+    }
+
+    @Test
+    void Test5(){
+        CommonGoalCard Card = new CommonGoalCard5();
+        Bookshelf bookshelf = new Bookshelf();
+        boolean[][] checkTile = new boolean[6][5];
+
+        for(int row=0; row<6; row++)
+            for(int col=0; col<5; col++)
+                checkTile[row][col]=false;
+
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5; j++){
+                Tile frame = new Tile(TileType.FRAME);
+                ArrayList<Tile> TileFrame = new ArrayList<>();
+                TileFrame.add(frame);
+                bookshelf.insertTiles(TileFrame, j);
+            }
+        }
+
+        int count3 = Card.FindAdjacentTiles(bookshelf.getTile(2,0),bookshelf,checkTile, 7,0);
+
+        assertEquals(7,count3);
+    }
+
+    @Test
+    void test6(){
+        CommonGoalCard Card = new CommonGoalCard5();
+        Bookshelf bookshelf = new Bookshelf();
+        boolean[][] checkTile = new boolean[6][5];
+
+        for(int row=0; row<6; row++)
+            for(int col=0; col<5; col++)
+                checkTile[row][col]=false;
+
+
+        Tile frame = new Tile(TileType.FRAME);
+        ArrayList<Tile> TileFrame = new ArrayList<>();
+        TileFrame.add(frame);
+        bookshelf.insertTiles(TileFrame, 0);
+
+        int count = Card.FindAdjacentTiles(bookshelf.getTile(5,0),bookshelf,checkTile,4,0);
+        int count0 = Card.FindAdjacentTiles(bookshelf.getTile(0,0),bookshelf,checkTile,4,0);
+
+        assertEquals(1,count);
+        assertEquals(0,count0);
     }
 
 }

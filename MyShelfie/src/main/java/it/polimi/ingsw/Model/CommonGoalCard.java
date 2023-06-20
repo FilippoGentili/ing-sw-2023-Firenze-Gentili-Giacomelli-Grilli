@@ -58,14 +58,14 @@ public abstract class CommonGoalCard implements Serializable {
      * @param bookshelf
      * @param checkTile
      * @param limit
-     * @param counter
+     * @param counter a flag that counts how many tiles where counted through the recursive calls
      * @return int
      */
 
     public int FindAdjacentTiles(Tile tile, Bookshelf bookshelf, boolean[][] checkTile, int limit, int counter){
         int count=0;
 
-        if(counter<=limit){
+        if(counter<limit && tile.getTileType() != TileType.NULL){
 
             if(!checkTile[tile.getRow()][tile.getCol()]){
 
@@ -85,41 +85,38 @@ public abstract class CommonGoalCard implements Serializable {
                 }else{
                     if (bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType() != TileType.NULL)
                         if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() + 1).getTileType()) {
-                            count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile, limit, counter + 1);
-                            counter+=count;
+                            count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() + 1), bookshelf, checkTile, limit, counter+1);
                         }
 
-                    if(counter<limit){
+                    if(counter + count < limit){
                         if (bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType() != TileType.NULL)
                             if (tile.getTileType() == bookshelf.getTile(tile.getRow(), tile.getCol() - 1).getTileType())
-                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile, limit, counter);
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow(), tile.getCol() - 1), bookshelf, checkTile, limit, counter+count);
 
                     }
                 }
 
-
-                if(counter<limit){
+                if(counter+count < limit){
                     if(tile.getRow()==0){
                         if(bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType() != TileType.NULL)
                             if(tile.getTileType() == bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())
-                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter+1);
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter+count);
 
                     }else if(tile.getRow()==5){
                         if(bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType() != TileType.NULL)
                             if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType())
-                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter+1);
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter+count);
 
                     }else{
                         if(bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType() != TileType.NULL)
                             if(tile.getTileType() == bookshelf.getTile(tile.getRow()-1,tile.getCol()).getTileType()) {
-                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter + 1);
-                                counter += count;
+                                count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() - 1, tile.getCol()), bookshelf, checkTile, limit, counter+count);
                             }
 
-                        if(counter<limit){
+                        if(counter+count<limit){
                             if(bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType() != TileType.NULL)
                                 if(tile.getTileType() == bookshelf.getTile(tile.getRow()+1,tile.getCol()).getTileType())
-                                    count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter);
+                                    count += FindAdjacentTiles(bookshelf.getTile(tile.getRow() + 1, tile.getCol()), bookshelf, checkTile, limit, counter+count);
 
                         }
                     }
