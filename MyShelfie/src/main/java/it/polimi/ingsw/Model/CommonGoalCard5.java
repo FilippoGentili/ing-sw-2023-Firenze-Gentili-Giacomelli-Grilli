@@ -24,7 +24,7 @@ public class CommonGoalCard5 extends CommonGoalCard {
                     if (!checkTile[row][col])
                         count = FindAdjacentTiles(bookshelf.getTile(row,col),bookshelf,checkTile,4,0);
 
-                    if(count==4)
+                    if(count == 4)
                         countGroup++;
 
                     if(count < 4)
