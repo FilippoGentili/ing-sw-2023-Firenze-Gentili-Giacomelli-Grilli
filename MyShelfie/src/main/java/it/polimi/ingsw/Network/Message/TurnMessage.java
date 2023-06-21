@@ -16,7 +16,7 @@ public class TurnMessage extends Message{
      * @param messageType TurnMessage
      */
     public TurnMessage(Player player, MessageType messageType) {
-        super(Game.getServerName(), MessageType.Turn_Message);
+        super(Game.getServerName(), messageType);
         this.player = player;
     }
 

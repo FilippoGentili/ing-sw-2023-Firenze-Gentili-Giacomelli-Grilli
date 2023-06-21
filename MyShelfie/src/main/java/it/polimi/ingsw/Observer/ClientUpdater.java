@@ -1,12 +1,14 @@
 package it.polimi.ingsw.Observer;
 
 import it.polimi.ingsw.Controller.ClientController;
-//import it.polimi.ingsw.Network.Client.Chat;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
 import java.util.ArrayList;
 
+/**
+ * The class represent a way for the client to be always listening
+ */
 public class ClientUpdater implements Runnable{
 
     private final Client client;

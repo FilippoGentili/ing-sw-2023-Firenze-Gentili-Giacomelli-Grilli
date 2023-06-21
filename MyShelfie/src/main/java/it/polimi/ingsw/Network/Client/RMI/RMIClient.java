@@ -21,6 +21,13 @@ public class RMIClient extends Client implements RMIClientHandler{
     private final String port;
     private static final int HEARTBEAT = 10000;
 
+    /**
+     * Constructor of RMI client
+     * @param disconnectionHandler
+     * @param address 
+     * @param port
+     * @throws RemoteException
+     */
     public RMIClient(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
         super(disconnectionHandler);
         this.address = address;

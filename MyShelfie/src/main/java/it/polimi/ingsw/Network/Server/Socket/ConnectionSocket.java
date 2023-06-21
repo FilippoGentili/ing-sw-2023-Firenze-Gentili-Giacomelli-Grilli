@@ -21,9 +21,13 @@ public class ConnectionSocket extends Connection implements Runnable{
     private Object inputLock = new Object();
     private Object outputLock = new Object();
     private Thread thread;
-
     private boolean connected;
 
+    /**
+     * Constructor of ConnectionSocket
+     * @param socketServer
+     * @param socket
+     */
     public ConnectionSocket(SocketServer socketServer, Socket socket){
         this.socketServer=socketServer;
         this.socket=socket;
@@ -45,6 +49,9 @@ public class ConnectionSocket extends Connection implements Runnable{
         thread.start();
     }
 
+    /**
+     * Method used to receive messages, through input stream and output stream
+     */
     public void run(){
         while(!Thread.currentThread().isInterrupted()){
             try{

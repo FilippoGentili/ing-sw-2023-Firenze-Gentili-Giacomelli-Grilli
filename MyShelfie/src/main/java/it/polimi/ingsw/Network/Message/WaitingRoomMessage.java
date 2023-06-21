@@ -10,7 +10,11 @@ public class WaitingRoomMessage extends Message{
 
     private  int numOfPlayersConnected;
 
-
+    /**
+     * Message used in login phase to let the players know they have been added to the waiting room
+     * @param maxPlayers
+     * @param numOfPlayersConnected
+     */
     public WaitingRoomMessage(int maxPlayers, int numOfPlayersConnected) {
         super(Game.getServerName(), MessageType.WAITING_ROOM);
         this.maxPlayers = maxPlayers;

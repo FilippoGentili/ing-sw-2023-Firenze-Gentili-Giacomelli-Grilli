@@ -10,6 +10,10 @@ public class WelcomeBackMessage extends Message {
     private static final long serialVersionUID = 9014383118592771811L;
     private final String nickname;
 
+    /**
+     * Message used in persistence when the game is reloaded
+     * @param nickname
+     */
     public WelcomeBackMessage(String nickname) {
         super(Game.getServerName(), MessageType.WELCOMEBACK_MESSAGE);
         this.nickname = nickname;

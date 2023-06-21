@@ -7,6 +7,13 @@ public class LoginResult extends Message{
     private final boolean nicknameAccepted;
     private final boolean successfulAccess;
     private final String chosenNickname;
+
+    /**
+     * Message used to communicate the login's status
+     * @param nickname
+     * @param nicknameAccepted
+     * @param successfulAccess
+     */
     public LoginResult(String nickname,boolean nicknameAccepted, boolean successfulAccess) {
         super(Game.getServerName(), MessageType.LOGIN_RESULT);
         this.chosenNickname= nickname;

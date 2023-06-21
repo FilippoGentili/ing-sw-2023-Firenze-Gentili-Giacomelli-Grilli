@@ -17,12 +17,16 @@ public class SocketClient extends Client implements Runnable{
     private final String port;
     private transient ObjectOutputStream output;
     private transient ObjectInputStream input;
-    //private ExecutorService executorService;
-    //private ScheduledExecutorService pinger;
-
     private transient Thread thread;
     private static final int HEARTBEAT = 10000;
 
+    /**
+     * Constructor of socket client
+     * @param disconnectionHandler
+     * @param address
+     * @param port
+     * @throws IOException
+     */
     public SocketClient(DisconnectionHandler disconnectionHandler, String address, String port) throws IOException {
         super(disconnectionHandler);
         this.address = address;

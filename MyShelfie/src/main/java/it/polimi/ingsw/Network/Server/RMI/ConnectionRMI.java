@@ -11,6 +11,11 @@ public class ConnectionRMI extends Connection {
     private final RMIClientHandler rmiClientHandler;
     private final Server server;
 
+    /**
+     * Constructor of RMIConnection
+     * @param rmiClientHandler
+     * @param server
+     */
     ConnectionRMI(RMIClientHandler rmiClientHandler, Server server){
         this.rmiClientHandler = rmiClientHandler;
         this.server = server;

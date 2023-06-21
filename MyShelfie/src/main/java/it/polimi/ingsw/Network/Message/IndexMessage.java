@@ -10,6 +10,11 @@ public class IndexMessage extends Message{
     private static final long serialVersionUID = 169983083844552426L;
     private ArrayList<Tile> chosen;
 
+    /**
+     * Message used to let the server know the chosen tile's index
+     * @param username
+     * @param chosen
+     */
     public IndexMessage(String username, ArrayList<Tile> chosen) {
         super(username, MessageType.INDEX_TILES);
         this.chosen = chosen;

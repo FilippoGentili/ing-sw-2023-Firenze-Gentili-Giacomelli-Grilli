@@ -12,6 +12,12 @@ public class UpdateGuiPointsMessage extends Message{
     private int previousPoints1;
     private int previousPoints2;
 
+    /**
+     * Message used to update gui points
+     * @param game instance of the game
+     * @param previousPoints1
+     * @param previousPoints2
+     */
     public UpdateGuiPointsMessage(Game game, int previousPoints1, int previousPoints2) {
         super(Game.getServerName(), MessageType.UPDATEGUIPOINTS_MESSAGE);
         this.game = game;

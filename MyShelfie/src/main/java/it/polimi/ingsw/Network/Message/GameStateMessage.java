@@ -12,6 +12,10 @@ public class GameStateMessage extends Message{
     private Player player;
     private Game game;
 
+    /**
+     * @param player playing when the message is used
+     * @param game instance of the game
+     */
     public GameStateMessage(Player player, Game game) {
         super(Game.getServerName(),MessageType.GAME_STATE);
         this.player=player;

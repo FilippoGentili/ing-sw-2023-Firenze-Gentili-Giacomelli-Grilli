@@ -4,6 +4,9 @@ import it.polimi.ingsw.Controller.GameController;
 
 import java.io.Serializable;
 
+/**
+ * Class to save the game controller of the game
+ */
 public class Persistence implements Serializable {
     private static final long serialVersionUID = -674292120191950383L;
 

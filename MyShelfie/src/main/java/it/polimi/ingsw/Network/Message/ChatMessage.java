@@ -12,7 +12,13 @@ public class ChatMessage extends Message{
     private final String message;
     private final String receiver;
     private final String sender;
-    
+
+    /**
+     * Message used exclusively when writing in the chat
+     * @param sender
+     * @param receiver
+     * @param message
+     */
     public ChatMessage(String sender, String receiver, String message) {
         super(Game.getServerName(), MessageType.CHAT_MESSAGE);
         this.receiver = receiver;

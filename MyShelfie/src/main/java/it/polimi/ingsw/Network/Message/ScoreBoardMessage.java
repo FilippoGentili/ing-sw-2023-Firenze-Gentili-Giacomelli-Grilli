@@ -10,6 +10,9 @@ public class ScoreBoardMessage extends Message{
     private static final long serialVersionUID = 8143302299525296710L;
     private final ArrayList<Player> scoreboard;
 
+    /**
+     * @param scoreboard updated sent from server to client
+     */
     public ScoreBoardMessage(ArrayList<Player> scoreboard) {
         super(Game.getServerName(), MessageType.SCOREBOARD_MESSAGE);
         this.scoreboard = scoreboard;

@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Model.Bookshelf;
-import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
@@ -25,9 +23,11 @@ public class Server implements Runnable{
     private GameController gameController;
     private Map<String, Connection> connectionMap;
     private Object lock;
-
     private boolean reloadedGame = false;
 
+    /**
+     * Constructor for Server when a new game is created
+     */
     public Server() {
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
@@ -36,6 +36,10 @@ public class Server implements Runnable{
         ping.start();
     }
 
+    /**
+     * Constructor for server when a game is reloaded
+     * @param b
+     */
     public Server(Boolean b) {
         reloadedGame = b;
         this.gameController = GameSaved.loadGame(this);
@@ -47,6 +51,9 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Game loaded successfully.");
     }
 
+    /**
+     * Method that starts both servers, so that clients can connect with different technologies
+     */
     public void startServers() {
         int Socketport = 1098;
         SocketServer ss = new SocketServer(this, Socketport);
@@ -69,12 +76,22 @@ public class Server implements Runnable{
         }
     }
 
+    /**
+     * Method used to log the client
+     * @param nickname
+     * @param connection
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public synchronized void login(String nickname, Connection connection) throws IOException, InterruptedException {
             if (nickname != null) {
                 addClient(nickname, connection);
             }
     }
 
+    /**
+     * Adds client through its nickname and connection type
+     */
     public synchronized void addClient(String nickname, Connection connection) throws InterruptedException {
         VirtualView vv = new VirtualView(connection);
 
@@ -101,7 +118,11 @@ public class Server implements Runnable{
         }
     }
 
-
+    /**
+     * Gets the nickname through the connection map
+     * @param connection
+     * @return
+     */
     public String getNickname(Connection connection){
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue().equals(connection))
@@ -110,6 +131,10 @@ public class Server implements Runnable{
         return null;
     }
 
+    /**
+     * Removes client from the connectionMap
+     * @param connection
+     */
     public void removeClient(Connection connection) {
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue().equals(connection)) {
@@ -121,6 +146,10 @@ public class Server implements Runnable{
         }
     }
 
+    /**
+     * Disconnects client, sending a broadcast message that a specific client has been disconnected
+     * @param connection
+     */
     public void clientDisconnection(Connection connection) {
         synchronized (lock){
 
@@ -137,6 +166,10 @@ public class Server implements Runnable{
 
     }
 
+    /**
+     * Sends a message to all clients
+     * @param message
+     */
     public void broadcastMessage(Message message){
         for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
             if(map.getValue()!=null && map.getValue().checkConnection()){
@@ -146,20 +179,11 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Send to all: {0}", message);
     }
 
-    public void sendPeriodicMessage(Message message) {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                broadcastMessage(message);
-            }
-        };
-
-        // Esegui il task ogni secondo (1000 millisecondi)
-        timer.scheduleAtFixedRate(task, 0, 1000);
-    }
-
-
+    /**
+     * Sends message to the player corresponding to nickname
+     * @param message
+     * @param nickname
+     */
     public void sendMessage(Message message, String nickname) {
         synchronized(lock){
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
@@ -176,6 +200,11 @@ public class Server implements Runnable{
         LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{nickname, message});
     }
 
+    /**
+     * Handles the message depending on its type
+     * @param message
+     * @throws InterruptedException
+     */
     public void handleMessage(Message message) throws InterruptedException {
         synchronized (lock) {
             if(message.getMessageType() == MessageType.CHAT_MESSAGE){
@@ -208,6 +237,5 @@ public class Server implements Runnable{
             }
         }
     }
-
 
 }
