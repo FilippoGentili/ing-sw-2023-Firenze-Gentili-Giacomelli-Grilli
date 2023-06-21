@@ -229,7 +229,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param game the current game
      */
     public synchronized void setUp(Game game){
-        this.game = game;
         confirmTileSelectionButton.setVisible(false);
 
         commonPoints1.setVisible(true);
@@ -801,6 +800,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public synchronized void updateBookShelf(Player player){
 
         Game game = player.getGame();
+        this.game = game;
         int index = game.getPlayers().indexOf(player);
         if (game.getPlayers().size() == 2) {
             switch (index) {
