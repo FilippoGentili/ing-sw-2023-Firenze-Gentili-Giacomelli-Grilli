@@ -273,5 +273,205 @@ class CommonGoalCard5Test {
         assertTrue(Card.check(bookshelf));
     }
 
+    @Test
+    void genericTest3() {
+        CommonGoalCard Card = new CommonGoalCard5();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for (int i = 0; i < 6; i++) {
+            for(int j=0; j<5; j++){
+                switch (i){
+                    case 0:
+                        if(j==0){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.BOOK));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==1){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.TROPHIE));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 1:
+                        if(j==3){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.TROPHIE));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 2:
+                        if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.CAT));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==3 || j==2){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.BOOK));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 3:
+                        if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.CAT));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==3 || j==2){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 4:
+                        if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.PLANT));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 5:
+                        if(j==0){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.TROPHIE));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==1 || j==2){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==3){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.CAT));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+
+                }
+            }
+        }
+
+        assertFalse(Card.check(bookshelf));
+    }
+
+    @Test
+    void genericTest4() {
+        CommonGoalCard Card = new CommonGoalCard5();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for (int i = 0; i < 6; i++) {
+            for(int j=0; j<5; j++){
+                switch (i){
+                    case 0:
+                        if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.BOOK));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==3) {
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.TROPHIE));
+                            bookshelf.insertTiles(arrayList, j);
+                        }else if(j==2){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList, j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 1:
+                        if(j==0){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.BOOK));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 2:
+                        if(j==4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.BOOK));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==0 || j==1) {
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.TROPHIE));
+                            bookshelf.insertTiles(arrayList, j);
+                        }else if(j==2){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList, j);
+                        }else{
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+                    case 3:
+                        if(j!=4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.TROPHIE));
+                            bookshelf.insertTiles(arrayList, j);
+                        }
+                        break;
+                    case 4:
+                        if(j==0 || j==3){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.FRAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==1){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.PLANT));
+                            bookshelf.insertTiles(arrayList,j);
+                        }else if(j==2){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.BOOK));
+                            bookshelf.insertTiles(arrayList, j);
+                        }
+                        break;
+                    case 5:
+                        if(j!= 3 && j!=4){
+                            ArrayList<Tile> arrayList = new ArrayList<>();
+                            arrayList.add(new Tile(TileType.GAME));
+                            bookshelf.insertTiles(arrayList,j);
+                        }
+                        break;
+
+                }
+            }
+        }
+
+        assertFalse(Card.check(bookshelf));
+    }
+
 
 }

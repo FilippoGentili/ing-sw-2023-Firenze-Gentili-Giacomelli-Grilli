@@ -21,14 +21,15 @@ public class CommonGoalCard5 extends CommonGoalCard {
             for(col=0; col<5; col++){
                 count=0;
                 if(bookshelf.getTile(row,col).getTileType() != TileType.NULL) {
-                    if (!checkTile[row][col])
-                        count = FindAdjacentTiles(bookshelf.getTile(row,col),bookshelf,checkTile,4,0);
+                    if (!checkTile[row][col]) {
+                        count = FindAdjacentTiles(bookshelf.getTile(row, col), bookshelf, checkTile, 4, 0);
 
-                    if(count == 4)
-                        countGroup++;
+                        if (count == 4)
+                            countGroup++;
 
-                    if(count < 4)
-                        ResetCheckTile(bookshelf.getTile(row,col),bookshelf,checkTile);
+                        if (count < 4)
+                            ResetCheckTile(bookshelf.getTile(row, col), bookshelf, checkTile);
+                    }
                 }
             }
         }
