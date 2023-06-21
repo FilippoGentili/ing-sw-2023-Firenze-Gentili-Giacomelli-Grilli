@@ -30,4 +30,5 @@ public interface View {
     void turnDisplay(Player player);
     void welcomeBack(String nickname);
     void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2);
+    void endGame(ArrayList<Player> scoreboard, String winner);
 }

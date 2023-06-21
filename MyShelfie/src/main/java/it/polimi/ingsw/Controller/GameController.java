@@ -464,16 +464,18 @@ public class GameController implements Serializable {
         winner = game.getWinner();
 
         ArrayList<Player> scoreBoard = game.getScoreBoard(game.getPlayers());
-        server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
-        server.broadcastMessage(new WinnerMessage(winner.getNickname(), game));
+
+        server.broadcastMessage(new EndGameMessage(scoreBoard,winner.getNickname()));
+        /*server.broadcastMessage(new ScoreBoardMessage(scoreBoard));
+        server.broadcastMessage(new WinnerMessage(winner.getNickname(), game));*/
 
 
         for(Player player : players){
-            if(player.getNickname().equals(winner.getNickname())) {
+           /* if(player.getNickname().equals(winner.getNickname())) {
                 server.sendMessage(new GenericMessage("Congratulations! " + "You won the game!"), player.getNickname());
             }else {
                 server.sendMessage(new GenericMessage("You lost :( " + winner.getNickname() + " won the game!"), player.getNickname());
-            }
+            }*/
             System.out.println("Write 'exit' to leave the game.");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine().trim();

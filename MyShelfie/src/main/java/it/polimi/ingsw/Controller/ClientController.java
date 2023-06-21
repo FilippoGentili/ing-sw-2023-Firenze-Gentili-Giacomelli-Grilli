@@ -206,6 +206,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         view.updateGuiCommonGoalCardPoints(guiPointsMessage.getGame(), guiPointsMessage.getPreviousPoints1(), guiPointsMessage.getPreviousPoints2());
                     });
                     break;
+                case ENDGAME_MESSAGE:
+                    EndGameMessage endGameMessage = (EndGameMessage) message;
+                    queue.add(() -> {
+                       view.endGame(endGameMessage.getScoreboard(),endGameMessage.getWinner());
+                    });
                 default:
                     break;
             }

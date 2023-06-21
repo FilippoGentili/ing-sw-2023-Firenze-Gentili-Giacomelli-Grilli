@@ -860,6 +860,13 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     @Override
     public void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2){
     }
+
+    @Override
+    public void endGame(ArrayList<Player> scoreboard, String winner) {
+        showScoreboard(scoreboard);
+        System.out.println("the winner is " + winner + "! Congratulations to everyone!");
+    }
+
     @Override
     public void handleDisconnection() {
         System.out.println("You will be disconnected. Game finished :(");
