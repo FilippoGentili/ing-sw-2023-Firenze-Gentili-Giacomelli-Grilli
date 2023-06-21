@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.ModelTest;
 
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Tile;
