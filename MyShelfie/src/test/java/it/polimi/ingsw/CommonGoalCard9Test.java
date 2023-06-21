@@ -143,4 +143,25 @@ class CommonGoalCard9Test {
         assertTrue(Card.check(bookshelf));
     }
 
+    @Test
+    void TwoColumnsAreFull(){
+        CommonGoalCard Card = new CommonGoalCard9();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int i=0; i<3; i++) {
+
+            ArrayList<Tile> tiles = new ArrayList<>();
+            tiles.add(new Tile(TileType.GAME));
+            tiles.add(new Tile(TileType.PLANT));
+            tiles.add(new Tile(TileType.GAME));
+            tiles.add(new Tile(TileType.BOOK));
+            tiles.add(new Tile(TileType.GAME));
+            tiles.add(new Tile(TileType.GAME));
+            bookshelf.insertTiles(tiles, i);
+
+        }
+
+        assertTrue(Card.check(bookshelf));
+    }
+
 }

@@ -170,4 +170,114 @@ class CommonGoalCard4Test {
         assertTrue(Card.check(bookshelf));
     }
 
+    @Test
+    void genericTest(){
+        CommonGoalCard Card = new CommonGoalCard4();
+        Bookshelf bookshelf = new Bookshelf();
+
+
+        ArrayList<Tile> tiles = new ArrayList<>();
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        bookshelf.insertTiles(tiles, 0);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        bookshelf.insertTiles(tiles, 1);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        bookshelf.insertTiles(tiles, 2);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        bookshelf.insertTiles(tiles, 3);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        bookshelf.insertTiles(tiles, 4);
+        tiles.clear();
+
+        assertTrue(Card.check(bookshelf));
+    }
+
+    @Test
+    void genericTest2(){
+        CommonGoalCard Card = new CommonGoalCard4();
+        Bookshelf bookshelf = new Bookshelf();
+
+
+        ArrayList<Tile> tiles = new ArrayList<>();
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        bookshelf.insertTiles(tiles, 0);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        tiles.add(new Tile(TileType.PLANT));
+        bookshelf.insertTiles(tiles, 1);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        tiles.add(new Tile(TileType.GAME));
+        bookshelf.insertTiles(tiles, 2);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        tiles.add(new Tile(TileType.BOOK));
+        bookshelf.insertTiles(tiles, 3);
+        tiles.clear();
+
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.CAT));
+        bookshelf.insertTiles(tiles, 4);
+        tiles.clear();
+
+        assertFalse(Card.check(bookshelf));
+    }
+
 }
