@@ -75,20 +75,20 @@ public class LeaderboardSceneController extends ViewObservable implements Generi
             case 2 -> {
                 score3.setVisible(false);
                 score4.setVisible(false);
-                score1.setText(list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
-                score2.setText(list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
+                score1.setText("1. " + list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
+                score2.setText("2. " + list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
             }
             case 3 -> {
                 score4.setVisible(false);
-                score1.setText(list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
-                score2.setText(list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
-                score3.setText(list.get(2).getNickname() + ":      " + scoreList.get(2) + " points");
+                score1.setText("1. " + list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
+                score2.setText("2. " + list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
+                score3.setText("3. " + list.get(2).getNickname() + ":      " + scoreList.get(2) + " points");
             }
             case 4 -> {
-                score1.setText(list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
-                score2.setText(list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
-                score3.setText(list.get(2).getNickname() + ":      " + scoreList.get(2) + " points");
-                score4.setText(list.get(3).getNickname() + ":      " + scoreList.get(3) + " points");
+                score1.setText("1. " + list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
+                score2.setText("2. " + list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
+                score3.setText("3. " + list.get(2).getNickname() + ":      " + scoreList.get(2) + " points");
+                score4.setText("4. " + list.get(3).getNickname() + ":      " + scoreList.get(3) + " points");
             }
             default -> {
             }

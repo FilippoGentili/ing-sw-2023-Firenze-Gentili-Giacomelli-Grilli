@@ -187,7 +187,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private boolean firstTime = true;
     private LivingRoom livingRoom = new LivingRoom();
 
-    private Game game;
+    private Game gamePassed;
 
     @FXML
     public void initialize() {
@@ -220,7 +220,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         commonGoalCard2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard2));
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
-        leaderboardButton.setOnAction(event -> leaderboardButtonClicked(game));
+        leaderboardButton.setOnAction(event -> leaderboardButtonClicked(gamePassed));
         rulebookButton.setOnAction(this::rulebookButtonClicked);
     }
 
@@ -800,7 +800,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     public synchronized void updateBookShelf(Player player){
 
         Game game = player.getGame();
-        this.game = game;
+        this.gamePassed = game;
         int index = game.getPlayers().indexOf(player);
         if (game.getPlayers().size() == 2) {
             switch (index) {

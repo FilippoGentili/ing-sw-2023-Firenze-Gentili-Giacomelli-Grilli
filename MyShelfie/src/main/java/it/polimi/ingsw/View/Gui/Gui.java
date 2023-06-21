@@ -16,7 +16,6 @@ public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
     private static final String END = "GAME OVER";
     private GameSceneController gameSceneController;
-    private EndSceneController endSceneController;
 
     /**
      * This method is used to show a message
@@ -43,6 +42,9 @@ public class Gui extends ViewObservable implements View {
                     GuiController.showBanner(ERROR, "Nickname already taken");
                     GuiController.changeScene("loginScene.fxml", observers);
                 });
+                if(nickname.length()==0){
+                    GuiController.showBanner(ERROR, "Choose a nickname");
+                }
             } else {
                 Platform.runLater(() -> {
                     GuiController.showBanner(ERROR, "Server Error");
@@ -232,7 +234,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showWinner(String winner, Game game) {
-        endSceneController = new EndSceneController();
+        EndSceneController endSceneController = new EndSceneController();
         endSceneController.addAllObserver(observers);
         endSceneController.setWinner(winner);
         endSceneController.setScoreBoard(game);
@@ -259,6 +261,12 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
     }
 
+    /**
+     * This method is used to update the common goal card points
+     * @param game
+     * @param previousPoints1
+     * @param previousPoints2
+     */
     @Override
     public void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2){
         Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(game, previousPoints1, previousPoints2));

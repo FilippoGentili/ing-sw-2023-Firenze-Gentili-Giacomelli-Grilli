@@ -68,6 +68,9 @@ public class GuiController extends ViewObservable{
         changeScene(fxml, currentScene, controller);
     }
 
+    /**
+     * This method is used to display the banner
+     */
     public synchronized static void showBanner(String title, String message) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/bannerScene.fxml"));
         Parent parent;
@@ -93,6 +96,9 @@ public class GuiController extends ViewObservable{
         return currentController;
     }
 
+    /**
+     * This method is used to display the chat
+     */
     public static void showChat() {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
@@ -109,6 +115,9 @@ public class GuiController extends ViewObservable{
         chatSceneController.showChat();
     }
 
+    /**
+     * This method is used to display the leaderBoard
+     */
     public static void showLeaderboard(Game game) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/leaderboardScene.fxml"));
         Parent parent;
@@ -126,6 +135,9 @@ public class GuiController extends ViewObservable{
         leaderboardSceneController.showLeaderboard();
     }
 
+    /**
+     * This method is used to display the ruleBook
+     */
     public static void showRulebook(){
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/rulebookScene.fxml"));
         Parent parent;
@@ -143,6 +155,9 @@ public class GuiController extends ViewObservable{
 
     }
 
+    /**
+     * This method is used to display the commonGoalCard information
+     */
     public static void showCommonGoalCardInfo(int id){
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/commonGoalCardInfoScene.fxml"));
         Parent parent;
