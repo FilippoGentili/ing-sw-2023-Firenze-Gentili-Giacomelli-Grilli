@@ -30,15 +30,18 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
      * @param event
      */
     private void enterButtonClicked(MouseEvent event) {
-        String selectedValue = numberOfPlayersMenu.getSelectionModel().getSelectedItem().toString();
-        enterButton.setDisable(true);
-        int maxPlayers = Integer.parseInt(selectedValue.split(" ")[0]);
-        notifyObserver(obs -> {
-            try {
-                obs.updateNumOfPlayers(maxPlayers);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        Object selectedValue = numberOfPlayersMenu.getSelectionModel().getSelectedItem();
+        if (selectedValue != null) {
+            String selectedValueString = selectedValue.toString();
+            enterButton.setDisable(true);
+            int maxPlayers = Integer.parseInt(selectedValueString.split(" ")[0]);
+            notifyObserver(obs -> {
+                try {
+                    obs.updateNumOfPlayers(maxPlayers);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
     }
 }
