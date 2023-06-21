@@ -8,7 +8,7 @@ public class LivingRoom implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 5403724841040315028L;
-    private static int numberOfTiles=0;
+    private int numberOfTiles=0;
     private Tile[][] board;
     private boolean[][] valid;
     private final int rows = 9;
