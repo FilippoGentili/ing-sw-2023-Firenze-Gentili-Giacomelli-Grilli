@@ -18,7 +18,13 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     @FXML
     private Text winnerText;
     @FXML
-    private ListView scoreBoard;
+    private Text score1;
+    @FXML
+    private Text score2;
+    @FXML
+    private Text score3;
+    @FXML
+    private Text score4;
     @FXML
     private Button exitButton;
 
@@ -29,8 +35,6 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     public void initialize(){
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
         easter.addEventHandler(MouseEvent.MOUSE_CLICKED, this::easterClicked);
-        winnerText = new Text();
-        scoreBoard = new ListView<>();
     }
 
     public void setWinner(String nickname){
@@ -38,16 +42,33 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     }
 
     public void setScoreBoard(Game game){
+        int numberOfPlayers = game.getPlayers().size();
         ArrayList<Player> list = game.getScoreBoard(game.getPlayers());
-        ArrayList<String> scoreboardItems = new ArrayList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            Player player = list.get(i);
-            String scoreboardItem = (i + 1) + ". " + player.getNickname() + " " + player.getScore();
-            scoreboardItems.add(scoreboardItem);
+        ArrayList<Integer> scoreList = new ArrayList<>();
+        for(Player player : list)
+            scoreList.add(player.getScore());
+        switch (numberOfPlayers) {
+            case 2 -> {
+                score3.setVisible(false);
+                score4.setVisible(false);
+                score1.setText(list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
+                score2.setText(list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
+            }
+            case 3 -> {
+                score4.setVisible(false);
+                score1.setText(list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
+                score2.setText(list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
+                score3.setText(list.get(2).getNickname() + ":      " + scoreList.get(2) + " points");
+            }
+            case 4 -> {
+                score1.setText(list.get(0).getNickname() + ":      " + scoreList.get(0) + " points");
+                score2.setText(list.get(1).getNickname() + ":      " + scoreList.get(1) + " points");
+                score3.setText(list.get(2).getNickname() + ":      " + scoreList.get(2) + " points");
+                score4.setText(list.get(3).getNickname() + ":      " + scoreList.get(3) + " points");
+            }
+            default -> {
+            }
         }
-
-        scoreBoard.getItems().addAll(scoreboardItems);
     }
 
     public void easterClicked(MouseEvent event){

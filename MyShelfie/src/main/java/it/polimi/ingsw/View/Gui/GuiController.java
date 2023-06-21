@@ -1,9 +1,11 @@
 package it.polimi.ingsw.View.Gui;
 
+import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.*;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -107,7 +109,7 @@ public class GuiController extends ViewObservable{
         chatSceneController.showChat();
     }
 
-    public static void showLeaderboard() {
+    public static void showLeaderboard(Game game) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/leaderboardScene.fxml"));
         Parent parent;
 
@@ -119,6 +121,7 @@ public class GuiController extends ViewObservable{
         }
         LeaderboardSceneController leaderboardSceneController = fxmlLoader.getController();
         Scene leaderboardScene = new Scene(parent);
+        leaderboardSceneController.setListScore(game);
         leaderboardSceneController.setScene(leaderboardScene);
         leaderboardSceneController.showLeaderboard();
     }

@@ -32,6 +32,7 @@ import java.util.Random;
 
 import static it.polimi.ingsw.Model.TileType.NULL;
 import static it.polimi.ingsw.View.Gui.GuiController.showCommonGoalCardInfo;
+import static it.polimi.ingsw.View.Gui.GuiController.showLeaderboard;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -186,6 +187,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private boolean firstTime = true;
     private LivingRoom livingRoom = new LivingRoom();
 
+    private Game game;
+
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
@@ -217,7 +220,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         commonGoalCard2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard2));
         openChatButton.setOnAction(this::openChatButtonClicked);
         quitButton.setOnAction(this::quitButtonClicked);
-        leaderboardButton.setOnAction(this::leaderboardButtonClicked);
+        leaderboardButton.setOnAction(event -> leaderboardButtonClicked(game));
         rulebookButton.setOnAction(this::rulebookButtonClicked);
     }
 
@@ -226,6 +229,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param game the current game
      */
     public synchronized void setUp(Game game){
+        this.game = game;
         confirmTileSelectionButton.setVisible(false);
 
         commonPoints1.setVisible(true);
@@ -1201,10 +1205,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     /**
      * This method is called to open the leaderboard from the menu bar
-     * @param event mouse click
+     * @param game of the player
      */
-    public void leaderboardButtonClicked(ActionEvent event) {
-        Platform.runLater(GuiController::showLeaderboard);
+    public void leaderboardButtonClicked(Game game) {
+        Platform.runLater(() -> showLeaderboard(game));
     }
 
     public void rulebookButtonClicked(ActionEvent event) {

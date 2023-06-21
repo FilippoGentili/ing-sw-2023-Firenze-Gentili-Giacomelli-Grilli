@@ -16,6 +16,7 @@ public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
     private static final String END = "GAME OVER";
     private GameSceneController gameSceneController;
+    private EndSceneController endSceneController;
 
     /**
      * This method is used to show a message
@@ -231,11 +232,11 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showWinner(String winner, Game game) {
-        EndSceneController endSceneController = new EndSceneController();
+        endSceneController = new EndSceneController();
         endSceneController.addAllObserver(observers);
-        Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
         endSceneController.setWinner(winner);
         endSceneController.setScoreBoard(game);
+        Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
     }
 
     @Override
