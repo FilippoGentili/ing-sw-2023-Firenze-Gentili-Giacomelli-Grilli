@@ -14,7 +14,7 @@ public class CommonGoalCard8 extends CommonGoalCard {
         for(row=0; row<6 && count<2; row++){
             uguali=false;
             if(bookshelf.getTile(row,0).getTileType()!=TileType.NULL) {
-                for (k = 0; k < 4 && !uguali; k++) {
+                for (k = 0; k < 5 && !uguali; k++) {
                     for(h=1; h<5 && !uguali; h++) {
                         if (h != k)
                             if (bookshelf.getTile(row, k).getTileType() == bookshelf.getTile(row, h).getTileType() || bookshelf.getTile(row, k).getTileType() == TileType.NULL)

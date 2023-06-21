@@ -18,7 +18,6 @@ public class GuiController extends ViewObservable{
     private static Scene currentScene;
     private static GenericSceneController currentController;
 
-
     public synchronized static <T> T changeScene(String fxml, Scene scene, List<ViewObserver> observers) {
         T controller = null;
         try {

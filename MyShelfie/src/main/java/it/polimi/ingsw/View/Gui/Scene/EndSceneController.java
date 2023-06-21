@@ -29,6 +29,8 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     public void initialize(){
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
         easter.addEventHandler(MouseEvent.MOUSE_CLICKED, this::easterClicked);
+        winnerText = new Text();
+        scoreBoard = new ListView<>();
     }
 
     public void setWinner(String nickname){
