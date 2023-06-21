@@ -16,37 +16,38 @@
     <children>
         <BorderPane prefHeight="760.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
-                <ImageView fitHeight="262.0" fitWidth="1000.0" BorderPane.alignment="CENTER">
+                <ImageView fitHeight="260.0" fitWidth="1000.0" BorderPane.alignment="CENTER">
                     <Image url="@../images/publisherMaterial/smallTitle.png" />
                 </ImageView>
             </top>
             <left>
-                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                <Pane maxHeight="200.0" maxWidth="203.0" minHeight="200.0" minWidth="203.0" prefHeight="200.0" prefWidth="203.0" BorderPane.alignment="CENTER" />
             </left>
             <right>
-                <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                <Pane maxHeight="200.0" maxWidth="203.0" minHeight="200.0" minWidth="203.0" prefHeight="200.0" prefWidth="203.0" BorderPane.alignment="CENTER" />
             </right>
             <bottom>
-                <Pane prefHeight="138.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
+                <Pane maxHeight="158.0" maxWidth="1366.0" minHeight="158.0" minWidth="1366.0" prefHeight="158.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
                     <children>
                         <Button fx:id="exitButton" alignment="CENTER" layoutX="583.0" layoutY="19.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" styleClass="generalButton" stylesheets="@../css/style.css" text="Exit">
                             <font>
                                 <Font name="Blackadder ITC" size="40.0" />
                             </font>
                         </Button>
+                  <AnchorPane fx:id="easter" layoutX="1257.0" layoutY="37.0" prefHeight="85.0" prefWidth="95.0" styleClass="publisher" stylesheets="@../css/style.css" />
                     </children></Pane>
             </bottom>
             <center>
-                <AnchorPane prefHeight="350.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+                <AnchorPane maxHeight="350.0" maxWidth="960.0" minHeight="350.0" minWidth="960.0" prefHeight="350.0" prefWidth="960.0" BorderPane.alignment="CENTER">
                     <children>
-                        <AnchorPane layoutX="333.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane layoutX="333.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="333.0" AnchorPane.rightAnchor="333.0">
                             <children>
-                                <ListView id="leaderBoardMenu" fx:id="scoreBoard" fixedCellSize="4.0" prefHeight="280.0" prefWidth="300.0" styleClass="basePane2" stylesheets="@../css/style.css" />
+                                <ListView id="leaderBoardMenu" fx:id="scoreBoard" fixedCellSize="4.0" prefHeight="280.0" prefWidth="300.0" styleClass="basePane2" stylesheets="@../css/style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane layoutX="280.0" layoutY="-14.0" prefHeight="75.0" prefWidth="400.0" style="-fx-background-position: 4;" styleClass="basePane2" stylesheets="@../css/style.css">
                             <children>
-                                <Text fx:id="winnerText" fill="WHITE" layoutX="2.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player won!" textAlignment="CENTER" wrappingWidth="403.21630859375">
+                                <Text fx:id="winnerText" fill="WHITE" layoutX="2.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player won!" textAlignment="CENTER" wrappingWidth="403.21630859375" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                     <font>
                                         <Font name="Blackadder ITC" size="50.0" />
                                     </font>

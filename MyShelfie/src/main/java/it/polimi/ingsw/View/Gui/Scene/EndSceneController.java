@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 
@@ -22,8 +23,12 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     private Button exitButton;
 
     @FXML
+    private AnchorPane easter;
+
+    @FXML
     public void initialize(){
-        exitButton.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
+        exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
+        easter.addEventHandler(MouseEvent.MOUSE_CLICKED, this::easterClicked);
     }
 
     public void setWinner(String nickname){
@@ -43,6 +48,8 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         scoreBoard.getItems().addAll(scoreboardItems);
     }
 
+    public void easterClicked(MouseEvent event){
+    }
     public void exitButtonClicked(MouseEvent event){
         System.exit(1);
     }

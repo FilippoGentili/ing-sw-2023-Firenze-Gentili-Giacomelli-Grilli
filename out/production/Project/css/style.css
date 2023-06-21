@@ -377,3 +377,8 @@
     -fx-background-image: url("../images/misc/number3.png");
     -fx-background-size: stretch;
 }
+
+.publisher {
+    -fx-background-image: url("../images/publisherMaterial/publisher.png");
+    -fx-background-size: stretch;
+}

@@ -234,7 +234,7 @@ public class Gui extends ViewObservable implements View {
         EndSceneController endSceneController = new EndSceneController();
         endSceneController.addAllObserver(observers);
         endSceneController.setWinner(winner);
-        //endSceneController.setScoreBoard(game);
+        endSceneController.setScoreBoard(game);
         Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
     }
 
@@ -244,7 +244,7 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showChatMessage(ChatMessage message) {
+    public void showChatMessage(String receiverUsername, ChatMessage message) {
 
     }
 
