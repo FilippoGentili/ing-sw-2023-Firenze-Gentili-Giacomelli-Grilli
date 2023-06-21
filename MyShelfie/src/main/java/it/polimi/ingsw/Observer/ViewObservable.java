@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Observer;
 
+import it.polimi.ingsw.Model.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -24,7 +26,5 @@ public abstract class ViewObservable {
             lambda.accept(observer);
         }
     }
-
-
 
 }

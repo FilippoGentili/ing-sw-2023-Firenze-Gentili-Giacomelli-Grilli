@@ -21,6 +21,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     Scanner scanner;
     private boolean myTurn = false;
     private boolean secondMessage = false;
+    private boolean close = false;
 
     private Chat chat;
 
@@ -263,10 +264,25 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 return 0;
         }
     }
+
+    /**
+     * This method is used to show the chat message
+     * @param receiver of the message
+     * @param sender of the message
+     * @param message to be shown
+     */
     @Override
     public void showChatMessage(String receiver, String sender, ChatMessage message) {
-
+        for(Message messages: chat.getMessages(receiver)){
+            System.out.println(messages.getSender() + ": " + messages.getMessage());
+        }
     }
+
+    /**
+     * This method is used for the chat
+     * @param player that writes the message
+     */
+    @Override
     public void openChat(Player player){
         String sender = player.getNickname();
         Scanner scanner = new Scanner(System.in);
@@ -276,27 +292,29 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             System.out.println("Chat opened");
         }
 
-        //prints all old mesages
-        if(chat.getMessages(player).isEmpty()){
+        //prints all old messages
+        if(chat.getMessages(player.getNickname()).isEmpty()){
             System.out.println("No old messages");
         }else{
-            for(Message message: chat.getMessages(player)){
+            for(Message message: chat.getMessages(player.getNickname())){
                 System.out.println(message.getTime() + ":" + message.getSender() + ": " + message.getMessage());
             }
         }
 
         //prints all players and ask who is the receiver
         System.out.println("Who is the receiver?");
-        System.out.println("Write all players to send a broadcast message");
+        System.out.println("Write 'all players' to send a broadcast message");
         for(Player players: player.getGame().getPlayers()){
             System.out.println(players.getNickname());
         }
 
-        //sends the message to the receiver
+        //asks the receiver
         do{
             receiver = scanner.nextLine().trim();
             if(receiver.equals("close chat")){
                 closeChat();
+                close = true;
+                break;
             }
             for(Player players: player.getGame().getPlayers()){
                 if(receiver.equals("all players") || receiver.equals(players.getNickname())) {
@@ -309,39 +327,47 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             }
         }while(!exists);
 
-        System.out.println("Write your message: ");
-        String message = scanner.nextLine().trim();
-        if(message.equals("close chat")){
-            closeChat();
-        }
-        final String finalReceiver = receiver;
-        notifyObserver(obs -> {
-            obs.sendChatMessage(sender, finalReceiver, message);
-        });
+        if(!close) {
+            //asks the message
+            System.out.println("Write your message: ");
+            String message = scanner.nextLine().trim();
 
-        //prints all new messages
-        for(Message messages: chat.getMessages(player)){
-            System.out.println(messages.getSender() + ": " + messages.getMessage());
-        }
-
-        //new message
-        System.out.println("Do you want to write a new message?");
-
-        String answer;
-        do{
-            answer = scanner.nextLine().trim();
-            if(answer.equals("yes")){
-                secondMessage = true;
-                openChat(player);
-            }else if(answer.equals("no")) {
+            if (message.equals("close chat")) {
                 closeChat();
-            }else{
-                System.out.println("Invalid input, type yes or no");
             }
-        } while(!answer.equals("yes") && !answer.equals("no"));
+            final String finalReceiver = receiver;
+           /* ChatMessage messageSent = null;
+            messageSent = new ChatMessage(sender, receiver, message);
+            server.sendChatMessage(messageSent);
+            notifyObserver(obs -> {
+                obs.sendChatMessage(sender, finalReceiver, message);
+            });*/
+
+            //prints all new messages
+            showChatMessage(player.getNickname(), receiver, null);
+
+
+            //another message?
+            System.out.println("Do you want to write a new message?");
+
+            String answer;
+            do {
+                answer = scanner.nextLine().trim();
+                if (answer.equals("yes")) {
+                    secondMessage = true;
+                    openChat(player);
+                } else if (answer.equals("no")) {
+                    closeChat();
+                } else {
+                    System.out.println("Invalid input, type yes or no");
+                }
+            } while (!answer.equals("yes") && !answer.equals("no"));
+        }
     }
+
     public void closeChat(){
-        //ritorna al punto dov'eri
+        System.out.println("Chat closed");
+        System.out.println("Continue where you left");
     }
     @Override
     public void TilesRequest(LivingRoom livingRoom) {

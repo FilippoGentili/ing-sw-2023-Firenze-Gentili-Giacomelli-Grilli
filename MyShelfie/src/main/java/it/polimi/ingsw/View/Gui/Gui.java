@@ -244,6 +244,11 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
+    public void openChat(Player player) {
+
+    }
+
+    @Override
     public void welcomeBack(String nickname){
         WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
         waitingRoomSceneController.addAllObserver(observers);
