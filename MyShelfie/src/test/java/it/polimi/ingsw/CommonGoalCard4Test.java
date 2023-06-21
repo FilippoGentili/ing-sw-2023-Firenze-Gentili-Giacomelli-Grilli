@@ -131,4 +131,43 @@ class CommonGoalCard4Test {
         assertTrue(Card.check(bookshelf));
     }
 
+    @Test
+    void ThreeColumnsDifferent(){
+        CommonGoalCard Card = new CommonGoalCard4();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5; j++){
+                if(j==0) {
+                    Tile cat = new Tile(TileType.CAT);
+                    ArrayList<Tile> TileCat = new ArrayList<>();
+                    TileCat.add(cat);
+                    bookshelf.insertTiles(TileCat, j);
+                }else if(j==1) {
+                    Tile game = new Tile(TileType.GAME);
+                    ArrayList<Tile> TileGame = new ArrayList<>();
+                    TileGame.add(game);
+                    bookshelf.insertTiles(TileGame, j);
+                }else if(j==2) {
+                    Tile cat = new Tile(TileType.CAT);
+                    ArrayList<Tile> TileCat = new ArrayList<>();
+                    TileCat.add(cat);
+                    bookshelf.insertTiles(TileCat, j);
+                }else if(j==3) {
+                    Tile game = new Tile(TileType.GAME);
+                    ArrayList<Tile> TileGame = new ArrayList<>();
+                    TileGame.add(game);
+                    bookshelf.insertTiles(TileGame, j);
+                } else {
+                    Tile plant = new Tile(TileType.PLANT);
+                    ArrayList<Tile> TilePlant = new ArrayList<>();
+                    TilePlant.add(plant);
+                    bookshelf.insertTiles(TilePlant, j);
+                }
+            }
+        }
+
+        assertTrue(Card.check(bookshelf));
+    }
+
 }

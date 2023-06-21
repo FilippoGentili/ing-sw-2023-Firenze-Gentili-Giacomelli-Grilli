@@ -253,5 +253,25 @@ class CommonGoalCard5Test {
         assertTrue(Card.check(bookshelf));
     }
 
+    @Test
+    void genericTest2(){
+        CommonGoalCard Card = new CommonGoalCard5();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int j=0; j<4; j++){
+
+            ArrayList<Tile> first = new ArrayList<>();
+            first.add(new Tile(TileType.BOOK));
+            first.add(new Tile(TileType.GAME));
+            first.add(new Tile(TileType.PLANT));
+            first.add(new Tile(TileType.BOOK));
+            bookshelf.insertTiles(first,j);
+
+        }
+
+
+        assertTrue(Card.check(bookshelf));
+    }
+
 
 }

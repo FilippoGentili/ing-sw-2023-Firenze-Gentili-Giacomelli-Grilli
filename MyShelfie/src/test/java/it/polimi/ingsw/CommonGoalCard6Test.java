@@ -149,4 +149,29 @@ class CommonGoalCard6Test {
         assertFalse(Card.check(bookshelf));
     }
 
+    @Test
+    void twoColTwoTypes(){
+        CommonGoalCard Card = new CommonGoalCard6();
+        Bookshelf bookshelf = new Bookshelf();
+
+        for(int i=0; i<6; i++) {
+            for (int j = 0; j < 2; j++) {
+                if(i==5){
+                    Tile cat = new Tile(TileType.PLANT);
+                    ArrayList<Tile> TileCat = new ArrayList<>();
+                    TileCat.add(cat);
+                    bookshelf.insertTiles(TileCat, j);
+                }else{
+                    Tile cat = new Tile(TileType.CAT);
+                    ArrayList<Tile> TileCat = new ArrayList<>();
+                    TileCat.add(cat);
+                    bookshelf.insertTiles(TileCat, j);
+                }
+
+            }
+        }
+
+        assertFalse(Card.check(bookshelf));
+    }
+
 }
