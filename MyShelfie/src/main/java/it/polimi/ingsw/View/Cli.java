@@ -181,12 +181,21 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
     @Override
     public void nicknameRequest(){
-        String nickname;
+        String nickname = null;
         System.out.println("Insert your nickname: ");
-        nickname=readLine();
+
+        do{
+            nickname=readLine();
+
+            if(nickname.equals("")){
+                System.out.println("input not valid. Please insert a valid nickname: ");
+            }
+        }while(nickname.equals(""));
+
+        String finalNickname = nickname;
         notifyObserver(obs -> {
             try {
-                obs.updateNickname(nickname);
+                obs.updateNickname(finalNickname);
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {

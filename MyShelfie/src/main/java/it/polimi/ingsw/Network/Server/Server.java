@@ -84,9 +84,30 @@ public class Server implements Runnable{
      * @throws InterruptedException
      */
     public synchronized void login(String nickname, Connection connection) throws IOException, InterruptedException {
-            if (nickname != null) {
-                addClient(nickname, connection);
+
+        if(nickname.equals("")){
+            wrongNickname(nickname,connection);
+            return;
+        }
+        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+            if(nickname.equals(map.getKey())){
+                wrongNickname(nickname,connection);
+                return;
             }
+        }
+
+        if (nickname != null || !nickname.isEmpty()) {
+            addClient(nickname, connection);
+        }
+    }
+
+    public synchronized void wrongNickname(String nickname, Connection connection){
+        if(nickname.equals("")){
+            connection.sendMessage(new GenericMessage("'null' is not a valid nickname"));
+        }else {
+            connection.sendMessage(new GenericMessage("This nickname is already used. Please, choose another one"));
+        }
+        connection.sendMessage(new LoginResult(nickname,false,true));
     }
 
     /**

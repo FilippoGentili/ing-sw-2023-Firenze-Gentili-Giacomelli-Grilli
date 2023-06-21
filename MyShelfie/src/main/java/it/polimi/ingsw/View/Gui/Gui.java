@@ -38,12 +38,16 @@ public class Gui extends ViewObservable implements View {
     public void loginResult(boolean validNickname, boolean connection, String nickname){
         if (!validNickname || !connection) {
             if (!validNickname && connection) {
-                Platform.runLater(() -> {
-                    GuiController.showBanner(ERROR, "Nickname already taken");
-                    GuiController.changeScene("loginScene.fxml", observers);
-                });
-                if(nickname.length()==0){
-                    GuiController.showBanner(ERROR, "Choose a nickname");
+                if(nickname.equals("") || nickname == null || nickname.isEmpty()){
+                    Platform.runLater(() -> {
+                        GuiController.showBanner(ERROR, "Please insert a valid nickname");
+                        GuiController.changeScene("loginScene.fxml", observers);
+                    });
+                }else {
+                    Platform.runLater(() -> {
+                        GuiController.showBanner(ERROR, "Nickname already taken");
+                        GuiController.changeScene("loginScene.fxml", observers);
+                    });
                 }
             } else {
                 Platform.runLater(() -> {
