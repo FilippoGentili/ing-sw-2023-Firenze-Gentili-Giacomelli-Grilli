@@ -98,9 +98,7 @@ public class GameController implements Serializable {
                     game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
                     game.getCommonGoal1().setDelta(numOfPlayersReply.getNumOfPlayers());
                     game.getCommonGoal2().setDelta(numOfPlayersReply.getNumOfPlayers());
-                    //server.sendMessage(new GenericMessage("The number of players is set. Now wait for other players to connect!"),message.getNickname());
                     server.sendMessage(new WaitingRoomMessage(numOfPlayersReply.getNumOfPlayers(), virtualViewMap.size()), message.getNickname());
-                    server.sendMessage(new StartingChatMessage(),message.getNickname());
                     //restoreMatchElements();
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
@@ -150,7 +148,6 @@ public class GameController implements Serializable {
                 server.sendMessage(new LoginReply(nickname), nickname);
                 //server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
                 server.broadcastMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()));
-                server.sendMessage(new StartingChatMessage(),nickname);
 
                 if (virtualViewMap.size() == numOfPlayers)
                     startGame();

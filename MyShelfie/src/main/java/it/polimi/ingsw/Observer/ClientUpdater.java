@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Observer;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.Network.Client.Chat;
+//import it.polimi.ingsw.Network.Client.Chat;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Message.Message;
 
@@ -25,11 +25,8 @@ public class ClientUpdater implements Runnable{
         while(!Thread.currentThread().isInterrupted()){
             synchronized (client){
                 ArrayList<Message> messages;
-                //ArrayList<ChatMessage> chatMessages;
-
                 do{
                     messages = client.receiveMessages();
-                    //chatMessages = chat.receiveMessages();
                     try{
                         client.wait(100);
                     }catch (InterruptedException e) {
@@ -41,9 +38,6 @@ public class ClientUpdater implements Runnable{
                 for(Message msg : messages) {
                     observer.update(msg);
                 }
-                /*for(ChatMessage chatMessage : chatMessages){
-                    observer.update(chatMessage);
-                }*/
             }
         }
     }

@@ -239,12 +239,7 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void startChat() {
-
-    }
-
-    @Override
-    public void showChatMessage(ChatMessage message) {
+    public void showChatMessage(String receiver, String sender, ChatMessage message) {
 
     }
 

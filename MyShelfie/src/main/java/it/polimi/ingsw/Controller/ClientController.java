@@ -3,7 +3,7 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.LivingRoom;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
-import it.polimi.ingsw.Network.Client.Chat;
+//import it.polimi.ingsw.Network.Client.Chat;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.RMI.RMIClient;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
@@ -182,17 +182,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                         view.showGameStarted(gameStartedMessage.getGame());
                     });
                     break;
-                case STARTING_CHAT_MESSAGE:
-                    try {
-                        startChat();
-                    }catch (IOException e){
-                        //
-                    }
-                    break;
                 case CHAT_MESSAGE:
                     ChatMessage chatMessage = (ChatMessage) message;
                     queue.add(() -> {
-                       view.showChatMessage(chatMessage);
+                       view.showChatMessage(chatMessage.getReceiver(), chatMessage.getSender(), chatMessage);
                     });
                     break;
                 case Turn_Message:
@@ -248,9 +241,13 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-    public void sendChatMessage(String message){
-        client.sendMessage(new ChatMessage(message));
+
+    @Override
+    public void sendChatMessage(String sender, String receiver, String message) {
+        client.sendMessage(new ChatMessage(sender, receiver, message));
+
     }
+
 
     @Override
     public void updateNickname(String nickname) {
@@ -285,10 +282,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     @Override
     public void updateLivingRoomTiles(ArrayList<Tile> chosen) throws IOException {
         client.sendMessage(new IndexMessage(client.getUsername(), chosen));
-    }
-
-    public void startChat() throws IOException {
-        this.view.startChat();
     }
 
     public static boolean validAddress(String address, String connectionType){

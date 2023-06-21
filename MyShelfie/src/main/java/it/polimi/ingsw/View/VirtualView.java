@@ -95,15 +95,9 @@ public class VirtualView implements View, Observer, Serializable {
     }
 
     @Override
-    public void startChat() {
+    public void showChatMessage(String receiver, String sender, ChatMessage message) {
 
     }
-
-    @Override
-    public void showChatMessage(ChatMessage message) {
-
-    }
-
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns, Player player)  {
         connection.sendMessage(new ColumnRequest(AvailableColumns, player)); //da sistemare gestione request e reply perche non coincidono

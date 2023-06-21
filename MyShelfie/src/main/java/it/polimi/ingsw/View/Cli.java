@@ -1,76 +1,37 @@
 package it.polimi.ingsw.View;
 
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
-import it.polimi.ingsw.View.Gui.Scene.GameSceneController;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.*;
-import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.sql.SQLOutput;
 import java.util.*;
-import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
-public class Cli extends ViewObservable implements View, DisconnectionHandler,Runnable {
+public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     private final PrintStream out;
     Scanner scanner;
     private boolean myTurn = false;
-    private Thread chatThread;
+    private boolean secondMessage = false;
+
+    private Chat chat;
 
     public Cli(){
+        chat = new Chat();
         out = System.out;
         scanner = new Scanner(System.in);
     }
-
-    public String chooseAction(){
-        String decision;
-        myTurn = true;
-
-        System.out.println("Write 'chat' if you want to send a message; 'disconnect' if you want to leave the game; 'continue' if you want to play");
-
-        decision = scanner.nextLine();
-
-        switch (decision) {
-            case "disconnect":
-                do {
-                    System.out.println("Are you sure you want to leave the game? [yes/no]");
-                    if (scanner.nextLine().equalsIgnoreCase("yes")) {
-                        handleDisconnection();
-                    } else if(scanner.nextLine().equalsIgnoreCase("no")) {
-                        chooseAction();
-                    }else{
-                        System.out.println("invalid argument");
-                    }
-                } while (!scanner.nextLine().equalsIgnoreCase("yes") || !scanner.nextLine().equalsIgnoreCase("no"));
-                break;
-            case "chat":
-                sendChatMessages();
-                return "chat";
-            case "continue":
-                break;
-            default:
-                System.out.println("command not valid.");
-                break;
-        }
-
-        return decision;
-    }
-
     public String readLine(){
         return scanner.nextLine().trim();
     }
-
-
     public void start() throws IOException {
         out.println("Welcome to MyShelfie!");
         out.println("\n" +
@@ -88,12 +49,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         serverInfo();
     }
-
     @Override
     public void showMessage(String message) {
         System.out.println(message);
     }
-
     public void serverInfo() {
 
         boolean rmi = false;
@@ -162,7 +121,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         }
 
     }
-
     public boolean validAddress(String address, boolean connection){
         boolean isValid=true;
         String SocketPort = "1098";
@@ -202,7 +160,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         return isValid;
     }
-
     public boolean notBroadcastAddress(String address){
         boolean bc=true;
         String tempAddress = address;
@@ -221,21 +178,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         return bc;
     }
-    /*
-    public boolean validPort(String port){
-        try {
-            int portNum = Integer.parseInt(port);
-            if ((portNum >= 1 && portNum <= 65536)) {
-                return true;
-            }
-        } catch (NumberFormatException e) {
-            // Handled with the return
-        }
-
-        return false;
-    }
-
-     */
     @Override
     public void nicknameRequest(){
         String nickname;
@@ -251,7 +193,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
             }
         });
     }
-
     @Override
     public void askNumberOfPlayers() {
         int num;
@@ -265,7 +206,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
             }
         });
     }
-
     public int checkValidNumOfPlayers(){
             int num;
             String old;
@@ -286,7 +226,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         return num;
     }
-
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname) {
        out.flush();
@@ -299,7 +238,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         }*/
 
     }
-
     public int indexTranslator(String input){
         switch(input){
             case "A", "a":
@@ -325,57 +263,86 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                 return 0;
         }
     }
+    @Override
+    public void showChatMessage(String receiver, String sender, ChatMessage message) {
 
-    public void startChat(){
-        //this.chatThread = new Thread(this);
-        //chatThread.start();
-        /*System.out.println("you can now write in the chat. Plaese write 'chat' every time you want to send a message to the other players.");
-
-        Thread chatTread = new Thread(() ->{
-            Scanner scanner1 = new Scanner(System.in);
-            while(true){
-                String chatInput = scanner1.nextLine().trim();
-
-                if(chatInput.equals("chat")){
-                    System.out.println("Write your mesage:");
-                    String chatMessage = scanner1.nextLine().trim();
-
-                    notifyObserver(obs -> {
-                        obs.sendChatMessage(chatMessage);
-                    });
-                }
-            }
-        });
-
-        chatTread.start();*/
     }
+    public void openChat(Player player){
+        String sender = player.getNickname();
+        Scanner scanner = new Scanner(System.in);
+        String receiver;
+        boolean exists = false;
+        if(!secondMessage) {
+            System.out.println("Chat opened");
+        }
 
-    public void sendChatMessages(){
-        boolean quit = false;
-
-        System.out.println("write 'quit' if you want to stop send messages");
-        while (!quit) {
-            System.out.print("> ");
-            String message = scanner.nextLine();
-            if (message.toLowerCase().equals("quit")) {
-                quit = true;
-            } else {
-                System.out.println("to [playerName]: ");
-                String receiver = scanner.nextLine().trim();
-                if (receiver.length() == 0)
-                    receiver = null;
-
-                notifyObserver(obs -> {
-                    obs.sendChatMessage(message);
-                });
+        //prints all old mesages
+        if(chat.getMessages(player).isEmpty()){
+            System.out.println("No old messages");
+        }else{
+            for(Message message: chat.getMessages(player)){
+                System.out.println(message.getTime() + ":" + message.getSender() + ": " + message.getMessage());
             }
         }
-    }
-    @Override
-    public void showChatMessage(ChatMessage message) {
-        System.out.println("new message from the chat: " + message.showMessage());
-    }
 
+        //prints all players and ask who is the receiver
+        System.out.println("Who is the receiver?");
+        System.out.println("Write all players to send a broadcast message");
+        for(Player players: player.getGame().getPlayers()){
+            System.out.println(players.getNickname());
+        }
+
+        //sends the message to the receiver
+        do{
+            receiver = scanner.nextLine().trim();
+            if(receiver.equals("close chat")){
+                closeChat();
+            }
+            for(Player players: player.getGame().getPlayers()){
+                if(receiver.equals("all players") || receiver.equals(players.getNickname())) {
+                    exists = true;
+                    break;
+                }
+            }
+            if(!exists){
+                System.out.println("Player not found, please try again");
+            }
+        }while(!exists);
+
+        System.out.println("Write your message: ");
+        String message = scanner.nextLine().trim();
+        if(message.equals("close chat")){
+            closeChat();
+        }
+        final String finalReceiver = receiver;
+        notifyObserver(obs -> {
+            obs.sendChatMessage(sender, finalReceiver, message);
+        });
+
+        //prints all new messages
+        for(Message messages: chat.getMessages(player)){
+            System.out.println(messages.getSender() + ": " + messages.getMessage());
+        }
+
+        //new message
+        System.out.println("Do you want to write a new message?");
+
+        String answer;
+        do{
+            answer = scanner.nextLine().trim();
+            if(answer.equals("yes")){
+                secondMessage = true;
+                openChat(player);
+            }else if(answer.equals("no")) {
+                closeChat();
+            }else{
+                System.out.println("Invalid input, type yes or no");
+            }
+        } while(!answer.equals("yes") && !answer.equals("no"));
+    }
+    public void closeChat(){
+        //ritorna al punto dov'eri
+    }
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
 
@@ -399,6 +366,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                     System.out.println("row: ");
                     input = readLine().trim();
                     while(!input.matches("\\d+")){
+                       // if(input.matches("open chat")){
+                           // openChat();
+                        //}
                         System.out.println("Input incorrect. Please insert a number between 1 and 9");
                         System.out.println("row: ");
                         input = readLine();
@@ -411,6 +381,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                     System.out.println("column: ");
                     input = readLine().trim();
                     if(!columns1.contains(input) && !columns2.contains(input))
+                        //if(input.matches("open chat")){
+                            //openChat();
+                       // }
                         System.out.println("Index not valid. Please insert a character between A and I");
                 }while(!columns1.contains(input) && !columns2.contains(input));
 
@@ -424,6 +397,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                         do{
                             System.out.println("Do you want to select another tile? (y/n)");
                             input = readLine().trim();
+                            //if(input.matches("open chat")){
+                                //openChat();
+                            //}
                             if(input.equals("n"))
                                 valid=false;
                             else if(!input.equals("y"))
@@ -448,7 +424,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
             }
         });
     }
-
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
         String input;
@@ -468,9 +443,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                 System.out.println("Select the " + i + " tile type:");
                 input = readLine();
 
-
                 if(!tilesTypes.contains(input)) {
-                    System.out.println("You didn't choose this type of tile");
+                    if(input.matches("open chat")){
+                       // openChat();
+                    }else {
+                        System.out.println("You didn't choose this type of tile");
+                    }
                 }else{
                     for (int x=0; x<chosenTiles.size(); x++) {
                         if (input.equals(chosenTiles.get(x).getTileType().toString())) {
@@ -498,7 +476,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         myTurn = false;
     }
-
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns, Player player) {
         boolean correct = false;
@@ -517,7 +494,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
                 if(!correct)
                     System.out.println("Column index Not valid. Please select a column with enough space");
             }else {
-                System.out.println("Input not valid. Please insert a number instead of a string");
+                if(input.matches("open chat")){
+                    openChat(player);
+                }else {
+                    System.out.println("Input not valid. Please insert a number instead of a string");
+                }
             }
 
         }while(!correct || !input.matches("\\d+"));
@@ -532,13 +513,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
             }
         });
     }
-
     @Override
     public void showScoreboard(ArrayList<Player> scoreboard) {
         for(Player p : scoreboard)
             System.out.println(p.getNickname() + ": "+ p.getScore()+" points");
     }
-
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
         String notValid = "%%%%%%%";
@@ -564,7 +543,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         System.out.println("| 9 |"+notValid+"|"+notValid+"|"+notValid+"|"+notValid+"|"+livingRoom.getTile(8,4).getTileType().toCliString()+"|"+livingRoom.getTile(8,5).getTileType().toCliString()+"|"+notValid+"|"+notValid+"|"+notValid+"|");
         System.out.println();
     }
-
     @Override
     public void showBookshelf(Player player) {
         System.out.println(player.getNickname()+"'s bookshelf:");
@@ -584,7 +562,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         System.out.println("+-------+-------+-------+-------+-------+");
         System.out.println();
     }
-
     @Override
     public void showCommonGoalCards(Game game) {
 
@@ -758,7 +735,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
             }
         }
     }
-
     @Override
     public void showPersonalGoalCard(Player player) throws Exception {
         Tile[][] personalGoalCard = player.getPersonalGoalCard().buildPersonalGoalCard();
@@ -780,7 +756,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         System.out.println();
 
     }
-
     @Override
     public void updateGameState(Player player, Game game) throws Exception {
 
@@ -799,24 +774,18 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         }
 
     }
-
     @Override
     public void showGameStarted(Game game) {
 
     }
-
-
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
 
     }
-
-
     @Override
     public void showWinner(String winner, Game game) {
 
     }
-
     @Override
     public void someoneDisconnected(String nickname) {
         System.out.println(nickname + " disconnected.");
@@ -830,7 +799,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         System.exit(1);
     }
-
     @Override
     public void handleDisconnection(String nickname) {
         System.out.println("You will be disconnected. Game finished :(");
@@ -845,12 +813,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
 
         System.exit(1);
     }
-
     @Override
     public void turnDisplay(Player player) {
 
     }
-
     @Override
     public void welcomeBack(String nickname) {
         System.out.println("Welcome back "+nickname+"!");
@@ -859,8 +825,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
     @Override
     public void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2){
     }
-
-
     @Override
     public void handleDisconnection() {
         System.out.println("You will be disconnected. Game finished :(");
@@ -874,25 +838,5 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler,Ru
         });*/
 
         System.exit(1);
-    }
-
-    @Override
-    public void run() {
-        Client.LOGGER.info("chat started");
-        Scanner scanner1 = new Scanner(System.in);
-        while(!Thread.currentThread().isInterrupted()){
-            if(!myTurn) {
-                String chatInput = scanner1.nextLine().trim();
-
-                if (chatInput.equals("chat")) {
-                    System.out.println("Write your mesage:");
-                    String chatMessage = scanner1.nextLine().trim();
-
-                    notifyObserver(obs -> {
-                        obs.sendChatMessage(chatMessage);
-                    });
-                }
-            }
-        }
     }
 }

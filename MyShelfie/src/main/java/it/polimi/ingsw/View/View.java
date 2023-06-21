@@ -11,8 +11,7 @@ public interface View {
     void loginResult(boolean validNickname, boolean connection, String nickname);
     void nicknameRequest();
     void askNumberOfPlayers() ;
-    void startChat();
-    void showChatMessage(ChatMessage message);
+    void showChatMessage(String receiver, String sender, ChatMessage chatMessage);
     void columnRequest(ArrayList<Integer> AvailableColumns, Player player);
     void TilesRequest(LivingRoom livingRoom) ;
     void OrderTiles(ArrayList<Tile> chosenTiles) ;

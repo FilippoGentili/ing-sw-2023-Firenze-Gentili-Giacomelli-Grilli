@@ -3,8 +3,10 @@ package it.polimi.ingsw.Observer;
 //qui ci saranno tutti i metodi da chiamare in seguito a cambiamenti nella view
 //i metodi manderanno messaggi al server
 
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Tile;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
+import it.polimi.ingsw.Network.Message.ChatMessage;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -15,7 +17,7 @@ public interface ViewObserver{
     void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) throws IOException;
 
     void updateServerInfoRmi(DisconnectionHandler disconnectionHandler,String address,String port) throws RemoteException;
-    void sendChatMessage(String message);
+    void sendChatMessage(String sender, String receiver, String message);
 
     void updateNickname(String nickname) throws IOException;
 

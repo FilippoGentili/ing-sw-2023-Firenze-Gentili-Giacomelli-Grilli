@@ -102,28 +102,6 @@ public class Player implements Serializable {
         this.score = score;
     }
 
-
-    /**
-     * If the player wants to quit the game he is in, it calls this method. The method remove Player in game
-     * eliminates the player from the player list of the specific game
-     * @param game
-     */
-    public void quitGame(Game game){
-        if(game!=null){
-            game.removePlayer(this);
-        }
-    }
-
-    /**
-     * Method called when the player wants to exit the chat
-     * @param chat
-     */
-    public void exitChat(Chat chat){
-        if(chat==null)
-            throw new IllegalArgumentException("Chat can't be null");
-        chat.removeParticipant(this);
-    }
-
     /**
      * @return the instance of the game
      */
