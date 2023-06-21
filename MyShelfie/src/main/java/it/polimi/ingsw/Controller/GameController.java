@@ -32,7 +32,7 @@ public class GameController implements Serializable {
 
 
     /**
-     * constructor use to create a new game
+     * Constructor used to create a new game
      */
     public GameController(Server server) {
         this.game = new Game();
@@ -45,7 +45,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this constructor is called when a saved game must be reloaded
+     * This constructor is called when a saved game must be reloaded
      */
     public GameController(Server server, GameController savedGameController) {
         this.game = savedGameController.getGame();
@@ -84,9 +84,9 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method receives the message from the client and decides what method must be called based on
+     * This method receives the message from the client and decides which method to call based on
      * the actual state of the game
-     * @param message
+     * @param message arrived from server
      */
     public synchronized void forwardMessage(Message message) throws InterruptedException {
 
@@ -116,8 +116,8 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method decides if a client who wants to play the game can be admitted or not. If he is the first player,
-     * this method asks what is the number of players.
+     * This method decides if a client who wants to play the game can be admitted or not. If he is the first player,
+     * this method asks the number of players.
      * @param nickname nickname of the player
      * @param vv virtual view of the player
      */
@@ -160,8 +160,8 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method is called when the game is already started and a message from the client arrives. It decides what
-     * method must be called based on the type of the message.
+     * This method is called when the game is already started and a message from the client arrives. It decides which
+     * method to call based on the type of the message.
      */
     public void handleGame(Message message) {
 
@@ -188,6 +188,9 @@ public class GameController implements Serializable {
         }
     }
 
+    /**
+     * Initialize game state and begins turns rotation
+     */
     public void startGame() {
         setGameState(PLAY);
         game.initializeLivingRoom();
@@ -200,13 +203,17 @@ public class GameController implements Serializable {
         newTurn();
     }
 
+    /**
+     * Gets the number of players from the message
+     * @param message of type NumOfPlayersReply
+     */
     public synchronized void setNumOfPlayers(Message message){
         NumOfPlayersReply numOfPlayersReply = (NumOfPlayersReply) message;
         this.numOfPlayers = numOfPlayersReply.getNumOfPlayers();
     }
 
     /**
-     * This method set the currentPlayer who is going play the turn
+     * This method sets the currentPlayer, who is going play the turn
      */
     public void nextPlayer(){
         int indexPlayer = players.indexOf(currentPlayer);
@@ -219,7 +226,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method initializes a new turn.
+     * This method initializes a new turn
      */
     public void newTurn() {
         if(firstTurn){
@@ -246,7 +253,7 @@ public class GameController implements Serializable {
     /**
      * This method receives the tiles chosen from the current Player on the livingRoom. If the selection is valid,
      * it asks the client to select the column, otherwise it asks to select the tiles again.
-     * @param message tiles the client chose
+     * @param message of type ChosenTilesReply containing the tiles the client chose
      */
     public void chooseTiles(Message message) {
         ChosenTilesReply chosenTilesMessage = (ChosenTilesReply) message;
@@ -268,7 +275,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method checks if the column chosen by the client is valid. If it's not, it asks the user to select another
+     * This method checks if the column chosen by the client is valid. If it's not, it asks the user to select another
      * column, otherwise it asks him to order the tiles he has already chosen.
      * @param message
      */
@@ -289,7 +296,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method receives the ordered tiles and inserts them in the bookshelf of the currentPlayer.
+     * This method receives the ordered tiles and inserts them in the currentPlayer's bookshelf.
      * @param message
      */
     public void InsertTiles(Message message) {
@@ -302,6 +309,11 @@ public class GameController implements Serializable {
         /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
     }
 
+    /**
+     * When receiving a message of type DisconnectionRequest it handles the disconnection of the client, removing it
+     * from the list of players and the game
+     * @param message of type DisconnectionRequest
+     */
     public void handleDisconnection(Message message) {
         DisconnectionRequest disconnectionRequest = (DisconnectionRequest) message;
         server.sendMessage(new DisconnectionReply(disconnectionRequest.getDisconnectedUser()),message.getNickname());
@@ -312,9 +324,9 @@ public class GameController implements Serializable {
 
 
     /**
-     * this method check if the player has reached the common goals. if he did, he receives his points, otherwise nothing
+     * This method checks if the player has reached the common goals. If it did, it receives its points, otherwise nothing
      * happens.
-     * @param player the player whose library must be checked.
+     * @param player the player whose library must be checked
      */
     public void CheckCommonGoal(Player player) {
         int previousPoints1 = player.getGame().getCommonGoal1().getValue();
@@ -352,6 +364,10 @@ public class GameController implements Serializable {
         EndTurn();
     }
 
+    /**
+     * Removes the chosen tiles from the livingRoom, setting their type to NULL
+     * @param message of type ChosenTilesReply
+     */
     public void removeTilesFromLivingRoom(Message message){
         ChosenTilesReply indexMessage = (ChosenTilesReply) message;
         ArrayList<Tile> chosen = indexMessage.getChosenTiles();
@@ -365,9 +381,9 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method handles the last actions of the turn: it checks if che current player has finished his bookshelf.
-     * If he has, "endGameTrigger" is called and the last round starts. If he hasn't, a new turn start with another player.
-     * If it already was the round, the method check if it was the last turn
+     * This method handles the last actions of the turn: it checks if che current player has finished its bookshelf.
+     * If it has, "endGameTrigger" is called and the last round starts. If it hasn't, a new turn starts with another player.
+     * The method checks if it was the last turn, in that case lastRound is called
      */
     public void EndTurn() {
 
@@ -401,7 +417,8 @@ public class GameController implements Serializable {
     }
 
     /**
-     * beginning of the last round
+     * Beginning of the last round, if the players finishing the bookshelf first is not the last player, another round
+     * is played, so everyone has played an equal number of turns.
      */
     public void lastRound() {
         if(!lastRound) lastRound = true;
@@ -437,7 +454,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * this method tells all the player who has won the game.
+     * This method tells all the player who has won the game and gives the final scoreboard.
      */
     public void findWinner() {
         Player winner;
@@ -476,6 +493,9 @@ public class GameController implements Serializable {
         }
     }
 
+    /**
+     * With a GameStateMessage all the elements of the game are updated and displayed
+     */
     public void restoreMatchElements() {
         for(Player player : players){
                     server.sendMessage(new GameStateMessage(player,game),player.getNickname());
@@ -515,7 +535,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * sends message to all the clients
+     * Sends message to all the clients
      * @param message message to send
      */
     public void broadcastShowMessage(String message) {
@@ -543,6 +563,10 @@ public class GameController implements Serializable {
         return gameState;
     }
 
+    /**
+     * Adds the player when it wants to reload the game, after server crashes
+     * @param username of the player trying to reconnect
+     */
     public void addingPlayersAgain(String username){
         returnPlayers.add(username);
 

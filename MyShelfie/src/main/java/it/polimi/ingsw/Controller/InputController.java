@@ -22,7 +22,7 @@ public class InputController implements Serializable {
     private final Server server;
 
     /**
-     * constructor
+     * Constructor
      */
     public InputController(GameController gameController, Server server){
         this.gameController = gameController;
@@ -30,7 +30,7 @@ public class InputController implements Serializable {
     }
 
     /**
-     * this method check if the nickname inserted from the client during the login is valid.
+     * This method checks if the nickname inserted by the client during login is valid
      * @param nickname nickname chosen by the client
      * @param view view of the client
      * @return {code @true} if nickname is valid {code @false} if nickname is not valid
@@ -53,7 +53,7 @@ public class InputController implements Serializable {
     }
 
     /**
-     * this method checks if the chosen tiles from the livingRoom are valid.
+     * This method checks if the chosen tiles from the livingRoom are valid
      * @param message message from the client
      * @return {code @true} if the tiles are valid {code @false} if the tiles are invalid.
      */
@@ -79,8 +79,7 @@ public class InputController implements Serializable {
     }
 
     /**
-     * this method checks if the column selected from the client has enough free cells for inserting
-     * the selected tiles.
+     * This method checks if the column selected from the client has enough free cells for inserting the selected tiles.
      * @param message column selected from the client
      * @return {code @true} if the column is valid {code @false} if the column is invalid.
      */

@@ -28,18 +28,6 @@ public class LivingRoom implements Serializable {
         valid = new boolean[rows][columns];
     }
 
-
-    /**
-     * Method to get the instance of the singleton
-     * @return the instance of the livingroom
-     */
-    /*public static LivingRoom getInstance() {
-        if(single_instance == null)
-            single_instance = new LivingRoom();
-
-        return  single_instance;
-    }*/
-
     /**
      * Set a cell either true or false, to keep track of the cell to consider on the board
      * @param i row
@@ -171,6 +159,7 @@ public class LivingRoom implements Serializable {
     }
 
     /**
+     * Checks if the selected tiles are valid, having a free side
      * @param chosen tiles that I want to pick from the board
      * @return true if the selected tiles can be picked up, false if not
      */
@@ -185,7 +174,6 @@ public class LivingRoom implements Serializable {
             y= curr.getCol();
 
 
-            //se non ha almeno uno spazio adiacente libero return false
             if(x >= 1)
                 if(getTile(x-1, y).getTileType() != TileType.NULL)
                     num++;
@@ -227,6 +215,10 @@ public class LivingRoom implements Serializable {
         return false;
     }
 
+    /**
+     * Checks if the living room is empty or not
+     * @return true if the livingRoom is empty, false otherwise
+     */
     public boolean checkEmptyLivingRoom(){
         for(int i=1; i<rows-1; i++){
             for(int j=1; j<columns-1; j++){

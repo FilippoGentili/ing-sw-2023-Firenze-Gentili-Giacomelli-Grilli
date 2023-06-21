@@ -36,7 +36,7 @@ public class Bag implements Serializable {
 
 
     /**
-     *
+     * Extracts the tiles from the bag and puts them in an arraylist, so they can be added to the living room
      * @param numStartTile number of tiles to fulfill the board, based on the number of players
      * @return an array list of the tiles chosen from the bag
      */

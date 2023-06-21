@@ -19,24 +19,16 @@ public class Player implements Serializable {
     private ArrayList<Tile> chosenTiles;
     private Integer ChosenColumn;
 
-    /**
-     * @return the nickname
-     */
     public String getNickname() {
         return this.nickname;
     }
 
-    /**
-     * sets the nickname of the player
-     * @param nickName
-     */
     public void setNickname(String nickName){
         this.nickname=nickName;
     }
 
-
     /**
-     * creates a player identified by a nickname and with a personal goal card and a score, initially of zero points
+     * Creates a player identified by a nickname and with a personal goal card and a score, initially of zero points
      */
     public Player(Game game) {
         this.game = game;
@@ -46,6 +38,10 @@ public class Player implements Serializable {
         this.lastPlayer = false;
     }
 
+    /**
+     * Reload player attributes when reloading a game
+     * @param savedPlayer
+     */
     public void loadPlayer(Player savedPlayer){
         this.game = savedPlayer.getGame();
         this.score = savedPlayer.getScore();
@@ -68,9 +64,6 @@ public class Player implements Serializable {
         return lastPlayer;
     }
 
-    /**
-     * @return the bookshelf of the player
-     */
     public Bookshelf getBookshelf(){
         return this.bookshelf;
     }
@@ -87,24 +80,14 @@ public class Player implements Serializable {
         game.addPlayer(this);
     }
 
-    /**
-     * @return the score of the player
-     */
     public int getScore(){
         return score;
     }
 
-    /**
-     * sets the score of the player
-     * @param score
-     */
     public void setScore(int score) {
         this.score = score;
     }
 
-    /**
-     * @return the instance of the game
-     */
     public Game getGame(){
         return game;
     }
@@ -140,14 +123,14 @@ public class Player implements Serializable {
     }
 
     /**
-     * sets to true the common goal card attribute number one after the player completes the goal
+     * Sets to true the common goal card attribute number one after the player completes the goal
      */
     public void setPointscg1(){
         this.Pointscg1=true;
     }
 
     /**
-     * sets to true the common goal card attribute number two after the player completes the goal
+     * Sets to true the common goal card attribute number two after the player completes the goal
      */
     public void setPointscg2(){
         this.Pointscg2=true;

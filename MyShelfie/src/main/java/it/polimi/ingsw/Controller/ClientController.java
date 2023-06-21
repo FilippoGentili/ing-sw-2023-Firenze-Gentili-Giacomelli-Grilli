@@ -212,10 +212,15 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
+    /**
+     * Updates server address and server port, creates socket client and its client updater
+     * @param disconnectionHandler
+     * @param address
+     * @param port
+     */
     @Override
-    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler, String address,String port) {
+    public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler,String address,String port) {
         try{
-            //creo una connessione con il server che ha ipaddress e port come serverInfo.
             this.client =  new SocketClient(disconnectionHandler,address,port);
             client.connection();
             //this.chat = new SocketClientChat(address,disconnectionHandler);
@@ -228,6 +233,12 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
+    /**
+     * Updates server address and server port, creates RMI client and its client updater
+     * @param disconnectionHandler
+     * @param address
+     * @param port
+     */
    @Override
     public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
         try {
@@ -241,7 +252,12 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-
+    /**
+     * Sends a chat message to the specified receiver
+     * @param sender
+     * @param receiver
+     * @param message
+     */
     @Override
     public void sendChatMessage(String sender, String receiver, String message) {
         client.sendMessage(new ChatMessage(sender, receiver, message));
@@ -284,6 +300,12 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         client.sendMessage(new IndexMessage(client.getUsername(), chosen));
     }
 
+    /**
+     * Checks if the address used to connect is valid, and if is possible to connect. Excludes broadcast addresses
+     * @param address
+     * @param connectionType
+     * @return
+     */
     public static boolean validAddress(String address, String connectionType){
         boolean isValid=true;
         String SocketPort = "1098";
@@ -292,7 +314,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         boolean bc=notBroadcastAddress(address);
 
         if (connection.equals("rmi")) {
-            if (/*(address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))*/ bc) {
+            if (bc) {
                 try {
                     Registry registry = LocateRegistry.getRegistry(address, parseInt(RMIPort));
                     registry.list();
@@ -304,7 +326,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 isValid = false;
             }
         } else {
-            if (/*(address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))*/ bc) {
+            if (bc) {
                 try {
                     Socket socket = new Socket();
                     socket.connect(new InetSocketAddress(address, parseInt(SocketPort)), 5000);
@@ -321,6 +343,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         return isValid;
     }
 
+    /**
+     * Checks if the address is not a broadcast address
+     * @param address
+     * @return
+     */
     public static boolean notBroadcastAddress(String address){
         boolean bc=true;
         String tempAddress = address;
@@ -336,23 +363,12 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             bc=false;
         }
 
-
         return bc;
     }
 
-    public static boolean validPort(String port){
-        try {
-            int portNum = Integer.parseInt(port);
-            if (portNum >= 1 && portNum <= 65536) {
-                return true;
-            }
-        } catch (NumberFormatException e) {
-            // Handled with the return
-        }
-
-        return false;
-    }
-
+    /**
+     * Closes connection with the client updater and disconnects the client
+     */
     public void closeConnection(){
         if(clientUpdater!= null){
             clientUpdater.stop();
