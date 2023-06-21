@@ -423,11 +423,12 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
                 if(selectedTile.getTileType() != TileType.NULL){
                     if (validCellForNumOfPlayers(selectedTile)) {
-                        for (Tile tile : chosenTiles) {
-                            if (tile.equals(selectedTile)) {
+
+                        for(int i=0; i<chosenTiles.size(); i++){
+                            if (chosenTiles.get(i).equals(selectedTile)) {
                                 selection.setEffect(null);
                                 numOfSelectedTiles--;
-                                chosenTiles.remove(tile);
+                                chosenTiles.remove(chosenTiles.get(i));
                             }
                         }
                     }
