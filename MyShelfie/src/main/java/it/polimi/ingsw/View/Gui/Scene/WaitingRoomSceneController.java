@@ -23,6 +23,11 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     private Text welcomeText;
 
 
+    public void setUp(){
+        playersConnectedText.setVisible(false);
+        welcomeText.setVisible(false);
+    }
+
     public void setVisualPlayersConnected() {
         playersConnectedText.setText("Players connected: " + numOfPlayersConnected + " of " + maxPlayers);
     }

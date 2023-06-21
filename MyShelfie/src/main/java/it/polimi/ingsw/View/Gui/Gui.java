@@ -17,6 +17,7 @@ public class Gui extends ViewObservable implements View {
     private static final String END = "GAME OVER";
     private GameSceneController gameSceneController;
     private EndSceneController endSceneController;
+    private WaitingRoomSceneController waitingRoomSceneController;
 
     /**
      * This method is used to show a message
@@ -233,6 +234,19 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
     }
 
+    @Override
+    public void welcomeBack(String nickname){
+        waitingRoomSceneController = new WaitingRoomSceneController();
+        waitingRoomSceneController.addAllObserver(observers);
+        Platform.runLater(waitingRoomSceneController::startAnimationTimer);
+        Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
+        Platform.runLater(() -> waitingRoomSceneController.setUp());
+        Platform.runLater(() -> waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!"));
+        Platform.runLater(() -> waitingRoomSceneController.setVisualPlayersConnected());
+        //waitingRoomSceneController.playersConnectedText.setText("Waiting for other players to connect...");
+        //waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
+    }
+
     /**
      * This method is used to show the end scene of the game
      * @param winner is the player that won the game
@@ -256,15 +270,7 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-    @Override
-    public void welcomeBack(String nickname){
-        WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
-        waitingRoomSceneController.addAllObserver(observers);
-        waitingRoomSceneController.playersConnectedText.setText("Waiting for other players to connect...");
-        waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
-        Platform.runLater(waitingRoomSceneController::startAnimationTimer);
-        Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
-    }
+
 
     /**
      * This method is used to update the common goal card points
