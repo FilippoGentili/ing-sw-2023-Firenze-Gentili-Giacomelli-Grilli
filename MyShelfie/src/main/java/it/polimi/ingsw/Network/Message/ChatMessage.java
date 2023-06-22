@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Message;
 
+import it.polimi.ingsw.Model.Chat;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
@@ -9,32 +10,18 @@ public class ChatMessage extends Message{
 
     @Serial
     private static final long serialVersionUID = 1803056874187171704L;
-    private final String message;
-    private final String receiver;
-    private final String sender;
+    private final Chat chat;
 
     /**
      * Message used exclusively when writing in the chat
-     * @param sender
-     * @param receiver
-     * @param message
      */
-    public ChatMessage(String sender, String receiver, String message) {
+    public ChatMessage(Chat chat) {
         super(Game.getServerName(), MessageType.CHAT_MESSAGE);
-        this.receiver = receiver;
-        this.sender = sender;
-        this.message = message;
+        this.chat = chat;
+
     }
-    
-    public String getMessage(){
-        return message;
+    public Chat getChat(){
+        return  chat;
     }
 
-    public String getReceiver(){
-        return receiver;
-    }
-
-    public String getSender(){
-        return sender;
-    }
 }

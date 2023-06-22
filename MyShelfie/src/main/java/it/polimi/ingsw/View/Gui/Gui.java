@@ -1,9 +1,6 @@
 package it.polimi.ingsw.View.Gui;
 
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.Scene.*;
@@ -261,12 +258,12 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showChatMessage(String receiver, String sender, ChatMessage message) {
+    public void showChatMessage(Chat chat) {
 
     }
 
     @Override
-    public void openChat(Player player) {
+    public void sendChatMessage(String receiver, String sender, ChatMessage message){
 
     }
 

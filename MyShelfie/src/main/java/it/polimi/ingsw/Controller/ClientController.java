@@ -185,7 +185,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 case CHAT_MESSAGE:
                     ChatMessage chatMessage = (ChatMessage) message;
                     queue.add(() -> {
-                       view.showChatMessage(chatMessage.getReceiver(), chatMessage.getSender(), chatMessage);
+                       view.showChatMessage(chatMessage.getChat());
                     });
                     break;
                 case TURN_MESSAGE:
@@ -265,7 +265,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      */
     @Override
     public void sendChatMessage(String sender, String receiver, String message) {
-        client.sendMessage(new ChatMessage(sender, receiver, message));
+        //client.sendMessage(new ChatMessage(sender, receiver, message));
 
     }
 

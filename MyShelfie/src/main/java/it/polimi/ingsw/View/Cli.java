@@ -276,22 +276,25 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     /**
      * This method is used to show the chat message
-     * @param receiver of the message
-     * @param sender of the message
-     * @param message to be shown
      */
     @Override
-    public void showChatMessage(String receiver, String sender, ChatMessage message) {
-        for(Message messages: chat.getMessages(receiver)){
+    public void showChatMessage(Chat chat) {
+       /* for(Message messages: chat){
             System.out.println(messages.getSender() + ": " + messages.getMessage());
-        }
+        }*/
+    }
+
+    @Override
+    public void sendChatMessage(String receiver, String sender, ChatMessage message){
+            notifyObserver(obs -> {
+               // obs.sendChatMessage(sender, receiver, message);
+            });
     }
 
     /**
      * This method is used for the chat
      * @param player that writes the message
      */
-    @Override
     public void openChat(Player player){
         String sender = player.getNickname();
         Scanner scanner = new Scanner(System.in);
@@ -345,15 +348,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 closeChat();
             }
             final String finalReceiver = receiver;
-           /* ChatMessage messageSent = null;
-            messageSent = new ChatMessage(sender, receiver, message);
-            server.sendChatMessage(messageSent);
-            notifyObserver(obs -> {
-                obs.sendChatMessage(sender, finalReceiver, message);
-            });*/
 
             //prints all new messages
-            showChatMessage(player.getNickname(), receiver, null);
+            //showChatMessage(player.getNickname(), receiver, null);
 
 
             //another message?

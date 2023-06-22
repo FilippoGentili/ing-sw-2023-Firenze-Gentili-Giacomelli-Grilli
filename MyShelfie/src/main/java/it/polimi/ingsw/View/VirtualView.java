@@ -1,10 +1,8 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.LivingRoom;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.Tile;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.Message.*;
+import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Connection;
 import it.polimi.ingsw.Observer.Observer;
 
@@ -95,13 +93,13 @@ public class VirtualView implements View, Observer, Serializable {
     }
 
     @Override
-    public void showChatMessage(String receiver, String sender, ChatMessage message) {
+    public void showChatMessage(Chat chat) {
 
     }
 
     @Override
-    public void openChat(Player player) {
-        //connection.sendMessage(new ChatMessage(nickname));
+    public void sendChatMessage(String receiver, String sender, ChatMessage message){
+
     }
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns, Player player)  {
