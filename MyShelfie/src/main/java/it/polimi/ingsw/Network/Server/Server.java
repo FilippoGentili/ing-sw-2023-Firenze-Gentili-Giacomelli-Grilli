@@ -269,7 +269,7 @@ public class Server implements Runnable{
     }
 
     public void closeServer(){
-        if(connectionMap.size()==0 && !gameController.waitingForPlayers()){
+        if(connectionMap.size()==0){
             System.exit(1);
         }
     }
