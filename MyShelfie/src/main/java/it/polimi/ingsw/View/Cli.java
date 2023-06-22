@@ -874,7 +874,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             input = scanner.nextLine().trim();
         }
         if(input.equalsIgnoreCase("exit")) {
-            System.exit(1);
+            handleDisconnection();
         }
 
     }

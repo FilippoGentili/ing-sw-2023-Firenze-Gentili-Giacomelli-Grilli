@@ -161,6 +161,8 @@ public class Server implements Runnable{
             if(map.getValue().equals(connection)) {
                 connection.setIsConnected();
                 connectionMap.remove(map.getKey(), map.getValue());
+
+                closeServer();
                 LOGGER.info(() -> map.getKey() + " was removed from the client list");
                 break;
             }
@@ -177,11 +179,18 @@ public class Server implements Runnable{
             String app = "Server";
 
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
-                if(map.getValue().equals(connection))
-                    app=map.getKey();
-                break;
+                if(map.getValue().equals(connection)) {
+                    app = map.getKey();
+                    break;
+                }
             }
-            broadcastMessage(new GenericMessage(app + " disconnected from the server. Game finished :("));
+
+            if(app != "Server") {
+                for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
+                    if (!map.getKey().equals(app))
+                        sendMessage(new GenericMessage(app + " disconnected from the server. Game finished :("), map.getKey());
+                }
+            }
             removeClient(connection);
         }
 
@@ -209,12 +218,12 @@ public class Server implements Runnable{
         synchronized(lock){
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
-                    map.getValue().sendMessage(message);
                     if(message.getMessageType() == MessageType.DISCONNECTION_REPLY){
                         clientDisconnection(map.getValue());
+                    }else{
+                        map.getValue().sendMessage(message);
                     }
                     break;
-
                 }
             }
         }
@@ -260,7 +269,7 @@ public class Server implements Runnable{
     }
 
     public void closeServer(){
-        if(connectionMap.size()==0){
+        if(connectionMap.size()==0 && !gameController.waitingForPlayers()){
             System.exit(1);
         }
     }

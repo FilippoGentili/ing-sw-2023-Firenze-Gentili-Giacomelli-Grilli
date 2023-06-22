@@ -427,7 +427,6 @@ public class GameController implements Serializable {
         int currPlayer = players.indexOf(currentPlayer);
         if(currPlayer == players.size()-1){
             if(players.get(0).equals(firstPlayer)){
-                setGameState(END);
                 findWinner();
             }else{
                 server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
@@ -440,7 +439,6 @@ public class GameController implements Serializable {
             }
         }else {
             if (players.get(currPlayer + 1).equals(firstPlayer)) {
-                setGameState(END);
                 findWinner();
             } else {
                 server.sendMessage(new GenericMessage("Your turn ended."), currentPlayer.getNickname());
@@ -471,14 +469,14 @@ public class GameController implements Serializable {
         server.broadcastMessage(new WinnerMessage(winner.getNickname(), game));*/
 
 
-        for(Player player : players){
-           /* if(player.getNickname().equals(winner.getNickname())) {
+        /*for(Player player : players){
+            if(player.getNickname().equals(winner.getNickname())) {
                 server.sendMessage(new GenericMessage("Congratulations! " + "You won the game!"), player.getNickname());
             }else {
                 server.sendMessage(new GenericMessage("You lost :( " + winner.getNickname() + " won the game!"), player.getNickname());
-            }*/
+            }
             endGame(player);
-        }
+        }*/
     }
 
     public void endGame(Player player){

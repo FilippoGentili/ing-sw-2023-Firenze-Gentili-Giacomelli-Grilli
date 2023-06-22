@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -90,6 +91,14 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     public void easterClicked(MouseEvent event){
     }
     public void exitButtonClicked(MouseEvent event){
+        notifyObserver(obs -> {
+            try {
+                obs.handleDisconnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         System.exit(1);
     }
 }
