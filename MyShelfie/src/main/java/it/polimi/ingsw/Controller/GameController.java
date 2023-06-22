@@ -199,6 +199,7 @@ public class GameController implements Serializable {
         game.getLivingRoom().insertTiles(chosen);
         currentPlayer = game.pickFirstPlayer();
         firstPlayer = currentPlayer;
+        GameSaved.saveGame(this);
         server.broadcastMessage(new GameStartedMessage(game));
         newTurn();
     }
@@ -575,7 +576,12 @@ public class GameController implements Serializable {
         if(returnPlayers.size() == players.size()) {
             restoreMatchElements();
             Server.LOGGER.log(Level.INFO, "{0}", new Object[]{game.getLivingRoom()});
-            handleGame(lastMessage);
+            if(lastMessage != null) {
+                handleGame(lastMessage);
+            }else{
+                server.broadcastMessage(new GameStartedMessage(game));
+                newTurn();
+            }
         }
     }
 
