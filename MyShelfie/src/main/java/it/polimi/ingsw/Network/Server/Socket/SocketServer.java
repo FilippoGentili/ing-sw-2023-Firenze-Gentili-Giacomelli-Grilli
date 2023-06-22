@@ -7,6 +7,7 @@ import it.polimi.ingsw.Network.Server.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public class SocketServer extends Thread{

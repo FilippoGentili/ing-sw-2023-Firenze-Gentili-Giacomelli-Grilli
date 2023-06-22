@@ -846,7 +846,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             }
         });
 
-        System.exit(1);
+
+       // System.exit(1);
     }
     @Override
     public void turnDisplay(Player player) {
@@ -865,6 +866,17 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void endGame(ArrayList<Player> scoreboard, String winner) {
         showScoreboard(scoreboard);
         System.out.println("the winner is " + winner + "! Congratulations to everyone!");
+        System.out.println("Write 'exit' to leave the game.");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+        while(!input.equalsIgnoreCase("exit")) {
+            System.out.println("Invalid statement!");
+            input = scanner.nextLine().trim();
+        }
+        if(input.equalsIgnoreCase("exit")) {
+            System.exit(1);
+        }
+
     }
 
     @Override
@@ -878,7 +890,5 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 throw new RuntimeException(e);
             }
         });*/
-
-        System.exit(1);
     }
 }
