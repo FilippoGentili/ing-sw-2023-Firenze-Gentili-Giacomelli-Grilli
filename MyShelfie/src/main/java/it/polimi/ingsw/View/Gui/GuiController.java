@@ -99,7 +99,7 @@ public class GuiController extends ViewObservable{
     /**
      * This method is used to display the chat
      */
-    public static void showChat() {
+    public static void showChat(Game game) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
 
@@ -111,6 +111,7 @@ public class GuiController extends ViewObservable{
         }
         ChatSceneController chatSceneController = fxmlLoader.getController();
         Scene chatScene = new Scene(parent);
+        chatSceneController.setUp(game);
         chatSceneController.setScene(chatScene);
         chatSceneController.showChat();
     }

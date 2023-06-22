@@ -31,8 +31,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static it.polimi.ingsw.Model.TileType.NULL;
-import static it.polimi.ingsw.View.Gui.GuiController.showCommonGoalCardInfo;
-import static it.polimi.ingsw.View.Gui.GuiController.showLeaderboard;
+import static it.polimi.ingsw.View.Gui.GuiController.*;
 
 public class GameSceneController extends ViewObservable implements GenericSceneController{
     @FXML
@@ -218,7 +217,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,5, arrowB4C5));
         commonGoalCard1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard1));
         commonGoalCard2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard2));
-        openChatButton.setOnAction(this::openChatButtonClicked);
+        openChatButton.setOnAction(event -> openChatButtonClicked(gamePassed));
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(event -> leaderboardButtonClicked(gamePassed));
         rulebookButton.setOnAction(this::rulebookButtonClicked);
@@ -1189,10 +1188,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     /**
      * This method is called to open the chat from the menu bar
-     * @param event mouse click
+     * @param game current game
      */
-    public void openChatButtonClicked(ActionEvent event) {
-        Platform.runLater(GuiController::showChat);
+    public void openChatButtonClicked(Game game) {
+        Platform.runLater(() -> showChat(game));
     }
 
     /**

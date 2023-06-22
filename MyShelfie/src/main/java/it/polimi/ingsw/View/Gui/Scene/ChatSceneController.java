@@ -1,10 +1,13 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -27,6 +30,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     @FXML
     private ListView chatList;
     @FXML
+    private ComboBox playerList;
+    @FXML
     private BorderPane pane;
     private double xAxis;
     private double yAxis;
@@ -45,6 +50,17 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this::paneClicked);
         pane.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::paneDragged);
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeButtonClicked);
+    }
+
+    public void setUp(Game game){
+        int numberOfPlayers = game.getPlayers().size();
+        playerList.getItems().clear();
+        playerList.setPromptText("Select Player");
+        playerList.getItems().add("All players");
+        for (Player player : game.getPlayers()) {
+            playerList.getItems().add(player.getNickname());
+        }
+        playerList.getSelectionModel().select(0);
     }
     private void closeButtonClicked(MouseEvent event) {
         stage.close();

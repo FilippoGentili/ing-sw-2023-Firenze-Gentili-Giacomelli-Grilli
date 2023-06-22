@@ -22,10 +22,10 @@
          <children>
             <AnchorPane prefHeight="20.0" prefWidth="20.0">
                <children>
-                  <Button fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="X" />
+                  <Button fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="X" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-            <ComboBox fx:id="playerList" layoutX="29.0" prefHeight="30.0" prefWidth="570.0" promptText="Select Player" visibleRowCount="5">
+            <ComboBox fx:id="playerList" layoutX="29.0" prefHeight="30.0" prefWidth="570.0" promptText="Select Player" visibleRowCount="5" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="All players" />
