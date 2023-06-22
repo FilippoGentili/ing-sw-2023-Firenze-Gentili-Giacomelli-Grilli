@@ -25,6 +25,6 @@ public class WelcomeBackMessage extends Message {
 
     @Override
     public String toString() {
-        return "Welcome back"+nickname;
+        return "Welcome back " + nickname;
     }
 }

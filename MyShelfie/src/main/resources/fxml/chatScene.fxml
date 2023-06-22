@@ -5,14 +5,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" styleClass="basePane1" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ChatSceneController">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.Gui.Scene.ChatSceneController">
    <center>
       <AnchorPane prefHeight="463.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView prefHeight="470.0" prefWidth="600.0" styleClass="basePane1" stylesheets="@../css/style.css" />
+            <ListView fx:id="chatList" prefHeight="424.0" prefWidth="600.0" styleClass="basePane1" stylesheets="@../css/style.css" />
          </children></AnchorPane>
    </center>
    <top>
@@ -37,4 +39,16 @@
          </children>
       </AnchorPane>
    </top>
+   <bottom>
+      <AnchorPane prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="chatText" layoutY="10.0" prefHeight="57.0" prefWidth="475.0" />
+            <Button fx:id="sendButton" layoutX="475.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="124.0" text="Send">
+               <font>
+                  <Font name="Blackadder ITC" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

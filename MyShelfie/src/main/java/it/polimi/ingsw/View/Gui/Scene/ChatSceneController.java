@@ -5,6 +5,8 @@ import it.polimi.ingsw.View.Gui.GuiController;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,6 +20,12 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private final Stage stage;
     @FXML
     private Button closeButton;
+    @FXML
+    private Button sendButton;
+    @FXML
+    private TextField chatText;
+    @FXML
+    private ListView chatList;
     @FXML
     private BorderPane pane;
     private double xAxis;
