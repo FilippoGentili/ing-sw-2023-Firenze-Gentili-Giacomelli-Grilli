@@ -61,8 +61,9 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         chatText.setOnKeyPressed(this::enterButtonClicked);
     }
 
-    public void setUp(Game game){
+    public void setUp(Game game, Chat chat){
         int numberOfPlayers = game.getPlayers().size();
+        updateChat(chat);
         playerList.getItems().clear();
         playerList.setPromptText("Select Player");
         playerList.getItems().add("All players");
@@ -83,6 +84,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
             }
         }
     }
+
     public void updateChat(Chat chat){
         ArrayList<String> messages = chat.getMessages();
         chatList.getItems().clear();

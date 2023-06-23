@@ -12,7 +12,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -797,7 +796,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param player of the bookshelf
      */
     public synchronized void updateBookShelf(Player player){
-
         Game game = player.getGame();
         this.gamePassed = game;
         int index = game.getPlayers().indexOf(player);
@@ -1188,9 +1186,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     /**
      * This method is called to open the chat from the menu bar
+     *
      * @param game current game
      */
-    public void openChatButtonClicked(Game game) {
+    public void openChatButtonClicked(Game game){
         Platform.runLater(() -> showChat(game));
     }
 

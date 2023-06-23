@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View.Gui;
 
+import it.polimi.ingsw.Model.Chat;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
@@ -101,9 +102,9 @@ public class GuiController extends ViewObservable{
      * This method is used to display the chat
      */
     public static void showChat(Game game) {
+        Chat chat = gui.getChat();
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
-
         try {
             parent = fxmlLoader.load();
         } catch (IOException e) {
@@ -112,7 +113,7 @@ public class GuiController extends ViewObservable{
         }
         ChatSceneController chatSceneController = fxmlLoader.getController();
         Scene chatScene = new Scene(parent);
-        chatSceneController.setUp(game);
+        chatSceneController.setUp(game, chat);
         chatSceneController.setScene(chatScene);
         chatSceneController.showChat();
     }
