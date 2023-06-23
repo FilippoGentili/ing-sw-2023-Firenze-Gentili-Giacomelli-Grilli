@@ -99,7 +99,7 @@ public class VirtualView implements View, Observer, Serializable {
 
     @Override
     public void showChatMessages(Chat chat) {
-
+        connection.sendMessage(new GenericMessage("ciao"));
     }
 
     /*@Override

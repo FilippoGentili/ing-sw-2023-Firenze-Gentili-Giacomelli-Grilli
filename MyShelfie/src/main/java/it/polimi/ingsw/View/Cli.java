@@ -20,9 +20,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     private final PrintStream out;
     Scanner scanner;
     private boolean myTurn = false;
-    private boolean secondMessage = false;
-    private boolean close = false;
-
+    private boolean chatMode = false;
     private Chat chat;
 
     public Cli(){
@@ -287,37 +285,43 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void showChatMessages(Chat chat) {
        ArrayList<String> messages = chat.getMessages();
 
-       for(String s : messages)
-           System.out.println(s);
+       if(messages.size()>0){
+           for(String s : messages)
+               System.out.println(s);
+       }
     }
 
     /**
      * This method is used for the chat
      */
-    public void openChat(){
+    public void openChat() {
+        chatMode = true;
         Scanner scanner = new Scanner(System.in);
         String receiver;
-        if(!secondMessage) {
-            System.out.println("Chat opened");
-            System.out.println("Write the name of the player you want to chat with, 'all players' to send a broadcast message");
-            System.out.println("Write close chat to return the game");
-        }
+        System.out.println("Chat opened");
+        System.out.println("Write the name of the player you want to chat with, 'all players' to send a broadcast message");
+        System.out.println("Write close chat to return the game");
 
-        do{
+        /*if (chat.getMessages().isEmpty()) {
+            System.out.println("No old messages");
+        } else {
+            showChatMessages(this.chat);
+        }*/
 
-            //prints all old messages
-            if(chat.getMessages().isEmpty()){
-                System.out.println("No old messages");
-            }else{
+        Thread chatThread = new Thread(() -> {
+            while (chatMode) {
                 showChatMessages(this.chat);
             }
+        });
+        chatThread.start();
 
+        do {
             System.out.print("Send to:");
             receiver = scanner.nextLine().trim();
 
-            if(receiver.equals("close chat")){
+            if (receiver.equals("close chat")) {
                 closeChat();
-                close = true;
+                chatMode = false;
                 return;
             }
 
@@ -326,6 +330,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
             if (message.equals("close chat")) {
                 closeChat();
+                chatMode = false;
+                return;
             }
             final String finalReceiver = receiver;
 
@@ -333,64 +339,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 obs.sendChatMessage(finalReceiver, message);
             });
 
-        }while(!close);
-
-
-
-        /*for(Player players: player.getGame().getPlayers()){
-            System.out.println(players.getNickname());
-        }*/
-
-        //asks the receiver
-        /*do{
-            receiver = scanner.nextLine().trim();
-            if(receiver.equals("close chat")){
-                closeChat();
-                close = true;
-                break;
-            }
-            for(Player players: player.getGame().getPlayers()){
-                if(receiver.equals("all players") || receiver.equals(players.getNickname())) {
-                    exists = true;
-                    break;
-                }
-            }
-            if(!exists){
-                System.out.println("Player not found, please try again");
-            }
-        }while(!exists);
-
-        if(!close) {
-            //asks the message
-            System.out.println("Write your message: ");
-            String message = scanner.nextLine().trim();
-
-            if (message.equals("close chat")) {
-                closeChat();
-            }
-            final String finalReceiver = receiver;
-
-            //prints all new messages
-            //showChatMessage(player.getNickname(), receiver, null);
-
-
-            //another message?
-            System.out.println("Do you want to write a new message?");
-
-            String answer;
-            do {
-                answer = scanner.nextLine().trim();
-                if (answer.equals("yes")) {
-                    secondMessage = true;
-                    openChat(player);
-                } else if (answer.equals("no")) {
-                    closeChat();
-                } else {
-                    System.out.println("Invalid input, type yes or no");
-                }
-            } while (!answer.equals("yes") && !answer.equals("no"));
-        }*/
+        } while (chatMode);
     }
+
 
     public void closeChat(){
         System.out.println("Chat closed");
@@ -418,10 +369,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 do{
                     System.out.println("row: ");
                     input = readLine().trim();
+                    if(input.matches("/chat")){
+                        openChat();
+                    }
                     while(!input.matches("\\d+")){
-                       // if(input.matches("open chat")){
-                           // openChat();
-                        //}
                         System.out.println("Input incorrect. Please insert a number between 1 and 9");
                         System.out.println("row: ");
                         input = readLine();
@@ -433,10 +384,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 do{
                     System.out.println("column: ");
                     input = readLine().trim();
+                    if(input.matches("/chat")){
+                        openChat();
+                    }
                     if(!columns1.contains(input) && !columns2.contains(input))
-                        //if(input.matches("open chat")){
-                            //openChat();
-                       // }
                         System.out.println("Index not valid. Please insert a character between A and I");
                 }while(!columns1.contains(input) && !columns2.contains(input));
 
@@ -450,9 +401,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                         do{
                             System.out.println("Do you want to select another tile? (y/n)");
                             input = readLine().trim();
-                            //if(input.matches("open chat")){
-                                //openChat();
-                            //}
+                            if(input.matches("open chat")){
+                                openChat();
+                            }
                             if(input.equals("n"))
                                 valid=false;
                             else if(!input.equals("y"))
@@ -495,13 +446,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
                 System.out.println("Select the " + i + " tile type:");
                 input = readLine();
+                if(input.matches("/chat")){
+                    openChat();
+                }
 
                 if(!tilesTypes.contains(input)) {
-                    if(input.matches("open chat")){
-                       // openChat();
-                    }else {
-                        System.out.println("You didn't choose this type of tile");
-                    }
+                    System.out.println("You didn't choose this type of tile");
                 }else{
                     for (int x=0; x<chosenTiles.size(); x++) {
                         if (input.equals(chosenTiles.get(x).getTileType().toString())) {

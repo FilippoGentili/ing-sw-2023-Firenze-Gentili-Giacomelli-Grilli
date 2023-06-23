@@ -2,9 +2,10 @@ package it.polimi.ingsw.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Chat {
-    private final List<String> messages;
+    private final ArrayList<String> messages;
 
 
     public Chat(){
@@ -18,8 +19,8 @@ public class Chat {
         return playerMessages;
     }
 
-    public void addMessage(String sender, String receiver, String message){ //da controllare ordine dei parametri che forse li ho trollati
-        String finalMessage = "from" + sender + "to " + receiver + ": " + message;
+    public void addMessage(String sender, String receiver, String message){
+        String finalMessage = "from " + sender + " to " + receiver + ": " + message;
         messages.add(finalMessage);
     }
 
