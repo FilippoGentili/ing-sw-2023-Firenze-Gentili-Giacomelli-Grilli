@@ -50,6 +50,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         serverInfo();
     }
+
+    @Override
+    public Chat getChat() {
+        return this.chat;
+    }
+
     @Override
     public void showMessage(String message) {
         System.out.println(message);
@@ -278,50 +284,65 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
      * This method is used to show the chat message
      */
     @Override
-    public void showChatMessage(Chat chat) {
-       /* for(Message messages: chat){
-            System.out.println(messages.getSender() + ": " + messages.getMessage());
-        }*/
-    }
+    public void showChatMessages(Chat chat) {
+       ArrayList<String> messages = chat.getMessages();
 
-    @Override
-    public void sendChatMessage(String receiver, String sender, ChatMessage message){
-            notifyObserver(obs -> {
-               // obs.sendChatMessage(sender, receiver, message);
-            });
+       for(String s : messages)
+           System.out.println(s);
     }
 
     /**
      * This method is used for the chat
-     * @param player that writes the message
      */
-    public void openChat(Player player){
-        String sender = player.getNickname();
+    public void openChat(){
         Scanner scanner = new Scanner(System.in);
         String receiver;
-        boolean exists = false;
         if(!secondMessage) {
             System.out.println("Chat opened");
+            System.out.println("Write the name of the player you want to chat with, 'all players' to send a broadcast message");
+            System.out.println("Write close chat to return the game");
         }
 
-        //prints all old messages
-        if(chat.getMessages(player.getNickname()).isEmpty()){
-            System.out.println("No old messages");
-        }else{
-            for(Message message: chat.getMessages(player.getNickname())){
-                System.out.println(message.getTime() + ":" + message.getSender() + ": " + message.getMessage());
+        do{
+
+            //prints all old messages
+            if(chat.getMessages().isEmpty()){
+                System.out.println("No old messages");
+            }else{
+                showChatMessages(this.chat);
             }
-        }
 
-        //prints all players and ask who is the receiver
-        System.out.println("Who is the receiver?");
-        System.out.println("Write 'all players' to send a broadcast message");
-        for(Player players: player.getGame().getPlayers()){
+            System.out.print("Send to:");
+            receiver = scanner.nextLine().trim();
+
+            if(receiver.equals("close chat")){
+                closeChat();
+                close = true;
+                return;
+            }
+
+            System.out.print("Write your message: ");
+            String message = scanner.nextLine().trim();
+
+            if (message.equals("close chat")) {
+                closeChat();
+            }
+            final String finalReceiver = receiver;
+
+            notifyObserver(obs -> {
+                obs.sendChatMessage(finalReceiver, message);
+            });
+
+        }while(!close);
+
+
+
+        /*for(Player players: player.getGame().getPlayers()){
             System.out.println(players.getNickname());
-        }
+        }*/
 
         //asks the receiver
-        do{
+        /*do{
             receiver = scanner.nextLine().trim();
             if(receiver.equals("close chat")){
                 closeChat();
@@ -368,7 +389,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                     System.out.println("Invalid input, type yes or no");
                 }
             } while (!answer.equals("yes") && !answer.equals("no"));
-        }
+        }*/
     }
 
     public void closeChat(){
@@ -526,8 +547,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 if(!correct)
                     System.out.println("Column index Not valid. Please select a column with enough space");
             }else {
-                if(input.matches("open chat")){
-                    openChat(player);
+                if(input.matches("/chat")){
+                    openChat();
                 }else {
                     System.out.println("Input not valid. Please insert a number instead of a string");
                 }

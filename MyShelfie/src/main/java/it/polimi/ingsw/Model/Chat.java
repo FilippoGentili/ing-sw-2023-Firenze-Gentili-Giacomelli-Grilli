@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chat {
-    private final List<Message> messages;
+    private final List<String> messages;
 
 
     public Chat(){
-        this.messages = new ArrayList<Message>();
+        this.messages = new ArrayList<>();
     }
 
-    public List<Message> getMessages(String nickname){
-        List<Message> playerMessages = new ArrayList<Message>();
-        playerMessages.addAll(this.messages.stream().filter(t -> (t.getReceiver() != null && t.getReceiver().equals(nickname))).toList());
-        playerMessages.addAll(this.messages.stream().filter(t -> (t.getSender().equals(nickname))).toList());
-        playerMessages.addAll(this.messages.stream().filter(t -> (t.getReceiver() == null)).toList());
+    public ArrayList<String> getMessages(){
+        ArrayList<String> playerMessages = new ArrayList<>();
+        playerMessages.addAll(messages);
+        messages.clear();
         return playerMessages;
+    }
+
+    public void addMessage(String sender, String receiver, String message){ //da controllare ordine dei parametri che forse li ho trollati
+        String finalMessage = "from" + sender + "to " + receiver + ": " + message;
+        messages.add(finalMessage);
     }
 
 }

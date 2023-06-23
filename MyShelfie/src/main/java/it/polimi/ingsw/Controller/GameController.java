@@ -184,6 +184,9 @@ public class GameController implements Serializable {
             case INDEX_TILES:
                 removeTilesFromLivingRoom(message);
                 break;
+            case CHAT_MESSAGE:
+                handleMessage(message);
+                break;
 
         }
     }
@@ -249,6 +252,17 @@ public class GameController implements Serializable {
         }
 
         server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
+    }
+
+    public void handleMessage(Message message){
+        ChatMessage chatMessage = (ChatMessage) message;
+        String sender = chatMessage.getSender();
+        String receiver = chatMessage.getReceiver();
+        String msg = chatMessage.getMessage();
+
+        if(receiver.equals("all players"))
+            server.broadcastMessage(new ChatMessage(sender, receiver, msg));
+        else server.sendMessage(new ChatMessage(sender, receiver, msg), receiver);
     }
 
     /**

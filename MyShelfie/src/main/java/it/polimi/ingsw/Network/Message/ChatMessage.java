@@ -10,18 +10,25 @@ public class ChatMessage extends Message{
 
     @Serial
     private static final long serialVersionUID = 1803056874187171704L;
-    private final Chat chat;
+    private final String sender;
+    private final String receiver;
+    private final String message;
 
     /**
      * Message used exclusively when writing in the chat
      */
-    public ChatMessage(Chat chat) {
-        super(Game.getServerName(), MessageType.CHAT_MESSAGE);
-        this.chat = chat;
+    public ChatMessage(String sender, String receiver, String message) {
+        super(sender, MessageType.CHAT_MESSAGE);
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+    }
 
-    }
-    public Chat getChat(){
-        return  chat;
-    }
+    public String getSender(){return this.sender;}
+
+    public String getReceiver(){return this.receiver;}
+
+    public String getMessage(){return this.message;}
+
 
 }

@@ -7,12 +7,13 @@ import java.util.ArrayList;
 
 public interface View {
 
+    Chat getChat();
     void showMessage(String message) ;
     void loginResult(boolean validNickname, boolean connection, String nickname);
     void nicknameRequest();
     void askNumberOfPlayers() ;
-    void showChatMessage(Chat chat);
-    void sendChatMessage(String receiver, String sender, ChatMessage message);
+    void showChatMessages(Chat chat);
+    //void sendChatMessage(String sender, String receiver, String message);
     void columnRequest(ArrayList<Integer> AvailableColumns, Player player);
     void TilesRequest(LivingRoom livingRoom) ;
     void OrderTiles(ArrayList<Tile> chosenTiles) ;

@@ -15,6 +15,12 @@ public class Gui extends ViewObservable implements View {
     private GameSceneController gameSceneController;
     private EndSceneController endSceneController;
     private WaitingRoomSceneController waitingRoomSceneController;
+    private Chat chat;
+
+    @Override
+    public Chat getChat() {
+        return chat;
+    }
 
     /**
      * This method is used to show a message
@@ -258,14 +264,14 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showChatMessage(Chat chat) {
+    public void showChatMessages(Chat chat) {
 
     }
 
-    @Override
-    public void sendChatMessage(String receiver, String sender, ChatMessage message){
+    /*@Override
+    public void sendChatMessage(String sender, String receiver, String message){
 
-    }
+    }*/
 
 
 
