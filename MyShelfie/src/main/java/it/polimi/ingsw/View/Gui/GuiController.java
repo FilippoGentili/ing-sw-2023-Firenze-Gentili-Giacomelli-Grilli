@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.*;
+import it.polimi.ingsw.View.View;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;

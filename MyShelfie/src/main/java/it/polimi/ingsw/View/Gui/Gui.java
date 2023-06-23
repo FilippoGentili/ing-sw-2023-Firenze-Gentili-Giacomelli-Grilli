@@ -256,24 +256,12 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showWinner(String winner, Game game) {
-        EndSceneController endSceneController = new EndSceneController();
-        endSceneController.addAllObserver(observers);
-        endSceneController.setWinner(winner);
-        //endSceneController.setScoreBoard(game);
-        Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
     }
 
     @Override
     public void showChatMessages(Chat chat) {
 
     }
-
-    /*@Override
-    public void sendChatMessage(String sender, String receiver, String message){
-
-    }*/
-
-
 
     /**
      * This method is used to update the common goal card points

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
+import it.polimi.ingsw.Model.Chat;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.ViewObservable;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.Event;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This class is the controller for the chat scene.
@@ -68,23 +70,25 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
             playerList.getItems().add(player.getNickname());
         }
         playerList.getSelectionModel().select(0);
+
     }
     public void sendButtonClicked(Event event){
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
             String message = chatText.getText();
             if(!message.equals("")){
-             /* notifyObserver(obs -> {
-                try {
-                    obs.
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                });*/
+                chatText.clear();
+                notifyObserver(obs -> {
+                    obs.sendChatMessage(playerList.getSelectionModel().toString(), message);
+                });
             }
         }
     }
-    public void updateChat(String message){
-        chatList.getItems().add(message);
+    public void updateChat(Chat chat){
+        ArrayList<String> messages = chat.getMessages();
+        chatList.getItems().clear();
+        for (String message : messages) {
+            chatList.getItems().add(message);
+        }
     }
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
