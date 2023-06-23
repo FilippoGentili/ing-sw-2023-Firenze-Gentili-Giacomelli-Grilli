@@ -10,11 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
+import javafx.event.Event;
+
+import java.io.IOException;
 
 /**
  * This class is the controller for the chat scene.
@@ -50,6 +55,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this::paneClicked);
         pane.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::paneDragged);
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeButtonClicked);
+        sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::sendButtonClicked);
+        chatText.setOnKeyPressed(this::enterButtonClicked);
     }
 
     public void setUp(Game game){
@@ -62,13 +69,29 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         }
         playerList.getSelectionModel().select(0);
     }
+    public void sendButtonClicked(Event event){
+        if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
+            String message = chatText.getText();
+            if(!message.equals("")){
+             /* notifyObserver(obs -> {
+                try {
+                    obs.
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                });*/
+            }
+        }
+    }
+    public void updateChat(String message){
+        chatList.getItems().add(message);
+    }
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
     }
     public void showChat() {
         stage.showAndWait();
     }
-
     public void setScene(Scene scene) {
         stage.setScene(scene);
     }
@@ -83,5 +106,14 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         stage.setY(event.getScreenY() + yAxis);
     }
 
-
+    /**
+     * This method is called when the enter key is pressed. It calls the sendButtonClicked method.
+     * @param event enter button pressed.
+     */
+    @FXML
+    private void enterButtonClicked(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            sendButtonClicked(event);
+        }
+    }
 }
