@@ -155,7 +155,7 @@ public class Gui extends ViewObservable implements View {
 
 
     @Override
-    public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
+    public synchronized void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
         WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
         waitingRoomSceneController.addAllObserver(observers);
         waitingRoomSceneController.setMaxPlayers(maxPlayers);

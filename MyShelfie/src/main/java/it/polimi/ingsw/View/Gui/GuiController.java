@@ -161,18 +161,9 @@ public class GuiController extends ViewObservable{
         }
         ChatSceneController chatSceneController = fxmlLoader.getController();
         Scene chatScene = new Scene(parent);
-        chatSceneController.setUp(game);
-        chatSceneController.updateChat(getChat());
+        chatSceneController.setUp(game, chat);
         chatSceneController.setScene(chatScene);
         chatSceneController.showChat();
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                chatSceneController.updateChat(getChat());
-            }
-        }, 0, 1000);
     }
 
     /**

@@ -42,6 +42,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private BorderPane pane;
     private double xAxis;
     private double yAxis;
+    private Chat chat;
+
     public ChatSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -61,7 +63,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         chatText.setOnKeyPressed(this::enterButtonClicked);
     }
 
-    public void setUp(Game game){
+    public void setUp(Game game, Chat chat){
+        this.chat = chat;
         int numberOfPlayers = game.getPlayers().size();
         playerList.getItems().clear();
         playerList.setPromptText("Select Player");
@@ -70,7 +73,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
             playerList.getItems().add(player.getNickname());
         }
         playerList.getSelectionModel().select(0);
-
+        updateChat(chat);
     }
     public void sendButtonClicked(Event event){
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
@@ -82,6 +85,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
                 });
                 chatText.clear();
             }
+            updateChat(chat);
         }
     }
 
