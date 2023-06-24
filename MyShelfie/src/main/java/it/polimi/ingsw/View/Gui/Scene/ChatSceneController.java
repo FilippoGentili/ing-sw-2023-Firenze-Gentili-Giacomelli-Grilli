@@ -61,9 +61,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         chatText.setOnKeyPressed(this::enterButtonClicked);
     }
 
-    public void setUp(Game game, Chat chat){
+    public void setUp(Game game){
         int numberOfPlayers = game.getPlayers().size();
-        updateChat(chat);
         playerList.getItems().clear();
         playerList.setPromptText("Select Player");
         playerList.getItems().add("All players");
@@ -76,11 +75,12 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     public void sendButtonClicked(Event event){
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
             String message = chatText.getText();
+            String receiver = (String) playerList.getSelectionModel().getSelectedItem();
             if(!message.equals("")){
-                chatText.clear();
                 notifyObserver(obs -> {
-                    obs.sendChatMessage(playerList.getSelectionModel().toString(), message);
+                    obs.sendChatMessage(receiver, message);
                 });
+                chatText.clear();
             }
         }
     }

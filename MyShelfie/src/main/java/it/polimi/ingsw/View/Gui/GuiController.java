@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GuiController extends ViewObservable{
@@ -148,7 +150,7 @@ public class GuiController extends ViewObservable{
     /**
      * Displays the chat of the player
      */
-    public static void showChat() {
+    public static void showChat(Game game) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
         try {
@@ -159,9 +161,18 @@ public class GuiController extends ViewObservable{
         }
         ChatSceneController chatSceneController = fxmlLoader.getController();
         Scene chatScene = new Scene(parent);
-        chatSceneController.setUp(game, chat);
+        chatSceneController.setUp(game);
+        chatSceneController.updateChat(getChat());
         chatSceneController.setScene(chatScene);
         chatSceneController.showChat();
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                chatSceneController.updateChat(getChat());
+            }
+        }, 0, 1000);
     }
 
     /**
