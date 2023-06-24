@@ -172,7 +172,6 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene("waitingRoomScene.fxml",waitingRoomSceneController));
         Platform.runLater(() -> waitingRoomSceneController.setUp());
         Platform.runLater(() -> waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!"));
-        Platform.runLater(() -> waitingRoomSceneController.setVisualPlayersConnected());
         //waitingRoomSceneController.playersConnectedText.setText("Waiting for other players to connect...");
         //waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
     }
