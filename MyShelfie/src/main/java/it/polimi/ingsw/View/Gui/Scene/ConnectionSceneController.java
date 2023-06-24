@@ -33,7 +33,9 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private final PseudoClass ERROR = PseudoClass.getPseudoClass("error");
     private static final String ERROR_MESSAGE = "Network Error";
 
-
+    /**
+     * Initializes the buttons for the two types of connection
+     */
     @FXML
     public void initialize(){
         socketButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::socketButtonClicked);
@@ -42,7 +44,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
 
     /**
      * This method is called when the socket button is clicked. It starts a new game with socket connection.
-     * @param event
+     * @param event of type mouse clicked
      */
     private void socketButtonClicked(MouseEvent event) {
         String address = addressBox.getText();
@@ -70,7 +72,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
 
     /**
      * This method is called when the rmi button is clicked. It starts a new game with rmi connection.
-     * @param event
+     * @param event of type mouse clicked
      */
     private void rmiButtonClicked(MouseEvent event){
         String address = addressBox.getText();

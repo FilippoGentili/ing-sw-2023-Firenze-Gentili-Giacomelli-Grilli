@@ -12,9 +12,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
 
-/**
- * This class is the controller for the leaderBoard scene.
- */
 public class RulebookSceneController extends ViewObservable implements GenericSceneController{
     private final Stage stage;
     @FXML
@@ -24,6 +21,9 @@ public class RulebookSceneController extends ViewObservable implements GenericSc
     private double xAxis;
     private double yAxis;
 
+    /**
+     * Constructor of rulebook scene controller
+     */
     public RulebookSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -34,33 +34,54 @@ public class RulebookSceneController extends ViewObservable implements GenericSc
         stage.setAlwaysOnTop(true);
     }
 
+    /**
+     * Initializes the panes and close button
+     */
     @FXML
     public void initialize() {
         pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this::paneClicked);
         pane.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::paneDragged);
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeButtonClicked);
     }
+
+    /**
+     * Handles click on close button
+     * @param event of type mouse clicked
+     */
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
     }
 
+    /**
+     * Shows rulebook
+     */
     public void showRulebook() {
         stage.showAndWait();
     }
 
+    /**
+     * @param scene that has to be set
+     */
     public void setScene(Scene scene) {
         stage.setScene(scene);
     }
-
+    /**
+     * Handles pane clicked event
+     * @param event of type mouse clicked
+     */
     private void paneClicked(MouseEvent event) {
         xAxis = stage.getX() - event.getScreenX();
         yAxis = stage.getY() - event.getScreenY();
     }
-
+    /**
+     * Handles pane dragged event
+     * @param event of type mouse clicked
+     */
     private void paneDragged(MouseEvent event) {
         stage.setX(event.getScreenX() + xAxis);
         stage.setY(event.getScreenY() + yAxis);
     }
+
 
 
 }

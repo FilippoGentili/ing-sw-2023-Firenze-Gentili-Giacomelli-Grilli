@@ -28,6 +28,9 @@ public class CommonGoalCardInfoSceneController extends ViewObservable implements
     private double xAxis;
     private double yAxis;
 
+    /**
+     * Constructor of CommonGoalCard info controller
+     */
     public CommonGoalCardInfoSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -38,19 +41,35 @@ public class CommonGoalCardInfoSceneController extends ViewObservable implements
         stage.setAlwaysOnTop(true);
     }
 
+    /**
+     * Initializes panes and button of the scene
+     */
     @FXML
     public void initialize() {
         pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this::paneClicked);
         pane.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::paneDragged);
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeButtonClicked);
     }
+
+    /**
+     * Closes the stage when close button is clicked
+     * @param event of type mouse clicked
+     */
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
     }
 
+    /**
+     * Shows info for each common goal card
+     */
     public void showCommonGoalCardInfo() {
         stage.showAndWait();
     }
+
+    /**
+     * Sets title of each goal card using the id
+     * @param id of the goal card
+     */
     public void setTitle(int id) {
         switch (id) {
             case 1 -> textInfoNumber.setText("Common Goal Card 1");
@@ -70,6 +89,10 @@ public class CommonGoalCardInfoSceneController extends ViewObservable implements
         }
     }
 
+    /**
+     * Displays information about a goal card depending on the id
+     * @param id of the selected card
+     */
     public void setInformations(int id) {
         switch (id) {
             case 1 -> textInfo.setText("Six groups each containing at least 2 tiles of the same type (not necessarily in the depicted shape).\n" + "The tiles of one group can be different from those of another group.");
@@ -89,14 +112,26 @@ public class CommonGoalCardInfoSceneController extends ViewObservable implements
         }
     }
 
+    /**
+     * @param scene to be set
+     */
     public void setScene(Scene scene) {
         stage.setScene(scene);
     }
+
+    /**
+     * Handles pane clicked event
+     * @param event of type mouse clicked
+     */
     private void paneClicked(MouseEvent event) {
         xAxis = stage.getX() - event.getScreenX();
         yAxis = stage.getY() - event.getScreenY();
     }
 
+    /**
+     * Handles pane dragged event
+     * @param event of type mouse clicked
+     */
     private void paneDragged(MouseEvent event) {
         stage.setX(event.getScreenX() + xAxis);
         stage.setY(event.getScreenY() + yAxis);

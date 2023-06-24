@@ -17,10 +17,17 @@ public class VirtualView implements View, Observer, Serializable {
     private static final long serialVersionUID = -1283988823487689171L;
     private final Connection connection;
 
+    /**
+     * Constructor of virtual view
+     * @param connection chosen by the client
+     */
     public VirtualView(Connection connection){
         this.connection = connection;
     }
 
+    /**
+     * @return type of connection
+     */
     public Connection getConnection() {
         return connection;
     }

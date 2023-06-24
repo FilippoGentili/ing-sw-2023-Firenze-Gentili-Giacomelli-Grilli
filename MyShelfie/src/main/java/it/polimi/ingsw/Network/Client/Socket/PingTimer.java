@@ -13,6 +13,10 @@ public class PingTimer extends TimerTask {
         disconnectionHandler.handleDisconnection();
     }
 
+    /**
+     * Instantiates a disconnection handler to always be ready to handle disconnections
+     * @param disconnectionHandler
+     */
     public PingTimer(DisconnectionHandler disconnectionHandler){
         super();
         this.disconnectionHandler=disconnectionHandler;

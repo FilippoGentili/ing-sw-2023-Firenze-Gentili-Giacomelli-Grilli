@@ -31,12 +31,18 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     @FXML
     private AnchorPane easter;
 
+    /**
+     * Initializes exit button and easteregg of the project
+     */
     @FXML
     public void initialize(){
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
         easter.addEventHandler(MouseEvent.MOUSE_CLICKED, this::easterClicked);
     }
 
+    /**
+     * Sets up fields of the scene to be hidden in the beginning
+     */
     public void setUp(){
         winnerText.setVisible(false);
         score1.setVisible(false);
@@ -45,11 +51,19 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         score4.setVisible(false);
     }
 
+    /**
+     * Sets winner text
+     * @param nickname of the winner of the game
+     */
     public void setWinner(String nickname){
         winnerText.setVisible(true);
         winnerText.setText(nickname + " won!");
     }
 
+    /**
+     * Sets the scoreboard fields visible depending on the number of players
+     * @param scoreBoard of the players
+     */
     public void setScoreBoard(ArrayList<Player> scoreBoard){
         int numberOfPlayers = scoreBoard.size();
         ArrayList<Integer> scoreList = new ArrayList<>();
@@ -88,8 +102,17 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         }
     }
 
+    /**
+     * Handles easter egg clicked
+     * @param event of type mouse clicked
+     */
     public void easterClicked(MouseEvent event){
     }
+
+    /**
+     * Handles exit button clicked disconnecting the clients and closing everything
+     * @param event of type mouse clicked
+     */
     public void exitButtonClicked(MouseEvent event){
         notifyObserver(obs -> {
             try {

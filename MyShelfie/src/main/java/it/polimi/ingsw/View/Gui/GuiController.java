@@ -22,6 +22,14 @@ public class GuiController extends ViewObservable{
     private static Scene currentScene;
     private static GenericSceneController currentController;
 
+    /**
+     * Changes scene setting the controller, the scene and through the list of observers
+     * @param fxml
+     * @param scene
+     * @param observers
+     * @return
+     * @param <T>
+     */
     public synchronized static <T> T changeScene(String fxml, Scene scene, List<ViewObserver> observers) {
         T controller = null;
         try {
@@ -39,15 +47,36 @@ public class GuiController extends ViewObservable{
         return controller;
     }
 
+    /**
+     * Casts a scene to a node and changes the scene through an event, and fxml file and the list of observers
+     * @param fxml
+     * @param event
+     * @param observers
+     * @return the changed scene
+     * @param <T>
+     */
     public synchronized static <T> T changeScene(String fxml, Event event,List<ViewObserver> observers) {
         Scene scene = ((Node) event.getSource()).getScene();
         return changeScene(fxml, scene, observers);
     }
 
+    /**
+     * Changes scene through fxml and list of observers
+     * @param fxml
+     * @param observers
+     * @return the changed scene
+     * @param <T>
+     */
     public synchronized static <T> T changeScene(String fxml,  List<ViewObserver> observers){
         return changeScene(fxml, currentScene, observers);
     }
 
+    /**
+     * Changes scene through fxml file, scene to go to and controller
+     * @param fxml
+     * @param scene
+     * @param controller
+     */
     public synchronized static void changeScene(String fxml, Scene scene,GenericSceneController controller) {
         try {
             FXMLLoader loader = new FXMLLoader(GuiController.class.getResource("/fxml/" + fxml));
@@ -66,6 +95,11 @@ public class GuiController extends ViewObservable{
         changeScene(fxml, scene, controller);
     }
 
+    /**
+     * Changes scene through the fxml file and a generic scene controller
+     * @param fxml
+     * @param controller
+     */
     public synchronized static void changeScene(String fxml, GenericSceneController controller) {
         changeScene(fxml, currentScene, controller);
     }
@@ -90,16 +124,23 @@ public class GuiController extends ViewObservable{
         bannerSceneController.setBannerMessage(message);
         bannerSceneController.showBanner();
     }
+
+    /**
+     * @return current scene
+     */
     public static Scene getCurrentScene() {
         return currentScene;
     }
 
+    /**
+     * @return generic scene controller
+     */
     public static GenericSceneController getCurrentController() {
         return currentController;
     }
 
     /**
-     * This method is used to display the chat
+     * Displays the chat of the player
      */
     public static void showChat(Game game) {
         Chat chat = gui.getChat();
@@ -119,7 +160,7 @@ public class GuiController extends ViewObservable{
     }
 
     /**
-     * This method is used to display the leaderBoard
+     * Shows the leaderBoard
      */
     public static void showLeaderboard(Game game) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/leaderboardScene.fxml"));
@@ -139,7 +180,7 @@ public class GuiController extends ViewObservable{
     }
 
     /**
-     * This method is used to display the ruleBook
+     * Shows the ruleBook during the game
      */
     public static void showRulebook(){
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/rulebookScene.fxml"));
@@ -159,7 +200,7 @@ public class GuiController extends ViewObservable{
     }
 
     /**
-     * This method is used to display the commonGoalCard information
+     * Shows the commonGoalCard information
      */
     public static void showCommonGoalCardInfo(int id){
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/commonGoalCardInfoScene.fxml"));

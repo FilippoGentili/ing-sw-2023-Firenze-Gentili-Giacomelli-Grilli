@@ -12,6 +12,11 @@ public class RMIServerHandlerImpl extends UnicastRemoteObject implements RMIServ
     private final transient Server server;
     private transient ConnectionRMI connectionRMI;
 
+    /**
+     * Constructor of RMIServerHandlerImpl, that connects it to the server
+     * @param server
+     * @throws RemoteException
+     */
     public RMIServerHandlerImpl(Server server) throws RemoteException {
         this.server = server;
     }

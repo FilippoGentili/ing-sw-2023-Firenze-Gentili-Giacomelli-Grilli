@@ -23,14 +23,27 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     private boolean chatMode = false;
     private Chat chat;
 
+    /**
+     * Constructor of class cli, a new chat, input and output are created
+     */
     public Cli(){
         chat = new Chat();
         out = System.out;
         scanner = new Scanner(System.in);
     }
+
+    /**
+     * Reads from command line
+     * @return input trimmed of spaces
+     */
     public String readLine(){
         return scanner.nextLine().trim();
     }
+
+    /**
+     * Starts the game, displaying the name to the players connected
+     * @throws IOException when errors in input or output occur
+     */
     public void start() throws IOException {
         out.println("Welcome to MyShelfie!");
         out.println("\n" +
@@ -58,6 +71,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     public void showMessage(String message) {
         System.out.println(message);
     }
+
+    /**
+     * Prints all the information useful for connection, such as the valid ip address. Asks the client if it wants to
+     * establish a connection using rmi or socket. Depending on the chosen type of connection observers are notified.
+     */
     public void serverInfo() {
 
         boolean rmi = false;
@@ -94,18 +112,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         } while (!validAddress(input, rmi));
 
         address = input;
-        /*
-        do {
-            System.out.println("Insert the Server port:");
-            input = scanner.nextLine().trim();
-               if(!validPort(input))
-                   System.out.println("Please insert a valid port");
-        } while (!validPort(input));
-
-        port = input;
-
-         */
-
 
         if (rmi) {
             notifyObserver(obs -> {
@@ -126,6 +132,15 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         }
 
     }
+
+    /**
+     * Calls notBroadCastAddress to verify the format of the address. If the check returns true it tries to establish
+     * a connection to see if the address inserted is in fact the one printed in the server. If the connection is
+     * possible, it's closed.
+     * @param address inserted by the client
+     * @param connection type chosen
+     * @return true if address is valid, false otherwise
+     */
     public boolean validAddress(String address, boolean connection){
         boolean isValid=true;
         String SocketPort = "1098";
@@ -134,7 +149,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         boolean bc=notBroadcastAddress(address);
 
         if (rmi) {
-            if (/*((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) &&*/ bc) {
+            if (bc) {
                 try {
                     Registry registry = LocateRegistry.getRegistry(address, parseInt(RMIPort));
                     registry.list();
@@ -146,7 +161,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 isValid = false;
             }
         } else {
-            if (/*((address.matches("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b")) || (address == null || address.equals("localhost"))) &&*/ bc) {
+            if (bc) {
                 try {
                     Socket socket = new Socket();
                     socket.connect(new InetSocketAddress(address, parseInt(SocketPort)), 5000);
@@ -165,6 +180,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         return isValid;
     }
+
+    /**
+     * Checks if the address is in the correct form and if it's not a broadcast address (starts with 127.)
+     * @param address inserted by the client
+     * @return true if the address is valid and not a broadcast address, false otherwise
+     */
     public boolean notBroadcastAddress(String address){
         boolean bc=true;
         String tempAddress = address;
@@ -183,6 +204,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
         return bc;
     }
+
     @Override
     public void nicknameRequest(){
         String nickname = null;
@@ -207,6 +229,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             }
         });
     }
+
     @Override
     public void askNumberOfPlayers() {
         int num;
@@ -220,6 +243,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             }
         });
     }
+
+    /**
+     * Checks if the inserted number of players is between 2 and 4, and if it's a number.
+     * @return the number of players if is valid, prints error messages otherwise
+     */
     public int checkValidNumOfPlayers(){
             int num;
             String old;
@@ -252,6 +280,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         }*/
 
     }
+
+    /**
+     * Translates string input to int, to read from the living room
+     * @param input chosen by the player
+     * @return the translated value
+     */
     public int indexTranslator(String input){
         switch(input){
             case "A", "a":
@@ -278,9 +312,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         }
     }
 
-    /**
-     * This method is used to show the chat message
-     */
     @Override
     public void showChatMessages(Chat chat) {
        ArrayList<String> messages = chat.getMessages();
@@ -292,7 +323,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
 
     /**
-     * This method is used for the chat
+     * Opens the chat whenever called, asks to write a message, to specify a receiver and notifies the observer
      */
     public void openChat() {
         chatMode = true;
@@ -342,7 +373,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         } while (chatMode);
     }
 
-
+    /**
+     * Closes the chat and tells the client to continue from where the chat was opened
+     */
     public void closeChat(){
         System.out.println("Chat closed");
         System.out.println("Continue where you left");

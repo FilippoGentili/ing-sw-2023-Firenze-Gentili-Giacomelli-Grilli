@@ -21,7 +21,9 @@ public class LoginSceneController extends ViewObservable implements GenericScene
     @FXML
     private Button loginButton;
 
-
+    /**
+     * Initializes the login button and username field
+     */
     @FXML
     public void initialize() {
         loginButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::loginButtonClicked);

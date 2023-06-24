@@ -24,7 +24,7 @@ public class ConnectionSocket extends Connection implements Runnable{
     private boolean connected;
 
     /**
-     * Constructor of ConnectionSocket
+     * Constructor of ConnectionSocket and input and output streams
      * @param socketServer
      * @param socket
      */

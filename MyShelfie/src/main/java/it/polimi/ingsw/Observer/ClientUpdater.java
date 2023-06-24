@@ -15,6 +15,11 @@ public class ClientUpdater implements Runnable{
     private Observer observer;
     private Thread thread;
 
+    /**
+     * Constructor of client updater for a client
+     * @param client the client updater has to be tied to
+     * @param observer
+     */
     public ClientUpdater(Client client, Observer observer) {
         this.client = client;
         this.observer = observer;
@@ -44,12 +49,18 @@ public class ClientUpdater implements Runnable{
         }
     }
 
+    /**
+     * Starts the thread
+     */
     public void start() {
         if (this.thread.isInterrupted()) {
             this.thread.start();
         }
     }
 
+    /**
+     * Stops the thread
+     */
     public void stop(){
         this.thread.interrupt();
     }

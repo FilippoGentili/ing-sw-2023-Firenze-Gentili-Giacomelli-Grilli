@@ -39,7 +39,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
     private ClientUpdater clientUpdater;
 
-
+    /**
+     * Constructor of client controller for each client
+     * @param view created for the client
+     */
     public ClientController(View view) {
         this.view = view;
         //taskQueue = Executors.newSingleThreadExecutor();
@@ -59,21 +62,21 @@ public class ClientController implements Observer, ViewObserver, Runnable {
             }
     }
 
+    /**
+     * @param client set for the specific client controller
+     */
     public void setClient(Client client){
         this.client = client;
     }
 
+    /**
+     * @return the nickname of the client
+     */
     public String getNickname(){return this.client.getUsername();}
 
     //potrei far partire tanti thread quanti sono gli observable
 
 
-
-    /**
-     * Handles arriving messages from Server (Requests)
-     *
-     * @param message
-     */
     @Override
     public void update(Message message) {
         synchronized (client){
@@ -217,12 +220,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-    /**
-     * Updates server address and server port, creates socket client and its client updater
-     * @param disconnectionHandler
-     * @param address
-     * @param port
-     */
+
     @Override
     public void updateServerInfoSocket(DisconnectionHandler disconnectionHandler,String address,String port) {
         try{
@@ -238,12 +236,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-    /**
-     * Updates server address and server port, creates RMI client and its client updater
-     * @param disconnectionHandler
-     * @param address
-     * @param port
-     */
    @Override
     public void updateServerInfoRmi(DisconnectionHandler disconnectionHandler, String address, String port) throws RemoteException {
         try {
@@ -257,17 +249,11 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         }
     }
 
-    /**
-     * Sends a chat message to the specified receiver
-     * @param receiver
-     * @param message
-     */
     @Override
     public void sendChatMessage(String receiver, String message) {
         client.sendMessage(new ChatMessage(client.getUsername(), receiver, message));
 
     }
-
 
     @Override
     public void updateNickname(String nickname) {

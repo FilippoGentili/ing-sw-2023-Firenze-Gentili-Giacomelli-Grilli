@@ -11,11 +11,19 @@ public class RMIServer {
     private final Server server;
     private final int port;
 
+    /**
+     * Constructor of RMIServer
+     * @param server
+     * @param port
+     */
     public RMIServer(Server server, int port) {
         this.server = server;
         this.port = port;
     }
 
+    /**
+     * Starts RMI server creating the Registry on port 1099
+     */
     public void startRMIServer() {
         try {
             RMIServerHandlerImpl rmiServerHandler = new RMIServerHandlerImpl(server);

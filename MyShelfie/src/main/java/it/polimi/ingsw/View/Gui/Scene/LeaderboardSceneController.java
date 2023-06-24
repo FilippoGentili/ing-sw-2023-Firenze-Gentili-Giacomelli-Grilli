@@ -38,6 +38,10 @@ public class LeaderboardSceneController extends ViewObservable implements Generi
     private Text score4;
     private double xAxis;
     private double yAxis;
+
+    /**
+     * Constructor of leaderboard scene controller
+     */
     public LeaderboardSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -47,24 +51,42 @@ public class LeaderboardSceneController extends ViewObservable implements Generi
         yAxis = 0;
         stage.setAlwaysOnTop(true);
     }
-
+    /**
+     * Initializes the panes and close button
+     */
     @FXML
     public void initialize() {
         pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this::paneClicked);
         pane.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::paneDragged);
         closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::closeButtonClicked);
     }
+
+    /**
+     * Closes the stage when exit button is clicked
+     * @param event of type mouse clicked
+     */
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
     }
+
+    /**
+     * Shows leaderboard
+     */
     public void showLeaderboard() {
         stage.showAndWait();
     }
 
+    /**
+     * @param scene that has to be set
+     */
     public void setScene(Scene scene) {
         stage.setScene(scene);
     }
 
+    /**
+     * Sets list score for the game
+     * @param game current game
+     */
     public void setListScore(Game game) {
         int numberOfPlayers = game.getPlayers().size();
         ArrayList<Player> list = game.getScoreBoard(game.getPlayers());
@@ -96,11 +118,19 @@ public class LeaderboardSceneController extends ViewObservable implements Generi
 
     }
 
+    /**
+     * Handles pane clicked event
+     * @param event of type mouse clicked
+     */
     private void paneClicked(MouseEvent event) {
         xAxis = stage.getX() - event.getScreenX();
         yAxis = stage.getY() - event.getScreenY();
     }
 
+    /**
+     * Handles pane dragged event
+     * @param event of type mouse clicked
+     */
     private void paneDragged(MouseEvent event) {
         stage.setX(event.getScreenX() + xAxis);
         stage.setY(event.getScreenY() + yAxis);

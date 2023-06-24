@@ -22,29 +22,48 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     @FXML
     private Text welcomeText;
 
-
+    /**
+     * Sets up the waiting room
+     */
     public void setUp(){
         playersConnectedText.setVisible(false);
         welcomeText.setVisible(false);
     }
 
+    /**
+     * Sets the text about how many players are connected out of the number of players of the game
+     */
     public void setVisualPlayersConnected() {
         playersConnectedText.setText("Players connected: " + numOfPlayersConnected + " of " + maxPlayers);
     }
 
+    /**
+     * Sets the number of players of the game
+     * @param maxPlayers chosen by the first client
+     */
     public void setMaxPlayers(int maxPlayers) {
         this.maxPlayers = maxPlayers;
     }
 
+    /**
+     * Sets how many players are connected out of the number of players of the game
+     * @param numOfPlayersConnected when the client connects
+     */
     public void setNumOfPlayersConnected(int numOfPlayersConnected) {
         this.numOfPlayersConnected = numOfPlayersConnected;
     }
 
+    /**
+     * @param string to be set as welcome text
+     */
     public void setWelcomeText(String string){
         welcomeText.setVisible(true);
         welcomeText.setText(string);
     }
 
+    /**
+     * Starts animation timer
+     */
     public void startAnimationTimer() {
         timer = new AnimationTimer() {
             @Override

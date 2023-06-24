@@ -25,8 +25,8 @@ public class PlayerSelectionSceneController extends ViewObservable implements Ge
     }
 
     /**
-     * This method is only accessible by the first player that enters the game
-     * sets the number of players and puts the player in the waiting room
+     * This method is only accessible by the first player that enters the game sets the number of players and puts the
+     * player in the waiting room
      * @param event
      */
     private void enterButtonClicked(MouseEvent event) {

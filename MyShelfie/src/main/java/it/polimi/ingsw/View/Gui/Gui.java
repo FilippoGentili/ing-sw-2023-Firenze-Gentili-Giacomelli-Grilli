@@ -22,10 +22,6 @@ public class Gui extends ViewObservable implements View {
         return chat;
     }
 
-    /**
-     * This method is used to show a message
-     * @param message is the message to show
-     */
     @Override
     public void showMessage(String message){
         //if(gameSceneController != null)
@@ -33,12 +29,6 @@ public class Gui extends ViewObservable implements View {
         //per ora lo lasciamo commentato, perchè ogni messsaggio che manda il server è un banner nella gui
     }
 
-    /**
-     * This method is used to get the login result after the player has chosen the nickname
-     * @param validNickname is true if the nickname is valid, false otherwise
-     * @param connection is true if the connection is valid, false otherwise
-     * @param nickname is the nickname chosen by the player
-     */
     @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname){
         if (!validNickname || !connection) {
@@ -62,18 +52,11 @@ public class Gui extends ViewObservable implements View {
             }
         }    }
 
-    /**
-     * This method is used to change scene where the player can choose the nickname
-     */
     @Override
     public void nicknameRequest(){
         Platform.runLater(() -> GuiController.changeScene( "loginScene.fxml",observers));
     }
 
-
-    /**
-     * This method is used to change scene where the player can choose the max number of players in the game
-     */
     @Override
     public void askNumberOfPlayers() {
         PlayerSelectionSceneController playerSelectionSceneController = new PlayerSelectionSceneController();
@@ -81,56 +64,31 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> GuiController.changeScene( "playerSelectionScene.fxml",playerSelectionSceneController));
     }
 
-    /**
-     * This method is used to displlay the current player
-     * @param player current player
-     */
     @Override
     public void turnDisplay(Player player) {
         Platform.runLater(() -> gameSceneController.setVisualNames(player));
     }
 
-
-    /**
-     * This method is used to ask the player to choose the tiles from the board
-     * @param livingRoom is the living room of the game
-     */
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
         Platform.runLater(() -> gameSceneController.selectTiles());
     }
 
-    /**
-     * This method is used to ask the order of the tiles to put in the bookshelf
-     * @param chosenTiles are the tiles chosen by the player
-     */
     @Override
     public void OrderTiles(ArrayList<Tile> chosenTiles) {
         Platform.runLater(() -> gameSceneController.tileOrder(chosenTiles));
     }
 
-    /**
-     * This method is used to ask the player to choose the column where to put the tile
-     * @param AvailableColumns are the columns where the player can put the tile
-     * @param player is the current player
-     */
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns, Player player) {
         Platform.runLater(() -> gameSceneController.selectColumn(AvailableColumns, player));
     }
 
-    /**
-     * This method is used to change scene and display the scoreboard
-     */
     @Override
     public void showScoreboard(ArrayList<Player> scoreboard) {
         //Platform.runLater(() -> GuiController.changeScene( "endScene.fxml",observers));
     }
 
-    /**
-     * This method is used to show the message that a player has disconnected
-     * @param nickname is the nickname of the player that has disconnected
-     */
     @Override
     public void someoneDisconnected(String nickname) {
         Platform.runLater(() -> {
@@ -139,47 +97,26 @@ public class Gui extends ViewObservable implements View {
         });
     }
 
-    /**
-     * This method is used to show the living room of the game
-     * @param livingRoom is the living room of the game
-     */
     @Override
     public void showLivingRoom(LivingRoom livingRoom) {
         Platform.runLater(() -> gameSceneController.updateLivingRoom(livingRoom));
     }
 
-    /**
-     * This method is used to show the bookshelf of a player
-     * @param player is the player whose bookshelf has to be shown
-     */
     @Override
     public void showBookshelf(Player player) {
         Platform.runLater(() -> gameSceneController.updateBookShelf(player));
     }
 
-    /**
-     * This method is used to show the common goal cards of the game
-     * @param game is the game
-     */
     @Override
     public synchronized void showCommonGoalCards(Game game) {
         Platform.runLater(() -> gameSceneController.setCommonGoalCards(game));
     }
 
-    /**
-     * This method is used to show the personal goal card of a player
-     * @param player is the player whose personal goal card has to be shown
-     */
     @Override
     public synchronized void showPersonalGoalCard(Player player) {
         Platform.runLater(() -> gameSceneController.setPersonalGoalCard(player));
     }
 
-    /**
-     * This method is used update the state of the game
-     * @param player is the current player
-     * @param game is the current game
-     */
     @Override
     public void updateGameState(Player player, Game game) {
         if(gameSceneController == null){
@@ -194,10 +131,6 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
-    /**
-     * This method is used to set up the initial game
-     * @param game is the game started
-     */
     @Override
     public synchronized void showGameStarted(Game game) {
         gameSceneController = new GameSceneController();
@@ -222,11 +155,6 @@ public class Gui extends ViewObservable implements View {
     }
 
 
-    /**
-     * This method is used to show the waiting room
-     * @param maxPlayers is the max number of players in the game
-     * @param numOfPlayersConnected is the number of players connected
-     */
     @Override
     public void showWaitingRoom(int maxPlayers, int numOfPlayersConnected) {
         WaitingRoomSceneController waitingRoomSceneController = new WaitingRoomSceneController();
@@ -250,10 +178,6 @@ public class Gui extends ViewObservable implements View {
         //waitingRoomSceneController.setWelcomeText("Welcome back " + nickname + "!");
     }
 
-    /**
-     * This method is used to show the end scene of the game
-     * @param winner is the player that won the game
-     */
     @Override
     public void showWinner(String winner, Game game) {
     }
@@ -263,12 +187,6 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-    /**
-     * This method is used to update the common goal card points
-     * @param game
-     * @param previousPoints1
-     * @param previousPoints2
-     */
     @Override
     public void updateGuiCommonGoalCardPoints(Game game, int previousPoints1, int previousPoints2){
         Platform.runLater(() ->gameSceneController.updateVisualCommonGoalCardPoints(game, previousPoints1, previousPoints2));
@@ -284,10 +202,6 @@ public class Gui extends ViewObservable implements View {
         Platform.runLater(() -> endSceneController.setScoreBoard(scoreboard));
     }
 
-    /**
-     * This method is used to handle the disconnections of the players
-     * @param nickname is the nickname of the player that has disconnected
-     */
     @Override
     public void handleDisconnection(String nickname) {
         Platform.runLater(() -> {

@@ -187,6 +187,9 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
     private Game gamePassed;
 
+    /**
+     * Initializes all the fields of the main game scene
+     */
     @FXML
     public void initialize() {
         boardGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, this::tileClicked);
@@ -223,7 +226,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to set up the initial game scene
+     * Sets up the initial game scene
      * @param game the current game
      */
     public synchronized void setUp(Game game){
@@ -333,6 +336,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         });
     }
 
+    /**
+     * Displays the current player in yellow
+     * @param player current player
+     */
     public void setVisualNames(Player player){
         if(namePlayer1.getText().equals(player.getNickname())){
             namePlayer1.setFill(Color.YELLOW);
@@ -358,7 +365,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method shows thw banner when the player has to choose the tiles from the board
+     * Shows thw banner when the player has to choose the tiles from the board
      */
     public void selectTiles(){
         if(firstTime) {
@@ -375,7 +382,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called when a tile has been clicked during the current player's turn
+     * Handles the event of a tile being clicked during the current player's turn
      * @param event mouse event
      */
     public void tileClicked(MouseEvent event) {
@@ -444,7 +451,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called when the confirm button is clicked for the chosen tiles
+     * Handles the confirm button being clicked for the chosen tiles
      * @param event mouse event
      */
     public void confirmTileSelectionButtonClicked(MouseEvent event){
@@ -463,7 +470,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method shows thw banner when the player has to choose the order for the tiles
+     * Shows the banner when the player has to choose the order for the tiles
      */
     public void tileOrder(ArrayList<Tile> chosenTiles) {
 
@@ -503,7 +510,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is used to set the style of the tile
+     * Sets the style of the tile
      * @param tileType of the chosen tile
      * @return the style of the tile
      */
@@ -588,16 +595,23 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
+    /**
+     * @param counter to be set
+     */
     private void setCounter(int counter) {
         this.counter = counter;
     }
 
+    /**
+     * @return the counter
+     */
     private int getCounter() {
         return counter;
     }
 
     /**
-     * This method shows the banner when the player has to choose the column to put the tiles in and shows the arrows above the available columns
+     * Shows the banner when the player has to choose the column to put the tiles in and shows the arrows above the
+     * available columns
      */
     public void selectColumn(ArrayList<Integer> AvailableColumns, Player player){
         Platform.runLater(() -> GuiController.showBanner("INFO", "Choose the column to put the tiles in"));
@@ -775,7 +789,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to update the tiles on the living room board
+     * Updates the tiles on the living room board
      * @param livingRoom of the current game
      */
     public synchronized void updateLivingRoom(LivingRoom livingRoom){
@@ -792,7 +806,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to update the tiles on the bookshelf
+     * Updates the tiles on the bookshelf
      * @param player of the bookshelf
      */
     public synchronized void updateBookShelf(Player player){
@@ -911,7 +925,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to set the common goal cards of the game
+     * Sets the common goal cards of the game
      * @param game the current game
      */
     public void setCommonGoalCards(Game game){
@@ -926,7 +940,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to set the personal goal cards of the players
+     * Sets the personal goal cards of the players
      * @param player the current player
      */
     public void setPersonalGoalCard(Player player) {
@@ -1004,7 +1018,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called  set the chair of the first player
+     * Sets the chair of the first player
      * @param game the current game
      */
     public void setChair(Game game) {
@@ -1049,7 +1063,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to convert the tile type into an image
+     * Converts the tile type into an image
      * @param tileType the type of the tile
      * @return the image of the tile
      */
@@ -1126,7 +1140,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to resize thr tiles for the bookshelf
+     * Resizes the tiles for the bookshelf
      * @param imageName od the tile
      * @return the image of the tile
      */
@@ -1137,7 +1151,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to check if the cell of the living room is valid
+     * Checks if the cell of the living room is valid
      * @param tile of the cell
      * @return true if the cell is valid, false otherwise
      */
@@ -1154,6 +1168,11 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         };
     }
 
+    /**
+     * Checks if the selected tile is valid depending on the number of players
+     * @param tile selected
+     * @return true if is valid, false otherwise
+     */
     public boolean validCellForNumOfPlayers(Tile tile){
 
         if(numOfPlayers == 2){
@@ -1185,8 +1204,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to open the chat from the menu bar
-     *
+     * Opens the chat from the menu bar
      * @param game current game
      */
     public void openChatButtonClicked(Game game){
@@ -1194,7 +1212,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to quit the game from the menu bar
+     * Quits the game from the menu bar
      * @param event mouse click
      */
     public void quitButtonClicked(ActionEvent event) {
@@ -1202,17 +1220,25 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to open the leaderboard from the menu bar
-     * @param game of the player
+     * Opens the leaderboard from the menu bar
+     * @param game current game
      */
     public void leaderboardButtonClicked(Game game) {
         Platform.runLater(() -> showLeaderboard(game));
     }
 
+    /**
+     * Shows rulebook from the menu bar
+     * @param event of type mouse clicked
+     */
     public void rulebookButtonClicked(ActionEvent event) {
         Platform.runLater(GuiController::showRulebook);
     }
 
+    /**
+     * Shows common goal card
+     * @param commonGoal selected
+     */
     public void commonGoalCardClicked(AnchorPane commonGoal) {
         String styleName = commonGoal.getStyleClass().get(0);
         Integer id = switch (styleName) {
@@ -1234,10 +1260,18 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Platform.runLater(() -> showCommonGoalCardInfo(id));
     }
 
+    /**
+     * Sets number of player
+     * @param numOfPlayers to be set
+     */
     public void setNumOfPlayers(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
     }
 
+    /**
+     * Aligns center of gridpane
+     * @param gridPane to be aligned
+     */
     public void alignCenter(GridPane gridPane){
         ObservableList<Node> cells = gridPane.getChildren();
 
@@ -1248,7 +1282,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * This method is called to update the common goal card points
+     * Updates the common goal card points
      * @param game current game
 
      */
@@ -1380,7 +1414,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
 
     /**
-     * This method is called to update the end game token
+     * Updates the end game token
      * @param game of the player
      */
     public void updateVisualEndGameToken(Game game) {
