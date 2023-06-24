@@ -22,6 +22,12 @@ public class GuiController extends ViewObservable{
     private static Scene currentScene;
     private static GenericSceneController currentController;
 
+    private static final Chat chat = new Chat();
+
+    public static Chat getChat(){
+        return chat;
+    }
+
     /**
      * Changes scene setting the controller, the scene and through the list of observers
      * @param fxml
@@ -142,8 +148,7 @@ public class GuiController extends ViewObservable{
     /**
      * Displays the chat of the player
      */
-    public static void showChat(Game game) {
-        Chat chat = gui.getChat();
+    public static void showChat() {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
         try {

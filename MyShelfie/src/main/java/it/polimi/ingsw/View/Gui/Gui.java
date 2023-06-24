@@ -15,11 +15,10 @@ public class Gui extends ViewObservable implements View {
     private GameSceneController gameSceneController;
     private EndSceneController endSceneController;
     private WaitingRoomSceneController waitingRoomSceneController;
-    private Chat chat;
 
     @Override
     public Chat getChat() {
-        return chat;
+        return GuiController.getChat();
     }
 
     @Override
