@@ -23,6 +23,7 @@ public class Server implements Runnable{
     private GameController gameController;
     private Map<String, Connection> connectionMap;
     private Object lock;
+    private Object lock2;
     private boolean reloadedGame = false;
 
     /**
@@ -32,6 +33,7 @@ public class Server implements Runnable{
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
+        this.lock2 = new Object();
         Thread ping = new Thread(this);
         ping.start();
     }
@@ -157,15 +159,29 @@ public class Server implements Runnable{
      * @param connection
      */
     public void removeClient(Connection connection) {
-        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
-            if(map.getValue().equals(connection)) {
-                connection.setIsConnected();
-                connectionMap.remove(map.getKey(), map.getValue());
+        synchronized (lock2) {
+            for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
+                if (map.getValue().equals(connection)) {
+                    connection.setIsConnected();
+                    connectionMap.remove(map.getKey(), map.getValue());
 
-                closeServer();
-                LOGGER.info(() -> map.getKey() + " was removed from the client list");
-                break;
+                    if (!gameController.waitingForPlayers()) {
+                        removeAllClients();
+                    }
+
+                    LOGGER.info(() -> map.getKey() + " was removed from the client list");
+                    closeServer();
+                    break;
+                }
             }
+        }
+    }
+
+    public void removeAllClients(){
+        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+            map.getValue().setIsConnected();
+            connectionMap.remove(map.getKey(), map.getValue());
+            LOGGER.info(() -> map.getKey() + " was removed from the client list");
         }
     }
 
@@ -174,7 +190,7 @@ public class Server implements Runnable{
      * @param connection
      */
     public void clientDisconnection(Connection connection) {
-        synchronized (lock){
+        synchronized (lock2){
 
             String app = "Server";
 
@@ -187,13 +203,14 @@ public class Server implements Runnable{
 
             if(app != "Server") {
                 for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
-                    if (!map.getKey().equals(app))
-                        sendMessage(new GenericMessage(app + " disconnected from the server. Game finished :("), map.getKey());
+                    if (!map.getKey().equals(app)) {
+                        sendMessage(new DisconnectionReply(app), map.getKey());
+                    }
                 }
             }
-            removeClient(connection);
         }
 
+        removeClient(connection);
     }
 
     /**
@@ -206,6 +223,7 @@ public class Server implements Runnable{
                 map.getValue().sendMessage(message);
             }
         }
+
         LOGGER.log(Level.INFO, "Send to all: {0}", message);
     }
 
@@ -218,11 +236,11 @@ public class Server implements Runnable{
         synchronized(lock){
             for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
-                    if(message.getMessageType() == MessageType.DISCONNECTION_REPLY){
+                    map.getValue().sendMessage(message);
+
+                    if(message.getMessageType() == MessageType.DISCONNECTION_REPLY)
                         clientDisconnection(map.getValue());
-                    }else{
-                        map.getValue().sendMessage(message);
-                    }
+
                     break;
                 }
             }

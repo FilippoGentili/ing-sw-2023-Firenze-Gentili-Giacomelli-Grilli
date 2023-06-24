@@ -139,6 +139,10 @@ public class VirtualView implements View, Observer, Serializable {
     }
 
     @Override
+    public void handleDisconnection() {
+
+    }
+
     public void handleDisconnection(String nickname) {
         connection.sendMessage(new DisconnectionReply(nickname));
         try {

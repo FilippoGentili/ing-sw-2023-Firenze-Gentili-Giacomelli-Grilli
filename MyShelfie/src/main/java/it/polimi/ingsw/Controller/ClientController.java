@@ -38,6 +38,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     private Client client;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
     private ClientUpdater clientUpdater;
+    private Object lock = new Object();
 
     /**
      * Constructor of client controller for each client
@@ -127,10 +128,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                 case DISCONNECTION_REPLY:
                     DisconnectionReply disconnectionReply = (DisconnectionReply) message;
                     queue.add(() -> {
-                        if(disconnectionReply.getDisconnectedUser().equals("Server"))
-                            view.handleDisconnection(disconnectionReply.getDisconnectedUser());
-                        else view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
-                        closeConnection();
+                        view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
                     });
                     break;
                 case CHOSEN_TILES_REQUEST:
@@ -282,7 +280,9 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
     @Override
     public void handleDisconnection() {
+        view.handleDisconnection();
         client.sendMessage(new DisconnectionRequest(client.getUsername()));
+        closeConnection();
     }
 
     @Override
@@ -359,18 +359,19 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     /**
      * Closes connection with the client updater and disconnects the client
      */
-    public void closeConnection(){
-        if(clientUpdater!= null){
-            clientUpdater.stop();
-            clientUpdater=null;
-        }
+    public void closeConnection() {
+        synchronized (lock) {
+            if (clientUpdater != null) {
+                clientUpdater.stop();
+                clientUpdater = null;
+            }
 
-        try{
-            client.disconnectMe();
-        } catch (Exception e){
+            try {
+                client.disconnectMe();
+            } catch (Exception e) {
 
+            }
+            client = null;
         }
-        client = null;
     }
-
 }

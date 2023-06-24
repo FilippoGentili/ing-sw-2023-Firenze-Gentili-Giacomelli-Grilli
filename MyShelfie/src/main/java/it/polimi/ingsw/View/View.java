@@ -125,9 +125,8 @@ public interface View {
 
     /**
      * Handles the disconnection of the client notifying the observers
-     * @param nickname of the disconnected player
      */
-    void handleDisconnection(String nickname);
+    void handleDisconnection();
 
     /**
      * This method is used to display the current player

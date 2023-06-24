@@ -90,10 +90,11 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void someoneDisconnected(String nickname) {
-        Platform.runLater(() -> {
-            GuiController.showBanner(END, "The player " + nickname + " disconnected");
-            GuiController.changeScene("startScene.fxml", observers);
-        });
+        endSceneController = new EndSceneController();
+        endSceneController.addAllObserver(observers);
+        Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
+        Platform.runLater(() -> endSceneController.setText("The player " + nickname + " disconnected"));
+        Platform.runLater(() -> endSceneController.setSadMessage());
     }
 
     @Override
@@ -196,16 +197,13 @@ public class Gui extends ViewObservable implements View {
         endSceneController.addAllObserver(observers);
         Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
         Platform.runLater(() -> endSceneController.setUp());
-        Platform.runLater(() -> endSceneController.setWinner(winner));
+        Platform.runLater(() -> endSceneController.setText(winner + " won!"));
         Platform.runLater(() -> endSceneController.setScoreBoard(scoreboard));
     }
 
     @Override
-    public void handleDisconnection(String nickname) {
-        Platform.runLater(() -> {
-            GuiController.showBanner(END, "You will be disconnected. Game finished :(");
-        });
-
+    public void handleDisconnection() {
+        Platform.exit();
         System.exit(1);
     }
 }

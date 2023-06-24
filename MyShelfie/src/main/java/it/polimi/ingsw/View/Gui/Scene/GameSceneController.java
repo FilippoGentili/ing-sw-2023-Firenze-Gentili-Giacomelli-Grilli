@@ -1216,7 +1216,13 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * @param event mouse click
      */
     public void quitButtonClicked(ActionEvent event) {
-        System.exit(1);
+        notifyObserver(obs -> {
+            try {
+                obs.handleDisconnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**

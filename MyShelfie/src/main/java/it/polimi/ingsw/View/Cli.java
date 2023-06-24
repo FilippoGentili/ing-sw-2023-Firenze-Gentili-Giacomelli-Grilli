@@ -824,18 +824,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
     @Override
     public void someoneDisconnected(String nickname) {
-        System.out.println(nickname + " disconnected.");
-        /*notifyObserver(obs -> {
-            try {
-                obs.handleDisconnection();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });*/
-
-        System.exit(1);
+        System.out.println(nickname + " disconnected. The game cannot continue...");
+        handleDisconnection();
     }
-    @Override
+
     public void handleDisconnection(String nickname) {
         System.out.println("You will be disconnected. Game finished :(");
 
@@ -847,8 +839,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             }
         });
 
-
-       //System.exit(1);
+        System.exit(1);
     }
     @Override
     public void turnDisplay(Player player) {
@@ -890,15 +881,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
     @Override
     public void handleDisconnection() {
-        System.out.println("You will be disconnected. Game finished :(");
-
-       /* notifyObserver(obs -> {
-            try {
-                obs.handleDisconnection();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });*/
+        System.out.println("Game finished :(");
         System.exit(1);
     }
 }

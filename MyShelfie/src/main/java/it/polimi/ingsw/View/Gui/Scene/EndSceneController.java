@@ -55,9 +55,9 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
      * Sets winner text
      * @param nickname of the winner of the game
      */
-    public void setWinner(String nickname){
+    public void setText(String nickname){
         winnerText.setVisible(true);
-        winnerText.setText(nickname + " won!");
+        winnerText.setText(nickname);
     }
 
     /**
@@ -100,6 +100,14 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
             default -> {
             }
         }
+    }
+
+    public void setSadMessage(){
+        score1.setVisible(false);
+        score2.setVisible(false);
+        score3.setVisible(true);
+        score3.setText("The game cannot continue...");
+        score4.setVisible(false);
     }
 
     /**
