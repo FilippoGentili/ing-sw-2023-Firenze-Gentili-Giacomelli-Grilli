@@ -92,6 +92,6 @@
                 </AnchorPane>
             </center>
         </BorderPane>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="egg" layoutX="280.0" layoutY="50.0" prefHeight="650.0" prefWidth="800.0" stylesheets="@../css/style.css" visible="false" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="283.0" AnchorPane.topAnchor="59.0" />
     </children>
 </AnchorPane>

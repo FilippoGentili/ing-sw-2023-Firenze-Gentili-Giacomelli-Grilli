@@ -30,6 +30,9 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     private Button exitButton;
     @FXML
     private AnchorPane easter;
+    @FXML
+    private AnchorPane egg;
+    private int counter = 0;
 
     /**
      * Initializes exit button and easteregg of the project
@@ -38,6 +41,7 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     public void initialize(){
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
         easter.addEventHandler(MouseEvent.MOUSE_CLICKED, this::easterClicked);
+        egg.addEventHandler(MouseEvent.MOUSE_CLICKED, this::eggClicked);
     }
 
     /**
@@ -115,6 +119,16 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
      * @param event of type mouse clicked
      */
     public void easterClicked(MouseEvent event){
+        counter++;
+        if(counter == 5){
+            egg.setVisible(true);
+            egg.getStyleClass().add("egg");
+        }
+    }
+
+    public void eggClicked(MouseEvent event){
+        counter = 0;
+        egg.setVisible(false);
     }
 
     /**

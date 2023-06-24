@@ -382,3 +382,8 @@
     -fx-background-image: url("../images/publisherMaterial/publisher.png");
     -fx-background-size: stretch;
 }
+
+.egg{
+    -fx-background-image: url("../images/misc/egg.jpg");
+    -fx-background-size: stretch;
+}
