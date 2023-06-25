@@ -65,7 +65,6 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
 
     public void setUp(Game game, Chat chat){
         this.chat = chat;
-        int numberOfPlayers = game.getPlayers().size();
         playerList.getItems().clear();
         playerList.setPromptText("Select Player");
         playerList.getItems().add("All players");
