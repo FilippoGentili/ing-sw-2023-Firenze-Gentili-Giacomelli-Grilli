@@ -260,7 +260,7 @@ public class GameController implements Serializable {
         String receiver = chatMessage.getReceiver();
         String msg = chatMessage.getMessage();
 
-        if(receiver.equals("all players"))
+        if(receiver.equals("All players"))
             server.broadcastMessage(new ChatMessage(sender, receiver, msg));
         else server.sendMessage(new ChatMessage(sender, receiver, msg), receiver);
     }

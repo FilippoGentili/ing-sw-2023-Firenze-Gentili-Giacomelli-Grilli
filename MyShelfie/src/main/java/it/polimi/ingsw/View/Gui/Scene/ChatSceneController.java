@@ -40,9 +40,9 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private ComboBox playerList;
     @FXML
     private BorderPane pane;
+    private Chat chat;
     private double xAxis;
     private double yAxis;
-    private Chat chat;
 
     public ChatSceneController() {
         stage = new Stage();

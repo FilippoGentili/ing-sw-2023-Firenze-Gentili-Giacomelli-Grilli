@@ -1,7 +1,6 @@
 package it.polimi.ingsw.View.Gui;
 
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Network.Message.ChatMessage;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.Scene.*;
 import it.polimi.ingsw.View.View;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 
 public class Gui extends ViewObservable implements View {
     private static final String ERROR = "Login Error";
-    private static final String END = "GAME OVER";
     private GameSceneController gameSceneController;
     private EndSceneController endSceneController;
     private WaitingRoomSceneController waitingRoomSceneController;
@@ -94,7 +92,7 @@ public class Gui extends ViewObservable implements View {
         endSceneController.addAllObserver(observers);
         Platform.runLater(() -> GuiController.changeScene("endScene.fxml", endSceneController));
         Platform.runLater(() -> endSceneController.setText("The player " + nickname + " disconnected"));
-        Platform.runLater(() -> endSceneController.setSadMessage());
+        Platform.runLater(() -> endSceneController.setDisconnectionText());
     }
 
     @Override

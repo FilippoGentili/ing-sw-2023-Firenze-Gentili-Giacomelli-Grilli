@@ -330,7 +330,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         Scanner scanner = new Scanner(System.in);
         String receiver;
         System.out.println("Chat opened");
-        System.out.println("Write the name of the player you want to chat with, 'all players' to send a broadcast message");
+        System.out.println("Write the name of the player you want to chat with, 'All players' to send a broadcast message");
         System.out.println("Write close chat to return the game");
 
         /*if (chat.getMessages().isEmpty()) {

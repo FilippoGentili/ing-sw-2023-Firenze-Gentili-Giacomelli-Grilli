@@ -1,11 +1,9 @@
 package it.polimi.ingsw.View.Gui.Scene;
 
-import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.ViewObservable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -106,7 +104,10 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         }
     }
 
-    public void setSadMessage(){
+    /**
+     * Sets the text field  when the game cannot continue
+     */
+    public void setDisconnectionText(){
         score1.setVisible(false);
         score2.setVisible(false);
         score3.setVisible(true);
@@ -126,9 +127,14 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         }
     }
 
+    /**
+     * Closes the easter egg when clicked
+     * @param event of type mouse clicked
+     */
     public void eggClicked(MouseEvent event){
         counter = 0;
         egg.setVisible(false);
+        egg.getStyleClass().clear();
     }
 
     /**

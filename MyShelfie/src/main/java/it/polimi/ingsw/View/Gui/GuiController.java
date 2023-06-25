@@ -6,8 +6,6 @@ import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.*;
-import it.polimi.ingsw.View.View;
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,8 +14,6 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class GuiController extends ViewObservable{
@@ -150,7 +146,7 @@ public class GuiController extends ViewObservable{
     /**
      * Displays the chat of the player
      */
-    public static void showChat(Game game) {
+    public static void showChat(Game game, Chat chat) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
         try {

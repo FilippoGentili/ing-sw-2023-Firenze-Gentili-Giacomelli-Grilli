@@ -184,7 +184,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private boolean firstPlayerFullBookshelf = true;
     private boolean firstTime = true;
     private LivingRoom livingRoom = new LivingRoom();
-
     private Game gamePassed;
 
     /**
@@ -219,7 +218,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,5, arrowB4C5));
         commonGoalCard1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard1));
         commonGoalCard2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard2));
-        openChatButton.setOnAction(event -> openChatButtonClicked(gamePassed));
+        openChatButton.setOnAction(event -> openChatButtonClicked(gamePassed, getChat()));
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(event -> leaderboardButtonClicked(gamePassed));
         rulebookButton.setOnAction(this::rulebookButtonClicked);
@@ -1207,8 +1206,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * Opens the chat from the menu bar
      * @param game current game
      */
-    public void openChatButtonClicked(Game game){
-        Platform.runLater(() -> showChat(game));
+    public void openChatButtonClicked(Game game, Chat chat) {
+        Platform.runLater(() -> showChat(game, chat));
     }
 
     /**
@@ -1275,7 +1274,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * Aligns center of gridpane
+     * Aligns center of gridPane
      * @param gridPane to be aligned
      */
     public void alignCenter(GridPane gridPane){
@@ -1290,7 +1289,6 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     /**
      * Updates the common goal card points
      * @param game current game
-
      */
     public void updateVisualCommonGoalCardPoints(Game game, int previousPointCGC1, int previousPointCGC2) {
         int currentPointCGC1 = game.getCommonGoal1().getValue();
