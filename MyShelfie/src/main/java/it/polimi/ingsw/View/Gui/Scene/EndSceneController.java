@@ -149,7 +149,5 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
                 throw new RuntimeException(e);
             }
         });
-
-        System.exit(1);
     }
 }
