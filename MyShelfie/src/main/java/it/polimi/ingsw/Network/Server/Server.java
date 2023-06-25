@@ -6,7 +6,6 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.RMI.RMIServer;
 import it.polimi.ingsw.Network.Server.Socket.SocketServer;
-import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -114,12 +113,11 @@ public class Server implements Runnable{
      * Adds client through its nickname and connection type
      */
     public synchronized void addClient(String nickname, Connection connection) throws InterruptedException {
-        VirtualView vv = new VirtualView(connection);
 
         if(!reloadedGame){
             if (gameController.waitingForPlayers()) {
                 connectionMap.put(nickname, connection);
-                gameController.handleLogin(nickname, vv);
+                gameController.handleLogin(nickname);
             } else {
                 sendMessage(new GenericMessage("We are sorry, the game already started :( ... you have to wait until the end of the match"),nickname);
                 sendMessage(new DisconnectionReply(nickname),nickname);
@@ -159,16 +157,16 @@ public class Server implements Runnable{
     public void removeClient(Connection connection) {
         synchronized (lock) {
             for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
-                Map.Entry<String, Connection> map = mapIterator.next();
-                if (map.getValue().equals(connection)) {
+                Map.Entry<String, Connection> mapElement = mapIterator.next();
+                if (mapElement.getValue().equals(connection)) {
                     connection.setIsConnected();
-                    connectionMap.remove(map.getKey(), map.getValue());
+                    connectionMap.remove(mapElement.getKey(), mapElement.getValue());
 
                     if (!gameController.waitingForPlayers()) {
                         //removeAllClients();
                     }
 
-                    LOGGER.info(() -> map.getKey() + " was removed from the client list");
+                    LOGGER.info(() -> mapElement.getKey() + " was removed from the client list");
                     closeServer();
                     break;
                 }
@@ -266,10 +264,10 @@ public class Server implements Runnable{
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
                 for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
-                    Map.Entry<String, Connection> map = mapIterator.next();
-                    if (map.getValue() != null && map.getValue().checkConnection()) {
+                    Map.Entry<String, Connection> mapElement = mapIterator.next();
+                    if (mapElement.getValue() != null && mapElement.getValue().checkConnection()) {
                         try {
-                            map.getValue().ping();
+                            mapElement.getValue().ping();
                         } catch (RemoteException e) {
                             throw new RuntimeException(e);
                         }

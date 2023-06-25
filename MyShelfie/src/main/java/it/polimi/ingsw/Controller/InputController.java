@@ -2,15 +2,12 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.Server.Server;
-import it.polimi.ingsw.View.View;
-import it.polimi.ingsw.View.VirtualView;
 import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Model.Tile;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * this class is used to handle and check all the input messages arriving from the client
@@ -32,23 +29,20 @@ public class InputController implements Serializable {
     /**
      * This method checks if the nickname inserted by the client during login is valid
      * @param nickname nickname chosen by the client
-     * @param view view of the client
      * @return {code @true} if nickname is valid {code @false} if nickname is not valid
      */
-    public boolean checkNickname(String nickname, View view) {
+    public boolean checkNickname(String nickname) {
         if(nickname.isEmpty()){
-            view.showMessage("nickname missing");
+            gameController.getServer().sendMessage(new GenericMessage("nickname missing"),nickname);
             return false;
         }
 
-        for(Map.Entry<Player, VirtualView> map : gameController.getVirtualViewMap().entrySet()){
-            if(nickname.equals(map.getKey().getNickname())){
-                view.showMessage("this nickname is already used");
+        for(Player player : gameController.getPlayers()){
+            if(nickname.equals(player.getNickname())){
+                gameController.getServer().sendMessage(new GenericMessage("this nickname is already used"),nickname);
                 return false;
             }
         }
-
-        view.loginResult(true, true, nickname);
         return true;
     }
 

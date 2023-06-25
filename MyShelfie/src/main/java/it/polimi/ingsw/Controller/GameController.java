@@ -4,7 +4,6 @@ import it.polimi.ingsw.Network.Message.*;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Server.Persistence.GameSaved;
 import it.polimi.ingsw.Network.Server.Server;
-import it.polimi.ingsw.View.VirtualView;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,7 +21,6 @@ public class GameController implements Serializable {
     private Player firstPlayer;
     private final transient InputController inputController;
     private ArrayList<Player> players;
-    private transient Map<Player, VirtualView> virtualViewMap;
     private final transient Server server;
     private boolean lastRound = false;
     private boolean firstTurn = true;
@@ -38,10 +36,8 @@ public class GameController implements Serializable {
         this.game = new Game();
         this.server = server;
         this.players = new ArrayList<>();
-        //this.numOfPlayers = num;
         this.inputController = new InputController(this, server);
         setGameState(LOGIN);
-        //virtualViewMap = new HashMap<>();
     }
 
     /**
@@ -55,7 +51,6 @@ public class GameController implements Serializable {
         this.firstPlayer = savedGameController.getFirstPlayer();
         this.inputController = new InputController(this, server);
         this.players = savedGameController.getPlayers();
-        this.virtualViewMap = savedGameController.getVirtualViewMap();
         this.lastRound = savedGameController.isLastRound();
         this.firstTurn = savedGameController.isFirstTurn();
         this.firstLogin = savedGameController.isFirstLogin();
@@ -98,7 +93,7 @@ public class GameController implements Serializable {
                     game.setNumOfPlayers(numOfPlayersReply.getNumOfPlayers());
                     game.getCommonGoal1().setDelta(numOfPlayersReply.getNumOfPlayers());
                     game.getCommonGoal2().setDelta(numOfPlayersReply.getNumOfPlayers());
-                    server.sendMessage(new WaitingRoomMessage(numOfPlayersReply.getNumOfPlayers(), virtualViewMap.size()), message.getNickname());
+                    server.sendMessage(new WaitingRoomMessage(numOfPlayersReply.getNumOfPlayers(), players.size()), message.getNickname());
                     //restoreMatchElements();
                 }else {
                     Server.LOGGER.severe("Message from the client is not the number of players");
@@ -119,9 +114,8 @@ public class GameController implements Serializable {
      * This method decides if a client who wants to play the game can be admitted or not. If he is the first player,
      * this method asks the number of players.
      * @param nickname nickname of the player
-     * @param vv virtual view of the player
      */
-    public synchronized void handleLogin(String nickname, VirtualView vv) throws InterruptedException {
+    public synchronized void handleLogin(String nickname) {
         Player player = new Player(this.game);
 
         if (numOfPlayers == 0) {
@@ -130,7 +124,6 @@ public class GameController implements Serializable {
                 handleDisconnection(new DisconnectionRequest(nickname));
             }else {
                 firstLogin = false;
-                addVirtualView(player, vv);
                 players.add(player);
                 player.setNickname(nickname);
                 game.addPlayer(player);
@@ -138,22 +131,20 @@ public class GameController implements Serializable {
                 server.sendMessage(new NumOfPlayersRequest(), nickname);
                 server.sendMessage(new LoginReply(nickname), nickname);
             }
-        } else if (virtualViewMap.size() < numOfPlayers) {
-            if (inputController.checkNickname(nickname, vv)) {
-                addVirtualView(player, vv);
+        } else if (players.size() < numOfPlayers) {
+            if (inputController.checkNickname(nickname)) {
                 players.add(player);
                 player.setNickname(nickname);
                 game.addPlayer(player);
                 server.sendMessage(new LoginResult(nickname, true, true), nickname);
                 server.sendMessage(new LoginReply(nickname), nickname);
-                //server.sendMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()), nickname);
-                server.broadcastMessage(new WaitingRoomMessage(numOfPlayers, virtualViewMap.size()));
+                server.broadcastMessage(new WaitingRoomMessage(numOfPlayers, players.size()));
 
-                if (virtualViewMap.size() == numOfPlayers)
+                if (players.size() == numOfPlayers)
                     startGame();
             } else
                 server.sendMessage(new LoginResult(nickname,false,true),nickname);
-        } else if (virtualViewMap.size() == numOfPlayers) {
+        } else if (players.size() == numOfPlayers) {
             server.sendMessage(new LoginResult(nickname,true,false),nickname);
             handleDisconnection(new DisconnectionRequest(nickname));
         }
@@ -504,19 +495,8 @@ public class GameController implements Serializable {
      */
     public void restoreMatchElements() {
         for(Player player : players){
-                    server.sendMessage(new GameStateMessage(player,game),player.getNickname());
+            server.sendMessage(new GameStateMessage(player,game),player.getNickname());
         }
-    }
-
-    public void addVirtualView(Player player, VirtualView vv) {
-        if(numOfPlayers==0){
-            virtualViewMap = new HashMap<>();
-        }
-        virtualViewMap.put(player, vv);
-    }
-
-    public void removeVirtualView(String nickname) {
-        virtualViewMap.remove(getPlayerByNickname(nickname));
     }
 
     public Player getCurrentPlayer() {
@@ -529,10 +509,6 @@ public class GameController implements Serializable {
 
     public void setGameState(GameState gameState){
         this.gameState = gameState;
-    }
-
-    public Map<Player,VirtualView> getVirtualViewMap(){
-        return virtualViewMap;
     }
 
     public boolean waitingForPlayers(){
@@ -582,12 +558,15 @@ public class GameController implements Serializable {
             if(lastMessage != null) {
                 handleGame(lastMessage);
             }else{
-                server.broadcastMessage(new GameStartedMessage(game));
+                //server.broadcastMessage(new GameStartedMessage(game));
                 newTurn();
             }
         }
     }
 
+    public Server getServer(){
+        return server;
+    }
     public ArrayList<String> getReturnPlayers(){
         return returnPlayers;
     }
