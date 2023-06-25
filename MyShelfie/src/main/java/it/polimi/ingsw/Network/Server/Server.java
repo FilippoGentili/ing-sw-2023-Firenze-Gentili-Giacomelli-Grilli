@@ -158,7 +158,8 @@ public class Server implements Runnable{
      */
     public void removeClient(Connection connection) {
         synchronized (lock) {
-            for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
+            for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
+                Map.Entry<String, Connection> map = mapIterator.next();
                 if (map.getValue().equals(connection)) {
                     connection.setIsConnected();
                     connectionMap.remove(map.getKey(), map.getValue());
@@ -264,7 +265,8 @@ public class Server implements Runnable{
     public void run(){
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
-                for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
+                for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
+                    Map.Entry<String, Connection> map = mapIterator.next();
                     if (map.getValue() != null && map.getValue().checkConnection()) {
                         try {
                             map.getValue().ping();
