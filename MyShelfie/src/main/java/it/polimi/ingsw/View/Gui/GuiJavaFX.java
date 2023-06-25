@@ -21,6 +21,7 @@ public class GuiJavaFX extends Application {
         Gui guiView = new Gui();
         ClientController clientController = new ClientController(guiView);
         guiView.addObserver(clientController);
+        guiView.setObs(clientController);
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/fxml/startScene.fxml"));

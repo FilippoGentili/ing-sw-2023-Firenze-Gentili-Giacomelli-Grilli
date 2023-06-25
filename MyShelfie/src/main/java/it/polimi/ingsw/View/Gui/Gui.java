@@ -1,7 +1,9 @@
 package it.polimi.ingsw.View.Gui;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObservable;
+import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.*;
 import it.polimi.ingsw.View.View;
 import javafx.application.Platform;
@@ -13,6 +15,15 @@ public class Gui extends ViewObservable implements View {
     private GameSceneController gameSceneController;
     private EndSceneController endSceneController;
     private WaitingRoomSceneController waitingRoomSceneController;
+    private static ArrayList<ViewObserver> guiObs = new ArrayList<>();
+
+    public void setObs(ViewObserver viewObserver){
+        guiObs.add(viewObserver);
+    }
+
+    public static ArrayList<ViewObserver> getObs(){
+        return guiObs;
+    }
 
     @Override
     public Chat getChat() {

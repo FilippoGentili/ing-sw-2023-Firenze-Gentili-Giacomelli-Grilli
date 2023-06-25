@@ -3,6 +3,7 @@ package it.polimi.ingsw.View.Gui;
 import it.polimi.ingsw.Model.Chat;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Network.Client.Client;
+import it.polimi.ingsw.Observer.Observer;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.Observer.ViewObserver;
 import it.polimi.ingsw.View.Gui.Scene.*;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +27,7 @@ public class GuiController extends ViewObservable{
     public static Chat getChat(){
         return chat;
     }
+
 
     /**
      * Changes scene setting the controller, the scene and through the list of observers
@@ -157,6 +160,7 @@ public class GuiController extends ViewObservable{
         }
         ChatSceneController chatSceneController = fxmlLoader.getController();
         Scene chatScene = new Scene(parent);
+        chatSceneController.addAllObserver(Gui.getObs());
         chatSceneController.setUp(game, chat);
         chatSceneController.setScene(chatScene);
         chatSceneController.showChat();

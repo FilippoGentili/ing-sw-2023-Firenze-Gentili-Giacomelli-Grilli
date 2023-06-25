@@ -44,6 +44,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private double xAxis;
     private double yAxis;
 
+    private boolean chatMode = false;
+
     public ChatSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -72,7 +74,6 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
             playerList.getItems().add(player.getNickname());
         }
         playerList.getSelectionModel().select(0);
-        updateChat(chat);
     }
     public void sendButtonClicked(Event event){
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
@@ -82,24 +83,30 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
                 notifyObserver(obs -> {
                     obs.sendChatMessage(receiver, message);
                 });
-                chatText.clear();
+                chatList.getItems().add("from you to " + receiver + ": " + message);
             }
-            updateChat(chat);
         }
     }
 
     public void updateChat(Chat chat){
         ArrayList<String> messages = chat.getMessages();
-        chatList.getItems().clear();
         for (String message : messages) {
             chatList.getItems().add(message);
         }
     }
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
+        chatMode = false;
     }
     public void showChat() {
+        chatMode = true;
         stage.showAndWait();
+        Thread chatThread = new Thread(() -> {
+            while (chatMode) {
+                updateChat(this.chat);
+            }
+        });
+        chatThread.start();
     }
     public void setScene(Scene scene) {
         stage.setScene(scene);
