@@ -218,7 +218,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         arrowB4C5.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> arrowClicked(4,5, arrowB4C5));
         commonGoalCard1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard1));
         commonGoalCard2.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> commonGoalCardClicked(commonGoalCard2));
-        openChatButton.setOnAction(event -> openChatButtonClicked(gamePassed, getChat()));
+        openChatButton.setOnAction(event -> openChatButtonClicked(gamePassed));
         quitButton.setOnAction(this::quitButtonClicked);
         leaderboardButton.setOnAction(event -> leaderboardButtonClicked(gamePassed));
         rulebookButton.setOnAction(this::rulebookButtonClicked);
@@ -1206,8 +1206,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      * Opens the chat from the menu bar
      * @param game current game
      */
-    public void openChatButtonClicked(Game game, Chat chat) {
-        Platform.runLater(() -> showChat(game, chat));
+    public void openChatButtonClicked(Game game) {
+        Platform.runLater(() -> showChat(game));
     }
 
     /**

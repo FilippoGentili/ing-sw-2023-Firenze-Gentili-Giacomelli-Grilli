@@ -149,7 +149,7 @@ public class GuiController extends ViewObservable{
     /**
      * Displays the chat of the player
      */
-    public static void showChat(Game game, Chat chat) {
+    public static void showChat(Game game) {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiController.class.getResource("/fxml/chatScene.fxml"));
         Parent parent;
         try {

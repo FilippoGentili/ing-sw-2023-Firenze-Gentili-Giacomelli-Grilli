@@ -100,10 +100,15 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     }
     public void showChat() {
         chatMode = true;
-        stage.showAndWait();
+        stage.show();
         Thread chatThread = new Thread(() -> {
             while (chatMode) {
                 updateChat(this.chat);
+                try {
+                    Thread.sleep(1000); // Aggiungi una breve pausa tra gli aggiornamenti della chat
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         chatThread.start();
