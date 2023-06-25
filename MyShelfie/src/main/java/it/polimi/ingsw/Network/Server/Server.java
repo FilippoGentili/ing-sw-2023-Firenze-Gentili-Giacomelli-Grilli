@@ -23,7 +23,6 @@ public class Server implements Runnable{
     private GameController gameController;
     private Map<String, Connection> connectionMap;
     private Object lock;
-    private Object lock2;
     private boolean reloadedGame = false;
 
     /**
@@ -33,7 +32,6 @@ public class Server implements Runnable{
         this.gameController = new GameController(this);
         this.connectionMap = new HashMap<>();
         this.lock = new Object();
-        this.lock2 = new Object();
         Thread ping = new Thread(this);
         ping.start();
     }
@@ -159,14 +157,14 @@ public class Server implements Runnable{
      * @param connection
      */
     public void removeClient(Connection connection) {
-        synchronized (lock2) {
+        synchronized (lock) {
             for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
                 if (map.getValue().equals(connection)) {
                     connection.setIsConnected();
                     connectionMap.remove(map.getKey(), map.getValue());
 
                     if (!gameController.waitingForPlayers()) {
-                        removeAllClients();
+                        //removeAllClients();
                     }
 
                     LOGGER.info(() -> map.getKey() + " was removed from the client list");
@@ -190,22 +188,20 @@ public class Server implements Runnable{
      * @param connection
      */
     public void clientDisconnection(Connection connection) {
-        synchronized (lock2){
 
-            String app = "Server";
+        String app = "Server";
 
-            for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
-                if(map.getValue().equals(connection)) {
-                    app = map.getKey();
-                    break;
-                }
+        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
+            if(map.getValue().equals(connection)) {
+                app = map.getKey();
+                break;
             }
+        }
 
-            if(app != "Server") {
-                for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
-                    if (!map.getKey().equals(app)) {
-                        sendMessage(new DisconnectionReply(app), map.getKey());
-                    }
+        if(app != "Server") {
+            for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
+                if (!map.getKey().equals(app)) {
+                    sendMessage(new DisconnectionReply(app), map.getKey());
                 }
             }
         }
@@ -238,8 +234,9 @@ public class Server implements Runnable{
                 if(map.getKey().equals(nickname) && map.getValue()!=null && map.getValue().checkConnection()){
                     map.getValue().sendMessage(message);
 
-                    if(message.getMessageType() == MessageType.DISCONNECTION_REPLY)
+                    if(message.getMessageType() == MessageType.DISCONNECTION_RESULT){
                         clientDisconnection(map.getValue());
+                    }
 
                     break;
                 }
@@ -255,7 +252,7 @@ public class Server implements Runnable{
      */
     public void handleMessage(Message message) throws InterruptedException {
         synchronized (lock) {
-            if(message.getMessageType() == MessageType.CHAT_MESSAGE){
+            if(message.getMessageType() == MessageType.CHAT_MESSAGE) {
                 broadcastMessage(message);
             }else {
                 gameController.forwardMessage(message);
