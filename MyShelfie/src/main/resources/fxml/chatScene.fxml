@@ -14,7 +14,7 @@
    <center>
       <AnchorPane prefHeight="463.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="chatList" prefHeight="424.0" prefWidth="600.0" styleClass="basePane1" stylesheets="@../css/style.css" />
+            <ListView fx:id="chatList" layoutY="10.0" prefHeight="414.0" prefWidth="600.0" styleClass="basePane1" stylesheets="@../css/style.css" AnchorPane.topAnchor="10.0" />
          </children></AnchorPane>
    </center>
    <top>
