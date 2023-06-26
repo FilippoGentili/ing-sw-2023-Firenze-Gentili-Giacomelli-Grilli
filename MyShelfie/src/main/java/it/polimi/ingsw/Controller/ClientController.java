@@ -255,7 +255,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     @Override
     public void sendChatMessage(String receiver, String message) {
         client.sendMessage(new ChatMessage(client.getUsername(), receiver, message));
-
+        view.getChat().addOldMessage("from you to " + receiver + ": " + message);
     }
 
     @Override

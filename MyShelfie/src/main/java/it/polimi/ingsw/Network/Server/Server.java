@@ -251,11 +251,7 @@ public class Server implements Runnable{
      */
     public void handleMessage(Message message) throws InterruptedException {
         synchronized (lock) {
-            if(message.getMessageType() == MessageType.CHAT_MESSAGE) {
-                broadcastMessage(message);
-            }else {
-                gameController.forwardMessage(message);
-            }
+            gameController.forwardMessage(message);
         }
     }
 

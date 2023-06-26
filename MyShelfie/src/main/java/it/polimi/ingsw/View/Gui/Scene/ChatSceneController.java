@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer.ViewObservable;
 import it.polimi.ingsw.View.Gui.GuiController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,7 +44,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private Chat chat;
     private double xAxis;
     private double yAxis;
-
+    private volatile ArrayList<String> chatMessages;
     private boolean chatMode = false;
 
     public ChatSceneController() {
@@ -54,6 +55,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         xAxis = 0;
         yAxis = 0;
         stage.setAlwaysOnTop(true);
+        this.chatMessages = new ArrayList<>();
     }
 
     @FXML
@@ -92,6 +94,13 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         ArrayList<String> messages = chat.getMessages();
         for (String message : messages) {
             chatList.getItems().add(message);
+            //GuiController.getChat().addOldMessage(message);
+        }
+    }
+
+    public void addOldMessages(ArrayList<String> messages){
+        for(String message : messages){
+            chatList.getItems().add(message);
         }
     }
     private void closeButtonClicked(MouseEvent event) {
@@ -102,8 +111,9 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         chatMode = true;
         stage.show();
         Thread chatThread = new Thread(() -> {
+            Platform.runLater(() -> addOldMessages(GuiController.getChat().getOldMessages()));
             while (chatMode) {
-                updateChat(this.chat);
+                Platform.runLater(() -> updateChat(this.chat));
                 try {
                     Thread.sleep(1000); // Aggiungi una breve pausa tra gli aggiornamenti della chat
                 } catch (InterruptedException e) {
