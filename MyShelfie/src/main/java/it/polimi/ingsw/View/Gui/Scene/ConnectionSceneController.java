@@ -49,6 +49,7 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private void socketButtonClicked(MouseEvent event) {
         String address = addressBox.getText();
         String port = SocketPort;
+        addressBox.clear();
 
         boolean validAddress = ClientController.validAddress(address, "socket");
         addressBox.pseudoClassStateChanged(ERROR, !validAddress);
@@ -77,6 +78,8 @@ public class ConnectionSceneController extends ViewObservable implements Generic
     private void rmiButtonClicked(MouseEvent event){
         String address = addressBox.getText();
         String port = RMIPort;
+        addressBox.clear();
+
 
         boolean validAddress = ClientController.validAddress(address, "rmi");
 

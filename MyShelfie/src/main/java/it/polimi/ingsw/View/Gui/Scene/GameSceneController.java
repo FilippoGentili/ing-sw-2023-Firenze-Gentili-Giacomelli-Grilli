@@ -578,7 +578,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             numOfSelectedTiles = 0;
             yourTurn = false;
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
             pause.setOnFinished(event -> {
                 tile1.setEffect(null);
                 tile1.setVisible(false);
@@ -757,7 +757,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             }
         });
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
         pause.setOnFinished(event -> {
             arrow.setEffect(null);
             arrowB1C1.setVisible(false);
