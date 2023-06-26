@@ -17,7 +17,9 @@ public class Game implements Serializable {
     private Bag bag;
     private static final String SERVER_NAME = "Server";
 
-
+    /**
+     * Constructor of class game
+     */
     public Game() {
         listOfPlayers = new ArrayList<Player>();
         pickCommonGoalCards();
@@ -25,6 +27,10 @@ public class Game implements Serializable {
         bag = new Bag(this);
     }
 
+    /**
+     * Returns the bag set for this game
+     * @return bag of the current game
+     */
     public Bag getBag() {
         return bag;
     }
@@ -35,18 +41,18 @@ public class Game implements Serializable {
     public static String getServerName(){
         return SERVER_NAME;
     }
-    /**
-     * the next player of the list becomes the current player and the state is set to start
-     *
-     */
 
+    /**
+     * Sets number of player for the game
+     * @param num number of player selected by the first player to join the game
+     */
     public void setNumOfPlayers(int num){
         this.numOfPlayers = num;
     }
 
 
     /**
-     * random selection of the first player
+     * Random selection of the first player
      * @return the first player of the match
      * @throws IllegalStateException if the list of players is empty
      */
@@ -61,7 +67,7 @@ public class Game implements Serializable {
     }
 
     /**
-     *
+     * Returns current player of the turn
      * @return the current player that is playing
      * @throws IllegalStateException if the list of players is empty
      */
@@ -72,8 +78,8 @@ public class Game implements Serializable {
     }
 
     /**
-     * sets current player
-     * @param player
+     * Sets current player
+     * @param player that is set as current player
      */
     public  void setCurrentPlayer(Player player) {
         currentPlayer = player;
@@ -81,9 +87,9 @@ public class Game implements Serializable {
     }
 
     /**
+     * Returns next player
      * @return the next player int the list of players
      */
-
     public Player getNextPlayer() {
         nextPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer)+1) % listOfPlayers.size());
         currentPlayer = nextPlayer;
@@ -91,13 +97,6 @@ public class Game implements Serializable {
 
     }
 
-    /**
-     * sets next player
-     */
-
-    public void setNextPlayer(Player player){
-        nextPlayer = player;
-    }
 
     /** If there is a tie, the most distant player from the first player wins the game
      * @return winner of the game
@@ -123,14 +122,15 @@ public class Game implements Serializable {
     }
 
     /**
-     * sets the winner
+     * Sets the winner
+     * @param player that is winning the game
      */
     public void setWinner(Player player){
         winner = player;
     }
 
     /**
-     *
+     * Returns the list of players for the current game
      * @return list of all players
      */
     public ArrayList<Player> getPlayers() {
@@ -142,35 +142,28 @@ public class Game implements Serializable {
         return players;
     }
 
-    /**
-     * adds player to the list of players
-     */
 
+    /**
+     * Adds player to the list of players
+     * @param player that has to be added
+     */
     public void addPlayer(Player player) {
 
         listOfPlayers.add(player);
     }
 
     /**
-     * removes player from the list of players
+     * Removes player from the list of players
      * @param player
      */
     public void removePlayer(Player player) {
-        if(!listOfPlayers.contains(player)){
-            //System.out.println("The player is not part of the game");
-            return;
-        }else listOfPlayers.remove(player);
-        /*int i = listOfPlayers.indexOf(player);
-        listOfPlayers.remove(player);
-        if(listOfPlayers.indexOf(currentPlayer) == i){
-            currentPlayer = listOfPlayers.get((listOfPlayers.indexOf(currentPlayer) + 1) % listOfPlayers.size());
-        }
-        System.out.println("The player has been removed from the game");*/
+        if(listOfPlayers.contains(player))
+            listOfPlayers.remove(player);
     }
 
     /**
-     *
-     * @return number of tiles on living room board for different amount of players
+     * Returns number of tiles depending on the number of players for the game
+     * @return number of tiles on living room board
      */
     public int numberOfTiles() {
 
@@ -183,7 +176,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * sets the valid cells of the living room
+     * Sets the valid cells of the living room
      */
     public void initializeLivingRoom(){
 
@@ -243,7 +236,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * picks two random common goal cards
+     * Picks two random common goal cards
      */
     public void pickCommonGoalCards() {
         List<Integer> availableCommonGoalCards = new ArrayList<>();
@@ -296,7 +289,7 @@ public class Game implements Serializable {
     }
 
     /**
-     * sets the personal goal card for each player
+     * Sets the personal goal card for each player
      */
     public void setPersonalGoalCard(){
 
@@ -315,9 +308,9 @@ public class Game implements Serializable {
     }
 
     /**
-     * notifies that it is the last round and gives the first player that calls the method one extra point
-     * @param bookshelf
-     * @param player
+     * Notifies that it is the last round and gives the first player that calls the method one extra point
+     * @param bookshelf of the  player ending the turn
+     * @param player ending the turn
      */
     public void endGameTrigger(Bookshelf bookshelf, Player player) {
         if(player==null)
@@ -329,8 +322,8 @@ public class Game implements Serializable {
     }
 
     /**
-     * assigns personal goal card points for each player
-     * @param players
+     * Assigns personal goal card points for each player
+     * @param players list of players of the game
      */
     public void assignPoints(ArrayList<Player> players) {
         if(players==null || players.isEmpty())
@@ -346,8 +339,8 @@ public class Game implements Serializable {
     }
 
     /**
-     * gets the scoreboard
-     * @param players
+     * Gets the scoreboard
+     * @param players list of players of the game
      * @return arraylist of players in decreasing order of their score
      */
     public ArrayList<Player> getScoreBoard(ArrayList<Player> players){
@@ -358,29 +351,33 @@ public class Game implements Serializable {
     }
 
     /**
-     *
-     * @return common goal card 1
+     * Returns common goal card 1
+     * @return first common goal extracted
      */
     public CommonGoalCard getCommonGoal1(){
         return CommonGoal1;
     }
 
     /**
-     *
-     * @return common goal card 2
+     * Returns common goal card 2
+     * @return second common goal card extracted
      */
     public CommonGoalCard getCommonGoal2(){
         return CommonGoal2;
     }
 
     /**
-     *
-     * @return living room
+     * Returns living room
+     * @return living room board
      */
     public LivingRoom getLivingRoom() {
         return living;
     }
 
+    /**
+     * Reloads a saved game
+     * @param savedGame to be reloaded
+     */
     public void loadGame(Game savedGame){
         listOfPlayers=savedGame.getPlayers();
         numOfPlayers=savedGame.getNumOfPlayers();
@@ -398,10 +395,18 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Returns first player
+     * @return first player of the game
+     */
     public Player getFirstPlayer() {
         return firstPlayer;
     }
 
+    /**
+     * Returns number of players of the game
+     * @return number of players
+     */
     public int getNumOfPlayers() {
         return numOfPlayers;
     }

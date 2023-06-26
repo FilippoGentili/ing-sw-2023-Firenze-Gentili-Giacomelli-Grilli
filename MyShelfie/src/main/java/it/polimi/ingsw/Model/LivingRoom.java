@@ -16,7 +16,7 @@ public class LivingRoom implements Serializable {
 
 
     /**
-     * private constructor because of the singleton pattern
+     * Constructor of class livingRoom
      */
     public LivingRoom() {
         board = new Tile[rows][columns];
@@ -29,7 +29,7 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * Set a cell either true or false, to keep track of the cell to consider on the board
+     * Sets a cell either true or false, to keep track of the cell to consider on the board
      * @param i row
      * @param j column
      * @param x value to be set
@@ -39,7 +39,7 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * check if a cell is either valid or not
+     * Checks if a cell is either valid or not
      * @param i row
      * @param j column
      * @return true if it is valid, false if it is not valid
@@ -48,6 +48,12 @@ public class LivingRoom implements Serializable {
         return valid[i][j];
     }
 
+    /**
+     * Sets a tile in the board
+     * @param t tile to be set
+     * @param i row index
+     * @param j column index
+     */
     public void setTile(Tile t, int i, int j){
         Tile tile = new Tile(t.getTileType());
         tile.setRow(i);
@@ -55,65 +61,48 @@ public class LivingRoom implements Serializable {
         board[i][j] = tile;
     }
 
+    /**
+     * Sets a tile to TileType null
+     * @param i row index
+     * @param j column index
+     */
     public void setNull(int i, int j){
         setTile(new Tile(TileType.NULL), i, j);
     }
 
+    /**
+     * Returns number of tiles present on the board
+     * @return number of tiles on the board
+     */
     public int getNumberOfTiles(){
         return numberOfTiles;
     }
 
+    /**
+     * Decrements number of tiles on the board
+     */
     public void decrementNumberOfTiles(){
         numberOfTiles--;
     }
 
+    /**
+     * Returns a tile in position i, j
+     * @param i row index
+     * @param j column index
+     * @return tile in the position i, j on the board
+     */
     public Tile getTile(int i, int j){
         return board[i][j];
     }
 
     /**
-     * Remove the tile of the specified position from the board, and return it
+     * Removes the tile of the specified position from the board, and return it
      * @param i row
      * @param j column
      * @return tile picked
      */
     public Tile pickTile(int i, int j){
-        /*int count = 0;
-        boolean stop = false;
-        String input;
-        int i, j;
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Tile> chosen = new ArrayList<Tile>();
-
-        System.out.println("Scegli gli indici delle tessere che vuoi prendere (scrivi 'stop' se hai concluso la scelta):");
-
-        //try catch per gestire l'immissione sbagliata degli indici
-
-        System.out.println(count+1 + " tessera:");
-        i = Integer.parseInt(scanner.nextLine());
-        j = Integer.parseInt(scanner.nextLine());
-        chosen.add(getTile(i ,j));
-        count++;
-
-        while(count<3 && !stop){
-
-            System.out.println(count+1 + " tessera:");
-
-            input = scanner.nextLine();
-
-            if(input.equals("stop"))
-                stop=true;
-            else{
-                i = Integer.parseInt(input);
-                j = Integer.parseInt(scanner.nextLine());
-                chosen.add(getTile(i ,j));
-                count++;
-            }
-
-        }
-        return chosen;*/    //ignora (interazione utente)
-
-        Tile app;  //nuova istanza da creare?
+        Tile app;
 
         if(valid[i][j] && getTile(i,j).getTileType()!= TileType.NULL){
             app = getTile(i, j);
@@ -125,8 +114,8 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * inserts the tiles to fulfill the board
-     * @param chosen arraylist of the tikes to insert
+     * Inserts the tiles to fulfill the board
+     * @param chosen arraylist of the tiles to insert
      */
     public void insertTiles(ArrayList<Tile> chosen){
 
@@ -147,9 +136,10 @@ public class LivingRoom implements Serializable {
 
 
     /**
+     * Checks if two tiles are adjacent
      * @param t1 first tile
      * @param t2 second tile
-     * @return true if t1 and t2 are adjacents
+     * @return true if t1 and t2 are adjacent
      */
     public boolean isAdjacent(Tile t1, Tile t2){
         if((t1.getCol()==t2.getCol() && (t1.getRow()==t2.getRow()+1 || t1.getRow()==t2.getRow()-1)) ||
@@ -161,7 +151,7 @@ public class LivingRoom implements Serializable {
     /**
      * Checks if the selected tiles are valid, having a free side
      * @param chosen tiles that I want to pick from the board
-     * @return true if the selected tiles can be picked up, false if not
+     * @return true if the selected tiles can be picked up, false otherwise
      */
     public boolean checkValid(ArrayList<Tile> chosen){
 

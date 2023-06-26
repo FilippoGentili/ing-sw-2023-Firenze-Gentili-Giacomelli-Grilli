@@ -16,6 +16,9 @@ public class Bookshelf implements Serializable {
 
     private static boolean[][] alreadyChecked;
 
+    /**
+     * Constructor of class bookshelf
+     */
     public Bookshelf() {
         shelf = new Tile[rows][columns];
         for(int i=0; i<rows; i++){
@@ -27,6 +30,7 @@ public class Bookshelf implements Serializable {
     }
 
     /**
+     * Checks if bookshelf is empty or not
      * @param i row
      * @param j column
      * @return true if the cell is empty, false if there is a tile
@@ -38,11 +42,18 @@ public class Bookshelf implements Serializable {
             return true;
     }
 
+    /**
+     * Return tiles in position i, j
+     * @param i row index
+     * @param j column index
+     * @return selected tile
+     */
     public Tile getTile(int i, int j){
         return shelf[i][j];
     }
 
     /**
+     * Checks if there is enough space available to insert the selected tiles
      * @param tiles arraylist of the Tiles I want to insert
      * @param col column of the bookshelf where I want to insert the tiles
      * @return true if there is enough space to put the selected tiles, false if there is no space
@@ -56,7 +67,7 @@ public class Bookshelf implements Serializable {
     }
 
     /**
-     * Stores the tiles in the bookshelf
+     * Inserts the tiles in the bookshelf
      * @param tiles arraylist of tiles I want to insert
      * @param col column of the bookshelf where I want to insert the selected tiles
      */
@@ -73,6 +84,7 @@ public class Bookshelf implements Serializable {
     }
 
     /**
+     * Checks adjacent tiles of current tile
      * @param curr Tile I am considering
      * @return an arraylist of the tiles adjacent to curr and of the same tileType of curr
      */
@@ -95,7 +107,7 @@ public class Bookshelf implements Serializable {
     }
 
     /**
-     * recursive method that counts the number of tiles in a group
+     * Recursive method that counts the number of tiles in a group
      * @param tiles arrayList of tiles of the same type
      * @param x number of the adjacent tiles of the same time so far
      * @return number of tiles of the same type adjacent to each other
@@ -158,7 +170,8 @@ public class Bookshelf implements Serializable {
     }
 
     /**
-     * @return true if the bookshelf is full, false if there are some free cells
+     * Checks if bookshelf is full
+     * @return true if the bookshelf is full, false if there are any free cells
      */
     public boolean fullBookshelf(){
         for(int j=0; j<columns; j++){
@@ -170,7 +183,7 @@ public class Bookshelf implements Serializable {
     }
 
     /**
-     * Set a tile in a given position
+     * Sets a tile in a given position
      * Use only for testing!
      * @param i row
      * @param j column
@@ -183,6 +196,10 @@ public class Bookshelf implements Serializable {
         shelf[i][j]=tile;
     }
 
+    /**
+     * Checks max number of tiles the player can select based on its bookshelf
+     * @return max number of tiles a player can select
+     */
     public int getMaxPossibleTiles(){
         int max=0;
         int curr=0;
@@ -200,6 +217,11 @@ public class Bookshelf implements Serializable {
         else return max;
     }
 
+    /**
+     * Returns free columns in the bookshelf, depending on the size of arraylist of chosen tiles
+     * @param size number of chosen tiles
+     * @return columns that have enough space
+     */
     public ArrayList<Integer> getFreeColumns(int size){
         ArrayList<Integer> col = new ArrayList<>();
         int curr;
