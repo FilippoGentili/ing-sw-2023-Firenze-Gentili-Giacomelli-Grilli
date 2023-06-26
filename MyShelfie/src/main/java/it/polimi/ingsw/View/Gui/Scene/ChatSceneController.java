@@ -87,6 +87,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
                 });
                 chatList.getItems().add("from you to " + receiver + ": " + message);
             }
+            chatText.clear();
         }
     }
 

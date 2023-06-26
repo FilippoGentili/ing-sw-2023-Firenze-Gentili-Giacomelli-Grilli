@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
 
@@ -30,6 +32,7 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
     private AnchorPane easter;
     @FXML
     private AnchorPane egg;
+    private MediaPlayer mediaPlayer;
     private int counter = 0;
 
     /**
@@ -40,6 +43,9 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         exitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::exitButtonClicked);
         easter.addEventHandler(MouseEvent.MOUSE_CLICKED, this::easterClicked);
         egg.addEventHandler(MouseEvent.MOUSE_CLICKED, this::eggClicked);
+        String audioFile = getClass().getResource("/images/misc/easterEggMusic.mp3").toExternalForm();
+        Media media = new Media(audioFile);
+        mediaPlayer = new MediaPlayer(media);
     }
 
     /**
@@ -124,6 +130,7 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         if(counter == 5){
             egg.setVisible(true);
             egg.getStyleClass().add("egg");
+            mediaPlayer.play();
         }
     }
 
@@ -135,6 +142,7 @@ public class EndSceneController extends ViewObservable implements GenericSceneCo
         counter = 0;
         egg.setVisible(false);
         egg.getStyleClass().clear();
+        mediaPlayer.stop();
     }
 
     /**
