@@ -331,7 +331,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         String receiver;
         System.out.println("Chat opened");
         System.out.println("Write the name of the player you want to chat with, 'All players' to send a broadcast message");
-        System.out.println("Write close chat to return the game");
+        System.out.println("Write close chat to return to the game");
 
         /*if (chat.getMessages().isEmpty()) {
             System.out.println("No old messages");
@@ -350,7 +350,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             System.out.print("Send to:");
             receiver = scanner.nextLine().trim();
 
-            if (receiver.equals("close chat")) {
+            if (receiver.equalsIgnoreCase("close chat")) {
                 closeChat();
                 chatMode = false;
                 return;
@@ -359,7 +359,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
             System.out.print("Write your message: ");
             String message = scanner.nextLine().trim();
 
-            if (message.equals("close chat")) {
+            if (message.equalsIgnoreCase("close chat")) {
                 closeChat();
                 chatMode = false;
                 return;
@@ -402,7 +402,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 do{
                     System.out.println("row: ");
                     input = readLine().trim();
-                    if(input.matches("/chat")){
+                    if(input.matches("open chat")){
                         openChat();
                     }
                     while(!input.matches("\\d+")){
@@ -417,7 +417,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 do{
                     System.out.println("column: ");
                     input = readLine().trim();
-                    if(input.matches("/chat")){
+                    if(input.matches("open chat")){
                         openChat();
                     }
                     if(!columns1.contains(input) && !columns2.contains(input))
@@ -479,7 +479,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
                 System.out.println("Select the " + i + " tile type:");
                 input = readLine();
-                if(input.matches("/chat")){
+                if(input.matches("open chat")){
                     openChat();
                 }
 
@@ -530,7 +530,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                 if(!correct)
                     System.out.println("Column index Not valid. Please select a column with enough space");
             }else {
-                if(input.matches("/chat")){
+                if(input.matches("open chat")){
                     openChat();
                 }else {
                     System.out.println("Input not valid. Please insert a number instead of a string");

@@ -28,7 +28,6 @@ public class GameStartedMessage extends Message{
     }
 
     @Override
-    public String toString(){
-        return "Game started!";
+    public String toString(){return "Game started!\nWhenever you want to send a chat message, write 'open chat'";
     }
 }

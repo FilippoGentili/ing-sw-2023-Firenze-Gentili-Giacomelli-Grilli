@@ -183,7 +183,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * Initialize game state and begins turns rotation
+     * Initializes game state and begins turns rotation
      */
     public void startGame() {
         setGameState(PLAY);

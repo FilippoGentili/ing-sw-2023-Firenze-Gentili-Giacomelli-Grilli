@@ -364,7 +364,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
-     * Shows thw banner when the player has to choose the tiles from the board
+     * Shows the banner when the player has to choose the tiles from the board
      */
     public void selectTiles(){
         if(firstTime) {
