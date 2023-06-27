@@ -379,6 +379,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             Platform.runLater(() -> {
                 GuiController.showBanner("INFO", "Invalid tiles, try again!");
             });
+            selectionTime = true;
         }
     }
 
@@ -415,7 +416,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
 
                         selection.setEffect(new DropShadow(10, Color.YELLOW));
                         InnerShadow innerShadow = new InnerShadow();
-                        innerShadow.setChoke(0.5); // Imposta il grado di sfocatura dell'effetto
+                        innerShadow.setChoke(0.5);
                         innerShadow.setColor(Color.YELLOW);
                         selection.setEffect(innerShadow);
                         numOfSelectedTiles++;
