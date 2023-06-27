@@ -47,6 +47,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private volatile ArrayList<String> chatMessages;
     private boolean chatMode = false;
 
+
     public ChatSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -57,6 +58,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         stage.setAlwaysOnTop(true);
         this.chatMessages = new ArrayList<>();
     }
+
+
 
     @FXML
     public void initialize() {

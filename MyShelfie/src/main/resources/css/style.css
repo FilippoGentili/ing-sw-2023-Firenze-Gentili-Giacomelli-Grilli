@@ -387,3 +387,15 @@
     -fx-background-image: url("../images/misc/egg.jpg");
     -fx-background-size: stretch;
 }
+
+#chatList .list-cell {
+    -fx-background-image: url("../images/misc/sfondoCelle.jpg");
+    -fx-background-size: stretch;
+    -fx-font-size: 18px;
+    -fx-background-radius: 5px;
+}
+
+.backGroundChat{
+    -fx-background-image: url("../images/misc/sfondoChat.jpg");
+    -fx-background-size: stretch;
+}
