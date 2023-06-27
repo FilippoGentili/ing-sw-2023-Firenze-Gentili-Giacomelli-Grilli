@@ -333,11 +333,6 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         System.out.println("Write the name of the player you want to chat with, 'All players' to send a broadcast message");
         System.out.println("Write close chat to return to the game");
 
-        /*if (chat.getMessages().isEmpty()) {
-            System.out.println("No old messages");
-        } else {
-            showChatMessages(this.chat);
-        }*/
 
         Thread chatThread = new Thread(() -> {
             while (chatMode) {
@@ -409,6 +404,9 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                         System.out.println("Input incorrect. Please insert a number between 1 and 9");
                         System.out.println("row: ");
                         input = readLine();
+                        if(input.matches("open chat")){
+                            openChat();
+                        }
                     }
                     row = parseInt(input);
                     if(row<1 || row>9)
