@@ -38,6 +38,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     private Client client;
     private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
     private ClientUpdater clientUpdater;
+    private boolean alreadyDisconnected = false;
     private Object lock = new Object();
 
     /**
@@ -46,9 +47,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
      */
     public ClientController(View view) {
         this.view = view;
-        //taskQueue = Executors.newSingleThreadExecutor();
         new Thread(this).start();
-        //this.lock = new Object();
     }
 
     @Override
@@ -126,10 +125,13 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     });
                     break;
                 case DISCONNECTION_REPLY:
-                    DisconnectionReply disconnectionReply = (DisconnectionReply) message;
-                    queue.add(() -> {
-                        view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
-                    });
+                    if(!alreadyDisconnected) {
+                        alreadyDisconnected = true;
+                        DisconnectionReply disconnectionReply = (DisconnectionReply) message;
+                        queue.add(() -> {
+                            view.someoneDisconnected(disconnectionReply.getDisconnectedUser());
+                        });
+                    }
                     break;
                 case DISCONNECTION_RESULT:
                     queue.add(() -> {
@@ -229,9 +231,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         try{
             this.client =  new SocketClient(disconnectionHandler,address,port);
             client.connection();
-            //this.chat = new SocketClientChat(address,disconnectionHandler);
-            //chat.connectChat();
-            //this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             this.view.nicknameRequest();
         }catch (IOException e){
@@ -244,7 +243,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         try {
             this.client = new RMIClient(disconnectionHandler, address, port);
             this.client.connection();
-            //this.client.addObserver(this);
             this.clientUpdater = new ClientUpdater(this.client, this);
             view.nicknameRequest();
         }catch (IOException e){
@@ -261,6 +259,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     @Override
     public void updateNickname(String nickname) {
         this.client.setUsername(nickname);
+        view.getChat().setOwner(nickname);
         client.sendMessage(new LoginRequest(nickname));
     }
 

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 public class Chat {
     private final ArrayList<String> messages;
     private ArrayList<String> oldMessages;
+    private String owner;
 
     public Chat(){
         this.messages = new ArrayList<>();
@@ -32,5 +33,13 @@ public class Chat {
 
     public void addOldMessage(String message){
         oldMessages.add(message);
+    }
+
+    public void setOwner(String nickname){
+        this.owner = nickname;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

@@ -73,7 +73,8 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         playerList.setPromptText("Select Player");
         playerList.getItems().add("All players");
         for (Player player : game.getPlayers()) {
-            playerList.getItems().add(player.getNickname());
+            if(!player.getNickname().equals(GuiController.getChat().getOwner()))
+                playerList.getItems().add(player.getNickname());
         }
         playerList.getSelectionModel().select(0);
     }
@@ -81,7 +82,7 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
             String message = chatText.getText();
             String receiver = (String) playerList.getSelectionModel().getSelectedItem();
-            if(!message.equals("")){
+            if(!message.equals("") && !receiver.equals(GuiController.getChat().getOwner())){
                 notifyObserver(obs -> {
                     obs.sendChatMessage(receiver, message);
                 });

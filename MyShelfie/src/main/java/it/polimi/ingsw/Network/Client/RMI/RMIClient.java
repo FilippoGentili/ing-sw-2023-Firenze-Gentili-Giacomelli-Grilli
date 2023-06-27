@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client.RMI;
 import it.polimi.ingsw.Network.Client.Client;
 import it.polimi.ingsw.Network.Client.Socket.DisconnectionHandler;
 import it.polimi.ingsw.Network.Client.Socket.PingTimer;
+import it.polimi.ingsw.Network.Message.DisconnectionResult;
 import it.polimi.ingsw.Network.Message.Message;
 import it.polimi.ingsw.Network.Message.MessageType;
 import it.polimi.ingsw.Network.Server.RMI.RMIServerHandler;
@@ -66,6 +67,7 @@ public class RMIClient extends Client implements RMIClientHandler{
             }
         }catch (IOException | InterruptedException e){
             Client.LOGGER.severe("connection refused : must disconnect");
+            messageQueue.add(new DisconnectionResult(super.getUsername()));
             server = null;
         }
     }
