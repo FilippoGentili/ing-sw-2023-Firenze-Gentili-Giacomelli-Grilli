@@ -188,6 +188,13 @@ public class ClientController implements Observer, ViewObserver, Runnable {
                     queue.add(() -> {
                         view.showMessage(message.toString());
                         view.showGameStarted(gameStartedMessage.getGame());
+                        view.getChat().addOtherPlayers(gameStartedMessage.getGame().getPlayers());
+                    });
+                    break;
+                case OPENCHAT_MESSAGE:
+                    OpenChatMessage openChatMessage = (OpenChatMessage) message;
+                    queue.add(() -> {
+                        view.openChat();
                     });
                     break;
                 case CHAT_MESSAGE:

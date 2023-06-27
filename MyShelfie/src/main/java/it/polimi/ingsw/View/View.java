@@ -16,6 +16,8 @@ public interface View {
      */
     void showMessage(String message) ;
 
+    void openChat();
+
     /**
      * If nickname and connection are not valid asks them again
      * @param validNickname true if the nickname is valid, false otherwise

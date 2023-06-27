@@ -20,7 +20,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     private final PrintStream out;
     Scanner scanner;
     private boolean myTurn = false;
-    private boolean chatMode = false;
+    private boolean chatMode = true;
     private Chat chat;
 
     /**
@@ -322,6 +322,11 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
        }
     }
 
+    public void showOtherPlayers(){
+        for(String nickname : chat.getOtherPlayers())
+            System.out.println("- "+nickname);
+    }
+
     /**
      * Opens the chat whenever called, asks to write a message, to specify a receiver and notifies the observer
      */
@@ -331,6 +336,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         String receiver;
         System.out.println("Chat opened");
         System.out.println("Write the name of the player you want to chat with, 'All players' to send a broadcast message");
+        showOtherPlayers();
         System.out.println("Write close chat to return to the game");
 
 
@@ -377,6 +383,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
     }
     @Override
     public void TilesRequest(LivingRoom livingRoom) {
+
+        closeChat();
 
         ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
@@ -509,6 +517,8 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         });
 
         myTurn = false;
+
+        openChat();
     }
     @Override
     public void columnRequest(ArrayList<Integer> AvailableColumns, Player player) {

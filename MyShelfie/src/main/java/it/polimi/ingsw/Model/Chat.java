@@ -9,9 +9,12 @@ public class Chat {
     private ArrayList<String> oldMessages;
     private String owner;
 
+    private ArrayList<String> otherPlayers;
+
     public Chat(){
         this.messages = new ArrayList<>();
         this.oldMessages = new ArrayList<>();
+        this.otherPlayers = new ArrayList<>();
     }
 
     public ArrayList<String> getMessages(){
@@ -41,5 +44,15 @@ public class Chat {
 
     public String getOwner() {
         return owner;
+    }
+
+    public void addOtherPlayers(ArrayList<Player> players){
+        for(Player p : players)
+            if(!p.getNickname().equals(owner))
+                this.otherPlayers.add(p.getNickname());
+    }
+
+    public ArrayList<String> getOtherPlayers() {
+        return this.otherPlayers;
     }
 }

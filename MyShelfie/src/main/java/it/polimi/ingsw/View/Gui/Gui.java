@@ -38,6 +38,11 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
+    public void openChat() {
+
+    }
+
+    @Override
     public void loginResult(boolean validNickname, boolean connection, String nickname){
         if (!validNickname || !connection) {
             if (!validNickname && connection) {

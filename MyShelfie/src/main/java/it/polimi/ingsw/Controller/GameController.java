@@ -234,8 +234,10 @@ public class GameController implements Serializable {
         restoreMatchElements();
 
         for(Player player : players){
-            if(!player.equals(currentPlayer))
-                server.sendMessage(new GenericMessage("It's the turn of " + currentPlayer.getNickname()),player.getNickname());
+            if(!player.equals(currentPlayer)) {
+                server.sendMessage(new GenericMessage("It's the turn of " + currentPlayer.getNickname()), player.getNickname());
+                server.sendMessage(new OpenChatMessage(), player.getNickname());
+            }
             else {
                 server.sendMessage(new GenericMessage("It's your turn, " + currentPlayer.getNickname() + "!"), player.getNickname());
                 server.broadcastMessage((new TurnMessage(player, MessageType.TURN_MESSAGE)));
