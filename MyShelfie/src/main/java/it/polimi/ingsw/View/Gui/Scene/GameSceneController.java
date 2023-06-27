@@ -533,16 +533,18 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public void orderClicked(AnchorPane tile, ArrayList<Tile> chosenTiles){
 
-        if (tile1.equals(tile) && !tile1Clicked) {
+        if (tile1.equals(tile) && !tile1Clicked && getCounter()<3) {
             setCounter(getCounter()+1);
             tile1Clicked = true;
+            tile1.setDisable(true);
             numberOfTile1.setVisible(true);
             numberOfTile1.getStyleClass().clear();
             numberOfTile1.getStyleClass().add("generalNumber" + getCounter());
             orderedList.add(chosenTiles.get(0));
-        } else if (tile2.equals(tile) && !tile2Clicked) {
+        } else if (tile2.equals(tile) && !tile2Clicked && getCounter()<3) {
             setCounter(getCounter()+1);
             tile2Clicked = true;
+            tile2.setDisable(true);
             numberOfTile2.setVisible(true);
             numberOfTile2.getStyleClass().clear();
             numberOfTile2.getStyleClass().add("generalNumber" + getCounter());
@@ -551,9 +553,10 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
             }else if(chosenTiles.size() == 3) {
                 orderedList.add(chosenTiles.get(1));
             }
-        } else if (tile3.equals(tile) && !tile3Clicked) {
+        } else if (tile3.equals(tile) && !tile3Clicked && getCounter()<3) {
             setCounter(getCounter()+1);
             tile3Clicked = true;
+            tile3.setDisable(true);
             numberOfTile3.setVisible(true);
             numberOfTile3.getStyleClass().clear();
             numberOfTile3.getStyleClass().add("generalNumber" + getCounter());
@@ -565,6 +568,8 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         }
 
         if (orderedList.size() == chosenTiles.size()) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+            pause.setOnFinished(event -> {
             notifyObserver(obs -> {
                 try {
                     obs.updateOrderedTiles(orderedList);
@@ -572,17 +577,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                     throw new RuntimeException(e);
                 }
             });
-            orderedList.clear();
-            setCounter(0);
-            tile1Clicked = false;
-            tile2Clicked = false;
-            tile3Clicked = false;
-            chosenTiles.clear();
-            numOfSelectedTiles = 0;
-            yourTurn = false;
 
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-            pause.setOnFinished(event -> {
                 tile1.setEffect(null);
                 tile1.setVisible(false);
                 numberOfTile1.setVisible(false);
@@ -592,6 +587,17 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 tile3.setEffect(null);
                 tile3.setVisible(false);
                 numberOfTile3.setVisible(false);
+                orderedList.clear();
+                setCounter(0);
+                tile1Clicked = false;
+                tile2Clicked = false;
+                tile3Clicked = false;
+                tile1.setDisable(false);
+                tile2.setDisable(false);
+                tile3.setDisable(false);
+                chosenTiles.clear();
+                numOfSelectedTiles = 0;
+                yourTurn = false;
             });
             pause.play();
         }
@@ -1071,68 +1077,15 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
      */
     public ImageView setTiles(TileType tileType) {
 
-        Random random = new Random();
-        int randomNumber = random.nextInt(3);
-        String imageName = null;
-
-        switch (tileType) {
-            case CAT:
-                switch (randomNumber) {
-                    case 0 -> imageName = "Gatti1.png";
-                    case 1 -> imageName = "Gatti2.png";
-                    case 2 -> imageName = "Gatti3.png";
-                    default -> {
-                    }
-                }
-                break;
-            case BOOK:
-                switch (randomNumber) {
-                    case 0 -> imageName = "Libri1.png";
-                    case 1 -> imageName = "Libri2.png";
-                    case 2 -> imageName = "Libri3.png";
-                    default -> {
-                    }
-                }
-                break;
-            case GAME:
-                switch (randomNumber) {
-                    case 0 -> imageName = "Giochi1.png";
-                    case 1 -> imageName = "Giochi2.png";
-                    case 2 -> imageName = "Giochi3.png";
-                    default -> {
-                    }
-                }
-                break;
-            case FRAME:
-                switch (randomNumber) {
-                    case 0 -> imageName = "Cornici1.png";
-                    case 1 -> imageName = "Cornici2.png";
-                    case 2 -> imageName = "Cornici3.png";
-                    default -> {
-                    }
-                }
-                break;
-            case TROPHIE:
-                switch (randomNumber) {
-                    case 0 -> imageName = "Trofei1.png";
-                    case 1 -> imageName = "Trofei2.png";
-                    case 2 -> imageName = "Trofei3.png";
-                    default -> {
-                    }
-                }
-                break;
-            case PLANT:
-                switch (randomNumber) {
-                    case 0 -> imageName = "Piante1.png";
-                    case 1 -> imageName = "Piante2.png";
-                    case 2 -> imageName = "Piante3.png";
-                    default -> {
-                    }
-                }
-                break;
-            default:
-                imageName = "Empty.png";
-        }
+        String imageName = switch (tileType) {
+            case CAT -> "Gatti1.png";
+            case BOOK -> "Libri1.png";
+            case GAME -> "Giochi1.png";
+            case FRAME -> "Cornici1.png";
+            case TROPHIE -> "Trofei1.png";
+            case PLANT -> "Piante1.png";
+            default -> "Empty.png";
+        };
 
         Image image =  new Image("images/itemTiles/" + imageName);
         ImageView imageView = new ImageView(image);
