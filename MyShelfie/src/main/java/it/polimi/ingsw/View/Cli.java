@@ -455,7 +455,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
                 col = indexTranslator(input);
 
-                if(!chosenTiles.contains(livingRoom.getTile(row-1, col)) && livingRoom.getTile(row-1,col).getTileType() != TileType.NULL){
+                if(!chosenTiles.contains(livingRoom.getTile(row-1, col)) && livingRoom.getTile(row-1,col).getTileType() != TileType.NULL && livingRoom.validCell(row-1, col)){
                     chosenTiles.add(livingRoom.getTile(row-1, col));
                     i++;
 
@@ -474,12 +474,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                     }else
                         valid = false;
                 }else{
-                    if(livingRoom.getTile(row,col).getTileType() == TileType.NULL)
+                    if(livingRoom.getTile(row,col).getTileType() == TileType.NULL || !livingRoom.validCell(row-1, col))
                         System.out.println("You can't select this tile");
                     else System.out.println("You already selected this tile");
                 }
 
-            }while((chosenTiles.contains(livingRoom.getTile(row-1, col)) || livingRoom.getTile(row-1,col).getTileType() == TileType.NULL) && valid);
+            }while((chosenTiles.contains(livingRoom.getTile(row-1, col)) || livingRoom.getTile(row-1,col).getTileType() == TileType.NULL || !livingRoom.validCell(row-1, col)) && valid);
         }
 
         notifyObserver(obs -> {
