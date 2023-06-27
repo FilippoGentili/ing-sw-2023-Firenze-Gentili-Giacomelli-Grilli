@@ -337,7 +337,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         System.out.println("Chat opened");
         System.out.println("Write the name of the player you want to chat with, 'All players' to send a broadcast message");
         showOtherPlayers();
-        System.out.println("Write close chat to return to the game");
+        System.out.println("Write 'send message' to send a message, 'close chat' to return to the game");
 
 
         Thread chatThread = new Thread(() -> {
@@ -347,31 +347,54 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         });
         chatThread.start();
 
+        boolean validRec = true;
+
         do {
-            System.out.print("Send to:");
-            receiver = scanner.nextLine().trim();
+            String in = scanner.nextLine().trim();
+            if(in.equalsIgnoreCase("send message")){
+                do{
+                    System.out.print("Send to:");
+                    receiver = scanner.nextLine().trim();
 
-            if (receiver.equalsIgnoreCase("close chat")) {
+                    if (receiver.equalsIgnoreCase("close chat")) {
+                        if(myTurn){
+                            closeChat();
+                            chatMode = false;
+                            return;
+                        }
+                    }
+
+                    if(!chat.getOtherPlayers().contains(receiver)){
+                        System.out.println("player not valid");
+                        validRec = false;
+                    }
+                }while(!validRec);
+
+
+                System.out.print("Write your message: ");
+                String message = scanner.nextLine().trim();
+
+                if (message.equalsIgnoreCase("close chat")) {
+                    if(myTurn){
+                        closeChat();
+                        chatMode = false;
+                        return;
+                    }
+                }
+                final String finalReceiver = receiver;
+
+                notifyObserver(obs -> {
+                    obs.sendChatMessage(finalReceiver, message);
+                });
+            }else if (in.equalsIgnoreCase("close chat")) {
                 closeChat();
                 chatMode = false;
                 return;
+            }else{
+                System.out.println("command not valid");
             }
-
-            System.out.print("Write your message: ");
-            String message = scanner.nextLine().trim();
-
-            if (message.equalsIgnoreCase("close chat")) {
-                closeChat();
-                chatMode = false;
-                return;
-            }
-            final String finalReceiver = receiver;
-
-            notifyObserver(obs -> {
-                obs.sendChatMessage(finalReceiver, message);
-            });
-
         } while (chatMode);
+
     }
 
     /**
