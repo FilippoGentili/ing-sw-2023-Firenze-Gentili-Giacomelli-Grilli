@@ -54,6 +54,7 @@ public class WaitingRoomSceneController extends ViewObservable implements Generi
     }
 
     /**
+     * Sets welcome text when starting a game
      * @param string to be set as welcome text
      */
     public void setWelcomeText(String string){

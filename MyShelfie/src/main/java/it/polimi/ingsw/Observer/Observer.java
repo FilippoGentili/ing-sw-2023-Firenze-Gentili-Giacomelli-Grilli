@@ -7,7 +7,6 @@ import it.polimi.ingsw.Network.Message.*;
 public interface Observer {
     /**
      * Handles arriving messages from Server (Requests)
-     *
      * @param message
      */
     void update(Message message);

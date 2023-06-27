@@ -21,7 +21,7 @@ public class StartSceneController extends ViewObservable implements GenericScene
 
     /**
      * This method is called when the play button is clicked. It starts a new game.
-     * @param event
+     * @param event of type mouse clicked
      */
     private void playButtonClicked(MouseEvent event){
         GuiController.changeScene("connectionScene.fxml",event,observers);

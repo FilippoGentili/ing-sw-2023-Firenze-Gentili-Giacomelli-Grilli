@@ -868,6 +868,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         });
     }
 
+    /**
+     * Handles disconnection of a client
+     * @param nickname of client disconnecting
+     */
     public void handleDisconnection(String nickname) {
         System.out.println("You will be disconnected. Game finished :(");
 

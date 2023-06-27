@@ -16,6 +16,10 @@ public enum TileType {
 
     public static final String RESET = "\033[0m";
 
+    /**
+     * Converts tiletype to string
+     * @return
+     */
     public String toString(){
         return switch (this.ordinal()) {
             case 0 -> "cat";
@@ -29,6 +33,10 @@ public enum TileType {
         };
     }
 
+    /**
+     * Colors tiles in cli
+     * @return value of current tile associated with corresponding color
+     */
     public String toCliString(){
         return switch (this.ordinal()) {
             case 0 -> ANSI_GREEN_BACKGROUND + "  cat  " + RESET;

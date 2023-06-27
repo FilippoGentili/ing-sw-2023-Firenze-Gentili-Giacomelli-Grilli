@@ -77,6 +77,7 @@ public class LeaderboardSceneController extends ViewObservable implements Generi
     }
 
     /**
+     * Sets scene to stage
      * @param scene that has to be set
      */
     public void setScene(Scene scene) {

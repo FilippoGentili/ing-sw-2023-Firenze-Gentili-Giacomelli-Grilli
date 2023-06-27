@@ -30,7 +30,7 @@ public abstract class Connection {
 
     /**
      * Sends message
-     * @param message
+     * @param message to be sent
      */
     public abstract void sendMessage(Message message);
 

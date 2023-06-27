@@ -578,14 +578,26 @@ public class GameController implements Serializable {
         return null;
     }
 
+    /**
+     * Gets players in the game
+     * @return arraylist of players
+     */
     public ArrayList<Player> getPlayers(){
         return players;
     }
 
+    /**
+     * Gets last message sent
+     * @return last message sent
+     */
     public Message getLastMessage(){
         return lastMessage;
     }
 
+    /**
+     * Gets game state
+     * @return current game state
+     */
     public GameState getGameState(){
         return gameState;
     }
@@ -603,15 +615,23 @@ public class GameController implements Serializable {
             if(lastMessage != null) {
                 handleGame(lastMessage);
             }else{
-                //server.broadcastMessage(new GameStartedMessage(game));
                 newTurn();
             }
         }
     }
 
+    /**
+     * Gets server
+      * @return server for game controller
+     */
     public Server getServer(){
         return server;
     }
+
+    /**
+     * Gets returned player after reloading
+     * @return arraylist of returned players
+     */
     public ArrayList<String> getReturnPlayers(){
         return returnPlayers;
     }

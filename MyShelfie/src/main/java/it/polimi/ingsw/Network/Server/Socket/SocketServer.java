@@ -16,11 +16,19 @@ public class SocketServer extends Thread{
     private final int port;
     private ServerSocket serverSocket;
 
+    /**
+     * Constructor of Socket server
+     * @param server of the game
+     * @param port socket port, set to 1098
+     */
     public SocketServer(Server server, int port){
         this.server = server;
         this.port = port;
     }
 
+    /**
+     * Starts socket server
+     */
     public void startSocketServer(){
         try {
             serverSocket = new ServerSocket(port);
@@ -44,18 +52,43 @@ public class SocketServer extends Thread{
         }
     }
 
+    /**
+     * Handles login of a socket client
+     * @param nickname chosen by the client
+     * @param connection type of connection chosen
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void login(String nickname, Connection connection) throws IOException, InterruptedException {
         server.login(nickname, connection);
     }
 
+    /**
+     * Adds client
+     * @param nickname chosen by the client
+     * @param connection type of connection chosen
+     * @throws RemoteException
+     * @throws InterruptedException
+     */
     public void addClient(String nickname, Connection connection) throws RemoteException, InterruptedException {
         server.addClient(nickname, connection);
     }
 
+    /**
+     * Handles client disconnection
+     * @param connection type of connection for the client to be disconnected
+     * @throws RemoteException
+     */
     public void clientDisconnection(Connection connection) throws RemoteException {
         server.clientDisconnection(connection);
     }
 
+    /**
+     * Handles message received
+     * @param message to be handled
+     * @throws RemoteException
+     * @throws InterruptedException
+     */
     public void handleMessage(Message message) throws RemoteException, InterruptedException {
         server.handleMessage(message);
     }

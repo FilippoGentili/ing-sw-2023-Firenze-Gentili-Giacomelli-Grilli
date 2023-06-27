@@ -605,6 +605,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
+     * Sets counter for the scene
      * @param counter to be set
      */
     private void setCounter(int counter) {
@@ -612,6 +613,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     }
 
     /**
+     * Gets the counter for the scene
      * @return the counter
      */
     private int getCounter() {

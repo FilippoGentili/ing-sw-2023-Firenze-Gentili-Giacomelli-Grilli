@@ -8,14 +8,19 @@ import java.util.ArrayList;
 public interface View {
 
     /**
+     * Gets chat of the client
      * @return chat of the client
      */
     Chat getChat();
     /**
+     * Shows message
      * @param message shown to the receiver
      */
     void showMessage(String message) ;
 
+    /**
+     * Opens chat for the client
+     */
     void openChat();
 
     /**

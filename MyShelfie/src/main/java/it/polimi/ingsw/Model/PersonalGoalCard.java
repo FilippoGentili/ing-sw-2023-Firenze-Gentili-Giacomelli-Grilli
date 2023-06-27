@@ -10,14 +10,26 @@ public class PersonalGoalCard implements Serializable {
     private int matches;
     private int ID;
 
+    /**
+     * Sets id for a specific personal goal card
+     * @param id of the specific card
+     */
     public void setID(int id){
         this.ID = id;
     }
 
+    /**
+     * Sets player for a personal goal card
+     * @param player associated to the personal goal card
+     */
     public void setPlayer(Player player){
         this.player=player;
     }
 
+    /**
+     * Gets id of personal goal card
+     * @return id of the current personal goal card
+     */
     public int getID(){
         return ID;
     }
@@ -284,6 +296,11 @@ public class PersonalGoalCard implements Serializable {
         return points;
     }
 
+    /**
+     * Builds personal goal card based on id
+     * @return matrix of type tile representing the goal card
+     * @throws Exception
+     */
     public Tile[][] buildPersonalGoalCard() throws Exception {
         Tile[][] goal = new Tile[6][5];
 
@@ -535,7 +552,7 @@ public class PersonalGoalCard implements Serializable {
 
     /**
      * The method gives how many points the player has to get, based on his PersonalGoalCard
-     * @param ID
+     * @param ID of the card given to the player
      * @return points given to the player depending on the number of matches
      */
     public int assignPoints (int ID){

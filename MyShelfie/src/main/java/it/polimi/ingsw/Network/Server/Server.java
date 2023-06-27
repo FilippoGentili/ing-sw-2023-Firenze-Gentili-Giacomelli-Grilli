@@ -246,7 +246,7 @@ public class Server implements Runnable{
 
     /**
      * Handles the message depending on its type
-     * @param message
+     * @param message received
      * @throws InterruptedException
      */
     public void handleMessage(Message message) throws InterruptedException {
@@ -283,6 +283,9 @@ public class Server implements Runnable{
         }
     }
 
+    /**
+     * Closes server
+     */
     public void closeServer(){
         if(connectionMap.size()==0){
             System.exit(1);

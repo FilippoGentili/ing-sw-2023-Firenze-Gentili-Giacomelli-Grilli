@@ -9,7 +9,7 @@ import java.util.logging.Level;
 public class GameSaved {
     /**
      * A file to save the game is created, saving the game controller, which has all the information of the game
-     * @param gameController
+     * @param gameController of game to be saved
      */
     public static void saveGame(GameController gameController) {
         Persistence persistence = new Persistence(gameController);
@@ -30,8 +30,8 @@ public class GameSaved {
 
     /**
      * When reloading the game this method is called, reading from the saved file the version of the game to reload
-     * @param server
-     * @return
+     * @param server of the game being played
+     * @return game controller of the game
      */
     public static GameController loadGame(Server server){
         Persistence persistence;

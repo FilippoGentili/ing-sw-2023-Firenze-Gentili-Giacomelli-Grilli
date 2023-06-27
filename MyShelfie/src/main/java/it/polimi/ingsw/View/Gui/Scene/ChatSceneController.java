@@ -47,7 +47,9 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     private volatile ArrayList<String> chatMessages;
     private boolean chatMode = false;
 
-
+    /**
+     * Constructor of chat scene controller
+     */
     public ChatSceneController() {
         stage = new Stage();
         stage.initOwner(GuiController.getCurrentScene().getWindow());
@@ -60,7 +62,9 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
     }
 
 
-
+    /**
+     * Initializes all the components of the chat
+     */
     @FXML
     public void initialize() {
         pane.addEventHandler(MouseEvent.MOUSE_PRESSED, this::paneClicked);
@@ -70,6 +74,11 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         chatText.setOnKeyPressed(this::enterButtonClicked);
     }
 
+    /**
+     * Sets up item for the chat, selecting players available to receive messages
+     * @param game current game
+     * @param chat of the player
+     */
     public void setUp(Game game, Chat chat){
         this.chat = chat;
         playerList.getItems().clear();
@@ -81,6 +90,11 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         }
         playerList.getSelectionModel().select(0);
     }
+
+    /**
+     * Handles sending messages
+     * @param event of type mouse clicked
+     */
     public void sendButtonClicked(Event event){
         if (event instanceof MouseEvent || (event instanceof KeyEvent && ((KeyEvent) event).getCode() == KeyCode.ENTER)) {
             String message = chatText.getText();
@@ -95,6 +109,10 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
+    /**
+     * Updates chat with new messages
+     * @param chat of the player
+     */
     public void updateChat(Chat chat){
         ArrayList<String> messages = chat.getMessages();
         for (String message : messages) {
@@ -103,15 +121,28 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         }
     }
 
+    /**
+     * Adds old messages to be displayed
+     * @param messages received by the player
+     */
     public void addOldMessages(ArrayList<String> messages){
         for(String message : messages){
             chatList.getItems().add(message);
         }
     }
+
+    /**
+     * Handles closing the chat
+     * @param event of type mouse clicked
+     */
     private void closeButtonClicked(MouseEvent event) {
         stage.close();
         chatMode = false;
     }
+
+    /**
+     * Shows chat for the current player
+     */
     public void showChat() {
         chatMode = true;
         stage.show();
@@ -128,15 +159,28 @@ public class ChatSceneController extends ViewObservable implements GenericSceneC
         });
         chatThread.start();
     }
+
+    /**
+     * Sets scene to stage
+     * @param scene to be set
+     */
     public void setScene(Scene scene) {
         stage.setScene(scene);
     }
 
+    /**
+     * Handles pane clicked
+     * @param event of type mouse clicked
+     */
     private void paneClicked(MouseEvent event) {
         xAxis = stage.getX() - event.getScreenX();
         yAxis = stage.getY() - event.getScreenY();
     }
 
+    /**
+     * Handles pane dragged
+     * @param event of type mouse clicked
+     */
     private void paneDragged(MouseEvent event) {
         stage.setX(event.getScreenX() + xAxis);
         stage.setY(event.getScreenY() + yAxis);

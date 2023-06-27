@@ -10,8 +10,6 @@ public class Player implements Serializable {
     private int score;
     private Game game;
     private Bookshelf bookshelf;
-
-    private boolean FirstPlayer;
     private boolean lastPlayer;
     private PersonalGoalCard personalGoalCard;
     private boolean Pointscg1 = false;
@@ -19,10 +17,18 @@ public class Player implements Serializable {
     private ArrayList<Tile> chosenTiles;
     private Integer ChosenColumn;
 
+    /**
+     * Gets nickname of the player
+     * @return nickname of current player
+     */
     public String getNickname() {
         return this.nickname;
     }
 
+    /**
+     * Sets nickname of the player
+     * @param nickName chosen by the player
+     */
     public void setNickname(String nickName){
         this.nickname=nickName;
     }
@@ -52,48 +58,63 @@ public class Player implements Serializable {
         this.Pointscg2 = savedPlayer.hasPointscg2();
     }
 
+    /**
+     * Boolean used to check if a player has reached common goal card 2
+     * @return true if it has, false otherwise
+     */
     private boolean hasPointscg2() {
         return Pointscg2;
     }
-
+    /**
+     * Boolean used to check if a player has reached common goal card 1
+     * @return true if it has, false otherwise
+     */
     private boolean hasPointscg1() {
         return Pointscg1;
     }
 
+    /**
+     * Checks if player is last player
+     * @return true if it is, false otherwise
+     */
     private boolean isLastPlayer() {
         return lastPlayer;
     }
 
+    /**
+     * Gets player bookshelf
+     * @return bookshelf of the current player
+     */
     public Bookshelf getBookshelf(){
         return this.bookshelf;
     }
 
     /**
-     * When a player wants to join a game, it calls this method. the method addPlayer in game adds the player
-     * in the list of player dor the specific game
-     * @param game
+     * Gets score of the player
+     * @return current score of the player
      */
-    public void joinGame(Game game){
-        if(game==null)
-            throw new IllegalArgumentException("Game can't be null");
-
-        game.addPlayer(this);
-    }
-
     public int getScore(){
         return score;
     }
 
+    /**
+     * Sets score of the player
+     * @param score points to be set for the player
+     */
     public void setScore(int score) {
         this.score = score;
     }
 
+    /**
+     * Gets the game the player is playing in
+     * @return current game
+     */
     public Game getGame(){
         return game;
     }
 
     /**
-     * Method to assign the personalGoalCard to the player
+     * Assigns the personalGoalCard to the player
      * @param personalGoalCard drawn in game
      */
     public void setPersonalGoalCard(int personalGoalCard) {
@@ -102,6 +123,7 @@ public class Player implements Serializable {
     }
 
     /**
+     * Gets personal goal card of the player
      * @return the specific personal goal card of the player
      */
     public PersonalGoalCard getPersonalGoalCard(){
@@ -109,14 +131,16 @@ public class Player implements Serializable {
     }
 
     /**
-     * @return the value of the common goal card one attribute
+     * Gets the value of boolean for the common goal card one
+     * @return true if the goal has been reached, false otherwise
      */
     public boolean getPointscg1(){
         return Pointscg1;
     }
 
     /**
-     * @return the value of the common goal card two attribute
+     * Gets the value of boolean for the common goal card two
+     * @return true if the goal has been reached, false otherwise
      */
     public boolean getPointscg2(){
         return Pointscg2;
@@ -136,43 +160,56 @@ public class Player implements Serializable {
         this.Pointscg2=true;
     }
 
-    public void drawTile(int i, int j) throws RemoteException {
-        chosenTiles.add(game.getLivingRoom().pickTile(i, j));
-    }
-
+    /**
+     * Gets chosen tiles of the player
+     * @return arraylist of tiles chosen
+     */
     public ArrayList<Tile> getChosenTiles(){
         return chosenTiles;
     }
 
+    /**
+     * Sets chosen tiles for the player
+     * @param chosen tiles chosen by the player
+     */
     public void setChosenTiles(ArrayList<Tile> chosen){
         chosenTiles = new ArrayList<>();
         for(int i=0; i<chosen.size(); i++)
             chosenTiles.add(chosen.get(i));
     }
 
-    public void ClearChosenTiles(){
-        for(int i=0; i<chosenTiles.size(); i++)
-            chosenTiles.remove(i);
-    }
-
+    /**
+     * Gets chosen column by the player
+     * @return chosen column
+     */
     public Integer getChosenColumn() {
         return ChosenColumn;
     }
 
+    /**
+     * Sets the column chosen by the player
+     * @param chosenColumn in the bookshelf to set the tile
+     */
     public void setChosenColumn(Integer chosenColumn) {
         ChosenColumn = chosenColumn;
     }
 
+    /**
+     * Inserts tile chosen in the bookshelf
+     * @param chosen arraylist of chosen tiles
+     * @param column where to insert the tiles
+     */
     public void insertTiles(ArrayList<Tile> chosen, int column){
         getBookshelf().insertTiles(chosenTiles, column);
     }
 
+    /**
+     * Sets if player is the last or not
+     * @param lastPlayer true if it's the last, false otherwise
+     */
     public void setLastPlayer(boolean lastPlayer) {
         this.lastPlayer = lastPlayer;
     }
 
-    public boolean getLastPlayer(){
-        return lastPlayer;
-    }
 }
 

@@ -36,6 +36,7 @@ public class Game implements Serializable {
     }
 
     /**
+     * Gets server name when message is sent from server to client
      * @return the name Server, is used in the reply messages
      */
     public static String getServerName(){

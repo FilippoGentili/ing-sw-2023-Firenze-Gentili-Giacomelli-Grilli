@@ -113,6 +113,7 @@ public class CommonGoalCardInfoSceneController extends ViewObservable implements
     }
 
     /**
+     * Sets scene to stage
      * @param scene to be set
      */
     public void setScene(Scene scene) {

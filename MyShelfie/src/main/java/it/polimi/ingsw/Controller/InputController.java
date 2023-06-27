@@ -9,9 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * this class is used to handle and check all the input messages arriving from the client
- */
+
 public class InputController implements Serializable {
     @Serial
     private static final long serialVersionUID = 6905901343913742095L;

@@ -3,10 +3,7 @@ package it.polimi.ingsw.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Class Bookshelf
- * @author pheelaw
- */
+
 public class Bookshelf implements Serializable {
     private static final long serialVersionUID = 8979967644213276996L;
     private Tile[][] shelf;

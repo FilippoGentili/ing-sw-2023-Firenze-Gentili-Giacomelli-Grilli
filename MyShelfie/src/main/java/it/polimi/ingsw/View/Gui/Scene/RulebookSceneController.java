@@ -60,6 +60,7 @@ public class RulebookSceneController extends ViewObservable implements GenericSc
     }
 
     /**
+     * Sets scene to stage
      * @param scene that has to be set
      */
     public void setScene(Scene scene) {

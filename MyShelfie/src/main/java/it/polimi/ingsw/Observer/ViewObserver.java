@@ -79,5 +79,4 @@ public interface ViewObserver{
      */
     void handleDisconnection() throws IOException;
 
-    void updateLivingRoomTiles(ArrayList<Tile> chosen) throws IOException;
 }
