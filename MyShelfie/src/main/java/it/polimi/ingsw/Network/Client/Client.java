@@ -32,6 +32,7 @@ public abstract class Client extends UnicastRemoteObject {
     }
 
     /**
+     * Gets client username
      * @return client username
      */
     public String getUsername() {
@@ -39,6 +40,7 @@ public abstract class Client extends UnicastRemoteObject {
     }
 
     /**
+     * Sets client username
      * @param username is set for the player that chose it
      */
     public void setUsername(String username) {
@@ -60,6 +62,7 @@ public abstract class Client extends UnicastRemoteObject {
     public abstract void disconnectMe() throws RemoteException;
 
     /**
+     * Sends message
      * @param message that has to be sent
      */
     public abstract void sendMessage(Message message);
