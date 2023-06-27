@@ -23,8 +23,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
@@ -63,6 +61,7 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     /**
+     * Sets client for this client controller
      * @param client set for the specific client controller
      */
     public void setClient(Client client){
@@ -70,12 +69,10 @@ public class ClientController implements Observer, ViewObserver, Runnable {
     }
 
     /**
+     * Gets nickname of the client
      * @return the nickname of the client
      */
     public String getNickname(){return this.client.getUsername();}
-
-    //potrei far partire tanti thread quanti sono gli observable
-
 
     @Override
     public void update(Message message) {
@@ -303,9 +300,9 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
     /**
      * Checks if the address used to connect is valid, and if is possible to connect. Excludes broadcast addresses
-     * @param address
-     * @param connectionType
-     * @return
+     * @param address inserted by the client in gui
+     * @param connectionType inserted by the client in gui
+     * @return true if address is valid, false otherwise
      */
     public static boolean validAddress(String address, String connectionType){
         boolean isValid=true;
@@ -346,8 +343,8 @@ public class ClientController implements Observer, ViewObserver, Runnable {
 
     /**
      * Checks if the address is not a broadcast address
-     * @param address
-     * @return
+     * @param address inserted by the client in gui
+     * @return true if the address is a valid ip address and not broadcast, false otherwise
      */
     public static boolean notBroadcastAddress(String address){
         boolean bc=true;

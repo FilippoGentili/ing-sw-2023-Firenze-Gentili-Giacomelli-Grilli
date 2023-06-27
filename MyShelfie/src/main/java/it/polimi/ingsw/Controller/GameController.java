@@ -58,22 +58,41 @@ public class GameController implements Serializable {
         this.server = server;
     }
 
+    /**
+     * Gets number of players
+     * @return number of plyers
+     */
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
 
+    /**
+     * Gets first player
+     * @return the first player
+     */
     public Player getFirstPlayer(){
         return firstPlayer;
     }
 
+    /**
+     * Boolean used to know if it's the last round or not
+     * @return true if it's the last round, false otherwise
+     */
     public boolean isLastRound(){
         return lastRound;
     }
 
+    /**
+     * Boolean used to know if it's the first turn or not
+     * @return true if it's the first turn, false otherwise
+     */
     public boolean isFirstTurn(){
         return firstTurn;
     }
-
+    /**
+     * Boolean used to know if it's the first login or not
+     * @return true if it's the first login, false otherwise
+     */
     public boolean isFirstLogin(){
         return firstLogin;
     }
@@ -247,6 +266,10 @@ public class GameController implements Serializable {
         server.sendMessage(new ChosenTilesRequest(game.getLivingRoom()),currentPlayer.getNickname());
     }
 
+    /**
+     * Handles chat message
+     * @param message to be handled
+     */
     public void handleMessage(Message message){
         ChatMessage chatMessage = (ChatMessage) message;
         String sender = chatMessage.getSender();
@@ -317,7 +340,6 @@ public class GameController implements Serializable {
         currentPlayer.getBookshelf().insertTiles(chosenTiles, currentPlayer.getChosenColumn());
 
         CheckCommonGoal(currentPlayer);
-        /*EndTurn(); //vanno messi qui o in un'altra classe del server?*/
     }
 
     /**
@@ -331,8 +353,6 @@ public class GameController implements Serializable {
         players.remove(getPlayerByNickname(message.getNickname()));
         game.removePlayer(getPlayerByNickname(message.getNickname()));
     }
-
-
 
     /**
      * This method checks if the player has reached the common goals. If it did, it receives its points, otherwise nothing
@@ -421,8 +441,7 @@ public class GameController implements Serializable {
                     ArrayList<Tile> chosen = game.getBag().extract(game.numberOfTiles());
                     game.getLivingRoom().insertTiles(chosen);
                 }
-
-                newTurn(); //da rivedere
+                newTurn();
             }
         }
     }
@@ -504,18 +523,34 @@ public class GameController implements Serializable {
         }
     }
 
+    /**
+     * Gets the current player of the turn
+     * @return the current player
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * Gets the current game
+     * @return the game being played
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * Sets game state
+     * @param gameState of the game
+     */
     public void setGameState(GameState gameState){
         this.gameState = gameState;
     }
 
+    /**
+     * Boolean used to know whether the game can start or not
+     * @return true if players still have to connect, false otherwise
+     */
     public boolean waitingForPlayers(){
         if(gameState == GameState.LOGIN) return true;
         else return false;
@@ -531,6 +566,11 @@ public class GameController implements Serializable {
         }
     }
 
+    /**
+     * Gets player
+     * @param nickname of the player
+     * @return the player with the asked nickname
+     */
     public Player getPlayerByNickname(String nickname){
         for(Player player : players)
             if(player.getNickname().equals(nickname))
