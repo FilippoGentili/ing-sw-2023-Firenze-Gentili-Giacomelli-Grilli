@@ -412,6 +412,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
         ArrayList<Tile> chosenTiles = new ArrayList<>();
         int row;
         int col;
+        int correctRow;
         String input;
         List<String> columns1 = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
         List<String> columns2 = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i");
@@ -455,8 +456,10 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
 
                 col = indexTranslator(input);
 
-                if(!chosenTiles.contains(livingRoom.getTile(row-1, col)) && livingRoom.getTile(row-1,col).getTileType() != TileType.NULL && livingRoom.validCell(row-1, col)){
-                    chosenTiles.add(livingRoom.getTile(row-1, col));
+                correctRow = row-1;
+
+                if(!chosenTiles.contains(livingRoom.getTile(correctRow, col)) && livingRoom.getTile(correctRow,col).getTileType() != TileType.NULL && livingRoom.validCell(correctRow, col)){
+                    chosenTiles.add(livingRoom.pickTile(correctRow, col));
                     i++;
 
                     if(i<4){
@@ -474,12 +477,12 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                     }else
                         valid = false;
                 }else{
-                    if(livingRoom.getTile(row,col).getTileType() == TileType.NULL || !livingRoom.validCell(row-1, col))
+                    if(livingRoom.getTile(correctRow,col).getTileType() == TileType.NULL || !livingRoom.validCell(correctRow, col))
                         System.out.println("You can't select this tile");
                     else System.out.println("You already selected this tile");
                 }
 
-            }while((chosenTiles.contains(livingRoom.getTile(row-1, col)) || livingRoom.getTile(row-1,col).getTileType() == TileType.NULL || !livingRoom.validCell(row-1, col)) && valid);
+            }while((chosenTiles.contains(livingRoom.getTile(correctRow, col)) || livingRoom.getTile(correctRow,col).getTileType() == TileType.NULL || !livingRoom.validCell(correctRow, col)) && valid);
         }
 
         notifyObserver(obs -> {
