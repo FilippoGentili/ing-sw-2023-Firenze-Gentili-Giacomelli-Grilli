@@ -178,6 +178,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
     private int counter = 0;
     private int numOfPlayers;
     private int numOfSelectedTiles = 0;
+    private boolean selectionTime;
     private boolean tile1Clicked = false;
     private boolean tile2Clicked = false;
     private boolean tile3Clicked = false;
@@ -372,6 +373,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
                 GuiController.showBanner("INFO", "Choose up to 3 tiles from the board");
             });
             yourTurn = true;
+            selectionTime = true;
             firstTime = false;
         }else{
             Platform.runLater(() -> {
@@ -390,7 +392,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         Integer row = GridPane.getRowIndex(selection);
         Integer col = GridPane.getColumnIndex(selection);
 
-        if(row != null && col != null && yourTurn){
+        if(row != null && col != null && yourTurn && selectionTime){
             if(numOfSelectedTiles < 3) {
                 Tile selectedTile = this.livingRoom.getTile(row - 1, col - 1);
 
@@ -457,6 +459,7 @@ public class GameSceneController extends ViewObservable implements GenericSceneC
         confirmTileSelectionButton.setVisible(false);
 
         if(yourTurn && !chosenTiles.isEmpty()) {
+            selectionTime = false;
             notifyObserver(obs -> {
                 try {
                     obs.updateChosenTiles(chosenTiles);
