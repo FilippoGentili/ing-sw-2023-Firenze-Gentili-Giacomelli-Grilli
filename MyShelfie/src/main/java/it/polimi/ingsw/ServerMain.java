@@ -19,6 +19,10 @@ public class ServerMain {
                     server.startServers();
                 }
             }
+        }else{
+            Server server = new Server();
+            Server.LOGGER.info("Creating a new match");
+            server.startServers();
         }
         /*Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
