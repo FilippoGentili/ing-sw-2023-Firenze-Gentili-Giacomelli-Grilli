@@ -293,11 +293,6 @@ public class ClientController implements Observer, ViewObserver, Runnable {
         closeConnection();
     }
 
-    @Override
-    public void updateLivingRoomTiles(ArrayList<Tile> chosen) throws IOException {
-        client.sendMessage(new IndexMessage(client.getUsername(), chosen));
-    }
-
     /**
      * Checks if the address used to connect is valid, and if is possible to connect. Excludes broadcast addresses
      * @param address inserted by the client in gui
