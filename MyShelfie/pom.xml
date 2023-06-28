@@ -24,12 +24,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>20.0.1</version>
@@ -43,6 +37,12 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-media</artifactId>
       <version>20.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

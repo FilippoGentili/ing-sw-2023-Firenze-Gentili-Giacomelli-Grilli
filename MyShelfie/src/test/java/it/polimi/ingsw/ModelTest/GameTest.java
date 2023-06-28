@@ -1,14 +1,10 @@
 package it.polimi.ingsw.ModelTest;
 
 import it.polimi.ingsw.Model.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static it.polimi.ingsw.Model.Game.*;
-import static org.junit.Assert.*;
 
 public class GameTest {
     @Test
