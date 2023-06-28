@@ -174,14 +174,6 @@ public class Server implements Runnable{
         }
     }
 
-    public void removeAllClients(){
-        for(Map.Entry<String, Connection> map : connectionMap.entrySet()){
-            map.getValue().setIsConnected();
-            connectionMap.remove(map.getKey(), map.getValue());
-            LOGGER.info(() -> map.getKey() + " was removed from the client list");
-        }
-    }
-
     /**
      * Disconnects client, sending a broadcast message that a specific client has been disconnected
      * @param connection
@@ -197,7 +189,7 @@ public class Server implements Runnable{
             }
         }
 
-        if(app != "Server") {
+        if(app != "Server" && !gameController.waitingForPlayers()) {
             for (Map.Entry<String, Connection> map : connectionMap.entrySet()) {
                 if (!map.getKey().equals(app)) {
                     sendMessage(new DisconnectionReply(app), map.getKey());
