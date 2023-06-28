@@ -1,16 +1,23 @@
-# **ing-sw-2023-Firenze-Gentili-Giacomelli-Grilli**
+# **Progetto ingegneria del software 2023**
 
-Progetto ingegneria del software 2023
 ![image](https://github.com/FilippoGentili/ing-sw-2023-Firenze-Gentili-Giacomelli-Grilli/assets/125986747/4e649d56-23f9-4c2b-9767-cb793ac55d93)
+
+_Project folder_: ing-sw-2023-Firenze-Gentili-Giacomelli-Grilli
 
 Our project implements board game "My Shelfie", through one server and multiple clients, one for each player, and architectural pattern Model-View-Controller. Two to four players can participate only in one game at a time, upon startup they can choose whether to play using Command Line Interface (CLI) or Graphic User Interface (GUI). 
 
 ## **Documentation**
 
-UML
+### UML
+
 The following UML diagrams represent the initial model of the project, realized in the beginning of the project development, and the final one.
 - First UML
 - Final UML
+
+### Sequence Diagram
+- Login Sequence Diagram
+- Inserting Tiles Sequence Diagram
+- Common Goal Sequence Diagram
 
 ## **JavaDoc**
 Project's documentation can be found throughout the whole code, describing each method. 
@@ -39,12 +46,16 @@ Jar files can be downloaded here:
 
 In order to run the client open a terminal window, navigate to the correct path where the jar file is and type in:
 
-`java -jar clientMain.jar`
+```
+java -jar clientMain.jar
+```
 
 To be able to play with GUI depedencies of JavaFX need to be imported. Correct SDK for the operative system can be downloaded from [here](https://gluonhq.com/products/javafx/) and put in the same folder as clientMain.jar .
 Then the follwing instruction has to be typed in:
 
-`java --module-path javafx-sdk-20.0.1/lib --add-modules javafx.controls --add-modules javafx.fxml -jar clientMain.jar`
+```
+java --module-path javafx-sdk-20.0.1/lib --add-modules javafx.controls --add-modules javafx.fxml -jar clientMain.jar
+```
 
 Both using CLI and GUI a client can choose socekt or RMI connection, both servers are always started so that different players can choose different types of connection in one game.
 
@@ -52,7 +63,9 @@ Both using CLI and GUI a client can choose socekt or RMI connection, both server
 
 To start the server it is only necessary to type in
 
-`java -jar serverMain.jar `
+```
+java -jar serverMain.jar
+```
 
 Socket server will start on port 1098. RMI Server will start on port 1099.
 Server address is displayed when servers start. Port is automatically set based on the type of connection.
