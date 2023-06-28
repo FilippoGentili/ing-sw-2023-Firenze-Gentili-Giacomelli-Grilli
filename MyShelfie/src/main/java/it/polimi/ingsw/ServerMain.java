@@ -2,10 +2,8 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.Network.Server.Server;
 
-import java.util.Scanner;
 
-
-public class ServerApp {
+public class ServerMain {
 
     public static void main(String[] args) {
 

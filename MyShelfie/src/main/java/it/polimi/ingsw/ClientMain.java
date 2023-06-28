@@ -8,7 +8,7 @@ import javafx.application.Application;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ClientApp {
+public class ClientMain {
 
     public static void main(String[] args) throws IOException {
 
