@@ -364,7 +364,7 @@ public class Cli extends ViewObservable implements View, DisconnectionHandler {
                         }
                     }
 
-                    if(!chat.getOtherPlayers().contains(receiver)){
+                    if(!chat.getOtherPlayers().contains(receiver) && !receiver.equalsIgnoreCase("all players")){
                         System.out.println("player not valid");
                         validRec = false;
                     }
