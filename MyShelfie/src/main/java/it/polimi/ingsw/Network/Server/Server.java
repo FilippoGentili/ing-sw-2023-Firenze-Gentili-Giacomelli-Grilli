@@ -252,17 +252,13 @@ public class Server implements Runnable{
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
                 for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
-                    try {
-                        Map.Entry<String, Connection> mapElement = mapIterator.next();
-                        if (mapElement.getValue() != null && mapElement.getValue().checkConnection()) {
-                            try {
-                                mapElement.getValue().ping();
-                            } catch (RemoteException e) {
-                                throw new RuntimeException(e);
-                            }
+                    Map.Entry<String, Connection> mapElement = mapIterator.next();
+                    if (mapElement.getValue() != null && mapElement.getValue().checkConnection()) {
+                        try {
+                            mapElement.getValue().ping();
+                        } catch (RemoteException e) {
+                            throw new RuntimeException(e);
                         }
-                    } catch (ConcurrentModificationException e) {
-                        LOGGER.severe(e.getMessage());
                     }
                 }
             }
