@@ -24,18 +24,6 @@ public class ServerMain {
             Server.LOGGER.info("Creating a new match");
             server.startServers();
         }
-        /*Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-
-        if(input.equalsIgnoreCase("r")){
-            Server server = new Server(true);
-            Server.LOGGER.info("Loading an existing match");
-            server.startServers();
-        }else{
-            Server server = new Server();
-            Server.LOGGER.info("Creating a new match");
-            server.startServers();
-        }*/
 
     }
 }
