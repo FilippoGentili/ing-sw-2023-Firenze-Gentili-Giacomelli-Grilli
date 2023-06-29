@@ -18,7 +18,6 @@ public class GameSaved {
             ObjectOutputStream out = new ObjectOutputStream(savedGame);
 
             out.writeObject(persistence);
-            Server.LOGGER.log(Level.INFO, "Game state saved");
 
             out.close();
         } catch (FileNotFoundException e) {

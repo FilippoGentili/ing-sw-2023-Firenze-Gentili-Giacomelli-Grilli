@@ -62,9 +62,6 @@ public class Server implements Runnable{
         RMIServer rs = new RMIServer(this,rmiPort);
         rs.startRMIServer();
 
-        /*int socketChat = 49671;
-        SocketChat sc = new SocketChat(this,socketChat);
-        sc.startSocketChat();*/
         try {
             String address;
             address=getLocalHost().toString();
@@ -156,16 +153,13 @@ public class Server implements Runnable{
      */
     public void removeClient(Connection connection) {
         synchronized (lock) {
-            for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
+            Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator();
+            while (mapIterator.hasNext()) {
                 Map.Entry<String, Connection> mapElement = mapIterator.next();
                 if (mapElement.getValue().equals(connection)) {
                     connection.setIsConnected();
                     connectionMap.remove(mapElement.getKey(), mapElement.getValue());
-
-                    if (!gameController.waitingForPlayers()) {
-                        //removeAllClients();
-                    }
-
+                    //mapIterator.remove();
                     LOGGER.info(() -> mapElement.getKey() + " was removed from the client list");
                     closeServer();
                     break;
@@ -210,8 +204,6 @@ public class Server implements Runnable{
                 map.getValue().sendMessage(message);
             }
         }
-
-        LOGGER.log(Level.INFO, "Send to all: {0}", message);
     }
 
     /**
@@ -233,7 +225,6 @@ public class Server implements Runnable{
                 }
             }
         }
-        LOGGER.log(Level.INFO, "Sending to {0}, {1}", new Object[]{nickname, message});
     }
 
     /**
@@ -251,7 +242,8 @@ public class Server implements Runnable{
     public void run(){
         while(!Thread.currentThread().isInterrupted()){
             synchronized(lock) {
-                for (Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator(); mapIterator.hasNext();) {
+                Iterator<Map.Entry<String, Connection>> mapIterator = connectionMap.entrySet().iterator();
+                while (mapIterator.hasNext()) {
                     Map.Entry<String, Connection> mapElement = mapIterator.next();
                     if (mapElement.getValue() != null && mapElement.getValue().checkConnection()) {
                         try {

@@ -114,8 +114,6 @@ public class GameController implements Serializable {
                     game.getCommonGoal2().setDelta(numOfPlayersReply.getNumOfPlayers());
                     server.sendMessage(new WaitingRoomMessage(numOfPlayersReply.getNumOfPlayers(), players.size()), message.getNickname());
                     //restoreMatchElements();
-                }else {
-                    Server.LOGGER.severe("Message from the client is not the number of players");
                 }
                 break;
             case PLAY:
