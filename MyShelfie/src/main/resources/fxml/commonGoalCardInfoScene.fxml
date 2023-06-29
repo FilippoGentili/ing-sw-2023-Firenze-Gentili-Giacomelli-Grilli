@@ -12,7 +12,7 @@
             <children>
                 <Text fx:id="textInfo" layoutX="25.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information about the common goal card" textAlignment="CENTER" wrappingWidth="549.68408203125">
                     <font>
-                        <Font name="Blackadder ITC" size="45.0" />
+                        <Font name="Blackadder ITC" size="40.0" />
                     </font>
                 </Text>
             </children></AnchorPane>
