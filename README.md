@@ -10,7 +10,7 @@ Our project implements board game "My Shelfie", through one server and multiple 
 
 ### UML
 
-The following UML diagrams represent the initial model of the project, realized in the beginning of the project development, and the final one.
+The following UML diagrams represent the initial model of the project, realized in the beginning of the project development, and the final ones.
 - [First UML](MyShelfie/src/deliverables/uml/uml_initial.jpg)
 - Final UML:
   - [Model](MyShelfie/src/deliverables/uml/uml_model.png)
@@ -44,7 +44,7 @@ JavaFx | Graphic library specific for graphic user interface
 - Chat
 
 ## **Execution of jar files**
-Jar files can be downloaded here:
+Jar files can be downloaded here.
 
 **Client:**
 
@@ -54,14 +54,14 @@ In order to run the client open a terminal window, navigate to the correct path 
 java -jar clientMain.jar
 ```
 
-To be able to play with GUI depedencies of JavaFX need to be imported. Correct SDK for the operative system can be downloaded from [here](https://gluonhq.com/products/javafx/) and put in the same folder as clientMain.jar .
-Then the follwing instruction has to be typed in:
+To be able to play with GUI, depedencies of JavaFX need to be imported. Correct SDK for the operative system, which can be downloaded from [here](https://gluonhq.com/products/javafx/), must be put in the same folder as clientMain.jar .
+Then the following instruction has to be typed in:
 
 ```
 java --module-path javafx-sdk-20.0.1/lib --add-modules javafx.controls --add-modules javafx.fxml -jar clientMain.jar
 ```
 
-Both using CLI and GUI a client can choose socekt or RMI connection, both servers are always started so that different players can choose different types of connection in one game.
+Both using CLI and GUI a client can choose socket or RMI connection, both servers are always started so that different players can choose different types of connection.
 
 When playing with GUI, it may be necessary to download the project's font [here](http://legionfonts.com/fonts/blackadder-itc). 
 
