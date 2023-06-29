@@ -11,13 +11,17 @@ Our project implements board game "My Shelfie", through one server and multiple 
 ### UML
 
 The following UML diagrams represent the initial model of the project, realized in the beginning of the project development, and the final one.
-- First UML
-- Final UML
+- [First UML](MyShelfie/src/deliverables/uml/uml_initial.jpg)
+- Final UML:
+  - [Model](MyShelfie/src/deliverables/uml/uml_model.png)
+  - [Network-View](MyShelfie/src/deliverables/uml/uml_network_view.png)
+  - [Network-View](MyShelfie/src/deliverables/uml/uml_network_view_detailed.png) (detailed version)
+
 
 ### Sequence Diagram
-- Login Sequence Diagram
-- Inserting Tiles Sequence Diagram
-- Common Goal Sequence Diagram
+- [Login Sequence Diagram](MyShelfie/src/deliverables/uml/Sequence_Diagram_Login.png)
+- [Inserting Tiles Sequence Diagram](MyShelfie/src/deliverables/uml/Sequence_diagram_Inserting_tiles.png)
+- [Common Goal Sequence Diagram](MyShelfie/src/deliverables/uml/Sequence_diagram_commonGoal.png)
 
 ## **JavaDoc**
 Project's documentation can be found throughout the whole code, describing each method. 
@@ -59,12 +63,19 @@ java --module-path javafx-sdk-20.0.1/lib --add-modules javafx.controls --add-mod
 
 Both using CLI and GUI a client can choose socekt or RMI connection, both servers are always started so that different players can choose different types of connection in one game.
 
+When playing with GUI, it may be necessary to download the project's font [here](http://legionfonts.com/fonts/blackadder-itc). 
+
 **Server:**
 
-To start the server it is only necessary to type in
+To start the server and create a new game it is only necessary to type in
 
 ```
 java -jar serverMain.jar
+```
+otherwise, if you want to reload an existing game type in
+
+```
+java -jar serverMain.jar -r
 ```
 
 Socket server will start on port 1098. RMI Server will start on port 1099.
