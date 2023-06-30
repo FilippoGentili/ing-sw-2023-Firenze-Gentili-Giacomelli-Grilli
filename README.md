@@ -12,7 +12,7 @@ Our project implements board game "My Shelfie", through one server and multiple 
 
 The following UML diagrams represent the initial model of the project, realized in the beginning of the project development, and the final ones.
 - [First UML](MyShelfie/src/deliverables/uml/uml_initial.jpg)
-- Final UML:
+- Final UML :
   - [Model](MyShelfie/src/deliverables/uml/uml_model.png)
   - [Network-View](MyShelfie/src/deliverables/uml/uml_network_view.png)
   - [Network-View](MyShelfie/src/deliverables/uml/uml_network_view_detailed.png) (detailed version)
@@ -44,9 +44,9 @@ JavaFx | Graphic library specific for graphic user interface
 - Chat
 
 ## **Execution of jar files**
-Jar files can be downloaded here.
+Jar files can be downloaded [here](MyShelfie/src/deliverables/jar).
 
-**Client:**
+#### **Client**
 
 In order to run the client open a terminal window, navigate to the correct path where the jar file is and type in:
 
@@ -65,7 +65,7 @@ Both using CLI and GUI a client can choose socket or RMI connection, both server
 
 When playing with GUI, it may be necessary to download the project's font [here](http://legionfonts.com/fonts/blackadder-itc). 
 
-**Server:**
+#### **Server**
 
 To start the server and create a new game it is only necessary to type in
 
