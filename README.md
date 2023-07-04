@@ -4,7 +4,7 @@
 
 _Project folder_: ing-sw-2023-Firenze-Gentili-Giacomelli-Grilli
 
-Our project implements board game "My Shelfie", through one server and multiple clients, one for each player, and architectural pattern Model-View-Controller. Two to four players can participate only in one game at a time, upon startup they can choose whether to play using Command Line Interface (CLI) or Graphic User Interface (GUI). 
+Our project implements the board game "My Shelfie", through one server and multiple clients, one for each player, and architectural pattern Model-View-Controller. Two to four players can participate only in one game at a time, upon startup they can choose whether to play using Command Line Interface (CLI) or Graphic User Interface (GUI). 
 
 ## **Documentation**
 
