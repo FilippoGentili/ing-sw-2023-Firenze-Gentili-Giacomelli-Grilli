@@ -22,3 +22,6 @@
 hs_err_pid*
 
 .idea/#
+
+#images
+MyShelfie/src/main/resources/images/*
