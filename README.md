@@ -81,6 +81,10 @@ java -jar serverMain.jar -r
 Socket server will start on port 1098. RMI Server will start on port 1099.
 Server address is displayed when servers start. Port is automatically set based on the type of connection.
 
+##Disclaimer
+We have removed certain images from this repository due to copyright considerations. These images were either copyrighted material or their usage required permissions that we could not obtain.
+If you were relying on these images, we recommend replacing them with properly licensed alternatives or generating your own.
+
 ## **Group Components**
 - Silvia Firenze
 - Filippo Gentili
